@@ -806,6 +806,12 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
 
+|`* * *` |user |edit a detail I added |
+
+|`* *` |user |undo a command I entered |undo a wrong command that I entered
+
+|`* *` |user |redo a command I entered |redo when I want to undo my "undo" command
+
 |`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
 |`*` |user with many persons in the address book |sort persons by name |locate a person easily
@@ -856,6 +862,7 @@ _{More to be added}_
 .  Should be intuitive to use for users who are not tech-savvy.
 .  The system should respond within 2 seconds.
 .  Should work on 32-bit and 64-bit environment.
+
 _{More to be added}_
 
 [appendix]
