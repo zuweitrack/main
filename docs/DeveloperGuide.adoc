@@ -10,7 +10,7 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4/tree/master
+:repoURL: https://github.com/CS2103JAN2018-T09-B2/main
 
 By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
@@ -806,9 +806,15 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
 
+|`* * *` |user |edit a detail I added |
+
 |`* * *` |user |set a level of friendship with a specific person |maintain my frienships depending on a priority system set by myself
 
 |`* * *` |user |edit details of my contacts |stay updated with the current details of my friends
+
+|`* *` |user |undo a command I entered |undo a wrong command that I entered
+
+|`* *` |user |redo a command I entered |redo when I want to undo my "undo" command
 
 |`* *` |user |note down appointments with my friends in a calendar |make my schedule schedule more organised
 
@@ -865,6 +871,10 @@ _{More to be added}_
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `1.8.0_60` or higher installed.
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+.  Should be able to deal with invalid command inputs.
+.  Should be intuitive to use for users who are not tech-savvy.
+.  The system should respond within 2 seconds.
+.  Should work on 32-bit and 64-bit environment.
 
 _{More to be added}_
 
