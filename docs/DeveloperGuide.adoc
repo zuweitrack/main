@@ -806,9 +806,22 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
 
+|`* * *` |user |set a level of friendship with a specific person |maintain my frienships depending on a priority system set by myself
+
+|`* * *` |user |edit details of my contacts |stay updated with the current details of my friends
+
+|`* *` |user |note down appointments with my friends in a calendar |make my schedule schedule more organised
+
+|`* *` |user |write down a short reflection of how an appointment went |remember precious moments easier in the future
+
+|`* *` |user |list down all past appointments with a particular friend |reminisce past memories with a particular friend
+
 |`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
 |`*` |user with many persons in the address book |sort persons by name |locate a person easily
+
+|`*` |user with many persons with the same in the address book |set a display picture of each contact|differentiate persons with the same name
+
 |=======================================================================
 
 _{More to be added}_
