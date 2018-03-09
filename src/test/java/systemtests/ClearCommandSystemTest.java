@@ -29,7 +29,7 @@ public class ClearCommandSystemTest extends AddressBookSystemTest {
         String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command,  expectedResultMessage, defaultModel);
         assertSelectedCardUnchanged();
-        
+
         /*Case: clear restored address book using shortcut command -> cleared */
         assertCommandSuccess(ClearCommand.COMMAND_ALIAS);
         assertSelectedCardUnchanged();

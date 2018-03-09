@@ -65,7 +65,7 @@ public class AddressBookParser {
 
         case ClearCommand.COMMAND_ALIAS:
             return new ClearCommand();
-            
+
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
