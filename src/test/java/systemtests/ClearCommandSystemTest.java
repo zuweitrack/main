@@ -30,16 +30,6 @@ public class ClearCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command,  expectedResultMessage, defaultModel);
         assertSelectedCardUnchanged();
 
-        /*Case: clear restored address book using shortcut command -> cleared */
-        assertCommandSuccess(ClearCommand.COMMAND_ALIAS);
-        assertSelectedCardUnchanged();
-
-        /* Case: undo clearing address book -> original address book restored */
-        command = UndoCommand.COMMAND_WORD;
-        expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
-        assertCommandSuccess(command,  expectedResultMessage, defaultModel);
-        assertSelectedCardUnchanged();
-
         /* Case: redo clearing address book -> cleared */
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
