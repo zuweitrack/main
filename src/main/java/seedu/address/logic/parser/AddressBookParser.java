@@ -51,13 +51,25 @@ public class AddressBookParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
+        case AddCommand.COMMAND_ALIAS:
+            return new AddCommandParser().parse(arguments);
+
         case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
+
+        case EditCommand.COMMAND_ALIAS:
             return new EditCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 
+        case SelectCommand.COMMAND_ALIAS:
+            return new SelectCommandParser().parse(arguments);
+
         case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommandParser().parse(arguments);
+
+        case DeleteCommand.COMMAND_ALIAS:
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
@@ -69,10 +81,19 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        case FindCommand.COMMAND_ALIAS:
+            return new FindCommandParser().parse(arguments);
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
+        case ListCommand.COMMAND_ALIAS:
+            return new ListCommand();
+
         case HistoryCommand.COMMAND_WORD:
+            return new HistoryCommand();
+
+        case HistoryCommand.COMMAND_ALIAS:
             return new HistoryCommand();
 
         case ExitCommand.COMMAND_WORD:
@@ -84,7 +105,13 @@ public class AddressBookParser {
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
 
+        case UndoCommand.COMMAND_ALIAS:
+            return new UndoCommand();
+
         case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
+
+        case RedoCommand.COMMAND_ALIAS:
             return new RedoCommand();
 
         default:
