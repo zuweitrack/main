@@ -810,7 +810,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |RC student |edit a detail I added |
 
-|`* * *` |user |set a level of friendship with a specific person |maintain my frienships depending on a priority system set by myself
+|`* * *` |user |set a level of friendship with a specific person |maintain my friendships depending on a priority system set by myself
 
 |`* * *` |user |edit details of my contacts |stay updated with the current details of my friends
 
