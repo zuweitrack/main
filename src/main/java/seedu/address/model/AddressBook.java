@@ -152,6 +152,30 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
     }
+    // removing of tags
+    public void removeTag(Tag t) {
+        for (Person person : persons) {
+            removeTagfromPerson(t, person);
+        }
+    }
+
+    public void removeTagfromPerson(Tag tag, Person person) {
+        Set<Tag> newTags = new HashSet<>(person.getTags());
+
+        if (!newTags.remove(tag)) {
+            return;
+        }
+
+        Person newPerson = new Person(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), newTags);
+
+        try {
+            updatePerson(person, newPerson);
+        } catch (DuplicatePersonException dpe) {
+            throw new AssertionError("Modifiying a person's tag should not result in a duplicate. ");
+        } catch (PersonNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     //// util methods
 
