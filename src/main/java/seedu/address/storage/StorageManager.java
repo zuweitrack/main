@@ -79,6 +79,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public void backupAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+        logger.fine("Attempting to write to backup local data file");
         addressBookStorage.backupAddressBook(addressBook);
     }
 
