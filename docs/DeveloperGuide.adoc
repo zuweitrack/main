@@ -925,8 +925,11 @@ Windows, Linux, Unix, OS-X
 [[private-contact-detail]] Private contact detail::
 A contact detail that is not meant to be shared with others
 
+[[CCA]] Co-Curricular Activities::
+Co-Curricular Activities offered within Residential College 4 (RC4)
+
 [[RC4]] Residential College 4::
-A campus living area at NUS U-Town for NUS undergraduate students.
+A campus living area at NUS U-Town for NUS undergraduate students
 
 [appendix]
 == Product Survey
