@@ -811,9 +811,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |RC student |edit a detail I added |
 
-|`* * *` |user |set a level of friendship with a specific person |maintain my friendships depending on a priority system set by myself
+|`* * *` |RC student |set a level of friendship with a specific person |maintain my friendships depending on a priority system set by myself
 
-|`* * *` |user |edit details of my contacts |stay updated with the current details of my friends
+|`* * *` |RC student |edit details of my contacts |stay updated with the current information about my contacts
 
 |`* * *` |forgetful RC student |add persistent reminders |periodically remind myself to do something.
 
@@ -823,11 +823,11 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |careless RC student |redo a command I entered |redo when I want to undo my "undo" command
 
-|`* *` |user |note down appointments with my friends in a calendar |make my schedule schedule more organised
+|`* *` |RC student |note down events or training sessions in a calendar |make my schedule schedule more organised
 
-|`* *` |user |write down a short reflection of how an appointment went |remember precious moments easier in the future
+|`* *` |RC student |write down a short reflection of how an event/training session went |remember precious moments easier in the future
 
-|`* *` |user |list down all past appointments with a particular friend |reminisce past memories with a particular friend
+|`* *` |RC student |list down all past appointments with a particular friend |reminisce past memories with a particular friend
 
 |`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
