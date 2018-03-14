@@ -10,7 +10,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 == Project Team
 
 === Deborah Low Shi Lei
-image::Deborah.jpg[width="150", align="left"]
+image::deborahlow97.jpg[width="150", align="left"]
 {empty}[https://github.com/deborahlow97[github]] [<<johndoe#, portfolio>>]
 
 Role: Team Lead +
@@ -19,7 +19,7 @@ Responsibilities: UI
 '''
 
 === Goh Zu Wei
-image::ZuWei.jpg[width="150", align="left"]
+image::zuweitrack.jpg[width="150", align="left"]
 {empty}[https://github.com/zuweitrack[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
@@ -28,7 +28,7 @@ Responsibilities: Data
 '''
 
 === Fuad B Sahmawi
-image::Fuad.jpg[width="150", align="left"]
+image::fuadsahmawi.jpg[width="150", align="left"]
 {empty}[https://github.com/fuadsahmawi[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
@@ -37,7 +37,7 @@ Responsibilities: Dev Ops + Threading
 '''
 
 === Shamsheer Ahamed
-image::yl_coder.jpg[width="150", align="left"]
+image::a0158738x.jpg[width="150", align="left"]
 {empty}[https://github.com/A0158738X[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
