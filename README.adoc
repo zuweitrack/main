@@ -16,7 +16,7 @@ image::images/Ui.png[width="600"]
 endif::[]
 
 * CollegeZone is a desktop application for *NUS Residential College 4 (RC4) students*. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
-* It's created for a RC4 resident to manage their contacts with other RC4 residents and their tasks.
+* It's created for a RC4 resident to manage their contacts with other RC4 residents and to manage their tasks.
 
 
 == Site Map
