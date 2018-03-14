@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= CollegeZone - User Guide
 :toc:
 :toc-title:
 :toc-placement: preamble
@@ -11,13 +11,13 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2103JAN2018-T09-B2/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team T09-B2`      Since: `March 2018`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+CollegeZone is for NUS students living in Residential College 4 (RC4) who *prefers to use a desktop app for managing their RC4 friends contacts and their tasks*. More importantly, CollegeZone is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CollegeZone can get your contact management and tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -27,8 +27,8 @@ AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for mana
 Having any Java 8 version is not enough. +
 This app will not work with earlier versions of Java 8.
 +
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Download the latest `collegezone.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for CollegeZone.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
@@ -38,7 +38,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
+* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the CollegeZone.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
 
@@ -60,41 +60,46 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
-=== Adding a person: `add`
+=== Adding a Friend: `add`
 
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Adds a person to CollegeZone +
+Format: `add n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...`
+
+****
+* `LEVEL_OF_FRIENDSHIP` must be a positive integer ranging from 1 to 10.
+****
 
 [TIP]
-A person can have any number of tags (including 0)
+A person can have any number of tags (including 0) +
+A person can have any number of CCAs (including 0)
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 */9 b/21 May 1997 u/#10-12 cca/Badminton cca/Volleyball t/workout buddy`
+* `add n/Betsy Crowe t/friend b/21 12 1994 u/01-10 p/1234567 */1 t/OwesMoney`
 
-=== Listing all persons : `list`
+=== Listing all friends : `list`
 
-Shows a list of all persons in the address book. +
+Shows a list of all persons in CollegeZone. +
 Format: `list`
 
-=== Editing a person : `edit`
+=== Editing a Friend : `edit`
 
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Edits an existing person in CollegeZone. +
+Format: `edit INDEX [n/NAME] [p/PHONE] [u/UNIT_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [cca/CCA]... [t/TAG]...`
 
 ****
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the last person listing. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags or CCAs, the existing tags or CCAs of the person will be removed i.e adding of tags or CCAs is not cumulative.
 * You can remove all the person's tags by typing `t/` without specifying any tags after it.
 ****
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+* `edit 1 p/91234567 */10` +
+Edits the phone number and level of friendship of the 1st person to be `91234567` and `10` respectively.
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
@@ -120,7 +125,7 @@ Returns any person having names `Betsy`, `Tim`, or `John`
 
 === Deleting a person : `delete`
 
-Deletes the specified person from the address book. +
+Deletes the specified person from CollegeZone. +
 Format: `delete INDEX`
 
 ****
@@ -133,7 +138,7 @@ Examples:
 
 * `list` +
 `delete 2` +
-Deletes the 2nd person in the address book.
+Deletes the 2nd person in CollegeZone.
 * `find Betsy` +
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
@@ -153,7 +158,7 @@ Examples:
 
 * `list` +
 `select 2` +
-Selects the 2nd person in the address book.
+Selects the 2nd person in CollegeZone.
 * `find Betsy` +
 `select 1` +
 Selects the 1st person in the results of the `find` command.
@@ -171,12 +176,12 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 // tag::undoredo[]
 === Undoing previous command : `undo`
 
-Restores the address book to the state before the previous _undoable_ command was executed. +
+Restores CollegeZone to the state before the previous _undoable_ command was executed. +
 Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify CollegeZone's content (`add`, `delete`, `edit` and `clear`).
 ====
 
 Examples:
@@ -220,7 +225,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 === Clearing all entries : `clear`
 
-Clears all entries from the address book. +
+Clears all entries from CollegeZone. +
 Format: `clear`
 
 === Exiting the program : `exit`
@@ -230,7 +235,7 @@ Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+CollegeZone data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 // tag::dataencryption[]
@@ -242,17 +247,17 @@ _{explain how the user can enable/disable data encryption}_
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CollegeZone folder.
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* *Add* `add n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...` +
+e.g. `add n/James Ho p/22224444 */3 b/14th 3 1995 u/01-111 cca/Choir t/friend t/colleague`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
+* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [u/UNIT_NUMBER] [cca/CCA]... [t/TAG]...` +
+e.g. `edit 2 n/James Lee cca/waterpolo`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
 * *List* : `list`
