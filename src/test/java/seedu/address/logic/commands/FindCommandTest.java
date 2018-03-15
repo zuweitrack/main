@@ -61,6 +61,9 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
+        // null -> returns false
+        assertFalse(findThirdCommand.equals(null));
+
         // different person -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
 

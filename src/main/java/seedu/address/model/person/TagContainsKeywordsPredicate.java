@@ -28,7 +28,6 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         String tagS = tag.toString();
-        System.out.println(tagS);
 
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(tagS, keyword));
