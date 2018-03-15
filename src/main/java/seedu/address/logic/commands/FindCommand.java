@@ -31,10 +31,11 @@ public class FindCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        if (predicateT == null)
-        model.updateFilteredPersonList(predicateN);
-        if (predicateN == null)
+        if (predicateT == null) {
+            model.updateFilteredPersonList(predicateN);
+        } else {
             model.updateFilteredPersonList(predicateT);
+        }
         return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredPersonList().size()));
     }
 
@@ -44,8 +45,7 @@ public class FindCommand extends Command {
             return other == this // short circuit if same object
                     || (other instanceof FindCommand // instanceof handles nulls
                     && this.predicateN.equals(((FindCommand) other).predicateN)); // state check
-        }
-        else {
+        } else {
             return other == this // short circuit if same object
                     || (other instanceof FindCommand // instanceof handles nulls
                     && this.predicateT.equals(((FindCommand) other).predicateT)); // state check

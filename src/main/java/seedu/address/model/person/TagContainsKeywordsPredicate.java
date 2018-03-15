@@ -1,9 +1,8 @@
 package seedu.address.model.person;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
-
-import java.util.Iterator;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
@@ -27,8 +26,10 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
             tag.append(ir.next().getTag());
             tag.append(" ");
         }
-            String tagS = tag.toString();
+
+        String tagS = tag.toString();
         System.out.println(tagS);
+
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(tagS, keyword));
     }
