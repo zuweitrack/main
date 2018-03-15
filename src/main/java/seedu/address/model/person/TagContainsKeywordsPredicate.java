@@ -23,7 +23,7 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
         Iterator<Tag> ir = person.getTags().iterator();
         StringBuilder tag = new StringBuilder();
         while (ir.hasNext()) {
-            tag.append(ir.next().getTag());
+            tag.append(ir.next().tagName);
             tag.append(" ");
         }
 
