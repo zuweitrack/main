@@ -35,22 +35,20 @@ public class FindCommandParser implements Parser<FindCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-       
+
         name = argMultimap.getValue(PREFIX_NAME);
         tag = argMultimap.getValue(PREFIX_TAG);
-        
+
         String[] nameKeywords = name.get().split("\\s+");
         String[] tagKeywords = tag.get().split("\\s+");
-        
+
         if (tag.get().equals("")) {
             return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         } else {
             return new FindCommand(new TagContainsKeywordsPredicate(Arrays.asList(tagKeywords)));
         }
-        
-        
     }
-    
+
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }

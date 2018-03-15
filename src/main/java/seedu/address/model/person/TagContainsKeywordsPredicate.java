@@ -26,7 +26,7 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
         while (ir.hasNext()) {
             tag.append(ir.next().getTag());
             tag.append(" ");
-        }   
+        }
             String tagS = tag.toString();
         System.out.println(tagS);
         return keywords.stream()
