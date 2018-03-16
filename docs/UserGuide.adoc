@@ -103,7 +103,7 @@ Edits the phone number and level of friendship of the 1st person to be `91234567
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-=== Locating persons by name: `find`
+=== Locating persons by name: `find` `[since v1.1]`
 
 Finds persons whose names contain any of the given keywords. +
 Format: `find [n/KEYWORDS] [t/]` or `find [n/] [t/KEYWORDS]`
