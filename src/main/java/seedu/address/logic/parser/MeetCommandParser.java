@@ -12,7 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new {@code RemarkCommand} object
  */
-public class MeetCommandParser implements Parser<MeetCommand> {
+public class MeetCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the {@code RemarkCommand}
      * and returns a {@code RemarkCommand} object for execution.
@@ -33,4 +33,5 @@ public class MeetCommandParser implements Parser<MeetCommand> {
 
         return new MeetCommand(index, date);
     }
+
 }
