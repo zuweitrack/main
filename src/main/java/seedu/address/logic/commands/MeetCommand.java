@@ -20,12 +20,12 @@ public class MeetCommand extends UndoableCommand {
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DATE + "[REMARK]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DATE+ "01/April/2018";
+            + PREFIX_DATE + "01/April/2018";
 
 
     public static final String MESSAGE_SUCCESS = "Person added for meet up on this date. ";
     public static final String MESSAGE_DUPLICATE_MEETUP = "This meeting already exists in the calendar";
-    public static final String MESSAGE_DATE_BOOKED = "This date has already been booked for a meeting with another person";
+    public static final String MESSAGE_DATE_BOOKED = "This date has already been booked for another meeting";
 
     public static final String MESSAGE_ARGUMENTS = "You are meeting person %1$d, Date of meeting: %2$s";
 

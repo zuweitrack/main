@@ -25,6 +25,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses user input.
  */
+@SuppressWarnings("CheckStyle")
 public class AddressBookParser {
 
     /**
@@ -117,6 +118,7 @@ public class AddressBookParser {
 
             case MeetCommand.COMMAND_WORD:
                 return new MeetCommandParser().parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
