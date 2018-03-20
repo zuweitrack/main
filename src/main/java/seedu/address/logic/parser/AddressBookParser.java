@@ -113,11 +113,11 @@ public class AddressBookParser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
-            case RedoCommand.COMMAND_ALIAS:
-                return new RedoCommand();
+        case RedoCommand.COMMAND_ALIAS:
+            return new RedoCommand();
 
-            case MeetCommand.COMMAND_WORD:
-                return new MeetCommandParser().parse(arguments);
+        case MeetCommand.COMMAND_WORD:
+            return new MeetCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
