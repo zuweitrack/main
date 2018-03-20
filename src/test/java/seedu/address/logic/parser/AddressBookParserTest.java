@@ -5,10 +5,11 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -95,7 +96,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_meet() throws Exception {
         final String date = "14/10/2018";
-        MeetCommand command  = (MeetCommand) parser.parseCommand(MeetCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_DATE + date);
+        MeetCommand command  = (MeetCommand) parser.parseCommand(MeetCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_DATE + date);
         assertEquals(new MeetCommand(INDEX_FIRST_PERSON, date), command);
     }
 
