@@ -3,10 +3,17 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.List;
+
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Meet;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 
 /**
@@ -24,14 +31,16 @@ public class MeetCommand extends UndoableCommand {
             + PREFIX_DATE + "01/April/2018";
 
 
-    public static final String MESSAGE_SUCCESS = "Person added for meet up on this date. ";
-    public static final String MESSAGE_DUPLICATE_MEETUP = "This meeting already exists in the calendar";
-    public static final String MESSAGE_DATE_BOOKED = "This date has already been booked for another meeting";
+    public static final String MESSAGE_ADD_MEETDATE_SUCCESS = "%1$s added for meet up on this date.";
+    public static final String MESSAGE_DELETE_MEETDATE_SUCCESS = "You are not meeting %1$s on this date.";
 
     public static final String MESSAGE_ARGUMENTS = "You are meeting person %1$d, Date of meeting: %2$s";
 
     private final Index targetIndex;
     private final Meet date;
+
+    private Person personToEdit;
+    private Person editedPerson;
 
     /**
      * @param targetIndex of the person in the filtered person list you want to meet
@@ -47,9 +56,43 @@ public class MeetCommand extends UndoableCommand {
     }
 
     @Override
-    protected CommandResult executeUndoableCommand() throws CommandException {
-        throw new CommandException(String.format(MESSAGE_ARGUMENTS, targetIndex.getOneBased(), date));
+    public CommandResult executeUndoableCommand() throws CommandException {
+        requireNonNull(personToEdit);
+        requireNonNull(editedPerson);
 
+        try {
+            model.updatePerson(personToEdit, editedPerson);
+        } catch (DuplicatePersonException dpe) {
+            throw new AssertionError("Changing target person's meeting date should not "
+                    + "result in a duplicate");
+        } catch (PersonNotFoundException pnfe) {
+            throw new AssertionError("The target person cannot be missing");
+        }
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        return new CommandResult(generateSuccessMessage(editedPerson));
+    }
+
+    @Override
+    protected void preprocessUndoableCommand() throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if( targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        personToEdit = lastShownList.get(targetIndex.getZeroBased());
+        editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(), date, personToEdit.getTags());
+    }
+
+    /**
+     * Generates a command execution success message based on whether the remark is added to or removed from
+     * {@code personToEdit}.
+     */
+    private String generateSuccessMessage(Person personToEdit) {
+        String message = !date.value.isEmpty() ? MESSAGE_ADD_MEETDATE_SUCCESS : MESSAGE_DELETE_MEETDATE_SUCCESS;
+        return String.format(message, personToEdit);
     }
 
     @Override
