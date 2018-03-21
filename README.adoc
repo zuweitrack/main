@@ -19,6 +19,9 @@ endif::[]
 * It's created for a RC4 resident to manage their contacts with other RC4 residents and to manage their tasks.
 
 
+
+* The main reasons NUS freshmen chooses to stay in RC4 is to *forge new friendships* and to *perform well in their studies*. CollegeZone aims to aid in RC4 residents tasks management and maintaining the friendships forged in RC4.
+
 == Site Map
 
 * <<UserGuide#, User Guide>>
