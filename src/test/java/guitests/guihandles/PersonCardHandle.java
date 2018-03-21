@@ -17,6 +17,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String TAGS_FIELD_ID = "#tags";
+    private static final String MEET_FIELD_ID = "#meet";
 
     private final Label idLabel;
     private final Label nameLabel;

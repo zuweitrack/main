@@ -8,7 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.MeetCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
+import seedu.address.model.person.Meet;
 /**
  * Parses input arguments and creates a new {@code RemarkCommand} object
  */
@@ -31,7 +31,7 @@ public class MeetCommandParser implements Parser {
 
         String date = argMultimap.getValue(PREFIX_DATE).orElse("");
 
-        return new MeetCommand(index, date);
+        return new MeetCommand(index, new Meet(date));
     }
 
 }

@@ -16,6 +16,7 @@ import seedu.address.logic.UndoRedoStack;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Meet;
 
 
 /**
@@ -37,10 +38,10 @@ public class MeetCommandTest {
     public void equals() {
         String testDate = "15/03/2018";
         String testDateTwo = "16/03/2018";
-        final MeetCommand standardCommand = new MeetCommand(INDEX_FIRST_PERSON, testDate);
+        final MeetCommand standardCommand = new MeetCommand(INDEX_FIRST_PERSON, new Meet(testDate));
 
         // same values -> returns true
-        MeetCommand commandWithSameValues = new MeetCommand(INDEX_FIRST_PERSON, testDate);
+        MeetCommand commandWithSameValues = new MeetCommand(INDEX_FIRST_PERSON, new Meet(testDate));
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -53,17 +54,17 @@ public class MeetCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new MeetCommand(INDEX_SECOND_PERSON, testDate)));
+        assertFalse(standardCommand.equals(new MeetCommand(INDEX_SECOND_PERSON, new Meet(testDate))));
 
         // different remark -> returns false
-        assertFalse(standardCommand.equals(new MeetCommand(INDEX_FIRST_PERSON, testDateTwo)));
+        assertFalse(standardCommand.equals(new MeetCommand(INDEX_FIRST_PERSON, new Meet(testDateTwo))));
     }
 
     /**
      * Returns an {@code RemarkCommand} with parameters {@code index} and {@code remark}.
      */
     private MeetCommand prepareCommand(Index index, String date) {
-        MeetCommand meetCommand = new MeetCommand(index, date);
+        MeetCommand meetCommand = new MeetCommand(index, new Meet(date));
         meetCommand.setData(model, new CommandHistory(), new UndoRedoStack());
         return meetCommand;
     }
