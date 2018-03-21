@@ -385,6 +385,16 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
+[d]
+=== Since v1.1
+// tag::find[]
+=== Enhanced Find Command
+
+The old find command feature only allows searching by name. To make CollegeZone more useful for RC4 students, we have enhanced the find
+command feature to be able to find persons by tags.
+
+
+
 == Documentation
 
 We use asciidoc for writing documentation.
@@ -802,6 +812,11 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 |Add and Edit : Change add and edit command to suit our target audience ( RC4 Residents ) +
  GUI : Change the look and feel of the GUI to make it more user friendly.
 
+|Fuad B Sahmawi
+|Scheduler (Tasks) : This feature allows user to set/edit/delete tasks/events reflected on a Calendar +
+ Scheduler (Notes) : This feature will allow user to add notes for a certain task/event
+|Find : Change find command to be able to find persons in contact list according to tags +
+ Logic : Added command aliases to allow users to be able to perform commands by typing shortcuts
 
 |=======================================================================
 
@@ -833,11 +848,11 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |forgetful RC student |add other RC friends name, birthday, hall CCAs and tags into CollegeZone |
 
+|`* * *` |RC student |note down tasks, events or training sessions in a calendar |make my schedule schedule more organised
+
 |`* *` |careless RC student |undo a command I entered |undo a wrong command that I entered
 
 |`* *` |careless RC student |redo a command I entered |redo when I want to undo my "undo" command
-
-|`* *` |RC student |note down events or training sessions in a calendar |make my schedule schedule more organised
 
 |`* *` |RC student |write down a short reflection of how an event/training session went |remember precious moments easier in the future
 
@@ -916,6 +931,31 @@ Use case ends.
 Use case resumes at step 2.
 
 [discrete]
+=== Use case: Find person
+1. User requests to find person by tag or name using keywords
+2. CollegeZone shows a list of persons
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The given detail format is invalid.
++
+[none]
+** 1a1. CollegeZone shows an error message
+
+[none]
+* 2a. The list has all persons with name or tag that matches keywords
++
+Use case ends.
+
+[none]
+* 2b. The list is empty
++ 
+Use case ends.
+
+[discrete]
 === Use case: Reminder add<reminder>
 
 *MSS*
@@ -935,6 +975,7 @@ Use case ends.
 +
 Use case ends.
 
+[discrete]
 === Use case: Reminder delete<reminder>
 *MSS*
 
@@ -958,6 +999,14 @@ Use case ends.
 [none]
 ** 1b1. CollegeZone shows an error message.
 +
+Use case ends.
+
+[discrete]
+=== Use case: Task add<task, notes>
+
+1. User requests to add a task on a certain date with a note attached
+2. CollegeZone adds the task in the calendar and changes is reflected in the calendar
++ 
 Use case ends.
 
 _{More to be added}_
