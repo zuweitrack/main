@@ -92,6 +92,14 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Email} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withMeetDate(String meetDate) {
+        this.meetDate = new Meet(meetDate);
+        return this;
+    }
+
     public Person build() {
         return new Person(name, phone, email, address, meetDate, tags);
     }
