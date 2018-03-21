@@ -32,6 +32,8 @@ public class XmlAdaptedPerson {
     private String email;
     @XmlElement(required = true)
     private String address;
+    @XmlElement(required = true)
+    private String meetDate;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -66,6 +68,7 @@ public class XmlAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         tagged = new ArrayList<>();
+        meetDate = source.getMeetDate().value;
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
         }
@@ -114,7 +117,7 @@ public class XmlAdaptedPerson {
         }
         final Address address = new Address(this.address);
 
-        final Meet meetDate = new Meet(""); // TODO: To be fixed in later commit
+        final Meet meetDate = new Meet(this.meetDate);
 
         final Set<Tag> tags = new HashSet<>(personTags);
         return new Person(name, phone, email, address, meetDate, tags);
