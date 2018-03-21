@@ -393,6 +393,55 @@ Certain properties of the application can be controlled (e.g App name, logging l
 The old find command feature only allows searching by name. To make CollegeZone more useful for RC4 students, we have enhanced the find
 command feature to be able to find persons by tags.
 
+=== Logic: Command Aliases
+
+CollegeZone users may now use shortcuts to perform desired tasks. These shortcuts are shown in figure 3.6.1.
+
+*Figure 3.6.1*:
+[width="90%",cols="20%,<25%,<25%",options="header",]
+|=======================================================================
+|Command | Original| Alias
+|Add
+|add
+|a
+
+|Clear
+|clear
+|c
+
+|Delete
+|delete
+|d
+
+|Edit
+|edit
+|e
+
+|Find
+|find
+|f
+
+|History
+|history
+|h
+
+|List
+|list
+|l
+
+|Redo
+|redo
+|r
+
+|Select
+|select
+|s
+
+|Undo
+|undo
+|u
+
+|=======================================================================
 
 
 == Documentation
