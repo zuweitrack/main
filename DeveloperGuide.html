@@ -82,7 +82,11 @@
 </li>
 <li><a href="#product-scope">Appendix B: Product Scope</a></li>
 <li><a href="#user-stories">Appendix C: User Stories</a></li>
-<li><a href="#use-cases">Appendix D: Use Cases</a></li>
+<li><a href="#use-cases">Appendix D: Use Cases</a>
+<ul class="sectlevel2">
+<li><a href="#use-case-reminder-delete-reminder">D.1. Use case: Reminder delete&lt;reminder&gt;</a></li>
+</ul>
+</li>
 <li><a href="#non-functional-requirements">Appendix E: Non Functional Requirements</a></li>
 <li><a href="#glossary">Appendix F: Glossary</a></li>
 <li><a href="#product-survey">Appendix G: Product Survey</a></li>
@@ -1903,10 +1907,13 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>NUS Students living in Residential College 4 (RC4)</p>
+<p>Current NUS Student living in Residential College 4 (RC4)</p>
 </li>
 <li>
 <p>has a need to manage a significant number of contacts (friends) and tasks to do</p>
+</li>
+<li>
+<p>needs to be reminded of things to do</p>
 </li>
 <li>
 <p>prefer desktop apps over other types</p>
@@ -1925,6 +1932,31 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="paragraph">
 <p><strong>Value proposition</strong>: manage contacts and tasks faster than a typical mouse/GUI driven app</p>
 </div>
+<div class="paragraph">
+<p><strong>Feature Contribution</strong>:</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 28.5714%;">
+<col style="width: 35.7142%;">
+<col style="width: 35.7144%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Assignee</th>
+<th class="tableblock halign-left valign-top">Major</th>
+<th class="tableblock halign-left valign-top">Minor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deborah Low</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scheduler (Reminder) : This app allows user to set/edit/delete reminders reflected on a Calendar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add and Edit : Change add and edit command to suit our target audience ( RC4 Residents )<br>
+ GUI : Change the look and feel of the GUI to make it more user friendly.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect1">
@@ -2041,7 +2073,7 @@ for <code>RemarkCommandParser</code>.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RC student</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">hide <a href="#private-contact-detail">private contact details</a> by default</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">minimize chance of someone else seeing them by accident</p></td>
 </tr>
@@ -2181,8 +2213,97 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
+<h3 id="use-case-reminder-add-reminder" class="discrete">Use case: Reminder add&lt;reminder&gt;</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to add a reminder on a certain date</p>
+</li>
+<li>
+<p>CollegeZone adds the reminder in the calendar and changes is reflected on the calendar</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The given date detail in invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. CollegeZone shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="use-case-reminder-delete-reminder"><a class="link" href="#use-case-reminder-delete-reminder">D.1. Use case: Reminder delete&lt;reminder&gt;</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to delete a certain reminder on a certain date</p>
+</li>
+<li>
+<p>CollegeZone delete the reminder from the calendar and changes is reflected on the calendar</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The given reminder to delete does not exist.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. CollegeZone shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1b. The given details to delete reminder is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1b1. CollegeZone shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p><em>{More to be added}</em></p>
+</div>
 </div>
 </div>
 </div>
@@ -2394,7 +2515,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-14 10:16:13 UTC
+Last updated 2018-03-21 00:39:16 UTC
 </div>
 </div>
 </body>

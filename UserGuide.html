@@ -32,7 +32,7 @@
 <li><a href="#adding-a-friend-code-add-code">3.2. Adding a Friend: <code>add</code></a></li>
 <li><a href="#listing-all-friends-code-list-code">3.3. Listing all friends : <code>list</code></a></li>
 <li><a href="#editing-a-friend-code-edit-code">3.4. Editing a Friend : <code>edit</code></a></li>
-<li><a href="#locating-persons-by-name-code-find-code">3.5. Locating persons by name: <code>find</code></a></li>
+<li><a href="#locating-persons-by-name-code-find-code-code-since-v1-1-code">3.5. Locating persons by name: <code>find</code> <code>[since v1.1]</code></a></li>
 <li><a href="#deleting-a-person-code-delete-code">3.6. Deleting a person : <code>delete</code></a></li>
 <li><a href="#selecting-a-person-code-select-code">3.7. Selecting a person : <code>select</code></a></li>
 <li><a href="#listing-entered-commands-code-history-code">3.8. Listing entered commands : <code>history</code></a></li>
@@ -251,10 +251,10 @@ Edits the name of the 2nd person to be <code>Betsy Crower</code> and clears all 
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-persons-by-name-code-find-code"><a class="link" href="#locating-persons-by-name-code-find-code">3.5. Locating persons by name: <code>find</code></a></h3>
+<h3 id="locating-persons-by-name-code-find-code-code-since-v1-1-code"><a class="link" href="#locating-persons-by-name-code-find-code-code-since-v1-1-code">3.5. Locating persons by name: <code>find</code> <code>[since v1.1]</code></a></h3>
 <div class="paragraph">
 <p>Finds persons whose names contain any of the given keywords.<br>
-Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
+Format: <code>find [n/KEYWORDS] [t/]</code> or <code>find [n/] [t/KEYWORDS]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -267,13 +267,16 @@ Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
 <p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
 </li>
 <li>
-<p>Only the name is searched.</p>
+<p>Only the name or tag is searched at a single time</p>
 </li>
 <li>
 <p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
 </li>
 <li>
 <p>Persons matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
+</li>
+<li>
+<p>Searching both name and tag at the same time is not possible</p>
 </li>
 </ul>
 </div>
@@ -285,12 +288,16 @@ Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>find John</code><br>
+<p><code>find n/John t/</code><br>
 Returns <code>john</code> and <code>John Doe</code></p>
 </li>
 <li>
-<p><code>find Betsy Tim John</code><br>
+<p><code>find n/Betsy Tim John t/</code><br>
 Returns any person having names <code>Betsy</code>, <code>Tim</code>, or <code>John</code></p>
+</li>
+<li>
+<p><code>find n/ t/friends</code><br>
+Returns any person having tags <code>friends</code></p>
 </li>
 </ul>
 </div>
@@ -563,7 +570,7 @@ e.g.<code>select 2</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-14 10:16:13 UTC
+Last updated 2018-03-21 00:39:16 UTC
 </div>
 </div>
 </body>
