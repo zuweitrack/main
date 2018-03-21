@@ -391,18 +391,21 @@ Certain properties of the application can be controlled (e.g App name, logging l
 [d]
 === Since v1.2
 // tag::addandedit[]
-=== Targeted add and edit
+=== Targeted add and edit command
 
 The old add and edit feature holds a broad information about a Person.
 As CollegeZone is catered toward NUS RC4 Residents, we have changed the attributes of a Person to hold: +
 *Name, Mobile Number, Birthday, Level of Friendship, RC4 Unit Number, RC4 CCAs and Tags*. +
 This is done by removing unwanted attributes of a person and adding new attributes of a person.
 
+===== Aspect: Nature of new Attributes
+* Birthday: Must be a valid date.
+* Level Of Friendship: Level of friendship is an integer from 1 to 10. The level is indicated by the number of hearts via the UI.
+* Unit Number: Must be a valid unit number in RC4.
+* A RC4 resident is able to have multiple CCAs.
+
 // end::addandedit[]
 
-=== Enhanced delete
-
-The old delete feature only allows user to delete a single person at a time. The current enhanced delete feature allows multiple people to deleted at once. The delete command is modified to take in multiple index inputs. This is done by splitting a string of index inputs into multiple tokens of indexes to delete.
 == Documentation
 
 We use asciidoc for writing documentation.
