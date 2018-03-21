@@ -124,7 +124,7 @@ public class XmlAddressBookStorageTest {
     @Test
     public void backupAddressBook_nullAddressBook_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        backupAddressBook(null, "SomeFile.xml.backup" );
+        backupAddressBook(null, "SomeFile.xml.backup");
     }
 
     /**
