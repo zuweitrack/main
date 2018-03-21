@@ -7,8 +7,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 
-import javax.swing.plaf.metal.MetalComboBoxEditor;
-
 /**
  * Provides a handle to a person card in the person list panel.
  */
