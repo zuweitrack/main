@@ -3,55 +3,73 @@
     <persons>
         <name>Hans Muster</name>
         <phone isPrivate="false">9482424</phone>
-        <email isPrivate="false">hans@example.com</email>
-        <address isPrivate="false">4th street</address>
+        <birthday isPrivate="false">28/03/1995</birthday>
+        <levelOfFriendship isPrivate="false">1</levelOfFriendship>
+        <unitNumber isPrivate="false">#8-209</unitNumber>
+        <meetDate isPrivate="false"></meetDate>
     </persons>
     <persons>
         <name>Ruth Mueller</name>
         <phone isPrivate="false">87249245</phone>
-        <email isPrivate="false">ruth@example.com</email>
-        <address isPrivate="false">81th street</address>
+        <birthday isPrivate="false">09-02-2009</birthday>
+        <levelOfFriendship isPrivate="false">2</levelOfFriendship>
+        <unitNumber isPrivate="false">#01-10</unitNumber>
+        <meetDate isPrivate="false"></meetDate>
     </persons>
     <persons>
         <name>Heinz Kurz</name>
         <phone isPrivate="false">95352563</phone>
-        <email isPrivate="false">heinz@example.com</email>
-        <address isPrivate="false">wall street</address>
+        <birthday isPrivate="false">25-12-1992</birthday>
+        <levelOfFriendship isPrivate="false">3</levelOfFriendship>
+        <unitNumber isPrivate="false">#2-40</unitNumber>
+        <meetDate isPrivate="false"></meetDate>
     </persons>
     <persons>
         <name>Cornelia Meier</name>
         <phone isPrivate="false">87652533</phone>
-        <email isPrivate="false">cornelia@example.com</email>
-        <address isPrivate="false">10th street</address>
+        <birthday isPrivate="false">24-10-2000</birthday>
+        <levelOfFriendship isPrivate="false">4</levelOfFriendship>
+        <unitNumber isPrivate="false">#12-204</unitNumber>
+        <meetDate isPrivate="false">15/04/2018</meetDate>
     </persons>
     <persons>
         <name>Werner Meyer</name>
         <phone isPrivate="false">9482224</phone>
-        <email isPrivate="false">werner@example.com</email>
-        <address isPrivate="false">michegan ave</address>
+        <birthday isPrivate="false">18/09/2000</birthday>
+        <levelOfFriendship isPrivate="false">5</levelOfFriendship>
+        <unitNumber isPrivate="false">#7-111</unitNumber>
+        <meetDate isPrivate="false"></meetDate>
     </persons>
     <persons>
         <name>Lydia Kunz</name>
         <phone isPrivate="false">9482427</phone>
-        <email isPrivate="false">lydia@example.com</email>
-        <address isPrivate="false">little tokyo</address>
+        <birthday isPrivate="false">18/06/1990</birthday>
+        <levelOfFriendship isPrivate="false">6</levelOfFriendship>
+        <unitNumber isPrivate="false">#01-39</unitNumber>
+        <meetDate isPrivate="false"></meetDate>
     </persons>
     <persons>
         <name>Anna Best</name>
         <phone isPrivate="false">9482442</phone>
-        <email isPrivate="false">anna@example.com</email>
-        <address isPrivate="false">4th street</address>
+        <birthday isPrivate="false">10-11-1995</birthday>
+        <levelOfFriendship isPrivate="false">7</levelOfFriendship>
+        <unitNumber isPrivate="false">#03-86</unitNumber>
+        <meetDate isPrivate="false"></meetDate>
     </persons>
     <persons>
         <name>Stefan Meier</name>
         <phone isPrivate="false">8482424</phone>
-        <email isPrivate="false">stefan@example.com</email>
-        <address isPrivate="false">little india</address>
+        <birthday isPrivate="false">05-05-1995</birthday>
+        <levelOfFriendship isPrivate="false">8</levelOfFriendship>
+        <unitNumber isPrivate="false">#12-88</unitNumber>
+        <meetDate isPrivate="false"></meetDate>
     </persons>
     <persons>
         <name>Martin Mueller</name>
         <phone isPrivate="false">8482131</phone>
-        <email isPrivate="false">hans@example.com</email>
-        <address isPrivate="false">chicago ave</address>
+        <birthday isPrivate="false">06/06/1996</birthday>
+        <levelOfFriendship isPrivate="false">9</levelOfFriendship>
+        <unitNumber isPrivate="false">#15-400</unitNumber>
+        <meetDate isPrivate="false"></meetDate>
     </persons>
 </addressbook>

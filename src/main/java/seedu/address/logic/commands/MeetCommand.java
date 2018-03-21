@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Meet;
 
 
 /**
@@ -30,14 +31,14 @@ public class MeetCommand extends UndoableCommand {
     public static final String MESSAGE_ARGUMENTS = "You are meeting person %1$d, Date of meeting: %2$s";
 
     private final Index targetIndex;
-    private final String date;
+    private final Meet date;
 
     /**
      * @param targetIndex of the person in the filtered person list you want to meet
      * @param date you want to meet the person
      */
 
-    public MeetCommand(Index targetIndex, String date) {
+    public MeetCommand(Index targetIndex, Meet date) {
         requireNonNull(targetIndex);
         requireNonNull(date);
 

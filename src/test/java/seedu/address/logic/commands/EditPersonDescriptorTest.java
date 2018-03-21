@@ -4,11 +4,13 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDAY_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CCA_BADMINTON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_OF_FRIENDSHIP_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_NUMBER_BOB;
 
 import org.junit.Test;
 
@@ -43,12 +45,21 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different email -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
+        // different birthday -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withBirthday(VALID_BIRTHDAY_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different address -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
+        // different levelOfFriendship -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withLevelOfFriendship(VALID_LEVEL_OF_FRIENDSHIP_BOB)
+                .build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different unitNumber -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withUnitNumber(VALID_UNIT_NUMBER_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different ccas -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withCcas(VALID_CCA_BADMINTON).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false

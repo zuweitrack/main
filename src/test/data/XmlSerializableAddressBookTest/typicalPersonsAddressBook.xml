@@ -5,47 +5,65 @@
     <persons>
         <name>Alice Pauline</name>
         <phone>85355255</phone>
-        <email>alice@example.com</email>
-        <address>123, Jurong West Ave 6, #08-111</address>
+        <birthday>01-01-1991</birthday>
+        <levelOfFriendship>1</levelOfFriendship>
+        <unitNumber>#12-21</unitNumber>
+        <ccas>hockey</ccas>
+        <meetDate></meetDate>
         <tagged>friends</tagged>
     </persons>
     <persons>
         <name>Benson Meier</name>
         <phone>98765432</phone>
-        <email>johnd@example.com</email>
-        <address>311, Clementi Ave 2, #02-25</address>
+        <birthday>19-01-1998</birthday>
+        <levelOfFriendship>2</levelOfFriendship>
+        <unitNumber>#4-44</unitNumber>
+        <ccas>Skating</ccas>
+        <ccas>swimming</ccas>
+        <meetDate></meetDate>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
     </persons>
     <persons>
         <name>Carl Kurz</name>
         <phone>95352563</phone>
-        <email>heinz@example.com</email>
-        <address>wall street</address>
+        <birthday>12-02-1994</birthday>
+        <levelOfFriendship>7</levelOfFriendship>
+        <unitNumber>#2-69</unitNumber>
+        <meetDate></meetDate>
     </persons>
     <persons>
         <name>Daniel Meier</name>
         <phone>87652533</phone>
-        <email>cornelia@example.com</email>
-        <address>10th street</address>
+        <birthday>12/03/1994</birthday>
+        <levelOfFriendship>4</levelOfFriendship>
+        <unitNumber>#03-033</unitNumber>
+        <meetDate></meetDate>
     </persons>
     <persons>
         <name>Elle Meyer</name>
         <phone>9482224</phone>
-        <email>werner@example.com</email>
-        <address>michegan ave</address>
+        <birthday>09-09-1999</birthday>
+        <levelOfFriendship>10</levelOfFriendship>
+        <unitNumber>#9-434</unitNumber>
+        <ccas>modern dance</ccas>
+        <meetDate></meetDate>
     </persons>
     <persons>
         <name>Fiona Kunz</name>
         <phone>9482427</phone>
-        <email>lydia@example.com</email>
-        <address>little tokyo</address>
+        <birthday>10/10/1990</birthday>
+        <levelOfFriendship>3</levelOfFriendship>
+        <unitNumber>#10-10</unitNumber>
+        <meetDate></meetDate>
     </persons>
     <persons>
         <name>George Best</name>
         <phone>9482442</phone>
-        <email>anna@example.com</email>
-        <address>4th street</address>
+        <birthday>11/11/2000</birthday>
+        <levelOfFriendship>8</levelOfFriendship>
+        <unitNumber>#2-65</unitNumber>
+        <meetDate>14/04/2018</meetDate>
     </persons>
     <tags>friends</tags>
     <tags>owesMoney</tags>
