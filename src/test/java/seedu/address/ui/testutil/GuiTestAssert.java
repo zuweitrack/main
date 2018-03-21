@@ -40,6 +40,7 @@ public class GuiTestAssert {
         assertEquals(expectedPerson.getPhone().value, actualCard.getPhone());
         assertEquals(expectedPerson.getEmail().value, actualCard.getEmail());
         assertEquals(expectedPerson.getAddress().value, actualCard.getAddress());
+        assertEquals(expectedPerson.getMeetDate().value, actualCard.getMeetDate());
         assertTagsEqual(expectedPerson, actualCard);
     }
 
