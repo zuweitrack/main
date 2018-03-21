@@ -365,6 +365,7 @@ _{Explain here how the data encryption feature will be implemented}_
 
 // end::dataencryption[]
 
+// tag::logging[]
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
@@ -380,6 +381,8 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 * `INFO` : Information showing the noteworthy actions by the App
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size
 
+// end::logging[]
+
 [[Implementation-Configuration]]
 === Configuration
 
@@ -387,7 +390,7 @@ Certain properties of the application can be controlled (e.g App name, logging l
 
 [d]
 === Since v1.1
-// tag::find[]
+
 === Enhanced Find Command
 
 The old find command feature only allows searching by name. To make CollegeZone more useful for RC4 students, we have enhanced the find
@@ -443,6 +446,24 @@ CollegeZone users may now use shortcuts to perform desired tasks. These shortcut
 
 |=======================================================================
 
+//end::find[]
+
+=== Since v1.2
+// tag::addandedit[]
+=== Targeted add and edit command
+
+The old add and edit feature holds a broad information about a Person.
+As CollegeZone is catered toward NUS RC4 Residents, we have changed the attributes of a Person to hold: +
+*Name, Mobile Number, Birthday, Level of Friendship, RC4 Unit Number, RC4 CCAs and Tags*. +
+This is done by removing unwanted attributes of a person and adding new attributes of a person.
+
+===== Aspect: Nature of new Attributes
+* Birthday: Must be a valid date.
+* Level Of Friendship: Level of friendship is an integer from 1 to 10. The level is indicated by the number of hearts via the UI.
+* Unit Number: Must be a valid unit number in RC4.
+* A RC4 resident is able to have multiple CCAs.
+
+// end::addandedit[]
 
 == Documentation
 
