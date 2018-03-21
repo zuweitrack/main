@@ -1022,7 +1022,7 @@ Use case ends.
 
 [none]
 * 2b. The list is empty
-+ 
++
 Use case ends.
 
 [discrete]
@@ -1076,7 +1076,7 @@ Use case ends.
 
 1. User requests to add a task on a certain date with a note attached
 2. CollegeZone adds the task in the calendar and changes is reflected in the calendar
-+ 
++
 Use case ends.
 
 _{More to be added}_
