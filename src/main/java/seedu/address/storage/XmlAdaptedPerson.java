@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Meet;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -113,8 +114,10 @@ public class XmlAdaptedPerson {
         }
         final Address address = new Address(this.address);
 
+        final Meet meetDate = new Meet(""); // TODO: To be fixed in later commit
+
         final Set<Tag> tags = new HashSet<>(personTags);
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, meetDate, tags);
     }
 
     @Override
