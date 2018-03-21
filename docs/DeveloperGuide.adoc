@@ -803,14 +803,28 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile*:
 
-* NUS Students living in Residential College 4 (RC4)
+* Current NUS Student living in Residential College 4 (RC4)
 * has a need to manage a significant number of contacts (friends) and tasks to do
+* needs to be reminded of things to do
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
 *Value proposition*: manage contacts and tasks faster than a typical mouse/GUI driven app
+
+*Feature Contribution*:
+[width="90%",cols="20%,<25%,<25%",options="header",]
+|=======================================================================
+|Assignee |Major |Minor
+
+|Deborah Low
+|Scheduler (Reminder) : This app allows user to set/edit/delete reminders reflected on a Calendar
+|Add and Edit : Change add and edit command to suit our target audience ( RC4 Residents ) +
+ GUI : Change the look and feel of the GUI to make it more user friendly.
+
+
+|=======================================================================
 
 [appendix]
 == User Stories
@@ -850,7 +864,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |RC student |list down all past appointments with a particular friend |reminisce past memories with a particular friend
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* *` |RC student |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
 |`* *` |RC student | be reminded on when my campus fees are due | pay it on time
 
@@ -921,6 +935,51 @@ Use case ends.
 ** 3b1. CollegeZone shows an error message.
 +
 Use case resumes at step 2.
+
+[discrete]
+=== Use case: Reminder add<reminder>
+
+*MSS*
+
+1.  User requests to add a reminder on a certain date
+2.  CollegeZone adds the reminder in the calendar and changes is reflected on the calendar
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The given date detail in invalid.
++
+[none]
+** 1a1. CollegeZone shows an error message.
++
+Use case ends.
+
+=== Use case: Reminder delete<reminder>
+*MSS*
+
+1.  User requests to delete a certain reminder on a certain date
+2.  CollegeZone delete the reminder from the calendar and changes is reflected on the calendar
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The given reminder to delete does not exist.
++
+[none]
+** 1a1. CollegeZone shows an error message.
++
+Use case ends.
+
+* 1b. The given details to delete reminder is invalid.
++
+[none]
+** 1b1. CollegeZone shows an error message.
++
+Use case ends.
 
 _{More to be added}_
 

@@ -8,16 +8,19 @@ https://www.codacy.com/app/damith/addressbook-level4?utm_source=github.com&utm_m
 https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[Gitter chat]]
 
 ifdef::env-github[]
-image::docs/images/Ui.png[width="600"]
+image::docs/images/CollegeZone.jpg[width="600"]
 endif::[]
 
 ifndef::env-github[]
-image::images/Ui.png[width="600"]
+image::images/CollegeZone.jpg[width="600"]
 endif::[]
 
 * CollegeZone is a desktop application for *NUS Residential College 4 (RC4) students*. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
 * It's created for a RC4 resident to manage their contacts with other RC4 residents and to manage their tasks.
 
+
+
+* The main reasons NUS freshmen chooses to stay in RC4 is to *forge new friendships* and to *perform well in their studies*. CollegeZone aims to aid in RC4 residents tasks management and maintaining the friendships forged in RC4.
 
 == Site Map
 
