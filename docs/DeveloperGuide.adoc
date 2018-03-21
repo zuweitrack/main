@@ -888,6 +888,12 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 |Find : Change find command to be able to find persons in contact list according to tags +
  Logic : Added command aliases to allow users to be able to perform commands by typing shortcuts
 
+|Shamsheer Ahamed
+|Meetup (Tasks) : This feature allows user to set up a meet up date which will be reflected on a Calendar +
+|Meetup : Added a new Command called meet to allow user to set up a meet up date with RC4 residents +
+ Ui : Added a placeholder in PersonCard's to display the date of meet up for each person later +
+
+
 |=======================================================================
 
 [appendix]
@@ -917,6 +923,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |forgetful RC student |add persistent reminders |periodically remind myself to do something.
 
 |`* * *` |forgetful RC student |add other RC friends name, birthday, hall CCAs and tags into CollegeZone |
+
+|`* * *` |forgetful RC student |add a reminder of meet up with another RC4 student |shows who you are meetin up with on what date
 
 |`* * *` |RC student |note down tasks, events or training sessions in a calendar |make my schedule schedule more organised
 
@@ -1076,6 +1084,31 @@ Use case ends.
 
 1. User requests to add a task on a certain date with a note attached
 2. CollegeZone adds the task in the calendar and changes is reflected in the calendar
++
+Use case ends.
+
+[discrete]
+=== Use case: Meet person
+
+1. User requests to add a meet up date on a certain date with a person using his index
+2. CollegeZone adds the meet up in the calendar and changes are reflected in the calendar
++
+Use case ends.
+
+*Extensions*
+
+[none]
+*1a. The given date is invalid.
++
+[note]
+** 1a1. CollegeZone shows an error message.
++
+Use case ends.
+
+*1b. The given person's index is invalid.
++
+[note]
+** 1b1. CollegeZone shows an error message.
 +
 Use case ends.
 
