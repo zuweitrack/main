@@ -448,6 +448,12 @@ CollegeZone users may now use shortcuts to perform desired tasks. These shortcut
 
 //end::find[]
 
+// tag::tagcolours[]
+=== Enhanced tag colours
+Tags are now colour-coded which allows improved differentiation between many different tags.
+// end::tagcolours[]
+
+[d]
 === Since v1.2
 // tag::addandedit[]
 === Targeted add and edit command
@@ -457,13 +463,44 @@ As CollegeZone is catered toward NUS RC4 Residents, we have changed the attribut
 *Name, Mobile Number, Birthday, Level of Friendship, RC4 Unit Number, RC4 CCAs and Tags*. +
 This is done by removing unwanted attributes of a person and adding new attributes of a person.
 
+image::RCPersonClass.JPG[width="450"]
+    Figure 3.7.1: Person Class diagram with added attributes
+
 ===== Aspect: Nature of new Attributes
 * Birthday: Must be a valid date.
 * Level Of Friendship: Level of friendship is an integer from 1 to 10. The level is indicated by the number of hearts via the UI.
 * Unit Number: Must be a valid unit number in RC4.
 * A RC4 resident is able to have multiple CCAs.
 
+===== Aspect: displaying Level Of Friendship
+* Level of Friendship is displayed as a string of heart symbols. It is represented this way as it more intuitive for users to understand what the symbols mean.
 // end::addandedit[]
+
+=== Suggested: Set Reminders
+As RC4 residents have events, classes and meetings to go to at a certain date and time, we decided on implementing a reminder feature to allow users to add reminders in CollegeZone. +
+Reminder commands are undoable and redoable for the benefit users to redo and undo a command they did or did not intend to change.
+
+*Reminder features:* +
+
+* Adding a reminder to the Calendar
+* Editing a reminder on the Calendar
+* Deleting a reminder on the Calendar
+* Acknowledging a reminder on the Calendar
+
+*Reminder objects will consist of 3 attributes :* +
+1. the date, time and recurrence of reminder +
+2. the level of urgency of reminder +
+3. the reminder text content
+
+The reminders will be stored in an ArrayList of all the reminder objects. Each reminder will have specific positive integer index number. +
+A reminder will be *green* until it is due. +
+A reminder will turn and remain orange for 24 hours if it's due. +
+This is when user can start acknowledging a reminder on the Calendar.  +
+After acknowledging it, it is removed from calendar. +
+If it's overdue and not acknowledged, it will turn Grey. +
+
+Bottom Panel: Number of orange reminders +
+
 
 == Documentation
 
