@@ -53,7 +53,9 @@ public class Person {
         return address;
     }
 
-    public Meet getMeetDate() { return meetDate; }
+    public Meet getMeetDate() {
+        return meetDate;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
