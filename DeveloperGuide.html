@@ -51,8 +51,10 @@
 <li><a href="#since-v1-1">Since v1.1</a></li>
 <li><a href="#enhanced-find-command">3.5. Enhanced Find Command</a></li>
 <li><a href="#logic-command-aliases">3.6. Logic: Command Aliases</a></li>
-<li><a href="#since-v1-2">3.7. Since v1.2</a></li>
+<li><a href="#enhanced-tag-colours">3.7. Enhanced tag colours</a></li>
+<li><a href="#since-v1-2">Since v1.2</a></li>
 <li><a href="#targeted-add-and-edit-command">3.8. Targeted add and edit command</a></li>
+<li><a href="#suggested-set-reminders">3.9. Suggested: Set Reminders</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -1010,7 +1012,13 @@ command feature to be able to find persons by tags.</p>
 </table>
 </div>
 <div class="sect2">
-<h3 id="since-v1-2"><a class="link" href="#since-v1-2">3.7. Since v1.2</a></h3>
+<h3 id="enhanced-tag-colours"><a class="link" href="#enhanced-tag-colours">3.7. Enhanced tag colours</a></h3>
+<div class="paragraph">
+<p>Tags are now colour-coded which allows improved differentiation between many different tags.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="since-v1-2"><a class="link" href="#since-v1-2">Since v1.2</a></h3>
 
 </div>
 <div class="sect2">
@@ -1020,6 +1028,16 @@ command feature to be able to find persons by tags.</p>
 As CollegeZone is catered toward NUS RC4 Residents, we have changed the attributes of a Person to hold:<br>
 <strong>Name, Mobile Number, Birthday, Level of Friendship, RC4 Unit Number, RC4 CCAs and Tags</strong>.<br>
 This is done by removing unwanted attributes of a person and adding new attributes of a person.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/RCPersonClass.JPG" alt="RCPersonClass" width="450">
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Figure 3.7.1: Person Class diagram with added attributes</pre>
+</div>
 </div>
 <div class="sect4">
 <h5 id="aspect-nature-of-new-attributes"><a class="link" href="#aspect-nature-of-new-attributes">Aspect: Nature of new Attributes</a></h5>
@@ -1039,6 +1057,59 @@ This is done by removing unwanted attributes of a person and adding new attribut
 </li>
 </ul>
 </div>
+</div>
+<div class="sect4">
+<h5 id="aspect-displaying-level-of-friendship"><a class="link" href="#aspect-displaying-level-of-friendship">Aspect: displaying Level Of Friendship</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Level of Friendship is displayed as a string of heart symbols. It is represented this way as it more intuitive for users to understand what the symbols mean.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="suggested-set-reminders"><a class="link" href="#suggested-set-reminders">3.9. Suggested: Set Reminders</a></h3>
+<div class="paragraph">
+<p>As RC4 residents have events, classes and meetings to go to at a certain date and time, we decided on implementing a reminder feature to allow users to add reminders in CollegeZone.<br>
+Reminder commands are undoable and redoable for the benefit users to redo and undo a command they did or did not intend to change.</p>
+</div>
+<div class="paragraph">
+<p><strong>Reminder features:</strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Adding a reminder to the Calendar</p>
+</li>
+<li>
+<p>Editing a reminder on the Calendar</p>
+</li>
+<li>
+<p>Deleting a reminder on the Calendar</p>
+</li>
+<li>
+<p>Acknowledging a reminder on the Calendar</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Reminder objects will consist of 3 attributes :</strong><br>
+1. the date, time and recurrence of reminder<br>
+2. the level of urgency of reminder<br>
+3. the reminder text content</p>
+</div>
+<div class="paragraph">
+<p>The reminders will be stored in an ArrayList of all the reminder objects. Each reminder will have specific positive integer index number.<br>
+A reminder will be <strong>green</strong> until it is due.<br>
+A reminder will turn and remain orange for 24 hours if it&#8217;s due.<br>
+This is when user can start acknowledging a reminder on the Calendar. <br>
+After acknowledging it, it is removed from calendar.<br>
+If it&#8217;s overdue and not acknowledged, it will turn Grey.<br></p>
+</div>
+<div class="paragraph">
+<p>Bottom Panel: Number of orange reminders<br></p>
 </div>
 </div>
 </div>
@@ -2081,6 +2152,12 @@ for <code>RemarkCommandParser</code>.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Find : Change find command to be able to find persons in contact list according to tags<br>
  Logic : Added command aliases to allow users to be able to perform commands by typing shortcuts</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shamsheer Ahamed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meetup (Tasks) : This feature allows user to set up a meet up date which will be reflected on a Calendar<br></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meetup : Added a new Command called meet to allow user to set up a meet up date with RC4 residents<br>
+ Ui : Added a placeholder in PersonCard&#8217;s to display the date of meet up for each person later<br></p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -2166,6 +2243,12 @@ for <code>RemarkCommandParser</code>.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">forgetful RC student</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">add other RC friends name, birthday, hall CCAs and tags into CollegeZone</p></td>
 <td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">forgetful RC student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add a reminder of meet up with another RC4 student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">shows who you are meetin up with on what date</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
@@ -2491,6 +2574,55 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ol>
 </div>
+<h3 id="use-case-meet-person" class="discrete">Use case: Meet person</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to add a meet up date on a certain date with a person using his index</p>
+</li>
+<li>
+<p>CollegeZone adds the meet up in the calendar and changes are reflected in the calendar</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="paragraph">
+<p>*1a. The given date is invalid.</p>
+</div>
+<div class="paragraph">
+<p>+</p>
+</div>
+<div class="ulist note">
+<ul class="note">
+<li>
+<p>1a1. CollegeZone shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>*1b. The given person&#8217;s index is invalid.</p>
+</div>
+<div class="paragraph">
+<p>+</p>
+</div>
+<div class="ulist note">
+<ul class="note">
+<li>
+<p>1b1. CollegeZone shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p><em>{More to be added}</em></p>
 </div>
@@ -2704,7 +2836,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-21 14:28:45 UTC
+Last updated 2018-03-22 02:20:27 UTC
 </div>
 </div>
 </body>
