@@ -126,6 +126,25 @@ Returns any person having names `Betsy`, `Tim`, or `John`
 *  `find n/ t/friends` +
 Returns any person having tags `friends`
 
+=== Seeking the Resident Assistant of a person : `seek` `[coming in v2.0]`
+Seek the Resident Assistant (RA) of the person whose name contains any of the given keywords. +
+Format: `seek NAME`
+
+****
+* The search is case insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched at a single time
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Resident Assistant (RA) of the person's name matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber's RA`, `Bo Yang's RA`
+****
+
+Examples:
+
+* `find John` +
+Returns `John's RA`
+* `find Betsy` +
+Returns `Betsy's RA`
+
 === Deleting a person : `delete`
 
 Deletes the specified person from CollegeZone. +

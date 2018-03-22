@@ -930,6 +930,10 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 |Meetup : Added a new Command called meet to allow user to set up a meet up date with RC4 residents +
  Ui : Added a placeholder in PersonCard's to display the date of meet up for each person later +
 
+|Goh Zu Wei
+|Form Groups : This feature allows user to organize students to form study groups or recreational sport groups +
+ Set event: Add events and dates for the group meeting and gathering.
+|Seek: Add seek command to be able to seek the Resident Assistant (RA) of any particular the student living in RC4
 
 |=======================================================================
 
@@ -961,9 +965,11 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |forgetful RC student |add other RC friends name, birthday, hall CCAs and tags into CollegeZone |
 
-|`* * *` |forgetful RC student |add a reminder of meet up with another RC4 student |shows who you are meetin up with on what date
+|`* * *` |forgetful RC student |add a reminder of meet up with another RC4 student |shows who you are meeting up with on what date
 
 |`* * *` |RC student |note down tasks, events or training sessions in a calendar |make my schedule schedule more organised
+
+|`* * *` |RC student |Set down a date for group events |do necessary group preparation prior to a group event
 
 |`* *` |careless RC student |undo a command I entered |undo a wrong command that I entered
 
@@ -976,6 +982,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* *` |RC student |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
 |`* *` |RC student | be reminded on when my campus fees are due | pay it on time
+
+|`* *` |RC student |know who the Resident Assistant (RA) is of a fellow resident |find the RA of the resident and convey floor issues to the RA
 
 |`*` |user with many persons in CollegeZone |sort persons by name |locate a person easily
 
