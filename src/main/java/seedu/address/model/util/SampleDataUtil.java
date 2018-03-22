@@ -5,17 +5,19 @@ import java.util.Set;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
+import seedu.address.model.person.Birthday;
+import seedu.address.model.person.Cca;
+import seedu.address.model.person.LevelOfFriendship;
 import seedu.address.model.person.Meet;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.UnitNumber;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code CollegeZone} with sample data.
  */
 public class SampleDataUtil {
 
@@ -23,24 +25,24 @@ public class SampleDataUtil {
 
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"), EMPTY_MEET_DATE,
-                getTagSet("friends")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), EMPTY_MEET_DATE,
-                getTagSet("colleagues", "friends")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), EMPTY_MEET_DATE,
-                getTagSet("neighbours")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), EMPTY_MEET_DATE,
-                getTagSet("family")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"), EMPTY_MEET_DATE,
-                getTagSet("classmates")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"), EMPTY_MEET_DATE,
-                getTagSet("colleagues"))
+            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Birthday("1-01-1997"),
+                new LevelOfFriendship("5"), new UnitNumber("#06-40"), getCcaSet("Basketball"),
+                EMPTY_MEET_DATE, getTagSet("friends")),
+            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Birthday("21-2-1990"),
+                new LevelOfFriendship("9"), new UnitNumber("#07-18"), getCcaSet(),
+                EMPTY_MEET_DATE, getTagSet("colleagues", "friends")),
+            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Birthday("5/9/1980"),
+                new LevelOfFriendship("1"), new UnitNumber("#11-04"), getCcaSet("Swimming"),
+                EMPTY_MEET_DATE, getTagSet("neighbours")),
+            new Person(new Name("David Li"), new Phone("91031282"), new Birthday("20-2-1995"),
+                new LevelOfFriendship("6"), new UnitNumber("#16-43"), getCcaSet(),
+                EMPTY_MEET_DATE, getTagSet("family")),
+            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Birthday("01-01-1999"),
+                new LevelOfFriendship("7"), new UnitNumber("#16-41"), getCcaSet(),
+                EMPTY_MEET_DATE, getTagSet("classmates")),
+            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Birthday("2/04/1995"),
+                new LevelOfFriendship("10"), new UnitNumber("#6-43"), getCcaSet("Computing club", "Anime Club"),
+                EMPTY_MEET_DATE, getTagSet("colleagues"))
         };
     }
 
@@ -54,6 +56,18 @@ public class SampleDataUtil {
         } catch (DuplicatePersonException e) {
             throw new AssertionError("sample data cannot contain duplicate persons", e);
         }
+    }
+
+    /**
+     * Returns a cca set containing the list of strings given.
+     */
+    public static Set<Cca> getCcaSet(String... strings) {
+        HashSet<Cca> ccas = new HashSet<>();
+        for (String s : strings) {
+            ccas.add(new Cca(s));
+        }
+
+        return ccas;
     }
 
     /**

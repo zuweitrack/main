@@ -5,11 +5,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
+import seedu.address.model.person.Birthday;
+import seedu.address.model.person.Cca;
+import seedu.address.model.person.LevelOfFriendship;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.UnitNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,8 +36,10 @@ public class EditPersonDescriptorBuilder {
         descriptor = new EditPersonDescriptor();
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
-        descriptor.setEmail(person.getEmail());
-        descriptor.setAddress(person.getAddress());
+        descriptor.setBirthday(person.getBirthday());
+        descriptor.setLevelOfFriendship(person.getLevelOfFriendship());
+        descriptor.setUnitNumber(person.getUnitNumber());
+        descriptor.setCcas(person.getCcas());
         descriptor.setTags(person.getTags());
     }
 
@@ -56,18 +60,37 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Birthday} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
+    public EditPersonDescriptorBuilder withBirthday(String birthday) {
+        descriptor.setBirthday(new Birthday(birthday));
         return this;
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code LevelOfFriendship} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
+    public EditPersonDescriptorBuilder withLevelOfFriendship(String levelOfFriendship) {
+        descriptor.setLevelOfFriendship(new LevelOfFriendship(levelOfFriendship));
+        return this;
+    }
+
+
+    /**
+     * Sets the {@code UnitNumber} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withUnitNumber(String unitNumber) {
+        descriptor.setUnitNumber(new UnitNumber(unitNumber));
+        return this;
+    }
+
+    /**
+     * Parses the {@code ccas} into a {@code Set<Cca>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withCcas(String... ccas) {
+        Set<Cca> ccaSet = Stream.of(ccas).map(Cca::new).collect(Collectors.toSet());
+        descriptor.setCcas(ccaSet);
         return this;
     }
 

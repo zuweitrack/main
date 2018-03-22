@@ -1,6 +1,6 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
+//import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a Person's date of meeting in the address book.
@@ -13,7 +13,7 @@ public class Meet {
     public final String value;
 
     public Meet(String meet) {
-        requireNonNull(meet);
+        //requireNonNull(meet);
         this.value = meet;
     }
 
