@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.MeetCommand;
+import seedu.address.model.person.Meet;
 
 public class MeetCommandParserTest {
     private MeetCommandParser parser = new MeetCommandParser();
@@ -22,12 +23,12 @@ public class MeetCommandParserTest {
         //have a date
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_DATE.toString() + nonEmptyDate;
-        MeetCommand expectedCommand = new MeetCommand(INDEX_FIRST_PERSON, nonEmptyDate);
+        MeetCommand expectedCommand = new MeetCommand(INDEX_FIRST_PERSON, new Meet(nonEmptyDate));
         assertParseSuccess(parser, userInput, expectedCommand);
 
         //no date
         userInput = targetIndex.getOneBased() + " " + PREFIX_DATE.toString() + emptyDate;
-        expectedCommand = new MeetCommand(INDEX_FIRST_PERSON, emptyDate);
+        expectedCommand = new MeetCommand(INDEX_FIRST_PERSON, new Meet(emptyDate));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
