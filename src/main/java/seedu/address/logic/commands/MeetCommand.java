@@ -82,8 +82,8 @@ public class MeetCommand extends UndoableCommand {
         }
 
         personToEdit = lastShownList.get(targetIndex.getZeroBased());
-        editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), date, personToEdit.getTags());
+        editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getBirthday(),
+                personToEdit.getLevelOfFriendship(), personToEdit.getUnitNumber(), personToEdit.getCcas(), date, personToEdit.getTags());
     }
 
     /**
