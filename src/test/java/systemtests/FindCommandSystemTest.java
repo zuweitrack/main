@@ -23,9 +23,11 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
+import seedu.address.model.person.Cca;
 import seedu.address.model.tag.Tag;
 
 public class FindCommandSystemTest extends AddressBookSystemTest {
+
 
     @Test
     public void find() {
@@ -120,13 +122,24 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find address of person in address book -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " n/ " + DANIEL.getAddress().value + " t/ ";
+        /* Case: find birthday of person in address book -> 0 persons found */
+        command = FindCommand.COMMAND_WORD + " n/" + DANIEL.getBirthday().value + " t/ ";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find email of person in address book -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " n/ " + DANIEL.getEmail().value + " t/ ";
+        /* Case: find level of friendship of person in address book -> 0 persons found */
+        command = FindCommand.COMMAND_WORD + " n/ " + DANIEL.getLevelOfFriendship().value + " t/ ";
+        assertCommandSuccess(command, expectedModel);
+        assertSelectedCardUnchanged();
+
+        /* Case: find unit number of person in address book -> 0 persons found */
+        command = FindCommand.COMMAND_WORD + " n/ " + DANIEL.getUnitNumber().value + " t/ ";
+        assertCommandSuccess(command, expectedModel);
+        assertSelectedCardUnchanged();
+
+        /* Case: find ccas of person in address book -> 0 persons found */
+        List<Cca> ccas = new ArrayList<>(DANIEL.getCcas());
+        command = FindCommand.COMMAND_WORD + " n/" + ccas.get(0).ccaName + " t/ ";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 

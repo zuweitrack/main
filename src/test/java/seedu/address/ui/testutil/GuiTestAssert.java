@@ -23,10 +23,12 @@ public class GuiTestAssert {
      */
     public static void assertCardEquals(PersonCardHandle expectedCard, PersonCardHandle actualCard) {
         assertEquals(expectedCard.getId(), actualCard.getId());
-        assertEquals(expectedCard.getAddress(), actualCard.getAddress());
-        assertEquals(expectedCard.getEmail(), actualCard.getEmail());
+        assertEquals(expectedCard.getBirthday(), actualCard.getBirthday());
+        assertEquals(expectedCard.getUnitNumber(), actualCard.getUnitNumber());
         assertEquals(expectedCard.getName(), actualCard.getName());
         assertEquals(expectedCard.getPhone(), actualCard.getPhone());
+        assertEquals(expectedCard.getLevelOfFriendship(), actualCard.getLevelOfFriendship());
+        assertEquals(expectedCard.getCcas(), actualCard.getCcas());
         assertEquals(expectedCard.getTags(), actualCard.getTags());
         expectedCard.getTags().forEach(tag -> assertEquals(expectedCard.getTagStyleClasses(tag),
                 actualCard.getTagStyleClasses(tag)));
@@ -38,8 +40,13 @@ public class GuiTestAssert {
     public static void assertCardDisplaysPerson(Person expectedPerson, PersonCardHandle actualCard) {
         assertEquals(expectedPerson.getName().fullName, actualCard.getName());
         assertEquals(expectedPerson.getPhone().value, actualCard.getPhone());
-        assertEquals(expectedPerson.getEmail().value, actualCard.getEmail());
-        assertEquals(expectedPerson.getAddress().value, actualCard.getAddress());
+        assertEquals(expectedPerson.getBirthday().value, actualCard.getBirthday());
+        assertLevelOfFriendshipEqual(expectedPerson, actualCard);
+        assertEquals(expectedPerson.getUnitNumber().value, actualCard.getUnitNumber());
+        List<String> ccaInArrayList = expectedPerson.getCcas().stream().map(cca -> cca.ccaName)
+                .collect(Collectors.toList());
+        assertEquals(getCcasInString(ccaInArrayList), actualCard.getCcas());
+        assertEquals(expectedPerson.getMeetDate().value, actualCard.getMeetDate());
         assertTagsEqual(expectedPerson, actualCard);
     }
 
@@ -88,6 +95,22 @@ public class GuiTestAssert {
                         actualCard.getTagStyleClasses(tag)));
     }
 
+
+    /**
+     * Asserts that the level of friendship in {@code actualCard} matches all the tags in {@code expectedPerson} with
+     * the correct symbol.
+     */
+    private static void assertLevelOfFriendshipEqual(Person expectedPerson,
+                                                PersonCardHandle actualCard) {
+        String expectedLevelOfFriendship = expectedPerson.getLevelOfFriendship().value;
+        int levelOfFriendshipInIntegerForm = Integer.parseInt((expectedLevelOfFriendship));
+        String levelOfFriendshipSymbol = "";
+        for (int i = 0; i < levelOfFriendshipInIntegerForm; i++) {
+            levelOfFriendshipSymbol = levelOfFriendshipSymbol + '\u2665' + " ";
+        }
+        assertEquals(levelOfFriendshipSymbol, actualCard.getLevelOfFriendship());
+    }
+
     /**
      * Asserts that the list in {@code personListPanelHandle} displays the details of {@code persons} correctly and
      * in the correct order.
@@ -119,5 +142,18 @@ public class GuiTestAssert {
      */
     public static void assertResultMessage(ResultDisplayHandle resultDisplayHandle, String expected) {
         assertEquals(expected, resultDisplayHandle.getText());
+    }
+
+    /**
+     * Changing @param ccaInArrayList into a CCA string in desired format
+     * @return ccaInString
+     */
+    public static String getCcasInString(List<String> ccaInArrayList) {
+        String ccaInString = "";
+        for (String temp : ccaInArrayList) {
+            temp = "[" + temp + "] ";
+            ccaInString = ccaInString + temp;
+        }
+        return ccaInString.trim();
     }
 }

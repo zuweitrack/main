@@ -4,14 +4,20 @@
     <persons>
         <name>Hans Muster</name>
         <phone isPrivate="false">9482424</phone>
-        <email isPrivate="false">hans@example.com</email>
-        <address isPrivate="false">4th street</address>
+        <birthday isPrivate="false">24-02-1998</birthday>
+        <levelOfFriendship isPrivate="false">10</levelOfFriendship>
+        <unitNumber isPrivate="false">#1-20</unitNumber>
+        <cca isPrivate="false">basketball</cca>
+        <meetDate isPrivate="false">15/03/2018</meetDate>
     </persons>
     <!-- Person with invalid phone field -->
     <persons>
         <name>Hans Muster</name>
         <phone isPrivate="false">948asdf2424</phone>
-        <email isPrivate="false">hans@example.com</email>
-        <address isPrivate="false">4th street</address>
+        <birthday isPrivate="false">13-09-1990</birthday>
+        <levelOfFriendship isPrivate="false">9</levelOfFriendship>
+        <unitNumber isPrivate="false">#2-201</unitNumber>
+        <cca isPrivate="false">badminton</cca>
+        <meetDate isPrivate="false">15/03/2018</meetDate>
     </persons>
 </addressbook>

@@ -20,6 +20,8 @@ public class XmlSerializableAddressBook {
     @XmlElement
     private List<XmlAdaptedPerson> persons;
     @XmlElement
+    private List<XmlAdaptedCca> ccas;
+    @XmlElement
     private List<XmlAdaptedTag> tags;
 
     /**
@@ -28,6 +30,7 @@ public class XmlSerializableAddressBook {
      */
     public XmlSerializableAddressBook() {
         persons = new ArrayList<>();
+        ccas = new ArrayList<>();
         tags = new ArrayList<>();
     }
 
@@ -37,6 +40,7 @@ public class XmlSerializableAddressBook {
     public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        ccas.addAll(src.getCcaList().stream().map(XmlAdaptedCca::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
@@ -44,10 +48,13 @@ public class XmlSerializableAddressBook {
      * Converts this addressbook into the model's {@code AddressBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
-     * {@code XmlAdaptedPerson} or {@code XmlAdaptedTag}.
+     * {@code XmlAdaptedPerson}or {@code XmlAdaptedCca} or {@code XmlAdaptedTag}.
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
+        for (XmlAdaptedCca c : ccas) {
+            addressBook.addCca(c.toModelType());
+        }
         for (XmlAdaptedTag t : tags) {
             addressBook.addTag(t.toModelType());
         }
@@ -68,6 +75,6 @@ public class XmlSerializableAddressBook {
         }
 
         XmlSerializableAddressBook otherAb = (XmlSerializableAddressBook) other;
-        return persons.equals(otherAb.persons) && tags.equals(otherAb.tags);
+        return persons.equals(otherAb.persons) && ccas.equals(otherAb.ccas) && tags.equals(otherAb.tags);
     }
 }

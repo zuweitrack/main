@@ -1,11 +1,16 @@
 package seedu.address.ui;
 
+import java.util.Iterator;
+import java.util.Set;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.person.Cca;
 import seedu.address.model.person.Person;
+
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -34,9 +39,15 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
+    private Label birthday;
     @FXML
-    private Label email;
+    private Label levelOfFriendship;
+    @FXML
+    private Label unitNumber;
+    @FXML
+    private Label ccas;
+    @FXML
+    private Label meetDate;
     @FXML
     private FlowPane tags;
 
@@ -46,8 +57,11 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        birthday.setText(person.getBirthday().value);
+        levelOfFriendship.setText(changeLevelOfFriendshipToHeart(person.getLevelOfFriendship().value));
+        unitNumber.setText(person.getUnitNumber().value);
+        ccas.setText(getCcasInString(person.getCcas()));
+        meetDate.setText(person.getMeetDate().value);
         initTags(person);
     }
 
@@ -56,7 +70,7 @@ public class PersonCard extends UiPart<Region> {
      */
     private String getTagColorStyleFor(String tagName) {
         // we use the hash code of the tag name to generate a random color, so that the color remain consistent
-        // between different runs of the program while still making it random enough between tags.
+        // between diffe 11rent runs of the program while still making it random enough between tags.
         return TAG_COLOR_STYLES[Math.abs(tagName.hashCode()) % TAG_COLOR_STYLES.length];
     }
 
@@ -71,6 +85,27 @@ public class PersonCard extends UiPart<Region> {
         });
     }
 
+    private String getCcasInString(Set<Cca> ccas) {
+        String ccasValue = "";
+        Iterator iterator = ccas.iterator();
+        while (iterator.hasNext()) {
+            ccasValue = ccasValue + iterator.next().toString() + " ";
+        }
+        return ccasValue;
+    }
+
+    /**
+     * Takes in @param value representing the level of friendship value
+     * @return a number of hearts string.
+     */
+    public static String changeLevelOfFriendshipToHeart(String value) {
+        int intValue = Integer.parseInt(value);
+        String heartString = "";
+        for (int i = 0; i < intValue; i++) {
+            heartString = heartString + '\u2665' + " ";
+        }
+        return heartString;
+    }
     @Override
     public boolean equals(Object other) {
         // short circuit if same object

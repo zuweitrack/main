@@ -9,11 +9,14 @@ import java.util.Set;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
+import seedu.address.model.person.Birthday;
+import seedu.address.model.person.Cca;
+import seedu.address.model.person.LevelOfFriendship;
+import seedu.address.model.person.Meet;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.UnitNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,10 +31,16 @@ public class XmlAdaptedPerson {
     @XmlElement(required = true)
     private String phone;
     @XmlElement(required = true)
-    private String email;
+    private String birthday;
     @XmlElement(required = true)
-    private String address;
+    private String levelOfFriendship;
+    @XmlElement(required = true)
+    private String unitNumber;
+    @XmlElement(required = true)
+    private String meetDate;
 
+    @XmlElement
+    private List<XmlAdaptedCca> ccas = new ArrayList<>();
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
@@ -44,11 +53,16 @@ public class XmlAdaptedPerson {
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
-    public XmlAdaptedPerson(String name, String phone, String email, String address, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedPerson(String name, String phone, String birthday, String levelOfFriendship, String unitNumber,
+                            List<XmlAdaptedCca> ccas, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
-        this.email = email;
-        this.address = address;
+        this.birthday = birthday;
+        this.levelOfFriendship = levelOfFriendship;
+        this.unitNumber = unitNumber;
+        if (ccas != null) {
+            this.ccas = new ArrayList<>(ccas);
+        }
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -62,9 +76,15 @@ public class XmlAdaptedPerson {
     public XmlAdaptedPerson(Person source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
+        birthday = source.getBirthday().value;
+        levelOfFriendship = source.getLevelOfFriendship().value;
+        unitNumber = source.getUnitNumber().value;
+        ccas = new ArrayList<>();
+        for (Cca cca : source.getCcas()) {
+            ccas.add(new XmlAdaptedCca(cca));
+        }
         tagged = new ArrayList<>();
+        meetDate = source.getMeetDate().value;
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
         }
@@ -76,6 +96,10 @@ public class XmlAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
     public Person toModelType() throws IllegalValueException {
+        final List<Cca> personCcas = new ArrayList<>();
+        for (XmlAdaptedCca cca : ccas) {
+            personCcas.add(cca.toModelType());
+        }
         final List<Tag> personTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
@@ -97,24 +121,39 @@ public class XmlAdaptedPerson {
         }
         final Phone phone = new Phone(this.phone);
 
-        if (this.email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        if (this.birthday == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Birthday.class.getSimpleName()));
         }
-        if (!Email.isValidEmail(this.email)) {
-            throw new IllegalValueException(Email.MESSAGE_EMAIL_CONSTRAINTS);
+        if (!Birthday.isValidBirthday(this.birthday)) {
+            throw new IllegalValueException(Birthday.MESSAGE_BIRTHDAY_CONSTRAINTS);
         }
-        final Email email = new Email(this.email);
+        final Birthday birthday = new Birthday(this.birthday);
 
-        if (this.address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        if (this.levelOfFriendship == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, LevelOfFriendship
+                    .class.getSimpleName()));
         }
-        if (!Address.isValidAddress(this.address)) {
-            throw new IllegalValueException(Address.MESSAGE_ADDRESS_CONSTRAINTS);
+        if (!LevelOfFriendship.isValidLevelOfFriendship(this.levelOfFriendship)) {
+            throw new IllegalValueException(LevelOfFriendship.MESSAGE_LEVEL_OF_FRIENDSHIP_CONSTRAINTS);
         }
-        final Address address = new Address(this.address);
+        final LevelOfFriendship levelOfFriendship = new LevelOfFriendship(this.levelOfFriendship);
 
+        final Meet meetDate = new Meet(this.meetDate);
+
+        if (this.unitNumber == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    UnitNumber.class.getSimpleName()));
+        }
+        if (!UnitNumber.isValidUnitNumber(this.unitNumber)) {
+            throw new IllegalValueException(UnitNumber.MESSAGE_UNIT_NUMBER_CONSTRAINTS);
+        }
+        final UnitNumber unitNumber = new UnitNumber(this.unitNumber);
+        final Set<Cca> ccas = new HashSet<>(personCcas);
+        //final Meet meetDate = new Meet("");
+        // TODO: To be fixed in later commit
         final Set<Tag> tags = new HashSet<>(personTags);
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, birthday, levelOfFriendship, unitNumber, ccas, meetDate, tags);
     }
 
     @Override
@@ -130,8 +169,10 @@ public class XmlAdaptedPerson {
         XmlAdaptedPerson otherPerson = (XmlAdaptedPerson) other;
         return Objects.equals(name, otherPerson.name)
                 && Objects.equals(phone, otherPerson.phone)
-                && Objects.equals(email, otherPerson.email)
-                && Objects.equals(address, otherPerson.address)
+                && Objects.equals(birthday, otherPerson.birthday)
+                && Objects.equals(levelOfFriendship, otherPerson.levelOfFriendship)
+                && Objects.equals(unitNumber, otherPerson.unitNumber)
+                && ccas.equals(otherPerson.ccas)
                 && tagged.equals(otherPerson.tagged);
     }
 }

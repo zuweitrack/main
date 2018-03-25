@@ -18,24 +18,31 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
+import seedu.address.model.person.Birthday;
+import seedu.address.model.person.Cca;
+import seedu.address.model.person.LevelOfFriendship;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.UnitNumber;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.Assert;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
-    private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_BIRTHDAY = "24 maya 1997";
+    private static final String INVALID_LEVEL_OF_FRIENDSHIP = "A";
+    private static final String INVALID_UNIT_NUMBER = " ";
+    private static final String INVALID_CCA = "!345hockey";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
-    private static final String VALID_ADDRESS = "123 Main Street #0505";
-    private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_BIRTHDAY = "12-3-1992";
+    private static final String VALID_LEVEL_OF_FRIENDSHIP = "1";
+    private static final String VALID_UNIT_NUMBER = "#04-33";
+    private static final String VALID_CCA_1 = "scouts";
+    private static final String VALID_CCA_2 = "aerobics";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -131,67 +138,156 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((Optional<String>) null));
+    public void parseBirthday_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseBirthday((String) null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseBirthday((Optional<String>) null));
     }
 
     @Test
-    public void parseAddress_invalidValue_throwsIllegalValueException() {
-        Assert.assertThrows(IllegalValueException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
-        Assert.assertThrows(IllegalValueException.class, () -> ParserUtil.parseAddress(Optional.of(INVALID_ADDRESS)));
+    public void parseBirthday_invalidValue_throwsIllegalValueException() {
+        Assert.assertThrows(IllegalValueException.class, () -> ParserUtil.parseBirthday(INVALID_BIRTHDAY));
+        Assert.assertThrows(IllegalValueException.class, () -> ParserUtil.parseBirthday(Optional.of(INVALID_BIRTHDAY)));
     }
 
     @Test
-    public void parseAddress_optionalEmpty_returnsOptionalEmpty() throws Exception {
-        assertFalse(ParserUtil.parseAddress(Optional.empty()).isPresent());
+    public void parseBirthday_optionalEmpty_returnsOptionalEmpty() throws Exception {
+        assertFalse(ParserUtil.parseBirthday(Optional.empty()).isPresent());
     }
 
     @Test
-    public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ADDRESS));
-        assertEquals(Optional.of(expectedAddress), ParserUtil.parseAddress(Optional.of(VALID_ADDRESS)));
+    public void parseBirthday_validValueWithoutWhitespace_returnsBirthday() throws Exception {
+        Birthday expectedBirthday = new Birthday(VALID_BIRTHDAY);
+        assertEquals(expectedBirthday, ParserUtil.parseBirthday(VALID_BIRTHDAY));
+        assertEquals(Optional.of(expectedBirthday), ParserUtil.parseBirthday(Optional.of(VALID_BIRTHDAY)));
     }
 
     @Test
-    public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
-        String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
-        assertEquals(Optional.of(expectedAddress), ParserUtil.parseAddress(Optional.of(addressWithWhitespace)));
+    public void parseBirthday_validValueWithWhitespace_returnsTrimmedBirthday() throws Exception {
+        String birthdayWithWhitespace = WHITESPACE + VALID_BIRTHDAY + WHITESPACE;
+        Birthday expectedBirthday = new Birthday(VALID_BIRTHDAY);
+        assertEquals(expectedBirthday, ParserUtil.parseBirthday(birthdayWithWhitespace));
+        assertEquals(Optional.of(expectedBirthday), ParserUtil.parseBirthday(Optional.of(birthdayWithWhitespace)));
     }
 
     @Test
-    public void parseEmail_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((Optional<String>) null));
+    public void parseLevelOfFriendship_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseLevelOfFriendship((String) null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil
+                .parseLevelOfFriendship((Optional<String>) null));
     }
 
     @Test
-    public void parseEmail_invalidValue_throwsIllegalValueException() {
-        Assert.assertThrows(IllegalValueException.class, () -> ParserUtil.parseEmail(INVALID_EMAIL));
-        Assert.assertThrows(IllegalValueException.class, () -> ParserUtil.parseEmail(Optional.of(INVALID_EMAIL)));
+    public void parseLevelOfFriendship_invalidValue_throwsIllegalValueException() {
+        Assert.assertThrows(IllegalValueException.class, () -> ParserUtil
+                .parseLevelOfFriendship(INVALID_LEVEL_OF_FRIENDSHIP));
+        Assert.assertThrows(IllegalValueException.class, () -> ParserUtil
+                .parseLevelOfFriendship(Optional.of(INVALID_LEVEL_OF_FRIENDSHIP)));
     }
 
     @Test
-    public void parseEmail_optionalEmpty_returnsOptionalEmpty() throws Exception {
-        assertFalse(ParserUtil.parseEmail(Optional.empty()).isPresent());
+    public void parseLevelOfFriendship_optionalEmpty_returnsOptionalEmpty() throws Exception {
+        assertFalse(ParserUtil.parseLevelOfFriendship(Optional.empty()).isPresent());
     }
 
     @Test
-    public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
-        Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, ParserUtil.parseEmail(VALID_EMAIL));
-        assertEquals(Optional.of(expectedEmail), ParserUtil.parseEmail(Optional.of(VALID_EMAIL)));
+    public void parseLevelOfFriendship_validValueWithoutWhitespace_returnsLevelOfFriendship() throws Exception {
+        LevelOfFriendship expectedLevelOfFriendship = new LevelOfFriendship(VALID_LEVEL_OF_FRIENDSHIP);
+        assertEquals(expectedLevelOfFriendship, ParserUtil.parseLevelOfFriendship(VALID_LEVEL_OF_FRIENDSHIP));
+        assertEquals(Optional.of(expectedLevelOfFriendship), ParserUtil
+                .parseLevelOfFriendship(Optional.of(VALID_LEVEL_OF_FRIENDSHIP)));
     }
 
     @Test
-    public void parseEmail_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
-        String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
-        Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
-        assertEquals(Optional.of(expectedEmail), ParserUtil.parseEmail(Optional.of(emailWithWhitespace)));
+    public void parseLevelOfFriendship_validValueWithWhitespace_returnsTrimmedLevelOfFriendship() throws Exception {
+        String levelOfFriendshipWithWhitespace = WHITESPACE + VALID_LEVEL_OF_FRIENDSHIP + WHITESPACE;
+        LevelOfFriendship expectedLevelOfFriendship = new LevelOfFriendship(VALID_LEVEL_OF_FRIENDSHIP);
+        assertEquals(expectedLevelOfFriendship, ParserUtil.parseLevelOfFriendship(levelOfFriendshipWithWhitespace));
+        assertEquals(Optional.of(expectedLevelOfFriendship), ParserUtil
+                .parseLevelOfFriendship(Optional.of(levelOfFriendshipWithWhitespace)));
+    }
+
+    @Test
+    public void parseUnitNumber_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseUnitNumber((String) null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseUnitNumber((Optional<String>) null));
+    }
+
+    @Test
+    public void parseUnitNumber_invalidValue_throwsIllegalValueException() {
+        Assert.assertThrows(IllegalValueException.class, () -> ParserUtil.parseUnitNumber(INVALID_UNIT_NUMBER));
+        Assert.assertThrows(IllegalValueException.class, () -> ParserUtil
+                .parseUnitNumber(Optional.of(INVALID_UNIT_NUMBER)));
+    }
+
+    @Test
+    public void parseUnitNumber_optionalEmpty_returnsOptionalEmpty() throws Exception {
+        assertFalse(ParserUtil.parseUnitNumber(Optional.empty()).isPresent());
+    }
+
+    @Test
+    public void parseUnitNumber_validValueWithoutWhitespace_returnsUnitNumber() throws Exception {
+        UnitNumber expectedUnitNumber = new UnitNumber(VALID_UNIT_NUMBER);
+        assertEquals(expectedUnitNumber, ParserUtil.parseUnitNumber(VALID_UNIT_NUMBER));
+        assertEquals(Optional.of(expectedUnitNumber), ParserUtil.parseUnitNumber(Optional.of(VALID_UNIT_NUMBER)));
+    }
+
+    @Test
+    public void parseUnitNumber_validValueWithWhitespace_returnsTrimmedUnitNumber() throws Exception {
+        String unitNumberWithWhitespace = WHITESPACE + VALID_UNIT_NUMBER + WHITESPACE;
+        UnitNumber expectedUnitNumber = new UnitNumber(VALID_UNIT_NUMBER);
+        assertEquals(expectedUnitNumber, ParserUtil.parseUnitNumber(unitNumberWithWhitespace));
+        assertEquals(Optional.of(expectedUnitNumber), ParserUtil.parseUnitNumber(Optional
+                .of(unitNumberWithWhitespace)));
+    }
+
+    @Test
+    public void parseCca_null_throwsNullPointerException() throws Exception {
+        thrown.expect(NullPointerException.class);
+        ParserUtil.parseCca(null);
+    }
+
+    @Test
+    public void parseCca_invalidValue_throwsIllegalValueException() throws Exception {
+        thrown.expect(IllegalValueException.class);
+        ParserUtil.parseCca(INVALID_CCA);
+    }
+
+    @Test
+    public void parseCca_validValueWithoutWhitespace_returnsCca() throws Exception {
+        Cca expectedCca = new Cca(VALID_CCA_1);
+        assertEquals(expectedCca, ParserUtil.parseCca(VALID_CCA_1));
+    }
+
+    @Test
+    public void parseCca_validValueWithWhitespace_returnsTrimmedCca() throws Exception {
+        String ccaWithWhitespace = WHITESPACE + VALID_CCA_1 + WHITESPACE;
+        Cca expectedCca = new Cca(VALID_CCA_1);
+        assertEquals(expectedCca, ParserUtil.parseCca(ccaWithWhitespace));
+    }
+
+    @Test
+    public void parseCcas_null_throwsNullPointerException() throws Exception {
+        thrown.expect(NullPointerException.class);
+        ParserUtil.parseCcas(null);
+    }
+
+    @Test
+    public void parseCcas_collectionWithInvalidCcas_throwsIllegalValueException() throws Exception {
+        thrown.expect(IllegalValueException.class);
+        ParserUtil.parseCcas(Arrays.asList(VALID_CCA_1, INVALID_CCA));
+    }
+
+    @Test
+    public void parseCcas_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseCcas(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parseCcas_collectionWithValidCcas_returnsCcaSet() throws Exception {
+        Set<Cca> actualCcaSet = ParserUtil.parseCcas(Arrays.asList(VALID_CCA_1, VALID_CCA_2));
+        Set<Cca> expectedCcaSet = new HashSet<Cca>(Arrays.asList(new Cca(VALID_CCA_1), new Cca(VALID_CCA_2)));
+
+        assertEquals(expectedCcaSet, actualCcaSet);
     }
 
     @Test

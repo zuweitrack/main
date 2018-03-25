@@ -32,6 +32,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Meet;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -98,7 +99,7 @@ public class AddressBookParserTest {
         final String date = "14/10/2018";
         MeetCommand command  = (MeetCommand) parser.parseCommand(MeetCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_DATE + date);
-        assertEquals(new MeetCommand(INDEX_FIRST_PERSON, date), command);
+        assertEquals(new MeetCommand(INDEX_FIRST_PERSON, new Meet(date)), command);
     }
 
     @Test

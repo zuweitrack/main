@@ -17,21 +17,28 @@ public class Person {
 
     private final Name name;
     private final Phone phone;
-    private final Email email;
-    private final Address address;
-
+    private final Birthday birthday;
+    private final LevelOfFriendship levelOfFriendship;
+    private final UnitNumber unitNumber;
+    private final Meet meetDate;
+    private final UniqueCcaList ccas;
     private final UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+
+    public Person(Name name, Phone phone, Birthday birthday, LevelOfFriendship levelOfFriendship,
+                  UnitNumber unitNumber, Set<Cca> ccas, Meet meetDate, Set<Tag> tags) {
+        requireAllNonNull(name, phone, birthday, levelOfFriendship, unitNumber, ccas, tags);
         this.name = name;
         this.phone = phone;
-        this.email = email;
-        this.address = address;
-        // protect internal tags from changes in the arg list
+        this.birthday = birthday;
+        this.levelOfFriendship = levelOfFriendship;
+        this.unitNumber = unitNumber;
+        this.meetDate = meetDate;
+        // protect internal tags and ccas from changes in the arg list
+        this.ccas = new UniqueCcaList(ccas);
         this.tags = new UniqueTagList(tags);
     }
 
@@ -43,12 +50,26 @@ public class Person {
         return phone;
     }
 
-    public Email getEmail() {
-        return email;
+    public Birthday getBirthday() {
+        return birthday;
     }
 
-    public Address getAddress() {
-        return address;
+    public LevelOfFriendship getLevelOfFriendship() {
+        return levelOfFriendship;
+    }
+
+    public Meet getMeetDate() {
+        return meetDate;
+    }
+    public UnitNumber getUnitNumber() {
+        return unitNumber;
+    }
+    /**
+     * Returns an immutable cca set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Cca> getCcas() {
+        return Collections.unmodifiableSet(ccas.toSet());
     }
 
     /**
@@ -72,14 +93,15 @@ public class Person {
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(this.getName())
                 && otherPerson.getPhone().equals(this.getPhone())
-                && otherPerson.getEmail().equals(this.getEmail())
-                && otherPerson.getAddress().equals(this.getAddress());
+                && otherPerson.getBirthday().equals(this.getBirthday())
+                && otherPerson.getLevelOfFriendship().equals(this.getLevelOfFriendship())
+                && otherPerson.getUnitNumber().equals(this.getUnitNumber());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, birthday, levelOfFriendship, unitNumber, ccas, tags);
     }
 
     @Override
@@ -88,11 +110,15 @@ public class Person {
         builder.append(getName())
                 .append(" Phone: ")
                 .append(getPhone())
-                .append(" Email: ")
-                .append(getEmail())
-                .append(" Address: ")
-                .append(getAddress())
-                .append(" Tags: ");
+                .append(" Birthday: ")
+                .append(getBirthday())
+                .append(" Level Of Friendship: ")
+                .append(getLevelOfFriendship())
+                .append(" Unit Number: ")
+                .append(getUnitNumber())
+                .append(" Ccas: ");
+        getCcas().forEach(builder::append);
+        builder.append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
