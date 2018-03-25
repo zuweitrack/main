@@ -501,6 +501,73 @@ If it's overdue and not acknowledged, it will turn Grey. +
 
 Bottom Panel: Number of orange reminders +
 
+// tag::myGoalsPage[]
+=== My Goals Page [coming v1.4]
+
+The My Goals page is created for RC4 users to add and keep track of their goals every year. We are implementing this goal page as setting goals gives you *long-term vision* and *short-term motivation* for the goals. In addition as a majority of RC4 residents are NUS students, when students set their own goals, they take responsibility and ownership of their learning goals. +
+Goals are meant only for the user, and the user can have many goals stored in CollegeZone. +
+
+*Goals features:* +
+
+* Adding a goal to the My Goals Page
+* Editing a goal to the My Goals Page
+* Deleting a goal to the My Goals Page
+* Completing a goal to the My Goals Page
+
+All goal commands are event driven. +
+The following is the Sequence Diagram for interactions within the `Logic` component for the `execute("goal remove 1")` API call. +
+
+image::GoalHighLevelSequenceDiagram.jpg[width="500"]
+    Figure 3.10.0.1: Goal delete Sequence Diagram
+
+1. Logic
+* AddressBookParser: Detects if goal delete keyword contains correct parsing keyword after +
+e.g. goal delete 1
+* GoalDeleteCommandParser:
+** Parses the input by extracting the input index +
+Parsed index : 1 +
+** Creates a RemarkCommand class and passes the index and string as arguments
+* GoalDeleteCommand:
+** Deletes the goal corresponding to the index locally
+** Runs the execution which calls the model
+
+2. Model
+
+* 1. Calls the model and gets the filtered goals list
+* 2. Deletes the deleted Goal object
+* 3. Updates the filtered goals list
+* 4. Gets the updated filtered goals list
+
+*Reason for how it is implemented* +
+
+* Makes use of existing implementations +
+Coming up with new algorithms is very time consuming. Implementation of My Goals Page uses new implementations are very similar to how CollegeZone implements its contacts. This is implemented in this way so as to reduce errors and complexity in the code. +
+
+*Goals objects will consist of 3 attributes :* +
+
+1. the date and time of Goal completion. +
+2. the level of importance of Goal. +
+3. the text content of Goal.
+
+The following is the model component class diagram for Goal
+
+image::GoalModelComponentClassDiagram.JPG[width="500"]
+    Figure 3.10.0.2: Goal model Class Diagram
+
+
+==== Design Considerations
+
+
+**Aspect:** Representation of Goals level of importance in UI +
+**Alternative 1 (current choice):** Each level of importance have a different colour specified to it. +
+**Pros:** Ability for the user to differentiate the Goals with higher level of importance compared to those with lower level of importance. +
+**Cons:** The colours of the goals list in the UI might look messy to the user without having a sort Goals option as the list of goals is displayed based on when it was added. +
+**Alternative 2:** Having a sort goals command+
+**Pros:** It is simple and easy to understand. +
+**Cons:** It requires extra methods to implement the sort function. +
+
+---
+// end::myGoalsPage[]
 
 == Documentation
 
@@ -658,7 +725,7 @@ Do take a look at <<Design-Logic>> before attempting to modify the `Logic` compo
 [TIP]
 Do take a look at <<Design-Model>> before attempting to modify the `Model` component.
 
-. Add a `removeTag(Tag)` method. The specified tag will be removed from everyone in the address book.
+. Add a `removeTag(Tag)` method. The specified tag will be removed from everyone in CollegeZone.
 +
 ****
 * Hints
@@ -915,7 +982,7 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 |Assignee |Major |Minor
 
 |Deborah Low
-|Scheduler (Reminder) : This app allows user to set/edit/delete reminders reflected on a Calendar
+|Goals Page : This feature allows user to set/edit/delete goals they have for the year and to keep track of their goals progress.
 |Add and Edit : Change add and edit command to suit our target audience ( RC4 Residents ) +
  GUI : Change the look and feel of the GUI to make it more user friendly.
 
@@ -956,6 +1023,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |RC student |find a person by tags |locate a particular group of people without having to go through the entire list
 
 |`* * *` |RC student |edit a detail I added |
+
+|`* * *` |RC student |add my goals for the year |keep track of the goals I have and have not completed
 
 |`* * *` |RC student |set a level of friendship with a specific person |maintain my friendships depending on a priority system set by myself
 
