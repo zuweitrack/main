@@ -58,6 +58,9 @@ public class Person {
         return levelOfFriendship;
     }
 
+    public Meet getMeetDate() {
+        return meetDate;
+    }
     public UnitNumber getUnitNumber() {
         return unitNumber;
     }
@@ -69,7 +72,6 @@ public class Person {
         return Collections.unmodifiableSet(ccas.toSet());
     }
 
-    public Meet getMeetDate() { return meetDate; }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
