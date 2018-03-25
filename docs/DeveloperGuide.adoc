@@ -926,7 +926,7 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
  Logic : Added command aliases to allow users to be able to perform commands by typing shortcuts
 
 |Shamsheer Ahamed
-|Meetup (Tasks) : This feature allows user to set up a meet up date which will be reflected on a Calendar +
+|Meetup (Tasks) : This feature allows user to set up a meet up date that will be reflected on a Calendar +
 |Meetup : Added a new Command called meet to allow user to set up a meet up date with RC4 residents +
  Ui : Added a placeholder in PersonCard's to display the date of meet up for each person later +
 
