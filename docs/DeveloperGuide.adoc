@@ -396,6 +396,15 @@ Certain properties of the application can be controlled (e.g App name, logging l
 The old find command feature only allows searching by name. To make CollegeZone more useful for RC4 students, we have enhanced the find
 command feature to be able to find persons by tags.
 
+==== Aspect: User Input
+* Old user input format: find <name>
+* New user input format: find n/<name> t/<tag>
+
+==== Aspect: Nature of user input
+* Searching of name and tag at the same time is not allowed
+* If user is searching by name, user input should be: find n/<name> t/<empty>
+* If user is searching by tags, user input should be: find n/<empty> t/<tag>
+
 === Logic: Command Aliases
 
 CollegeZone users may now use shortcuts to perform desired tasks. These shortcuts are shown in figure 3.6.1.
@@ -500,6 +509,9 @@ After acknowledging it, it is removed from calendar. +
 If it's overdue and not acknowledged, it will turn Grey. +
 
 Bottom Panel: Number of orange reminders +
+
+=== Suggested: Set Tasks
+
 
 
 == Documentation
@@ -967,7 +979,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |forgetful RC student |add a reminder of meet up with another RC4 student |shows who you are meeting up with on what date
 
-|`* * *` |RC student |note down tasks, events or training sessions in a calendar |make my schedule schedule more organised
+|`* * *` |RC student |note down tasks, events or training sessions in a calendar |make my schedule more organised
 
 |`* * *` |RC student |Set down a date for group events |do necessary group preparation prior to a group event
 
