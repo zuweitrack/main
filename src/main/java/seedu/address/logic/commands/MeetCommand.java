@@ -33,6 +33,8 @@ public class MeetCommand extends UndoableCommand {
 
     public static final String MESSAGE_ADD_MEETDATE_SUCCESS = "%1$s added for meet up on this date.";
     public static final String MESSAGE_DELETE_MEETDATE_SUCCESS = "You are not meeting %1$s on this date.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person has already been set to have meeting.";
+
 
     public static final String MESSAGE_ARGUMENTS = "You are meeting person %1$d, Date of meeting: %2$s";
 
@@ -63,10 +65,9 @@ public class MeetCommand extends UndoableCommand {
         try {
             model.updatePerson(personToEdit, editedPerson);
         } catch (DuplicatePersonException dpe) {
-            throw new AssertionError("Changing target person's meeting date should not "
-                    + "result in a duplicate");
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         } catch (PersonNotFoundException pnfe) {
-            throw new AssertionError("The target person cannot be missing");
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
