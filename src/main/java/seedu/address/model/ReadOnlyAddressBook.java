@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import javafx.collections.ObservableList;
 
+import seedu.address.model.goal.Goal;
 import seedu.address.model.person.Cca;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -28,5 +29,12 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate tags.
      */
     ObservableList<Tag> getTagList();
+
+    //@@author deborahlow97
+    /**
+     * Returns an unmodifiable view of the goals list.
+     * This list will not contain any duplicate goals.
+     */
+    ObservableList<Goal> getGoalList();
 
 }

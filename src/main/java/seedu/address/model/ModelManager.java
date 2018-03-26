@@ -41,6 +41,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredGoals = new FilteredList<>(this.addressBook.getGoalList());
     }
 
     public ModelManager() {
@@ -84,6 +85,7 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.updatePerson(target, editedPerson);
         indicateAddressBookChanged();
     }
+
 
     @Override
     public void deleteTag (Tag t) {
@@ -135,6 +137,12 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public ObservableList<Goal> getFilteredGoalList() {
         return FXCollections.unmodifiableObservableList(filteredGoals);
+    }
+
+    @Override
+    public void updateFilteredGoalList(Predicate<Goal> predicate) {
+        requireNonNull(predicate);
+        filteredGoals.setPredicate(predicate);
     }
 
 }

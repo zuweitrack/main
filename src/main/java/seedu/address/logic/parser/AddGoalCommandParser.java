@@ -11,12 +11,13 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddGoalCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.goal.Completion;
-import seedu.address.model.goal.EndDate;
+import seedu.address.model.goal.EndDateTime;
 import seedu.address.model.goal.Goal;
 import seedu.address.model.goal.GoalText;
 import seedu.address.model.goal.Importance;
 import seedu.address.model.goal.StartDateTime;
 
+//@@author deborahlow97
 /**
  * Parses input arguments and creates a new AddGoalCommand object
  */
@@ -40,9 +41,9 @@ public class AddGoalCommandParser implements Parser<AddGoalCommand> {
             Importance importance = ParserUtil.parseImportance(argMultimap.getValue(PREFIX_IMPORTANCE)).get();
             GoalText goalText = ParserUtil.parseGoalText(argMultimap.getValue(PREFIX_GOAL_TEXT)).get();
             StartDateTime startDateTime = new StartDateTime(LocalDateTime.now());
-            EndDate endDate = new EndDate("");
-            Completion completion = new Completion("");
-            Goal goal = new Goal(importance, goalText, startDateTime, endDate, completion);
+            EndDateTime endDateTime = new EndDateTime("");
+            Completion completion = new Completion(false);
+            Goal goal = new Goal(importance, goalText, startDateTime, endDateTime, completion);
             return new AddGoalCommand(goal);
         } catch (IllegalValueException ive) {
             throw new ParseException(ive.getMessage(), ive);

@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+//@@author deborahlow97
 /**
  * Represents a RC4 resident Unit Number in CollegeZone.
  * Guarantees: immutable; is valid as declared in {@link #isValidUnitNumber(String)}

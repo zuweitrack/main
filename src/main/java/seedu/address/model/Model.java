@@ -18,6 +18,9 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Goal> PREDICATE_SHOW_ALL_GOALS = unused -> true;
+
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
 
@@ -57,5 +60,11 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Goal> getFilteredGoalList();
+
+    /**
+     * Updates the filter of the filtered goal list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredGoalList(Predicate<Goal> predicate);
 
 }

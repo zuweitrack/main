@@ -3,8 +3,9 @@ package seedu.address.model.goal;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+//@@author deborahlow97
 /**
- * Represents a Goal's text in CollegeZone.
+ * Represents a Goal's text in the Goals Page.
  * Guarantees: immutable; is valid as declared in {@link #isValidGoalText(String)}
  */
 public class GoalText {

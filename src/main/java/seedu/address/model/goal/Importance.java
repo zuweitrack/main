@@ -3,6 +3,7 @@ package seedu.address.model.goal;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+//@@author deborahlow97
 /**
  * Represents a Goal's importance in CollegeZone.
  * Guarantees: immutable; is valid as declared in {@link #isValidImportance(String)}

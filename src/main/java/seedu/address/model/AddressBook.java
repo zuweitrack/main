@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.goal.Goal;
+import seedu.address.model.goal.UniqueGoalList;
 import seedu.address.model.goal.exceptions.DuplicateGoalException;
 import seedu.address.model.person.Cca;
 import seedu.address.model.person.Person;
@@ -69,7 +70,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.tags.setTags(tags);
     }
 
-    public void setGoals(Set<Goal> goals) throws DuplicateGoalException {
+    public void setGoals(List<Goal> goals) throws DuplicateGoalException {
         this.goals.setGoals(goals);
     }
     /**
@@ -88,6 +89,13 @@ public class AddressBook implements ReadOnlyAddressBook {
             setPersons(syncedPersonList);
         } catch (DuplicatePersonException e) {
             throw new AssertionError("CollegeZone should not have duplicate persons");
+        }
+
+        List<Goal> syncedGoalList = newData.getGoalList().stream().collect(Collectors.toList());
+        try {
+            setGoals(syncedGoalList);
+        } catch (DuplicateGoalException e) {
+            throw new AssertionError("Goal Page should not have duplicate goals");
         }
     }
 
@@ -256,6 +264,17 @@ public class AddressBook implements ReadOnlyAddressBook {
             throw new AssertionError("Modifying a person's tags only should not result in a duplicate. "
                     + "See Person#equals(Object).");
         }
+    }
+
+    //// goal-level operations
+
+    //@@author deborahlow97
+    /**
+     * Adds a goal to CollegeZone.
+     * @throws DuplicateGoalException if an equivalent goal already exists.
+     */
+    public void addGoal(Goal g) throws DuplicateGoalException {
+        goals.add(g);
     }
 
     //// util methods
