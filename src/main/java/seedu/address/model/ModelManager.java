@@ -12,6 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.model.goal.Goal;
+import seedu.address.model.goal.exceptions.DuplicateGoalException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -26,6 +28,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final AddressBook addressBook;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Goal> filteredGoals;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -120,6 +123,18 @@ public class ModelManager extends ComponentManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && filteredPersons.equals(other.filteredPersons);
+    }
+
+    @Override
+    public void addGoal(Goal goal) throws DuplicateGoalException {
+        addressBook.addGoal(goal);
+        updateFilteredGoalList(PREDICATE_SHOW_ALL_GOALS);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public ObservableList<Goal> getFilteredGoalList() {
+        return FXCollections.unmodifiableObservableList(filteredGoals);
     }
 
 }

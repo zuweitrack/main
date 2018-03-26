@@ -11,6 +11,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.goal.Goal;
+import seedu.address.model.goal.exceptions.DuplicateGoalException;
 import seedu.address.model.person.Cca;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniqueCcaList;
@@ -29,6 +31,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniquePersonList persons;
     private final UniqueCcaList ccas;
     private final UniqueTagList tags;
+    private final UniqueGoalList goals;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -41,12 +44,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons = new UniquePersonList();
         ccas = new UniqueCcaList();
         tags = new UniqueTagList();
+        goals = new UniqueGoalList();
     }
 
     public AddressBook() {}
 
     /**
-     * Creates a CollegeZone using the Persons, Ccas and Tags in the {@code toBeCopied}
+     * Creates a CollegeZone using the Persons, Ccas, Tags and Goals in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -65,6 +69,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.tags.setTags(tags);
     }
 
+    public void setGoals(Set<Goal> goals) throws DuplicateGoalException {
+        this.goals.setGoals(goals);
+    }
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -273,6 +280,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Tag> getTagList() {
         return tags.asObservableList();
+    }
+
+    @Override
+    public ObservableList<Goal> getGoalList() {
+        return goals.asObservableList();
     }
 
     @Override

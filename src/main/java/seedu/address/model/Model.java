@@ -3,6 +3,8 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.goal.Goal;
+import seedu.address.model.goal.exceptions.DuplicateGoalException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -49,5 +51,11 @@ public interface Model {
 
     /** Removes the given {@code tag} from all {@code Person}s. */
     void deleteTag(Tag tag);
+
+    /** Adds the given goal */
+    void addGoal(Goal goal) throws DuplicateGoalException;
+
+    /** Returns an unmodifiable view of the filtered person list */
+    ObservableList<Goal> getFilteredGoalList();
 
 }
