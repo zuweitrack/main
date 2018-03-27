@@ -330,6 +330,23 @@ Format: `!goal INDEX` +
         `OR` +
         `completegoal INDEX`
 
+****
+* Indicates completion of the goal at the specified `INDEX`.
+* The index refers to the index number shown in the most recent goal listing.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `list` +
+`!goal 2` +
+Indicates completion of the 2nd goal in CollegeZone's goal page. +
+* `list` +
+`!g 4` +
+Indicates completion of the 4th goal in CollegeZone's goal page. +
+* `l` +
+`completegoal 1` +
+Indicates completion of the 1st goal in CollegeZone's goal page.
 
 === Listing entered commands : `history`
 
@@ -433,12 +450,25 @@ e.g. `find James Jake`
 * *List* : `list` OR `l`
 * *Help* : `help` or `h`
 * *Select* : `select INDEX` OR `s INDEX`
-e.g.`select 2`
+e.g. `select 2`
 * *History* : `history` OR `h`
 * *Undo* : `undo`
 * *Redo* : `redo`
 * *Add Goal* : `+goal impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
-OR +
-`+g impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
-OR +
-`addgoal impt/IMPORTANCE_LEVEL text/GOAL_TEXT`
+OR `+g impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
+OR `addgoal impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
+e.g. `+goal impt/3 text/lose weight!`
+* *Edit Goal* : `~goal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
+OR `~g INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
+OR `editgoal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
+e.g. `~goal 2 impt/1`
+
+* *Delete Goal* : `-goal INDEX` +
+OR `-g INDEX` +
+OR `deletegoal INDEX` +
+e.g. `-goal 2`
+
+* *Complete Goal* : `!goal INDEX` +
+OR `!g INDEX` +
+OR `completegoal INDEX` +
+e.g. `!goal INDEX`
