@@ -18,14 +18,17 @@ public class UnitNumberContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        UnitNumberContainsKeywordsPredicate firstPredicate = new UnitNumberContainsKeywordsPredicate(firstPredicateKeywordList);
-        UnitNumberContainsKeywordsPredicate secondPredicate = new UnitNumberContainsKeywordsPredicate(secondPredicateKeywordList);
+        UnitNumberContainsKeywordsPredicate firstPredicate =
+                new UnitNumberContainsKeywordsPredicate(firstPredicateKeywordList);
+        UnitNumberContainsKeywordsPredicate secondPredicate =
+                new UnitNumberContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        UnitNumberContainsKeywordsPredicate firstPredicateCopy = new UnitNumberContainsKeywordsPredicate(firstPredicateKeywordList);
+        UnitNumberContainsKeywordsPredicate firstPredicateCopy =
+                new UnitNumberContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -41,7 +44,8 @@ public class UnitNumberContainsKeywordsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        UnitNumberContainsKeywordsPredicate predicate = new UnitNumberContainsKeywordsPredicate(Collections.singletonList("Alice"));
+        UnitNumberContainsKeywordsPredicate predicate =
+                new UnitNumberContainsKeywordsPredicate(Collections.singletonList("Alice"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Multiple keywords
@@ -60,7 +64,8 @@ public class UnitNumberContainsKeywordsPredicateTest {
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        UnitNumberContainsKeywordsPredicate predicate = new UnitNumberContainsKeywordsPredicate(Collections.emptyList());
+        UnitNumberContainsKeywordsPredicate predicate =
+                new UnitNumberContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
 
         // Non-matching keyword
