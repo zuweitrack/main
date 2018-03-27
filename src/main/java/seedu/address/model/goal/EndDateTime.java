@@ -1,6 +1,5 @@
 package seedu.address.model.goal;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.parser.DateTimeParser.nattyDateAndTimeParser;
 import static seedu.address.logic.parser.DateTimeParser.properDateTimeFormat;
@@ -17,7 +16,7 @@ public class EndDateTime {
 
 
     public static final String MESSAGE_END_DATE_TIME_CONSTRAINTS =
-            "EndDateTime valud must be a valid date and time";
+            "EndDateTime must be a valid date and time";
     public final String value;
 
     /**
@@ -26,10 +25,14 @@ public class EndDateTime {
      * @param endDateTime A valid endDateTime number.
      */
     public EndDateTime(String endDateTime) {
-        requireNonNull(endDateTime);
-        checkArgument(isValidEndDateTime(endDateTime), MESSAGE_END_DATE_TIME_CONSTRAINTS);
-        LocalDateTime localEndDateTime = nattyDateAndTimeParser(endDateTime).get();
-        this.value = properDateTimeFormat(localEndDateTime);
+        //requireNonNull(endDateTime);
+        if (endDateTime.equals("")) {
+            this.value = "";
+        } else {
+            checkArgument(isValidEndDateTime(endDateTime), MESSAGE_END_DATE_TIME_CONSTRAINTS);
+            LocalDateTime localEndDateTime = nattyDateAndTimeParser(endDateTime).get();
+            this.value = properDateTimeFormat(localEndDateTime);
+        }
     }
 
     /**
