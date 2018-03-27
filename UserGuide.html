@@ -29,19 +29,24 @@
 <li><a href="#Features">3. Features</a>
 <ul class="sectlevel2">
 <li><a href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></li>
-<li><a href="#adding-a-friend-code-add-code">3.2. Adding a Friend: <code>add</code></a></li>
+<li><a href="#adding-a-friend-code-add-code-since-v1-2">3.2. Adding a Friend: <code>add</code> [since v1.2]</a></li>
 <li><a href="#listing-all-friends-code-list-code">3.3. Listing all friends : <code>list</code></a></li>
-<li><a href="#editing-a-friend-code-edit-code">3.4. Editing a Friend : <code>edit</code></a></li>
+<li><a href="#editing-a-friend-code-edit-code-since-v1-2">3.4. Editing a Friend : <code>edit</code> [since v1.2]</a></li>
 <li><a href="#locating-persons-by-name-code-find-code-code-since-v1-1-code">3.5. Locating persons by name: <code>find</code> <code>[since v1.1]</code></a></li>
-<li><a href="#deleting-a-person-code-delete-code">3.6. Deleting a person : <code>delete</code></a></li>
-<li><a href="#selecting-a-person-code-select-code">3.7. Selecting a person : <code>select</code></a></li>
-<li><a href="#listing-entered-commands-code-history-code">3.8. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">3.9. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.10. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">3.11. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.12. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.13. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.14. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#seeking-the-resident-assistant-of-a-person-code-seek-code-code-coming-in-v2-0-code">3.6. Seeking the Resident Assistant of a person : <code>seek</code> <code>[coming in v2.0]</code></a></li>
+<li><a href="#deleting-a-person-code-delete-code">3.7. Deleting a person : <code>delete</code></a></li>
+<li><a href="#selecting-a-person-code-select-code">3.8. Selecting a person : <code>select</code></a></li>
+<li><a href="#meeting-a-person-code-meet-code">3.9. Meeting a person : <code>meet</code></a></li>
+<li><a href="#adding-a-reminder-code-r-code-coming-v1-3">3.10. Adding a Reminder: <code>+r</code> [Coming v1.3]</a></li>
+<li><a href="#editing-a-reminder-code-r-code-v1-4">3.11. Editing a Reminder: <code>~r</code> [v1.4]</a></li>
+<li><a href="#deleting-a-reminder-code-r-code-v1-4">3.12. Deleting a Reminder: <code>-r</code> [v1.4]</a></li>
+<li><a href="#listing-entered-commands-code-history-code">3.13. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">3.14. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.15. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">3.16. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.17. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.18. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.19. Encrypting data files <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -155,7 +160,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-friend-code-add-code"><a class="link" href="#adding-a-friend-code-add-code">3.2. Adding a Friend: <code>add</code></a></h3>
+<h3 id="adding-a-friend-code-add-code-since-v1-2"><a class="link" href="#adding-a-friend-code-add-code-since-v1-2">3.2. Adding a Friend: <code>add</code> [since v1.2]</a></h3>
 <div class="paragraph">
 <p>Adds a person to CollegeZone<br>
 Format: <code>add n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]&#8230;&#8203; [t/TAG]&#8230;&#8203;</code></p>
@@ -206,7 +211,7 @@ Format: <code>list</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-a-friend-code-edit-code"><a class="link" href="#editing-a-friend-code-edit-code">3.4. Editing a Friend : <code>edit</code></a></h3>
+<h3 id="editing-a-friend-code-edit-code-since-v1-2"><a class="link" href="#editing-a-friend-code-edit-code-since-v1-2">3.4. Editing a Friend : <code>edit</code> [since v1.2]</a></h3>
 <div class="paragraph">
 <p>Edits an existing person in CollegeZone.<br>
 Format: <code>edit INDEX [n/NAME] [p/PHONE] [u/UNIT_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [cca/CCA]&#8230;&#8203; [t/TAG]&#8230;&#8203;</code></p>
@@ -303,7 +308,52 @@ Returns any person having tags <code>friends</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person-code-delete-code"><a class="link" href="#deleting-a-person-code-delete-code">3.6. Deleting a person : <code>delete</code></a></h3>
+<h3 id="seeking-the-resident-assistant-of-a-person-code-seek-code-code-coming-in-v2-0-code"><a class="link" href="#seeking-the-resident-assistant-of-a-person-code-seek-code-code-coming-in-v2-0-code">3.6. Seeking the Resident Assistant of a person : <code>seek</code> <code>[coming in v2.0]</code></a></h3>
+<div class="paragraph">
+<p>Seek the Resident Assistant (RA) of the person whose name contains any of the given keywords.<br>
+Format: <code>seek NAME</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
+</li>
+<li>
+<p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
+</li>
+<li>
+<p>Only the name is searched at a single time</p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
+</li>
+<li>
+<p>Resident Assistant (RA) of the person&#8217;s name matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber&#8217;s RA</code>, <code>Bo Yang&#8217;s RA</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find John</code><br>
+Returns <code>John&#8217;s RA</code></p>
+</li>
+<li>
+<p><code>find Betsy</code><br>
+Returns <code>Betsy&#8217;s RA</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-person-code-delete-code"><a class="link" href="#deleting-a-person-code-delete-code">3.7. Deleting a person : <code>delete</code></a></h3>
 <div class="paragraph">
 <p>Deletes the specified person from CollegeZone.<br>
 Format: <code>delete INDEX</code></p>
@@ -344,7 +394,7 @@ Deletes the 1st person in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-a-person-code-select-code"><a class="link" href="#selecting-a-person-code-select-code">3.7. Selecting a person : <code>select</code></a></h3>
+<h3 id="selecting-a-person-code-select-code"><a class="link" href="#selecting-a-person-code-select-code">3.8. Selecting a person : <code>select</code></a></h3>
 <div class="paragraph">
 <p>Selects the person identified by the index number used in the last person listing.<br>
 Format: <code>select INDEX</code></p>
@@ -385,7 +435,156 @@ Selects the 1st person in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.8. Listing entered commands : <code>history</code></a></h3>
+<h3 id="meeting-a-person-code-meet-code"><a class="link" href="#meeting-a-person-code-meet-code">3.9. Meeting a person : <code>meet</code></a></h3>
+<div class="paragraph">
+<p>Selects the person identified by the index number used in the last person listing.<br>
+Format: <code>meet INDEX [d/MEETDATE]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Sets up a meeting with the person at the specified <code>INDEX</code> on the specified meet date.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
+</li>
+<li>
+<p>The date must be of the format d/ + DD/MM/YYYY.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>meet 1 d/14/03/2018</code><br>
+Sets up a meeting with the 1st person on the 14th of March, 2018 in your Calendar.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-reminder-code-r-code-coming-v1-3"><a class="link" href="#adding-a-reminder-code-r-code-coming-v1-3">3.10. Adding a Reminder: <code>+r</code> [Coming v1.3]</a></h3>
+<div class="paragraph">
+<p>Adds a reminder to CollegeZone<br>
+Format: <code>+r text/REMINDER_TEXT d/DATETIME</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Adds a reminder to CollegeZone and is reflected in the Calendar.</p>
+</li>
+<li>
+<p><code>DATETIME</code>: a datetime is a string that contains either a date, a time or a combination of both (in any order). If a date is not specified, then it will refer to today. If a time is not specified, then it will refer to the current time.</p>
+</li>
+<li>
+<p>Examples of valid datetime:<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>[date] [time]<br></p>
+</li>
+<li>
+<p>3pm<br></p>
+</li>
+<li>
+<p>today<br></p>
+</li>
+<li>
+<p>tmr<br></p>
+</li>
+<li>
+<p>10 Feb<br></p>
+</li>
+<li>
+<p>thursday 8am<br></p>
+</li>
+<li>
+<p>tomorrow 3pm<br></p>
+</li>
+<li>
+<p>14 Feb 2014 5.30am<br></p>
+</li>
+<li>
+<p>29/2/14 23:59</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>+r text/Eat vitamins d/tmr 8am</code></p>
+</li>
+<li>
+<p><code>+r text/Dental appointment d/next thurs 3pm</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editing-a-reminder-code-r-code-v1-4"><a class="link" href="#editing-a-reminder-code-r-code-v1-4">3.11. Editing a Reminder: <code>~r</code> [v1.4]</a></h3>
+<div class="paragraph">
+<p>Edits an existing reminder in CollegeZone.<br>
+Format: <code>~r INDEX [text/REMINDER_TEXT] [d/DATETIME]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Edits the reminder at the specified <code>INDEX</code>. The index refers to the index number shown in the reminder listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>~r 4 text/CS2103 exam coming in 1 week</code><br>
+Edits the reminder text of the 4th reminder to be <code>CS2103 exam coming in 1 week</code>.</p>
+</li>
+<li>
+<p><code>~r 2 text/water plants d/tmr 7am</code><br>
+Edits the reminder text and datetime of the 2nd person to be <code>water plants</code> and <code>tmr 7am</code> respectively.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-reminder-code-r-code-v1-4"><a class="link" href="#deleting-a-reminder-code-r-code-v1-4">3.12. Deleting a Reminder: <code>-r</code> [v1.4]</a></h3>
+
+</div>
+<div class="sect2">
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.13. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
 Format: <code>history</code></p>
@@ -406,7 +605,7 @@ Format: <code>history</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.9. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.14. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Restores CollegeZone to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
@@ -419,7 +618,7 @@ Format: <code>undo</code></p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Undoable commands: those commands that modify CollegeZone&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>).</p>
+<p>Undoable commands: those commands that modify CollegeZone&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code>, <code>clear</code>, <code>+r</code>, <code>~r</code> and <code>-r</code>).</p>
 </div>
 </td>
 </tr>
@@ -451,7 +650,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.10. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.15. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
 Format: <code>redo</code></p>
@@ -483,28 +682,28 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.11. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.16. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from CollegeZone.<br>
 Format: <code>clear</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.12. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.17. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.13. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.18. Saving the data</a></h3>
 <div class="paragraph">
 <p>CollegeZone data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.14. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.19. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
@@ -570,7 +769,7 @@ e.g.<code>select 2</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-22 02:20:27 UTC
+Last updated 2018-03-27 11:38:55 UTC
 </div>
 </div>
 </body>
