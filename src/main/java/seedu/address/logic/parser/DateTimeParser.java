@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.TextStyle;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 import com.joestelmach.natty.DateGroup;
@@ -61,6 +63,32 @@ public class DateTimeParser {
             newEndDateTime = newEndDateTime.plusDays(1);
         }
         return newEndDateTime;
+    }
+
+    /**
+     * Receives a LocalDateTime and formats the {@code dateTime}
+     *
+     * @return a formatted dateTime in String
+     */
+    public static String properDateTimeFormat(LocalDateTime dateTime) {
+        StringBuilder builder = new StringBuilder();
+        int day = dateTime.getDayOfMonth();
+        String month = dateTime.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+        int year = dateTime.getYear();
+        int hour = dateTime.getHour();
+        int minute = dateTime.getMinute();
+
+        builder.append("Date: ")
+                .append(day)
+                .append(" ")
+                .append(month)
+                .append(" ")
+                .append(year)
+                .append(",  Time: ")
+                .append(hour)
+                .append(" ")
+                .append(minute);
+        return builder.toString();
     }
 
     public static boolean containsDateAndTime(String args) {
