@@ -75,9 +75,8 @@ public class Goal {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getImportance())
-                .append(" Importance: ")
-                .append(getGoalText())
+        builder.append(" Importance: ")
+                .append(getImportance())
                 .append(" Goal Text: ")
                 .append(getGoalText())
                 .append(" Start Date Time: ")
