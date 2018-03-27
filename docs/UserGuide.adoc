@@ -60,7 +60,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
-=== Adding a Friend: `add`
+=== Adding a Friend: `add` [since v1.2]
 
 Adds a person to CollegeZone +
 Format: `add n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...`
@@ -83,7 +83,7 @@ Examples:
 Shows a list of all persons in CollegeZone. +
 Format: `list`
 
-=== Editing a Friend : `edit`
+=== Editing a Friend : `edit` [since v1.2]
 
 Edits an existing person in CollegeZone. +
 Format: `edit INDEX [n/NAME] [p/PHONE] [u/UNIT_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [cca/CCA]... [t/TAG]...`
@@ -126,6 +126,25 @@ Returns any person having names `Betsy`, `Tim`, or `John`
 *  `find n/ t/friends` +
 Returns any person having tags `friends`
 
+=== Seeking the Resident Assistant of a person : `seek` `[coming in v2.0]`
+Seek the Resident Assistant (RA) of the person whose name contains any of the given keywords. +
+Format: `seek NAME`
+
+****
+* The search is case insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched at a single time
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Resident Assistant (RA) of the person's name matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber's RA`, `Bo Yang's RA`
+****
+
+Examples:
+
+* `find John` +
+Returns `John's RA`
+* `find Betsy` +
+Returns `Betsy's RA`
+
 === Deleting a person : `delete`
 
 Deletes the specified person from CollegeZone. +
@@ -166,6 +185,67 @@ Selects the 2nd person in CollegeZone.
 `select 1` +
 Selects the 1st person in the results of the `find` command.
 
+=== Meeting a person : `meet`
+
+Selects the person identified by the index number used in the last person listing. +
+Format: `meet INDEX [d/MEETDATE]`
+
+****
+* Sets up a meeting with the person at the specified `INDEX` on the specified meet date.
+* The index refers to the index number shown in the most recent listing.
+* The index *must be a positive integer* `1, 2, 3, ...`
+* The date must be of the format d/ + DD/MM/YYYY.
+****
+
+Examples:
+
+* `meet 1 d/14/03/2018` +
+Sets up a meeting with the 1st person on the 14th of March, 2018 in your Calendar.
+
+=== Adding a Reminder: `+r` [Coming v1.3]
+Adds a reminder to CollegeZone +
+Format: `+r text/REMINDER_TEXT d/DATETIME`
+
+****
+* Adds a reminder to CollegeZone and is reflected in the Calendar.
+* `DATETIME`: a datetime is a string that contains either a date, a time or a combination of both (in any order). If a date is not specified, then it will refer to today. If a time is not specified, then it will refer to the current time.
+* Examples of valid datetime: +
+ -	[date] [time] +
+ -	3pm +
+ -	today +
+ -	tmr +
+ -	10 Feb +
+ -	thursday 8am +
+ -	tomorrow 3pm +
+ -	14 Feb 2014 5.30am +
+ -	29/2/14 23:59
+
+****
+
+
+Examples:
+
+* `+r text/Eat vitamins d/tmr 8am`
+* `+r text/Dental appointment d/next thurs 3pm`
+
+=== Editing a Reminder: `~r` [v1.4]
+Edits an existing reminder in CollegeZone. +
+Format: `~r INDEX [text/REMINDER_TEXT] [d/DATETIME]`
+
+****
+* Edits the reminder at the specified `INDEX`. The index refers to the index number shown in the reminder listing. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+****
+
+Examples:
+
+* `~r 4 text/CS2103 exam coming in 1 week` +
+Edits the reminder text of the 4th reminder to be `CS2103 exam coming in 1 week`.
+* `~r 2 text/water plants d/tmr 7am` +
+Edits the reminder text and datetime of the 2nd person to be `water plants` and `tmr 7am` respectively.
+
+=== Deleting a Reminder: `-r` [v1.4]
 === Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
@@ -184,7 +264,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify CollegeZone's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify CollegeZone's content (`add`, `delete`, `edit`, `clear`, `+r`, `~r` and `-r`).
 ====
 
 Examples:
