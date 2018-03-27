@@ -38,6 +38,11 @@ public class UnitNumber {
         return value;
     }
 
+    public String getFloor() {
+        String[] floor = value.split("-");
+        return floor[0];
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
