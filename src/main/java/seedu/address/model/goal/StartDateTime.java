@@ -1,9 +1,9 @@
 package seedu.address.model.goal;
 
-import java.time.LocalDateTime;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.DateTimeParser.properDateTimeFormat;
+
+import java.time.LocalDateTime;
 
 //@@author deborahlow97
 /**

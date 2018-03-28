@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.goal.Goal;
 import seedu.address.model.goal.exceptions.DuplicateGoalException;
+import seedu.address.model.goal.exceptions.GoalNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -155,6 +156,17 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredGoalList(Predicate<Goal> predicate) {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void deleteGoal(Goal target) throws GoalNotFoundException {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void updateGoal(Goal target, Goal editedGoal)
+                throws DuplicateGoalException {
             fail("This method should not be called.");
         }
     }

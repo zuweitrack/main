@@ -25,7 +25,6 @@ public class EndDateTime {
      * @param endDateTime A valid endDateTime number.
      */
     public EndDateTime(String endDateTime) {
-        //requireNonNull(endDateTime);
         if (endDateTime.equals("")) {
             this.value = "";
         } else {

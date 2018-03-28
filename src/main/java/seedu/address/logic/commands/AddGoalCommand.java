@@ -14,7 +14,8 @@ import seedu.address.model.goal.exceptions.DuplicateGoalException;
  */
 public class AddGoalCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "+goal";
-    public static final String COMMAND_ALIAS = "+g";
+    public static final String COMMAND_ALIAS_1 = "+g";
+    public static final String COMMAND_ALIAS_2 = "addgoal";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a goal to Goals Page. "
             + "Parameters: "

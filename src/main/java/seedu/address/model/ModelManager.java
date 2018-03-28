@@ -14,6 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.goal.Goal;
 import seedu.address.model.goal.exceptions.DuplicateGoalException;
+import seedu.address.model.goal.exceptions.GoalNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -127,6 +128,7 @@ public class ModelManager extends ComponentManager implements Model {
                 && filteredPersons.equals(other.filteredPersons);
     }
 
+    //@@author deborahlow97
     @Override
     public void addGoal(Goal goal) throws DuplicateGoalException {
         addressBook.addGoal(goal);
@@ -145,4 +147,18 @@ public class ModelManager extends ComponentManager implements Model {
         filteredGoals.setPredicate(predicate);
     }
 
+    @Override
+    public synchronized void deleteGoal(Goal target) throws GoalNotFoundException {
+        addressBook.removeGoal(target);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void updateGoal(Goal target, Goal editedGoal)
+            throws DuplicateGoalException, GoalNotFoundException {
+        requireAllNonNull(target, editedGoal);
+
+        addressBook.updateGoal(target, editedGoal);
+        indicateAddressBookChanged();
+    }
 }

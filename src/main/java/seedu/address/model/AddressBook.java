@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.goal.Goal;
 import seedu.address.model.goal.UniqueGoalList;
 import seedu.address.model.goal.exceptions.DuplicateGoalException;
+import seedu.address.model.goal.exceptions.GoalNotFoundException;
 import seedu.address.model.person.Cca;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniqueCcaList;
@@ -275,6 +276,34 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addGoal(Goal g) throws DuplicateGoalException {
         goals.add(g);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * @throws GoalNotFoundException if the {@code key} is not in this {@code AddressBook}.
+     */
+    public boolean removeGoal(Goal key) throws GoalNotFoundException {
+        if (goals.remove(key)) {
+            return true;
+        } else {
+            throw new GoalNotFoundException();
+        }
+    }
+
+    /**
+     * Replaces the given goal {@code target} in the list with {@code editedGoal}.
+     *
+     * @throws DuplicateGoalException if updating the goal's details causes the goal to be equivalent to
+     *      another existing goal in the list.
+     * @throws GoalNotFoundException if {@code target} could not be found in the list.
+     */
+    public void updateGoal(Goal target, Goal editedGoal)
+            throws DuplicateGoalException, GoalNotFoundException {
+        requireNonNull(editedGoal);
+        // TODO: the tags master list will be updated even though the below line fails.
+        // This can cause the tags master list to have additional tags that are not tagged to any person
+        // in the person list.
+        goals.setGoal(target, editedGoal);
     }
 
     //// util methods
