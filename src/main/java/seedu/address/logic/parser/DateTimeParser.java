@@ -89,6 +89,32 @@ public class DateTimeParser {
         return builder.toString();
     }
 
+    /**
+     * Receives a LocalDateTime and formats the {@code dateTime}
+     *
+     * @return a formatted dateTime in String
+     */
+    public static String properDateTimeFormat(LocalDateTime dateTime) {
+        StringBuilder builder = new StringBuilder();
+        int day = dateTime.getDayOfMonth();
+        String month = dateTime.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+        int year = dateTime.getYear();
+        int hour = dateTime.getHour();
+        int minute = dateTime.getMinute();
+
+        builder.append("Date: ")
+                .append(day)
+                .append(" ")
+                .append(month)
+                .append(" ")
+                .append(year)
+                .append(",  Time: ")
+                .append(hour)
+                .append(" ")
+                .append(minute);
+        return builder.toString();
+    }
+
     public static boolean containsDateAndTime(String args) {
         return nattyDateAndTimeParser(args).isPresent();
     }
