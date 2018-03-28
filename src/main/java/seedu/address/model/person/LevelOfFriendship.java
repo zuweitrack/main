@@ -44,8 +44,7 @@ public class LevelOfFriendship {
         if (levelOfFriendshipInIntegerForm >= MINIMUM_LEVEL_OF_FRIENDSHIP
                 && levelOfFriendshipInIntegerForm <= MAXIMUM_LEVEL_OF_FRIENDSHIP) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
