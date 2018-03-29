@@ -25,6 +25,16 @@ public abstract class Command {
     }
 
     /**
+     * Constructs a feedback message to summarise an operation that displayed a listing of Resident Assistants (RA).
+     *
+     * @param displaySize used to generate summary
+     * @return summary message for RA displayed
+     */
+    public static String getMessageForRaShownSummary(int displaySize) {
+        return String.format(Messages.MESSAGE_RA_LISTED_OVERVIEW, displaySize);
+    }
+
+    /**
      * Executes the command and returns the result message.
      *
      * @return feedback message of the operation result for display

@@ -65,7 +65,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
-    public void setCcas(Set<Cca> ccas) { this.ccas.setCcas(ccas); }
+    public void setCcas(Set<Cca> ccas) {
+        this.ccas.setCcas(ccas); }
 
     public void setTags(Set<Tag> tags) {
         this.tags.setTags(tags);
