@@ -40,6 +40,7 @@ public class AddressBookTest {
     @Test
     public void constructor() {
         assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getGoalList());
         assertEquals(Collections.emptyList(), addressBook.getCcaList());
         assertEquals(Collections.emptyList(), addressBook.getTagList());
     }
@@ -139,6 +140,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<Goal> getGoalList() {
+            return goals;
         }
 
         @Override
