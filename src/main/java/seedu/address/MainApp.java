@@ -1,21 +1,14 @@
 package seedu.address;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import com.calendarfx.model.Calendar;
-import com.calendarfx.model.Calendar.Style;
-import com.calendarfx.model.CalendarSource;
-import com.calendarfx.view.CalendarView;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
@@ -239,8 +232,8 @@ public class MainApp extends Application {
         primaryStage.centerOnScreen();
         primaryStage.show();
         */
-        
-        ui.start(primaryStage);
+
+    ui.start(primaryStage);
     }
 
     @Override
