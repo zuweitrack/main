@@ -192,7 +192,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
-        CalendarView calendarView = new CalendarView();
+        /*CalendarView calendarView = new CalendarView();
 
         Calendar birthdays = new Calendar("Birthdays");
         Calendar holidays = new Calendar("Holidays");
@@ -238,6 +238,9 @@ public class MainApp extends Application {
         primaryStage.setHeight(1000);
         primaryStage.centerOnScreen();
         primaryStage.show();
+        */
+        
+        ui.start(primaryStage);
     }
 
     @Override
