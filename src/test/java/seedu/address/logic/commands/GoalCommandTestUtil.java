@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GOAL_TEXT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IMPORTANCE;
+import static seedu.address.model.util.SampleGoalDataUtil.getLocalDateTimeFromString;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import seedu.address.model.goal.exceptions.GoalNotFoundException;
 import seedu.address.model.util.SampleGoalDataUtil;
 import seedu.address.testutil.EditGoalDescriptorBuilder;
 
+//@@author deborahlow97
 /**
  * Contains helper methods for testing commands.
  */
@@ -33,8 +35,12 @@ public class GoalCommandTestUtil {
     public static final String VALID_GOAL_TEXT_B = "Drink 8 glasses of water everyday - stay hydrated!!";
     public static final String VALID_GOAL_IMPORTANCE_A = "1";
     public static final String VALID_GOAL_IMPORTANCE_B = "2";
-    public static final String VALID_GOAL_START_DATE_TIME_STRING_A = 
-
+    public static final String VALID_GOAL_START_DATE_TIME_STRING_A = "2018-03-03 10:30";
+    public static final String VALID_GOAL_START_DATE_TIME_STRING_B = "2018-03-03 10:31";
+    public static final String VALID_GOAL_END_DATE_TIME_STRING_A = "2018-04-04 10:30";
+    public static final String VALID_GOAL_END_DATE_TIME_STRING_B = "";
+    public static final boolean VALID_GOAL_COMPLETION_A = true;
+    public static final boolean VALID_GOAL_COMPLETION_B = false;
     public static final String GOAL_TEXT_DESC_A = " " + PREFIX_GOAL_TEXT + VALID_GOAL_TEXT_A;
     public static final String GOAL_TEXT_DESC_B = " " + PREFIX_GOAL_TEXT + VALID_GOAL_TEXT_B;
     public static final String GOAL_IMPORTANCE_DESC_A = " " + PREFIX_IMPORTANCE + VALID_GOAL_IMPORTANCE_A;
@@ -48,20 +54,17 @@ public class GoalCommandTestUtil {
 
     public static final LocalDateTime VALID_GOAL_START_DATE_TIME_A;
     public static final LocalDateTime VALID_GOAL_START_DATE_TIME_B;
-    public static final LocalDateTime VALID_GOAL_END_DATE_TIME_A;
-    public static final LocalDateTime VALID_GOAL_END_DATE_TIME_B;
-    public static final EditCommand.EditGoalDescriptor DESC_GOAL_A;
-    public static final EditCommand.EditGoalDescriptor DESC_GOAL_B;
+    public static final EditGoalCommand.EditGoalDescriptor DESC_GOAL_A;
+    public static final EditGoalCommand.EditGoalDescriptor DESC_GOAL_B;
 
     static {
+        VALID_GOAL_START_DATE_TIME_A = getLocalDateTimeFromString(VALID_GOAL_START_DATE_TIME_STRING_A);
+        VALID_GOAL_START_DATE_TIME_B = getLocalDateTimeFromString(VALID_GOAL_START_DATE_TIME_STRING_B);
+
         DESC_GOAL_A = new EditGoalDescriptorBuilder().withImportance(VALID_GOAL_IMPORTANCE_A)
-                .withPhone(VALID_PHONE_AMY).withBirthday(VALID_BIRTHDAY_AMY)
-                .withLevelOfFriendship(VALID_LEVEL_OF_FRIENDSHIP_AMY).withUnitNumber(VALID_UNIT_NUMBER_AMY)
-                .withCcas(VALID_CCA_DANCE).withTags(VALID_TAG_FRIEND).build();
-        DESC_GOAL_B = new EditGoalDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withBirthday(VALID_BIRTHDAY_BOB)
-                .withLevelOfFriendship(VALID_LEVEL_OF_FRIENDSHIP_BOB).withUnitNumber(VALID_UNIT_NUMBER_BOB)
-                .withCcas(VALID_CCA_BADMINTON, VALID_CCA_DANCE).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withGoalText(VALID_GOAL_TEXT_A).build();
+        DESC_GOAL_B = new EditGoalDescriptorBuilder().withGoalText(VALID_GOAL_TEXT_A)
+                .withImportance(VALID_GOAL_IMPORTANCE_B).build();
     }
 
     /**
@@ -103,21 +106,7 @@ public class GoalCommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
-     * {@code model}'s address book.
-     */
-    public static void showGoalTextAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredGoalList().size());
-
-        Goal goal = model.getFilteredGoalList().get(targetIndex.getZeroBased());
-        final String[] splitName = goal.getGoalText().split("\\s+");
-        model.updateFilteredGoalList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
-
-        assertEquals(1, model.getFilteredGoalList().size());
-    }
-
-    /**
-     * Deletes the first person in {@code model}'s filtered list from {@code model}'s address book.
+     * Deletes the first GOAL in {@code model}'s list from {@code model}'s address book.
      */
     public static void deleteFirstGoal(Model model) {
         Goal firstGoal = model.getFilteredGoalList().get(0);
