@@ -11,6 +11,7 @@ import seedu.address.logic.commands.AddGoalCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteGoalCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditGoalCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -137,6 +138,11 @@ public class AddressBookParser {
         case EditGoalCommand.COMMAND_ALIAS_1:
         case EditGoalCommand.COMMAND_ALIAS_2:
             return new EditGoalCommandParser().parse(arguments);
+
+        case DeleteGoalCommand.COMMAND_WORD:
+        case DeleteGoalCommand.COMMAND_ALIAS_1:
+        case DeleteGoalCommand.COMMAND_ALIAS_2:
+            return new DeleteGoalCommandParser().parse(arguments);
 
             default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

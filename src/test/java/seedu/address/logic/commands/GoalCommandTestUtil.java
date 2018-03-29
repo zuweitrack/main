@@ -16,10 +16,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.logic.commands.exceptions.CommandException;
+
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.goal.Goal;
 import seedu.address.model.goal.exceptions.GoalNotFoundException;
+import seedu.address.model.util.SampleGoalDataUtil;
 import seedu.address.testutil.EditGoalDescriptorBuilder;
 
 /**
@@ -31,6 +33,7 @@ public class GoalCommandTestUtil {
     public static final String VALID_GOAL_TEXT_B = "Drink 8 glasses of water everyday - stay hydrated!!";
     public static final String VALID_GOAL_IMPORTANCE_A = "1";
     public static final String VALID_GOAL_IMPORTANCE_B = "2";
+    public static final String VALID_GOAL_START_DATE_TIME_STRING_A = 
 
     public static final String GOAL_TEXT_DESC_A = " " + PREFIX_GOAL_TEXT + VALID_GOAL_TEXT_A;
     public static final String GOAL_TEXT_DESC_B = " " + PREFIX_GOAL_TEXT + VALID_GOAL_TEXT_B;
@@ -45,7 +48,8 @@ public class GoalCommandTestUtil {
 
     public static final LocalDateTime VALID_GOAL_START_DATE_TIME_A;
     public static final LocalDateTime VALID_GOAL_START_DATE_TIME_B;
-    public static final LocalDateTime VALID_GOAL_START_DATE_TIME_A;
+    public static final LocalDateTime VALID_GOAL_END_DATE_TIME_A;
+    public static final LocalDateTime VALID_GOAL_END_DATE_TIME_B;
     public static final EditCommand.EditGoalDescriptor DESC_GOAL_A;
     public static final EditCommand.EditGoalDescriptor DESC_GOAL_B;
 
