@@ -145,7 +145,7 @@ public class AddressBookParser {
             return new DeleteGoalCommandParser().parse(arguments);
 
         default:
-        throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
 
     }
