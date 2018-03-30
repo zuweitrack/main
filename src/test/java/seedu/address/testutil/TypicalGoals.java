@@ -32,7 +32,7 @@ public class TypicalGoals {
     public static final Goal BENSON = new GoalBuilder().withCompletion(true)
             .withEndDatTime("1 March 2018 10 30").withGoalText("eat fruits daily").withImportance("2")
             .withStartDateTime("#4-44").build();
-    public static final Goal CARL = new GoalBuilder().withCompletion("Carl Kurz").withEndDatTime("95352563")
+    public static final Goal CARL = new GoalBuilder().withCompletion(true).withEndDatTime("95352563")
             .withGoalText("12-02-1994").withImportance("7").withStartDateTime("#2-69").build();
     public static final Goal DANIEL = new GoalBuilder().withCompletion("Daniel Meier").withEndDatTime("87652533")
             .withGoalText("12/03/1994").withImportance("4").withStartDateTime("#03-033").build();

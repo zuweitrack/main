@@ -144,6 +144,11 @@ public class AddressBookParser {
         case DeleteGoalCommand.COMMAND_ALIAS_2:
             return new DeleteGoalCommandParser().parse(arguments);
 
+        case CompleteGoalCommand.COMMAND_WORD:
+        case CompleteGoalCommand.COMMAND_ALIAS_1:
+        case CompleteGoalCommand.COMMAND_ALIAS_2:
+                return new CompleteGoalCommandParser().parse(arguments);
+
             default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
