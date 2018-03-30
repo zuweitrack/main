@@ -24,14 +24,17 @@ public class CalendarPanel extends UiPart<Region> {
         calendarView.setRequestedTime(LocalTime.now());
         calendarView.setToday(LocalDate.now());
         calendarView.setTime(LocalTime.now());
-        Calendar birthdays = new Calendar("Birthdays");
+        calendarView.setShowAddCalendarButton(false);
+        calendarView.setShowSearchField(false);
+        calendarView.setShowSearchResultsTray(false);
+        calendarView.setShowPrintButton(false);
+        calendarView.showMonthPage();
         Calendar holidays = new Calendar("Holidays");
-
-        birthdays.setStyle(Calendar.Style.STYLE1);
+        
         holidays.setStyle(Calendar.Style.STYLE2);
 
         CalendarSource myCalendarSource = new CalendarSource("My Calendars");
-        myCalendarSource.getCalendars().addAll(birthdays, holidays);
+        myCalendarSource.getCalendars().addAll(holidays);
 
         calendarView.getCalendarSources().addAll(myCalendarSource);
     }
