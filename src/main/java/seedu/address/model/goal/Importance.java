@@ -12,10 +12,10 @@ public class Importance {
 
 
     public static final String MESSAGE_IMPORTANCE_CONSTRAINTS =
-            "Importance should only be a numerical integer value between 1 to 3";
+            "Importance should only be a numerical integer value between 1 to 10.";
     public static final String IMPORTANCE_VALIDATION_REGEX = "[0-9]+";
     private static final int MINIMUM_IMPORTANCE = 1;
-    private static final int MAXIMUM_IMPORTANCE = 3;
+    private static final int MAXIMUM_IMPORTANCE = 10;
     private static int importanceInIntegerForm;
     public final String value;
 
