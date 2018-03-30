@@ -14,12 +14,12 @@ import javafx.scene.layout.Region;
  */
 public class CalendarPanel extends UiPart<Region> {
     private static final String FXML = "CalendarPanel.fxml";
-    
+
     private CalendarView calendarView;
-    
+
     public CalendarPanel() {
         super(FXML);
-        
+
         calendarView = new CalendarView();
         calendarView.setRequestedTime(LocalTime.now());
         calendarView.setToday(LocalDate.now());
@@ -30,7 +30,7 @@ public class CalendarPanel extends UiPart<Region> {
         calendarView.setShowPrintButton(false);
         calendarView.showMonthPage();
         Calendar holidays = new Calendar("Holidays");
-        
+
         holidays.setStyle(Calendar.Style.STYLE2);
 
         CalendarSource myCalendarSource = new CalendarSource("My Calendars");
