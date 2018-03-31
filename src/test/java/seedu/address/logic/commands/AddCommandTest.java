@@ -99,7 +99,7 @@ public class AddCommandTest {
     /**
      * A default model stub that have all of the methods failing.
      */
-    private class ModelStub implements Model {
+    public static class ModelStub implements Model {
         @Override
         public void addPerson(Person person) throws DuplicatePersonException {
             fail("This method should not be called.");
