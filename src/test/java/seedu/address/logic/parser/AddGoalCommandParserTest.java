@@ -21,6 +21,7 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.AddGoalCommand;
 import seedu.address.model.goal.Goal;
+import seedu.address.model.goal.GoalText;
 import seedu.address.model.goal.Importance;
 import seedu.address.testutil.GoalBuilder;
 
@@ -65,7 +66,7 @@ public class AddGoalCommandParserTest {
 
         // invalid goal text
         assertParseFailure(parser, INVALID_GOAL_TEXT_DESC + GOAL_IMPORTANCE_DESC_B,
-                Importance.MESSAGE_IMPORTANCE_CONSTRAINTS);
+                GoalText.MESSAGE_GOAL_TEXT_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + GOAL_TEXT_DESC_B + GOAL_IMPORTANCE_DESC_B,
