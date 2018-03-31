@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.GoalCommandTestUtil.GOAL_IMPORTANCE_D
 import static seedu.address.logic.commands.GoalCommandTestUtil.GOAL_IMPORTANCE_DESC_B;
 import static seedu.address.logic.commands.GoalCommandTestUtil.GOAL_TEXT_DESC_A;
 import static seedu.address.logic.commands.GoalCommandTestUtil.GOAL_TEXT_DESC_B;
+import static seedu.address.logic.commands.GoalCommandTestUtil.INVALID_GOAL_TEXT_DESC;
 import static seedu.address.logic.commands.GoalCommandTestUtil.INVALID_IMPORTANCE_DESC;
 import static seedu.address.logic.commands.GoalCommandTestUtil.VALID_GOAL_IMPORTANCE_A;
 import static seedu.address.logic.commands.GoalCommandTestUtil.VALID_GOAL_IMPORTANCE_B;
@@ -21,6 +22,7 @@ import org.junit.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditGoalCommand;
 import seedu.address.logic.commands.EditGoalCommand.EditGoalDescriptor;
+import seedu.address.model.goal.GoalText;
 import seedu.address.model.goal.Importance;
 import seedu.address.testutil.EditGoalDescriptorBuilder;
 
@@ -71,6 +73,19 @@ public class EditGoalCommandParserTest {
         // valid goal text followed by invalid importance.
         assertParseFailure(parser, "1" + GOAL_TEXT_DESC_B + INVALID_IMPORTANCE_DESC,
                 Importance.MESSAGE_IMPORTANCE_CONSTRAINTS);
+
+        // invalid goal text
+        assertParseFailure(parser, "1" + GOAL_IMPORTANCE_DESC_B + INVALID_GOAL_TEXT_DESC,
+                GoalText.MESSAGE_GOAL_TEXT_CONSTRAINTS);
+
+        // valid importance followed by invalid goal text.
+        assertParseFailure(parser, "1" + INVALID_GOAL_TEXT_DESC + GOAL_IMPORTANCE_DESC_A,
+                GoalText.MESSAGE_GOAL_TEXT_CONSTRAINTS);
+
+        // invalid importance followed by invalid goal text. Last invalid value is captured
+        assertParseFailure(parser, "1" + INVALID_IMPORTANCE_DESC + INVALID_GOAL_TEXT_DESC,
+                GoalText.MESSAGE_GOAL_TEXT_CONSTRAINTS);
+
     }
 
     @Test
