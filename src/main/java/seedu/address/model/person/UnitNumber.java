@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+//@@author deborahlow97
 /**
  * Represents a RC4 resident Unit Number in CollegeZone.
  * Guarantees: immutable; is valid as declared in {@link #isValidUnitNumber(String)}
@@ -11,7 +12,7 @@ public class UnitNumber {
 
     public static final String MESSAGE_UNIT_NUMBER_CONSTRAINTS =
             "Unit Number should contain #, - and alphanumerical values.";
-    public static final String UNIT_NUMBER_VALIDATION_REGEX = "[^\\s].*";
+    public static final String UNIT_NUMBER_VALIDATION_REGEX = "\\#[0-9]{1,2}\\-[0-9]{2,3}";
     public final String value;
 
     /**

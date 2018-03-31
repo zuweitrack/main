@@ -10,6 +10,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.goal.GoalText;
+import seedu.address.model.goal.Importance;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Cca;
 import seedu.address.model.person.LevelOfFriendship;
@@ -93,6 +95,7 @@ public class ParserUtil {
         return phone.isPresent() ? Optional.of(parsePhone(phone.get())) : Optional.empty();
     }
 
+    //@@author deborahlow97
     /**
      * Parses a {@code String birthday} into an {@code birthday}.
      * Leading and trailing whitespaces will be trimmed.
@@ -220,5 +223,55 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String importance} into an {@code Importance}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code importance} is invalid.
+     */
+    public static Importance parseImportance(String importance) throws IllegalValueException {
+        requireNonNull(importance);
+        String trimmedImportance = importance.trim();
+        if (!Importance.isValidImportance(trimmedImportance)) {
+            throw new IllegalValueException(Importance.MESSAGE_IMPORTANCE_CONSTRAINTS);
+        }
+        return new Importance(trimmedImportance);
+    }
+
+    /**
+     * Parses a {@code Optional<String> importance} into an {@code Optional<Importance>} if {@code importance}
+     * is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Importance> parseImportance(Optional<String> importance) throws IllegalValueException {
+        requireNonNull(importance);
+        return importance.isPresent() ? Optional.of(parseImportance(importance.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String goalText} into an {@code GoalText}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code goalText} is invalid.
+     */
+    public static GoalText parseGoalText(String goalText) throws IllegalValueException {
+        requireNonNull(goalText);
+        String trimmedGoalText = goalText.trim();
+        if (!GoalText.isValidGoalText(trimmedGoalText)) {
+            throw new IllegalValueException(GoalText.MESSAGE_GOAL_TEXT_CONSTRAINTS);
+        }
+        return new GoalText(trimmedGoalText);
+    }
+
+    /**
+     * Parses a {@code Optional<String> goalText} into an {@code Optional<GoalText>} if {@code goalText}
+     * is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<GoalText> parseGoalText(Optional<String> goalText) throws IllegalValueException {
+        requireNonNull(goalText);
+        return goalText.isPresent() ? Optional.of(parseGoalText(goalText.get())) : Optional.empty();
     }
 }
