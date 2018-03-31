@@ -29,7 +29,7 @@ public class GoalCommandTestUtil {
     public static final String VALID_GOAL_TEXT_A = "Make 10 new friends in university";
     public static final String VALID_GOAL_TEXT_B = "Drink 8 glasses of water everyday - stay hydrated!!";
     public static final String VALID_GOAL_IMPORTANCE_A = "1";
-    public static final String VALID_GOAL_IMPORTANCE_B = "2";
+    public static final String VALID_GOAL_IMPORTANCE_B = "10";
     public static final String VALID_GOAL_START_DATE_TIME_STRING_A = "2018-03-03 10:30";
     public static final String VALID_GOAL_START_DATE_TIME_STRING_B = "2018-03-03 10:31";
     public static final String VALID_GOAL_END_DATE_TIME_STRING_A = "2018-04-04 10:30";

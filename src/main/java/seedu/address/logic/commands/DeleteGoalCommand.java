@@ -56,7 +56,7 @@ public class DeleteGoalCommand extends UndoableCommand {
         List<Goal> lastShownList = model.getFilteredGoalList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_GOAL_DISPLAYED_INDEX);
         }
 
         goalToDelete = lastShownList.get(targetIndex.getZeroBased());

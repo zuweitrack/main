@@ -19,7 +19,7 @@ public class GoalBuilder {
     public static final String DEFAULT_END_DATE_TIME = "";
     public static final String DEFAULT_GOAL_TEXT = "er yea acadamic no la no la";
     public static final String DEFAULT_IMPORTANCE = "1";
-    public static final String DEFAULT_START_DATE_TIME = "2008-04-08 09:58";
+    public static final String DEFAULT_START_DATE_TIME = "2017-04-08 12:30";
 
     private Completion completion;
     private EndDateTime endDateTime;
