@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import seedu.address.testutil.Assert;
 
+//@@author deborahlow97
 public class UnitNumberTest {
 
     @Test
@@ -28,10 +29,13 @@ public class UnitNumberTest {
         // invalid unit numbers
         assertFalse(UnitNumber.isValidUnitNumber("")); // empty string
         assertFalse(UnitNumber.isValidUnitNumber(" ")); // spaces only
+        assertFalse(UnitNumber.isValidUnitNumber("#12222-1312414")); // long unit number
+        assertFalse(UnitNumber.isValidUnitNumber("#1-1")); // one character only
 
         // valid unit numbers
         assertTrue(UnitNumber.isValidUnitNumber("#01-355"));
-        assertTrue(UnitNumber.isValidUnitNumber("#1-1")); // one character
-        assertTrue(UnitNumber.isValidUnitNumber("#12222-1312414")); // long unit number
+        assertTrue(UnitNumber.isValidUnitNumber("#1-12"));
+        assertTrue(UnitNumber.isValidUnitNumber("#12-12"));
+
     }
 }

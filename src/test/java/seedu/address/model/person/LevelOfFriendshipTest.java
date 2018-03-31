@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import seedu.address.testutil.Assert;
 
+//@@author deborahlow97
 public class LevelOfFriendshipTest {
 
     @Test

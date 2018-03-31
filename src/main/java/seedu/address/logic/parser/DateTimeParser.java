@@ -64,7 +64,6 @@ public class DateTimeParser {
         }
         return newEndDateTime;
     }
-
     /**
      * Receives a LocalDateTime and formats the {@code dateTime}
      *
@@ -77,7 +76,6 @@ public class DateTimeParser {
         int year = dateTime.getYear();
         int hour = dateTime.getHour();
         int minute = dateTime.getMinute();
-
         builder.append("Date: ")
                 .append(day)
                 .append(" ")
