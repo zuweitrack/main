@@ -14,5 +14,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_CCA = new Prefix("cca/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_DATE = new Prefix("d/");
+    public static final Prefix PREFIX_GOAL_TEXT = new Prefix("text/");
+    public static final Prefix PREFIX_IMPORTANCE = new Prefix("impt/");
 
 }
