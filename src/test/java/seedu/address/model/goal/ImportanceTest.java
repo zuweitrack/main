@@ -42,7 +42,7 @@ public class ImportanceTest {
         assertFalse(Importance.isValidImportance("0")); // invalid number
         assertFalse(Importance.isValidImportance("1.1")); // number in decimal
 
-        // valid level of friendship
+        // valid importance
         assertTrue(Importance.isValidImportance("1"));
         assertTrue(Importance.isValidImportance("10"));  // minimal
         assertTrue(Importance.isValidImportance("2"));   // alphabets only

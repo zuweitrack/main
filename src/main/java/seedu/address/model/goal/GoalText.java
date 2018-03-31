@@ -12,8 +12,8 @@ public class GoalText {
 
 
     public static final String MESSAGE_GOAL_TEXT_CONSTRAINTS =
-            "Goal text can be any expression which includes whitespaces.";
-    public static final String GOAL_TEXT_VALIDATION_REGEX = "(.*?)";
+            "Goal text can be any expression that are not just whitespaces.";
+    public static final String GOAL_TEXT_VALIDATION_REGEX = "^(?!\\s*$).+";
     public final String value;
 
     /**
