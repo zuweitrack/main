@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.GoalCommandTestUtil.GOAL_IMPORTANCE_D
 import static seedu.address.logic.commands.GoalCommandTestUtil.GOAL_IMPORTANCE_DESC_B;
 import static seedu.address.logic.commands.GoalCommandTestUtil.GOAL_TEXT_DESC_A;
 import static seedu.address.logic.commands.GoalCommandTestUtil.GOAL_TEXT_DESC_B;
+import static seedu.address.logic.commands.GoalCommandTestUtil.INVALID_GOAL_TEXT_DESC;
 import static seedu.address.logic.commands.GoalCommandTestUtil.INVALID_IMPORTANCE_DESC;
 import static seedu.address.logic.commands.GoalCommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.GoalCommandTestUtil.PREAMBLE_WHITESPACE;
@@ -20,6 +21,7 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.AddGoalCommand;
 import seedu.address.model.goal.Goal;
+import seedu.address.model.goal.GoalText;
 import seedu.address.model.goal.Importance;
 import seedu.address.testutil.GoalBuilder;
 
@@ -61,6 +63,10 @@ public class AddGoalCommandParserTest {
         // invalid goal importance
         assertParseFailure(parser, INVALID_IMPORTANCE_DESC + GOAL_TEXT_DESC_B,
                 Importance.MESSAGE_IMPORTANCE_CONSTRAINTS);
+
+        // invalid goal text
+        assertParseFailure(parser, INVALID_GOAL_TEXT_DESC + GOAL_IMPORTANCE_DESC_B,
+                GoalText.MESSAGE_GOAL_TEXT_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + GOAL_TEXT_DESC_B + GOAL_IMPORTANCE_DESC_B,

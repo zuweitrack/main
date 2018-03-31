@@ -44,6 +44,7 @@ public class GoalCommandTestUtil {
     public static final String INVALID_IMPORTANCE_DESC = " " + PREFIX_IMPORTANCE + "-1";
     // negative numbers not allowed in importance
 
+    public static final String INVALID_GOAL_TEXT_DESC = " " + PREFIX_GOAL_TEXT + "";
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
