@@ -26,7 +26,7 @@ public class GoalCard extends UiPart<Region> {
     public final Goal goal;
 
     @FXML
-    private HBox cardPane;
+    private HBox goalCardPane;
     @FXML
     private Label goalText;
     @FXML

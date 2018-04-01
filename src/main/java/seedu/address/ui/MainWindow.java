@@ -120,7 +120,7 @@ public class MainWindow extends UiPart<Stage> {
         calendarPanel = new CalendarPanel();
         calendarPlaceholder.getChildren().add(calendarPanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), addressBook.getGoalList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getFilteredGoalList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
