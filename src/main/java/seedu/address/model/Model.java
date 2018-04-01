@@ -9,6 +9,8 @@ import seedu.address.model.goal.exceptions.GoalNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.reminder.Reminder;
+import seedu.address.model.reminder.exceptions.DuplicateReminderException;
 import seedu.address.model.tag.Tag;
 
 
@@ -21,6 +23,8 @@ public interface Model {
 
     /** {@code Predicate} that always evaluate to true */
     Predicate<Goal> PREDICATE_SHOW_ALL_GOALS = unused -> true;
+    
+    Predicate<Reminder> PREDICATE_SHOW_ALL_REMINDERS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
@@ -46,6 +50,9 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the filtered reminder list */
+    ObservableList<Reminder> getFilteredReminderList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
@@ -82,4 +89,5 @@ public interface Model {
     /** Deletes the given goal. */
     void deleteGoal(Goal target) throws GoalNotFoundException;
 
+    void addReminder(Reminder reminder) throws DuplicateReminderException;
 }
