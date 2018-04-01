@@ -15,6 +15,7 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.address.model.goal.Goal;
 import seedu.address.model.person.Person;
 
 /**
@@ -26,19 +27,25 @@ public class PersonListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<PersonCard> personListView;
+    @FXML
+    private ListView<GoalCard> goalListView;
 
-    public PersonListPanel(ObservableList<Person> personList) {
+    public PersonListPanel(ObservableList<Person> personList, ObservableList<Goal> goalList) {
         super(FXML);
-        setConnections(personList);
+        setConnections(personList, goalList);
         registerAsAnEventHandler(this);
     }
 
-    private void setConnections(ObservableList<Person> personList) {
+    private void setConnections(ObservableList<Person> personList, ObservableList<Goal> goalList) {
         ObservableList<PersonCard> mappedList = EasyBind.map(
                 personList, (person) -> new PersonCard(person, personList.indexOf(person) + 1));
         personListView.setItems(mappedList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
         setEventHandlerForSelectionChangeEvent();
+        ObservableList<GoalCard> mappedGoalList = EasyBind.map(
+                goalList, (goal) -> new GoalCard(goal, goalList.indexOf(goal) + 1));
+        goalListView.setItems(mappedGoalList);
+        goalListView.setCellFactory(listView -> new GoalListViewCell());
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
@@ -85,4 +92,38 @@ public class PersonListPanel extends UiPart<Region> {
         }
     }
 
+    //@@author deborahlow97
+    @Subscribe
+    private void handleJumpToGoalListRequestEvent(JumpToListRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        scrollToGoal(event.targetIndex);
+    }
+
+    /**
+     * Scrolls to the {@code GoalCard} at the {@code index} and selects it.
+     */
+    private void scrollToGoal(int index) {
+        Platform.runLater(() -> {
+            goalListView.scrollTo(index);
+            goalListView.getSelectionModel().clearAndSelect(index);
+        });
+    }
+
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code GoalCard}.
+     */
+    class GoalListViewCell extends ListCell<GoalCard> {
+
+        @Override
+        protected void updateItem(GoalCard goal, boolean empty) {
+            super.updateItem(goal, empty);
+
+            if (empty || goal == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(goal.getRoot());
+            }
+        }
+    }
 }
