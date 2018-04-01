@@ -175,16 +175,19 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
     
+    @Override
     public ObservableList<Reminder> getFilteredReminderList() {
         return FXCollections.unmodifiableObservableList(filteredReminders);
     }
     
+    @Override
     public void updateFilteredReminderList(Predicate<Reminder> predicate) {
         requireNonNull(predicate);
         filteredReminders.setPredicate(predicate);
     }
     
-    
+    /*
+    @Override
     public void updateReminder(Reminder target, Reminder editedReminder)
             throws DuplicateReminderException, ReminderNotFoundException {
         requireAllNonNull(target, editedReminder);
@@ -192,5 +195,5 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.updateReminder(target, editedReminder);
         indicateAddressBookChanged();
     }
-    
+    */
 }

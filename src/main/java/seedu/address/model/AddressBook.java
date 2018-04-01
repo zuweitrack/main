@@ -336,11 +336,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the given goal {@code target} in the list with {@code editedGoal}.
+     * Replaces the given reminder {@code target} in the list with {@code editedReminder}.
      *
-     * @throws DuplicateGoalException if updating the goal's details causes the goal to be equivalent to
-     *      another existing goal in the list.
-     * @throws GoalNotFoundException if {@code target} could not be found in the list.
+     * @throws DuplicateReminderException if updating the reminder's details causes the reminder to be equivalent to
+     *      another existing reminder in the list.
+     * @throws ReminderNotFoundException if {@code target} could not be found in the list.
      */
     public void updateReminder(Reminder target, Reminder editedReminder)
             throws DuplicateReminderException, ReminderNotFoundException {

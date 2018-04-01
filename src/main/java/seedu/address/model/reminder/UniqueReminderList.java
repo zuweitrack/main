@@ -13,7 +13,7 @@ import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
 
 //@@author fuadsahmawi
 /**
- * A list of goals that enforces uniqueness between its elements and does not allow nulls.
+ * A list of reminders that enforces uniqueness between its elements and does not allow nulls.
  *
  * Supports a minimal set of list operations.
  *
@@ -34,7 +34,7 @@ public class UniqueReminderList implements Iterable<Reminder> {
     /**
      * Adds a reminder to the list.
      *
-     * @throws DuplicateReminderException if the goal to add is a duplicate of an existing goal in the list.
+     * @throws DuplicateReminderException if the reminder to add is a duplicate of an existing reminder in the list.
      */
     public void add(Reminder toAdd) throws DuplicateReminderException {
         requireNonNull(toAdd);
@@ -45,9 +45,9 @@ public class UniqueReminderList implements Iterable<Reminder> {
     }
 
     /**
-     * Replaces the goal {@code target} in the list with {@code editedGoal}.
+     * Replaces the reminder {@code target} in the list with {@code editedReminder}.
      *
-     * @throws DuplicateReminderException if the replacement is equivalent to another existing goal in the list.
+     * @throws DuplicateReminderException if the replacement is equivalent to another existing reminder in the list.
      * @throws ReminderNotFoundException if {@code target} could not be found in the list.
      */
     public void setReminder(Reminder target, Reminder editedReminder)
@@ -67,9 +67,9 @@ public class UniqueReminderList implements Iterable<Reminder> {
     }
 
     /**
-     * Removes the equivalent goal from the list.
+     * Removes the equivalent reminder from the list.
      *
-     * @throws ReminderNotFoundException if no such goal could be found in the list.
+     * @throws ReminderNotFoundException if no such reminder could be found in the list.
      */
     public boolean remove(Reminder toRemove) throws ReminderNotFoundException {
         requireNonNull(toRemove);

@@ -23,7 +23,8 @@ public interface Model {
 
     /** {@code Predicate} that always evaluate to true */
     Predicate<Goal> PREDICATE_SHOW_ALL_GOALS = unused -> true;
-    
+
+    /** {@code Predicate} that always evaluate to true */
     Predicate<Reminder> PREDICATE_SHOW_ALL_REMINDERS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
@@ -89,5 +90,13 @@ public interface Model {
     /** Deletes the given goal. */
     void deleteGoal(Goal target) throws GoalNotFoundException;
 
+    //@@author fuadsahmawi
+    /** Adds the given reminder. */
     void addReminder(Reminder reminder) throws DuplicateReminderException;
+
+    /**
+     * Updates the filter of the filtered reminder list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredReminderList(Predicate<Reminder> predicate);
 }
