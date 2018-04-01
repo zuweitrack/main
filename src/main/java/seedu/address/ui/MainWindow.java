@@ -18,6 +18,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
+import seedu.address.model.AddressBook;
 import seedu.address.model.UserPrefs;
 
 /**
@@ -32,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private AddressBook addressBook;
 
     // Independent Ui parts residing in this Ui container
     private CalendarPanel calendarPanel;
@@ -118,7 +120,7 @@ public class MainWindow extends UiPart<Stage> {
         calendarPanel = new CalendarPanel();
         calendarPlaceholder.getChildren().add(calendarPanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getFilteredGoalList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
