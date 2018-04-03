@@ -198,6 +198,7 @@ public class ParserUtil {
         return ccaSet;
     }
 
+    //@@author
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
@@ -225,6 +226,7 @@ public class ParserUtil {
         return tagSet;
     }
 
+    //@@author deborahlow97
     /**
      * Parses a {@code String importance} into an {@code Importance}.
      * Leading and trailing whitespaces will be trimmed.

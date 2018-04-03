@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GOAL_TEXT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IMPORTANCE;
-import static seedu.address.model.util.SampleGoalDataUtil.getLocalDateTimeFromString;
+import static seedu.address.logic.parser.DateTimeParser.getLocalDateTimeFromString;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
