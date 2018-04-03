@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.Date;
 import java.util.List;
@@ -84,7 +85,7 @@ public class DateTimeParser {
                 .append(year)
                 .append(",  Time: ")
                 .append(hour)
-                .append(" ")
+                .append(":")
                 .append(minute);
         return builder.toString();
     }
@@ -99,5 +100,11 @@ public class DateTimeParser {
 
     public static boolean isTimeInferredInArgs() {
         return isTimeInferred;
+    }
+
+    public static LocalDateTime getLocalDateTimeFromString(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
+        return dateTime;
     }
 }
