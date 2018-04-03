@@ -31,7 +31,7 @@ public class MeetCommand extends UndoableCommand {
             + PREFIX_DATE + "01/April/2018";
 
 
-    public static final String MESSAGE_ADD_MEETDATE_SUCCESS = "%1$s added for meet up on: ";
+    public static final String MESSAGE_ADD_MEETDATE_SUCCESS = "%1$s added for meet up! Here particulars have been added to the calendar.";
     public static final String MESSAGE_DELETE_MEETDATE_SUCCESS = "You are not meeting %1$s anymore!!";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person has already been set to have meeting.";
 
@@ -90,8 +90,7 @@ public class MeetCommand extends UndoableCommand {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !date.value.isEmpty() ? MESSAGE_ADD_MEETDATE_SUCCESS + date.value
-                                               : MESSAGE_DELETE_MEETDATE_SUCCESS;
+        String message = !date.value.isEmpty() ? MESSAGE_ADD_MEETDATE_SUCCESS : MESSAGE_DELETE_MEETDATE_SUCCESS;
         return String.format(message, personToEdit.getName());
     }
 
