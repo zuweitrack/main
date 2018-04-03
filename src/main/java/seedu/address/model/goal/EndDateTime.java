@@ -1,11 +1,9 @@
 package seedu.address.model.goal;
 
-import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.parser.DateTimeParser.nattyDateAndTimeParser;
 import static seedu.address.logic.parser.DateTimeParser.properDateTimeFormat;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 //@@author deborahlow97
 /**
