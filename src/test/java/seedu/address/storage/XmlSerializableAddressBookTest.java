@@ -12,12 +12,15 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.AddressBook;
+import seedu.address.testutil.TypicalGoals;
 import seedu.address.testutil.TypicalPersons;
 
 public class XmlSerializableAddressBookTest {
 
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("src/test/data/XmlSerializableAddressBookTest/");
     private static final File TYPICAL_PERSONS_FILE = new File(TEST_DATA_FOLDER + "typicalPersonsAddressBook.xml");
+    private static final File TYPICAL_GOALS_FILE = new File(TEST_DATA_FOLDER + "typicalGoalsAddressBook.xml");
+    private static final File INVALID_GOAL_FILE = new File(TEST_DATA_FOLDER + "invalidGoalAddressBook.xml");
     private static final File INVALID_PERSON_FILE = new File(TEST_DATA_FOLDER + "invalidPersonAddressBook.xml");
     private static final File INVALID_TAG_FILE = new File(TEST_DATA_FOLDER + "invalidTagAddressBook.xml");
 
@@ -47,5 +50,23 @@ public class XmlSerializableAddressBookTest {
                 XmlSerializableAddressBook.class);
         thrown.expect(IllegalValueException.class);
         dataFromFile.toModelType();
+    }
+
+    //@@author deborahlow97
+    @Test
+    public void toModelType_invalidGoalFile_throwsIllegalValueException() throws Exception {
+        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(INVALID_GOAL_FILE,
+                XmlSerializableAddressBook.class);
+        thrown.expect(IllegalValueException.class);
+        dataFromFile.toModelType();
+    }
+
+    @Test
+    public void toModelType_typicalGoalsFile_success() throws Exception {
+        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TYPICAL_GOALS_FILE,
+                XmlSerializableAddressBook.class);
+        AddressBook addressBookFromFile = dataFromFile.toModelType();
+        AddressBook typicalPersonsAddressBook = TypicalGoals.getTypicalGoalAddressBook();
+        assertEquals(addressBookFromFile, typicalPersonsAddressBook);
     }
 }

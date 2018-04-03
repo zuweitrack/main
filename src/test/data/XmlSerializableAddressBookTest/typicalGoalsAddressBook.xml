@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- AddressBook save file which contains the same Goal values as in
+{@code TypicalGoals#getTypicalGoalAddressBook()}-->
+<addressbook>
+    <goals>
+        <goalText>stay fit</goalText>
+        <importance>1</importance>
+        <startDateTime>2017-04-08 12:30</startDateTime>
+        <endDateTime></endDateTime>
+        <completion>false</completion>
+    </goals>
+    <goals>
+        <goalText>eat fruits daily</goalText>
+        <importance>2</importance>
+        <startDateTime>2017-05-08 12:30</startDateTime>
+        <endDateTime></endDateTime>
+        <completion>false</completion>
+    </goals>
+    <goals>
+        <goalText>aa</goalText>
+        <importance>7</importance>
+        <startDateTime>2017-06-08 12:30</startDateTime>
+        <endDateTime>7</endDateTime>
+        <completion>true</completion>
+    </goals>
+    <goals>
+        <goalText>bb</goalText>
+        <importance>4</importance>
+        <startDateTime>2017-06-08 12:31</startDateTime>
+        <endDateTime>4</endDateTime>
+        <completion>true</completion>
+    </goals>
+    <goals>
+        <goalText>cc</goalText>
+        <importance>10</importance>
+        <startDateTime>2017-06-08 12:32</startDateTime>
+        <endDateTime></endDateTime>
+        <completion>false</completion>
+    </goals>
+    <goals>
+        <goalText>dd</goalText>
+        <importance>3</importance>
+        <startDateTime>2017-06-08 12:33</startDateTime>
+        <endDateTime></endDateTime>
+        <completion>false</completion>
+    </goals>
+    <goals>
+        <goalText>ee</goalText>
+        <importance>8</importance>
+        <startDateTime>2017-06-08 12:35</startDateTime>
+        <endDateTime></endDateTime>
+        <completion>false</completion>
+    </goals>
+</addressbook>
