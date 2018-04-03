@@ -10,8 +10,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Cca;
 import seedu.address.model.person.Person;
-import sun.jvm.hotspot.utilities.BitMap;
-
 
 /**
  * An UI component that displays information of a {@code Person}.
