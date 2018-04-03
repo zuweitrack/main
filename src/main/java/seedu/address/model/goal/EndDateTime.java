@@ -10,13 +10,10 @@ import java.util.Optional;
 //@@author deborahlow97
 /**
  * Represents a Goal's end date and time in the Goals Page.
- * Guarantees: immutable; is valid as declared in {@link #isValidEndDateTime(String)}
+ * Guarantees: immutable; is valid
  */
 public class EndDateTime {
 
-
-    public static final String MESSAGE_END_DATE_TIME_CONSTRAINTS =
-            "EndDateTime must be a valid date and time";
     public final String value;
 
     /**
@@ -28,23 +25,9 @@ public class EndDateTime {
         if (endDateTime.equals("")) {
             this.value = "";
         } else {
-            checkArgument(isValidEndDateTime(endDateTime), MESSAGE_END_DATE_TIME_CONSTRAINTS);
             LocalDateTime localEndDateTime = nattyDateAndTimeParser(endDateTime).get();
             this.value = properDateTimeFormat(localEndDateTime);
         }
-    }
-
-    /**
-     * Returns true if a given string is a valid person endDateTime number.
-     */
-    public static boolean isValidEndDateTime(String test) {
-        Optional<LocalDateTime> localEndDateTime = nattyDateAndTimeParser(test);
-        if (localEndDateTime.isPresent()) {
-            return true;
-        } else {
-            return false;
-        }
-
     }
 
     @Override
