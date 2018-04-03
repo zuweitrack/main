@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Cca;
 import seedu.address.model.person.Person;
+import sun.jvm.hotspot.utilities.BitMap;
 
 
 /**
@@ -61,7 +62,7 @@ public class PersonCard extends UiPart<Region> {
         levelOfFriendship.setText(changeLevelOfFriendshipToHeart(person.getLevelOfFriendship().value));
         unitNumber.setText(person.getUnitNumber().value);
         ccas.setText(getCcasInString(person.getCcas()));
-        meetDate.setText(person.getMeetDate().value);
+        meetDate.setText("Meet Date: " + person.getMeetDate().value);
         initTags(person);
     }
 

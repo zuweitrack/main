@@ -13,6 +13,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Cca;
 import seedu.address.model.person.LevelOfFriendship;
+import seedu.address.model.person.Meet;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.UnitNumber;
@@ -169,7 +170,32 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String cca} into a {@code Cca}.
+     * Parses a {@code String unitNumber} into an {@code UnitNumber}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code unitNumber} is invalid.
+     */
+    public static Meet parseMeetDate(String meetDate) throws IllegalValueException {
+        requireNonNull(meetDate);
+        String trimmedMeetDate = meetDate.trim();
+        if (!Meet.isValidDate(trimmedMeetDate)) {
+            throw new IllegalValueException(Meet.MESSAGE_DATE_CONSTRAINTS);
+        }
+        return new Meet(trimmedMeetDate);
+    }
+
+    /**
+     * Parses a {@code Optional<String> meetDate} into an {@code Optional<meetDate>} if {@code meetDate}
+     * is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Meet> parseMeetDate(Optional<String> meetDate) throws IllegalValueException {
+        requireNonNull(meetDate);
+        return meetDate.isPresent() ? Optional.of(parseMeetDate(meetDate.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String cca} into a {@code Cca}
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws IllegalValueException if the given {@code cca} is invalid.

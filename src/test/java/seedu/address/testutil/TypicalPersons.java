@@ -1,20 +1,5 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDAY_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDAY_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CCA_BADMINTON;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CCA_DANCE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_OF_FRIENDSHIP_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_OF_FRIENDSHIP_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_NUMBER_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_NUMBER_BOB;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,6 +7,8 @@ import java.util.List;
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+
+import static seedu.address.logic.commands.CommandTestUtil.*;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -61,10 +48,12 @@ public class TypicalPersons {
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withBirthday(VALID_BIRTHDAY_AMY).withLevelOfFriendship(VALID_LEVEL_OF_FRIENDSHIP_AMY)
-            .withUnitNumber(VALID_UNIT_NUMBER_AMY).withCcas(VALID_CCA_DANCE).withTags(VALID_TAG_FRIEND).build();
+            .withUnitNumber(VALID_UNIT_NUMBER_AMY).withCcas(VALID_CCA_DANCE)
+            .withTags(VALID_TAG_FRIEND).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withBirthday(VALID_BIRTHDAY_BOB).withLevelOfFriendship(VALID_LEVEL_OF_FRIENDSHIP_BOB)
-            .withUnitNumber(VALID_UNIT_NUMBER_BOB).withCcas(VALID_CCA_DANCE, VALID_CCA_BADMINTON)
+            .withUnitNumber(VALID_UNIT_NUMBER_BOB)
+            .withCcas(VALID_CCA_DANCE, VALID_CCA_BADMINTON)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 

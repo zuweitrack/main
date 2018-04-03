@@ -46,7 +46,7 @@ public class GuiTestAssert {
         List<String> ccaInArrayList = expectedPerson.getCcas().stream().map(cca -> cca.ccaName)
                 .collect(Collectors.toList());
         assertEquals(getCcasInString(ccaInArrayList), actualCard.getCcas());
-        assertEquals(expectedPerson.getMeetDate().value, actualCard.getMeetDate());
+        assertEquals("Meet Date: "+ expectedPerson.getMeetDate().value, actualCard.getMeetDate());
         assertTagsEqual(expectedPerson, actualCard);
     }
 

@@ -9,13 +9,16 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.MeetCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Meet;
+
+import java.util.stream.Stream;
+
 /**
  * Parses input arguments and creates a new {@code RemarkCommand} object
  */
 public class MeetCommandParser implements Parser {
     /**
-     * Parses the given {@code String} of arguments in the context of the {@code RemarkCommand}
-     * and returns a {@code RemarkCommand} object for execution.
+     * Parses the given {@code String} of arguments in the context of the {@code MeetCommand}
+     * and returns a {@code MeetCommand} object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public MeetCommand parse(String args) throws ParseException {
@@ -23,15 +26,21 @@ public class MeetCommandParser implements Parser {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE);
 
         Index index;
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (IllegalValueException ive) {
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATE) || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MeetCommand.MESSAGE_USAGE));
         }
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            Meet meetDate = ParserUtil.parseMeetDate(argMultimap.getValue(PREFIX_DATE)).get();
+            return new MeetCommand(index, meetDate);
+        } catch (IllegalValueException ive) {
+            throw new ParseException(ive.getMessage(), ive);
+        }
+    }
 
-        String date = argMultimap.getValue(PREFIX_DATE).orElse("");
-
-        return new MeetCommand(index, new Meet(date));
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
 }

@@ -44,7 +44,7 @@ public class MeetCommandTest {
 
         MeetCommand meetCommand = prepareCommand(INDEX_FIRST_PERSON, editedPerson.getMeetDate().value);
 
-        String expectedMessage = String.format(MeetCommand.MESSAGE_ADD_MEETDATE_SUCCESS, editedPerson);
+        String expectedMessage = String.format(MeetCommand.MESSAGE_ADD_MEETDATE_SUCCESS, editedPerson.getName());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updatePerson(firstPerson, editedPerson);
@@ -59,7 +59,7 @@ public class MeetCommandTest {
 
         MeetCommand meetCommand = prepareCommand(INDEX_FIRST_PERSON, editedPerson.getMeetDate().toString());
 
-        String expectedMessage = String.format(MeetCommand.MESSAGE_DELETE_MEETDATE_SUCCESS, editedPerson);
+        String expectedMessage = String.format(MeetCommand.MESSAGE_DELETE_MEETDATE_SUCCESS, editedPerson.getName());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updatePerson(firstPerson, editedPerson);
@@ -77,7 +77,7 @@ public class MeetCommandTest {
 
         MeetCommand meetCommand = prepareCommand(INDEX_FIRST_PERSON, editedPerson.getMeetDate().value);
 
-        String expectedMessage = String.format(MeetCommand.MESSAGE_ADD_MEETDATE_SUCCESS, editedPerson);
+        String expectedMessage = String.format(MeetCommand.MESSAGE_ADD_MEETDATE_SUCCESS, editedPerson.getName());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updatePerson(firstPerson, editedPerson);
