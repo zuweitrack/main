@@ -41,6 +41,7 @@ public class XmlUtilTest {
     private static final String VALID_BIRTHDAY = "24-05-1997";
     private static final String VALID_LEVEL_OF_FRIENDSHIP = "10";
     private static final String VALID_UNIT_NUMBER = "#10-10";
+    private static final String VALID_MEETDATE = "";
     private static final List<XmlAdaptedCca> VALID_CCAS = Collections.singletonList(new XmlAdaptedCca("dance"));
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
 
@@ -83,7 +84,7 @@ public class XmlUtilTest {
         XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
                 MISSING_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
         XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
-                null, VALID_PHONE, VALID_BIRTHDAY, VALID_LEVEL_OF_FRIENDSHIP, VALID_UNIT_NUMBER,
+                null, VALID_PHONE, VALID_BIRTHDAY, VALID_LEVEL_OF_FRIENDSHIP, VALID_UNIT_NUMBER, VALID_MEETDATE,
                 VALID_CCAS, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
@@ -93,7 +94,7 @@ public class XmlUtilTest {
         XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
                 INVALID_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
         XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
-                VALID_NAME, INVALID_PHONE, VALID_BIRTHDAY, VALID_LEVEL_OF_FRIENDSHIP, VALID_UNIT_NUMBER,
+                VALID_NAME, INVALID_PHONE, VALID_BIRTHDAY, VALID_LEVEL_OF_FRIENDSHIP, VALID_UNIT_NUMBER, VALID_MEETDATE,
                 VALID_CCAS, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
@@ -103,7 +104,7 @@ public class XmlUtilTest {
         XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
                 VALID_PERSON_FILE, XmlAdaptedPersonWithRootElement.class);
         XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
-                VALID_NAME, VALID_PHONE, VALID_BIRTHDAY, VALID_LEVEL_OF_FRIENDSHIP, VALID_UNIT_NUMBER,
+                VALID_NAME, VALID_PHONE, VALID_BIRTHDAY, VALID_LEVEL_OF_FRIENDSHIP, VALID_UNIT_NUMBER, VALID_MEETDATE,
                 VALID_CCAS, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
