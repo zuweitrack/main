@@ -11,9 +11,10 @@ public class UnitNumber {
 
     public static final String MESSAGE_UNIT_NUMBER_CONSTRAINTS =
             "Unit Number should contain #, - and alphanumerical values.";
-    public static final String UNIT_NUMBER_VALIDATION_REGEX = "[^\\s].*";
+    public static final String UNIT_NUMBER_VALIDATION_REGEX = "\\#[0-9]{1,2}\\-[0-9]{2,3}";
     public final String value;
 
+    //@@author deborahlow97
     /**
      * * Constructs an {@code UnitNumber}.
      *
@@ -38,6 +39,13 @@ public class UnitNumber {
         return value;
     }
 
+    //@@author
+    public String getFloor() {
+        String[] floor = value.split("-");
+        return floor[0];
+    }
+
+    //@@author deborahlow97
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

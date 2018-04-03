@@ -7,10 +7,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddGoalCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteGoalCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditGoalCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -18,6 +21,7 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MeetCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.SeekRaCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -86,6 +90,12 @@ public class AddressBookParser {
         case FindCommand.COMMAND_ALIAS:
             return new FindCommandParser().parse(arguments);
 
+        case SeekRaCommand.COMMAND_WORD:
+            return new SeekRaCommandParser().parse(arguments);
+
+        case SeekRaCommand.COMMAND_ALIAS:
+            return new SeekRaCommandParser().parse(arguments);
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
@@ -118,6 +128,22 @@ public class AddressBookParser {
 
         case MeetCommand.COMMAND_WORD:
             return new MeetCommandParser().parse(arguments);
+
+        case AddGoalCommand.COMMAND_WORD:
+        case AddGoalCommand.COMMAND_ALIAS_1:
+        case AddGoalCommand.COMMAND_ALIAS_2:
+            return new AddGoalCommandParser().parse(arguments);
+
+        case EditGoalCommand.COMMAND_WORD:
+        case EditGoalCommand.COMMAND_ALIAS_1:
+        case EditGoalCommand.COMMAND_ALIAS_2:
+            return new EditGoalCommandParser().parse(arguments);
+
+        case DeleteGoalCommand.COMMAND_WORD:
+        case DeleteGoalCommand.COMMAND_ALIAS_1:
+        case DeleteGoalCommand.COMMAND_ALIAS_2:
+            return new DeleteGoalCommandParser().parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

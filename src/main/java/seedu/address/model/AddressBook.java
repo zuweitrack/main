@@ -11,6 +11,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.goal.Goal;
+import seedu.address.model.goal.UniqueGoalList;
+import seedu.address.model.goal.exceptions.DuplicateGoalException;
+import seedu.address.model.goal.exceptions.GoalNotFoundException;
 import seedu.address.model.person.Cca;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniqueCcaList;
@@ -29,6 +33,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniquePersonList persons;
     private final UniqueCcaList ccas;
     private final UniqueTagList tags;
+    private final UniqueGoalList goals;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -41,12 +46,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons = new UniquePersonList();
         ccas = new UniqueCcaList();
         tags = new UniqueTagList();
+        goals = new UniqueGoalList();
     }
 
     public AddressBook() {}
 
     /**
-     * Creates a CollegeZone using the Persons, Ccas and Tags in the {@code toBeCopied}
+     * Creates a CollegeZone using the Persons, Ccas, Tags and Goals in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -59,12 +65,21 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
-    public void setCcas(Set<Cca> ccas) { this.ccas.setCcas(ccas); }
+    //@@author deborahlow97
+    public void setCcas(Set<Cca> ccas) {
+        this.ccas.setCcas(ccas); }
 
+    //@@author
     public void setTags(Set<Tag> tags) {
         this.tags.setTags(tags);
     }
 
+    //@@author deborahlow97
+    public void setGoals(List<Goal> goals) throws DuplicateGoalException {
+        this.goals.setGoals(goals);
+    }
+
+    //@@author
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -81,6 +96,13 @@ public class AddressBook implements ReadOnlyAddressBook {
             setPersons(syncedPersonList);
         } catch (DuplicatePersonException e) {
             throw new AssertionError("CollegeZone should not have duplicate persons");
+        }
+
+        List<Goal> syncedGoalList = newData.getGoalList().stream().collect(Collectors.toList());
+        try {
+            setGoals(syncedGoalList);
+        } catch (DuplicateGoalException e) {
+            throw new AssertionError("Goal Page should not have duplicate goals");
         }
     }
 
@@ -126,6 +148,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         removeUnusedTags();
     }
 
+    //@@author deborahlow97
     /**
      * Removes all {@code Ccas}s that are not used by any {@code Person} in this {@code AddressBook}.
      */
@@ -136,6 +159,8 @@ public class AddressBook implements ReadOnlyAddressBook {
                 .collect(Collectors.toSet());
         ccas.setCcas(ccasInPersons);
     }
+
+    //@@author
     /**
      * Removes all {@code Tag}s that are not used by any {@code Person} in this {@code AddressBook}.
      */
@@ -147,6 +172,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         tags.setTags(tagsInPersons);
     }
 
+    //@@author deborahlow97
     /**
      *  Updates the master cca list to include ccas in {@code person} that are not in the list.
      *  @return a copy of this {@code person} such that every cca in this person points to a Cca object in the master
@@ -170,6 +196,7 @@ public class AddressBook implements ReadOnlyAddressBook {
                 person.getTags());
     }
 
+    //@@author
     /**
      *  Updates the master tag list to include tags in {@code person} that are not in the list.
      *  @return a copy of this {@code person} such that every tag in this person points to a Tag object in the master
@@ -207,12 +234,14 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// cca-level operations
 
+    //@@author deborahlow97
     public void addCca(Cca cca) throws UniqueCcaList.DuplicateCcaException {
         ccas.add(cca);
     }
 
     //// tag-level operations
 
+    //@@author
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
     }
@@ -251,6 +280,45 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
     }
 
+    //// goal-level operations
+
+    //@@author deborahlow97
+    /**
+     * Adds a goal to CollegeZone.
+     * @throws DuplicateGoalException if an equivalent goal already exists.
+     */
+    public void addGoal(Goal g) throws DuplicateGoalException {
+        goals.add(g);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * @throws GoalNotFoundException if the {@code key} is not in this {@code AddressBook}.
+     */
+    public boolean removeGoal(Goal key) throws GoalNotFoundException {
+        if (goals.remove(key)) {
+            return true;
+        } else {
+            throw new GoalNotFoundException();
+        }
+    }
+
+    /**
+     * Replaces the given goal {@code target} in the list with {@code editedGoal}.
+     *
+     * @throws DuplicateGoalException if updating the goal's details causes the goal to be equivalent to
+     *      another existing goal in the list.
+     * @throws GoalNotFoundException if {@code target} could not be found in the list.
+     */
+    public void updateGoal(Goal target, Goal editedGoal)
+            throws DuplicateGoalException, GoalNotFoundException {
+        requireNonNull(editedGoal);
+        // TODO: the tags master list will be updated even though the below line fails.
+        // This can cause the tags master list to have additional tags that are not tagged to any person
+        // in the person list.
+        goals.setGoal(target, editedGoal);
+    }
+
     //// util methods
 
     @Override
@@ -273,6 +341,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Tag> getTagList() {
         return tags.asObservableList();
+    }
+
+    @Override
+    public ObservableList<Goal> getGoalList() {
+        return goals.asObservableList();
     }
 
     @Override

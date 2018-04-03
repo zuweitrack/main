@@ -64,6 +64,7 @@ public class PersonCard extends UiPart<Region> {
         initTags(person);
     }
 
+    //@@author deborahlow97
     /**
      * Returns the color style for {@code tagName}'s label.
      */
@@ -105,6 +106,8 @@ public class PersonCard extends UiPart<Region> {
         }
         return heartString;
     }
+
+    //@@author
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
