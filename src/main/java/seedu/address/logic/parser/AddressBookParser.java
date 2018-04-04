@@ -8,11 +8,13 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddGoalCommand;
+import seedu.address.logic.commands.AddReminderCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CompleteGoalCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteGoalCommand;
+import seedu.address.logic.commands.DeleteReminderCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditGoalCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -149,6 +151,16 @@ public class AddressBookParser {
         case CompleteGoalCommand.COMMAND_ALIAS_1:
         case CompleteGoalCommand.COMMAND_ALIAS_2:
             return new CompleteGoalCommandParser().parse(arguments);
+
+        case AddReminderCommand.COMMAND_WORD:
+        case AddReminderCommand.COMMAND_ALIAS:
+        case AddReminderCommand.COMMAND_ALIAS_2:
+            return new AddReminderCommandParser().parse(arguments);
+
+        case DeleteReminderCommand.COMMAND_WORD:
+        case DeleteReminderCommand.COMMAND_ALIAS:
+        case DeleteReminderCommand.COMMAND_ALIAS_2:
+            return new DeleteReminderCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

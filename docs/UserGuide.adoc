@@ -111,7 +111,7 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 === Locating Persons by name: `find OR f` `[since v1.1]`
 
 Finds persons whose names contain any of the given keywords. +
-Format: `find [n/KEYWORDS] [t/]` or `find [n/] [t/KEYWORDS]`
+Format: `find [n/KEYWORDS]` or `find [t/KEYWORDS]`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
@@ -124,11 +124,11 @@ Format: `find [n/KEYWORDS] [t/]` or `find [n/] [t/KEYWORDS]`
 
 Examples:
 
-* `find n/John t/` +
+* `find n/John` +
 Returns `john` and `John Doe`
-* `f n/Betsy Tim John t/` +
+* `f n/Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
-*  `find n/ t/friends` +
+*  `find t/friends` +
 Returns any person having tags `friends`
 
 === Seeking the Resident Assistant of a person : `seek` `[coming in v2.0]`
@@ -207,13 +207,13 @@ Examples:
 * `meet 1 d/14/03/2018` +
 Sets up a meeting with the 1st person on the 14th of March, 2018 in your Calendar.
 
-=== Adding a Reminder: `+r` [Coming v1.3]
+=== Adding a Reminder: `+reminder OR +r OR addreminder` [Since v1.4]
 Adds a reminder to CollegeZone +
-Format: `+r text/REMINDER_TEXT d/DATETIME`
+Format: `+r text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME`
 
 ****
 * Adds a reminder to CollegeZone and is reflected in the Calendar.
-* `DATETIME`: a datetime is a string that contains either a date, a time or a combination of both (in any order). If a date is not specified, then it will refer to today. If a time is not specified, then it will refer to the current time.
+* `START_DATETIME` & `END_DATETIME`: a datetime is a string that contains either a date, a time or a combination of both (in any order). If a date is not specified, then it will refer to today. If a time is not specified, then it will refer to the current time.
 * Examples of valid datetime: +
  -	[date] [time] +
  -	3pm +
@@ -230,10 +230,10 @@ Format: `+r text/REMINDER_TEXT d/DATETIME`
 
 Examples:
 
-* `+r text/Eat vitamins d/tmr 8am`
-* `+r text/Dental appointment d/next thurs 3pm`
+* `+r text/Eat vitamins d/tmr 8am e/tmr 8.10am`
+* `+reminder text/Dental appointment d/next thurs 3pm e/next thurs 4pm`
 
-=== Editing a Reminder: `~r` [v1.4]
+=== Editing a Reminder: `~r` [coming v1.5]
 Edits an existing reminder in CollegeZone. +
 Format: `~r INDEX [text/REMINDER_TEXT] [d/DATETIME]`
 
@@ -250,7 +250,21 @@ Edits the reminder text of the 4th reminder to be `CS2103 exam coming in 1 week`
 * `~r 2 text/water plants d/tmr 7am` +
 Edits the reminder text and datetime of the 2nd person to be `water plants` and `tmr 7am` respectively.
 
-=== Deleting a Reminder: `-r` [v1.4]
+=== Deleting a Reminder: `-reminder OR -r OR deletereminder` [Since v1.4]
+Deletes a reminder from CollegeZone +
+Format: `-r REMINDER_TEXT`
+
+****
+* Deletes a reminder from CollegeZone and reminder delete will not be reflected in the Calendar anymore.
+* `REMINDER_TEXT`: a string that contains the reminder's title
+
+****
+
+
+Examples:
+
+* `-r Eat vitamins`
+* `-reminder Dental appointment`
 
 
 === Adding a Goal: `+goal OR +g OR addgoal` [Coming v1.3]
@@ -445,10 +459,13 @@ e.g. `delete 3`
 * *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [u/UNIT_NUMBER] [cca/CCA]... [t/TAG]...` +
 OR `e INDEX [n/NAME] [p/PHONE_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [u/UNIT_NUMBER] [cca/CCA]... [t/TAG]...` +
 e.g. `edit 2 n/James Lee cca/waterpolo`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
+* *Find* : `find n/KEYWORD [MORE_KEYWORDS]` +
+OR `f n/KEYWORD [MORE_KEYWORDS]` +
+OR `find t/KEYWORD [MORE_KEYWORDS]` +
+OR `f t/KEYWORD [MORE_KEYWORDS]` +
+e.g. `find n/James Jake`
 * *List* : `list` OR `l`
-* *Help* : `help` or `h`
+* *Help* : `help` OR `h`
 * *Select* : `select INDEX` OR `s INDEX`
 e.g. `select 2`
 * *History* : `history` OR `h`
@@ -472,3 +489,12 @@ e.g. `-goal 2`
 OR `!g INDEX` +
 OR `completegoal INDEX` +
 e.g. `!goal INDEX`
+* *Add Reminder* : `+reminder [text/REMINDER_TEXT] [d/START_DATETIME] [e/END_DATETIME]` +
+OR `+r [text/REMINDER_TEXT] [d/START_DATETIME] [e/END_DATETIME]` +
+OR `addreminder [text/REMINDER_TEXT] [d/START_DATETIME] [e/END_DATETIME]` +
+e.g. `+reminder text/Eat pills d/tonight 10pm e/tonight 10.15pm`
+
+* *Delete Reminder* : `-reminder [REMINDER_TEXT]` +
+OR `-r [REMINDER_TEXT]` +
+OR `deletereminder [REMINDER_TEXT]` +
+e.g. `-reminder Eat pills`
