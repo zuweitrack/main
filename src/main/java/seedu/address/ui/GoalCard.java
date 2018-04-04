@@ -2,9 +2,12 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.commons.util.AppUtil;
 import seedu.address.model.goal.Goal;
 
 //@@author deborahlow97
@@ -58,11 +61,19 @@ public class GoalCard extends UiPart<Region> {
     private void initCompletion(Goal goal) {
         String trueOrFalseString = goal.getCompletion().value;
         if (trueOrFalseString.equals("true")) {
-            Label completionLabel = new Label("Completed");
+            Image completedImage = AppUtil.getImage("/images/completedImage.png");
+            ImageView completedImageView = new ImageView(completedImage);
+            completedImageView.setFitHeight(30);
+            completedImageView.setFitWidth(30);
+            Label completionLabel = new Label("Completed", completedImageView);
             completionLabel.getStyleClass().add(COMPLETION_COLOR_STYLES[COMPLETED_COLOUR_STYLE]);
             completion.getChildren().add(completionLabel);
         } else {
-            Label completionLabel = new Label("Ongoing");
+            Image ongoingImage = AppUtil.getImage("/images/ongoingImage.png");
+            ImageView ongoingImageView = new ImageView(ongoingImage);
+            ongoingImageView.setFitHeight(27);
+            ongoingImageView.setFitWidth(27);
+            Label completionLabel = new Label("Ongoing", ongoingImageView);
             completionLabel.getStyleClass().add(COMPLETION_COLOR_STYLES[NOT_COMPLETED_COLOUR_STYLE]);
             completion.getChildren().add(completionLabel);
         }
