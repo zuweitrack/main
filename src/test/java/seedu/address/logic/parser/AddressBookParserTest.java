@@ -21,6 +21,8 @@ import org.junit.rules.ExpectedException;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddGoalCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CompleteGoalCommand;
+import seedu.address.logic.commands.CompleteGoalCommand.CompleteGoalDescriptor;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteGoalCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -41,6 +43,7 @@ import seedu.address.model.goal.Goal;
 import seedu.address.model.person.Meet;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.CompleteGoalDescriptorBuilder;
 import seedu.address.testutil.EditGoalDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.GoalBuilder;
@@ -302,5 +305,32 @@ public class AddressBookParserTest {
         DeleteGoalCommand command = (DeleteGoalCommand) parser.parseCommand(
                 DeleteGoalCommand.COMMAND_ALIAS_2 + " " + INDEX_FIRST_GOAL.getOneBased());
         assertEquals(new DeleteGoalCommand(INDEX_FIRST_GOAL), command);
+    }
+
+    @Test
+    public void parseCommand_completeGoal() throws Exception {
+        Goal goal = new GoalBuilder().build();
+        CompleteGoalDescriptor descriptor = new CompleteGoalDescriptorBuilder(goal).build();
+        CompleteGoalCommand command = (CompleteGoalCommand) parser.parseCommand(
+                CompleteGoalCommand.COMMAND_WORD + " " + INDEX_FIRST_GOAL.getOneBased());
+        assertEquals(new CompleteGoalCommand(INDEX_FIRST_GOAL, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_completeGoalAliasOne() throws Exception {
+        Goal goal = new GoalBuilder().build();
+        CompleteGoalDescriptor descriptor = new CompleteGoalDescriptorBuilder(goal).build();
+        CompleteGoalCommand command = (CompleteGoalCommand) parser.parseCommand(
+                CompleteGoalCommand.COMMAND_ALIAS_1 + " " + INDEX_FIRST_GOAL.getOneBased());
+        assertEquals(new CompleteGoalCommand(INDEX_FIRST_GOAL, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_completeGoalAliasTwo() throws Exception {
+        Goal goal = new GoalBuilder().build();
+        CompleteGoalDescriptor descriptor = new CompleteGoalDescriptorBuilder(goal).build();
+        CompleteGoalCommand command = (CompleteGoalCommand) parser.parseCommand(
+                CompleteGoalCommand.COMMAND_ALIAS_2 + " " + INDEX_FIRST_GOAL.getOneBased());
+        assertEquals(new CompleteGoalCommand(INDEX_FIRST_GOAL, descriptor), command);
     }
 }

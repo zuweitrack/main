@@ -54,12 +54,13 @@ public class XmlAdaptedPerson {
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
     public XmlAdaptedPerson(String name, String phone, String birthday, String levelOfFriendship, String unitNumber,
-                            List<XmlAdaptedCca> ccas, List<XmlAdaptedTag> tagged) {
+                            String meetDate, List<XmlAdaptedCca> ccas, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.birthday = birthday;
         this.levelOfFriendship = levelOfFriendship;
         this.unitNumber = unitNumber;
+        this.meetDate = meetDate;
         if (ccas != null) {
             this.ccas = new ArrayList<>(ccas);
         }
@@ -79,12 +80,13 @@ public class XmlAdaptedPerson {
         birthday = source.getBirthday().value;
         levelOfFriendship = source.getLevelOfFriendship().value;
         unitNumber = source.getUnitNumber().value;
+        meetDate = source.getMeetDate().value;
         ccas = new ArrayList<>();
         for (Cca cca : source.getCcas()) {
             ccas.add(new XmlAdaptedCca(cca));
         }
         tagged = new ArrayList<>();
-        meetDate = source.getMeetDate().value;
+
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
         }
@@ -139,6 +141,9 @@ public class XmlAdaptedPerson {
         }
         final LevelOfFriendship levelOfFriendship = new LevelOfFriendship(this.levelOfFriendship);
 
+        /*if (!Meet.isValidDate(this.meetDate)) {
+            throw new IllegalValueException(Meet.MESSAGE_DATE_CONSTRAINTS);
+        }*/
         final Meet meetDate = new Meet(this.meetDate);
 
         if (this.unitNumber == null) {
@@ -150,8 +155,6 @@ public class XmlAdaptedPerson {
         }
         final UnitNumber unitNumber = new UnitNumber(this.unitNumber);
         final Set<Cca> ccas = new HashSet<>(personCcas);
-        //final Meet meetDate = new Meet("");
-        // TODO: To be fixed in later commit
         final Set<Tag> tags = new HashSet<>(personTags);
         return new Person(name, phone, birthday, levelOfFriendship, unitNumber, ccas, meetDate, tags);
     }
@@ -172,6 +175,7 @@ public class XmlAdaptedPerson {
                 && Objects.equals(birthday, otherPerson.birthday)
                 && Objects.equals(levelOfFriendship, otherPerson.levelOfFriendship)
                 && Objects.equals(unitNumber, otherPerson.unitNumber)
+                //&& Objects.equals(meetDate, otherPerson.meetDate)
                 && ccas.equals(otherPerson.ccas)
                 && tagged.equals(otherPerson.tagged);
     }

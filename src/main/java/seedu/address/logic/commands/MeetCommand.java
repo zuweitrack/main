@@ -31,12 +31,10 @@ public class MeetCommand extends UndoableCommand {
             + PREFIX_DATE + "01/April/2018";
 
 
-    public static final String MESSAGE_ADD_MEETDATE_SUCCESS = "%1$s added for meet up on this date.";
-    public static final String MESSAGE_DELETE_MEETDATE_SUCCESS = "You are not meeting %1$s on this date.";
+    public static final String MESSAGE_ADD_MEETDATE_SUCCESS = "%1$s added for meet up! Here particulars "
+            + "have been added to the calendar.";
+    public static final String MESSAGE_DELETE_MEETDATE_SUCCESS = "You are not meeting %1$s anymore!!";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person has already been set to have meeting.";
-
-
-    public static final String MESSAGE_ARGUMENTS = "You are meeting person %1$d, Date of meeting: %2$s";
 
     private final Index targetIndex;
     private final Meet date;
@@ -94,7 +92,7 @@ public class MeetCommand extends UndoableCommand {
      */
     private String generateSuccessMessage(Person personToEdit) {
         String message = !date.value.isEmpty() ? MESSAGE_ADD_MEETDATE_SUCCESS : MESSAGE_DELETE_MEETDATE_SUCCESS;
-        return String.format(message, personToEdit);
+        return String.format(message, personToEdit.getName());
     }
 
     @Override

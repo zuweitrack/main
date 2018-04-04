@@ -87,6 +87,13 @@ public interface Model {
     /** Deletes the given goal. */
     void deleteGoal(Goal target) throws GoalNotFoundException;
 
+    /**
+     * Replaces the given goal {@code target} with {@code updateGoal}.
+     *
+     * @throws GoalNotFoundException if {@code target} could not be found in the list.
+     */
+    void updateGoalWithoutParameters(Goal target, Goal editedGoal) throws GoalNotFoundException;
+
     //@@author fuadsahmawi
     /** Adds the given reminder. */
     void addReminder(Reminder reminder) throws DuplicateReminderException;

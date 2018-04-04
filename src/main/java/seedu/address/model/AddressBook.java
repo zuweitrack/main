@@ -71,20 +71,27 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+    //@@author deborahlow97
     public void setCcas(Set<Cca> ccas) {
         this.ccas.setCcas(ccas); }
 
+    //@@author
     public void setTags(Set<Tag> tags) {
         this.tags.setTags(tags);
     }
 
+    //@@author deborahlow97
     public void setGoals(List<Goal> goals) throws DuplicateGoalException {
         this.goals.setGoals(goals);
     }
 
+
     public void setReminders(List<Reminder> reminders) throws DuplicateReminderException {
         this.reminders.setReminders(reminders);
     }
+
+    //@@author
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -160,6 +167,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         removeUnusedTags();
     }
 
+    //@@author deborahlow97
     /**
      * Removes all {@code Ccas}s that are not used by any {@code Person} in this {@code AddressBook}.
      */
@@ -170,6 +178,8 @@ public class AddressBook implements ReadOnlyAddressBook {
                 .collect(Collectors.toSet());
         ccas.setCcas(ccasInPersons);
     }
+
+    //@@author
     /**
      * Removes all {@code Tag}s that are not used by any {@code Person} in this {@code AddressBook}.
      */
@@ -181,6 +191,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         tags.setTags(tagsInPersons);
     }
 
+    //@@author deborahlow97
     /**
      *  Updates the master cca list to include ccas in {@code person} that are not in the list.
      *  @return a copy of this {@code person} such that every cca in this person points to a Cca object in the master
@@ -204,6 +215,7 @@ public class AddressBook implements ReadOnlyAddressBook {
                 person.getTags());
     }
 
+    //@@author
     /**
      *  Updates the master tag list to include tags in {@code person} that are not in the list.
      *  @return a copy of this {@code person} such that every tag in this person points to a Tag object in the master
@@ -241,12 +253,14 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// cca-level operations
 
+    //@@author deborahlow97
     public void addCca(Cca cca) throws UniqueCcaList.DuplicateCcaException {
         ccas.add(cca);
     }
 
     //// tag-level operations
 
+    //@@author
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
     }
@@ -318,11 +332,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void updateGoal(Goal target, Goal editedGoal)
             throws DuplicateGoalException, GoalNotFoundException {
         requireNonNull(editedGoal);
-        // TODO: the tags master list will be updated even though the below line fails.
-        // This can cause the tags master list to have additional tags that are not tagged to any person
-        // in the person list.
         goals.setGoal(target, editedGoal);
     }
+
+    /**
+     * Replaces the given goal {@code target} in the list with {@code editedGoal}.
+     * @throws GoalNotFoundException if {@code target} could not be found in the list.
+     */
+    public void updateGoalWithoutParameters(Goal target, Goal editedGoal) throws GoalNotFoundException {
+        requireNonNull(editedGoal);
+        goals.setGoalWithoutParameters(target, editedGoal);  
 
     //// reminder-level operations
 

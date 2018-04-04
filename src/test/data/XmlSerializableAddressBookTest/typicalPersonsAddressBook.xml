@@ -9,7 +9,7 @@
         <levelOfFriendship>1</levelOfFriendship>
         <unitNumber>#12-21</unitNumber>
         <ccas>hockey</ccas>
-        <meetDate></meetDate>
+        <meetDate>14/03/2018</meetDate>
         <tagged>friends</tagged>
     </persons>
     <persons>
@@ -20,7 +20,7 @@
         <unitNumber>#4-44</unitNumber>
         <ccas>Skating</ccas>
         <ccas>swimming</ccas>
-        <meetDate></meetDate>
+        <meetDate>14/03/2018</meetDate>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
     </persons>
@@ -30,7 +30,7 @@
         <birthday>12-02-1994</birthday>
         <levelOfFriendship>7</levelOfFriendship>
         <unitNumber>#2-69</unitNumber>
-        <meetDate></meetDate>
+        <meetDate>14/03/2018</meetDate>
     </persons>
     <persons>
         <name>Daniel Meier</name>
@@ -38,7 +38,7 @@
         <birthday>12/03/1994</birthday>
         <levelOfFriendship>4</levelOfFriendship>
         <unitNumber>#03-033</unitNumber>
-        <meetDate></meetDate>
+        <meetDate>14/03/2018</meetDate>
     </persons>
     <persons>
         <name>Elle Meyer</name>
@@ -47,7 +47,7 @@
         <levelOfFriendship>10</levelOfFriendship>
         <unitNumber>#9-434</unitNumber>
         <ccas>modern dance</ccas>
-        <meetDate></meetDate>
+        <meetDate>14/03/2018</meetDate>
     </persons>
     <persons>
         <name>Fiona Kunz</name>
@@ -55,7 +55,7 @@
         <birthday>10/10/1990</birthday>
         <levelOfFriendship>3</levelOfFriendship>
         <unitNumber>#10-10</unitNumber>
-        <meetDate></meetDate>
+        <meetDate>14/03/2018</meetDate>
     </persons>
     <persons>
         <name>George Best</name>

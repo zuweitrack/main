@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 
@@ -14,16 +15,18 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_ALIAS = "f";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names or tags contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Parameters: n/KEYWORD [MORE_KEYWORDS]... or t/KEYWORD [MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " n/alice bob charlie";
+
+    public static final String MESSAGE_NOT_EDITED = "A keyword to find name or tag must be provided.";
 
     private TagContainsKeywordsPredicate predicateT = null;
     private NameContainsKeywordsPredicate predicateN = null;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
-        this.predicateN = predicate;
+    public FindCommand(NameContainsKeywordsPredicate predicateName) {
+        this.predicateN = predicateName;
     }
 
     public FindCommand(TagContainsKeywordsPredicate predicate) {
@@ -50,6 +53,42 @@ public class FindCommand extends Command {
             return other == this // short circuit if same object
                     || (other instanceof FindCommand // instanceof handles nulls
                     && this.predicateT.equals(((FindCommand) other).predicateT)); // state check
+        }
+    }
+
+    /**
+     * Stores the details to edit the person with. Each non-empty field value will replace the
+     * corresponding field value of the person.
+     */
+    public static class FindPersonDescriptor {
+        private String[] nameKeywords;
+        private String[] tagKeywords;
+
+        public FindPersonDescriptor() {
+        }
+
+        /**
+         * Returns true if at least one field is edited.
+         */
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyNonNull(this.nameKeywords, this.tagKeywords);
+        }
+
+        public void setNameKeywords(String name) {
+            this.nameKeywords = name.split("\\s+");
+            ;
+        }
+
+        public void setTagKeywords(String tags) {
+            this.tagKeywords = tags.split("\\s+");
+        }
+
+        public String[] getNameKeywords() {
+            return this.nameKeywords;
+        }
+
+        public String[] getTagKeyWords() {
+            return this.tagKeywords;
         }
     }
 }

@@ -21,7 +21,7 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    public static final Meet EMPTY_MEET_DATE = new Meet("");
+    public static final Meet EMPTY_MEET_DATE = new Meet("15/04/2018");
 
     public static Person[] getSamplePersons() {
         return new Person[] {

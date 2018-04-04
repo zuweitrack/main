@@ -173,6 +173,12 @@ public class AddCommandTest {
             fail("This method should not be called.");
         }
 
+        @Override
+        public void updateGoalWithoutParameters(Goal target, Goal editedGoal)
+                throws GoalNotFoundException {
+            fail("This method should not be called.");
+        }      
+
         //@@author fuadsahmawi
         @Override
         public void addReminder(Reminder reminder) throws DuplicateReminderException {
