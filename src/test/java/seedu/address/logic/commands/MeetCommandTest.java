@@ -27,6 +27,7 @@ import seedu.address.model.person.Meet;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
+//@@author A0158738X
 /**
  * Contains integration tests (interaction with the Model) and unit tests for RemarkCommand.
  */

@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 
-
+//@@author A0158738X
 /**
  * Represents a Person's date of meeting in the address book.
  * Guarantees: immutable; is always valid
@@ -25,7 +25,7 @@ public class Meet {
     public Meet(String meet) {
         requireNonNull(meet);
         if (meet.isEmpty()) {
-            this.value = meet;
+            this.value = "";
         } else {
             checkArgument(isValidDate(meet), MESSAGE_DATE_CONSTRAINTS);
             this.value = meet;
