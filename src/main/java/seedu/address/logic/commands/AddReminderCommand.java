@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_TEXT;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -19,8 +21,12 @@ public class AddReminderCommand extends UndoableCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a reminder to Calendar. "
             + "Parameters: "
             + PREFIX_REMINDER_TEXT + "TEXT "
+            + PREFIX_DATE + "START_DATETIME"
+            + PREFIX_END_DATE + "END_DATETIME"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_REMINDER_TEXT + " do homework ";
+            + PREFIX_REMINDER_TEXT + " do homework "
+            + PREFIX_DATE + " tonight 8pm "
+            + PREFIX_END_DATE + " tonight 10pm";
 
     public static final String MESSAGE_SUCCESS = "New reminder added: %1$s";
     public static final String MESSAGE_DUPLICATE_REMINDER = "This reminder already exists in the Calendar";
