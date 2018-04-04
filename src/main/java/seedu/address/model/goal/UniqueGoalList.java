@@ -69,6 +69,22 @@ public class UniqueGoalList implements Iterable<Goal> {
     }
 
     /**
+     * Replaces the goal {@code target} in the list with {@code editedGoal}.
+     * @throws GoalNotFoundException if {@code target} could not be found in the list.
+     */
+    public void setGoalWithoutParameters(Goal target, Goal editedGoal)
+            throws GoalNotFoundException {
+        requireNonNull(editedGoal);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new GoalNotFoundException();
+        }
+
+        internalList.set(index, editedGoal);
+    }
+
+    /**
      * Removes the equivalent goal from the list.
      *
      * @throws GoalNotFoundException if no such goal could be found in the list.

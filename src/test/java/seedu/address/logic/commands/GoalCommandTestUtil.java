@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GOAL_TEXT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IMPORTANCE;
-import static seedu.address.model.util.SampleGoalDataUtil.getLocalDateTimeFromString;
+import static seedu.address.logic.parser.DateTimeParser.getLocalDateTimeFromString;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,7 +18,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.goal.Goal;
 import seedu.address.model.goal.exceptions.GoalNotFoundException;
+import seedu.address.testutil.CompleteGoalDescriptorBuilder;
 import seedu.address.testutil.EditGoalDescriptorBuilder;
+
 
 //@@author deborahlow97
 /**
@@ -34,8 +36,12 @@ public class GoalCommandTestUtil {
     public static final String VALID_GOAL_START_DATE_TIME_STRING_B = "2018-03-03 10:31";
     public static final String VALID_GOAL_END_DATE_TIME_STRING_A = "2018-04-04 10:30";
     public static final String VALID_GOAL_END_DATE_TIME_STRING_B = "";
+    public static final String VALID_GOAL_END_DATE_TIME_STRING_C = "14/10/2018 3pm";
+    public static final String VALID_GOAL_END_DATE_TIME_STRING_D = "10/10/2018 4pm";
     public static final boolean VALID_GOAL_COMPLETION_A = true;
     public static final boolean VALID_GOAL_COMPLETION_B = false;
+    public static final boolean VALID_GOAL_COMPLETION_C = true;
+    public static final boolean VALID_GOAL_COMPLETION_D = true;
     public static final String GOAL_TEXT_DESC_A = " " + PREFIX_GOAL_TEXT + VALID_GOAL_TEXT_A;
     public static final String GOAL_TEXT_DESC_B = " " + PREFIX_GOAL_TEXT + VALID_GOAL_TEXT_B;
     public static final String GOAL_IMPORTANCE_DESC_A = " " + PREFIX_IMPORTANCE + VALID_GOAL_IMPORTANCE_A;
@@ -53,6 +59,9 @@ public class GoalCommandTestUtil {
     public static final EditGoalCommand.EditGoalDescriptor DESC_GOAL_A;
     public static final EditGoalCommand.EditGoalDescriptor DESC_GOAL_B;
 
+    public static final CompleteGoalCommand.CompleteGoalDescriptor DESC_GOAL_COMPLETED_C;
+    public static final CompleteGoalCommand.CompleteGoalDescriptor DESC_GOAL_COMPLETED_D;
+
     static {
         VALID_GOAL_START_DATE_TIME_A = getLocalDateTimeFromString(VALID_GOAL_START_DATE_TIME_STRING_A);
         VALID_GOAL_START_DATE_TIME_B = getLocalDateTimeFromString(VALID_GOAL_START_DATE_TIME_STRING_B);
@@ -61,6 +70,10 @@ public class GoalCommandTestUtil {
                 .withGoalText(VALID_GOAL_TEXT_A).build();
         DESC_GOAL_B = new EditGoalDescriptorBuilder().withGoalText(VALID_GOAL_TEXT_A)
                 .withImportance(VALID_GOAL_IMPORTANCE_B).build();
+        DESC_GOAL_COMPLETED_C = new CompleteGoalDescriptorBuilder().withCompletion(VALID_GOAL_COMPLETION_C)
+                .withEndDateTime(VALID_GOAL_END_DATE_TIME_STRING_C).build();
+        DESC_GOAL_COMPLETED_D = new CompleteGoalDescriptorBuilder().withCompletion(VALID_GOAL_COMPLETION_D)
+                .withEndDateTime(VALID_GOAL_END_DATE_TIME_STRING_D).build();
     }
 
     /**

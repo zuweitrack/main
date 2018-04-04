@@ -7,10 +7,6 @@ import static java.util.Objects.requireNonNull;
  * Represents a Goal's completion status in the Goals Page.
  */
 public class Completion {
-
-
-    public static final String MESSAGE_PHONE_CONSTRAINTS =
-            "Completion numbers can only contain numbers, and should be at least 3 digits long";
     public final String value;
 
     /**

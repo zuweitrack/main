@@ -32,6 +32,7 @@ public class XmlAdaptedPersonTest {
     private static final String VALID_BIRTHDAY = BENSON.getBirthday().toString();
     private static final String VALID_LEVEL_OF_FRIENDSHIP = BENSON.getLevelOfFriendship().toString();
     private static final String VALID_UNIT_NUMBER = BENSON.getUnitNumber().toString();
+    private static final String VALID_MEETDATE = BENSON.getMeetDate().toString();
     private static final List<XmlAdaptedCca> VALID_CCAS = BENSON.getCcas().stream()
             .map(XmlAdaptedCca::new)
             .collect(Collectors.toList());
@@ -49,7 +50,7 @@ public class XmlAdaptedPersonTest {
     public void toModelType_invalidName_throwsIllegalValueException() {
         XmlAdaptedPerson person =
                 new XmlAdaptedPerson(INVALID_NAME, VALID_PHONE, VALID_BIRTHDAY,
-                        VALID_LEVEL_OF_FRIENDSHIP, VALID_UNIT_NUMBER, VALID_CCAS, VALID_TAGS);
+                        VALID_LEVEL_OF_FRIENDSHIP, VALID_UNIT_NUMBER, VALID_MEETDATE, VALID_CCAS, VALID_TAGS);
         String expectedMessage = Name.MESSAGE_NAME_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -57,7 +58,7 @@ public class XmlAdaptedPersonTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         XmlAdaptedPerson person = new XmlAdaptedPerson(null, VALID_PHONE, VALID_BIRTHDAY,
-                VALID_LEVEL_OF_FRIENDSHIP, VALID_UNIT_NUMBER, VALID_CCAS, VALID_TAGS);
+                VALID_LEVEL_OF_FRIENDSHIP, VALID_UNIT_NUMBER, VALID_MEETDATE, VALID_CCAS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -66,7 +67,7 @@ public class XmlAdaptedPersonTest {
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         XmlAdaptedPerson person =
                 new XmlAdaptedPerson(VALID_NAME, INVALID_PHONE, VALID_BIRTHDAY,
-                        VALID_LEVEL_OF_FRIENDSHIP, VALID_UNIT_NUMBER, VALID_CCAS, VALID_TAGS);
+                        VALID_LEVEL_OF_FRIENDSHIP, VALID_UNIT_NUMBER, VALID_MEETDATE, VALID_CCAS, VALID_TAGS);
         String expectedMessage = Phone.MESSAGE_PHONE_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -74,7 +75,7 @@ public class XmlAdaptedPersonTest {
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NAME, null, VALID_BIRTHDAY,
-                VALID_LEVEL_OF_FRIENDSHIP, VALID_UNIT_NUMBER, VALID_CCAS, VALID_TAGS);
+                VALID_LEVEL_OF_FRIENDSHIP, VALID_UNIT_NUMBER, VALID_MEETDATE, VALID_CCAS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -83,7 +84,7 @@ public class XmlAdaptedPersonTest {
     public void toModelType_invalidBirthday_throwsIllegalValueException() {
         XmlAdaptedPerson person =
                 new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, INVALID_BIRTHDAY,
-                        VALID_LEVEL_OF_FRIENDSHIP, VALID_UNIT_NUMBER, VALID_CCAS, VALID_TAGS);
+                        VALID_LEVEL_OF_FRIENDSHIP, VALID_UNIT_NUMBER, VALID_MEETDATE, VALID_CCAS, VALID_TAGS);
         String expectedMessage = Birthday.MESSAGE_BIRTHDAY_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -91,7 +92,7 @@ public class XmlAdaptedPersonTest {
     @Test
     public void toModelType_nullBirthday_throwsIllegalValueException() {
         XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, null,
-                VALID_LEVEL_OF_FRIENDSHIP, VALID_UNIT_NUMBER, VALID_CCAS, VALID_TAGS);
+                VALID_LEVEL_OF_FRIENDSHIP, VALID_UNIT_NUMBER, VALID_MEETDATE, VALID_CCAS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Birthday.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -100,7 +101,7 @@ public class XmlAdaptedPersonTest {
     public void toModelType_invalidLevelOfFriendship_throwsIllegalValueException() {
         XmlAdaptedPerson person =
                 new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_BIRTHDAY,
-                        INVALID_LEVEL_OF_FRIENDSHIP, VALID_UNIT_NUMBER, VALID_CCAS, VALID_TAGS);
+                        INVALID_LEVEL_OF_FRIENDSHIP, VALID_UNIT_NUMBER, VALID_MEETDATE, VALID_CCAS, VALID_TAGS);
         String expectedMessage = LevelOfFriendship.MESSAGE_LEVEL_OF_FRIENDSHIP_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -108,7 +109,7 @@ public class XmlAdaptedPersonTest {
     @Test
     public void toModelType_nullLevelOfFriendship_throwsIllegalValueException() {
         XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_BIRTHDAY,
-                 null, VALID_UNIT_NUMBER, VALID_CCAS, VALID_TAGS);
+                 null, VALID_UNIT_NUMBER, VALID_MEETDATE, VALID_CCAS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, LevelOfFriendship.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -117,7 +118,7 @@ public class XmlAdaptedPersonTest {
     public void toModelType_invalidUnitNumber_throwsIllegalValueException() {
         XmlAdaptedPerson person =
                 new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_BIRTHDAY,
-                        VALID_LEVEL_OF_FRIENDSHIP, INVALID_UNIT_NUMBER, VALID_CCAS, VALID_TAGS);
+                        VALID_LEVEL_OF_FRIENDSHIP, INVALID_UNIT_NUMBER, VALID_MEETDATE, VALID_CCAS, VALID_TAGS);
         String expectedMessage = UnitNumber.MESSAGE_UNIT_NUMBER_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -125,7 +126,7 @@ public class XmlAdaptedPersonTest {
     @Test
     public void toModelType_nullUnitNumber_throwsIllegalValueException() {
         XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_BIRTHDAY,
-                VALID_LEVEL_OF_FRIENDSHIP, null, VALID_CCAS, VALID_TAGS);
+                VALID_LEVEL_OF_FRIENDSHIP, null, VALID_MEETDATE, VALID_CCAS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, UnitNumber.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -136,7 +137,7 @@ public class XmlAdaptedPersonTest {
         invalidCcas.add(new XmlAdaptedCca(INVALID_CCA));
         XmlAdaptedPerson person =
                 new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_BIRTHDAY,
-                        VALID_LEVEL_OF_FRIENDSHIP, VALID_UNIT_NUMBER, invalidCcas, VALID_TAGS);
+                        VALID_LEVEL_OF_FRIENDSHIP, VALID_UNIT_NUMBER, "", invalidCcas, VALID_TAGS);
         Assert.assertThrows(IllegalValueException.class, person::toModelType);
     }
 
@@ -146,7 +147,7 @@ public class XmlAdaptedPersonTest {
         invalidTags.add(new XmlAdaptedTag(INVALID_TAG));
         XmlAdaptedPerson person =
                 new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_BIRTHDAY,
-                        VALID_LEVEL_OF_FRIENDSHIP, VALID_UNIT_NUMBER, VALID_CCAS, invalidTags);
+                        VALID_LEVEL_OF_FRIENDSHIP, VALID_UNIT_NUMBER, "", VALID_CCAS, invalidTags);
         Assert.assertThrows(IllegalValueException.class, person::toModelType);
     }
 

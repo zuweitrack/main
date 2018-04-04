@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import static seedu.address.model.util.SampleGoalDataUtil.getLocalDateTimeFromString;
+import static seedu.address.logic.parser.DateTimeParser.getLocalDateTimeFromString;
 
 import seedu.address.model.goal.Completion;
 import seedu.address.model.goal.EndDateTime;
