@@ -160,7 +160,7 @@ public class AddressBookParser {
         case DeleteReminderCommand.COMMAND_WORD:
         case DeleteReminderCommand.COMMAND_ALIAS:
         case DeleteReminderCommand.COMMAND_ALIAS_2:
-                return new DeleteReminderCommandParser().parse(arguments);    
+            return new DeleteReminderCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
