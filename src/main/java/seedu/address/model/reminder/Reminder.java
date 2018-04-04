@@ -34,7 +34,7 @@ public class Reminder {
     public DateTime getDateTime() {
         return dateTime;
     }
-    
+
     public EndDateTime getEndDateTime() { return endDateTime; }
 
     @Override

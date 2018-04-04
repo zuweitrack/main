@@ -152,9 +152,9 @@ public class AddressBookParser {
             return new CompleteGoalCommandParser().parse(arguments);
 
         case AddReminderCommand.COMMAND_WORD:
-        case AddReminderCommand.COMMAND_ALIAS:    
-        case AddReminderCommand.COMMAND_ALIAS_2:    
-            return new AddReminderCommandParser().parse(arguments);    
+        case AddReminderCommand.COMMAND_ALIAS:
+        case AddReminderCommand.COMMAND_ALIAS_2:
+            return new AddReminderCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

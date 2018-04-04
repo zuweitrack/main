@@ -177,7 +177,7 @@ public class AddCommandTest {
         public void updateGoalWithoutParameters(Goal target, Goal editedGoal)
                 throws GoalNotFoundException {
             fail("This method should not be called.");
-        }      
+        }
 
         //@@author fuadsahmawi
         @Override
