@@ -12,7 +12,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Meet {
     public static final String MESSAGE_DATE_CONSTRAINTS =
-            "Make sure date is in this format: DD/MM/YYYY";
+            "Make sure date is in this format: DD-MM-YYYY";
     public static final String DATE_VALIDATION_REGEX =
             "^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug|Oct|Dec)))\\1|(?:(?:29|30)(\\/|-|\\.)"
             + "(?:0?[1,3-9]|1[0-2]|(?:Jan|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))\\2))(?:(?:1[6-9]|[2-9]\\d)"

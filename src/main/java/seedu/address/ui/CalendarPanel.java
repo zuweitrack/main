@@ -5,11 +5,13 @@ import java.time.LocalTime;
 import java.time.ZonedDateTime;
 
 import com.calendarfx.model.Calendar;
+
 import com.calendarfx.model.CalendarSource;
 import com.calendarfx.view.CalendarView;
-import com.calendarfx.model.CalendarEvent;
+//import com.calendarfx.model.CalendarEvent;
 
 import javafx.scene.layout.Region;
+import seedu.address.model.person.Person;
 
 /**
  * The Calendar Panel of the App.
@@ -33,6 +35,8 @@ public class CalendarPanel extends UiPart<Region> {
         calendarView.showMonthPage();
         Calendar holidays = new Calendar("Holidays");
         ZonedDateTime zdt = ZonedDateTime.parse("2018-04-16T10:15:30+01:00[Europe/Paris]");
+
+
         calendarView.createEntryAt(zdt, holidays);
 
         holidays.setStyle(Calendar.Style.STYLE2);
@@ -46,4 +50,9 @@ public class CalendarPanel extends UiPart<Region> {
     public CalendarView getRoot() {
         return this.calendarView;
     }
+
+    public String getMeetDateForCalendar(Person person) {
+        return person.getMeetDate().value;
+    }
+
 }
