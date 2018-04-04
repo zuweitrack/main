@@ -27,6 +27,8 @@ import seedu.address.model.goal.exceptions.GoalNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.reminder.Reminder;
+import seedu.address.model.reminder.exceptions.DuplicateReminderException;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
@@ -169,6 +171,29 @@ public class AddCommandTest {
         public void updateGoal(Goal target, Goal editedGoal)
                 throws DuplicateGoalException {
             fail("This method should not be called.");
+        }
+
+        @Override
+        public void updateGoalWithoutParameters(Goal target, Goal editedGoal)
+                throws GoalNotFoundException {
+            fail("This method should not be called.");
+        }
+
+        //@@author fuadsahmawi
+        @Override
+        public void addReminder(Reminder reminder) throws DuplicateReminderException {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredReminderList(Predicate<Reminder> predicate) {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Reminder> getFilteredReminderList() {
+            fail("This method should not be called.");
+            return null;
         }
     }
 

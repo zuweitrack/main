@@ -20,7 +20,7 @@ public class StartDateTime {
      */
     public StartDateTime(LocalDateTime startDateTime) {
         requireNonNull(startDateTime);
-        this.value = properDateTimeFormat(startDateTime);;
+        this.value = properDateTimeFormat(startDateTime);
     }
 
     @Override

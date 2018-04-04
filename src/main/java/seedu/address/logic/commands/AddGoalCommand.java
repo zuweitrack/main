@@ -17,13 +17,13 @@ public class AddGoalCommand extends UndoableCommand {
     public static final String COMMAND_ALIAS_1 = "+g";
     public static final String COMMAND_ALIAS_2 = "addgoal";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a goal to Goals Page. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a goal to Goals Page. \n"
             + "Parameters: "
             + PREFIX_IMPORTANCE + "IMPORTANCE "
-            + PREFIX_GOAL_TEXT + "TEXT "
+            + PREFIX_GOAL_TEXT + "TEXT \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_IMPORTANCE + "3 "
-            + PREFIX_GOAL_TEXT + "lose weight ";
+            + PREFIX_GOAL_TEXT + "lose weight \n";
 
     public static final String MESSAGE_SUCCESS = "New goal added: %1$s";
     public static final String MESSAGE_DUPLICATE_GOAL = "This goal already exists in the Goals Page";

@@ -1,7 +1,6 @@
 package seedu.address.model.util;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import static seedu.address.logic.parser.DateTimeParser.getLocalDateTimeFromString;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -56,11 +55,4 @@ public class SampleGoalDataUtil {
             throw new AssertionError("sample data cannot contain duplicate goals", e);
         }
     }
-
-    public static LocalDateTime getLocalDateTimeFromString(String dateString) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
-        return dateTime;
-    }
-
 }

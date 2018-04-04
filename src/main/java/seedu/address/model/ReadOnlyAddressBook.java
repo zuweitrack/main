@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.goal.Goal;
 import seedu.address.model.person.Cca;
 import seedu.address.model.person.Person;
+import seedu.address.model.reminder.Reminder;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -18,12 +19,14 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
+    //@@author deborahlow97
     /**
      * Returns an unmodifiable view of the ccas list.
      * This list will not contain any duplicate ccas.
      */
     ObservableList<Cca> getCcaList();
 
+    //@@author
     /**
      * Returns an unmodifiable view of the tags list.
      * This list will not contain any duplicate tags.
@@ -36,5 +39,11 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate goals.
      */
     ObservableList<Goal> getGoalList();
+    //@@author fuadsahmawi
+    /**
+     * Returns an unmodifiable view of the reminders list.
+     * This list will not contain any duplicate reminders.
+     */
+    ObservableList<Reminder> getReminderList();
 
 }

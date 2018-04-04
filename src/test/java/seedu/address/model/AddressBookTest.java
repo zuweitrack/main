@@ -26,6 +26,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.goal.Goal;
 import seedu.address.model.person.Cca;
 import seedu.address.model.person.Person;
+import seedu.address.model.reminder.Reminder;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -136,6 +137,7 @@ public class AddressBookTest {
         private final ObservableList<Goal> goals = FXCollections.observableArrayList();
         private final ObservableList<Cca> ccas = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
+        private final ObservableList<Reminder> reminders = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Person> persons, Collection<Goal> goals, Collection<? extends Cca> ccas,
                         Collection<? extends Tag> tags) {
@@ -163,6 +165,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Tag> getTagList() {
             return tags;
+        }
+
+        @Override
+        public ObservableList<Reminder> getReminderList() {
+            return reminders;
         }
     }
 
