@@ -2,10 +2,12 @@ package seedu.address.ui;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZonedDateTime;
 
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.CalendarSource;
 import com.calendarfx.view.CalendarView;
+import com.calendarfx.model.CalendarEvent;
 
 import javafx.scene.layout.Region;
 
@@ -30,6 +32,8 @@ public class CalendarPanel extends UiPart<Region> {
         calendarView.setShowPrintButton(false);
         calendarView.showMonthPage();
         Calendar holidays = new Calendar("Holidays");
+        ZonedDateTime zdt = ZonedDateTime.parse("2018-04-16T10:15:30+01:00[Europe/Paris]");
+        calendarView.createEntryAt(zdt, holidays);
 
         holidays.setStyle(Calendar.Style.STYLE2);
 
