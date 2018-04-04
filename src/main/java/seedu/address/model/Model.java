@@ -95,7 +95,8 @@ public interface Model {
      */
     void updateGoalWithoutParameters(Goal target, Goal editedGoal) throws GoalNotFoundException;
 
-    //@@author fuadsahmawi
+    //@@author
+    // fuadsahmawi
     /** Adds the given reminder. */
     void addReminder(Reminder reminder) throws DuplicateReminderException;
 

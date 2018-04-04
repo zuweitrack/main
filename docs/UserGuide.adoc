@@ -231,7 +231,7 @@ Format: `+r text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME`
 Examples:
 
 * `+r text/Eat vitamins d/tmr 8am e/tmr 8.10am`
-* `+r text/Dental appointment d/next thurs 3pm e/next thurs 4pm`
+* `+reminder text/Dental appointment d/next thurs 3pm e/next thurs 4pm`
 
 === Editing a Reminder: `~r` [coming v1.5]
 Edits an existing reminder in CollegeZone. +
@@ -250,7 +250,21 @@ Edits the reminder text of the 4th reminder to be `CS2103 exam coming in 1 week`
 * `~r 2 text/water plants d/tmr 7am` +
 Edits the reminder text and datetime of the 2nd person to be `water plants` and `tmr 7am` respectively.
 
-=== Deleting a Reminder: `-r` [coming v1.5]
+=== Deleting a Reminder: `-reminder OR -r OR deletereminder` [Since v1.4]
+Deletes a reminder from CollegeZone +
+Format: `-r REMINDER_TEXT`
+
+****
+* Deletes a reminder from CollegeZone and reminder delete will not be reflected in the Calendar anymore.
+* `REMINDER_TEXT`: a string that contains the reminder's title
+
+****
+
+
+Examples:
+
+* `-r Eat vitamins`
+* `-reminder Dental appointment`
 
 
 === Adding a Goal: `+goal OR +g OR addgoal` [Coming v1.3]
@@ -479,3 +493,8 @@ e.g. `!goal INDEX`
 OR `+r [text/REMINDER_TEXT] [d/START_DATETIME] [e/END_DATETIME]` +
 OR `addreminder [text/REMINDER_TEXT] [d/START_DATETIME] [e/END_DATETIME]` +
 e.g. `+reminder text/Eat pills d/tonight 10pm e/tonight 10.15pm`
+
+* *Delete Reminder* : `-reminder [REMINDER_TEXT]` +
+OR `-r [REMINDER_TEXT]` +
+OR `deletereminder [REMINDER_TEXT]` +
+e.g. `-reminder Eat pills`

@@ -50,8 +50,12 @@ public class GoalCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         goalText.setText(goal.getGoalText().value);
         importance.setText(changeImportanceToStar(goal.getImportance().value));
-        startDateTime.setText(goal.getStartDateTime().value);
-        endDateTime.setText(goal.getEndDateTime().value);
+        startDateTime.setText("Start " + goal.getStartDateTime().value);
+        if (goal.getEndDateTime().value.equals("")) {
+            endDateTime.setText(goal.getEndDateTime().value);
+        } else {
+            endDateTime.setText("End " + goal.getEndDateTime().value);
+        }
         initCompletion(goal);
     }
 
@@ -91,6 +95,7 @@ public class GoalCard extends UiPart<Region> {
         }
         return starString;
     }
+
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
