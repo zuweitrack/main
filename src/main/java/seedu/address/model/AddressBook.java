@@ -341,7 +341,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void updateGoalWithoutParameters(Goal target, Goal editedGoal) throws GoalNotFoundException {
         requireNonNull(editedGoal);
-        goals.setGoalWithoutParameters(target, editedGoal);  
+        goals.setGoalWithoutParameters(target, editedGoal);
+    }
 
     //// reminder-level operations
 
@@ -350,7 +351,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a reminder to CollegeZone.
      * @throws DuplicateReminderException if an equivalent reminder already exists.
      */
-    public void addReminder(Reminder r) throws DuplicateReminderException {
+    public void addReminder (Reminder r) throws DuplicateReminderException {
         reminders.add(r);
     }
 
