@@ -9,10 +9,12 @@ import org.controlsfx.control.StatusBar;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.model.goal.Goal;
 
 /**
  * A ui for the status bar that is displayed at the footer of the application.
@@ -21,7 +23,7 @@ public class StatusBarFooter extends UiPart<Region> {
 
     public static final String SYNC_STATUS_INITIAL = "Not updated yet in this session";
     public static final String SYNC_STATUS_UPDATED = "Last Updated: %s";
-
+    public static final int PERCENTAGE_KEY_NUMBER = 100;
     /**
      * Used to generate time stamps.
      *
@@ -40,12 +42,14 @@ public class StatusBarFooter extends UiPart<Region> {
     private StatusBar syncStatus;
     @FXML
     private StatusBar saveLocationStatus;
+    @FXML
+    private StatusBar goalCompletionStatus;
 
-
-    public StatusBarFooter(String saveLocation) {
+    public StatusBarFooter(String saveLocation, int goalCompletion) {
         super(FXML);
         setSyncStatus(SYNC_STATUS_INITIAL);
         setSaveLocation("./" + saveLocation);
+        setGoalCompletion(goalCompletion);
         registerAsAnEventHandler(this);
     }
 
@@ -71,11 +75,46 @@ public class StatusBarFooter extends UiPart<Region> {
         Platform.runLater(() -> this.syncStatus.setText(status));
     }
 
+    //@@author deborahlow97
+    private void setGoalCompletion(int goalCompletion) {
+        //        Platform.runLater(() -> this.goalCompletionStatus.setText(String.format(PERCENTAGE_GOAL_COMPLETED,
+        //                goalCompletion)));
+        Platform.runLater(() -> this.goalCompletionStatus.setText("Goal " + goalCompletion + "% completed."));
+    }
+
+    public int getGoalCompletion(ObservableList<Goal> goalList) {
+        int totalGoal = goalList.size();
+        int totalGoalCompleted = 0;
+        String completionStatus;
+        for (int i = 0; i < totalGoal; i++) {
+            completionStatus = goalList.get(i).getCompletion().value;
+            totalGoalCompleted += isCompletedGoal(completionStatus);
+        }
+        int percentageGoalCompletion = (int) (((float) totalGoalCompleted / totalGoal) * PERCENTAGE_KEY_NUMBER);
+        return percentageGoalCompletion;
+    }
+
+    /**
+     * @param completionStatus gives a String that should be either "true" or "false", indicating if the goal is
+     *                         completed.
+     * @return true or false
+     */
+    private int isCompletedGoal(String completionStatus) {
+        int valueToAdd;
+        if (completionStatus.equals("true")) {
+            valueToAdd = 1;
+        } else {
+            valueToAdd = 0;
+        }
+        return valueToAdd;
+    }
+    //@@author
     @Subscribe
     public void handleAddressBookChangedEvent(AddressBookChangedEvent abce) {
         long now = clock.millis();
         String lastUpdated = new Date(now).toString();
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus(String.format(SYNC_STATUS_UPDATED, lastUpdated));
+        setGoalCompletion(getGoalCompletion(abce.data.getGoalList()));
     }
 }

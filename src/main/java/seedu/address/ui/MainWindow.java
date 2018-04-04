@@ -28,6 +28,7 @@ import seedu.address.model.UserPrefs;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final int PERCENTAGE_KEY_NUMBER = 100;
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
 
@@ -130,7 +131,8 @@ public class MainWindow extends UiPart<Stage> {
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath(),
+                calculateGoalCompletion());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(logic);
@@ -194,5 +196,37 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
+    }
+
+
+    /**
+     * Calculation of percentage of goal completed
+     * @return
+     */
+    private int calculateGoalCompletion() {
+        int totalGoal = logic.getFilteredGoalList().size();
+        int totalGoalCompleted = 0;
+        String completionStatus;
+        for (int i = 0; i < totalGoal; i++) {
+            completionStatus = logic.getFilteredGoalList().get(i).getCompletion().value;
+            totalGoalCompleted += isCompletedGoal(completionStatus);
+        }
+        int percentageGoalCompletion = (int) (((float) totalGoalCompleted / totalGoal) * PERCENTAGE_KEY_NUMBER);
+        return percentageGoalCompletion;
+    }
+
+    /**
+     * @param completionStatus gives a String that should be either "true" or "false", indicating if the goal is
+     *                         completed.
+     * @return true or false
+     */
+    private int isCompletedGoal(String completionStatus) {
+        int valueToAdd;
+        if (completionStatus.equals("true")) {
+            valueToAdd = 1;
+        } else {
+            valueToAdd = 0;
+        }
+        return valueToAdd;
     }
 }
