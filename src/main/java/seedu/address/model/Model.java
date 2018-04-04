@@ -11,7 +11,6 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.reminder.Reminder;
 import seedu.address.model.reminder.exceptions.DuplicateReminderException;
-import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
 import seedu.address.model.tag.Tag;
 
 
@@ -107,7 +106,4 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredReminderList(Predicate<Reminder> predicate);
-
-    /** Deletes the given reminder. */
-    void deleteReminder(Reminder target) throws ReminderNotFoundException;
 }

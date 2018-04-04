@@ -356,17 +356,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * @throws ReminderNotFoundException if the {@code key} is not in this {@code AddressBook}.
-     */
-    public boolean removeReminder(Reminder key) throws ReminderNotFoundException {
-        if (reminders.remove(key)) {
-            return true;
-        } else {
-            throw new ReminderNotFoundException();
-        }
-    }
-    /**
      * Replaces the given reminder {@code target} in the list with {@code editedReminder}.
      *
      * @throws DuplicateReminderException if updating the reminder's details causes the reminder to be equivalent to
@@ -382,7 +371,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         reminders.setReminder(target, editedReminder);
     }
 
-    //@@author
     //// util methods
 
     @Override

@@ -90,30 +90,6 @@ public class DateTimeParser {
         return builder.toString();
     }
 
-    /**
-     * Receives a LocalDateTime and formats the {@code dateTime}
-     *
-     * @return a formatted dateTime in String
-     */
-    public static String properReminderDateTimeFormat(LocalDateTime dateTime) {
-        StringBuilder builder = new StringBuilder();
-        int day = dateTime.getDayOfMonth();
-        String month = dateTime.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
-        int year = dateTime.getYear();
-        int hour = dateTime.getHour();
-        int minute = dateTime.getMinute();
-        builder.append(day)
-                .append("/")
-                .append(month)
-                .append("/")
-                .append(year)
-                .append(" ")
-                .append(String.format("%02d", hour))
-                .append(":")
-                .append(String.format("%02d", minute));
-        return builder.toString();
-    }
-
     public static boolean containsDateAndTime(String args) {
         return nattyDateAndTimeParser(args).isPresent();
     }

@@ -2,12 +2,12 @@ package seedu.address.model.reminder;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.parser.DateTimeParser.nattyDateAndTimeParser;
-import static seedu.address.logic.parser.DateTimeParser.properReminderDateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
 //@author fuadsahmawi
+
 /**
  * Represents a Reminder's date and time in the Calendar.
  * Guarantees: immutable; is valid as declared in {@link #isValidDateTime(String)}
@@ -28,13 +28,12 @@ public class DateTime {
             this.dateTime = "";
         } else {
             checkArgument(isValidDateTime(dateTime), MESSAGE_DATE_TIME_CONSTRAINTS);
-            LocalDateTime localDateTime = nattyDateAndTimeParser(dateTime).get();
-            this.dateTime = properReminderDateTimeFormat(localDateTime);
+            this.dateTime = dateTime;
         }
     }
 
     /**
-     * Returns true if a given string is a valid person DateTime number.
+     * Returns true if a given string is a valid person endDateTime number.
      */
     public static boolean isValidDateTime(String test) {
         Optional<LocalDateTime> localEndDateTime = nattyDateAndTimeParser(test);

@@ -38,6 +38,7 @@ public class DeleteGoalCommand extends UndoableCommand {
         this.targetIndex = targetIndex;
     }
 
+
     @Override
     public CommandResult executeUndoableCommand() {
         requireNonNull(goalToDelete);

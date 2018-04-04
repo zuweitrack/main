@@ -1,13 +1,13 @@
 package seedu.address.model.reminder;
 
+//@@author fuadsahmawi
+
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.parser.DateTimeParser.nattyDateAndTimeParser;
-import static seedu.address.logic.parser.DateTimeParser.properReminderDateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-//@@author fuadsahmawi
 /**
  * Represents a Reminder's end date and time in the Calendar.
  * Guarantees: immutable; is valid as declared in {@link #isValidEndDateTime(String)}
@@ -29,8 +29,7 @@ public class EndDateTime {
             this.endDateTime = "";
         } else {
             checkArgument(isValidEndDateTime(endDateTime), MESSAGE_END_DATE_TIME_CONSTRAINTS);
-            LocalDateTime localEndDateTime = nattyDateAndTimeParser(endDateTime).get();
-            this.endDateTime = properReminderDateTimeFormat(localEndDateTime);
+            this.endDateTime = endDateTime;
         }
     }
 
