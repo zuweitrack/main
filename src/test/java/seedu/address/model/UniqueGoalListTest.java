@@ -6,6 +6,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.goal.UniqueGoalList;
 
+//@@author deborahlow97
 public class UniqueGoalListTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();

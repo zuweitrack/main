@@ -34,7 +34,7 @@ public class CompleteGoalCommand extends UndoableCommand {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 ";
 
-    public static final String MESSAGE_COMPLETE_GOAL_SUCCESS = "Completed Goal: %1$s";
+    public static final String MESSAGE_COMPLETE_GOAL_SUCCESS = "Completed Goal! : %1$s";
 
     private final Index index;
     private final CompleteGoalDescriptor completeGoalDescriptor;
