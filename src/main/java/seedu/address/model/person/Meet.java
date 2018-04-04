@@ -5,14 +5,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 
-
+//@@author A0158738X
 /**
  * Represents a Person's date of meeting in the address book.
  * Guarantees: immutable; is always valid
  */
 public class Meet {
     public static final String MESSAGE_DATE_CONSTRAINTS =
-            "Make sure date is in this format: DD/MM/YYYY";
+            "Make sure date is in this format: DD-MM-YYYY";
     public static final String DATE_VALIDATION_REGEX =
             "^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug|Oct|Dec)))\\1|(?:(?:29|30)(\\/|-|\\.)"
             + "(?:0?[1,3-9]|1[0-2]|(?:Jan|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))\\2))(?:(?:1[6-9]|[2-9]\\d)"
@@ -25,7 +25,7 @@ public class Meet {
     public Meet(String meet) {
         requireNonNull(meet);
         if (meet.isEmpty()) {
-            this.value = meet;
+            this.value = "";
         } else {
             checkArgument(isValidDate(meet), MESSAGE_DATE_CONSTRAINTS);
             this.value = meet;
