@@ -313,10 +313,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void updateGoal(Goal target, Goal editedGoal)
             throws DuplicateGoalException, GoalNotFoundException {
         requireNonNull(editedGoal);
-        // TODO: the tags master list will be updated even though the below line fails.
-        // This can cause the tags master list to have additional tags that are not tagged to any person
-        // in the person list.
         goals.setGoal(target, editedGoal);
+    }
+
+    /**
+     * Replaces the given goal {@code target} in the list with {@code editedGoal}.
+     * @throws GoalNotFoundException if {@code target} could not be found in the list.
+     */
+    public void updateGoalWithoutParameters(Goal target, Goal editedGoal) throws GoalNotFoundException {
+        requireNonNull(editedGoal);
+        goals.setGoalWithoutParameters(target, editedGoal);
     }
 
     //// util methods
