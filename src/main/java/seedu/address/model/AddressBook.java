@@ -21,6 +21,10 @@ import seedu.address.model.person.UniqueCcaList;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.reminder.Reminder;
+import seedu.address.model.reminder.UniqueReminderList;
+import seedu.address.model.reminder.exceptions.DuplicateReminderException;
+import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -34,6 +38,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniqueCcaList ccas;
     private final UniqueTagList tags;
     private final UniqueGoalList goals;
+    private final UniqueReminderList reminders;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -47,6 +52,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         ccas = new UniqueCcaList();
         tags = new UniqueTagList();
         goals = new UniqueGoalList();
+        reminders = new UniqueReminderList();
     }
 
     public AddressBook() {}
@@ -79,7 +85,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.goals.setGoals(goals);
     }
 
+
+    public void setReminders(List<Reminder> reminders) throws DuplicateReminderException {
+        this.reminders.setReminders(reminders);
+    }
+
     //@@author
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -103,6 +115,13 @@ public class AddressBook implements ReadOnlyAddressBook {
             setGoals(syncedGoalList);
         } catch (DuplicateGoalException e) {
             throw new AssertionError("Goal Page should not have duplicate goals");
+        }
+
+        List<Reminder> syncedReminderList = newData.getReminderList().stream().collect(Collectors.toList());
+        try {
+            setReminders(syncedReminderList);
+        } catch (DuplicateReminderException e) {
+            throw new AssertionError("Reminder list should not have duplicate reminders");
         }
     }
 
@@ -325,6 +344,33 @@ public class AddressBook implements ReadOnlyAddressBook {
         goals.setGoalWithoutParameters(target, editedGoal);
     }
 
+    //// reminder-level operations
+
+    //@@author fuadsahmawi
+    /**
+     * Adds a reminder to CollegeZone.
+     * @throws DuplicateReminderException if an equivalent reminder already exists.
+     */
+    public void addReminder (Reminder r) throws DuplicateReminderException {
+        reminders.add(r);
+    }
+
+    /**
+     * Replaces the given reminder {@code target} in the list with {@code editedReminder}.
+     *
+     * @throws DuplicateReminderException if updating the reminder's details causes the reminder to be equivalent to
+     *      another existing reminder in the list.
+     * @throws ReminderNotFoundException if {@code target} could not be found in the list.
+     */
+    public void updateReminder(Reminder target, Reminder editedReminder)
+            throws DuplicateReminderException, ReminderNotFoundException {
+        requireNonNull(editedReminder);
+        // TODO: the tags master list will be updated even though the below line fails.
+        // This can cause the tags master list to have additional tags that are not tagged to any person
+        // in the person list.
+        reminders.setReminder(target, editedReminder);
+    }
+
     //// util methods
 
     @Override
@@ -352,6 +398,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Goal> getGoalList() {
         return goals.asObservableList();
+    }
+
+    @Override
+    public ObservableList<Reminder> getReminderList() {
+        return reminders.asObservableList();
     }
 
     @Override
