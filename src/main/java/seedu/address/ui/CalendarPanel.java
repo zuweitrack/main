@@ -12,9 +12,12 @@ import com.calendarfx.model.CalendarSource;
 import com.calendarfx.model.Entry;
 import com.calendarfx.model.Interval;
 import com.calendarfx.view.CalendarView;
+import com.google.common.eventbus.Subscribe;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.Region;
+import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.reminder.Reminder;
 
 //@@author fuadsahmawi
@@ -46,6 +49,15 @@ public class CalendarPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    @Subscribe
+    private void handleNewReminderEvent(AddressBookChangedEvent event) {
+        reminderList = event.data.getReminderList();
+        Platform.runLater(this::updateCalendar);
+    }
+
+    /**
+     * Updates the Calendar with Reminders that are already added
+     */
     private void updateCalendar() {
         setDateAndTime();
         CalendarSource myCalendarSource = new CalendarSource("Reminders");
@@ -59,13 +71,6 @@ public class CalendarPanel extends UiPart<Region> {
             calendar.addEntry(new Entry(reminder.getReminderText().toString(), new Interval(ldtstart, ldtend)));
         }
         calendarView.getCalendarSources().add(myCalendarSource);
-    }
-
-    private Calendar getCalendar(int styleNum, Reminder reminder) {
-        Calendar calendar = new Calendar(reminder.getReminderText().toString());
-        calendar.setStyle(Calendar.Style.getStyle(styleNum));
-        calendar.setLookAheadDuration(Duration.ofDays(365));
-        return calendar;
     }
 
     private void setDateAndTime() {

@@ -18,7 +18,6 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
-import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 /**

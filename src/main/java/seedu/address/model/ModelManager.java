@@ -20,7 +20,6 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.reminder.Reminder;
 import seedu.address.model.reminder.exceptions.DuplicateReminderException;
-import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -166,7 +165,7 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.updateGoal(target, editedGoal);
         indicateAddressBookChanged();
     }
-    
+
     //@@author fuadsahmawi
     @Override
     public void addReminder(Reminder reminder) throws DuplicateReminderException {
@@ -174,18 +173,18 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredReminderList(PREDICATE_SHOW_ALL_REMINDERS);
         indicateAddressBookChanged();
     }
-    
+
     @Override
     public ObservableList<Reminder> getFilteredReminderList() {
         return FXCollections.unmodifiableObservableList(filteredReminders);
     }
-    
+
     @Override
     public void updateFilteredReminderList(Predicate<Reminder> predicate) {
         requireNonNull(predicate);
         filteredReminders.setPredicate(predicate);
     }
-    
+
     /*
     @Override
     public void updateReminder(Reminder target, Reminder editedReminder)

@@ -2,7 +2,6 @@ package seedu.address.model.reminder;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.parser.DateTimeParser.nattyDateAndTimeParser;
-import static seedu.address.logic.parser.DateTimeParser.properDateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.Optional;

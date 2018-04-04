@@ -10,7 +10,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class ReminderText {
 
-
     public static final String MESSAGE_REMINDER_TEXT_CONSTRAINTS =
             "Reminder text can be any expression that are not just whitespaces.";
     public static final String REMINDER_TEXT_VALIDATION_REGEX = "^(?!\\s*$).+";
@@ -50,7 +49,8 @@ public class ReminderText {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof seedu.address.model.goal.GoalText // instanceof handles nulls
-                && this.reminderText.equals(((seedu.address.model.reminder.ReminderText) other).reminderText)); // state check
+                && this.reminderText.equals(((
+                        seedu.address.model.reminder.ReminderText) other).reminderText)); // state check
     }
 
     @Override
