@@ -166,7 +166,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
-      @Override
+    @Override
     public void updateGoalWithoutParameters(Goal target, Goal editedGoal)
             throws GoalNotFoundException {
         requireAllNonNull(target, editedGoal);

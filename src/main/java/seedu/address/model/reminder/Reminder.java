@@ -35,7 +35,9 @@ public class Reminder {
         return dateTime;
     }
 
-    public EndDateTime getEndDateTime() { return endDateTime; }
+    public EndDateTime getEndDateTime() {
+        return endDateTime;
+    }
 
     @Override
     public boolean equals(Object other) {
