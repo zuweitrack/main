@@ -23,9 +23,7 @@ public class StatusBarFooter extends UiPart<Region> {
 
     public static final String SYNC_STATUS_INITIAL = "Not updated yet in this session";
     public static final String SYNC_STATUS_UPDATED = "Last Updated: %s";
-
-    public static final String PERCENTAGE_GOAL_COMPLETED = "Goal %d % complete.";
-    private static final int PERCENTAGE_KEY_NUMBER = 100;
+    public static final int PERCENTAGE_KEY_NUMBER = 100;
     /**
      * Used to generate time stamps.
      *
@@ -84,7 +82,7 @@ public class StatusBarFooter extends UiPart<Region> {
         Platform.runLater(() -> this.goalCompletionStatus.setText("Goal " + goalCompletion + "% completed."));
     }
 
-    private int getGoalCompletion(ObservableList<Goal> goalList) {
+    public int getGoalCompletion(ObservableList<Goal> goalList) {
         int totalGoal = goalList.size();
         int totalGoalCompleted = 0;
         String completionStatus;
