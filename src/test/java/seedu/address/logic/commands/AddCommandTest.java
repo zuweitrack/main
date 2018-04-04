@@ -170,6 +170,12 @@ public class AddCommandTest {
                 throws DuplicateGoalException {
             fail("This method should not be called.");
         }
+
+        @Override
+        public void updateGoalWithoutParameters(Goal target, Goal editedGoal)
+                throws GoalNotFoundException {
+            fail("This method should not be called.");
+        }
     }
 
     /**

@@ -161,4 +161,13 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.updateGoal(target, editedGoal);
         indicateAddressBookChanged();
     }
+
+    @Override
+    public void updateGoalWithoutParameters(Goal target, Goal editedGoal)
+            throws GoalNotFoundException {
+        requireAllNonNull(target, editedGoal);
+
+        addressBook.updateGoalWithoutParameters(target, editedGoal);
+        indicateAddressBookChanged();
+    }
 }
