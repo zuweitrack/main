@@ -5,8 +5,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 //@@author fuadsahmawi
 /**
- * Represents a Goal's text in the Goals Page.
- * Guarantees: immutable; is valid as declared in {@link #isValidGoalText(String)}
+ * Represents a Reminder's text in the Calendar.
+ * Guarantees: immutable; is valid as declared in {@link #isValidReminderText(String)}
  */
 public class ReminderText {
 
@@ -19,7 +19,7 @@ public class ReminderText {
     /**
      * Constructs a {@code ReminderText}.
      *
-     * @param reminderText A valid goal text.
+     * @param reminderText A valid reminder text.
      */
     public ReminderText(String reminderText) {
         requireNonNull(reminderText);
@@ -35,7 +35,7 @@ public class ReminderText {
     }
 
     /**
-     * Returns true if a given string is a valid goal text.
+     * Returns true if a given string is a valid reminder text.
      */
     public static boolean isValidGoalText(String test) {
         return test.matches(REMINDER_TEXT_VALIDATION_REGEX);

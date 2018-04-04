@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.reminder.DateTime;
+import seedu.address.model.reminder.EndDateTime;
 import seedu.address.model.reminder.Reminder;
 import seedu.address.model.reminder.ReminderText;
 
@@ -21,6 +22,8 @@ public class XmlAdaptedReminder {
     private String reminderText;
     @XmlElement(required = true)
     private String dateTime;
+    @XmlElement(required = true)
+    private String endDateTime;
 
     /**
      * Constructs an XmlAdaptedReminder.
@@ -31,9 +34,10 @@ public class XmlAdaptedReminder {
     /**
      * Constructs an {@code XmlAdaptedReminder} with the given person details.
      */
-    public XmlAdaptedReminder(String reminderText, String dateTime) {
+    public XmlAdaptedReminder(String reminderText, String dateTime, String endDateTime) {
         this.reminderText = reminderText;
         this.dateTime = dateTime;
+        this.endDateTime = endDateTime;
     }
 
     /**
@@ -44,6 +48,7 @@ public class XmlAdaptedReminder {
     public XmlAdaptedReminder(Reminder source) {
         reminderText = source.getReminderText().toString();
         dateTime = source.getDateTime().toString();
+        endDateTime = source.getEndDateTime().toString();
     }
 
     /**
@@ -70,7 +75,16 @@ public class XmlAdaptedReminder {
         }
         final DateTime dateTime = new DateTime(this.dateTime);
 
-        return new Reminder(reminderText, dateTime);
+        if (this.endDateTime == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    EndDateTime.class.getSimpleName()));
+        }
+        if (!DateTime.isValidDateTime(this.endDateTime)) {
+            throw new IllegalValueException(EndDateTime.MESSAGE_END_DATE_TIME_CONSTRAINTS);
+        }
+        final EndDateTime endDateTime = new EndDateTime(this.endDateTime);
+
+        return new Reminder(reminderText, dateTime, endDateTime);
     }
 
     @Override
@@ -85,6 +99,7 @@ public class XmlAdaptedReminder {
 
         XmlAdaptedReminder otherPerson = (XmlAdaptedReminder) other;
         return Objects.equals(reminderText, otherPerson.reminderText)
-                && Objects.equals(dateTime, otherPerson.dateTime);
+                && Objects.equals(dateTime, otherPerson.dateTime)
+                && Objects.equals(endDateTime, otherPerson.endDateTime);
     }
 }

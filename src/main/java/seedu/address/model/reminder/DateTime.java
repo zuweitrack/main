@@ -10,7 +10,7 @@ import java.util.Optional;
 //@author fuadsahmawi
 
 /**
- * Represents a Reminder's date and time in the Goals Page.
+ * Represents a Reminder's date and time in the Calendar.
  * Guarantees: immutable; is valid as declared in {@link #isValidDateTime(String)}
  */
 public class DateTime {
@@ -22,15 +22,14 @@ public class DateTime {
     /**
      * Constructs a {@code DateTime}.
      *
-     * @param dateTime A valid endDateTime number.
+     * @param dateTime A valid DateTime number.
      */
     public DateTime(String dateTime) {
         if (dateTime.equals("")) {
             this.dateTime = "";
         } else {
             checkArgument(isValidDateTime(dateTime), MESSAGE_DATE_TIME_CONSTRAINTS);
-            LocalDateTime localDateTime = nattyDateAndTimeParser(dateTime).get();
-            this.dateTime = properDateTimeFormat(localDateTime);
+            this.dateTime = dateTime;
         }
     }
 

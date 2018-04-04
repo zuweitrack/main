@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_TEXT;
 
 import java.util.stream.Stream;
@@ -10,6 +11,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddReminderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.reminder.DateTime;
+import seedu.address.model.reminder.EndDateTime;
 import seedu.address.model.reminder.Reminder;
 import seedu.address.model.reminder.ReminderText;
 
@@ -20,15 +22,15 @@ import seedu.address.model.reminder.ReminderText;
 public class AddReminderCommandParser implements Parser<AddReminderCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddGoalCommand
-     * and returns an AddGoalCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddReminderCommand
+     * and returns an AddReminderCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddReminderCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_REMINDER_TEXT, PREFIX_DATE);
+                ArgumentTokenizer.tokenize(args, PREFIX_REMINDER_TEXT, PREFIX_DATE, PREFIX_END_DATE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_REMINDER_TEXT, PREFIX_DATE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_REMINDER_TEXT, PREFIX_DATE, PREFIX_END_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddReminderCommand.MESSAGE_USAGE));
         }
@@ -36,7 +38,8 @@ public class AddReminderCommandParser implements Parser<AddReminderCommand> {
         try {
             ReminderText reminderText = ParserUtil.parseReminderText(argMultimap.getValue(PREFIX_REMINDER_TEXT)).get();
             DateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATE)).get();
-            Reminder reminder = new Reminder(reminderText, dateTime);
+            EndDateTime endDateTime = ParserUtil.parseEndDateTime(argMultimap.getValue(PREFIX_END_DATE)).get();
+            Reminder reminder = new Reminder(reminderText, dateTime, endDateTime);
             return new AddReminderCommand(reminder);
         } catch (IllegalValueException ive) {
             throw new ParseException(ive.getMessage(), ive);

@@ -52,9 +52,6 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filtered reminder list */
-    ObservableList<Reminder> getFilteredReminderList();
-
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -94,6 +91,9 @@ public interface Model {
     /** Adds the given reminder. */
     void addReminder(Reminder reminder) throws DuplicateReminderException;
 
+    /** Returns an unmodifiable view of the filtered reminder list */
+    ObservableList<Reminder> getFilteredReminderList();
+    
     /**
      * Updates the filter of the filtered reminder list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.

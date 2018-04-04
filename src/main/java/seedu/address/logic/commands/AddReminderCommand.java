@@ -23,12 +23,12 @@ public class AddReminderCommand extends UndoableCommand {
             + PREFIX_REMINDER_TEXT + " do homework ";
 
     public static final String MESSAGE_SUCCESS = "New reminder added: %1$s";
-    public static final String MESSAGE_DUPLICATE_REMINDER = "This goal already exists in the Goals Page";
+    public static final String MESSAGE_DUPLICATE_REMINDER = "This reminder already exists in the Calendar";
 
     private final Reminder toAdd;
 
     /**
-     * Creates an AddReminderCommand to add the specified {@code Goal}
+     * Creates an AddReminderCommand to add the specified {@code Reminder}
      */
     public AddReminderCommand(Reminder reminder) {
         requireNonNull(reminder);
