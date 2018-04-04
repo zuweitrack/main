@@ -1,5 +1,34 @@
 # deborahlow97
-###### \java\seedu\address\logic\commands\AddCommandTest.java
+###### /java/guitests/guihandles/StatusBarFooterHandle.java
+``` java
+    /**
+     * Returns the text of the 'save location' portion of the status bar.
+     */
+    public String getGoalCompletedStatus() {
+        return goalCompletedStatusNode.getText();
+    }
+
+```
+###### /java/guitests/guihandles/StatusBarFooterHandle.java
+``` java
+    /**
+     * Remembers the content of the 'goal completion status' portion of the status bar.
+     */
+    public void rememberGoalCompletedStatus() {
+        lastRememberedGoalCompletedStatus = getGoalCompletedStatus();
+    }
+
+    /**
+     * Returns true if the current content of the 'goal completion status' is different from the value remembered
+     * by the most
+     * recent {@code rememberGoalCompletedStatus()} call.
+     */
+    public boolean isGoalCompletedStatusChanged() {
+        return !lastRememberedGoalCompletedStatus.equals(getGoalCompletedStatus());
+    }
+}
+```
+###### /java/seedu/address/logic/commands/AddCommandTest.java
 ``` java
         @Override
         public void addGoal(Goal goal) throws DuplicateGoalException {
@@ -35,7 +64,7 @@
         }
 
 ```
-###### \java\seedu\address\logic\commands\AddGoalCommandIntegrationTest.java
+###### /java/seedu/address/logic/commands/AddGoalCommandIntegrationTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) for {@code AddGoalCommand}.
@@ -77,7 +106,7 @@ public class AddGoalCommandIntegrationTest {
 }
 
 ```
-###### \java\seedu\address\logic\commands\AddGoalCommandTest.java
+###### /java/seedu/address/logic/commands/AddGoalCommandTest.java
 ``` java
 public class AddGoalCommandTest {
 
@@ -175,7 +204,7 @@ public class AddGoalCommandTest {
     }
 }
 ```
-###### \java\seedu\address\logic\commands\CompleteGoalCommandTest.java
+###### /java/seedu/address/logic/commands/CompleteGoalCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -297,7 +326,7 @@ public class CompleteGoalCommandTest {
 }
 
 ```
-###### \java\seedu\address\logic\commands\DeleteGoalCommandTest.java
+###### /java/seedu/address/logic/commands/DeleteGoalCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -410,7 +439,7 @@ public class DeleteGoalCommandTest {
     }
 }
 ```
-###### \java\seedu\address\logic\commands\EditGoalCommandTest.java
+###### /java/seedu/address/logic/commands/EditGoalCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -563,7 +592,7 @@ public class EditGoalCommandTest {
     }
 }
 ```
-###### \java\seedu\address\logic\commands\GoalCommandTestUtil.java
+###### /java/seedu/address/logic/commands/GoalCommandTestUtil.java
 ``` java
 /**
  * Contains helper methods for testing commands.
@@ -687,7 +716,7 @@ public class GoalCommandTestUtil {
     }
 }
 ```
-###### \java\seedu\address\logic\parser\AddressBookParserTest.java
+###### /java/seedu/address/logic/parser/AddressBookParserTest.java
 ``` java
     @Test
     public void parseCommand_addGoal() throws Exception {
@@ -788,7 +817,7 @@ public class GoalCommandTestUtil {
     }
 }
 ```
-###### \java\seedu\address\logic\parser\CompleteGoalCommandParserTest.java
+###### /java/seedu/address/logic/parser/CompleteGoalCommandParserTest.java
 ``` java
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -816,7 +845,7 @@ public class CompleteGoalCommandParserTest {
     }
 }
 ```
-###### \java\seedu\address\logic\parser\DateTimeParserTest.java
+###### /java/seedu/address/logic/parser/DateTimeParserTest.java
 ``` java
 public class DateTimeParserTest {
 
@@ -849,7 +878,7 @@ public class DateTimeParserTest {
     }
 }
 ```
-###### \java\seedu\address\logic\parser\DeleteGoalCommandParserTest.java
+###### /java/seedu/address/logic/parser/DeleteGoalCommandParserTest.java
 ``` java
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -874,7 +903,7 @@ public class DeleteGoalCommandParserTest {
     }
 }
 ```
-###### \java\seedu\address\logic\parser\EditGoalCommandParserTest.java
+###### /java/seedu/address/logic/parser/EditGoalCommandParserTest.java
 ``` java
 public class EditGoalCommandParserTest {
 
@@ -989,7 +1018,7 @@ public class EditGoalCommandParserTest {
     }*/
 }
 ```
-###### \java\seedu\address\model\goal\GoalTextTest.java
+###### /java/seedu/address/model/goal/GoalTextTest.java
 ``` java
 public class GoalTextTest {
 
@@ -1023,7 +1052,7 @@ public class GoalTextTest {
     }
 }
 ```
-###### \java\seedu\address\model\goal\ImportanceTest.java
+###### /java/seedu/address/model/goal/ImportanceTest.java
 ``` java
 public class ImportanceTest {
 
@@ -1068,7 +1097,7 @@ public class ImportanceTest {
     }
 }
 ```
-###### \java\seedu\address\model\person\BirthdayTest.java
+###### /java/seedu/address/model/person/BirthdayTest.java
 ``` java
 public class BirthdayTest {
 
@@ -1123,7 +1152,7 @@ public class BirthdayTest {
     }
 }
 ```
-###### \java\seedu\address\model\person\CcaTest.java
+###### /java/seedu/address/model/person/CcaTest.java
 ``` java
 public class CcaTest {
 
@@ -1157,7 +1186,7 @@ public class CcaTest {
     }
 }
 ```
-###### \java\seedu\address\model\person\LevelOfFriendshipTest.java
+###### /java/seedu/address/model/person/LevelOfFriendshipTest.java
 ``` java
 public class LevelOfFriendshipTest {
 
@@ -1202,7 +1231,7 @@ public class LevelOfFriendshipTest {
     }
 }
 ```
-###### \java\seedu\address\model\person\UniqueCcaListTest.java
+###### /java/seedu/address/model/person/UniqueCcaListTest.java
 ``` java
 public class UniqueCcaListTest {
     @Rule
@@ -1217,7 +1246,7 @@ public class UniqueCcaListTest {
 }
 
 ```
-###### \java\seedu\address\model\person\UnitNumberTest.java
+###### /java/seedu/address/model/person/UnitNumberTest.java
 ``` java
 public class UnitNumberTest {
 
@@ -1251,7 +1280,7 @@ public class UnitNumberTest {
     }
 }
 ```
-###### \java\seedu\address\model\UniqueGoalListTest.java
+###### /java/seedu/address/model/UniqueGoalListTest.java
 ``` java
 public class UniqueGoalListTest {
     @Rule
@@ -1265,7 +1294,7 @@ public class UniqueGoalListTest {
     }
 }
 ```
-###### \java\seedu\address\storage\XmlAdaptedGoalTest.java
+###### /java/seedu/address/storage/XmlAdaptedGoalTest.java
 ``` java
 public class XmlAdaptedGoalTest {
     private static final String INVALID_IMPORTANCE = "11";
@@ -1343,7 +1372,7 @@ public class XmlAdaptedGoalTest {
     }
 }
 ```
-###### \java\seedu\address\storage\XmlSerializableAddressBookTest.java
+###### /java/seedu/address/storage/XmlSerializableAddressBookTest.java
 ``` java
     @Test
     public void toModelType_invalidGoalFile_throwsIllegalValueException() throws Exception {
@@ -1363,7 +1392,7 @@ public class XmlAdaptedGoalTest {
     }
 }
 ```
-###### \java\seedu\address\testutil\CompleteGoalDescriptorBuilder.java
+###### /java/seedu/address/testutil/CompleteGoalDescriptorBuilder.java
 ``` java
 /**
  * A utility class to help with building CompleteGoalDescriptor objects.
@@ -1413,7 +1442,7 @@ public class CompleteGoalDescriptorBuilder {
     }
 }
 ```
-###### \java\seedu\address\testutil\EditGoalDescriptorBuilder.java
+###### /java/seedu/address/testutil/EditGoalDescriptorBuilder.java
 ``` java
 /**
  * A utility class to help with building EditGoalDescriptor objects.
@@ -1461,7 +1490,7 @@ public class EditGoalDescriptorBuilder {
 }
 
 ```
-###### \java\seedu\address\testutil\GoalBuilder.java
+###### /java/seedu/address/testutil/GoalBuilder.java
 ``` java
 /**
  * A utility class to help with building Person objects.
@@ -1546,7 +1575,7 @@ public class GoalBuilder {
 }
 
 ```
-###### \java\seedu\address\testutil\GoalUtil.java
+###### /java/seedu/address/testutil/GoalUtil.java
 ``` java
 /**
  * A utility class for Goal.
@@ -1569,9 +1598,36 @@ public class GoalUtil {
         sb.append(PREFIX_GOAL_TEXT + goal.getGoalText().value + " ");
         return sb.toString();
     }
+
+    public static int getGoalCompletion(ObservableList<Goal> goalList) {
+        int totalGoal = goalList.size();
+        int totalGoalCompleted = 0;
+        String completionStatus;
+        for (int i = 0; i < totalGoal; i++) {
+            completionStatus = goalList.get(i).getCompletion().value;
+            totalGoalCompleted += isCompletedGoal(completionStatus);
+        }
+        int percentageGoalCompletion = (int) (((float) totalGoalCompleted / totalGoal) * PERCENTAGE_KEY_NUMBER);
+        return percentageGoalCompletion;
+    }
+
+    /**
+     * @param completionStatus gives a String that should be either "true" or "false", indicating if the goal is
+     * completed.
+     * @return true or false
+     */
+    private static int isCompletedGoal(String completionStatus) {
+        int valueToAdd;
+        if (completionStatus.equals("true")) {
+            valueToAdd = 1;
+        } else {
+            valueToAdd = 0;
+        }
+        return valueToAdd;
+    }
 }
 ```
-###### \java\seedu\address\testutil\TypicalGoals.java
+###### /java/seedu/address/testutil/TypicalGoals.java
 ``` java
 /**
  * A utility class containing a list of {@code Goal} objects to be used in tests.
@@ -1640,7 +1696,7 @@ public class TypicalGoals {
     }
 }
 ```
-###### \java\seedu\address\ui\testutil\GuiTestAssert.java
+###### /java/seedu/address/ui/testutil/GuiTestAssert.java
 ``` java
     /**
      * Returns the color style for {@code tagName}'s label. The tag's color is determined by looking up the color
@@ -1704,7 +1760,7 @@ public class TypicalGoals {
     }
 
 ```
-###### \java\seedu\address\ui\testutil\GuiTestAssert.java
+###### /java/seedu/address/ui/testutil/GuiTestAssert.java
 ``` java
     /**
      * Changing @param ccaInArrayList into a CCA string in desired format

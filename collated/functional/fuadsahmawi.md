@@ -1,5 +1,5 @@
 # fuadsahmawi
-###### \java\seedu\address\logic\commands\AddReminderCommand.java
+###### /java/seedu/address/logic/commands/AddReminderCommand.java
 ``` java
 /**
  * Adds a reminder to the Calendar.
@@ -12,8 +12,12 @@ public class AddReminderCommand extends UndoableCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a reminder to Calendar. "
             + "Parameters: "
             + PREFIX_REMINDER_TEXT + "TEXT "
+            + PREFIX_DATE + "START_DATETIME"
+            + PREFIX_END_DATE + "END_DATETIME"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_REMINDER_TEXT + " do homework ";
+            + PREFIX_REMINDER_TEXT + " do homework "
+            + PREFIX_DATE + " tonight 8pm "
+            + PREFIX_END_DATE + " tonight 10pm";
 
     public static final String MESSAGE_SUCCESS = "New reminder added: %1$s";
     public static final String MESSAGE_DUPLICATE_REMINDER = "This reminder already exists in the Calendar";
@@ -47,7 +51,59 @@ public class AddReminderCommand extends UndoableCommand {
     }
 }
 ```
-###### \java\seedu\address\logic\commands\FindCommand.java
+###### /java/seedu/address/logic/commands/DeleteReminderCommand.java
+``` java
+/**
+ * Deletes a reminder identified using its title in the calendar
+ */
+public class DeleteReminderCommand extends UndoableCommand {
+    public static final String COMMAND_WORD = "-reminder";
+    public static final String COMMAND_ALIAS = "-r";
+    public static final String COMMAND_ALIAS_2 = "deletereminder";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Deletes the reminder identified by its title in the calendar.\n"
+            + "Parameters: REMINDER_TITLE\n"
+            + "Example: " + COMMAND_WORD + " Eat pills";
+
+    public static final String MESSAGE_DELETE_REMINDER_SUCCESS = "Deleted Reminder: %1$s";
+
+    private Index targetIndex;
+
+    private ReminderTextPredicate predicate;
+
+    private Reminder reminderToDelete;
+
+    public DeleteReminderCommand(ReminderTextPredicate predicate) {
+        this.predicate = predicate;
+    }
+
+    @Override
+    public CommandResult executeUndoableCommand() {
+        requireNonNull(reminderToDelete);
+        try {
+            model.deleteReminder(reminderToDelete);
+        } catch (ReminderNotFoundException pnfe) {
+            throw new AssertionError("The target reminder cannot be missing");
+        }
+
+        return new CommandResult(String.format(MESSAGE_DELETE_REMINDER_SUCCESS, reminderToDelete));
+    }
+
+    @Override
+    protected void preprocessUndoableCommand() throws CommandException {
+        model.updateFilteredReminderList(predicate);
+        List<Reminder> lastShownList = model.getFilteredReminderList();
+        targetIndex = Index.fromOneBased(1);
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_GOAL_DISPLAYED_INDEX);
+        }
+
+        reminderToDelete = lastShownList.get(targetIndex.getZeroBased());
+    }
+}
+```
+###### /java/seedu/address/logic/commands/FindCommand.java
 ``` java
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -137,7 +193,7 @@ public class FindCommand extends Command {
     }
 }
 ```
-###### \java\seedu\address\logic\parser\AddReminderCommandParser.java
+###### /java/seedu/address/logic/parser/AddReminderCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new AddReminderCommand object
@@ -179,7 +235,32 @@ public class AddReminderCommandParser implements Parser<AddReminderCommand> {
 
 }
 ```
-###### \java\seedu\address\logic\parser\FindCommandParser.java
+###### /java/seedu/address/logic/parser/DeleteReminderCommandParser.java
+``` java
+/**
+ * Parses input arguments and creates a new DeleteReminderCommand object
+ */
+public class DeleteReminderCommandParser {
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the DeleteReminderCommand
+     * and returns an DeleteReminderCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public DeleteReminderCommand parse(String args) throws ParseException {
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteReminderCommand.MESSAGE_USAGE));
+        }
+
+        String[] nameKeywords = trimmedArgs.split("\\s+");
+
+        return new DeleteReminderCommand(new ReminderTextPredicate(Arrays.asList(nameKeywords)));
+    }
+}
+```
+###### /java/seedu/address/logic/parser/FindCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -216,7 +297,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 }
 ```
-###### \java\seedu\address\logic\parser\ParserUtil.java
+###### /java/seedu/address/logic/parser/ParserUtil.java
 ``` java
 
     /**
@@ -295,7 +376,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 }
 ```
-###### \java\seedu\address\model\AddressBook.java
+###### /java/seedu/address/model/AddressBook.java
 ``` java
     /**
      * Adds a reminder to CollegeZone.
@@ -305,6 +386,17 @@ public class FindCommandParser implements Parser<FindCommand> {
         reminders.add(r);
     }
 
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * @throws ReminderNotFoundException if the {@code key} is not in this {@code AddressBook}.
+     */
+    public boolean removeReminder(Reminder key) throws ReminderNotFoundException {
+        if (reminders.remove(key)) {
+            return true;
+        } else {
+            throw new ReminderNotFoundException();
+        }
+    }
     /**
      * Replaces the given reminder {@code target} in the list with {@code editedReminder}.
      *
@@ -321,72 +413,8 @@ public class FindCommandParser implements Parser<FindCommand> {
         reminders.setReminder(target, editedReminder);
     }
 
-    //// util methods
-
-    @Override
-    public String toString() {
-        return persons.asObservableList().size() + " persons, " + ccas.asObservableList().size()
-                + "ccas, " + tags.asObservableList().size() +  " tags";
-        // TODO: refine later
-    }
-
-    @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asObservableList();
-    }
-
-    @Override
-    public ObservableList<Cca> getCcaList() {
-        return ccas.asObservableList();
-    }
-
-    @Override
-    public ObservableList<Tag> getTagList() {
-        return tags.asObservableList();
-    }
-
-    @Override
-    public ObservableList<Goal> getGoalList() {
-        return goals.asObservableList();
-    }
-
-    @Override
-    public ObservableList<Reminder> getReminderList() {
-        return reminders.asObservableList();
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && this.persons.equals(((AddressBook) other).persons)
-                && this.ccas.equalsOrderInsensitive(((AddressBook) other).ccas)
-                && this.tags.equalsOrderInsensitive(((AddressBook) other).tags));
-    }
-
-    @Override
-    public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(persons, ccas, tags);
-    }
-}
 ```
-###### \java\seedu\address\model\Model.java
-``` java
-    /** Adds the given reminder. */
-    void addReminder(Reminder reminder) throws DuplicateReminderException;
-
-    /** Returns an unmodifiable view of the filtered reminder list */
-    ObservableList<Reminder> getFilteredReminderList();
-
-    /**
-     * Updates the filter of the filtered reminder list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredReminderList(Predicate<Reminder> predicate);
-}
-```
-###### \java\seedu\address\model\ModelManager.java
+###### /java/seedu/address/model/ModelManager.java
 ``` java
     @Override
     public void addReminder(Reminder reminder) throws DuplicateReminderException {
@@ -406,6 +434,11 @@ public class FindCommandParser implements Parser<FindCommand> {
         filteredReminders.setPredicate(predicate);
     }
 
+    @Override
+    public synchronized void deleteReminder(Reminder reminder) throws ReminderNotFoundException {
+        addressBook.removeReminder(reminder);
+        indicateAddressBookChanged();
+    }
     /*
     @Override
     public void updateReminder(Reminder target, Reminder editedReminder)
@@ -418,7 +451,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     */
 }
 ```
-###### \java\seedu\address\model\person\TagContainsKeywordsPredicate.java
+###### /java/seedu/address/model/person/TagContainsKeywordsPredicate.java
 ``` java
 /**
  * Tests that a {@code Person}'s {@code Tags} matches any of the keywords given.
@@ -455,7 +488,7 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
 
 }
 ```
-###### \java\seedu\address\model\ReadOnlyAddressBook.java
+###### /java/seedu/address/model/ReadOnlyAddressBook.java
 ``` java
     /**
      * Returns an unmodifiable view of the reminders list.
@@ -465,15 +498,8 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
 
 }
 ```
-###### \java\seedu\address\model\reminder\EndDateTime.java
+###### /java/seedu/address/model/reminder/EndDateTime.java
 ``` java
-
-import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.logic.parser.DateTimeParser.nattyDateAndTimeParser;
-
-import java.time.LocalDateTime;
-import java.util.Optional;
-
 /**
  * Represents a Reminder's end date and time in the Calendar.
  * Guarantees: immutable; is valid as declared in {@link #isValidEndDateTime(String)}
@@ -495,7 +521,8 @@ public class EndDateTime {
             this.endDateTime = "";
         } else {
             checkArgument(isValidEndDateTime(endDateTime), MESSAGE_END_DATE_TIME_CONSTRAINTS);
-            this.endDateTime = endDateTime;
+            LocalDateTime localEndDateTime = nattyDateAndTimeParser(endDateTime).get();
+            this.endDateTime = properReminderDateTimeFormat(localEndDateTime);
         }
     }
 
@@ -530,7 +557,7 @@ public class EndDateTime {
     }
 }
 ```
-###### \java\seedu\address\model\reminder\exceptions\DuplicateReminderException.java
+###### /java/seedu/address/model/reminder/exceptions/DuplicateReminderException.java
 ``` java
 /**
  * Signals that the operation will result in duplicate Goal objects.
@@ -541,7 +568,7 @@ public class DuplicateReminderException extends DuplicateDataException {
     }
 }
 ```
-###### \java\seedu\address\model\reminder\exceptions\ReminderNotFoundException.java
+###### /java/seedu/address/model/reminder/exceptions/ReminderNotFoundException.java
 ``` java
 /**
  * Signals that the operation is unable to find the specified reminder.
@@ -549,9 +576,8 @@ public class DuplicateReminderException extends DuplicateDataException {
 public class ReminderNotFoundException extends Exception {
 }
 ```
-###### \java\seedu\address\model\reminder\Reminder.java
+###### /java/seedu/address/model/reminder/Reminder.java
 ``` java
-
 /**
  * Represents a Reminder
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -621,7 +647,7 @@ public class Reminder {
     }
 }
 ```
-###### \java\seedu\address\model\reminder\ReminderText.java
+###### /java/seedu/address/model/reminder/ReminderText.java
 ``` java
 /**
  * Represents a Reminder's text in the Calendar.
@@ -679,7 +705,33 @@ public class ReminderText {
 
 }
 ```
-###### \java\seedu\address\model\reminder\UniqueReminderList.java
+###### /java/seedu/address/model/reminder/ReminderTextPredicate.java
+``` java
+/**
+ * Tests that a {@code Reminder}'s {@code ReminderText} matches any of the keywords given.
+ */
+public class ReminderTextPredicate implements Predicate<Reminder> {
+    private final List<String> keywords;
+
+    public ReminderTextPredicate(List<String> keywords) {
+        this.keywords = keywords;
+    }
+
+    @Override
+    public boolean test(Reminder reminder) {
+        return keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(reminder.getReminderText().toString(), keyword));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ReminderTextPredicate // instanceof handles nulls
+                && this.keywords.equals(((ReminderTextPredicate) other).keywords)); // state check
+    }
+}
+```
+###### /java/seedu/address/model/reminder/UniqueReminderList.java
 ``` java
 /**
  * A list of reminders that enforces uniqueness between its elements and does not allow nulls.
@@ -787,7 +839,7 @@ public class UniqueReminderList implements Iterable<Reminder> {
     }
 }
 ```
-###### \java\seedu\address\storage\XmlAdaptedReminder.java
+###### /java/seedu/address/storage/XmlAdaptedReminder.java
 ``` java
 /**
  * JAXB-friendly version of the Reminder.
@@ -882,7 +934,7 @@ public class XmlAdaptedReminder {
     }
 }
 ```
-###### \java\seedu\address\ui\CalendarPanel.java
+###### /java/seedu/address/ui/CalendarPanel.java
 ``` java
 /**
  * The Calendar Panel of the App.
@@ -894,10 +946,13 @@ public class CalendarPanel extends UiPart<Region> {
 
     private ObservableList<Reminder> reminderList;
 
-    public CalendarPanel(ObservableList<Reminder> reminderList) {
+    private ObservableList<Person> personObservableList;
+
+    public CalendarPanel(ObservableList<Reminder> reminderList, ObservableList<Person> personObservableList) {
         super(FXML);
 
         this.reminderList = reminderList;
+        this.personObservableList = personObservableList;
 
         calendarView = new CalendarView();
         calendarView.setRequestedTime(LocalTime.now());
@@ -909,7 +964,10 @@ public class CalendarPanel extends UiPart<Region> {
         calendarView.setShowPrintButton(false);
         calendarView.showMonthPage();
         updateCalendar();
+        updateMeetCalendar();
         registerAsAnEventHandler(this);
+
+
     }
 
     @Subscribe
@@ -917,6 +975,13 @@ public class CalendarPanel extends UiPart<Region> {
         reminderList = event.data.getReminderList();
         Platform.runLater(this::updateCalendar);
     }
+
+    @Subscribe
+    private void handleNewMeetEvent(AddressBookChangedEvent event) {
+        personObservableList = event.data.getPersonList();
+        Platform.runLater(this::updateMeetCalendar);
+    }
+
 
     /**
      * Updates the Calendar with Reminders that are already added
@@ -936,14 +1001,7 @@ public class CalendarPanel extends UiPart<Region> {
         calendarView.getCalendarSources().add(myCalendarSource);
     }
 
-    private void setDateAndTime() {
-        calendarView.setToday(LocalDate.now());
-        calendarView.setTime(LocalTime.now());
-        calendarView.getCalendarSources().clear();
-    }
-
-    public CalendarView getRoot() {
-        return this.calendarView;
-    }
-}
+    /**
+     * Updates the Calendar with Meet ups that are already added
+     */
 ```

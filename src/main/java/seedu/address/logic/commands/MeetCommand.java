@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
-
+//@@author A0158738X
 /**
  * Adds a meeting to the address book.
  */
@@ -31,8 +31,7 @@ public class MeetCommand extends UndoableCommand {
             + PREFIX_DATE + "01/April/2018";
 
 
-    public static final String MESSAGE_ADD_MEETDATE_SUCCESS = "%1$s added for meet up! Here particulars "
-            + "have been added to the calendar.";
+    public static final String MESSAGE_ADD_MEETDATE_SUCCESS = "%1$s added for meet up! Check out your Calendar!";
     public static final String MESSAGE_DELETE_MEETDATE_SUCCESS = "You are not meeting %1$s anymore!!";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person has already been set to have meeting.";
 

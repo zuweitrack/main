@@ -141,10 +141,9 @@ public class XmlAdaptedPerson {
         }
         final LevelOfFriendship levelOfFriendship = new LevelOfFriendship(this.levelOfFriendship);
 
-        /*if (!Meet.isValidDate(this.meetDate)) {
-            throw new IllegalValueException(Meet.MESSAGE_DATE_CONSTRAINTS);
-        }*/
+        //@@author A0158738X
         final Meet meetDate = new Meet(this.meetDate);
+        //@@author
 
         if (this.unitNumber == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

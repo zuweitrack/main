@@ -21,13 +21,13 @@
         <Insets bottom="5" left="15" right="5" top="5" />
       </padding>
       <HBox alignment="CENTER_LEFT" spacing="5">
-        <Label fx:id="id" styleClass="cell_big_label">
+        <Label fx:id="id" alignment="TOP_LEFT" styleClass="cell_big_label">
           <minWidth>
             <!-- Ensures that the label text is never truncated -->
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="goalText" styleClass="cell_big_label" text="\$first" />
+        <Label fx:id="goalText" styleClass="cell_big_label" text="\$first" wrapText="true" />
       </HBox>
       <FlowPane fx:id="completion" alignment="BOTTOM_RIGHT" columnHalignment="RIGHT" prefWidth="130.0" rowValignment="BOTTOM" />
       <Label fx:id="importance" styleClass="cell_small_label" text="\$importance" />

@@ -1,5 +1,5 @@
 # fuadsahmawi
-###### \java\seedu\address\logic\commands\AddCommandTest.java
+###### /java/seedu/address/logic/commands/AddCommandTest.java
 ``` java
         @Override
         public void addReminder(Reminder reminder) throws DuplicateReminderException {
@@ -15,6 +15,11 @@
         public ObservableList<Reminder> getFilteredReminderList() {
             fail("This method should not be called.");
             return null;
+        }
+
+        @Override
+        public void deleteReminder(Reminder target) throws ReminderNotFoundException {
+            fail("This method should not be called.");
         }
     }
 
