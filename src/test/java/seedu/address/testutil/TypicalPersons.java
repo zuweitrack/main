@@ -23,6 +23,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 
+
+
+
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
@@ -61,10 +64,12 @@ public class TypicalPersons {
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withBirthday(VALID_BIRTHDAY_AMY).withLevelOfFriendship(VALID_LEVEL_OF_FRIENDSHIP_AMY)
-            .withUnitNumber(VALID_UNIT_NUMBER_AMY).withCcas(VALID_CCA_DANCE).withTags(VALID_TAG_FRIEND).build();
+            .withUnitNumber(VALID_UNIT_NUMBER_AMY).withCcas(VALID_CCA_DANCE)
+            .withTags(VALID_TAG_FRIEND).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withBirthday(VALID_BIRTHDAY_BOB).withLevelOfFriendship(VALID_LEVEL_OF_FRIENDSHIP_BOB)
-            .withUnitNumber(VALID_UNIT_NUMBER_BOB).withCcas(VALID_CCA_DANCE, VALID_CCA_BADMINTON)
+            .withUnitNumber(VALID_UNIT_NUMBER_BOB)
+            .withCcas(VALID_CCA_DANCE, VALID_CCA_BADMINTON)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 

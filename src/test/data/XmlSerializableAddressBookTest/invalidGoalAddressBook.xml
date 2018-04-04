@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <!-- Goal with invalid importance field -->
+    <goals>
+        <goalText>Save up money for trip to Japan!</goalText>
+        <importance>9482424</importance>
+        <startDateTime>2017-04-08 12:30</startDateTime>
+        <endDateTime></endDateTime>
+        <completion>false</completion>
+    </goals>
+</addressbook>

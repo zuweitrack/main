@@ -57,8 +57,8 @@ public class PersonBuilder {
         birthday = personToCopy.getBirthday();
         levelOfFriendship = personToCopy.getLevelOfFriendship();
         unitNumber = personToCopy.getUnitNumber();
-        ccas = new HashSet<>(personToCopy.getCcas());
         meetDate = personToCopy.getMeetDate();
+        ccas = new HashSet<>(personToCopy.getCcas());
         tags = new HashSet<>(personToCopy.getTags());
     }
 
