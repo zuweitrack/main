@@ -9,7 +9,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.commons.util.AppUtil;
 import seedu.address.model.goal.Goal;
-import sun.plugin2.applet.Applet2ClassLoader;
 
 //@@author deborahlow97
 /**
