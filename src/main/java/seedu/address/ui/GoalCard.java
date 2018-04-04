@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -58,10 +60,13 @@ public class GoalCard extends UiPart<Region> {
     private void initCompletion(Goal goal) {
         String trueOrFalseString = goal.getCompletion().value;
         if (trueOrFalseString.equals("true")) {
-            Label completionLabel = new Label("Completed");
+            Image completedImage = new Image(getClass()
+                    .getResourceAsStream("/main/docs/images/completedImage.png"));
+            Label completionLabel = new Label("Completed", new ImageView(completedImage));
             completionLabel.getStyleClass().add(COMPLETION_COLOR_STYLES[COMPLETED_COLOUR_STYLE]);
             completion.getChildren().add(completionLabel);
         } else {
+            Image ongoingImage = new Image(getClass().getResourceAsStream("ongoingImage.jpg"));
             Label completionLabel = new Label("Ongoing");
             completionLabel.getStyleClass().add(COMPLETION_COLOR_STYLES[NOT_COMPLETED_COLOUR_STYLE]);
             completion.getChildren().add(completionLabel);
