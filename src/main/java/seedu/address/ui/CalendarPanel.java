@@ -8,16 +8,9 @@ import com.calendarfx.model.Calendar;
 
 import com.calendarfx.model.CalendarSource;
 import com.calendarfx.view.CalendarView;
-//import com.calendarfx.model.CalendarEvent;
 
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
-import org.fxmisc.easybind.EasyBind;
-import seedu.address.ui.PersonListPanel.*;
-import seedu.address.model.person.Person;
+
 
 
 /**
@@ -28,14 +21,8 @@ public class CalendarPanel extends UiPart<Region> {
 
     private CalendarView calendarView;
 
-    public CalendarPanel(ObservableList<Person> personList) {
+    public CalendarPanel() {
         super(FXML);
-
-        Person person = personList.get(1);
-
-        String meetDate = person.getMeetDate().value;
-
-        System.out.println(meetDate);
 
         calendarView = new CalendarView();
         calendarView.setRequestedTime(LocalTime.now());
@@ -47,10 +34,6 @@ public class CalendarPanel extends UiPart<Region> {
         calendarView.setShowPrintButton(false);
         calendarView.showMonthPage();
         Calendar holidays = new Calendar("Holidays");
-        ZonedDateTime zdt = ZonedDateTime.parse("2018-04-16T10:15:30+01:00[Europe/Paris]");
-
-
-        calendarView.createEntryAt(zdt, holidays);
 
 
         holidays.setStyle(Calendar.Style.STYLE2);

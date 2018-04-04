@@ -37,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private CalendarPanel calendarPanel;
+    private CalendarMeetPanel calendarMeetPanel;
     private PersonListPanel personListPanel;
     private Config config;
     private UserPrefs prefs;
@@ -117,8 +118,11 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        calendarPanel = new CalendarPanel(logic.getFilteredPersonList());
+        calendarPanel = new CalendarPanel();
         calendarPlaceholder.getChildren().add(calendarPanel.getRoot());
+
+        calendarMeetPanel = new CalendarMeetPanel(logic.getFilteredPersonList());
+        calendarPlaceholder.getChildren().add(calendarMeetPanel.getCalendarRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getFilteredGoalList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
