@@ -7,7 +7,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.commons.util.AppUtil;
 import seedu.address.model.goal.Goal;
+import sun.plugin2.applet.Applet2ClassLoader;
 
 //@@author deborahlow97
 /**
@@ -60,14 +62,19 @@ public class GoalCard extends UiPart<Region> {
     private void initCompletion(Goal goal) {
         String trueOrFalseString = goal.getCompletion().value;
         if (trueOrFalseString.equals("true")) {
-            Image completedImage = new Image(getClass()
-                    .getResourceAsStream("/main/docs/images/completedImage.png"));
-            Label completionLabel = new Label("Completed", new ImageView(completedImage));
+            Image completedImage = AppUtil.getImage("/images/completedImage.png");
+            ImageView completedImageView = new ImageView(completedImage);
+            completedImageView.setFitHeight(30);
+            completedImageView.setFitWidth(30);
+            Label completionLabel = new Label("Completed", completedImageView);
             completionLabel.getStyleClass().add(COMPLETION_COLOR_STYLES[COMPLETED_COLOUR_STYLE]);
             completion.getChildren().add(completionLabel);
         } else {
-            Image ongoingImage = new Image(getClass().getResourceAsStream("ongoingImage.jpg"));
-            Label completionLabel = new Label("Ongoing");
+            Image ongoingImage = AppUtil.getImage("/images/ongoingImage.png");
+            ImageView ongoingImageView = new ImageView(ongoingImage);
+            ongoingImageView.setFitHeight(27);
+            ongoingImageView.setFitWidth(27);
+            Label completionLabel = new Label("Ongoing", ongoingImageView);
             completionLabel.getStyleClass().add(COMPLETION_COLOR_STYLES[NOT_COMPLETED_COLOUR_STYLE]);
             completion.getChildren().add(completionLabel);
         }
