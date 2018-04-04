@@ -26,7 +26,7 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="goalText" styleClass="cell_big_label" text="\$first" />
+        <Label fx:id="goalText" styleClass="cell_big_label" text="\$first" wrapText="true"/>
       </HBox>
       <FlowPane fx:id="completion" alignment="BOTTOM_RIGHT" columnHalignment="RIGHT" prefWidth="130.0" rowValignment="BOTTOM" />
       <Label fx:id="importance" styleClass="cell_small_label" text="\$importance" />
