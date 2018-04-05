@@ -84,9 +84,9 @@ public class DateTimeParser {
                 .append(" ")
                 .append(year)
                 .append(",  Time: ")
-                .append(hour)
+                .append(String.format("%02d", hour))
                 .append(":")
-                .append(minute);
+                .append(String.format("%02d", minute));
         return builder.toString();
     }
 
