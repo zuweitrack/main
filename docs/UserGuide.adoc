@@ -86,7 +86,7 @@ Shows a list of all persons in CollegeZone. +
 
 Format: `list OR l`
 
-=== Editing a Person : `edit OR e` [since v1.2]
+=== Editing a Person : `edit OR e` [Since v1.2]
 
 Edits an existing person in CollegeZone. +
 
@@ -108,7 +108,7 @@ Edits the phone number and level of friendship of the 1st person to be `91234567
 * `e 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-=== Locating Persons by name: `find OR f` `[since v1.1]`
+=== Locating Persons by name or tag: `find OR f` [Since v1.1]
 
 Finds persons whose names contain any of the given keywords. +
 Format: `find [n/KEYWORDS]` or `find [t/KEYWORDS]`
@@ -131,7 +131,7 @@ Returns any person having names `Betsy`, `Tim`, or `John`
 *  `find t/friends` +
 Returns any person having tags `friends`
 
-=== Seeking the Resident Assistant of a person : `seek` `[coming in v2.0]`
+=== Seeking the Resident Assistant of a person : `seek` [Since v1.3]
 Seek the Resident Assistant (RA) of the person whose name contains any of the given keywords. +
 Format: `seek NAME`
 
@@ -190,7 +190,7 @@ Selects the 2nd person in CollegeZone.
 `s 1` +
 Selects the 1st person in the results of the `find` command.
 
-=== Meeting a person : `meet OR m`
+=== Meeting a person : `meet OR m` [Since v1.3]
 
 Selects the person identified by the index number used in the last person listing. +
 Format: `meet INDEX [d/MEETDATE]`
@@ -233,7 +233,7 @@ Examples:
 * `+r text/Eat vitamins d/tmr 8am e/tmr 8.10am`
 * `+reminder text/Dental appointment d/next thurs 3pm e/next thurs 4pm`
 
-=== Editing a Reminder: `~r` [coming v1.5]
+=== Editing a Reminder: `~r` [Coming v1.5]
 Edits an existing reminder in CollegeZone. +
 Format: `~r INDEX [text/REMINDER_TEXT] [d/DATETIME]`
 
@@ -267,7 +267,7 @@ Examples:
 * `-reminder Dental appointment`
 
 
-=== Adding a Goal: `+goal OR +g OR addgoal` [Coming v1.3]
+=== Adding a Goal: `+goal OR +g OR addgoal` [Since v1.3]
 Adds a goal to CollegeZone and is reflected in the Goals Page. +
 
 Format: `+goal impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
@@ -285,7 +285,7 @@ Examples:
 * `+g impt/2 text/meetup with close friends more often =)`
 * `addgoal impt/1 text/learn how to bake cheesecake`
 
-=== Editing a Goal: `~goal OR ~g OR editgoal` [Coming v1.4]
+=== Editing a Goal: `~goal OR ~g OR editgoal` [Since v1.4]
 Edits an existing goal in CollegeZone. +
 
 Format: `~goal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
@@ -309,7 +309,7 @@ Edits the goal text and importance level of the 1st person to be `learn yoga` an
 * `editgoal 5 text/swim at least twice a month` +
 Edits the goal text of the 5th person to be `swim at least twice a month`.
 
-=== Deleting a Goal: `-goal OR -g OR deletegoal` [v1.4]
+=== Deleting a Goal: `-goal OR -g OR deletegoal` [Since v1.4]
 Deletes the specified goal from CollegeZone. +
 Format: `-goal INDEX` +
         `OR` +
@@ -335,7 +335,7 @@ Deletes the 4th goal in CollegeZone's goal page. +
 `deletegoal 1` +
 Deletes the 1st goal in CollegeZone's goal page.
 
-=== Completing a Goal: `!goal OR !g OR completegoal` [v1.5]
+=== Completing a Goal: `!goal OR !g OR completegoal` [Since v1.4]
 Indicates completion of an existing goal in CollegeZone. +
 
 Format: `!goal INDEX` +
@@ -438,7 +438,7 @@ CollegeZone data are saved in the hard disk automatically after any command that
 There is no need to save manually.
 
 // tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+=== Encrypting data files [Coming in v2.0]
 
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
