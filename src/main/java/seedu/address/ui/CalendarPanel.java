@@ -75,27 +75,31 @@ public class CalendarPanel extends UiPart<Region> {
     private void updateCalendar() {
         setDateAndTime();
         CalendarSource myCalendarSource = new CalendarSource("Reminders and Meetups");
-        Calendar calendar = new Calendar("Reminders and Meetups");
-        calendar.setStyle(Calendar.Style.getStyle(1));
-        calendar.setLookAheadDuration(Duration.ofDays(365));
-        myCalendarSource.getCalendars().add(calendar);
+        Calendar calendarR = new Calendar("Reminders");
+        Calendar calendarM = new Calendar("Meetups");
+        calendarR.setStyle(Calendar.Style.getStyle(1));
+        calendarR.setLookAheadDuration(Duration.ofDays(365));
+        calendarM.setStyle(Calendar.Style.getStyle(2));
+        calendarR.setLookAheadDuration(Duration.ofDays(365));
+        myCalendarSource.getCalendars().add(calendarR);
+        myCalendarSource.getCalendars().add(calendarM);
         for (Reminder reminder : reminderList) {
             LocalDateTime ldtstart = nattyDateAndTimeParser(reminder.getDateTime().toString()).get();
             LocalDateTime ldtend = nattyDateAndTimeParser(reminder.getEndDateTime().toString()).get();
-            calendar.addEntry(new Entry(reminder.getReminderText().toString(), new Interval(ldtstart, ldtend)));
+            calendarR.addEntry(new Entry(reminder.getReminderText().toString(), new Interval(ldtstart, ldtend)));
         }
         //@@author A0158738X
         for (Person person : personList) {
             String meetDate = person.getMeetDate().toString();
             if (!meetDate.isEmpty()) {
                 int day = Integer.parseInt(meetDate.substring(0,
-                        1));
-                int month = Integer.parseInt(meetDate.substring(2,
-                        4 ));
-                int year = Integer.parseInt(meetDate.substring(5,
-                        9));
+                        2));
+                int month = Integer.parseInt(meetDate.substring(3,
+                        5));
+                int year = Integer.parseInt(meetDate.substring(6,
+                        10));
                 System.out.println(year + " " + month + " " + day);
-                calendar.addEntry(new Entry("Meeting " + person.getName().toString(),
+                calendarM.addEntry(new Entry("Meeting " + person.getName().toString(),
                         new Interval(LocalDate.of(year, month, day), LocalTime.of(12, 0),
                                 LocalDate.of(year, month, day), LocalTime.of(13, 0))));
             }
