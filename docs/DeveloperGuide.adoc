@@ -12,7 +12,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2103JAN2018-T09-B2/main
 
-By: `Team T09-B2`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team T09-B2`      Since: `Mar 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -388,10 +388,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
-[d]
-=== Since v1.1
-
-=== Enhanced Find Command
+=== Enhanced Find Command [Since v1.1]
 
 The old find command feature only allows searching by name. To make CollegeZone more useful for RC4 students, we have enhanced the find
 command feature to be able to find persons by tags.
@@ -405,7 +402,7 @@ command feature to be able to find persons by tags.
 * If user is searching by name, user input should be: find n/<name> t/<empty>
 * If user is searching by tags, user input should be: find n/<empty> t/<tag>
 
-=== Logic: Command Aliases
+=== Logic: Command Aliases [Since v1.1]
 
 CollegeZone users may now use shortcuts to perform desired tasks. These shortcuts are shown in figure 3.6.1.
 
@@ -453,39 +450,42 @@ CollegeZone users may now use shortcuts to perform desired tasks. These shortcut
 |undo
 |u
 
+|Meet
+|meet
+|m
+
 |=======================================================================
 
 //end::find[]
 
 // tag::tagcolours[]
-=== Enhanced tag colours
+=== Enhanced tag colours [Since v1.1]
 Tags are now colour-coded which allows improved differentiation between many different tags.
 // end::tagcolours[]
 
-[d]
-=== Since v1.2
 // tag::addandedit[]
-=== Targeted add and edit command
+=== Targeted add and edit command [Since v1.2]
 
 The old add and edit feature holds a broad information about a Person.
 As CollegeZone is catered toward NUS RC4 Residents, we have changed the attributes of a Person to hold: +
-*Name, Mobile Number, Birthday, Level of Friendship, RC4 Unit Number, RC4 CCAs and Tags*. +
+*Name, Mobile Number, Birthday, Level of Friendship, RC4 Unit Number, Meet up dates with RC4 students, RC4 CCAs and Tags*. +
 This is done by removing unwanted attributes of a person and adding new attributes of a person.
 
 image::RCPersonClass.JPG[width="450"]
-    Figure 3.7.1: Person Class diagram with added attributes
+    Figure 3.8.1: Person Class diagram with added attributes
 
 ===== Aspect: Nature of new Attributes
 * Birthday: Must be a valid date.
 * Level Of Friendship: Level of friendship is an integer from 1 to 10. The level is indicated by the number of hearts via the UI.
 * Unit Number: Must be a valid unit number in RC4.
+* Meet Date: Must be a valid date.
 * A RC4 resident is able to have multiple CCAs.
 
 ===== Aspect: displaying Level Of Friendship
 * Level of Friendship is displayed as a string of heart symbols. It is represented this way as it more intuitive for users to understand what the symbols mean.
 // end::addandedit[]
 
-=== Suggested: Set Reminders
+=== Suggested: Set Reminders [Since v1.4]
 As RC4 residents have events, classes and meetings to go to at a certain date and time, we decided on implementing a reminder feature to allow users to add reminders in CollegeZone. +
 Reminder commands are undoable and redoable for the benefit users to redo and undo a command they did or did not intend to change.
 
@@ -512,7 +512,7 @@ Bottom Panel: Number of orange reminders +
 //end::addandedit[]
 
 // tag::myGoalsPage[]
-=== My Goals Page [coming v1.4]
+=== My Goals Page [Since v1.4]
 
 The My Goals page is created for RC4 users to add and keep track of their goals every year. We are implementing this goal page as setting goals gives you *long-term vision* and *short-term motivation* for the goals. In addition as a majority of RC4 residents are NUS students, when students set their own goals, they take responsibility and ownership of their learning goals. +
 Goals are meant only for the user, and the user can have many goals stored in CollegeZone. +
@@ -527,7 +527,7 @@ Goals are meant only for the user, and the user can have many goals stored in Co
 All goal commands are event driven. +
 The following is the Sequence Diagram for interactions within the `Logic` component for the `execute("goal remove 1")` API call. +
 
-image::GoalHighLevelSequenceDiagram.jpg[width="500"]
+image::GoalHighLevelSequenceDiagram.jpg[width="800"]
     Figure 3.10.0.1: Goal delete Sequence Diagram
 
 1. Logic
@@ -555,13 +555,15 @@ Coming up with new algorithms is very time consuming. Implementation of My Goals
 
 *Goals objects will consist of 3 attributes :* +
 
-1. the date and time of Goal completion. +
-2. the level of importance of Goal. +
-3. the text content of Goal.
+1. Date and time of when goal completed. +
+2. Level of importance of goal. +
+3. Text content of Goal. +
+4. Date and time of Goal of when goal started. +
+5. Goal completion status.
 
 The following is the model component class diagram for Goal
 
-image::GoalModelComponentClassDiagram.JPG[width="500"]
+image::GoalModelComponentClassDiagram.JPG[width="800"]
     Figure 3.10.0.2: Goal model Class Diagram
 
 
@@ -569,13 +571,20 @@ image::GoalModelComponentClassDiagram.JPG[width="500"]
 
 
 **Aspect:** Representation of Goals level of importance in UI +
-**Alternative 1 (current choice):** Each level of importance have a different colour specified to it. +
+**Alternative 1 (current choice):** Each level of importance have a number of stars related to it. +
 **Pros:** Ability for the user to differentiate the Goals with higher level of importance compared to those with lower level of importance. +
-**Cons:** The colours of the goals list in the UI might look messy to the user without having a sort Goals option as the list of goals is displayed based on when it was added. +
-**Alternative 2:** Having a sort goals command+
+**Cons:** The goal list in the UI might look messy to the user without having a sort Goals option as the list of goals is displayed based on when it was added. +
+**Alternative 2:** Having an additional sort goal command +
 **Pros:** It is simple and easy to understand. +
 **Cons:** It requires extra methods to implement the sort function. +
 
+**Aspect:** Representation of Goals in UI +
+**Alternative 1 (current choice):** Having a goal list panel beside our current person list panel. +
+**Pros:** Ability for the user to differentiate the Goals with higher level of importance compared to those with lower level of importance. +
+**Cons:** The initial space in UI reserved for person list is not being used to display 2 lists, the person list and the goal list. This causes the UI to look clunky and overwhelming. +
+**Alternative 2:** Having a tab button in CollegeZone that allows user to switch between the person list panel and goal list panel. +
+**Pros:** Ability for user to switch to person list and goal list in the UI, which makes it look more user friendly. +
+**Cons:** As CollegeZone is a desktop application that has most interactions happen using a Command Line Interface (CLI), a new command to switch tabs between goal list and person list needs to be implemented. +
 ---
 // end::myGoalsPage[]
 
@@ -726,8 +735,7 @@ b. Require developers to download those libraries manually (this creates extra w
 
 |Shamsheer Ahamed
 |Meetup (Tasks) : This feature allows user to set up a meet up date that will be reflected on a Calendar +
-|Meetup : Added a new Command called meet to allow user to set up a meet up date with RC4 residents +
- Ui : Added a placeholder in PersonCard's to display the date of meet up for each person later +
+|Profile Photo : Added a male female profile pictures to GUI for an interactive experience.
 
 |Goh Zu Wei
 |Form Groups : This feature allows user to organize students to form study groups or recreational sport groups +
@@ -766,7 +774,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |forgetful RC student |add other RC friends name, birthday, hall CCAs and tags into CollegeZone |
 
-|`* * *` |forgetful RC student |add a reminder of meet up with another RC4 student |shows who you are meeting up with on what date
+|`* * *` |forgetful RC student |set up a meet up with another RC4 student |shows who you are meeting up with on the calendar
 
 |`* * *` |RC student |note down tasks, events or training sessions in a calendar |make my schedule more organised
 
@@ -944,16 +952,16 @@ Use case ends.
 *Extensions*
 
 [none]
-*1a. The given date is invalid.
+* 1a. The given date is invalid.
 +
-[note]
+[none]
 ** 1a1. CollegeZone shows an error message.
 +
 Use case ends.
 
-*1b. The given person's index is invalid.
+* 1b. The given person's index is invalid.
 +
-[note]
+[none]
 ** 1b1. CollegeZone shows an error message.
 +
 Use case ends.
