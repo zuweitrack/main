@@ -54,7 +54,6 @@ public class CalendarPanel extends UiPart<Region> {
         calendarView.setShowPrintButton(false);
         calendarView.showMonthPage();
         updateCalendar();
-       // updateMeetCalendar();
         registerAsAnEventHandler(this);
 
 
