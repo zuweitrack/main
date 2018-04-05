@@ -450,6 +450,10 @@ CollegeZone users may now use shortcuts to perform desired tasks. These shortcut
 |undo
 |u
 
+|Meet
+|meet
+|m
+
 |=======================================================================
 
 //end::find[]
@@ -464,7 +468,7 @@ Tags are now colour-coded which allows improved differentiation between many dif
 
 The old add and edit feature holds a broad information about a Person.
 As CollegeZone is catered toward NUS RC4 Residents, we have changed the attributes of a Person to hold: +
-*Name, Mobile Number, Birthday, Level of Friendship, RC4 Unit Number, RC4 CCAs and Tags*. +
+*Name, Mobile Number, Birthday, Level of Friendship, RC4 Unit Number, Meet up dates with RC4 students, RC4 CCAs and Tags*. +
 This is done by removing unwanted attributes of a person and adding new attributes of a person.
 
 image::RCPersonClass.JPG[width="450"]
@@ -474,6 +478,7 @@ image::RCPersonClass.JPG[width="450"]
 * Birthday: Must be a valid date.
 * Level Of Friendship: Level of friendship is an integer from 1 to 10. The level is indicated by the number of hearts via the UI.
 * Unit Number: Must be a valid unit number in RC4.
+* Meet Date: Must be a valid date.
 * A RC4 resident is able to have multiple CCAs.
 
 ===== Aspect: displaying Level Of Friendship
@@ -730,8 +735,7 @@ b. Require developers to download those libraries manually (this creates extra w
 
 |Shamsheer Ahamed
 |Meetup (Tasks) : This feature allows user to set up a meet up date that will be reflected on a Calendar +
-|Meetup : Added a new Command called meet to allow user to set up a meet up date with RC4 residents +
- Ui : Added a placeholder in PersonCard's to display the date of meet up for each person later +
+|Profile Photo : Added a male female profile pictures to GUI for an interactive experience.
 
 |Goh Zu Wei
 |Form Groups : This feature allows user to organize students to form study groups or recreational sport groups +
@@ -770,7 +774,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |forgetful RC student |add other RC friends name, birthday, hall CCAs and tags into CollegeZone |
 
-|`* * *` |forgetful RC student |add a reminder of meet up with another RC4 student |shows who you are meeting up with on what date
+|`* * *` |forgetful RC student |set up a meet up with another RC4 student |shows who you are meeting up with on the calendar
 
 |`* * *` |RC student |note down tasks, events or training sessions in a calendar |make my schedule more organised
 
@@ -948,14 +952,14 @@ Use case ends.
 *Extensions*
 
 [none]
-*1a. The given date is invalid.
+* 1a. The given date is invalid.
 +
 [none]
 ** 1a1. CollegeZone shows an error message.
 +
 Use case ends.
 
-*1b. The given person's index is invalid.
+* 1b. The given person's index is invalid.
 +
 [none]
 ** 1b1. CollegeZone shows an error message.
