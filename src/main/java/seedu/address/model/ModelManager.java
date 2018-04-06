@@ -100,6 +100,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     public void deleteMeetDate (Person person) throws PersonNotFoundException {
         addressBook.removeMeetFromPerson(person);
+        indicateAddressBookChanged();
     }
 
     //=========== Filtered Person List Accessors =============================================================
