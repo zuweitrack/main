@@ -1,5 +1,9 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.DateTimeParser.properDateTimeFormat;
+
+import java.time.LocalDateTime;
+
 import seedu.address.logic.commands.CompleteGoalCommand.CompleteGoalDescriptor;
 import seedu.address.model.goal.Completion;
 import seedu.address.model.goal.EndDateTime;
@@ -27,7 +31,7 @@ public class CompleteGoalDescriptorBuilder {
     public CompleteGoalDescriptorBuilder(Goal goal) {
         descriptor = new CompleteGoalDescriptor();
         descriptor.setCompletion(new Completion(true));
-        descriptor.setEndDateTime(new EndDateTime("today"));
+        descriptor.setEndDateTime(new EndDateTime(properDateTimeFormat(LocalDateTime.now())));
         //TODO
         //descriptor.setCompletion(goal.getCompletion());
         //descriptor.setEndDateTime(goal.getEndDateTime());
