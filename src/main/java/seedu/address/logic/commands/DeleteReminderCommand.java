@@ -29,12 +29,15 @@ public class DeleteReminderCommand extends UndoableCommand {
 
     private Index targetIndex;
 
+    private String dateTime;
+
     private ReminderTextPredicate predicate;
 
     private Reminder reminderToDelete;
 
-    public DeleteReminderCommand(ReminderTextPredicate predicate) {
+    public DeleteReminderCommand(ReminderTextPredicate predicate, String dateTime) {
         this.predicate = predicate;
+        this.dateTime = dateTime;
     }
 
     @Override
@@ -54,10 +57,18 @@ public class DeleteReminderCommand extends UndoableCommand {
         model.updateFilteredReminderList(predicate);
         List<Reminder> lastShownList = model.getFilteredReminderList();
         targetIndex = Index.fromOneBased(1);
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_GOAL_DISPLAYED_INDEX);
-        }
+        if (lastShownList.size() > 1) {
+            for (Reminder reminder : lastShownList) {
+                if (reminder.getDateTime().toString().equals(dateTime)) {
+                    reminderToDelete = reminder;
+                }
+            }
+        } else {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_GOAL_DISPLAYED_INDEX);
+            }
 
-        reminderToDelete = lastShownList.get(targetIndex.getZeroBased());
+            reminderToDelete = lastShownList.get(targetIndex.getZeroBased());
+        }
     }
 }
