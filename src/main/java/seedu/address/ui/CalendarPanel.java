@@ -75,18 +75,27 @@ public class CalendarPanel extends UiPart<Region> {
     private void updateCalendar() {
         setDateAndTime();
         CalendarSource myCalendarSource = new CalendarSource("Reminders and Meetups");
-        Calendar calendarR = new Calendar("Reminders");
+        Calendar calendarRDue = new Calendar("Reminders Already Due");
+        Calendar calendarRNotDue = new Calendar("Reminder Not Due");
         Calendar calendarM = new Calendar("Meetups");
-        calendarR.setStyle(Calendar.Style.getStyle(1));
-        calendarR.setLookAheadDuration(Duration.ofDays(365));
-        calendarM.setStyle(Calendar.Style.getStyle(2));
-        calendarR.setLookAheadDuration(Duration.ofDays(365));
-        myCalendarSource.getCalendars().add(calendarR);
+        calendarRDue.setStyle(Calendar.Style.getStyle(4));
+        calendarRDue.setLookAheadDuration(Duration.ofDays(365));
+        calendarRNotDue.setStyle(Calendar.Style.getStyle(1));
+        calendarRNotDue.setLookAheadDuration(Duration.ofDays(365));
+        calendarM.setStyle(Calendar.Style.getStyle(3));
+        myCalendarSource.getCalendars().add(calendarRDue);
+        myCalendarSource.getCalendars().add(calendarRNotDue);
         myCalendarSource.getCalendars().add(calendarM);
         for (Reminder reminder : reminderList) {
             LocalDateTime ldtstart = nattyDateAndTimeParser(reminder.getDateTime().toString()).get();
             LocalDateTime ldtend = nattyDateAndTimeParser(reminder.getEndDateTime().toString()).get();
-            calendarR.addEntry(new Entry(reminder.getReminderText().toString(), new Interval(ldtstart, ldtend)));
+            LocalDateTime now = LocalDateTime.now();
+            if (now.isBefore(ldtend)) {
+                calendarRNotDue.addEntry(new Entry(
+                        reminder.getReminderText().toString(), new Interval(ldtstart, ldtend)));
+            } else {
+                calendarRDue.addEntry(new Entry(reminder.getReminderText().toString(), new Interval(ldtstart, ldtend)));
+            }
         }
         //@@author A0158738X
         for (Person person : personList) {
