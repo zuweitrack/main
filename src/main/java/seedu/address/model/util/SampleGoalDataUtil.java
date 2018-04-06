@@ -69,7 +69,7 @@ public class SampleGoalDataUtil {
                     new StartDateTime(getLocalDateTimeFromString("2017-04-08 13:30")),
                     EMPTY_END_DATE_TIME, new Completion(false)),
             new Goal(new Importance("9"), new GoalText("Drink 8 cups of water everyday"),
-                    new StartDateTime(getLocalDateTimeFromString("2017-04-08 01:30")),
+                    new StartDateTime(getLocalDateTimeFromString("2017-04-08 01:59")),
                     new EndDateTime("03/06/2018 12:30"), new Completion(true)),
             new Goal(new Importance("8"), new GoalText("Get A for CS2105"),
                     new StartDateTime(getLocalDateTimeFromString("2017-04-08 02:30")),

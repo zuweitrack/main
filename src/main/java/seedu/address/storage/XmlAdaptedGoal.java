@@ -1,6 +1,5 @@
 package seedu.address.storage;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -93,7 +92,7 @@ public class XmlAdaptedGoal {
                     StartDateTime.class.getSimpleName()));
         }
 
-        final StartDateTime startDateTime = new StartDateTime(LocalDateTime.now());
+        final StartDateTime startDateTime = new StartDateTime(this.startDateTime);
 
         if (this.endDateTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EndDateTime
