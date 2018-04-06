@@ -15,10 +15,7 @@ import seedu.address.model.goal.Goal;
 import seedu.address.model.goal.UniqueGoalList;
 import seedu.address.model.goal.exceptions.DuplicateGoalException;
 import seedu.address.model.goal.exceptions.GoalNotFoundException;
-import seedu.address.model.person.Cca;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniqueCcaList;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.*;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.reminder.Reminder;
@@ -248,6 +245,24 @@ public class AddressBook implements ReadOnlyAddressBook {
             return true;
         } else {
             throw new PersonNotFoundException();
+        }
+    }
+
+    /**
+     * Removes {@code meet} from {@code person} in this {@code AddressBook}.
+     * @throws PersonNotFoundException if the {@code person} is not in this {@code AddressBook}.
+     */
+    public void removeMeetFromPerson(Person person) throws PersonNotFoundException {
+        Meet newMeetDate = new Meet("");
+
+        Person newPerson = new Person(person.getName(), person.getPhone(), person.getBirthday(),
+                person.getLevelOfFriendship(), person.getUnitNumber(), person.getCcas(), newMeetDate, person.getTags());
+
+        try {
+            updatePerson(person, newPerson);
+        } catch (DuplicatePersonException dpe) {
+            throw new AssertionError("Modifying a person's meeting date only should not result in a duplicate. "
+                    + "See Person#equals(Object).");
         }
     }
 
