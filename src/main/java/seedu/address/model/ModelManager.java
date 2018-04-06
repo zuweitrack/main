@@ -97,7 +97,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void deleteTag (Tag t) {
         addressBook.removeTag(t);
     }
-    
+
     public void deleteMeetDate (Person person) throws PersonNotFoundException {
         addressBook.removeMeetFromPerson(person);
     }
