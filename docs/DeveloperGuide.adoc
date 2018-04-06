@@ -485,7 +485,7 @@ image::RCPersonClass.JPG[width="450"]
 * Level of Friendship is displayed as a string of heart symbols. It is represented this way as it more intuitive for users to understand what the symbols mean.
 // end::addandedit[]
 
-=== Suggested: Set Reminders [Since v1.4]
+=== Reminders in Calendar [Since v1.4]
 As RC4 residents have events, classes and meetings to go to at a certain date and time, we decided on implementing a reminder feature to allow users to add reminders in CollegeZone. +
 Reminder commands are undoable and redoable for the benefit users to redo and undo a command they did or did not intend to change.
 
@@ -496,10 +496,9 @@ Reminder commands are undoable and redoable for the benefit users to redo and un
 * Deleting a reminder on the Calendar
 * Acknowledging a reminder on the Calendar
 
-*Reminder objects will consist of 3 attributes :* +
+*Reminder objects will consist of 2 attributes :* +
 1. the date, time and recurrence of reminder +
-2. the level of urgency of reminder +
-3. the reminder text content
+2. the reminder text content
 
 The reminders will be stored in an ArrayList of all the reminder objects. Each reminder will have specific positive integer index number. +
 A reminder will be *green* until it is due. +
