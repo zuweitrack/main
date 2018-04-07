@@ -201,6 +201,10 @@ public class AddCommandTest {
         public void deleteReminder(Reminder target) throws ReminderNotFoundException {
             fail("This method should not be called.");
         }
+
+        public void deleteMeetDate(Person person) throws PersonNotFoundException {
+            fail("This method should not be called.");
+        }
     }
 
     /**
