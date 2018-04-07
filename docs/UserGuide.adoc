@@ -489,6 +489,7 @@ e.g. `select 2`
 * *History* : `history` OR `h`
 * *Undo* : `undo`
 * *Redo* : `redo`
+* *Meet* : `meet INDEX [d/DD-MM-YYYY]` OR `m INDEX [d/DD-MM-YYYY]`
 * *Add Goal* : `+goal impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
 OR `+g impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
 OR `addgoal impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
