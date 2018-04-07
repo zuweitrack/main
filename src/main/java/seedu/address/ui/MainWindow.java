@@ -207,7 +207,7 @@ public class MainWindow extends UiPart<Stage> {
         handleHelp();
     }
 
-
+    //@@author deborahlow97
     /**
      * Calculation of percentage of goal completed
      * @return
