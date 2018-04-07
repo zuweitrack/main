@@ -65,18 +65,31 @@ public class GuiTestAssert {
 
         case "colleagues":
         case "neighbours":
+        case "bff":
             return "yellow";
 
         case "family":
         case "friend":
+        case "closefriend":
             return "orange";
 
         case "friends":
+        case "classmate":
             return "brown";
 
         case "husband":
+        case "cousin":
             return "grey";
 
+        case "boyfriend":
+            return "green";
+
+        case "schoolmate":
+            return "blue";
+
+        case "exgirlfriend":
+        case "malafriend":
+            return "red";
         default:
             fail(tagName + " does not have a color assigned.");
             return "";

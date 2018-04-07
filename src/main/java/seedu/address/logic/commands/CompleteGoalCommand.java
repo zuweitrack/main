@@ -152,6 +152,7 @@ public class CompleteGoalCommand extends UndoableCommand {
         public Optional<StartDateTime> getStartDateTime() {
             return Optional.ofNullable(startDateTime);
         }
+
         public Optional<Importance> getImportance() {
             return Optional.ofNullable(importance);
         }
