@@ -18,7 +18,7 @@ public class ThemeCommand extends Command {
             + "Parameters: COLOUR THEME\n"
             + "(Colour theme words: dark, light)\n"
             + "Example: " + COMMAND_WORD + " dark\n";
-    public static final String MESSAGE_INVALID_THEME_COLOUR = "Theme colour entered is invalid."
+    public static final String MESSAGE_INVALID_THEME_COLOUR = "Theme colour entered is invalid.\n"
             + "Possible theme colours:\n"
             + "(Colour theme words: dark, light)\n";
     public static final String MESSAGE_ALREADY_IN_CURRENT_THEME = "CollegeZone is already in the theme colour.";

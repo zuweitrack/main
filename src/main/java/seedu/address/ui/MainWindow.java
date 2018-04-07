@@ -244,8 +244,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void setThemeColour(String themeColour) {
-        //primaryStage.getScene().getStylesheets().add(EXTENSIONS_STYLESHEET);
-        String hello = themeHashMap.get(themeColour);
+        primaryStage.getScene().getStylesheets().add(EXTENSIONS_STYLESHEET);
         primaryStage.getScene().getStylesheets().add(themeHashMap.get(themeColour));
     }
 
