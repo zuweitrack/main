@@ -18,10 +18,6 @@
   </icons>
   <scene>
     <Scene>
-      <stylesheets>
-        <URL value="@DarkTheme.css" />
-        <URL value="@Extensions.css" />
-      </stylesheets>
 
       <VBox>
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
