@@ -37,6 +37,9 @@ public interface Model {
     /** Deletes the given person. */
     void deletePerson(Person target) throws PersonNotFoundException;
 
+    /** Deletes the given person's meet date */
+    void deleteMeetDate(Person target) throws PersonNotFoundException;
+
     /** Adds the given person */
     void addPerson(Person person) throws DuplicatePersonException;
 
