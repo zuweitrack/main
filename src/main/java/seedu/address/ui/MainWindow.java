@@ -242,8 +242,10 @@ public class MainWindow extends UiPart<Stage> {
     private void setThemeColour() {
         setThemeColour(DEFAULT_THEME_COLOUR);
     }
+
     private void setThemeColour(String themeColour) {
-        primaryStage.getScene().getStylesheets().add(EXTENSIONS_STYLESHEET);
+        //primaryStage.getScene().getStylesheets().add(EXTENSIONS_STYLESHEET);
+        String hello = themeHashMap.get(themeColour);
         primaryStage.getScene().getStylesheets().add(themeHashMap.get(themeColour));
     }
 
@@ -255,6 +257,8 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleChangeThemeEvent(ThemeSwitchRequestEvent event) {
         themeColour = event.themeToChangeTo;
-        Platform.runLater(this::changeThemeColour);
+        Platform.runLater(
+                this::changeThemeColour
+        );
     }
 }

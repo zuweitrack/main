@@ -18,13 +18,11 @@ public class ThemeCommand extends Command {
             + "Parameters: COLOUR THEME\n"
             + "(Colour theme words: dark, light)\n"
             + "Example: " + COMMAND_WORD + " dark\n";
-    public static final String VIEW_PATH = "/view/";
     public static final String MESSAGE_INVALID_THEME_COLOUR = "Theme colour entered is invalid."
             + "Possible theme colours:\n"
             + "(Colour theme words: dark, light)\n";
     public static final String MESSAGE_ALREADY_IN_CURRENT_THEME = "CollegeZone is already in the theme colour.";
     private final String themeColour;
-    private String themeToChangeTo;
 
     /**
      * Creates a ThemeCommand based on the specified themeColour.
@@ -37,8 +35,8 @@ public class ThemeCommand extends Command {
     @Override
     public CommandResult execute() {
 
-        EventsCenter.getInstance().post(new ThemeSwitchRequestEvent(themeToChangeTo));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, themeToChangeTo));
+        EventsCenter.getInstance().post(new ThemeSwitchRequestEvent(themeColour));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, themeColour));
     }
 
     @Override

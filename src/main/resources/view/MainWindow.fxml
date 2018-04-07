@@ -18,6 +18,7 @@
   </icons>
   <scene>
     <Scene>
+
       <VBox>
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
           <Menu mnemonicParsing="false" text="File">
