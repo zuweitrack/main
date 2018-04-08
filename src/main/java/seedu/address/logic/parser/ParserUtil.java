@@ -37,6 +37,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INSUFFICIENT_PARTS = "Number of parts must be more than 1.";
+    public static final String MESSAGE_INVALID_SORT_FIELD = "Sort field entered is not a valid field.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -189,7 +190,6 @@ public class ParserUtil {
         }
         return new Meet(trimmedMeetDate);
     }
-    //@@author
     /**
      * Parses a {@code Optional<String> meetDate} into an {@code Optional<meetDate>} if {@code meetDate}
      * is present.
@@ -200,6 +200,7 @@ public class ParserUtil {
         return meetDate.isPresent() ? Optional.of(parseMeetDate(meetDate.get())) : Optional.empty();
     }
 
+    //@@author deborahlow97
     /**
      * Parses a {@code String cca} into a {@code Cca}
      * Leading and trailing whitespaces will be trimmed.
@@ -381,5 +382,26 @@ public class ParserUtil {
     public static Optional<EndDateTime> parseEndDateTime(Optional<String> endDateTime) throws IllegalValueException {
         requireNonNull(endDateTime);
         return endDateTime.isPresent() ? Optional.of(parseEndDateTime(endDateTime.get())) : Optional.empty();
+    }
+
+    //@@author deborahlow97
+    /**
+     * Parses a String and check if it is a valid sortField.
+     * @param sortField
+     * @return a valid sortField
+     * @throws IllegalValueException if specified String is an invalid field.
+     */
+    public static String parseSortGoalField(String sortField) throws IllegalValueException {
+        String trimmedSortField = sortField.trim();
+        String sortFieldToLowerCase = trimmedSortField.toLowerCase();
+        switch (sortFieldToLowerCase) {
+        case "importance":
+        case "goaltext":
+        case "completion":
+        case "start":
+            return sortFieldToLowerCase;
+        default:
+            throw new IllegalValueException(MESSAGE_INVALID_SORT_FIELD);
+        }
     }
 }

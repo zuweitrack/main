@@ -363,6 +363,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         goals.setGoalWithoutParameters(target, editedGoal);
     }
 
+    /**
+     * Sorts goal based on the sort field input.
+     */
+    public void sortGoal(String sortField) {
+        goals.sortGoal(sortField);
+    }
     //// reminder-level operations
 
     //@@author fuadsahmawi

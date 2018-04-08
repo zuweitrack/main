@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class EndDateTime {
 
     public final String value;
-
+    public final LocalDateTime localDateTimeValue;
     /**
      * Constructs a {@code EndDateTime}.
      *

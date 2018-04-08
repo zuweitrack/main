@@ -98,6 +98,10 @@ public interface Model {
      */
     void updateGoalWithoutParameters(Goal target, Goal editedGoal) throws GoalNotFoundException;
 
+    /**
+     * Sort the goal based on sortType
+     */
+    void sortGoal(String sortType);
     //@@author
     // fuadsahmawi
     /** Adds the given reminder. */

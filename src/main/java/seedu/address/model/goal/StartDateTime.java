@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 public class StartDateTime {
 
     public final String value;
+    public final LocalDateTime localDateTimeValue;
+
 
     /**
      * Constructs a {@code StartDateTime}.
@@ -20,6 +22,7 @@ public class StartDateTime {
      */
     public StartDateTime(LocalDateTime startDateTime) {
         requireNonNull(startDateTime);
+        this.localDateTimeValue = startDateTime;
         this.value = properDateTimeFormat(startDateTime);
     }
 

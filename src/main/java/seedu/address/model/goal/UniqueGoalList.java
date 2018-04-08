@@ -112,6 +112,33 @@ public class UniqueGoalList implements Iterable<Goal> {
     }
 
     /**
+     * Sort goals internal list using comparator
+     * @param sortField
+     */
+    public void sortGoal(String sortField) {
+        switch (sortField) {
+        case "importance":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalA.getImportance()
+                    .compareTo(goalB.getImportance()));
+            break;
+        case "goaltext":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalA.getGoalText()
+                    .compareTo(goalB.getGoalText()));
+            break;
+        case "completion":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalA.getCompletion()
+                    .compareTo(goalB.getCompletion()));
+            break;
+        case "start":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalA.getStartDateTime()
+                    .compareTo(goalB.getStartDateTime()));
+            break;
+
+        default:
+            break;
+        }
+    }
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Goal> asObservableList() {
