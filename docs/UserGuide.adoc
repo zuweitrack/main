@@ -523,7 +523,7 @@ _{explain how the user can enable/disable data encryption}_
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CollegeZone folder.
 
 == Command Summary
-The table below provides a quick summary of all the commands available in EduBuddy.
+The table below provides a quick summary of all the commands available in CollegeZone.
 
 [width="90%",cols="20%,<22%,<23%,<25%",options="header",]
 |=======================================================================
