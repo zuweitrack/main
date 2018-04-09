@@ -523,53 +523,101 @@ _{explain how the user can enable/disable data encryption}_
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CollegeZone folder.
 
 == Command Summary
+The table below provides a quick summary of all the commands available in EduBuddy.
 
-* *Add* `add n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...` +
-OR `a n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 */3 b/14-3-1995 u/01-111 cca/Choir t/friend t/colleague`
-* *Clear* : `clear` OR `c`
-* *Delete* : `delete INDEX` OR `d INDEX`
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [u/UNIT_NUMBER] [cca/CCA]... [t/TAG]...` +
-OR `e INDEX [n/NAME] [p/PHONE_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [u/UNIT_NUMBER] [cca/CCA]... [t/TAG]...` +
-e.g. `edit 2 n/James Lee cca/waterpolo`
-* *Find* : `find n/KEYWORD [MORE_KEYWORDS]` +
-OR `f n/KEYWORD [MORE_KEYWORDS]` +
-OR `find t/KEYWORD [MORE_KEYWORDS]` +
-OR `f t/KEYWORD [MORE_KEYWORDS]` +
-e.g. `find n/James Jake`
-* *List* : `list` OR `l`
-* *Help* : `help` OR `h`
-* *Select* : `select INDEX` OR `s INDEX`
-e.g. `select 2`
-* *History* : `history` OR `h`
-* *Undo* : `undo`
-* *Redo* : `redo`
-* *Meet* : `meet INDEX d/DD-MM-YYYY` OR `m INDEX d/DD-MM-YYYY`
-* *Add Goal* : `+goal impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
-OR `+g impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
-OR `addgoal impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
-e.g. `+goal impt/3 text/lose weight!`
-* *Edit Goal* : `~goal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
-OR `~g INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
-OR `editgoal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
-e.g. `~goal 2 impt/1`
+[width="90%",cols="20%,<22%,<23%,<25%",options="header",]
+|=======================================================================
+|Command |Function |Format |Example
 
-* *Delete Goal* : `-goal INDEX` +
-OR `-g INDEX` +
-OR `deletegoal INDEX` +
-e.g. `-goal 2`
+|*Add* |Adds a person |`add n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...` +
+OR +
+`a n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...`
+|`add n/James Ho p/22224444 */3 b/14-3-1995 u/01-111 cca/Choir t/friend t/colleague`
 
-* *Complete Goal* : `!goal INDEX` +
-OR `!g INDEX` +
-OR `completegoal INDEX` +
-e.g. `!goal INDEX`
-* *Add Reminder* : `+reminder text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME` +
-OR `+r text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME` +
-OR `addreminder text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME` +
-e.g. `+reminder text/Eat pills d/tonight 10pm e/tonight 10.15pm`
+|*Clear* |Clears all person and goal entries |`clear` OR `c`|
 
-* *Delete Reminder* : `-reminder [REMINDER_TEXT]` +
-OR `-r [REMINDER_TEXT]` +
-OR `deletereminder [REMINDER_TEXT]` +
-e.g. `-reminder Eat pills`
+|*Delete* |Deletes a person entry |`delete INDEX` OR `d INDEX`
+|`delete 3`
+
+|*Edit* |Edits a peron details |`edit INDEX [n/NAME] [p/PHONE_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [u/UNIT_NUMBER] [cca/CCA]... [t/TAG]...` +
+OR +
+`e INDEX [n/NAME] [p/PHONE_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [u/UNIT_NUMBER] [cca/CCA]... [t/TAG]...` +
+|`edit 2 n/James Lee cca/waterpolo`
+
+|*Find* |Finds a person by keyword |`find n/KEYWORD [MORE_KEYWORDS]` +
+OR +
+`f n/KEYWORD [MORE_KEYWORDS]` +
+OR +
+`find t/KEYWORD [MORE_KEYWORDS]` +
+OR +
+`f t/KEYWORD [MORE_KEYWORDS]` +
+|`find n/James Jake`
+
+|*List* |Lists all persons |`list` +
+OR +
+`l` |
+
+|*Help* |Opens the help page |`help` +
+OR +
+`h` |
+
+|*Select* |Selects the person and goal entry |`select INDEX` +
+OR +
+`s INDEX`
+|`select 2`
+
+|*History* |Lists previously entered commands |`history` +
+OR +
+`h`
+|
+
+|*Undo* |Undo previous command |`undo` |
+
+|*Redo* |Redo previous command |`redo` |
+
+|*Meet* |Adds meet up date with a person |`meet INDEX d/DD-MM-YYYY` +
+OR +
+`m INDEX d/DD-MM-YYYY`
+|
+
+|*Add Goal* |Adds a goal entry |`+goal impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
+OR +
+`+g impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
+OR +
+`addgoal impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
+|`+goal impt/3 text/lose weight!`
+
+|*Edit Goal* |Edits a goal entry |`~goal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
+OR +
+`~g INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
+OR +
+`editgoal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
+|`~goal 2 impt/1`
+
+|*Delete Goal* |Deletes a goal entry |`-goal INDEX` +
+OR +
+`-g INDEX` +
+OR +
+`deletegoal INDEX` +
+|`-goal 2`
+
+|*Complete Goal* |Complete a goal entry |`!goal INDEX` +
+OR +
+`!g INDEX` +
+OR +
+`completegoal INDEX` +
+|`!goal 1`
+
+|*Add Reminder* |Adds a reminder entry |`+reminder text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME` +
+OR +
+`+r text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME` +
+OR +
+`addreminder text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME` +
+|`+reminder text/Eat pills d/tonight 10pm e/tonight 10.15pm`
+
+|*Delete Reminder* |Deletes a reminder entry |`-reminder [REMINDER_TEXT]` +
+OR +
+`-r [REMINDER_TEXT]` +
+OR +
+`deletereminder [REMINDER_TEXT]` +
+|`-reminder Eat pills`
