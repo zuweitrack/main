@@ -359,7 +359,8 @@ public class AddressBookParserTest {
     public void parseCommand_sortGoalAlias_returnsTrue() throws Exception {
         SortGoalCommand command = (SortGoalCommand) parser.parseCommand(
                 SortGoalCommand.COMMAND_ALIAS + " " + "f/completion" + " " + "o/ascending");
-        assertEquals(new SortGoalCommand("importance", "ascending"), command);
+        assertEquals(new SortGoalCommand("completion", "ascending"), command);
+
         command = (SortGoalCommand) parser.parseCommand(
                 SortGoalCommand.COMMAND_ALIAS + " " + "f/startdatetime" + " " + "o/ascending");
         assertEquals(new SortGoalCommand("startdatetime", "ascending"), command);
