@@ -52,9 +52,7 @@ public class StartDateTime implements Comparable<StartDateTime> {
 
     @Override
     public int compareTo(StartDateTime startDateTime) {
-        if ((startDateTime.localDateTimeValue).isEqual(this.localDateTimeValue)) {
-            return 0;
-        } else if ((startDateTime.localDateTimeValue).isBefore(this.localDateTimeValue)) {
+        if ((startDateTime.localDateTimeValue).isBefore(this.localDateTimeValue)) {
             return 1;
         } else if ((startDateTime.localDateTimeValue).isAfter(this.localDateTimeValue)) {
             return -1;
