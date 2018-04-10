@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.Date;
 import java.util.List;
@@ -64,7 +65,6 @@ public class DateTimeParser {
         }
         return newEndDateTime;
     }
-
     /**
      * Receives a LocalDateTime and formats the {@code dateTime}
      *
@@ -77,7 +77,6 @@ public class DateTimeParser {
         int year = dateTime.getYear();
         int hour = dateTime.getHour();
         int minute = dateTime.getMinute();
-
         builder.append("Date: ")
                 .append(day)
                 .append(" ")
@@ -85,9 +84,33 @@ public class DateTimeParser {
                 .append(" ")
                 .append(year)
                 .append(",  Time: ")
-                .append(hour)
+                .append(String.format("%02d", hour))
+                .append(":")
+                .append(String.format("%02d", minute));
+        return builder.toString();
+    }
+
+    /**
+     * Receives a LocalDateTime and formats the {@code dateTime}
+     *
+     * @return a formatted dateTime in String
+     */
+    public static String properReminderDateTimeFormat(LocalDateTime dateTime) {
+        StringBuilder builder = new StringBuilder();
+        int day = dateTime.getDayOfMonth();
+        String month = dateTime.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+        int year = dateTime.getYear();
+        int hour = dateTime.getHour();
+        int minute = dateTime.getMinute();
+        builder.append(day)
+                .append("/")
+                .append(month)
+                .append("/")
+                .append(year)
                 .append(" ")
-                .append(minute);
+                .append(String.format("%02d", hour))
+                .append(":")
+                .append(String.format("%02d", minute));
         return builder.toString();
     }
 
@@ -101,5 +124,11 @@ public class DateTimeParser {
 
     public static boolean isTimeInferredInArgs() {
         return isTimeInferred;
+    }
+
+    public static LocalDateTime getLocalDateTimeFromString(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
+        return dateTime;
     }
 }

@@ -11,7 +11,6 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.Cca;
 import seedu.address.model.person.Person;
 
-
 /**
  * An UI component that displays information of a {@code Person}.
  */
@@ -61,10 +60,11 @@ public class PersonCard extends UiPart<Region> {
         levelOfFriendship.setText(changeLevelOfFriendshipToHeart(person.getLevelOfFriendship().value));
         unitNumber.setText(person.getUnitNumber().value);
         ccas.setText(getCcasInString(person.getCcas()));
-        meetDate.setText(person.getMeetDate().value);
+        meetDate.setText("Meet Date: " + person.getMeetDate().value);
         initTags(person);
     }
 
+    //@@author deborahlow97
     /**
      * Returns the color style for {@code tagName}'s label.
      */
@@ -106,6 +106,8 @@ public class PersonCard extends UiPart<Region> {
         }
         return heartString;
     }
+
+    //@@author
     @Override
     public boolean equals(Object other) {
         // short circuit if same object

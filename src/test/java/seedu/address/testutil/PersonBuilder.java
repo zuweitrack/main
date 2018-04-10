@@ -57,8 +57,8 @@ public class PersonBuilder {
         birthday = personToCopy.getBirthday();
         levelOfFriendship = personToCopy.getLevelOfFriendship();
         unitNumber = personToCopy.getUnitNumber();
-        ccas = new HashSet<>(personToCopy.getCcas());
         meetDate = personToCopy.getMeetDate();
+        ccas = new HashSet<>(personToCopy.getCcas());
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -117,7 +117,7 @@ public class PersonBuilder {
         this.unitNumber = new UnitNumber(unitNumber);
         return this;
     }
-
+    //@@author A0158738X
     /**
      * Sets the {@code Email} of the {@code Person} that we are building.
      */

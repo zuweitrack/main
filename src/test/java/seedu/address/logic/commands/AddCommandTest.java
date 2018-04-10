@@ -21,9 +21,15 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.goal.Goal;
+import seedu.address.model.goal.exceptions.DuplicateGoalException;
+import seedu.address.model.goal.exceptions.GoalNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.reminder.Reminder;
+import seedu.address.model.reminder.exceptions.DuplicateReminderException;
+import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
@@ -96,7 +102,7 @@ public class AddCommandTest {
     /**
      * A default model stub that have all of the methods failing.
      */
-    private class ModelStub implements Model {
+    public static class ModelStub implements Model {
         @Override
         public void addPerson(Person person) throws DuplicatePersonException {
             fail("This method should not be called.");
@@ -137,6 +143,66 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            fail("This method should not be called.");
+        }
+
+        //@@author deborahlow97
+        @Override
+        public void addGoal(Goal goal) throws DuplicateGoalException {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Goal> getFilteredGoalList() {
+            fail("This method should not be called.");
+            return null;
+        }
+
+        @Override
+        public void updateFilteredGoalList(Predicate<Goal> predicate) {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void deleteGoal(Goal target) throws GoalNotFoundException {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void updateGoal(Goal target, Goal editedGoal)
+                throws DuplicateGoalException {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void updateGoalWithoutParameters(Goal target, Goal editedGoal)
+                throws GoalNotFoundException {
+            fail("This method should not be called.");
+        }
+
+        //@@author fuadsahmawi
+        @Override
+        public void addReminder(Reminder reminder) throws DuplicateReminderException {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredReminderList(Predicate<Reminder> predicate) {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Reminder> getFilteredReminderList() {
+            fail("This method should not be called.");
+            return null;
+        }
+
+        @Override
+        public void deleteReminder(Reminder target) throws ReminderNotFoundException {
+            fail("This method should not be called.");
+        }
+
+        public void deleteMeetDate(Person person) throws PersonNotFoundException {
             fail("This method should not be called.");
         }
     }

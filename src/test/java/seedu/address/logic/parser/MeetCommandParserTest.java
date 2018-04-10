@@ -13,10 +13,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.MeetCommand;
 import seedu.address.model.person.Meet;
 
+
+//@@author A0158738X
 public class MeetCommandParserTest {
     private MeetCommandParser parser = new MeetCommandParser();
     private final String nonEmptyDate = "15/03/2018";
-    private final String emptyDate = "";
 
     @Test
     public void parse_indexSpecified_success() throws Exception {
@@ -24,11 +25,6 @@ public class MeetCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_DATE.toString() + nonEmptyDate;
         MeetCommand expectedCommand = new MeetCommand(INDEX_FIRST_PERSON, new Meet(nonEmptyDate));
-        assertParseSuccess(parser, userInput, expectedCommand);
-
-        //no date
-        userInput = targetIndex.getOneBased() + " " + PREFIX_DATE.toString() + emptyDate;
-        expectedCommand = new MeetCommand(INDEX_FIRST_PERSON, new Meet(emptyDate));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

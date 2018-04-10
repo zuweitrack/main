@@ -2,6 +2,8 @@ package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.goal.Goal;
+import seedu.address.model.goal.exceptions.DuplicateGoalException;
 import seedu.address.model.person.Cca;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -33,6 +35,18 @@ public class AddressBookBuilder {
             addressBook.addPerson(person);
         } catch (DuplicatePersonException dpe) {
             throw new IllegalArgumentException("person is expected to be unique.");
+        }
+        return this;
+    }
+
+    /**
+     * Adds a new {@code Goal} to the {@code AddressBook} that we are building.
+     */
+    public AddressBookBuilder withGoal(Goal goal) {
+        try {
+            addressBook.addGoal(goal);
+        } catch (DuplicateGoalException dge) {
+            throw new IllegalArgumentException("goal is expected to be unique.");
         }
         return this;
     }
