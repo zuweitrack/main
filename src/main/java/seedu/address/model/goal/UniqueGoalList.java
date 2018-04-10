@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.goal.exceptions.DuplicateGoalException;
+import seedu.address.model.goal.exceptions.EmptyGoalListException;
 import seedu.address.model.goal.exceptions.GoalNotFoundException;
 
 //@@author deborahlow97
@@ -112,10 +113,17 @@ public class UniqueGoalList implements Iterable<Goal> {
     }
 
     /**
+     * Returns the size of goal list.
+     */
+    public int getSize() {
+        return internalList.size();
+    }
+
+    /**
      * Sort goals internal list using comparator
      * @param sortField
      */
-    public void sortGoal(String sortField, String sortOrder) {
+    public void sortGoal(String sortField, String sortOrder) throws EmptyGoalListException {
         String sortFieldAndOrder = sortField + " " + sortOrder;
         //Comparator<Goal> comparatorImportance = Comparator.comparingInt(Goal::getImportance);
         switch (sortFieldAndOrder) {

@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.model.goal.Goal;
 import seedu.address.model.goal.exceptions.DuplicateGoalException;
+import seedu.address.model.goal.exceptions.EmptyGoalListException;
 import seedu.address.model.goal.exceptions.GoalNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -101,7 +102,7 @@ public interface Model {
     /**
      * Sort the goal based on sortType
      */
-    void sortGoal(String sortType, String sortOrder);
+    void sortGoal(String sortType, String sortOrder) throws EmptyGoalListException;
 
     //@@author
     // fuadsahmawi
