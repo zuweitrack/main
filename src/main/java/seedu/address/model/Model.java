@@ -101,7 +101,7 @@ public interface Model {
     /**
      * Sort the goal based on sortType
      */
-    void sortGoal(String sortType);
+    void sortGoal(String sortType, String sortOrder);
 
     //@@author
     // fuadsahmawi

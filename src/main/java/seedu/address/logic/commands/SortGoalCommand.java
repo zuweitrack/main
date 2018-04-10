@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GOALS;
 
+//@@author deborahlow97
 /**
  * Sorts goal list based on sort field entered by user.
  */
@@ -11,21 +12,24 @@ public class SortGoalCommand extends Command {
     public static final String COMMAND_ALIAS = "sgoal";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts CollegeZone's goals based on the field entered.\n"
-            + "Parameters: FIELD (must be either 'importance', 'goaltext' or 'completion')\n"
+            + "Parameters: FIELD (must be 'importance', 'startdatetime' or 'completion') ORDER"
+            + "(must be either 'increasing' or 'decreasing'\n"
             + "Example: " + COMMAND_WORD + " completion";
 
-    public static final String MESSAGE_SUCCESS = "Sorted all goals by %s";
+    public static final String MESSAGE_SUCCESS = "Sorted all goals by %s and %s";
     private String sortField;
+    private String sortOrder;
 
-    public SortGoalCommand(String field) {
+    public SortGoalCommand(String field, String order) {
         this.sortField = field;
+        this.sortOrder = order;
     }
 
     @Override
     public CommandResult execute() {
-        model.sortGoal(sortField);
+        model.sortGoal(sortField, sortOrder);
         model.updateFilteredGoalList(PREDICATE_SHOW_ALL_GOALS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, sortField));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, sortField, sortOrder));
     }
 
     @Override

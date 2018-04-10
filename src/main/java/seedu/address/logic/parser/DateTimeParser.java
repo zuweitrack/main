@@ -96,7 +96,6 @@ public class DateTimeParser {
         int size = trimmedArgs.length();
         String stringFormat = properDateTimeString.substring(BEGIN_INDEX, size);
         stringFormat = stringFormat.replace(", Time: ", "");
-
         return nattyDateAndTimeParser(stringFormat).get();
     }
 

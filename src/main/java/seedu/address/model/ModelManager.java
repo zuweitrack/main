@@ -183,9 +183,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void sortGoal(String sortGoalType) {
-        requireAllNonNull(sortGoalType);
-        addressBook.sortGoal(sortGoalType);
+    public void sortGoal(String sortGoalType, String sortGoalOrder) {
+        requireAllNonNull(sortGoalType, sortGoalOrder);
+        addressBook.sortGoal(sortGoalType, sortGoalOrder);
         indicateAddressBookChanged();
     }
 

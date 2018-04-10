@@ -3,6 +3,7 @@ package seedu.address.model.goal;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -115,19 +116,33 @@ public class UniqueGoalList implements Iterable<Goal> {
      * Sort goals internal list using comparator
      * @param sortField
      */
-    public void sortGoal(String sortField) {
-        switch (sortField) {
-        case "importance":
+    public void sortGoal(String sortField, String sortOrder) {
+        String sortFieldAndOrder = sortField + " " + sortOrder;
+        //Comparator<Goal> comparatorImportance = Comparator.comparingInt(Goal::getImportance);
+        switch (sortFieldAndOrder) {
+        case "importance ascending":
             FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalA.getImportance()
                     .compareTo(goalB.getImportance()));
             break;
-//        case "completion":
-//            FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->(goalA.getCompletion().hasCompleted)
-//                    .compareTo(goalB.getCompletion().hasCompleted));
-//            break;
-        case "startdatetime":
+        case "importance descending":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalB.getImportance()
+                    .compareTo(goalA.getImportance()));
+            break;
+        case "completion ascending":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) -> new Boolean(goalA.getCompletion().hasCompleted)
+                    .compareTo(goalB.getCompletion().hasCompleted));
+            break;
+        case "completion descending":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) -> new Boolean(goalB.getCompletion().hasCompleted)
+                    .compareTo(goalA.getCompletion().hasCompleted));
+            break;
+        case "startdatetime ascending":
             FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalA.getStartDateTime()
                     .compareTo(goalB.getStartDateTime()));
+            break;
+        case "startdatetime descending":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalB.getStartDateTime()
+                    .compareTo(goalA.getStartDateTime()));
             break;
 
         default:

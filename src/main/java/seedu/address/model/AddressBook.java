@@ -364,10 +364,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Sorts goal based on the sort field input.
+     * Sorts goal based on the sort field and sort order input.
      */
-    public void sortGoal(String sortField) {
-        goals.sortGoal(sortField);
+    public void sortGoal(String sortField, String sortOrder) {
+        goals.sortGoal(sortField, sortOrder);
     }
     //// reminder-level operations
 
