@@ -180,6 +180,11 @@ public class AddCommandTest {
             fail("This method should not be called.");
         }
 
+        @Override
+        public void sortGoal(String goalField, String goalOrder) {
+            fail("This method should not be called.");
+        }
+
         //@@author fuadsahmawi
         @Override
         public void addReminder(Reminder reminder) throws DuplicateReminderException {
