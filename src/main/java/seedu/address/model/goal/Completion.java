@@ -8,7 +8,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class Completion {
     public final String value;
-    public final boolean booleanValue;
+    public final boolean hasCompleted;
 
     /**
      * Constructs a {@code Completion}.
@@ -18,10 +18,10 @@ public class Completion {
     public Completion(Boolean isCompleted) {
         requireNonNull(isCompleted);
         if (isCompleted) {
-            this.booleanValue = true;
+            this.hasCompleted = true;
             this.value = "true";
         } else {
-            this.booleanValue = false;
+            this.hasCompleted = false;
             this.value = "false";
         }
     }
@@ -43,4 +43,8 @@ public class Completion {
         return value.hashCode();
     }
 
+//    @Override
+//    public int compareTo(Completion completion) {
+//        return completion.hasCompleted.compareTo(this.hasCompleted);
+//    }
 }

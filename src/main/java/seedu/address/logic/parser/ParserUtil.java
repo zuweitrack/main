@@ -396,9 +396,8 @@ public class ParserUtil {
         String sortFieldToLowerCase = trimmedSortField.toLowerCase();
         switch (sortFieldToLowerCase) {
         case "importance":
-        case "goaltext":
         case "completion":
-        case "start":
+        case "startdatetime":
             return sortFieldToLowerCase;
         default:
             throw new IllegalValueException(MESSAGE_INVALID_SORT_FIELD);

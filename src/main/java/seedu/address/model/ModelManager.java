@@ -182,6 +182,13 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    @Override
+    public void sortGoal(String sortGoalType) {
+        requireAllNonNull(sortGoalType);
+        addressBook.sortGoal(sortGoalType);
+        indicateAddressBookChanged();
+    }
+
     //@@author fuadsahmawi
     @Override
     public void addReminder(Reminder reminder) throws DuplicateReminderException {

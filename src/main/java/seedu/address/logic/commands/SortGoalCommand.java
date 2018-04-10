@@ -8,7 +8,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GOALS;
 public class SortGoalCommand extends Command {
 
     public static final String COMMAND_WORD = "sortgoal";
-
+    public static final String COMMAND_ALIAS = "sgoal";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts CollegeZone's goals based on the field entered.\n"
             + "Parameters: FIELD (must be either 'importance', 'goaltext' or 'completion')\n"

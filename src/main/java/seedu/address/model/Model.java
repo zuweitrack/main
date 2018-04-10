@@ -102,6 +102,7 @@ public interface Model {
      * Sort the goal based on sortType
      */
     void sortGoal(String sortType);
+
     //@@author
     // fuadsahmawi
     /** Adds the given reminder. */

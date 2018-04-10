@@ -19,4 +19,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_REMINDER_TEXT = new Prefix("text/");
     public static final Prefix PREFIX_END_DATE = new Prefix("e/");
 
+
 }

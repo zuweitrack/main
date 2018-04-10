@@ -23,6 +23,8 @@ import seedu.address.model.goal.StartDateTime;
  */
 public class AddGoalCommandParser implements Parser<AddGoalCommand> {
 
+    public static final String EMPTY_END_DATE_TIME = "";
+    public static final boolean INITIAL_COMPLETION_STATUS = false;
     /**
      * Parses the given {@code String} of arguments in the context of the AddGoalCommand
      * and returns an AddGoalCommand object for execution.
@@ -41,8 +43,8 @@ public class AddGoalCommandParser implements Parser<AddGoalCommand> {
             Importance importance = ParserUtil.parseImportance(argMultimap.getValue(PREFIX_IMPORTANCE)).get();
             GoalText goalText = ParserUtil.parseGoalText(argMultimap.getValue(PREFIX_GOAL_TEXT)).get();
             StartDateTime startDateTime = new StartDateTime(LocalDateTime.now());
-            EndDateTime endDateTime = new EndDateTime("");
-            Completion completion = new Completion(false);
+            EndDateTime endDateTime = new EndDateTime(EMPTY_END_DATE_TIME);
+            Completion completion = new Completion(INITIAL_COMPLETION_STATUS);
             Goal goal = new Goal(importance, goalText, startDateTime, endDateTime, completion);
             return new AddGoalCommand(goal);
         } catch (IllegalValueException ive) {

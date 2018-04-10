@@ -9,7 +9,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new SortGoalCommand object
  */
-public class SortGoalParser implements Parser<SortGoalCommand> {
+public class SortGoalCommandParser implements Parser<SortGoalCommand> {
 
     @Override
     public SortGoalCommand parse(String args) throws ParseException {

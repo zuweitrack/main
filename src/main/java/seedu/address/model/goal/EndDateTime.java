@@ -22,9 +22,11 @@ public class EndDateTime {
     public EndDateTime(String endDateTime) {
         if (endDateTime.equals("")) {
             this.value = "";
+            this.localDateTimeValue = null;
         } else {
             LocalDateTime localEndDateTime = nattyDateAndTimeParser(endDateTime).get();
             this.value = properDateTimeFormat(localEndDateTime);
+            this.localDateTimeValue = localEndDateTime;
         }
     }
 

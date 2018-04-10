@@ -121,15 +121,11 @@ public class UniqueGoalList implements Iterable<Goal> {
             FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalA.getImportance()
                     .compareTo(goalB.getImportance()));
             break;
-        case "goaltext":
-            FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalA.getGoalText()
-                    .compareTo(goalB.getGoalText()));
-            break;
-        case "completion":
-            FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalA.getCompletion()
-                    .compareTo(goalB.getCompletion()));
-            break;
-        case "start":
+//        case "completion":
+//            FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->(goalA.getCompletion().hasCompleted)
+//                    .compareTo(goalB.getCompletion().hasCompleted));
+//            break;
+        case "startdatetime":
             FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalA.getStartDateTime()
                     .compareTo(goalB.getStartDateTime()));
             break;
