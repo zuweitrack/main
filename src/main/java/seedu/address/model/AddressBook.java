@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.goal.Goal;
 import seedu.address.model.goal.UniqueGoalList;
 import seedu.address.model.goal.exceptions.DuplicateGoalException;
@@ -70,6 +71,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public void setPersons(List<Person> persons) throws DuplicatePersonException {
         this.persons.setPersons(persons);
+    }
+
+    public void sortPersons(Index index) throws IndexOutOfBoundsException {
+        this.persons.sortPersons(index);
     }
 
     //@@author deborahlow97

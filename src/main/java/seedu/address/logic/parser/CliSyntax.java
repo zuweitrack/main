@@ -18,5 +18,4 @@ public class CliSyntax {
     public static final Prefix PREFIX_IMPORTANCE = new Prefix("impt/");
     public static final Prefix PREFIX_REMINDER_TEXT = new Prefix("text/");
     public static final Prefix PREFIX_END_DATE = new Prefix("e/");
-
 }

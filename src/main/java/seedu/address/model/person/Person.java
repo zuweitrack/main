@@ -2,9 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -78,6 +76,36 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags.toSet());
+    }
+    /**
+     * Seperate methods for sorting
+     */
+    public int getLevelOfFriendshipInt() {
+        return Integer.parseInt(levelOfFriendship.value);
+    }
+
+    public long getMeetDateInt() {
+        return converDateToSeconds(meetDate.toString());
+    }
+    public long getBirthdayInt() {
+        return converDateToSeconds(birthday.toString());
+    }
+    /**
+     * Converts  date to seconds
+     */
+    public long converDateToSeconds(String date) {
+        int day = Integer.parseInt(date.toString().substring(0,
+                2));
+        int month = Integer.parseInt(date.toString().substring(3,
+                5));
+        int year = Integer.parseInt(date.toString().substring(6,
+                10));
+
+        Calendar calendar = new GregorianCalendar();
+        calendar.set(year, month, day);
+        long seconds = calendar.getTimeInMillis();
+        System.out.println(seconds);
+        return seconds;
     }
 
     @Override
