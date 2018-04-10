@@ -41,6 +41,8 @@ public class AddReminderCommandParser implements Parser<AddReminderCommand> {
         if (nattyDateAndTimeParser(argMultimap.getValue(PREFIX_DATE).get()).get().compareTo(
                 nattyDateAndTimeParser(argMultimap.getValue(PREFIX_END_DATE).get()).get()) > 0
                 || nattyDateAndTimeParser(argMultimap.getValue(PREFIX_END_DATE).get()).get().compareTo(
+                        LocalDateTime.now()) < 0
+                || nattyDateAndTimeParser(argMultimap.getValue(PREFIX_DATE).get()).get().compareTo(
                         LocalDateTime.now()) < 0) {
             throw new ParseException(String.format(MESSAGE_INVALID_DATE_FORMAT, AddReminderCommand.MESSAGE_USAGE));
         }

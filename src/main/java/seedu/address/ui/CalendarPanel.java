@@ -76,7 +76,7 @@ public class CalendarPanel extends UiPart<Region> {
         setDateAndTime();
         CalendarSource myCalendarSource = new CalendarSource("Reminders and Meetups");
         Calendar calendarRDue = new Calendar("Reminders Already Due");
-        Calendar calendarRNotDue = new Calendar("Reminder Not Due");
+        Calendar calendarRNotDue = new Calendar("Reminders Not Due");
         Calendar calendarM = new Calendar("Meetups");
         calendarRDue.setStyle(Calendar.Style.getStyle(4));
         calendarRDue.setLookAheadDuration(Duration.ofDays(365));
