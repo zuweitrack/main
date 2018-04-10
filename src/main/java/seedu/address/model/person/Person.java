@@ -85,7 +85,19 @@ public class Person {
     }
 
     public long getMeetDateInt() {
-        return converDateToSeconds(meetDate.toString());
+        Calendar calendar = Calendar.getInstance();
+        long date = converDateToSeconds(meetDate.toString());
+        long currentDate = calendar.getTimeInMillis();
+        long timeDiff = date - currentDate;
+        System.out.println(date);
+        if (timeDiff < 0) {
+            return Long.MAX_VALUE;
+        }
+        else {
+            System.out.println("current date: " + calendar.getTimeInMillis());
+            return timeDiff;
+        }
+
     }
     public long getBirthdayInt() {
         return converDateToSeconds(birthday.toString());
@@ -94,17 +106,18 @@ public class Person {
      * Converts  date to seconds
      */
     public long converDateToSeconds(String date) {
+        if (meetDate.value == "") {
+            return 0;
+        }
         int day = Integer.parseInt(date.toString().substring(0,
                 2));
         int month = Integer.parseInt(date.toString().substring(3,
                 5));
         int year = Integer.parseInt(date.toString().substring(6,
                 10));
-
         Calendar calendar = new GregorianCalendar();
-        calendar.set(year, month, day);
+        calendar.set(year, month - 1, day);
         long seconds = calendar.getTimeInMillis();
-        System.out.println(seconds);
         return seconds;
     }
 

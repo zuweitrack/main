@@ -44,13 +44,18 @@ public class SortCommand extends UndoableCommand {
         } catch (IndexOutOfBoundsException ioe) {
             throw new AssertionError("The index is out of bounds");
         }
-
-        return new CommandResult(String.format(MESSAGE_SORTED_SUCCESS_LEVEL_OF_FRIENDSHIP));
+        if (index.getOneBased() == 1) {
+            return new CommandResult(String.format(MESSAGE_SORTED_SUCCESS_LEVEL_OF_FRIENDSHIP));
+        }
+        if (index.getOneBased() == 2) {
+            return new CommandResult(String.format(MESSAGE_SORTED_SUCCESS_MEET_DATE));
+        }
+        return new CommandResult(String.format(MESSAGE_SORTED_SUCCESS_BIRTHDAY));
     }
 
     @Override
     protected void preprocessUndoableCommand() throws CommandException {
-        if (index.getOneBased() >= 3) {
+        if (index.getOneBased() > 3) {
             throw new CommandException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
         }
     }
