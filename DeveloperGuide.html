@@ -18,7 +18,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>By: <code>Team T09-B2</code>      Since: <code>Jun 2016</code>      Licence: <code>MIT</code></p>
+<p>By: <code>Team T09-B2</code>      Since: <code>Mar 2018</code>      Licence: <code>MIT</code></p>
 </div>
 </div>
 <div id="toc" class="toc">
@@ -48,14 +48,12 @@
 <li><a href="#proposed-data-encryption">3.2. [Proposed] Data Encryption</a></li>
 <li><a href="#logging">3.3. Logging</a></li>
 <li><a href="#Implementation-Configuration">3.4. Configuration</a></li>
-<li><a href="#since-v1-1">Since v1.1</a></li>
-<li><a href="#enhanced-find-command">3.5. Enhanced Find Command</a></li>
-<li><a href="#logic-command-aliases">3.6. Logic: Command Aliases</a></li>
-<li><a href="#enhanced-tag-colours">3.7. Enhanced tag colours</a></li>
-<li><a href="#since-v1-2">Since v1.2</a></li>
-<li><a href="#targeted-add-and-edit-command">3.8. Targeted add and edit command</a></li>
-<li><a href="#suggested-set-reminders">3.9. Suggested: Set Reminders</a></li>
-<li><a href="#my-goals-page-coming-v1-4">3.10. My Goals Page [coming v1.4]</a></li>
+<li><a href="#enhanced-find-command-since-v1-1">3.5. Enhanced Find Command [Since v1.1]</a></li>
+<li><a href="#logic-command-aliases-since-v1-1">3.6. Logic: Command Aliases [Since v1.1]</a></li>
+<li><a href="#enhanced-tag-colours-since-v1-1">3.7. Enhanced tag colours [Since v1.1]</a></li>
+<li><a href="#targeted-add-and-edit-command-since-v1-2">3.8. Targeted add and edit command [Since v1.2]</a></li>
+<li><a href="#reminders-in-calendar-since-v1-4">3.9. Reminders in Calendar [Since v1.4]</a></li>
+<li><a href="#my-goals-page-since-v1-4">3.10. My Goals Page [Since v1.4]</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -442,7 +440,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p><strong>API</strong> : <a href="https://github.com/CS2103JAN2018-T09-B2/main/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PersonListPanel</code>, <code>StatusBarFooter</code>, <code>BrowserPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PersonListPanel</code>, <code>StatusBarFooter</code>, <code>CalendarPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
 </div>
 <div class="paragraph">
 <p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/CS2103JAN2018-T09-B2/main/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/CS2103JAN2018-T09-B2/main/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
@@ -921,11 +919,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="since-v1-1"><a class="link" href="#since-v1-1">Since v1.1</a></h3>
-
-</div>
-<div class="sect2">
-<h3 id="enhanced-find-command"><a class="link" href="#enhanced-find-command">3.5. Enhanced Find Command</a></h3>
+<h3 id="enhanced-find-command-since-v1-1"><a class="link" href="#enhanced-find-command-since-v1-1">3.5. Enhanced Find Command [Since v1.1]</a></h3>
 <div class="paragraph">
 <p>The old find command feature only allows searching by name. To make CollegeZone more useful for RC4 students, we have enhanced the find
 command feature to be able to find persons by tags.</p>
@@ -961,7 +955,7 @@ command feature to be able to find persons by tags.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logic-command-aliases"><a class="link" href="#logic-command-aliases">3.6. Logic: Command Aliases</a></h3>
+<h3 id="logic-command-aliases-since-v1-1"><a class="link" href="#logic-command-aliases-since-v1-1">3.6. Logic: Command Aliases [Since v1.1]</a></h3>
 <div class="paragraph">
 <p>CollegeZone users may now use shortcuts to perform desired tasks. These shortcuts are shown in figure 3.6.1.</p>
 </div>
@@ -1032,25 +1026,26 @@ command feature to be able to find persons by tags.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">undo</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">u</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meet</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">meet</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">m</p></td>
+</tr>
 </tbody>
 </table>
 </div>
 <div class="sect2">
-<h3 id="enhanced-tag-colours"><a class="link" href="#enhanced-tag-colours">3.7. Enhanced tag colours</a></h3>
+<h3 id="enhanced-tag-colours-since-v1-1"><a class="link" href="#enhanced-tag-colours-since-v1-1">3.7. Enhanced tag colours [Since v1.1]</a></h3>
 <div class="paragraph">
 <p>Tags are now colour-coded which allows improved differentiation between many different tags.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="since-v1-2"><a class="link" href="#since-v1-2">Since v1.2</a></h3>
-
-</div>
-<div class="sect2">
-<h3 id="targeted-add-and-edit-command"><a class="link" href="#targeted-add-and-edit-command">3.8. Targeted add and edit command</a></h3>
+<h3 id="targeted-add-and-edit-command-since-v1-2"><a class="link" href="#targeted-add-and-edit-command-since-v1-2">3.8. Targeted add and edit command [Since v1.2]</a></h3>
 <div class="paragraph">
 <p>The old add and edit feature holds a broad information about a Person.
 As CollegeZone is catered toward NUS RC4 Residents, we have changed the attributes of a Person to hold:<br>
-<strong>Name, Mobile Number, Birthday, Level of Friendship, RC4 Unit Number, RC4 CCAs and Tags</strong>.<br>
+<strong>Name, Mobile Number, Birthday, Level of Friendship, RC4 Unit Number, Meet up dates with RC4 students, RC4 CCAs and Tags</strong>.<br>
 This is done by removing unwanted attributes of a person and adding new attributes of a person.</p>
 </div>
 <div class="imageblock">
@@ -1060,7 +1055,7 @@ This is done by removing unwanted attributes of a person and adding new attribut
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>Figure 3.7.1: Person Class diagram with added attributes</pre>
+<pre>Figure 3.8.1: Person Class diagram with added attributes</pre>
 </div>
 </div>
 <div class="sect4">
@@ -1075,6 +1070,9 @@ This is done by removing unwanted attributes of a person and adding new attribut
 </li>
 <li>
 <p>Unit Number: Must be a valid unit number in RC4.</p>
+</li>
+<li>
+<p>Meet Date: Must be a valid date.</p>
 </li>
 <li>
 <p>A RC4 resident is able to have multiple CCAs.</p>
@@ -1094,7 +1092,7 @@ This is done by removing unwanted attributes of a person and adding new attribut
 </div>
 </div>
 <div class="sect2">
-<h3 id="suggested-set-reminders"><a class="link" href="#suggested-set-reminders">3.9. Suggested: Set Reminders</a></h3>
+<h3 id="reminders-in-calendar-since-v1-4"><a class="link" href="#reminders-in-calendar-since-v1-4">3.9. Reminders in Calendar [Since v1.4]</a></h3>
 <div class="paragraph">
 <p>As RC4 residents have events, classes and meetings to go to at a certain date and time, we decided on implementing a reminder feature to allow users to add reminders in CollegeZone.<br>
 Reminder commands are undoable and redoable for the benefit users to redo and undo a command they did or did not intend to change.</p>
@@ -1119,10 +1117,9 @@ Reminder commands are undoable and redoable for the benefit users to redo and un
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Reminder objects will consist of 3 attributes :</strong><br>
+<p><strong>Reminder objects will consist of 2 attributes :</strong><br>
 1. the date, time and recurrence of reminder<br>
-2. the level of urgency of reminder<br>
-3. the reminder text content</p>
+2. the reminder text content</p>
 </div>
 <div class="paragraph">
 <p>The reminders will be stored in an ArrayList of all the reminder objects. Each reminder will have specific positive integer index number.<br>
@@ -1137,7 +1134,7 @@ If it&#8217;s overdue and not acknowledged, it will turn Grey.<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="my-goals-page-coming-v1-4"><a class="link" href="#my-goals-page-coming-v1-4">3.10. My Goals Page [coming v1.4]</a></h3>
+<h3 id="my-goals-page-since-v1-4"><a class="link" href="#my-goals-page-since-v1-4">3.10. My Goals Page [Since v1.4]</a></h3>
 <div class="paragraph">
 <p>The My Goals page is created for RC4 users to add and keep track of their goals every year. We are implementing this goal page as setting goals gives you <strong>long-term vision</strong> and <strong>short-term motivation</strong> for the goals. In addition as a majority of RC4 residents are NUS students, when students set their own goals, they take responsibility and ownership of their learning goals.<br>
 Goals are meant only for the user, and the user can have many goals stored in CollegeZone.<br></p>
@@ -1167,7 +1164,7 @@ The following is the Sequence Diagram for interactions within the <code>Logic</c
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/GoalHighLevelSequenceDiagram.jpg" alt="GoalHighLevelSequenceDiagram" width="500">
+<img src="images/GoalHighLevelSequenceDiagram.jpg" alt="GoalHighLevelSequenceDiagram" width="800">
 </div>
 </div>
 <div class="literalblock">
@@ -1253,13 +1250,19 @@ Coming up with new algorithms is very time consuming. Implementation of My Goals
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>the date and time of Goal completion.<br></p>
+<p>Date and time of when goal completed.<br></p>
 </li>
 <li>
-<p>the level of importance of Goal.<br></p>
+<p>Level of importance of goal.<br></p>
 </li>
 <li>
-<p>the text content of Goal.</p>
+<p>Text content of Goal.<br></p>
+</li>
+<li>
+<p>Date and time of Goal of when goal started.<br></p>
+</li>
+<li>
+<p>Goal completion status.</p>
 </li>
 </ol>
 </div>
@@ -1268,7 +1271,7 @@ Coming up with new algorithms is very time consuming. Implementation of My Goals
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/GoalModelComponentClassDiagram.JPG" alt="GoalModelComponentClassDiagram" width="500">
+<img src="images/GoalModelComponentClassDiagram.JPG" alt="GoalModelComponentClassDiagram" width="800">
 </div>
 </div>
 <div class="literalblock">
@@ -1280,14 +1283,23 @@ Coming up with new algorithms is very time consuming. Implementation of My Goals
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.10.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Representation of Goals level of importance in UI<br>
-<strong>Alternative 1 (current choice):</strong> Each level of importance have a different colour specified to it.<br>
+<strong>Alternative 1 (current choice):</strong> Each level of importance have a number of stars related to it.<br>
 <strong>Pros:</strong> Ability for the user to differentiate the Goals with higher level of importance compared to those with lower level of importance.<br>
-<strong>Cons:</strong> The colours of the goals list in the UI might look messy to the user without having a sort Goals option as the list of goals is displayed based on when it was added.<br>
-<strong>Alternative 2:</strong> Having a sort goals command+
+<strong>Cons:</strong> The goal list in the UI might look messy to the user without having a sort Goals option as the list of goals is displayed based on when it was added.<br>
+<strong>Alternative 2:</strong> Having an additional sort goal command<br>
 <strong>Pros:</strong> It is simple and easy to understand.<br>
 <strong>Cons:</strong> It requires extra methods to implement the sort function.<br></p>
 </div>
-<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Representation of Goals in UI<br>
+<strong>Alternative 1 (current choice):</strong> Having a goal list panel beside our current person list panel.<br>
+<strong>Pros:</strong> Ability for the user to differentiate the Goals with higher level of importance compared to those with lower level of importance.<br>
+<strong>Cons:</strong> The initial space in UI reserved for person list is not being used to display 2 lists, the person list and the goal list. This causes the UI to look clunky and overwhelming.<br>
+<strong>Alternative 2:</strong> Having a tab button in CollegeZone that allows user to switch between the person list panel and goal list panel.<br>
+<strong>Pros:</strong> Ability for user to switch to person list and goal list in the UI, which makes it look more user friendly.<br>
+<strong>Cons:</strong> As CollegeZone is a desktop application that has most interactions happen using a Command Line Interface (CLI), a new command to switch tabs between goal list and person list needs to be implemented.<br>
+---</p>
+</div>
 </div>
 </div>
 </div>
@@ -1607,8 +1619,7 @@ b. Require developers to download those libraries manually (this creates extra w
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Shamsheer Ahamed</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Meetup (Tasks) : This feature allows user to set up a meet up date that will be reflected on a Calendar<br></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Meetup : Added a new Command called meet to allow user to set up a meet up date with RC4 residents<br>
- Ui : Added a placeholder in PersonCard&#8217;s to display the date of meet up for each person later<br></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Profile Photo : Added a male female profile pictures to GUI for an interactive experience.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Goh Zu Wei</p></td>
@@ -1711,8 +1722,8 @@ b. Require developers to download those libraries manually (this creates extra w
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">forgetful RC student</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">add a reminder of meet up with another RC4 student</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">shows who you are meeting up with on what date</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">set up a meet up with another RC4 student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">shows who you are meeting up with on the calendar</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
@@ -2067,14 +2078,12 @@ b. Require developers to download those libraries manually (this creates extra w
 <div class="paragraph">
 <p><strong>Extensions</strong></p>
 </div>
-<div class="paragraph">
-<p>*1a. The given date is invalid.</p>
-</div>
-<div class="paragraph">
-<p>+</p>
-</div>
-<div class="ulist note">
-<ul class="note">
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The given date is invalid.</p>
+<div class="ulist none">
+<ul class="none">
 <li>
 <p>1a1. CollegeZone shows an error message.</p>
 <div class="paragraph">
@@ -2083,18 +2092,18 @@ b. Require developers to download those libraries manually (this creates extra w
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>*1b. The given person&#8217;s index is invalid.</p>
-</div>
-<div class="paragraph">
-<p>+</p>
-</div>
-<div class="ulist note">
-<ul class="note">
+</li>
+<li>
+<p>1b. The given person&#8217;s index is invalid.</p>
+<div class="ulist none">
+<ul class="none">
 <li>
 <p>1b1. CollegeZone shows an error message.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
+</div>
+</li>
+</ul>
 </div>
 </li>
 </ul>
@@ -2312,7 +2321,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-27 11:38:55 UTC
+Last updated 2018-04-10 10:59:55 UTC
 </div>
 </div>
 </body>
