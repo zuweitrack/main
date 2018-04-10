@@ -239,14 +239,14 @@ public class AddressBookParserTest {
 
     //@@author deborahlow97
     @Test
-    public void parseCommand_addGoal() throws Exception {
+    public void parseCommand_addGoal_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         AddGoalCommand command = (AddGoalCommand) parser.parseCommand(GoalUtil.getAddGoalCommand(goal));
         assertEquals(new AddGoalCommand(goal), command);
     }
 
     @Test
-    public void parseCommand_addGoalAliasOne() throws Exception {
+    public void parseCommand_addGoalAliasOne_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         AddGoalCommand command = (AddGoalCommand) parser.parseCommand(
                 AddGoalCommand.COMMAND_ALIAS_1 + " " + GoalUtil.getGoalDetails(goal));
@@ -254,7 +254,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_addGoalAliasTwo() throws Exception {
+    public void parseCommand_addGoalAliasTwo_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         AddGoalCommand command = (AddGoalCommand) parser.parseCommand(
                 AddGoalCommand.COMMAND_ALIAS_2 + " " + GoalUtil.getGoalDetails(goal));
@@ -262,7 +262,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_editGoal() throws Exception {
+    public void parseCommand_editGoal_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         EditGoalDescriptor descriptor = new EditGoalDescriptorBuilder(goal).build();
         EditGoalCommand command = (EditGoalCommand) parser.parseCommand(EditGoalCommand.COMMAND_WORD + " "
@@ -271,7 +271,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_editGoalAliasOne() throws Exception {
+    public void parseCommand_editGoalAliasOne_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         EditGoalDescriptor descriptor = new EditGoalDescriptorBuilder(goal).build();
         EditGoalCommand command = (EditGoalCommand) parser.parseCommand(EditGoalCommand.COMMAND_ALIAS_1 + " "
@@ -280,7 +280,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_editGoalAliasTwo() throws Exception {
+    public void parseCommand_editGoalAliasTwo_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         EditGoalDescriptor descriptor = new EditGoalDescriptorBuilder(goal).build();
         EditGoalCommand command = (EditGoalCommand) parser.parseCommand(EditGoalCommand.COMMAND_ALIAS_2 + " "
@@ -289,28 +289,28 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_deleteGoal() throws Exception {
+    public void parseCommand_deleteGoal_returnsTrue() throws Exception {
         DeleteGoalCommand command = (DeleteGoalCommand) parser.parseCommand(
                 DeleteGoalCommand.COMMAND_WORD + " " + INDEX_FIRST_GOAL.getOneBased());
         assertEquals(new DeleteGoalCommand(INDEX_FIRST_GOAL), command);
     }
 
     @Test
-    public void parseCommand_deleteGoalAliasOne() throws Exception {
+    public void parseCommand_deleteGoalAliasOne_returnsTrue() throws Exception {
         DeleteGoalCommand command = (DeleteGoalCommand) parser.parseCommand(
                 DeleteGoalCommand.COMMAND_ALIAS_1 + " " + INDEX_FIRST_GOAL.getOneBased());
         assertEquals(new DeleteGoalCommand(INDEX_FIRST_GOAL), command);
     }
 
     @Test
-    public void parseCommand_deleteGoalAliasTwo() throws Exception {
+    public void parseCommand_deleteGoalAliasTwo_returnsTrue() throws Exception {
         DeleteGoalCommand command = (DeleteGoalCommand) parser.parseCommand(
                 DeleteGoalCommand.COMMAND_ALIAS_2 + " " + INDEX_FIRST_GOAL.getOneBased());
         assertEquals(new DeleteGoalCommand(INDEX_FIRST_GOAL), command);
     }
 
     @Test
-    public void parseCommand_completeGoal() throws Exception {
+    public void parseCommand_completeGoal_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         CompleteGoalDescriptor descriptor = new CompleteGoalDescriptorBuilder(goal).build();
         CompleteGoalCommand command = (CompleteGoalCommand) parser.parseCommand(
@@ -319,7 +319,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_completeGoalAliasOne() throws Exception {
+    public void parseCommand_completeGoalAliasOne_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         CompleteGoalDescriptor descriptor = new CompleteGoalDescriptorBuilder(goal).build();
         CompleteGoalCommand command = (CompleteGoalCommand) parser.parseCommand(
@@ -328,7 +328,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_completeGoalAliasTwo() throws Exception {
+    public void parseCommand_completeGoalAliasTwo_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         CompleteGoalDescriptor descriptor = new CompleteGoalDescriptorBuilder(goal).build();
         CompleteGoalCommand command = (CompleteGoalCommand) parser.parseCommand(
@@ -360,5 +360,10 @@ public class AddressBookParserTest {
         SortGoalCommand command = (SortGoalCommand) parser.parseCommand(
                 SortGoalCommand.COMMAND_ALIAS + " " + "f/completion" + " " + "o/ascending");
         assertEquals(new SortGoalCommand("importance", "ascending"), command);
+        command = (SortGoalCommand) parser.parseCommand(
+                SortGoalCommand.COMMAND_ALIAS + " " + "f/startdatetime" + " " + "o/ascending");
+        assertEquals(new SortGoalCommand("startdatetime", "ascending"), command);
     }
+
+
 }

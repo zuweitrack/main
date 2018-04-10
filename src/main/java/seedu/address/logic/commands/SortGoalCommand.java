@@ -20,8 +20,8 @@ public class SortGoalCommand extends Command {
             + ": Sorts CollegeZone's goals based on the field entered.\n"
             + "Parameters: "
             + PREFIX_SORT_FIELD + "FIELD (must be 'importance', 'startdatetime' or 'completion') "
-            + PREFIX_SORT_ORDER + "ORDER (must be either 'increasing' or 'decreasing')\n"
-            + "Example: " + COMMAND_WORD + " f/completion o/increasing";
+            + PREFIX_SORT_ORDER + "ORDER (must be either 'ascending' or 'descending')\n"
+            + "Example: " + COMMAND_WORD + " f/completion o/ascending";
 
     public static final String MESSAGE_SUCCESS = "Sorted all goals by %s and %s";
     private String sortField;
