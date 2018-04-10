@@ -2,10 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 //import static org.junit.Assert.assertEquals;
+import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 //import java.util.Arrays;
 
 import org.junit.Rule;
@@ -16,6 +18,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 //import seedu.address.logic.commands.AddCommandTest.ModelStub;
 //import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -35,6 +38,7 @@ public class AddGoalCommandTest {
         new AddGoalCommand(null);
     }
 
+    //TODODEB
     /*@Test
     public void execute_goalAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingGoalAdded modelStub = new ModelStubAcceptingGoalAdded();
@@ -44,11 +48,11 @@ public class AddGoalCommandTest {
 
         assertEquals(String.format(AddGoalCommand.MESSAGE_SUCCESS, validGoal), commandResult.feedbackToUser);
         assertEquals(Arrays.asList(validGoal), modelStub.goalsAdded);
-    }
+    }*/
 
     @Test
     public void execute_duplicateGoal_throwsCommandException() throws Exception {
-        ModelStub modelStub = new ModelStubThrowingDuplicateGoalException();
+        AddCommandTest.ModelStub modelStub = new ModelStubThrowingDuplicateGoalException();
         Goal validGoal = new GoalBuilder().build();
 
         thrown.expect(CommandException.class);
@@ -56,7 +60,7 @@ public class AddGoalCommandTest {
 
         getAddGoalCommandForGoal(validGoal, modelStub).execute();
     }
-    */
+
 
     @Test
     public void equals() {

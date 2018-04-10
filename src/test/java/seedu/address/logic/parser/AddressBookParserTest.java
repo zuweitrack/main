@@ -37,6 +37,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MeetCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.SortGoalCommand;
 import seedu.address.logic.commands.ThemeCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -336,8 +337,28 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_themeCommand_returns() throws Exception {
+    public void parseCommand_theme_returnsTrue() throws Exception {
         ThemeCommand command = (ThemeCommand) parser.parseCommand(ThemeCommand.COMMAND_WORD + " " + "dark");
         assertEquals(new ThemeCommand("dark"), command);
+    }
+
+    @Test
+    public void parseCommand_themeAlias_returnsTrue() throws Exception {
+        ThemeCommand command = (ThemeCommand) parser.parseCommand(ThemeCommand.COMMAND_ALIAS + " " + "light");
+        assertEquals(new ThemeCommand("light"), command);
+    }
+
+    @Test
+    public void parseCommand_sortGoal_returnsTrue() throws Exception {
+        SortGoalCommand command = (SortGoalCommand) parser.parseCommand(
+                SortGoalCommand.COMMAND_WORD + " " + "f/importance" + " " + "o/ascending");
+        assertEquals(new SortGoalCommand("importance", "ascending"), command);
+    }
+
+    @Test
+    public void parseCommand_sortGoalAlias_returnsTrue() throws Exception {
+        SortGoalCommand command = (SortGoalCommand) parser.parseCommand(
+                SortGoalCommand.COMMAND_ALIAS + " " + "f/completion" + " " + "o/ascending");
+        assertEquals(new SortGoalCommand("importance", "ascending"), command);
     }
 }

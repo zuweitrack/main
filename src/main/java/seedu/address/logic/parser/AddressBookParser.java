@@ -174,11 +174,8 @@ public class AddressBookParser {
             return new DeleteReminderCommandParser().parse(arguments);
 
         case ThemeCommand.COMMAND_WORD:
+        case ThemeCommand.COMMAND_ALIAS:
             return new ThemeCommandParser().parse(arguments);
-
-        case ListGoalCommand.COMMAND_WORD:
-        case ListGoalCommand.COMMAND_ALIAS:
-            return new ListGoalCommand();
 
         case SortGoalCommand.COMMAND_WORD:
         case SortGoalCommand.COMMAND_ALIAS:
