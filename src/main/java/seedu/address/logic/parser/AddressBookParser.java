@@ -178,7 +178,7 @@ public class AddressBookParser {
 
         case ListGoalCommand.COMMAND_WORD:
         case ListGoalCommand.COMMAND_ALIAS:
-                return new ListGoalCommand();
+            return new ListGoalCommand();
 
         case SortGoalCommand.COMMAND_WORD:
         case SortGoalCommand.COMMAND_ALIAS:
