@@ -98,6 +98,12 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.removeTag(t);
     }
 
+    @Override
+    public void deleteMeetDate (Person person) throws PersonNotFoundException {
+        addressBook.removeMeetFromPerson(person);
+        indicateAddressBookChanged();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
