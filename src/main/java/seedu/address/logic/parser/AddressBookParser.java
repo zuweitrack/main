@@ -180,9 +180,10 @@ public class AddressBookParser {
         case ListGoalCommand.COMMAND_ALIAS:
                 return new ListGoalCommand();
 
-            case SortGoalCommand.COMMAND_WORD:
-            case SortGoalCommand.COMMAND_ALIAS:
-                return new SortGoalCommandParser().parse(arguments);
+        case SortGoalCommand.COMMAND_WORD:
+        case SortGoalCommand.COMMAND_ALIAS:
+            return new SortGoalCommandParser().parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

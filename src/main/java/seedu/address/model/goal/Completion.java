@@ -42,9 +42,4 @@ public class Completion {
     public int hashCode() {
         return value.hashCode();
     }
-
-//    @Override
-//    public int compareTo(Completion completion) {
-//        return completion.hasCompleted.compareTo(this.hasCompleted);
-//    }
 }
