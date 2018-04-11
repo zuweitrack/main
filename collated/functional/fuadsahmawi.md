@@ -1,5 +1,5 @@
 # fuadsahmawi
-###### \java\seedu\address\logic\commands\AddReminderCommand.java
+###### /java/seedu/address/logic/commands/AddReminderCommand.java
 ``` java
 /**
  * Adds a reminder to the Calendar.
@@ -53,7 +53,7 @@ public class AddReminderCommand extends UndoableCommand {
     }
 }
 ```
-###### \java\seedu\address\logic\commands\DeleteReminderCommand.java
+###### /java/seedu/address/logic/commands/DeleteReminderCommand.java
 ``` java
 /**
  * Deletes a reminder identified using its title in the calendar
@@ -116,7 +116,7 @@ public class DeleteReminderCommand extends UndoableCommand {
     }
 }
 ```
-###### \java\seedu\address\logic\commands\FindCommand.java
+###### /java/seedu/address/logic/commands/FindCommand.java
 ``` java
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -206,7 +206,7 @@ public class FindCommand extends Command {
     }
 }
 ```
-###### \java\seedu\address\logic\parser\AddReminderCommandParser.java
+###### /java/seedu/address/logic/parser/AddReminderCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new AddReminderCommand object
@@ -257,7 +257,7 @@ public class AddReminderCommandParser implements Parser<AddReminderCommand> {
 
 }
 ```
-###### \java\seedu\address\logic\parser\DeleteReminderCommandParser.java
+###### /java/seedu/address/logic/parser/DeleteReminderCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new DeleteReminderCommand object
@@ -304,7 +304,7 @@ public class DeleteReminderCommandParser {
     }
 }
 ```
-###### \java\seedu\address\logic\parser\FindCommandParser.java
+###### /java/seedu/address/logic/parser/FindCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -341,7 +341,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 }
 ```
-###### \java\seedu\address\logic\parser\ParserUtil.java
+###### /java/seedu/address/logic/parser/ParserUtil.java
 ``` java
 
     /**
@@ -420,7 +420,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 
 ```
-###### \java\seedu\address\model\AddressBook.java
+###### /java/seedu/address/model/AddressBook.java
 ``` java
     /**
      * Adds a reminder to CollegeZone.
@@ -458,7 +458,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 
 ```
-###### \java\seedu\address\model\ModelManager.java
+###### /java/seedu/address/model/ModelManager.java
 ``` java
     @Override
     public void addReminder(Reminder reminder) throws DuplicateReminderException {
@@ -495,7 +495,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     */
 }
 ```
-###### \java\seedu\address\model\person\TagContainsKeywordsPredicate.java
+###### /java/seedu/address/model/person/TagContainsKeywordsPredicate.java
 ``` java
 /**
  * Tests that a {@code Person}'s {@code Tags} matches any of the keywords given.
@@ -532,7 +532,7 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
 
 }
 ```
-###### \java\seedu\address\model\ReadOnlyAddressBook.java
+###### /java/seedu/address/model/ReadOnlyAddressBook.java
 ``` java
     /**
      * Returns an unmodifiable view of the reminders list.
@@ -542,7 +542,7 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
 
 }
 ```
-###### \java\seedu\address\model\reminder\EndDateTime.java
+###### /java/seedu/address/model/reminder/EndDateTime.java
 ``` java
 /**
  * Represents a Reminder's end date and time in the Calendar.
@@ -601,7 +601,7 @@ public class EndDateTime {
     }
 }
 ```
-###### \java\seedu\address\model\reminder\exceptions\DuplicateReminderException.java
+###### /java/seedu/address/model/reminder/exceptions/DuplicateReminderException.java
 ``` java
 /**
  * Signals that the operation will result in duplicate Goal objects.
@@ -612,7 +612,7 @@ public class DuplicateReminderException extends DuplicateDataException {
     }
 }
 ```
-###### \java\seedu\address\model\reminder\exceptions\ReminderNotFoundException.java
+###### /java/seedu/address/model/reminder/exceptions/ReminderNotFoundException.java
 ``` java
 /**
  * Signals that the operation is unable to find the specified reminder.
@@ -620,7 +620,7 @@ public class DuplicateReminderException extends DuplicateDataException {
 public class ReminderNotFoundException extends Exception {
 }
 ```
-###### \java\seedu\address\model\reminder\Reminder.java
+###### /java/seedu/address/model/reminder/Reminder.java
 ``` java
 /**
  * Represents a Reminder
@@ -691,7 +691,7 @@ public class Reminder {
     }
 }
 ```
-###### \java\seedu\address\model\reminder\ReminderText.java
+###### /java/seedu/address/model/reminder/ReminderText.java
 ``` java
 /**
  * Represents a Reminder's text in the Calendar.
@@ -749,7 +749,7 @@ public class ReminderText {
 
 }
 ```
-###### \java\seedu\address\model\reminder\ReminderTextPredicate.java
+###### /java/seedu/address/model/reminder/ReminderTextPredicate.java
 ``` java
 /**
  * Tests that a {@code Reminder}'s {@code ReminderText} matches any of the keywords given.
@@ -775,7 +775,7 @@ public class ReminderTextPredicate implements Predicate<Reminder> {
     }
 }
 ```
-###### \java\seedu\address\model\reminder\UniqueReminderList.java
+###### /java/seedu/address/model/reminder/UniqueReminderList.java
 ``` java
 /**
  * A list of reminders that enforces uniqueness between its elements and does not allow nulls.
@@ -883,7 +883,7 @@ public class UniqueReminderList implements Iterable<Reminder> {
     }
 }
 ```
-###### \java\seedu\address\storage\XmlAdaptedReminder.java
+###### /java/seedu/address/storage/XmlAdaptedReminder.java
 ``` java
 /**
  * JAXB-friendly version of the Reminder.
@@ -978,7 +978,7 @@ public class XmlAdaptedReminder {
     }
 }
 ```
-###### \java\seedu\address\ui\CalendarPanel.java
+###### /java/seedu/address/ui/CalendarPanel.java
 ``` java
 /**
  * The Calendar Panel of the App.
@@ -1052,11 +1052,7 @@ public class CalendarPanel extends UiPart<Region> {
             }
         }
 ```
-<<<<<<< HEAD:collated/functional/fuadsahmawi.md
 ###### /java/seedu/address/ui/CalendarPanel.java
-=======
-###### \java\seedu\address\ui\CalendarPanel.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc:collated/main/fuadsahmawi.md
 ``` java
     private void setDateAndTime() {
         calendarView.setToday(LocalDate.now());

@@ -73,7 +73,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setPersons(List<Person> persons) throws DuplicatePersonException {
         this.persons.setPersons(persons);
     }
-
+    //@@author sham-sheer
     public void sortPersons(Index index) throws IndexOutOfBoundsException {
         this.persons.sortPersons(index);
     }

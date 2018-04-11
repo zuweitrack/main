@@ -22,9 +22,12 @@
             fail("This method should not be called.");
         }
 
+<<<<<<< HEAD
+=======
         public void deleteMeetDate(Person person) throws PersonNotFoundException {
             fail("This method should not be called.");
         }
+>>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc
     }
 
     /**

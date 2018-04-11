@@ -141,7 +141,7 @@ public class XmlAdaptedPerson {
         }
         final LevelOfFriendship levelOfFriendship = new LevelOfFriendship(this.levelOfFriendship);
 
-        //@@author A0158738X
+        //@@author sham-sheer
         final Meet meetDate = new Meet(this.meetDate);
         //@@author
 

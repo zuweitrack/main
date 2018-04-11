@@ -79,13 +79,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void sortPersons(Index index) throws IndexOutOfBoundsException {
-        addressBook.sortPersons(index);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        indicateAddressBookChanged();
-    }
-
-    @Override
     public synchronized void addPerson(Person person) throws DuplicatePersonException {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -107,11 +100,21 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.removeTag(t);
     }
 
+
+    //@@author sham-sheer
     @Override
     public void deleteMeetDate (Person person) throws PersonNotFoundException {
         addressBook.removeMeetFromPerson(person);
         indicateAddressBookChanged();
     }
+
+    @Override
+    public synchronized void sortPersons(Index index) throws IndexOutOfBoundsException {
+        addressBook.sortPersons(index);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        indicateAddressBookChanged();
+    }
+
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -119,6 +122,7 @@ public class ModelManager extends ComponentManager implements Model {
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code addressBook}
      */
+    //@@author
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return FXCollections.unmodifiableObservableList(filteredPersons);
