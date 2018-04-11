@@ -348,8 +348,10 @@ Format: `+goal impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
         `OR` +
         `addgoal impt/IMPORTANCE_LEVEL text/GOAL_TEXT`
 
-[TIP]
-The `IMPORTANCE_LEVEL` can only be an integer between 1 to 10. It represents the importance level of the goal to add
+[NOTE]
+====
+`IMPORTANCE_LEVEL` must be a positive integer ranging from 1 to 10.
+====
 
 Examples:
 
@@ -358,13 +360,18 @@ Examples:
 * `addgoal impt/1 text/learn how to bake cheesecake`
 
 ==== Editing a goal: `~goal OR ~g OR editgoal` [Since v1.4]
-Edits an existing goal in CollegeZone. +
+If you've adding a goal entry incorrectly, try using the `~goal`, `~g` or `editgoal` command to the goals you have. +
 
-Format: `~goal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
-        `OR` +
-        `~g INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
-        `OR` +
-        `editgoal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]`
+*_Formats:_*
+```java
+~goal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]
+```
+```java
+ ~g INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]
+```
+```java
+editgoal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]
+```
 
 ****
 * Edits the goal at the specified `INDEX`. The index refers to the index number shown in the goal page's listing. The index *must be a positive integer* 1, 2, 3, ...
@@ -372,22 +379,32 @@ Format: `~goal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
 * Existing values will be updated to the input values.
 ****
 
-Examples:
-
-* `~goal 2 impt/1` +
+*_Examples_:*
+```java
+> ~goal 2 impt/1
+```
 Edits the goal importance level of the 2nd reminder to be `1`.
-* `~g 1 impt/3 text/learn yoga` +
+```java
+~g 1 impt/3 text/learn yoga
+```
 Edits the goal text and importance level of the 1st person to be `learn yoga` and `1` respectively.
-* `editgoal 5 text/swim at least twice a month` +
+```java
+editgoal 5 text/swim at least twice a month
+```
 Edits the goal text of the 5th person to be `swim at least twice a month`.
 
 ==== Deleting a goal: `-goal OR -g OR deletegoal` [Since v1.4]
-Deletes the specified goal from CollegeZone. +
-Format: `-goal INDEX` +
-        `OR` +
-        `-g INDEX` +
-        `OR` +
-        `deletegoal INDEX` +
+If you've added a specific goal that you're unlikely to complete and want to remove it from CollegeZone, try using the `-goal`, `-g` or `deletegoal` command. +
+*_Formats:_*
+```java
+-goal INDEX
+```
+```java
+-g INDEX
+```
+```java
+deletegoal INDEX
+```
 
 ****
 * Deletes the goal at the specified `INDEX`.
@@ -395,26 +412,33 @@ Format: `-goal INDEX` +
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
-Examples:
-
-* `list` +
-`-goal 2` +
+*_Examples_:*
+```java
+> -goal 2
+```
 Deletes the 2nd goal in CollegeZone's goal page. +
-* `list` +
-`-g 4` +
+```java
+> -g 4
+```
 Deletes the 4th goal in CollegeZone's goal page. +
-* `l` +
-`deletegoal 1` +
+```java
+> deletegoal 1
+```
 Deletes the 1st goal in CollegeZone's goal page.
 
 ==== Completing a goal: `!goal OR !g OR completegoal` [Since v1.4]
-Indicates completion of an existing goal in CollegeZone. +
+Once you've completed a goal, indicate completion of an existing goal in CollegeZone using the `!goal`, `!g` or `completegoal` command. +
 
-Format: `!goal INDEX` +
-        `OR` +
-        `!g INDEX` +
-        `OR` +
-        `completegoal INDEX`
+*_Formats:_*
+```java
+!goal INDEX
+```
+```java
+!g INDEX
+```
+```java
+completegoal INDEX
+```
 
 ****
 * Indicates completion of the goal at the specified `INDEX`.
@@ -422,20 +446,79 @@ Format: `!goal INDEX` +
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
-Examples:
-
-* `list` +
-`!goal 2` +
-Indicates completion of the 2nd goal in CollegeZone's goal page. +
-* `list` +
-`!g 4` +
-Indicates completion of the 4th goal in CollegeZone's goal page. +
-* `l` +
-`completegoal 1` +
+*_Examples_:*
+```java
+> !goal 2
+```
+Indicates completion of the 2nd goal in CollegeZone's goal page.
+```java
+> !g 4
+```
+Indicates completion of the 4th goal in CollegeZone's goal page.
+```java
+> completegoal 1
+```
 Indicates completion of the 1st goal in CollegeZone's goal page.
 
+==== Sorting goals: `sortgoal OR sgoal` [Since v1.5]
+
+It is a hassle to locate the goals you're interested in if you have too many goals in CollegeZone. Try sorting the goals that you have using the `sortgoal` or `sgoal` command. +
+
+*_Formats:_*
+```java
+sortgoal f/GOAL_FIELD o/ORDER
+```
+```java
+sgoal f/GOAL_FIELD o/ORDER
+```
+[NOTE]
+====
+`GOAL_FIELD` can only be 'startdatetime', 'completion' or 'importance'.
+====
+[NOTE]
+====
+`ORDER` can only be either 'ascending' or 'descending'.
+====
+
+*_Examples_:*
+```java
+> sortgoal f/startdatetime o/ascending
+```
+Sorts the goal list based on start date time in ascending order.
+
+```java
+> sgoal f/completion o/descending
+```
+Sorts the goal list based on completion in descending order.
+
+
 === Interesting features
-==== Changing CollegeZone theme : `theme` [Since v1.5]
+==== Changing CollegeZone theme : `theme OR th` [Since v1.5]
+CollegeZone's default theme colour is not the only theme colour we have to offer! Try changing CollegeZone's theme colour using the `theme` or `th` command.  +
+
+*_Formats:_*
+```java
+theme THEME_COLOUR
+```
+```java
+th THEME_COLOUR
+```
+[NOTE]
+====
+`THEME_COLOUR` can only be 'dark' or 'light'.
+====
+
+*_Examples_:*
+```java
+> theme light
+```
+Changes the theme colour to light theme.
+
+```java
+> th dark
+```
+Changes the theme colour to dark theme.
+
 
 ==== Listing entered commands : `history`
 
@@ -609,6 +692,16 @@ OR +
 OR +
 `completegoal INDEX` +
 |`!goal 1`
+
+|*Sort Goal* |Sorts the goal list |`sortgoal f/GOAL_FIELD o/ORDER` +
+OR +
+`sgoal f/GOAL_FIELD o/ORDER` +
+|`sortgoal f/startdatetime o/ascending`
+
+|*Theme* |Switch theme colour of CollegeZone |`theme THEME_COLOUR` +
+OR +
+`th THEME_COLOUR` +
+|`theme light`
 
 |*Add Reminder* |Adds a reminder entry |`+reminder text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME` +
 OR +

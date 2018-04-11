@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Goal's importance in CollegeZone.
  * Guarantees: immutable; is valid as declared in {@link #isValidImportance(String)}
  */
-public class Importance {
+public class Importance implements Comparable<Importance> {
 
 
     public static final String MESSAGE_IMPORTANCE_CONSTRAINTS =
@@ -66,4 +66,15 @@ public class Importance {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(Importance importance) {
+        if ((Integer.valueOf(importance.value)).equals(Integer.valueOf(this.value))) {
+            return 0;
+        } else if ((Integer.valueOf(importance.value)) < (Integer.valueOf(this.value))) {
+            return 1;
+        } else if ((Integer.valueOf(importance.value)) > (Integer.valueOf(this.value))) {
+            return -1;
+        }
+        return 0;
+    }
 }

@@ -356,37 +356,37 @@
 
 #tags .red {
     -fx-text-fill: black;
-    -fx-background-color: red;
+    -fx-background-color: #ff7675;
 }
 
 #tags .yellow {
-    -fx-background-color: yellow;
+    -fx-background-color: #ffeaa7;
     -fx-text-fill: black;
 }
 
 #tags .blue {
-    -fx-text-fill: white;
-    -fx-background-color: blue;
+    -fx-text-fill: black;
+    -fx-background-color: #48dbfb;
 }
 
 #tags .orange {
     -fx-text-fill: black;
-    -fx-background-color: orange;
+    -fx-background-color: #ffa502;
 }
 
 #tags .brown {
-    -fx-text-fill: white;
-    -fx-background-color: brown;
+    -fx-text-fill: black;
+    -fx-background-color: #D7ACAC;
 }
 
 #tags .green {
     -fx-text-fill: black;
-    -fx-background-color: green;
+    -fx-background-color: #55efc4;
 }
 
 #tags .pink {
     -fx-text-fill: black;
-    -fx-background-color: pink;
+    -fx-background-color: #fd79a8;
 }
 
 #tags .black {
@@ -394,9 +394,9 @@
     -fx-background-color: black;
 }
 
-#tags .grey {
+#tags .purple {
     -fx-text-fill: black;
-    -fx-background-color: grey;
+    -fx-background-color: #a29bfe;
 }
 
 #completion {
@@ -409,15 +409,4 @@
     -fx-border-radius: 3;
     -fx-background-radius: 2;
     -fx-font-size: 14;
-}
-
-
-#completion .#74b9ff {
-    -fx-text-fill: white;
-    -fx-background-color: #74b9ff;
-}
-
-#completion .#00cec9 {
-    -fx-text-fill: white;
-    -fx-background-color: #00cec9;
 }
