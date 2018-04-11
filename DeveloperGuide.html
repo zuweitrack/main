@@ -52,7 +52,7 @@
 <li><a href="#logic-command-aliases-since-v1-1">3.6. Logic: Command Aliases [Since v1.1]</a></li>
 <li><a href="#enhanced-tag-colours-since-v1-1">3.7. Enhanced tag colours [Since v1.1]</a></li>
 <li><a href="#targeted-add-and-edit-command-since-v1-2">3.8. Targeted add and edit command [Since v1.2]</a></li>
-<li><a href="#reminders-in-calendar-since-v1-4">3.9. Reminders in Calendar [Since v1.4]</a></li>
+<li><a href="#reminders-since-v1-4">3.9. Reminders [Since v1.4]</a></li>
 <li><a href="#goals-list-since-v1-4">3.10. Goals List [Since v1.4]</a></li>
 </ul>
 </li>
@@ -1092,9 +1092,9 @@ This is done by removing unwanted attributes of a person and adding new attribut
 </div>
 </div>
 <div class="sect2">
-<h3 id="reminders-in-calendar-since-v1-4"><a class="link" href="#reminders-in-calendar-since-v1-4">3.9. Reminders in Calendar [Since v1.4]</a></h3>
+<h3 id="reminders-since-v1-4"><a class="link" href="#reminders-since-v1-4">3.9. Reminders [Since v1.4]</a></h3>
 <div class="paragraph">
-<p>As RC4 residents have events, classes and meetings to go to at a certain date and time, we decided on implementing a reminder feature to allow users to add reminders in CollegeZone.<br>
+<p>Reminders are created as RC4 residents have events, classes and meetings to go to at a certain date and time, we decided on implementing a reminder feature to allow users to add reminders in CollegeZone.<br>
 Reminder commands are undoable and redoable for the benefit users to redo and undo a command they did or did not intend to change.</p>
 </div>
 <div class="paragraph">
@@ -1106,31 +1106,33 @@ Reminder commands are undoable and redoable for the benefit users to redo and un
 <p>Adding a reminder to the Calendar</p>
 </li>
 <li>
-<p>Editing a reminder on the Calendar</p>
-</li>
-<li>
 <p>Deleting a reminder on the Calendar</p>
-</li>
-<li>
-<p>Acknowledging a reminder on the Calendar</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Reminder objects will consist of 2 attributes :</strong><br>
-1. the date, time and recurrence of reminder<br>
-2. the reminder text content</p>
+<p><strong>Reminder objects will consist of 3 attributes :</strong><br></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>the reminder text content<br></p>
+</li>
+<li>
+<p>the start date and time<br></p>
+</li>
+<li>
+<p>the end date and time</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>The reminders will be stored in an ArrayList of all the reminder objects. Each reminder will have specific positive integer index number.<br>
-A reminder will be <strong>green</strong> until it is due.<br>
-A reminder will turn and remain orange for 24 hours if it&#8217;s due.<br>
-This is when user can start acknowledging a reminder on the Calendar. <br>
-After acknowledging it, it is removed from calendar.<br>
-If it&#8217;s overdue and not acknowledged, it will turn Grey.<br></p>
+<p>The reminders will be stored in an ArrayList of all the reminder objects. Each reminder will have specific positive integer index number.<br></p>
 </div>
 <div class="paragraph">
-<p>Bottom Panel: Number of orange reminders<br></p>
+<p>A reminder will be <strong>blue</strong> until it is due.<br>
+A reminder will turn and remain <strong>red</strong> if it&#8217;s due.<br>
+Users can delete reminders on the Calendar if its already due or when they accidentally made a mistake <br></p>
 </div>
 </div>
 <div class="sect2">
@@ -2327,7 +2329,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-11 02:07:29 UTC
+Last updated 2018-04-11 18:29:13 UTC
 </div>
 </div>
 </body>
