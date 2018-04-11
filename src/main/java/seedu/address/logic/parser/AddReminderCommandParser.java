@@ -1,10 +1,13 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_TEXT;
+import static seedu.address.logic.parser.DateTimeParser.nattyDateAndTimeParser;
 
+import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -33,6 +36,15 @@ public class AddReminderCommandParser implements Parser<AddReminderCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_REMINDER_TEXT, PREFIX_DATE, PREFIX_END_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddReminderCommand.MESSAGE_USAGE));
+        }
+
+        if (nattyDateAndTimeParser(argMultimap.getValue(PREFIX_DATE).get()).get().compareTo(
+                nattyDateAndTimeParser(argMultimap.getValue(PREFIX_END_DATE).get()).get()) > 0
+                || nattyDateAndTimeParser(argMultimap.getValue(PREFIX_END_DATE).get()).get().compareTo(
+                        LocalDateTime.now()) < 0
+                || nattyDateAndTimeParser(argMultimap.getValue(PREFIX_DATE).get()).get().compareTo(
+                        LocalDateTime.now()) < 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_DATE_FORMAT, AddReminderCommand.MESSAGE_USAGE));
         }
 
         try {
