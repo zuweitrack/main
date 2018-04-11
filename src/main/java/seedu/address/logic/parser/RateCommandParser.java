@@ -28,13 +28,13 @@ public class RateCommandParser {
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_LEVEL_OF_FRIENDSHIP);
 
         String preamble;
-        String[] indexStr;
+        String[] indexString;
         List<Index> indexList = new ArrayList();
 
         try {
             preamble = argumentMultimap.getPreamble();
-            indexStr = preamble.split("\\s+");
-            for (String index : indexStr) {
+            indexString = preamble.split("\\s+");
+            for (String index : indexString) {
                 indexList.add(ParserUtil.parseIndex(index));
             }
 
