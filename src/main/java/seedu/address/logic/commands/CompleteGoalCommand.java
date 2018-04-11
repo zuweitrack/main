@@ -27,7 +27,7 @@ public class CompleteGoalCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "!goal";
     public static final String COMMAND_ALIAS_1 = "!g";
-    public static final String COMMAND_ALIAS_2 = "completedgoal";
+    public static final String COMMAND_ALIAS_2 = "completegoal";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Indicate completion of the goal identified "
             + "by the index number used in the last goal listing. "
@@ -152,6 +152,7 @@ public class CompleteGoalCommand extends UndoableCommand {
         public Optional<StartDateTime> getStartDateTime() {
             return Optional.ofNullable(startDateTime);
         }
+
         public Optional<Importance> getImportance() {
             return Optional.ofNullable(importance);
         }

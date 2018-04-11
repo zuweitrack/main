@@ -15,6 +15,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.goal.Goal;
 import seedu.address.model.goal.exceptions.DuplicateGoalException;
+import seedu.address.model.goal.exceptions.EmptyGoalListException;
 import seedu.address.model.goal.exceptions.GoalNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -187,6 +188,13 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(target, editedGoal);
 
         addressBook.updateGoalWithoutParameters(target, editedGoal);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void sortGoal(String sortGoalType, String sortGoalOrder) throws EmptyGoalListException {
+        requireAllNonNull(sortGoalType, sortGoalOrder);
+        addressBook.sortGoal(sortGoalType, sortGoalOrder);
         indicateAddressBookChanged();
     }
 
