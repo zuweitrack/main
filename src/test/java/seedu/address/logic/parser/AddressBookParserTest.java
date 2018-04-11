@@ -37,6 +37,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MeetCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.ThemeCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.goal.Goal;
@@ -332,5 +333,11 @@ public class AddressBookParserTest {
         CompleteGoalCommand command = (CompleteGoalCommand) parser.parseCommand(
                 CompleteGoalCommand.COMMAND_ALIAS_2 + " " + INDEX_FIRST_GOAL.getOneBased());
         assertEquals(new CompleteGoalCommand(INDEX_FIRST_GOAL, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_themeCommand_returns() throws Exception {
+        ThemeCommand command = (ThemeCommand) parser.parseCommand(ThemeCommand.COMMAND_WORD + " " + "dark");
+        assertEquals(new ThemeCommand("dark"), command);
     }
 }

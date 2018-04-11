@@ -9,20 +9,23 @@ import javafx.scene.Node;
  */
 public class StatusBarFooterHandle extends NodeHandle<Node> {
     public static final String STATUS_BAR_PLACEHOLDER = "#statusbarPlaceholder";
-
+    public static final String GOAL_COMPLETED_STATUS_ID = "#goalCompletionStatus";
     private static final String SYNC_STATUS_ID = "#syncStatus";
     private static final String SAVE_LOCATION_STATUS_ID = "#saveLocationStatus";
 
     private final StatusBar syncStatusNode;
+    private final StatusBar goalCompletedStatusNode;
     private final StatusBar saveLocationNode;
 
     private String lastRememberedSyncStatus;
+    private String lastRememberedGoalCompletedStatus;
     private String lastRememberedSaveLocation;
 
     public StatusBarFooterHandle(Node statusBarFooterNode) {
         super(statusBarFooterNode);
 
         this.syncStatusNode = getChildNode(SYNC_STATUS_ID);
+        this.goalCompletedStatusNode = getChildNode(GOAL_COMPLETED_STATUS_ID);
         this.saveLocationNode = getChildNode(SAVE_LOCATION_STATUS_ID);
     }
 
@@ -40,6 +43,15 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
         return saveLocationNode.getText();
     }
 
+    //@@author deborahlow97
+    /**
+     * Returns the text of the 'save location' portion of the status bar.
+     */
+    public String getGoalCompletedStatus() {
+        return goalCompletedStatusNode.getText();
+    }
+
+    //@@author
     /**
      * Remembers the content of the sync status portion of the status bar.
      */
@@ -68,5 +80,22 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
      */
     public boolean isSaveLocationChanged() {
         return !lastRememberedSaveLocation.equals(getSaveLocation());
+    }
+
+    //@@author deborahlow97
+    /**
+     * Remembers the content of the 'goal completion status' portion of the status bar.
+     */
+    public void rememberGoalCompletedStatus() {
+        lastRememberedGoalCompletedStatus = getGoalCompletedStatus();
+    }
+
+    /**
+     * Returns true if the current content of the 'goal completion status' is different from the value remembered
+     * by the most
+     * recent {@code rememberGoalCompletedStatus()} call.
+     */
+    public boolean isGoalCompletedStatusChanged() {
+        return !lastRememberedGoalCompletedStatus.equals(getGoalCompletedStatus());
     }
 }

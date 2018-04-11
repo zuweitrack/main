@@ -23,6 +23,11 @@ public class StartDateTime {
         this.value = properDateTimeFormat(startDateTime);
     }
 
+    public StartDateTime(String startDateTimeInString) {
+        requireNonNull(startDateTimeInString);
+        this.value = startDateTimeInString;
+    }
+
     @Override
     public String toString() {
         return value;

@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import com.calendarfx.model.Calendar;
+
 import com.calendarfx.model.CalendarSource;
 import com.calendarfx.model.Entry;
 import com.calendarfx.model.Interval;
@@ -18,7 +19,11 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.Region;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.model.person.Person;
 import seedu.address.model.reminder.Reminder;
+
+
+
 
 //@@author fuadsahmawi
 /**
@@ -31,10 +36,13 @@ public class CalendarPanel extends UiPart<Region> {
 
     private ObservableList<Reminder> reminderList;
 
-    public CalendarPanel(ObservableList<Reminder> reminderList) {
+    private ObservableList<Person> personList;
+
+    public CalendarPanel(ObservableList<Reminder> reminderList, ObservableList<Person> personList) {
         super(FXML);
 
         this.reminderList = reminderList;
+        this.personList = personList;
 
         calendarView = new CalendarView();
         calendarView.setRequestedTime(LocalTime.now());
@@ -47,32 +55,73 @@ public class CalendarPanel extends UiPart<Region> {
         calendarView.showMonthPage();
         updateCalendar();
         registerAsAnEventHandler(this);
+
+
     }
 
     @Subscribe
-    private void handleNewReminderEvent(AddressBookChangedEvent event) {
+    private void handleNewCalendarEvent(AddressBookChangedEvent event) {
         reminderList = event.data.getReminderList();
+        personList = event.data.getPersonList();
         Platform.runLater(this::updateCalendar);
     }
+
+
+
 
     /**
      * Updates the Calendar with Reminders that are already added
      */
     private void updateCalendar() {
         setDateAndTime();
-        CalendarSource myCalendarSource = new CalendarSource("Reminders");
-        Calendar calendar = new Calendar("Reminders");
-        calendar.setStyle(Calendar.Style.getStyle(1));
-        calendar.setLookAheadDuration(Duration.ofDays(365));
-        myCalendarSource.getCalendars().add(calendar);
+        CalendarSource myCalendarSource = new CalendarSource("Reminders and Meetups");
+        Calendar calendarRDue = new Calendar("Reminders Already Due");
+        Calendar calendarRNotDue = new Calendar("Reminder Not Due");
+        Calendar calendarM = new Calendar("Meetups");
+        calendarRDue.setStyle(Calendar.Style.getStyle(4));
+        calendarRDue.setLookAheadDuration(Duration.ofDays(365));
+        calendarRNotDue.setStyle(Calendar.Style.getStyle(1));
+        calendarRNotDue.setLookAheadDuration(Duration.ofDays(365));
+        calendarM.setStyle(Calendar.Style.getStyle(3));
+        myCalendarSource.getCalendars().add(calendarRDue);
+        myCalendarSource.getCalendars().add(calendarRNotDue);
+        myCalendarSource.getCalendars().add(calendarM);
         for (Reminder reminder : reminderList) {
             LocalDateTime ldtstart = nattyDateAndTimeParser(reminder.getDateTime().toString()).get();
             LocalDateTime ldtend = nattyDateAndTimeParser(reminder.getEndDateTime().toString()).get();
-            calendar.addEntry(new Entry(reminder.getReminderText().toString(), new Interval(ldtstart, ldtend)));
+            LocalDateTime now = LocalDateTime.now();
+            if (now.isBefore(ldtend)) {
+                calendarRNotDue.addEntry(new Entry(
+                        reminder.getReminderText().toString(), new Interval(ldtstart, ldtend)));
+            } else {
+                calendarRDue.addEntry(new Entry(reminder.getReminderText().toString(), new Interval(ldtstart, ldtend)));
+            }
+        }
+        //@@author A0158738X
+        for (Person person : personList) {
+            String meetDate = person.getMeetDate().toString();
+            if (!meetDate.isEmpty()) {
+                int day = Integer.parseInt(meetDate.substring(0,
+                        2));
+                int month = Integer.parseInt(meetDate.substring(3,
+                        5));
+                int year = Integer.parseInt(meetDate.substring(6,
+                        10));
+                System.out.println(year + " " + month + " " + day);
+                calendarM.addEntry(new Entry("Meeting " + person.getName().toString(),
+                        new Interval(LocalDate.of(year, month, day), LocalTime.of(12, 0),
+                                LocalDate.of(year, month, day), LocalTime.of(13, 0))));
+            }
         }
         calendarView.getCalendarSources().add(myCalendarSource);
     }
 
+    /**
+     * Updates the Calendar with Meet ups that are already added
+     */
+
+
+    //@@author fuadsahmawi
     private void setDateAndTime() {
         calendarView.setToday(LocalDate.now());
         calendarView.setTime(LocalTime.now());
@@ -82,4 +131,5 @@ public class CalendarPanel extends UiPart<Region> {
     public CalendarView getRoot() {
         return this.calendarView;
     }
+
 }

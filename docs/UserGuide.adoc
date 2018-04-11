@@ -38,7 +38,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the CollegeZone.
+* **`add`**`n/John Doe p/98765432 */9 b/21 May 1997 u/#10-12 cca/Badminton cca/Volleyball t/workout buddy` : adds a contact named `John Doe` to CollegeZone.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
 
@@ -54,45 +54,74 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* There are no limit to the number of tags or ccas a person can have.
+* [TIP]
+Sentences displayed in this manner indicates a TIP for you
 ====
 
-=== Viewing help : `help`
+=== General features
+==== *Viewing help : `help`*
+First, let's get familiar with the command features that CollegeZone offers! Type `help` in the Command Box and press kbd:[Enter] to display all the possible command usage.
 
-Format: `help`
+*_Format:_*
+```java
+help
+```
+==== *Adding a person: `add OR a`*
+Currently, CollegeZone is empty. Try to add a fellow RC4 friend into CollegeZone using the `add` or `a` command.
 
-=== Adding a person: `add OR a`
+*_Formats:_*
+```java
+add n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...
+```
+```java
+a n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...
+```
 
-Adds a person to CollegeZone +
-
-Format: `add n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...` +
-        `OR` +
-        `a n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...`
-****
-* `LEVEL_OF_FRIENDSHIP` must be a positive integer ranging from 1 to 10.
-****
+[NOTE]
+====
+`LEVEL_OF_FRIENDSHIP` must be a positive integer ranging from 1 to 10.
+====
+[NOTE]
+====
+`BIRTHDAY` must be a in DDMMYYYY format .
+====
 
 [TIP]
 A person can have any number of tags (including 0) +
 A person can have any number of CCAs (including 0)
 
-Examples:
+*_Examples_:*
+```java
+> add n/John Doe p/98765432 */9 b/21-May-1997 u/#10-12 cca/Badminton cca/Volleyball t/workout buddy
+```
+```java
+> a n/Betsy Crowe t/friend b/21/12/1994 u/01-10 p/1234567 */1 t/OwesMoney
+```
 
-* `add n/John Doe p/98765432 */9 b/21 May 1997 u/#10-12 cca/Badminton cca/Volleyball t/workout buddy`
-* `a n/Betsy Crowe t/friend b/21 12 1994 u/01-10 p/1234567 */1 t/OwesMoney`
-
-=== Listing all Persons : `list OR l`
+==== Listing all persons : `list OR l`
 
 Shows a list of all persons in CollegeZone. +
 
-Format: `list OR l`
+*_Formats:_*
+```java
+list
+```
+```java
+l
+```
 
-=== Editing a Person : `edit OR e` [since v1.2]
+==== Editing a person : `edit OR e` [Since v1.2]
 
 Edits an existing person in CollegeZone. +
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [u/UNIT_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [cca/CCA]... [t/TAG]...` +
-        `OR` +
-        `e INDEX [n/NAME] [p/PHONE] [u/UNIT_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [cca/CCA]... [t/TAG]...`
+*_Formats:_*
+```java
+edit INDEX [n/NAME] [p/PHONE] [u/UNIT_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [cca/CCA]... [t/TAG]...
+```
+```java
+e INDEX [n/NAME] [p/PHONE] [u/UNIT_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [cca/CCA]... [t/TAG]...
+```
 ****
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the last person listing. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
@@ -101,17 +130,25 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [u/UNIT_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [
 * You can remove all the person's tags by typing `t/` without specifying any tags after it.
 ****
 
-Examples:
-
-* `edit 1 p/91234567 */10` +
+*_Examples_:*
+```java
+> edit 1 p/91234567 */10
+```
 Edits the phone number and level of friendship of the 1st person to be `91234567` and `10` respectively.
-* `e 2 n/Betsy Crower t/` +
+
+```java
+> e 2 n/Betsy Crower t/
+```
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-=== Locating Persons by name: `find OR f` `[since v1.1]`
+==== Locating persons by name or tag: `find OR f` [Since v1.1]
 
 Finds persons whose names contain any of the given keywords. +
-Format: `find [n/KEYWORDS] [t/]` or `find [n/] [t/KEYWORDS]`
+
+*_Formats:_*
+```java
+ find [n/KEYWORDS] or find [t/KEYWORDS]
+```
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
@@ -122,16 +159,21 @@ Format: `find [n/KEYWORDS] [t/]` or `find [n/] [t/KEYWORDS]`
 * Searching both name and tag at the same time is not possible
 ****
 
-Examples:
-
-* `find n/John t/` +
+*_Examples_:*
+```java
+> find n/John
+```
 Returns `john` and `John Doe`
-* `f n/Betsy Tim John t/` +
+```java
+> f n/Betsy Tim John
+```
 Returns any person having names `Betsy`, `Tim`, or `John`
-*  `find n/ t/friends` +
+```java
+> find t/friends
+```
 Returns any person having tags `friends`
 
-=== Seeking the Resident Assistant of a person : `seek` `[coming in v2.0]`
+==== Seeking the Resident Assistant of a person : `seek` [Since v1.3]
 Seek the Resident Assistant (RA) of the person whose name contains any of the given keywords. +
 Format: `seek NAME`
 
@@ -150,10 +192,14 @@ Returns `John's RA`
 * `find Betsy` +
 Returns `Betsy's RA`
 
-=== Deleting a person : `delete OR d`
+==== Deleting a person : `delete OR d`
 
 Deletes the specified person from CollegeZone. +
-Format: `delete INDEX`
+
+*_Formats:_*
+```java
+delete INDEX
+```
 
 ****
 * Deletes the person at the specified `INDEX`.
@@ -161,16 +207,19 @@ Format: `delete INDEX`
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
-Examples:
-
-* `list` +
-`delete 2` +
+*_Examples_:*
+```java
+> list
+> delete 2
+```
 Deletes the 2nd person in CollegeZone.
-* `find Betsy` +
-`d 1` +
+```java
+> find Betsy
+> d 1
+```
 Deletes the 1st person in the results of the `find` command.
 
-=== Selecting a person : `select OR s`
+==== Selecting a person : `select OR s`
 
 Selects the person identified by the index number used in the last person listing. +
 Format: `select INDEX`
@@ -190,10 +239,10 @@ Selects the 2nd person in CollegeZone.
 `s 1` +
 Selects the 1st person in the results of the `find` command.
 
-=== Meeting a person : `meet OR m`
+==== Meeting a person : `meet OR m` [Since v1.3]
 
 Selects the person identified by the index number used in the last person listing. +
-Format: `meet INDEX [d/MEETDATE]`
+Format: `meet INDEX d/MEETDATE`
 
 ****
 * Sets up a meeting with the person at the specified `INDEX` on the specified meet date.
@@ -207,14 +256,16 @@ Examples:
 * `meet 1 d/14/03/2018` +
 Sets up a meeting with the 1st person on the 14th of March, 2018 in your Calendar.
 
-=== Adding a Reminder: `+r` [Coming v1.3]
-Adds a reminder to CollegeZone +
-Format: `+r text/REMINDER_TEXT d/DATETIME`
+=== Reminder features
+
+==== Adding a reminder: `+reminder OR +r OR addreminder` [Since v1.4]
+You can set a reminder into the calendar in CollegeZone +
+Format: `+r text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME`
 
 ****
-* Adds a reminder to CollegeZone and is reflected in the Calendar.
-* `DATETIME`: a datetime is a string that contains either a date, a time or a combination of both (in any order). If a date is not specified, then it will refer to today. If a time is not specified, then it will refer to the current time.
-* Examples of valid datetime: +
+* A reminder will be added to CollegeZone and it will reflected in the Calendar.
+* `START_DATETIME` & `END_DATETIME`: a datetime is a string that contains either a date, a time or a combination of both (in any order). If a date is not specified, then it will refer to today. If a time is not specified, then it will refer to the current time.
+* Examples of valid START_DATETIME & END_DATETIME: +
  -	[date] [time] +
  -	3pm +
  -	today +
@@ -223,17 +274,21 @@ Format: `+r text/REMINDER_TEXT d/DATETIME`
  -	thursday 8am +
  -	tomorrow 3pm +
  -	14 Feb 2014 5.30am +
- -	29/2/14 23:59
+ -	2/29/14 23:59 +
 
 ****
+
+[TIP]
+You should use a date format of MM/DD/YYYY instead of DD/MM/YYYY if you choose to
+use this date format for the START_DATETIME or END_DATETIME
 
 
 Examples:
 
-* `+r text/Eat vitamins d/tmr 8am`
-* `+r text/Dental appointment d/next thurs 3pm`
+* `+r text/Eat vitamins d/tmr 8am e/tmr 8.10am`
+* `+reminder text/Dental appointment d/next thurs 3pm e/next thurs 4pm`
 
-=== Editing a Reminder: `~r` [v1.4]
+==== Editing a reminder: `~r` [Coming v1.5]
 Edits an existing reminder in CollegeZone. +
 Format: `~r INDEX [text/REMINDER_TEXT] [d/DATETIME]`
 
@@ -250,10 +305,39 @@ Edits the reminder text of the 4th reminder to be `CS2103 exam coming in 1 week`
 * `~r 2 text/water plants d/tmr 7am` +
 Edits the reminder text and datetime of the 2nd person to be `water plants` and `tmr 7am` respectively.
 
-=== Deleting a Reminder: `-r` [v1.4]
+==== Deleting a reminder: `-reminder OR -r OR deletereminder` [Since v1.4]
+You can delete a reminder that you have set into the calendar in CollegeZone +
+Format: `-r text/REMINDER_TEXT d/START_DATETIME`
 
+****
+* Deletes a reminder from CollegeZone and the reminder will not be reflected in the Calendar anymore.
+* `REMINDER_TEXT`: a string that contains the reminder's title
+* `START_DATETIME`: a datetime is a string that contains either a date, a time or a combination of both (in any order). If a date is not specified, then it will refer to today. If a time is not specified, then it will refer to the current time.
+* Examples of valid START_DATETIM: +
+ -	[date] [time] +
+ -	3pm +
+ -	today +
+ -	tmr +
+ -	10 Feb +
+ -	thursday 8am +
+ -	tomorrow 3pm +
+ -	14 Feb 2014 5.30am +
+ -	2/29/14 23:59 +
 
-=== Adding a Goal: `+goal OR +g OR addgoal` [Coming v1.3]
+****
+
+[TIP]
+You should use a date format of MM/DD/YYYY instead of DD/MM/YYYY if you choose to
+use this date format for START_DATETIME
+
+Examples:
+
+* `-r text/Eat vitamins d/tmr 8pm`
+* `-reminder text/Dental appointment d/tmr`
+
+=== Goal features
+
+==== Adding a goal: `+goal OR +g OR addgoal` [Since v1.3]
 Adds a goal to CollegeZone and is reflected in the Goals Page. +
 
 Format: `+goal impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
@@ -263,7 +347,7 @@ Format: `+goal impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
         `addgoal impt/IMPORTANCE_LEVEL text/GOAL_TEXT`
 
 [TIP]
-The `IMPORTANCE_LEVEL` can only be an integer between 1 to 3. It represents the importance level of the goal to add
+The `IMPORTANCE_LEVEL` can only be an integer between 1 to 10. It represents the importance level of the goal to add
 
 Examples:
 
@@ -271,7 +355,7 @@ Examples:
 * `+g impt/2 text/meetup with close friends more often =)`
 * `addgoal impt/1 text/learn how to bake cheesecake`
 
-=== Editing a Goal: `~goal OR ~g OR editgoal` [Coming v1.4]
+==== Editing a goal: `~goal OR ~g OR editgoal` [Since v1.4]
 Edits an existing goal in CollegeZone. +
 
 Format: `~goal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
@@ -295,7 +379,7 @@ Edits the goal text and importance level of the 1st person to be `learn yoga` an
 * `editgoal 5 text/swim at least twice a month` +
 Edits the goal text of the 5th person to be `swim at least twice a month`.
 
-=== Deleting a Goal: `-goal OR -g OR deletegoal` [v1.4]
+==== Deleting a goal: `-goal OR -g OR deletegoal` [Since v1.4]
 Deletes the specified goal from CollegeZone. +
 Format: `-goal INDEX` +
         `OR` +
@@ -321,7 +405,7 @@ Deletes the 4th goal in CollegeZone's goal page. +
 `deletegoal 1` +
 Deletes the 1st goal in CollegeZone's goal page.
 
-=== Completing a Goal: `!goal OR !g OR completegoal` [v1.5]
+==== Completing a goal: `!goal OR !g OR completegoal` [Since v1.4]
 Indicates completion of an existing goal in CollegeZone. +
 
 Format: `!goal INDEX` +
@@ -348,7 +432,10 @@ Indicates completion of the 4th goal in CollegeZone's goal page. +
 `completegoal 1` +
 Indicates completion of the 1st goal in CollegeZone's goal page.
 
-=== Listing entered commands : `history`
+=== Interesting features
+==== Changing CollegeZone theme : `theme` [Since v1.5]
+
+==== Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
 Format: `history`
@@ -359,7 +446,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
-=== Undoing previous command : `undo`
+==== Undoing previous command : `undo`
 
 Restores CollegeZone to the state before the previous _undoable_ command was executed. +
 Format: `undo`
@@ -385,7 +472,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
 
-=== Redoing the previously undone command : `redo`
+==== Redoing the previously undone command : `redo`
 
 Reverses the most recent `undo` command. +
 Format: `redo`
@@ -408,23 +495,24 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-=== Clearing all entries : `clear`
+==== Clearing all entries : `clear`
 
 Clears all entries from CollegeZone. +
 Format: `clear`
 
-=== Exiting the program : `exit`
+==== Exiting the program : `exit`
 
 Exits the program. +
 Format: `exit`
 
-=== Saving the data
+==== Saving the data
 
 CollegeZone data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
+=== Upcoming features
 // tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+==== Encrypting data files [Coming in v2.0]
 
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
@@ -435,40 +523,101 @@ _{explain how the user can enable/disable data encryption}_
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CollegeZone folder.
 
 == Command Summary
+The table below provides a quick summary of all the commands available in CollegeZone.
 
-* *Add* `add n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...` +
-OR `a n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 */3 b/14-3-1995 u/01-111 cca/Choir t/friend t/colleague`
-* *Clear* : `clear` OR `c`
-* *Delete* : `delete INDEX` OR `d INDEX`
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [u/UNIT_NUMBER] [cca/CCA]... [t/TAG]...` +
-OR `e INDEX [n/NAME] [p/PHONE_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [u/UNIT_NUMBER] [cca/CCA]... [t/TAG]...` +
-e.g. `edit 2 n/James Lee cca/waterpolo`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *List* : `list` OR `l`
-* *Help* : `help` or `h`
-* *Select* : `select INDEX` OR `s INDEX`
-e.g. `select 2`
-* *History* : `history` OR `h`
-* *Undo* : `undo`
-* *Redo* : `redo`
-* *Add Goal* : `+goal impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
-OR `+g impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
-OR `addgoal impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
-e.g. `+goal impt/3 text/lose weight!`
-* *Edit Goal* : `~goal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
-OR `~g INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
-OR `editgoal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
-e.g. `~goal 2 impt/1`
+[width="90%",cols="20%,<22%,<23%,<25%",options="header",]
+|=======================================================================
+|Command |Function |Format |Example
 
-* *Delete Goal* : `-goal INDEX` +
-OR `-g INDEX` +
-OR `deletegoal INDEX` +
-e.g. `-goal 2`
+|*Add* |Adds a person entry|`add n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...` +
+OR +
+`a n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...`
+|`add n/James Ho p/22224444 */3 b/14-3-1995 u/01-111 cca/Choir t/friend t/colleague`
 
-* *Complete Goal* : `!goal INDEX` +
-OR `!g INDEX` +
-OR `completegoal INDEX` +
-e.g. `!goal INDEX`
+|*Clear* |Clears all person and goal entries |`clear` OR `c`|
+
+|*Delete* |Deletes a person entry |`delete INDEX` OR `d INDEX`
+|`delete 3`
+
+|*Edit* |Edits a peron details |`edit INDEX [n/NAME] [p/PHONE_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [u/UNIT_NUMBER] [cca/CCA]... [t/TAG]...` +
+OR +
+`e INDEX [n/NAME] [p/PHONE_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [u/UNIT_NUMBER] [cca/CCA]... [t/TAG]...` +
+|`edit 2 n/James Lee cca/waterpolo`
+
+|*Find* |Finds a person by keyword |`find n/KEYWORD [MORE_KEYWORDS]` +
+OR +
+`f n/KEYWORD [MORE_KEYWORDS]` +
+OR +
+`find t/KEYWORD [MORE_KEYWORDS]` +
+OR +
+`f t/KEYWORD [MORE_KEYWORDS]` +
+|`find n/James Jake`
+
+|*List* |Lists all persons |`list` +
+OR +
+`l` |
+
+|*Help* |Opens the help page |`help` +
+OR +
+`h` |
+
+|*Select* |Selects the person and goal entry |`select INDEX` +
+OR +
+`s INDEX`
+|`select 2`
+
+|*History* |Lists previously entered commands |`history` +
+OR +
+`h`
+|
+
+|*Undo* |Undo previous command |`undo` |
+
+|*Redo* |Redo previous command |`redo` |
+
+|*Meet* |Adds meet up date with a person |`meet INDEX d/DD-MM-YYYY` +
+OR +
+`m INDEX d/DD-MM-YYYY`
+|
+
+|*Add Goal* |Adds a goal entry |`+goal impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
+OR +
+`+g impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
+OR +
+`addgoal impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
+|`+goal impt/3 text/lose weight!`
+
+|*Edit Goal* |Edits a goal entry |`~goal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
+OR +
+`~g INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
+OR +
+`editgoal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
+|`~goal 2 impt/1`
+
+|*Delete Goal* |Deletes a goal entry |`-goal INDEX` +
+OR +
+`-g INDEX` +
+OR +
+`deletegoal INDEX` +
+|`-goal 2`
+
+|*Complete Goal* |Complete a goal entry |`!goal INDEX` +
+OR +
+`!g INDEX` +
+OR +
+`completegoal INDEX` +
+|`!goal 1`
+
+|*Add Reminder* |Adds a reminder entry |`+reminder text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME` +
+OR +
+`+r text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME` +
+OR +
+`addreminder text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME` +
+|`+reminder text/Eat pills d/tonight 10pm e/tonight 10.15pm`
+
+|*Delete Reminder* |Deletes a reminder entry |`-reminder [REMINDER_TEXT]` +
+OR +
+`-r [REMINDER_TEXT]` +
+OR +
+`deletereminder [REMINDER_TEXT]` +
+|`-reminder Eat pills`

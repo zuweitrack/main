@@ -14,6 +14,8 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CompleteGoalCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteGoalCommand;
+import seedu.address.logic.commands.DeleteMeetCommand;
+import seedu.address.logic.commands.DeleteReminderCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditGoalCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -25,6 +27,7 @@ import seedu.address.logic.commands.MeetCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SeekRaCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.ThemeCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -131,6 +134,13 @@ public class AddressBookParser {
         case MeetCommand.COMMAND_WORD:
             return new MeetCommandParser().parse(arguments);
 
+        case DeleteMeetCommand.COMMAND_WORD:
+            return new DeleteMeetCommandParser().parse(arguments);
+
+        case DeleteMeetCommand.COMMAND_ALIAS:
+            return new DeleteMeetCommandParser().parse(arguments);
+
+
         case AddGoalCommand.COMMAND_WORD:
         case AddGoalCommand.COMMAND_ALIAS_1:
         case AddGoalCommand.COMMAND_ALIAS_2:
@@ -155,6 +165,14 @@ public class AddressBookParser {
         case AddReminderCommand.COMMAND_ALIAS:
         case AddReminderCommand.COMMAND_ALIAS_2:
             return new AddReminderCommandParser().parse(arguments);
+
+        case DeleteReminderCommand.COMMAND_WORD:
+        case DeleteReminderCommand.COMMAND_ALIAS:
+        case DeleteReminderCommand.COMMAND_ALIAS_2:
+            return new DeleteReminderCommandParser().parse(arguments);
+
+        case ThemeCommand.COMMAND_WORD:
+            return new ThemeCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

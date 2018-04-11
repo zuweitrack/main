@@ -11,6 +11,7 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.reminder.Reminder;
 import seedu.address.model.reminder.exceptions.DuplicateReminderException;
+import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
 import seedu.address.model.tag.Tag;
 
 
@@ -35,6 +36,9 @@ public interface Model {
 
     /** Deletes the given person. */
     void deletePerson(Person target) throws PersonNotFoundException;
+
+    /** Deletes the given person's meet date */
+    void deleteMeetDate(Person target) throws PersonNotFoundException;
 
     /** Adds the given person */
     void addPerson(Person person) throws DuplicatePersonException;
@@ -94,7 +98,8 @@ public interface Model {
      */
     void updateGoalWithoutParameters(Goal target, Goal editedGoal) throws GoalNotFoundException;
 
-    //@@author fuadsahmawi
+    //@@author
+    // fuadsahmawi
     /** Adds the given reminder. */
     void addReminder(Reminder reminder) throws DuplicateReminderException;
 
@@ -106,4 +111,7 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredReminderList(Predicate<Reminder> predicate);
+
+    /** Deletes the given reminder. */
+    void deleteReminder(Reminder target) throws ReminderNotFoundException;
 }

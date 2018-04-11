@@ -29,6 +29,7 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.reminder.Reminder;
 import seedu.address.model.reminder.exceptions.DuplicateReminderException;
+import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
@@ -194,6 +195,15 @@ public class AddCommandTest {
         public ObservableList<Reminder> getFilteredReminderList() {
             fail("This method should not be called.");
             return null;
+        }
+
+        @Override
+        public void deleteReminder(Reminder target) throws ReminderNotFoundException {
+            fail("This method should not be called.");
+        }
+
+        public void deleteMeetDate(Person person) throws PersonNotFoundException {
+            fail("This method should not be called.");
         }
     }
 

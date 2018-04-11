@@ -20,6 +20,7 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.reminder.Reminder;
 import seedu.address.model.reminder.exceptions.DuplicateReminderException;
+import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -95,6 +96,12 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void deleteTag (Tag t) {
         addressBook.removeTag(t);
+    }
+
+    @Override
+    public void deleteMeetDate (Person person) throws PersonNotFoundException {
+        addressBook.removeMeetFromPerson(person);
+        indicateAddressBookChanged();
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -194,6 +201,11 @@ public class ModelManager extends ComponentManager implements Model {
         filteredReminders.setPredicate(predicate);
     }
 
+    @Override
+    public synchronized void deleteReminder(Reminder reminder) throws ReminderNotFoundException {
+        addressBook.removeReminder(reminder);
+        indicateAddressBookChanged();
+    }
     /*
     @Override
     public void updateReminder(Reminder target, Reminder editedReminder)

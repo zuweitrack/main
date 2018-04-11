@@ -27,7 +27,7 @@ public class CompleteGoalCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "!goal";
     public static final String COMMAND_ALIAS_1 = "!g";
-    public static final String COMMAND_ALIAS_2 = "completedgoal";
+    public static final String COMMAND_ALIAS_2 = "completegoal";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Indicate completion of the goal identified "
             + "by the index number used in the last goal listing. "
@@ -116,11 +116,11 @@ public class CompleteGoalCommand extends UndoableCommand {
      * Stores the details to update the goal with.
      */
     public static class CompleteGoalDescriptor {
-        private GoalText GoalText;
-        private Importance Importance;
-        private StartDateTime StartDateTime;
-        private EndDateTime EndDateTime;
-        private Completion Completion;
+        private GoalText goalText;
+        private Importance importance;
+        private StartDateTime startDateTime;
+        private EndDateTime endDateTime;
+        private Completion completion;
 
         public CompleteGoalDescriptor() {}
 
@@ -129,34 +129,35 @@ public class CompleteGoalCommand extends UndoableCommand {
          * A defensive copy of {@code toCopy} is used internally.
          */
         public CompleteGoalDescriptor(CompleteGoalDescriptor toCopy) {
-            setEndDateTime(toCopy.EndDateTime);
-            setCompletion(toCopy.Completion);
+            setEndDateTime(toCopy.endDateTime);
+            setCompletion(toCopy.completion);
         }
 
-        public void setEndDateTime(EndDateTime EndDateTime) {
-            this.EndDateTime = EndDateTime;
+        public void setEndDateTime(EndDateTime endDateTime) {
+            this.endDateTime = endDateTime;
         }
 
         public Optional<EndDateTime> getEndDateTime() {
-            return Optional.ofNullable(EndDateTime);
+            return Optional.ofNullable(endDateTime);
         }
 
-        public void setCompletion(Completion Completion) {
-            this.Completion = Completion;
+        public void setCompletion(Completion completion) {
+            this.completion = completion;
         }
 
         public Optional<Completion> getCompletion() {
-            return Optional.ofNullable(Completion);
+            return Optional.ofNullable(completion);
         }
 
         public Optional<StartDateTime> getStartDateTime() {
-            return Optional.ofNullable(StartDateTime);
+            return Optional.ofNullable(startDateTime);
         }
+
         public Optional<Importance> getImportance() {
-            return Optional.ofNullable(Importance);
+            return Optional.ofNullable(importance);
         }
         public Optional<GoalText> getGoalText() {
-            return Optional.ofNullable(GoalText);
+            return Optional.ofNullable(goalText);
         }
         @Override
         public boolean equals(Object other) {
