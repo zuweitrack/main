@@ -1,5 +1,23 @@
 # deborahlow97
-###### /java/seedu/address/logic/commands/AddGoalCommand.java
+###### \java\seedu\address\commons\events\ui\ThemeSwitchRequestEvent.java
+``` java
+/**
+ * Indicates that a theme switch is requested.
+ */
+public class ThemeSwitchRequestEvent extends BaseEvent {
+    public final String themeToChangeTo;
+
+    public ThemeSwitchRequestEvent(String themeToChangeTo) {
+        this.themeToChangeTo = themeToChangeTo;
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName();
+    }
+}
+```
+###### \java\seedu\address\logic\commands\AddGoalCommand.java
 ``` java
 /**
  * Adds a goal to the Goals Page.
@@ -49,7 +67,7 @@ public class AddGoalCommand extends UndoableCommand {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/CompleteGoalCommand.java
+###### \java\seedu\address\logic\commands\CompleteGoalCommand.java
 ``` java
 /**
  * Edits the details of an existing goal in the address book.
@@ -58,7 +76,7 @@ public class CompleteGoalCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "!goal";
     public static final String COMMAND_ALIAS_1 = "!g";
-    public static final String COMMAND_ALIAS_2 = "completedgoal";
+    public static final String COMMAND_ALIAS_2 = "completegoal";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Indicate completion of the goal identified "
             + "by the index number used in the last goal listing. "
@@ -147,11 +165,11 @@ public class CompleteGoalCommand extends UndoableCommand {
      * Stores the details to update the goal with.
      */
     public static class CompleteGoalDescriptor {
-        private GoalText GoalText;
-        private Importance Importance;
-        private StartDateTime StartDateTime;
-        private EndDateTime EndDateTime;
-        private Completion Completion;
+        private GoalText goalText;
+        private Importance importance;
+        private StartDateTime startDateTime;
+        private EndDateTime endDateTime;
+        private Completion completion;
 
         public CompleteGoalDescriptor() {}
 
@@ -160,34 +178,35 @@ public class CompleteGoalCommand extends UndoableCommand {
          * A defensive copy of {@code toCopy} is used internally.
          */
         public CompleteGoalDescriptor(CompleteGoalDescriptor toCopy) {
-            setEndDateTime(toCopy.EndDateTime);
-            setCompletion(toCopy.Completion);
+            setEndDateTime(toCopy.endDateTime);
+            setCompletion(toCopy.completion);
         }
 
-        public void setEndDateTime(EndDateTime EndDateTime) {
-            this.EndDateTime = EndDateTime;
+        public void setEndDateTime(EndDateTime endDateTime) {
+            this.endDateTime = endDateTime;
         }
 
         public Optional<EndDateTime> getEndDateTime() {
-            return Optional.ofNullable(EndDateTime);
+            return Optional.ofNullable(endDateTime);
         }
 
-        public void setCompletion(Completion Completion) {
-            this.Completion = Completion;
+        public void setCompletion(Completion completion) {
+            this.completion = completion;
         }
 
         public Optional<Completion> getCompletion() {
-            return Optional.ofNullable(Completion);
+            return Optional.ofNullable(completion);
         }
 
         public Optional<StartDateTime> getStartDateTime() {
-            return Optional.ofNullable(StartDateTime);
+            return Optional.ofNullable(startDateTime);
         }
+
         public Optional<Importance> getImportance() {
-            return Optional.ofNullable(Importance);
+            return Optional.ofNullable(importance);
         }
         public Optional<GoalText> getGoalText() {
-            return Optional.ofNullable(GoalText);
+            return Optional.ofNullable(goalText);
         }
         @Override
         public boolean equals(Object other) {
@@ -213,7 +232,7 @@ public class CompleteGoalCommand extends UndoableCommand {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/DeleteGoalCommand.java
+###### \java\seedu\address\logic\commands\DeleteGoalCommand.java
 ``` java
 /**
  * Deletes a goal identified using it's last displayed index from the address book.
@@ -273,7 +292,7 @@ public class DeleteGoalCommand extends UndoableCommand {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/EditGoalCommand.java
+###### \java\seedu\address\logic\commands\EditGoalCommand.java
 ``` java
 /**
  * Edits the details of an existing goal in the address book.
@@ -438,13 +457,102 @@ public class EditGoalCommand extends UndoableCommand {
 }
 
 ```
-###### /java/seedu/address/logic/parser/AddGoalCommandParser.java
+###### \java\seedu\address\logic\commands\SortGoalCommand.java
+``` java
+/**
+ * Sorts goal list based on sort field entered by user.
+ */
+public class SortGoalCommand extends Command {
+
+    public static final String COMMAND_WORD = "sortgoal";
+    public static final String COMMAND_ALIAS = "sgoal";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Sorts CollegeZone's goals based on the field entered.\n"
+            + "Parameters: "
+            + PREFIX_SORT_FIELD + "FIELD (must be 'importance', 'startdatetime' or 'completion') "
+            + PREFIX_SORT_ORDER + "ORDER (must be either 'ascending' or 'descending')\n"
+            + "Example: " + COMMAND_WORD + " f/completion o/ascending";
+
+    public static final String MESSAGE_SUCCESS = "Sorted all goals by %s and %s";
+    private String sortField;
+    private String sortOrder;
+
+    public SortGoalCommand(String field, String order) {
+        this.sortField = field;
+        this.sortOrder = order;
+    }
+
+    @Override
+    public CommandResult execute() throws CommandException {
+        try {
+            model.sortGoal(sortField, sortOrder);
+        } catch (EmptyGoalListException egle) {
+            throw new CommandException(Messages.MESSAGE_INVALID_SORT_COMMAND_USAGE);
+        }
+        model.updateFilteredGoalList(PREDICATE_SHOW_ALL_GOALS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, sortField, sortOrder));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof SortGoalCommand // instanceof handles nulls
+                && sortField.equals(((SortGoalCommand) other).sortField));
+    }
+}
+```
+###### \java\seedu\address\logic\commands\ThemeCommand.java
+``` java
+/**
+ * Changes the CollegeZone colour theme to either dark or light.
+ */
+public class ThemeCommand extends Command {
+    public static final String COMMAND_WORD = "theme";
+    public static final String COMMAND_ALIAS = "th";
+    public static final String MESSAGE_SUCCESS = "Theme successfully changed!";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the theme to the theme word entered.\n"
+            + "Parameters: COLOUR THEME\n"
+            + "(Colour theme words: dark, light)\n"
+            + "Example: " + COMMAND_WORD + " dark\n";
+    public static final String MESSAGE_INVALID_THEME_COLOUR = "Theme colour entered is invalid.\n"
+            + "Possible theme colours:\n"
+            + "(Colour theme words: dark, light)\n";
+    public static final String MESSAGE_ALREADY_IN_CURRENT_THEME = "CollegeZone is already in the theme colour.";
+    private final String themeColour;
+
+    /**
+     * Creates a ThemeCommand based on the specified themeColour.
+     */
+    public ThemeCommand (String themeColour) {
+        requireNonNull(themeColour);
+        this.themeColour = themeColour;
+    }
+
+    @Override
+    public CommandResult execute() {
+
+        EventsCenter.getInstance().post(new ThemeSwitchRequestEvent(themeColour));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, themeColour));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ThemeCommand // instanceof handles nulls
+                && themeColour.equals(((ThemeCommand) other).themeColour));
+    }
+}
+```
+###### \java\seedu\address\logic\parser\AddGoalCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new AddGoalCommand object
  */
 public class AddGoalCommandParser implements Parser<AddGoalCommand> {
 
+    public static final String EMPTY_END_DATE_TIME = "";
+    public static final boolean INITIAL_COMPLETION_STATUS = false;
     /**
      * Parses the given {@code String} of arguments in the context of the AddGoalCommand
      * and returns an AddGoalCommand object for execution.
@@ -463,8 +571,8 @@ public class AddGoalCommandParser implements Parser<AddGoalCommand> {
             Importance importance = ParserUtil.parseImportance(argMultimap.getValue(PREFIX_IMPORTANCE)).get();
             GoalText goalText = ParserUtil.parseGoalText(argMultimap.getValue(PREFIX_GOAL_TEXT)).get();
             StartDateTime startDateTime = new StartDateTime(LocalDateTime.now());
-            EndDateTime endDateTime = new EndDateTime("");
-            Completion completion = new Completion(false);
+            EndDateTime endDateTime = new EndDateTime(EMPTY_END_DATE_TIME);
+            Completion completion = new Completion(INITIAL_COMPLETION_STATUS);
             Goal goal = new Goal(importance, goalText, startDateTime, endDateTime, completion);
             return new AddGoalCommand(goal);
         } catch (IllegalValueException ive) {
@@ -482,7 +590,7 @@ public class AddGoalCommandParser implements Parser<AddGoalCommand> {
 
 }
 ```
-###### /java/seedu/address/logic/parser/CompleteGoalCommandParser.java
+###### \java\seedu\address\logic\parser\CompleteGoalCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new CompleteGoalCommand object
@@ -508,7 +616,7 @@ public class CompleteGoalCommandParser implements Parser<CompleteGoalCommand> {
 
         Optional<String> empty = Optional.empty();
         Completion completion = new Completion(true);
-        EndDateTime endDateTime = new EndDateTime("today");
+        EndDateTime endDateTime = new EndDateTime(properDateTimeFormat(LocalDateTime.now()));
         completeGoalDescriptor.setCompletion(completion);
         completeGoalDescriptor.setEndDateTime(endDateTime);
 
@@ -517,7 +625,7 @@ public class CompleteGoalCommandParser implements Parser<CompleteGoalCommand> {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/DateTimeParser.java
+###### \java\seedu\address\logic\parser\DateTimeParser.java
 ``` java
 /**
  * Contains utility methods used for parsing DateTime in the various *Parser classes.
@@ -526,6 +634,7 @@ public class DateTimeParser {
 
     private static boolean isRecurring;
     private static boolean isTimeInferred;
+    private static final int BEGIN_INDEX = 6;
     /**
      * Parses user input String specified{@code args} into LocalDateTime objects
      *
@@ -590,10 +699,18 @@ public class DateTimeParser {
                 .append(" ")
                 .append(year)
                 .append(",  Time: ")
-                .append(hour)
+                .append(String.format("%02d", hour))
                 .append(":")
-                .append(minute);
+                .append(String.format("%02d", minute));
         return builder.toString();
+    }
+
+    public static LocalDateTime getLocalDateTimeFromProperDateTime(String properDateTimeString) {
+        String trimmedArgs = properDateTimeString.trim();
+        int size = trimmedArgs.length();
+        String stringFormat = properDateTimeString.substring(BEGIN_INDEX, size);
+        stringFormat = stringFormat.replace(", Time: ", "");
+        return nattyDateAndTimeParser(stringFormat).get();
     }
 
     /**
@@ -639,7 +756,7 @@ public class DateTimeParser {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/DeleteGoalCommandParser.java
+###### \java\seedu\address\logic\parser\DeleteGoalCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new DeleteGoalCommand object
@@ -663,7 +780,7 @@ public class DeleteGoalCommandParser implements Parser<DeleteGoalCommand> {
 
 }
 ```
-###### /java/seedu/address/logic/parser/EditCommandParser.java
+###### \java\seedu\address\logic\parser\EditCommandParser.java
 ``` java
     /**
      * Parses {@code Collection<String> ccas} into a {@code Set<Cca>} if {@code ccas} is non-empty.
@@ -681,7 +798,7 @@ public class DeleteGoalCommandParser implements Parser<DeleteGoalCommand> {
     }
 
 ```
-###### /java/seedu/address/logic/parser/EditGoalCommandParser.java
+###### \java\seedu\address\logic\parser\EditGoalCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new EditGoalCommand object
@@ -723,7 +840,7 @@ public class EditGoalCommandParser implements Parser<EditGoalCommand> {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/ParserUtil.java
+###### \java\seedu\address\logic\parser\ParserUtil.java
 ``` java
     /**
      * Parses a {@code String birthday} into an {@code birthday}.
@@ -800,7 +917,37 @@ public class EditGoalCommandParser implements Parser<EditGoalCommand> {
         return unitNumber.isPresent() ? Optional.of(parseUnitNumber(unitNumber.get())) : Optional.empty();
     }
 ```
-###### /java/seedu/address/logic/parser/ParserUtil.java
+###### \java\seedu\address\logic\parser\ParserUtil.java
+``` java
+    /**
+     * Parses a {@code String cca} into a {@code Cca}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code cca} is invalid.
+     */
+    public static Cca parseCca(String cca) throws IllegalValueException {
+        requireNonNull(cca);
+        String trimmedCca = cca.trim();
+        if (!Cca.isValidCcaName(trimmedCca)) {
+            throw new IllegalValueException(Cca.MESSAGE_CCA_CONSTRAINTS);
+        }
+        return new Cca(trimmedCca);
+    }
+
+    /**
+     * Parses {@code Collection<String> ccas} into a {@code Set<Cca>}.
+     */
+    public static Set<Cca> parseCcas(Collection<String> ccas) throws IllegalValueException {
+        requireNonNull(ccas);
+        final Set<Cca> ccaSet = new HashSet<>();
+        for (String ccaName : ccas) {
+            ccaSet.add(parseCca(ccaName));
+        }
+        return ccaSet;
+    }
+
+```
+###### \java\seedu\address\logic\parser\ParserUtil.java
 ``` java
     /**
      * Parses a {@code String importance} into an {@code Importance}.
@@ -853,13 +1000,147 @@ public class EditGoalCommandParser implements Parser<EditGoalCommand> {
     }
 
 ```
-###### /java/seedu/address/model/AddressBook.java
+###### \java\seedu\address\logic\parser\ParserUtil.java
+``` java
+    /**
+     * Parses a {@code String sortField} and checks if it is a valid sortField parameter.
+     *
+     * @throws IllegalValueException if specified String is an invalid field.
+     */
+    public static String parseSortGoalField(String sortField) throws IllegalValueException {
+        String trimmedSortField = sortField.trim();
+        switch (trimmedSortField) {
+        case "importance":
+        case "completion":
+        case "startdatetime":
+            return trimmedSortField;
+        default:
+            throw new IllegalValueException(MESSAGE_INVALID_SORT_FIELD);
+        }
+    }
+
+    /**
+     * Parses a {@code Optional<String> sortField} into an {@code Optional<String>} if {@code sortField}
+     * is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<String> parseSortGoalField(Optional<String> sortField) throws IllegalValueException {
+        requireNonNull(sortField);
+        return sortField.isPresent() ? Optional.of(parseSortGoalField(sortField.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String order} and check if it is a valid order parameter.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code order} is invalid.
+     */
+    public static String parseSortGoalOrder(String order) throws IllegalValueException {
+        requireNonNull(order);
+        String trimmedOrder = order.trim();
+        switch (trimmedOrder) {
+        case "ascending":
+        case "descending":
+            return trimmedOrder;
+        default:
+            throw new IllegalValueException(MESSAGE_INVALID_ORDER_FIELD);
+        }
+    }
+
+    /**
+     * Parses a {@code Optional<String> sortOrder} into an {@code Optional<String>} if {@code sortOrder}
+     * is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<String> parseSortGoalOrder(Optional<String> sortOrder) throws IllegalValueException {
+        requireNonNull(sortOrder);
+        return sortOrder.isPresent() ? Optional.of(parseSortGoalOrder(sortOrder.get())) : Optional.empty();
+    }
+}
+```
+###### \java\seedu\address\logic\parser\SortGoalCommandParser.java
+``` java
+/**
+ * Parses input arguments and creates a new SortGoalCommand object
+ */
+public class SortGoalCommandParser implements Parser<SortGoalCommand> {
+
+    @Override
+    public SortGoalCommand parse(String args) throws ParseException {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_SORT_FIELD, PREFIX_SORT_ORDER);
+        if (!arePrefixesPresent(argMultimap, PREFIX_SORT_FIELD, PREFIX_SORT_ORDER)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortGoalCommand.MESSAGE_USAGE));
+        }
+        try {
+            String sortField = ParserUtil.parseSortGoalField(argMultimap.getValue(PREFIX_SORT_FIELD)).get();
+            String sortOrder = ParserUtil.parseSortGoalOrder(argMultimap.getValue(PREFIX_SORT_ORDER)).get();
+            return new SortGoalCommand(sortField, sortOrder);
+        } catch (IllegalValueException ive) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortGoalCommand.MESSAGE_USAGE));
+        }
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+}
+```
+###### \java\seedu\address\logic\parser\ThemeCommandParser.java
+``` java
+/**
+ * Parses input arguments and creates a new ThemeCommand object
+ */
+public class ThemeCommandParser implements Parser<ThemeCommand> {
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the ThemeCommand
+     * and returns a ThemeCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public ThemeCommand parse(String args) throws ParseException {
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ThemeCommand.MESSAGE_USAGE));
+        }
+        if (!isValidThemeColour(trimmedArgs)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ThemeCommand.MESSAGE_INVALID_THEME_COLOUR));
+
+        }
+        return new ThemeCommand(trimmedArgs);
+    }
+
+    /**
+     *
+     * @param themeColour
+     * @return
+     */
+    private boolean isValidThemeColour(String themeColour) {
+        HashMap<String, String> themes = getThemeHashMap();
+        if (themes.containsKey(themeColour.toLowerCase())) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+}
+
+```
+###### \java\seedu\address\model\AddressBook.java
 ``` java
     public void setCcas(Set<Cca> ccas) {
         this.ccas.setCcas(ccas); }
 
 ```
-###### /java/seedu/address/model/AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
     public void setGoals(List<Goal> goals) throws DuplicateGoalException {
         this.goals.setGoals(goals);
@@ -871,7 +1152,7 @@ public class EditGoalCommandParser implements Parser<EditGoalCommand> {
     }
 
 ```
-###### /java/seedu/address/model/AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
     /**
      * Removes all {@code Ccas}s that are not used by any {@code Person} in this {@code AddressBook}.
@@ -885,7 +1166,7 @@ public class EditGoalCommandParser implements Parser<EditGoalCommand> {
     }
 
 ```
-###### /java/seedu/address/model/AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
     /**
      *  Updates the master cca list to include ccas in {@code person} that are not in the list.
@@ -911,7 +1192,7 @@ public class EditGoalCommandParser implements Parser<EditGoalCommand> {
     }
 
 ```
-###### /java/seedu/address/model/AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
     public void addCca(Cca cca) throws UniqueCcaList.DuplicateCcaException {
         ccas.add(cca);
@@ -920,7 +1201,7 @@ public class EditGoalCommandParser implements Parser<EditGoalCommand> {
     //// tag-level operations
 
 ```
-###### /java/seedu/address/model/AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
     /**
      * Adds a goal to CollegeZone.
@@ -964,27 +1245,42 @@ public class EditGoalCommandParser implements Parser<EditGoalCommand> {
         goals.setGoalWithoutParameters(target, editedGoal);
     }
 
+    /**
+     * Sorts goal based on the sort field and sort order input.
+     */
+    public void sortGoal(String sortField, String sortOrder) throws EmptyGoalListException {
+        requireNonNull(sortField);
+        requireNonNull(sortOrder);
+        if (goals.getSize() > 0) {
+            goals.sortGoal(sortField, sortOrder);
+        } else {
+            throw new EmptyGoalListException();
+        }
+    }
     //// reminder-level operations
 
 ```
-###### /java/seedu/address/model/goal/Completion.java
+###### \java\seedu\address\model\goal\Completion.java
 ``` java
 /**
  * Represents a Goal's completion status in the Goals Page.
  */
 public class Completion {
     public final String value;
+    public final boolean hasCompleted;
 
     /**
      * Constructs a {@code Completion}.
      *
-     * @param completion A valid boolean.
+     * @param isCompleted A valid boolean.
      */
-    public Completion(Boolean completion) {
-        requireNonNull(completion);
-        if (completion) {
+    public Completion(Boolean isCompleted) {
+        requireNonNull(isCompleted);
+        if (isCompleted) {
+            this.hasCompleted = true;
             this.value = "true";
         } else {
+            this.hasCompleted = false;
             this.value = "false";
         }
     }
@@ -1005,10 +1301,9 @@ public class Completion {
     public int hashCode() {
         return value.hashCode();
     }
-
 }
 ```
-###### /java/seedu/address/model/goal/EndDateTime.java
+###### \java\seedu\address\model\goal\EndDateTime.java
 ``` java
 /**
  * Represents a Goal's end date and time in the Goals Page.
@@ -1017,7 +1312,7 @@ public class Completion {
 public class EndDateTime {
 
     public final String value;
-
+    public final LocalDateTime localDateTimeValue;
     /**
      * Constructs a {@code EndDateTime}.
      *
@@ -1026,9 +1321,11 @@ public class EndDateTime {
     public EndDateTime(String endDateTime) {
         if (endDateTime.equals("")) {
             this.value = "";
+            this.localDateTimeValue = null;
         } else {
             LocalDateTime localEndDateTime = nattyDateAndTimeParser(endDateTime).get();
             this.value = properDateTimeFormat(localEndDateTime);
+            this.localDateTimeValue = localEndDateTime;
         }
     }
 
@@ -1051,7 +1348,7 @@ public class EndDateTime {
 
 }
 ```
-###### /java/seedu/address/model/goal/exceptions/DuplicateGoalException.java
+###### \java\seedu\address\model\goal\exceptions\DuplicateGoalException.java
 ``` java
 /**
  * Signals that the operation will result in duplicate Goal objects.
@@ -1062,14 +1359,22 @@ public class DuplicateGoalException extends DuplicateDataException {
     }
 }
 ```
-###### /java/seedu/address/model/goal/exceptions/GoalNotFoundException.java
+###### \java\seedu\address\model\goal\exceptions\EmptyGoalListException.java
+``` java
+/**
+ * Signals that the current goal list is empty.
+ */
+public class EmptyGoalListException extends Exception {
+}
+```
+###### \java\seedu\address\model\goal\exceptions\GoalNotFoundException.java
 ``` java
 /**
  * Signals that the operation is unable to find the specified goal.
  */
 public class GoalNotFoundException extends Exception {}
 ```
-###### /java/seedu/address/model/goal/Goal.java
+###### \java\seedu\address\model\goal\Goal.java
 ``` java
 /**
  * Represents a Goal in the Goals Page.
@@ -1153,7 +1458,7 @@ public class Goal {
 
 }
 ```
-###### /java/seedu/address/model/goal/GoalText.java
+###### \java\seedu\address\model\goal\GoalText.java
 ``` java
 /**
  * Represents a Goal's text in the Goals Page.
@@ -1204,13 +1509,13 @@ public class GoalText {
 
 }
 ```
-###### /java/seedu/address/model/goal/Importance.java
+###### \java\seedu\address\model\goal\Importance.java
 ``` java
 /**
  * Represents a Goal's importance in CollegeZone.
  * Guarantees: immutable; is valid as declared in {@link #isValidImportance(String)}
  */
-public class Importance {
+public class Importance implements Comparable<Importance> {
 
 
     public static final String MESSAGE_IMPORTANCE_CONSTRAINTS =
@@ -1268,16 +1573,29 @@ public class Importance {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(Importance importance) {
+        if ((Integer.valueOf(importance.value)).equals(Integer.valueOf(this.value))) {
+            return 0;
+        } else if ((Integer.valueOf(importance.value)) < (Integer.valueOf(this.value))) {
+            return 1;
+        } else if ((Integer.valueOf(importance.value)) > (Integer.valueOf(this.value))) {
+            return -1;
+        }
+        return 0;
+    }
 }
 ```
-###### /java/seedu/address/model/goal/StartDateTime.java
+###### \java\seedu\address\model\goal\StartDateTime.java
 ``` java
 /**
  * Represents a Goal's start date in the address book.
  */
-public class StartDateTime {
+public class StartDateTime implements Comparable<StartDateTime> {
 
     public final String value;
+    public final LocalDateTime localDateTimeValue;
+
 
     /**
      * Constructs a {@code StartDateTime}.
@@ -1286,7 +1604,14 @@ public class StartDateTime {
      */
     public StartDateTime(LocalDateTime startDateTime) {
         requireNonNull(startDateTime);
+        this.localDateTimeValue = startDateTime;
         this.value = properDateTimeFormat(startDateTime);
+    }
+
+    public StartDateTime(String startDateTimeInString) {
+        requireNonNull(startDateTimeInString);
+        this.value = startDateTimeInString;
+        this.localDateTimeValue = getLocalDateTimeFromProperDateTime(startDateTimeInString);
     }
 
     @Override
@@ -1306,9 +1631,18 @@ public class StartDateTime {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(StartDateTime startDateTime) {
+        if ((startDateTime.localDateTimeValue).isBefore(this.localDateTimeValue)) {
+            return 1;
+        } else if ((startDateTime.localDateTimeValue).isAfter(this.localDateTimeValue)) {
+            return -1;
+        }
+        return 0;
+    }
 }
 ```
-###### /java/seedu/address/model/goal/UniqueGoalList.java
+###### \java\seedu\address\model\goal\UniqueGoalList.java
 ``` java
 /**
  * A list of goals that enforces uniqueness between its elements and does not allow nulls.
@@ -1409,6 +1743,50 @@ public class UniqueGoalList implements Iterable<Goal> {
     }
 
     /**
+     * Returns the size of goal list.
+     */
+    public int getSize() {
+        return internalList.size();
+    }
+
+    /**
+     * Sort goals internal list using comparator
+     * @param sortField
+     */
+    public void sortGoal(String sortField, String sortOrder) throws EmptyGoalListException {
+        String sortFieldAndOrder = sortField + " " + sortOrder;
+        //Comparator<Goal> comparatorImportance = Comparator.comparingInt(Goal::getImportance);
+        switch (sortFieldAndOrder) {
+        case "importance ascending":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalA.getImportance()
+                    .compareTo(goalB.getImportance()));
+            break;
+        case "importance descending":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalB.getImportance()
+                    .compareTo(goalA.getImportance()));
+            break;
+        case "completion ascending":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) -> new Boolean(goalA.getCompletion().hasCompleted)
+                    .compareTo(goalB.getCompletion().hasCompleted));
+            break;
+        case "completion descending":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) -> new Boolean(goalB.getCompletion().hasCompleted)
+                    .compareTo(goalA.getCompletion().hasCompleted));
+            break;
+        case "startdatetime ascending":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalA.getStartDateTime()
+                    .compareTo(goalB.getStartDateTime()));
+            break;
+        case "startdatetime descending":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalB.getStartDateTime()
+                    .compareTo(goalA.getStartDateTime()));
+            break;
+
+        default:
+            break;
+        }
+    }
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Goal> asObservableList() {
@@ -1433,7 +1811,7 @@ public class UniqueGoalList implements Iterable<Goal> {
     }
 }
 ```
-###### /java/seedu/address/model/Model.java
+###### \java\seedu\address\model\Model.java
 ``` java
     /** Adds the given goal */
     void addGoal(Goal goal) throws DuplicateGoalException;
@@ -1467,8 +1845,13 @@ public class UniqueGoalList implements Iterable<Goal> {
      */
     void updateGoalWithoutParameters(Goal target, Goal editedGoal) throws GoalNotFoundException;
 
+    /**
+     * Sort the goal based on sortType
+     */
+    void sortGoal(String sortType, String sortOrder) throws EmptyGoalListException;
+
 ```
-###### /java/seedu/address/model/ModelManager.java
+###### \java\seedu\address\model\ModelManager.java
 ``` java
     @Override
     public void addGoal(Goal goal) throws DuplicateGoalException {
@@ -1512,8 +1895,15 @@ public class UniqueGoalList implements Iterable<Goal> {
         indicateAddressBookChanged();
     }
 
+    @Override
+    public void sortGoal(String sortGoalType, String sortGoalOrder) throws EmptyGoalListException {
+        requireAllNonNull(sortGoalType, sortGoalOrder);
+        addressBook.sortGoal(sortGoalType, sortGoalOrder);
+        indicateAddressBookChanged();
+    }
+
 ```
-###### /java/seedu/address/model/person/Birthday.java
+###### \java\seedu\address\model\person\Birthday.java
 ``` java
 /**
  * Represents a Person's birthday in CollegeZone.
@@ -1568,7 +1958,7 @@ public class Birthday {
 
 }
 ```
-###### /java/seedu/address/model/person/Cca.java
+###### \java\seedu\address\model\person\Cca.java
 ``` java
 /**
  * Represents a Person's CCAs in CollegeZone.
@@ -1619,7 +2009,7 @@ public class Cca {
 
 }
 ```
-###### /java/seedu/address/model/person/LevelOfFriendship.java
+###### \java\seedu\address\model\person\LevelOfFriendship.java
 ``` java
 /**
  * Represents a Person's Level of Friendship in the address book.
@@ -1686,7 +2076,7 @@ public class LevelOfFriendship {
     }
 }
 ```
-###### /java/seedu/address/model/person/UniqueCcaList.java
+###### \java\seedu\address\model\person\UniqueCcaList.java
 ``` java
 /**
  * A list of ccas that enforces no nulls and uniqueness between its elements.
@@ -1817,7 +2207,7 @@ public class UniqueCcaList implements Iterable<Cca> {
 
 }
 ```
-###### /java/seedu/address/model/person/UnitNumber.java
+###### \java\seedu\address\model\person\UnitNumber.java
 ``` java
     /**
      * * Constructs an {@code UnitNumber}.
@@ -1844,7 +2234,7 @@ public class UniqueCcaList implements Iterable<Cca> {
     }
 
 ```
-###### /java/seedu/address/model/person/UnitNumber.java
+###### \java\seedu\address\model\person\UnitNumber.java
 ``` java
     @Override
     public boolean equals(Object other) {
@@ -1859,7 +2249,7 @@ public class UniqueCcaList implements Iterable<Cca> {
     }
 }
 ```
-###### /java/seedu/address/model/ReadOnlyAddressBook.java
+###### \java\seedu\address\model\ReadOnlyAddressBook.java
 ``` java
     /**
      * Returns an unmodifiable view of the ccas list.
@@ -1868,7 +2258,7 @@ public class UniqueCcaList implements Iterable<Cca> {
     ObservableList<Cca> getCcaList();
 
 ```
-###### /java/seedu/address/model/ReadOnlyAddressBook.java
+###### \java\seedu\address\model\ReadOnlyAddressBook.java
 ``` java
     /**
      * Returns an unmodifiable view of the goals list.
@@ -1876,7 +2266,54 @@ public class UniqueCcaList implements Iterable<Cca> {
      */
     ObservableList<Goal> getGoalList();
 ```
-###### /java/seedu/address/model/util/SampleGoalDataUtil.java
+###### \java\seedu\address\model\ThemeColourUtil.java
+``` java
+/**
+ * Contains utility methods for ThemeColour.
+ */
+public class ThemeColourUtil {
+
+    private static final HashMap<String, String> themes;
+
+    static {
+        themes = new HashMap<>();
+        themes.put("light", "view/LightTheme.css");
+        themes.put("dark", "view/DarkTheme.css");
+    }
+
+    public static HashMap<String, String> getThemeHashMap() {
+        return themes;
+    }
+}
+```
+###### \java\seedu\address\model\util\SampleCollegeZone.java
+``` java
+/**
+ * Contains method to get a sample CollegeZone data
+ */
+public class SampleCollegeZone {
+
+    public static ReadOnlyAddressBook getSampleCollegeZone() {
+        AddressBook sampleCz = new AddressBook();
+        try {
+            for (Person samplePerson : getSamplePersons()) {
+                sampleCz.addPerson(samplePerson);
+            }
+        } catch (DuplicatePersonException e) {
+            throw new AssertionError("sample data cannot contain duplicate persons", e);
+        }
+        try {
+            for (Goal sampleGoal : getSampleGoals()) {
+                sampleCz.addGoal(sampleGoal);
+            }
+        } catch (DuplicateGoalException e) {
+            throw new AssertionError("sample data cannot contain duplicate goals", e);
+        }
+        return sampleCz;
+    }
+}
+```
+###### \java\seedu\address\model\util\SampleGoalDataUtil.java
 ``` java
 /**
  * Contains utility methods for populating {@code CollegeZone} with sample data.
@@ -1893,23 +2330,65 @@ public class SampleGoalDataUtil {
                     EMPTY_END_DATE_TIME, new Completion(false)),
             new Goal(new Importance("2"), new GoalText("no"),
                     new StartDateTime(getLocalDateTimeFromString("2018-04-08 12:12")),
-                    EMPTY_END_DATE_TIME, new Completion(true)),
+                    EMPTY_END_DATE_TIME, new Completion(false)),
             new Goal(new Importance("3"), new GoalText("grow taller"),
                     new StartDateTime(getLocalDateTimeFromString("1997-04-08 12:30")),
                     EMPTY_END_DATE_TIME, new Completion(false)),
             new Goal(new Importance("3"), new GoalText("finish cs2105 assignments"),
                     new StartDateTime(getLocalDateTimeFromString("2018-04-08 10:30")),
-                    EMPTY_END_DATE_TIME, new Completion(true)),
+                    EMPTY_END_DATE_TIME, new Completion(false)),
             new Goal(new Importance("1"), new GoalText("learning digital art"),
                     new StartDateTime(getLocalDateTimeFromString("2017-04-08 12:39")),
                     EMPTY_END_DATE_TIME, new Completion(false)),
             new Goal(new Importance("2"), new GoalText("finish cs2103!!!!"),
                     new StartDateTime(getLocalDateTimeFromString("2017-04-08 12:30")),
                     EMPTY_END_DATE_TIME, new Completion(false)),
+            new Goal(new Importance("10"), new GoalText("finish cs2103!!!!"),
+                    new StartDateTime(getLocalDateTimeFromString("2018-03-18 08:30")),
+                    new EndDateTime("03/04/2018 12:30"), new Completion(true)),
+            new Goal(new Importance("6"), new GoalText("lose 0.5kg by this week"),
+                    new StartDateTime(getLocalDateTimeFromString("2018-04-06 19:30")),
+                    EMPTY_END_DATE_TIME, new Completion(false)),
+            new Goal(new Importance("10"), new GoalText("Find love <3"),
+                    new StartDateTime(getLocalDateTimeFromString("2014-04-08 20:30")),
+                    new EndDateTime("02/02/2018 12:30"), new Completion(true)),
+            new Goal(new Importance("7"), new GoalText("water plants"),
+                    new StartDateTime(getLocalDateTimeFromString("2017-04-08 12:30")),
+                    new EndDateTime("03/06/2018 12:30"), new Completion(true)),
+            new Goal(new Importance("2"), new GoalText("buy dog food"),
+                    new StartDateTime(getLocalDateTimeFromString("2017-04-08 12:30")),
+                    new EndDateTime("03/06/2018 12:30"), new Completion(true)),
+            new Goal(new Importance("4"), new GoalText("Take the stairs more often!"),
+                    new StartDateTime(getLocalDateTimeFromString("2017-04-08 12:30")),
+                    new EndDateTime("04/06/2018 12:30"), new Completion(true)),
+            new Goal(new Importance("10"), new GoalText("Eat PGP MALA once every week"),
+                    new StartDateTime(getLocalDateTimeFromString("2017-04-08 12:30")),
+                    new EndDateTime("07/06/2018 12:30"), new Completion(true)),
+            new Goal(new Importance("1"), new GoalText("Make more friends in uni"),
+                    new StartDateTime(getLocalDateTimeFromString("2017-04-08 12:45")),
+                    new EndDateTime("03/06/2018 12:30"), new Completion(true)),
+            new Goal(new Importance("2"), new GoalText("Go CCA regularly"),
+                    new StartDateTime(getLocalDateTimeFromString("2017-04-08 13:30")),
+                    EMPTY_END_DATE_TIME, new Completion(false)),
+            new Goal(new Importance("9"), new GoalText("Drink 8 cups of water everyday"),
+                    new StartDateTime(getLocalDateTimeFromString("2017-04-08 01:59")),
+                    new EndDateTime("03/06/2018 12:30"), new Completion(true)),
+            new Goal(new Importance("8"), new GoalText("Get A for CS2105"),
+                    new StartDateTime(getLocalDateTimeFromString("2017-04-08 02:30")),
+                    new EndDateTime("03/06/2018 12:30"), new Completion(true)),
+            new Goal(new Importance("8"), new GoalText("Get A- for GEH1036"),
+                    new StartDateTime(getLocalDateTimeFromString("2017-04-08 03:30")),
+                    new EndDateTime("03/06/2018 12:30"), new Completion(true)),
+            new Goal(new Importance("10"), new GoalText("Aim to increase CAP by 0.2 by the end of this semester"),
+                    new StartDateTime(getLocalDateTimeFromString("2017-02-18 12:30")),
+                    EMPTY_END_DATE_TIME, new Completion(false)),
+            new Goal(new Importance("10"), new GoalText("Do 50 squats EVERYDAY"),
+                    new StartDateTime(getLocalDateTimeFromString("2017-04-08 12:30")),
+                    new EndDateTime("03/06/2018 12:30"), new Completion(true)),
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
+    public static ReadOnlyAddressBook getSampleGoalAddressBook() {
         try {
             AddressBook sampleAb = new AddressBook();
             for (Goal sampleGoal : getSampleGoals()) {
@@ -1922,7 +2401,7 @@ public class SampleGoalDataUtil {
     }
 }
 ```
-###### /java/seedu/address/storage/XmlAdaptedCca.java
+###### \java\seedu\address\storage\XmlAdaptedCca.java
 ``` java
 /**
  * JAXB-friendly adapted version of the Cca.
@@ -1980,7 +2459,7 @@ public class XmlAdaptedCca {
     }
 }
 ```
-###### /java/seedu/address/storage/XmlAdaptedGoal.java
+###### \java\seedu\address\storage\XmlAdaptedGoal.java
 ``` java
 /**
  * JAXB-friendly version of the Goal.
@@ -2061,7 +2540,7 @@ public class XmlAdaptedGoal {
                     StartDateTime.class.getSimpleName()));
         }
 
-        final StartDateTime startDateTime = new StartDateTime(LocalDateTime.now());
+        final StartDateTime startDateTime = new StartDateTime(this.startDateTime);
 
         if (this.endDateTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EndDateTime
@@ -2099,7 +2578,7 @@ public class XmlAdaptedGoal {
 }
 
 ```
-###### /java/seedu/address/ui/GoalCard.java
+###### \java\seedu\address\ui\GoalCard.java
 ``` java
 /**
  * An UI component that displays information of a {@code Goal}.
@@ -2108,7 +2587,6 @@ public class GoalCard extends UiPart<Region> {
     private static final int NOT_COMPLETED_COLOUR_STYLE = 0;
     private static final int COMPLETED_COLOUR_STYLE = 1;
     private static final String FXML = "GoalListCard.fxml";
-    private static final String[] COMPLETION_COLOR_STYLES = new String[]{"#74b9ff", "#00cec9"};
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -2139,7 +2617,7 @@ public class GoalCard extends UiPart<Region> {
         this.goal = goal;
         id.setText(displayedIndex + ". ");
         goalText.setText(goal.getGoalText().value);
-        importance.setText(changeImportanceToStar(goal.getImportance().value));
+        importance.setText("Impt: " + changeImportanceToStar(goal.getImportance().value));
         startDateTime.setText("Start " + goal.getStartDateTime().value);
         if (goal.getEndDateTime().value.equals("")) {
             endDateTime.setText(goal.getEndDateTime().value);
@@ -2160,7 +2638,6 @@ public class GoalCard extends UiPart<Region> {
             completedImageView.setFitHeight(30);
             completedImageView.setFitWidth(30);
             Label completionLabel = new Label("Completed", completedImageView);
-            completionLabel.getStyleClass().add(COMPLETION_COLOR_STYLES[COMPLETED_COLOUR_STYLE]);
             completion.getChildren().add(completionLabel);
         } else {
             Image ongoingImage = AppUtil.getImage("/images/ongoingImage.png");
@@ -2168,7 +2645,6 @@ public class GoalCard extends UiPart<Region> {
             ongoingImageView.setFitHeight(27);
             ongoingImageView.setFitWidth(27);
             Label completionLabel = new Label("Ongoing", ongoingImageView);
-            completionLabel.getStyleClass().add(COMPLETION_COLOR_STYLES[NOT_COMPLETED_COLOUR_STYLE]);
             completion.getChildren().add(completionLabel);
         }
     }
@@ -2205,7 +2681,63 @@ public class GoalCard extends UiPart<Region> {
     }
 }
 ```
-###### /java/seedu/address/ui/PersonCard.java
+###### \java\seedu\address\ui\MainWindow.java
+``` java
+    /**
+     * Calculation of percentage of goal completed
+     * @return
+     */
+    private int calculateGoalCompletion() {
+        int totalGoal = logic.getFilteredGoalList().size();
+        int totalGoalCompleted = 0;
+        String completionStatus;
+        for (int i = 0; i < totalGoal; i++) {
+            completionStatus = logic.getFilteredGoalList().get(i).getCompletion().value;
+            totalGoalCompleted += isCompletedGoal(completionStatus);
+        }
+        int percentageGoalCompletion = (int) (((float) totalGoalCompleted / totalGoal) * PERCENTAGE_KEY_NUMBER);
+        return percentageGoalCompletion;
+    }
+
+    /**
+     * @param completionStatus gives a String that should be either "true" or "false", indicating if the goal is
+     *                         completed.
+     * @return true or false
+     */
+    private int isCompletedGoal(String completionStatus) {
+        int valueToAdd;
+        if (completionStatus.equals("true")) {
+            valueToAdd = 1;
+        } else {
+            valueToAdd = 0;
+        }
+        return valueToAdd;
+    }
+
+    private void setThemeColour() {
+        setThemeColour(DEFAULT_THEME_COLOUR);
+    }
+
+    private void setThemeColour(String themeColour) {
+        primaryStage.getScene().getStylesheets().add(EXTENSIONS_STYLESHEET);
+        primaryStage.getScene().getStylesheets().add(themeHashMap.get(themeColour));
+    }
+
+    private void changeThemeColour() {
+        primaryStage.getScene().getStylesheets().clear();
+        setThemeColour(themeColour);
+    }
+
+    @Subscribe
+    private void handleChangeThemeEvent(ThemeSwitchRequestEvent event) {
+        themeColour = event.themeToChangeTo;
+        Platform.runLater(
+                this::changeThemeColour
+        );
+    }
+}
+```
+###### \java\seedu\address\ui\PersonCard.java
 ``` java
     /**
      * Returns the color style for {@code tagName}'s label.
@@ -2250,7 +2782,7 @@ public class GoalCard extends UiPart<Region> {
     }
 
 ```
-###### /java/seedu/address/ui/PersonListPanel.java
+###### \java\seedu\address\ui\PersonListPanel.java
 ``` java
     @Subscribe
     private void handleJumpToGoalListRequestEvent(JumpToListRequestEvent event) {
@@ -2287,7 +2819,7 @@ public class GoalCard extends UiPart<Region> {
     }
 }
 ```
-###### /java/seedu/address/ui/StatusBarFooter.java
+###### \java\seedu\address\ui\StatusBarFooter.java
 ``` java
     private void setGoalCompletion(int goalCompletion) {
         //        Platform.runLater(() -> this.goalCompletionStatus.setText(String.format(PERCENTAGE_GOAL_COMPLETED,
@@ -2322,7 +2854,7 @@ public class GoalCard extends UiPart<Region> {
         return valueToAdd;
     }
 ```
-###### /resources/view/GoalListCard.fxml
+###### \resources\view\GoalListCard.fxml
 ``` fxml
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -2334,7 +2866,7 @@ public class GoalCard extends UiPart<Region> {
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="goalCardPane" fx:id="goalCardPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="goalCardPane" fx:id="goalCardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
@@ -2354,8 +2886,8 @@ public class GoalCard extends UiPart<Region> {
       </HBox>
       <FlowPane fx:id="completion" alignment="BOTTOM_RIGHT" columnHalignment="RIGHT" prefWidth="130.0" rowValignment="BOTTOM" />
       <Label fx:id="importance" styleClass="cell_small_label" text="\$importance" />
-      <Label fx:id="startDateTime" styleClass="cell_small_label" text="\$startDateTime" />
-      <Label fx:id="endDateTime" styleClass="cell_small_label" text="\$endDateTime" />
+      <Label fx:id="startDateTime" styleClass="cell_small_label" text="\$startDateTime" wrapText="true"/>
+      <Label fx:id="endDateTime" styleClass="cell_small_label" text="\$endDateTime" wrapText="true"/>
     </VBox>
       <rowConstraints>
          <RowConstraints />
@@ -2363,11 +2895,11 @@ public class GoalCard extends UiPart<Region> {
   </GridPane>
 </HBox>
 ```
-###### /resources/view/LightTheme.css
+###### \resources\view\LightTheme.css
 ``` css
 .background {
     -fx-background-color: derive(#ffffff, 20%);
-    background-color: #f5f5f5; /* Used in the default.html file */
+    background-color: #f5f5f5;
 }
 
 .label {
@@ -2471,11 +3003,11 @@ public class GoalCard extends UiPart<Region> {
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #b0b0b0;
+    -fx-background-color: #fcf9f9;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #a9bad6;
+    -fx-background-color: #dae3f2;
 }
 
 .list-cell:filled:selected #cardPane {
@@ -2648,7 +3180,7 @@ public class GoalCard extends UiPart<Region> {
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#ffffff, 20%);
+    -fx-background-color: derive(grey, 20%);
 }
 
 .scroll-bar .thumb {
@@ -2723,37 +3255,37 @@ public class GoalCard extends UiPart<Region> {
 
 #tags .red {
     -fx-text-fill: black;
-    -fx-background-color: red;
+    -fx-background-color: #ff7675;
 }
 
 #tags .yellow {
-    -fx-background-color: yellow;
+    -fx-background-color: #ffeaa7;
     -fx-text-fill: black;
 }
 
 #tags .blue {
-    -fx-text-fill: white;
-    -fx-background-color: blue;
+    -fx-text-fill: black;
+    -fx-background-color: #48dbfb;
 }
 
 #tags .orange {
     -fx-text-fill: black;
-    -fx-background-color: orange;
+    -fx-background-color: #ffa502;
 }
 
 #tags .brown {
-    -fx-text-fill: white;
-    -fx-background-color: brown;
+    -fx-text-fill: black;
+    -fx-background-color: #D7ACAC;
 }
 
 #tags .green {
     -fx-text-fill: black;
-    -fx-background-color: green;
+    -fx-background-color: #55efc4;
 }
 
 #tags .pink {
     -fx-text-fill: black;
-    -fx-background-color: pink;
+    -fx-background-color: #fd79a8;
 }
 
 #tags .black {
@@ -2761,8 +3293,8 @@ public class GoalCard extends UiPart<Region> {
     -fx-background-color: black;
 }
 
-#tags .grey {
+#tags .purple {
     -fx-text-fill: black;
-    -fx-background-color: grey;
+    -fx-background-color: #a29bfe;
 }
 ```

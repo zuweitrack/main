@@ -26,7 +26,7 @@ just like a digital organiser.
 
 * *Minor enhancement*: Added additional functionality to the find command, which allows RC4 students to find their contacts by tags.
 
-* *Code contributed*: [https://github.com/CS2103JAN2018-T09-B2/main/blob/master/collated/functional/fuadsahmawi.md[Functional code]] [https://github.com/CS2103JAN2018-T09-B2/main/blob/master/collated/test/fuadsahmawi.md[Test code]]
+* *Code contributed*: [https://github.com/CS2103JAN2018-T09-B2/main/blob/master/collated/main/fuadsahmawi.md[Functional code]] [https://github.com/CS2103JAN2018-T09-B2/main/blob/master/collated/test/fuadsahmawi.md[Test code]]
 
 * *Other contributions*:
 
