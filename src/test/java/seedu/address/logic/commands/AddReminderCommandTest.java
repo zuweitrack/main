@@ -15,9 +15,9 @@ import seedu.address.logic.UndoRedoStack;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.goal.Goal;
-import seedu.address.model.goal.exceptions.DuplicateGoalException;
-import seedu.address.testutil.GoalBuilder;
+import seedu.address.model.reminder.Reminder;
+import seedu.address.model.reminder.exceptions.DuplicateReminderException;
+import seedu.address.testutil.ReminderBuilder;
 
 //@@author fuadsahmawi
 public class AddReminderCommandTest {
@@ -26,74 +26,75 @@ public class AddReminderCommandTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void constructor_nullGoal_throwsNullPointerException() {
+    public void constructor_nullReminder_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         new AddReminderCommand(null);
     }
 
-    /*@Test
-    public void execute_goalAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingGoalAdded modelStub = new ModelStubAcceptingGoalAdded();
-        Goal validGoal = new GoalBuilder().build();
+    /*
+    @Test
+    public void execute_reminderAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingReminderAdded modelStub = new ModelStubAcceptingReminderAdded();
+        Reminder validReminder = new ReminderBuilder().build();
 
-        CommandResult commandResult = getAddGoalCommandForGoal(validGoal, modelStub).execute();
+        CommandResult commandResult = getAddReminderCommandForReminder(validReminder, modelStub).execute();
 
-        assertEquals(String.format(AddGoalCommand.MESSAGE_SUCCESS, validGoal), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validGoal), modelStub.goalsAdded);
+        assertEquals(String.format(AddReminderCommand.MESSAGE_SUCCESS, validReminder), commandResult.feedbackToUser);
+        assertEquals(Arrays.asList(validReminder), modelStub.remindersAdded);
     }
 
     @Test
-    public void execute_duplicateGoal_throwsCommandException() throws Exception {
-        ModelStub modelStub = new ModelStubThrowingDuplicateGoalException();
-        Goal validGoal = new GoalBuilder().build();
+    public void execute_duplicateReminder_throwsCommandException() throws Exception {
+        ModelStub modelStub = new ModelStubThrowingDuplicateReminderException();
+        Reminder validReminder = new ReminderBuilder().build();
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddGoalCommand.MESSAGE_DUPLICATE_GOAL);
+        thrown.expectMessage(AddReminderCommand.MESSAGE_DUPLICATE_REMINDER);
 
-        getAddGoalCommandForGoal(validGoal, modelStub).execute();
+        getAddReminderCommandForReminder(validReminder, modelStub).execute();
     }
     */
 
     @Test
     public void equals() {
-        Goal a = new GoalBuilder().withGoalText("A").build();
-        Goal b = new GoalBuilder().withGoalText("B").build();
-        AddGoalCommand addGoalACommand = new AddGoalCommand(a);
-        AddGoalCommand addGoalBCommand = new AddGoalCommand(b);
+        Reminder a = new ReminderBuilder().withReminderText("A").build();
+        Reminder b = new ReminderBuilder().withReminderText("B").build();
+        AddReminderCommand addReminderACommand = new AddReminderCommand(a);
+        AddReminderCommand addReminderBCommand = new AddReminderCommand(b);
 
         // same object -> returns true
-        assertTrue(addGoalACommand.equals(addGoalACommand));
+        assertTrue(addReminderACommand.equals(addReminderACommand));
 
         // same values -> returns true
-        AddGoalCommand addGoalACommandCopy = new AddGoalCommand(a);
-        assertTrue(addGoalACommand.equals(addGoalACommandCopy));
+        AddReminderCommand addReminderACommandCopy = new AddReminderCommand(a);
+        assertTrue(addReminderACommand.equals(addReminderACommandCopy));
 
         // different types -> returns false
-        assertFalse(addGoalACommand.equals(1));
+        assertFalse(addReminderACommand.equals(1));
 
         // null -> returns false
-        assertFalse(addGoalACommand.equals(null));
+        assertFalse(addReminderACommand.equals(null));
 
-        // different goal -> returns false
-        assertFalse(addGoalACommand.equals(addGoalBCommand));
+        // different reminder -> returns false
+        assertFalse(addReminderACommand.equals(addReminderBCommand));
     }
 
     /**
-     * Generates a new AddGoalCommand with the details of the given goal.
+     * Generates a new AddReminderCommand with the details of the given reminder.
      */
-    private AddGoalCommand getAddGoalCommandForGoal(Goal goal, Model model) {
-        AddGoalCommand command = new AddGoalCommand(goal);
+    private AddReminderCommand getAddReminderCommandForReminder(Reminder reminder, Model model) {
+        AddReminderCommand command = new AddReminderCommand(reminder);
         command.setData(model, new CommandHistory(), new UndoRedoStack());
         return command;
     }
 
     /**
-     * A Model stub that always throw a DuplicateGoalException when trying to add a goal.
+     * A Model stub that always throw a DuplicateReminderException when trying to add a reminder.
      */
-    private class ModelStubThrowingDuplicateGoalException extends AddCommandTest.ModelStub {
+    private class ModelStubThrowingDuplicateReminderException extends AddCommandTest.ModelStub {
         @Override
-        public void addGoal(Goal goal) throws DuplicateGoalException {
-            throw new DuplicateGoalException();
+        public void addReminder(Reminder reminder) throws DuplicateReminderException {
+            throw new DuplicateReminderException();
         }
 
         @Override
@@ -103,16 +104,15 @@ public class AddReminderCommandTest {
     }
 
     /**
-     * A Model stub that always accept the goal being added.
+     * A Model stub that always accept the reminder being added.
      */
-    private class ModelStubAcceptingGoalAdded extends AddCommandTest.ModelStub {
-        final ArrayList<Goal> goalsAdded = new ArrayList<>();
+    private class ModelStubAcceptingReminderAdded extends AddCommandTest.ModelStub {
+        final ArrayList<Reminder> remindersAdded = new ArrayList<>();
 
         @Override
-        public void addGoal(Goal goal) throws DuplicateGoalException {
-            requireNonNull(goal);
-            goalsAdded.add(goal);
+        public void addReminder(Reminder reminder) throws DuplicateReminderException {
+            requireNonNull(reminder);
+            remindersAdded.add(reminder);
         }
     }
-}    
 }
