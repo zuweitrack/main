@@ -176,7 +176,7 @@ public class ParserUtil {
         requireNonNull(unitNumber);
         return unitNumber.isPresent() ? Optional.of(parseUnitNumber(unitNumber.get())) : Optional.empty();
     }
-    //@@author A0158738X
+    //@@author sham-sheer
     /**
      * Parses a {@code String unitNumber} into an {@code UnitNumber}.
      * Leading and trailing whitespaces will be trimmed.

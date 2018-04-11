@@ -88,6 +88,7 @@ public class Person {
         return Integer.parseInt(levelOfFriendship.value);
     }
 
+    //@@author sham-sheer
     public long getMeetDateInt() {
         Calendar calendar = Calendar.getInstance();
         long date = converDateToSeconds(meetDate.toString());
@@ -125,6 +126,7 @@ public class Person {
         return seconds;
     }
 
+    //@@author
     @Override
     public boolean equals(Object other) {
         if (other == this) {
