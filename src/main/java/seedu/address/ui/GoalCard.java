@@ -18,7 +18,6 @@ public class GoalCard extends UiPart<Region> {
     private static final int NOT_COMPLETED_COLOUR_STYLE = 0;
     private static final int COMPLETED_COLOUR_STYLE = 1;
     private static final String FXML = "GoalListCard.fxml";
-    private static final String[] COMPLETION_COLOR_STYLES = new String[]{"#74b9ff", "#00cec9"};
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -70,7 +69,6 @@ public class GoalCard extends UiPart<Region> {
             completedImageView.setFitHeight(30);
             completedImageView.setFitWidth(30);
             Label completionLabel = new Label("Completed", completedImageView);
-            completionLabel.getStyleClass().add(COMPLETION_COLOR_STYLES[COMPLETED_COLOUR_STYLE]);
             completion.getChildren().add(completionLabel);
         } else {
             Image ongoingImage = AppUtil.getImage("/images/ongoingImage.png");
@@ -78,7 +76,6 @@ public class GoalCard extends UiPart<Region> {
             ongoingImageView.setFitHeight(27);
             ongoingImageView.setFitWidth(27);
             Label completionLabel = new Label("Ongoing", ongoingImageView);
-            completionLabel.getStyleClass().add(COMPLETION_COLOR_STYLES[NOT_COMPLETED_COLOUR_STYLE]);
             completion.getChildren().add(completionLabel);
         }
     }
