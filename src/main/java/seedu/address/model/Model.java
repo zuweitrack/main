@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.goal.Goal;
 import seedu.address.model.goal.exceptions.DuplicateGoalException;
 import seedu.address.model.goal.exceptions.EmptyGoalListException;
@@ -37,6 +38,9 @@ public interface Model {
 
     /** Deletes the given person. */
     void deletePerson(Person target) throws PersonNotFoundException;
+
+    /** Sorts a list according to the given type index */
+    void sortPersons(Index index) throws IndexOutOfBoundsException;
 
     /** Deletes the given person's meet date */
     void deleteMeetDate(Person target) throws PersonNotFoundException;
