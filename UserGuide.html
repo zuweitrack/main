@@ -780,14 +780,16 @@ use this date format for START_DATETIME
         <code>OR</code><br>
         <code>addgoal impt/IMPORTANCE_LEVEL text/GOAL_TEXT</code></p>
 </div>
-<div class="admonitionblock tip">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The <code>IMPORTANCE_LEVEL</code> can only be an integer between 1 to 10. It represents the importance level of the goal to add
+<div class="paragraph">
+<p><code>IMPORTANCE_LEVEL</code> must be a positive integer ranging from 1 to 10.</p>
+</div>
 </td>
 </tr>
 </table>
@@ -812,14 +814,25 @@ The <code>IMPORTANCE_LEVEL</code> can only be an integer between 1 to 10. It rep
 <div class="sect3">
 <h4 id="editing-a-goal-code-goal-or-g-or-editgoal-code-since-v1-4"><a class="link" href="#editing-a-goal-code-goal-or-g-or-editgoal-code-since-v1-4">3.3.2. Editing a goal: <code>~goal OR ~g OR editgoal</code> [Since v1.4]</a></h4>
 <div class="paragraph">
-<p>Edits an existing goal in CollegeZone.<br></p>
+<p>If you&#8217;ve adding a goal entry incorrectly, try using the <code>~goal</code>, <code>~g</code> or <code>editgoal</code> command to the goals you have.<br></p>
 </div>
 <div class="paragraph">
-<p>Format: <code>~goal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]</code><br>
-        <code>OR</code><br>
-        <code>~g INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]</code><br>
-        <code>OR</code><br>
-        <code>editgoal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]</code></p>
+<p><strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">~goal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"> ~g INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">editgoal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]</code></pre>
+</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -839,34 +852,53 @@ The <code>IMPORTANCE_LEVEL</code> can only be an integer between 1 to 10. It rep
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong><em>Examples</em>:</strong></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>~goal 2 impt/1</code><br>
-Edits the goal importance level of the 2nd reminder to be <code>1</code>.</p>
-</li>
-<li>
-<p><code>~g 1 impt/3 text/learn yoga</code><br>
-Edits the goal text and importance level of the 1st person to be <code>learn yoga</code> and <code>1</code> respectively.</p>
-</li>
-<li>
-<p><code>editgoal 5 text/swim at least twice a month</code><br>
-Edits the goal text of the 5th person to be <code>swim at least twice a month</code>.</p>
-</li>
-</ul>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; ~goal <span class="integer">2</span> impt/<span class="integer">1</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Edits the goal importance level of the 2nd reminder to be <code>1</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">~g <span class="integer">1</span> impt/<span class="integer">3</span> text/learn yoga</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Edits the goal text and importance level of the 1st person to be <code>learn yoga</code> and <code>1</code> respectively.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">editgoal <span class="integer">5</span> text/swim at least twice a month</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Edits the goal text of the 5th person to be <code>swim at least twice a month</code>.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="deleting-a-goal-code-goal-or-g-or-deletegoal-code-since-v1-4"><a class="link" href="#deleting-a-goal-code-goal-or-g-or-deletegoal-code-since-v1-4">3.3.3. Deleting a goal: <code>-goal OR -g OR deletegoal</code> [Since v1.4]</a></h4>
 <div class="paragraph">
-<p>Deletes the specified goal from CollegeZone.<br>
-Format: <code>-goal INDEX</code><br>
-        <code>OR</code><br>
-        <code>-g INDEX</code><br>
-        <code>OR</code><br>
-        <code>deletegoal INDEX</code><br></p>
+<p>If you&#8217;ve added a specific goal that you&#8217;re unlikely to complete and want to remove it from CollegeZone, try using the <code>-goal</code>, <code>-g</code> or <code>deletegoal</code> command.<br>
+<strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">-goal INDEX</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">-g INDEX</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">deletegoal INDEX</code></pre>
+</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -886,39 +918,55 @@ Format: <code>-goal INDEX</code><br>
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong><em>Examples</em>:</strong></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>list</code><br>
-<code>-goal 2</code><br>
-Deletes the 2nd goal in CollegeZone&#8217;s goal page.<br></p>
-</li>
-<li>
-<p><code>list</code><br>
-<code>-g 4</code><br>
-Deletes the 4th goal in CollegeZone&#8217;s goal page.<br></p>
-</li>
-<li>
-<p><code>l</code><br>
-<code>deletegoal 1</code><br>
-Deletes the 1st goal in CollegeZone&#8217;s goal page.</p>
-</li>
-</ul>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; -goal <span class="integer">2</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Deletes the 2nd goal in CollegeZone&#8217;s goal page.<br></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; -g <span class="integer">4</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Deletes the 4th goal in CollegeZone&#8217;s goal page.<br></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; deletegoal <span class="integer">1</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Deletes the 1st goal in CollegeZone&#8217;s goal page.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="completing-a-goal-code-goal-or-g-or-completegoal-code-since-v1-4"><a class="link" href="#completing-a-goal-code-goal-or-g-or-completegoal-code-since-v1-4">3.3.4. Completing a goal: <code>!goal OR !g OR completegoal</code> [Since v1.4]</a></h4>
 <div class="paragraph">
-<p>Indicates completion of an existing goal in CollegeZone.<br></p>
+<p>Once you&#8217;ve completed a goal, indicate completion of an existing goal in CollegeZone using the <code>!goal</code>, <code>!g</code> or <code>completegoal</code> command.<br></p>
 </div>
 <div class="paragraph">
-<p>Format: <code>!goal INDEX</code><br>
-        <code>OR</code><br>
-        <code>!g INDEX</code><br>
-        <code>OR</code><br>
-        <code>completegoal INDEX</code></p>
+<p><strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">!goal INDEX</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">!g INDEX</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">completegoal INDEX</code></pre>
+</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -938,34 +986,153 @@ Deletes the 1st goal in CollegeZone&#8217;s goal page.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong><em>Examples</em>:</strong></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>list</code><br>
-<code>!goal 2</code><br>
-Indicates completion of the 2nd goal in CollegeZone&#8217;s goal page.<br></p>
-</li>
-<li>
-<p><code>list</code><br>
-<code>!g 4</code><br>
-Indicates completion of the 4th goal in CollegeZone&#8217;s goal page.<br></p>
-</li>
-<li>
-<p><code>l</code><br>
-<code>completegoal 1</code><br>
-Indicates completion of the 1st goal in CollegeZone&#8217;s goal page.</p>
-</li>
-</ul>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; !goal <span class="integer">2</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Indicates completion of the 2nd goal in CollegeZone&#8217;s goal page.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; !g <span class="integer">4</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Indicates completion of the 4th goal in CollegeZone&#8217;s goal page.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; completegoal <span class="integer">1</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Indicates completion of the 1st goal in CollegeZone&#8217;s goal page.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sorting-goals-code-sortgoal-or-sgoal-code-since-v1-5"><a class="link" href="#sorting-goals-code-sortgoal-or-sgoal-code-since-v1-5">3.3.5. Sorting goals: <code>sortgoal OR sgoal</code> [Since v1.5]</a></h4>
+<div class="paragraph">
+<p>It is a hassle to locate the goals you&#8217;re interested in if you have too many goals in CollegeZone. Try sorting the goals that you have using the <code>sortgoal</code> or <code>sgoal</code> command.<br></p>
+</div>
+<div class="paragraph">
+<p><strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">sortgoal f/GOAL_FIELD o/ORDER</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">sgoal f/GOAL_FIELD o/ORDER</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><code>GOAL_FIELD</code> can only be 'startdatetime', 'completion' or 'importance'.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><code>ORDER</code> can only be either 'ascending' or 'descending'.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong><em>Examples</em>:</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; sortgoal f/startdatetime o/ascending</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sorts the goal list based on start date time in ascending order.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; sgoal f/completion o/descending</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sorts the goal list based on completion in descending order.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="interesting-features"><a class="link" href="#interesting-features">3.4. Interesting features</a></h3>
 <div class="sect3">
-<h4 id="changing-collegezone-theme-code-theme-code-since-v1-5"><a class="link" href="#changing-collegezone-theme-code-theme-code-since-v1-5">3.4.1. Changing CollegeZone theme : <code>theme</code> [Since v1.5]</a></h4>
-
+<h4 id="changing-collegezone-theme-code-theme-or-th-code-since-v1-5"><a class="link" href="#changing-collegezone-theme-code-theme-or-th-code-since-v1-5">3.4.1. Changing CollegeZone theme : <code>theme OR th</code> [Since v1.5]</a></h4>
+<div class="paragraph">
+<p>CollegeZone&#8217;s default theme colour is not the only theme colour we have to offer! Try changing CollegeZone&#8217;s theme colour using the <code>theme</code> or <code>th</code> command. <br></p>
+</div>
+<div class="paragraph">
+<p><strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">theme THEME_COLOUR</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">th THEME_COLOUR</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><code>THEME_COLOUR</code> can only be 'dark' or 'light'.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong><em>Examples</em>:</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; theme light</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Changes the theme colour to light theme.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; th dark</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Changes the theme colour to dark theme.</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.4.2. Listing entered commands : <code>history</code></a></h4>
@@ -1262,6 +1429,22 @@ OR<br>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>!goal 1</code></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Sort Goal</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sorts the goal list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sortgoal f/GOAL_FIELD o/ORDER</code><br>
+OR<br>
+<code>sgoal f/GOAL_FIELD o/ORDER</code><br></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sortgoal f/startdatetime o/ascending</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Theme</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Switch theme colour of CollegeZone</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>theme THEME_COLOUR</code><br>
+OR<br>
+<code>th THEME_COLOUR</code><br></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>theme light</code></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Add Reminder</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Adds a reminder entry</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>+reminder text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME</code><br>
@@ -1288,7 +1471,7 @@ OR<br>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-10 10:59:55 UTC
+Last updated 2018-04-11 02:07:29 UTC
 </div>
 </div>
 </body>
