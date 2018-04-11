@@ -60,10 +60,3 @@ include::../UserGuide.adoc[tag=reminder]
 |===
 
 include::../DeveloperGuide.adoc[tag=reminder]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
