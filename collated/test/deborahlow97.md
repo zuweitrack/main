@@ -1,5 +1,5 @@
 # deborahlow97
-###### /java/guitests/guihandles/StatusBarFooterHandle.java
+###### \java\guitests\guihandles\StatusBarFooterHandle.java
 ``` java
     /**
      * Returns the text of the 'save location' portion of the status bar.
@@ -9,7 +9,7 @@
     }
 
 ```
-###### /java/guitests/guihandles/StatusBarFooterHandle.java
+###### \java\guitests\guihandles\StatusBarFooterHandle.java
 ``` java
     /**
      * Remembers the content of the 'goal completion status' portion of the status bar.
@@ -28,7 +28,7 @@
     }
 }
 ```
-###### /java/seedu/address/logic/commands/AddCommandTest.java
+###### \java\seedu\address\logic\commands\AddCommandTest.java
 ``` java
         @Override
         public void addGoal(Goal goal) throws DuplicateGoalException {
@@ -63,8 +63,13 @@
             fail("This method should not be called.");
         }
 
+        @Override
+        public void sortGoal(String goalField, String goalOrder) throws EmptyGoalListException {
+            fail("This method should not be called.");
+        }
+
 ```
-###### /java/seedu/address/logic/commands/AddGoalCommandIntegrationTest.java
+###### \java\seedu\address\logic\commands\AddGoalCommandIntegrationTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) for {@code AddGoalCommand}.
@@ -106,7 +111,7 @@ public class AddGoalCommandIntegrationTest {
 }
 
 ```
-###### /java/seedu/address/logic/commands/AddGoalCommandTest.java
+###### \java\seedu\address\logic\commands\AddGoalCommandTest.java
 ``` java
 public class AddGoalCommandTest {
 
@@ -119,6 +124,7 @@ public class AddGoalCommandTest {
         new AddGoalCommand(null);
     }
 
+    //TODODEB
     /*@Test
     public void execute_goalAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingGoalAdded modelStub = new ModelStubAcceptingGoalAdded();
@@ -128,11 +134,11 @@ public class AddGoalCommandTest {
 
         assertEquals(String.format(AddGoalCommand.MESSAGE_SUCCESS, validGoal), commandResult.feedbackToUser);
         assertEquals(Arrays.asList(validGoal), modelStub.goalsAdded);
-    }
+    }*/
 
     @Test
     public void execute_duplicateGoal_throwsCommandException() throws Exception {
-        ModelStub modelStub = new ModelStubThrowingDuplicateGoalException();
+        AddCommandTest.ModelStub modelStub = new ModelStubThrowingDuplicateGoalException();
         Goal validGoal = new GoalBuilder().build();
 
         thrown.expect(CommandException.class);
@@ -140,7 +146,7 @@ public class AddGoalCommandTest {
 
         getAddGoalCommandForGoal(validGoal, modelStub).execute();
     }
-    */
+
 
     @Test
     public void equals() {
@@ -204,7 +210,7 @@ public class AddGoalCommandTest {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/CompleteGoalCommandTest.java
+###### \java\seedu\address\logic\commands\CompleteGoalCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -326,7 +332,7 @@ public class CompleteGoalCommandTest {
 }
 
 ```
-###### /java/seedu/address/logic/commands/DeleteGoalCommandTest.java
+###### \java\seedu\address\logic\commands\DeleteGoalCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -439,7 +445,7 @@ public class DeleteGoalCommandTest {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/EditGoalCommandTest.java
+###### \java\seedu\address\logic\commands\EditGoalCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -592,7 +598,7 @@ public class EditGoalCommandTest {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/GoalCommandTestUtil.java
+###### \java\seedu\address\logic\commands\GoalCommandTestUtil.java
 ``` java
 /**
  * Contains helper methods for testing commands.
@@ -613,11 +619,20 @@ public class GoalCommandTestUtil {
     public static final boolean VALID_GOAL_COMPLETION_B = false;
     public static final boolean VALID_GOAL_COMPLETION_C = true;
     public static final boolean VALID_GOAL_COMPLETION_D = true;
+    public static final String VALID_GOAL_SORT_FIELD_A = "importance";
+    public static final String VALID_GOAL_SORT_FIELD_B = "startdatetime";
+    public static final String VALID_GOAL_SORT_ORDER_A = "ascending";
+    public static final String VALID_GOAL_SORT_ORDER_B = "descending";
+    public static final String INVALID_GOAL_SORT_ORDER = " " + PREFIX_SORT_ORDER + "increasing";
+    public static final String INVALID_GOAL_SORT_FIELD = " " + PREFIX_SORT_FIELD + "invalid";
     public static final String GOAL_TEXT_DESC_A = " " + PREFIX_GOAL_TEXT + VALID_GOAL_TEXT_A;
     public static final String GOAL_TEXT_DESC_B = " " + PREFIX_GOAL_TEXT + VALID_GOAL_TEXT_B;
     public static final String GOAL_IMPORTANCE_DESC_A = " " + PREFIX_IMPORTANCE + VALID_GOAL_IMPORTANCE_A;
     public static final String GOAL_IMPORTANCE_DESC_B = " " + PREFIX_IMPORTANCE + VALID_GOAL_IMPORTANCE_B;
-
+    public static final String GOAL_SORT_ORDER_DESC_A = " " + PREFIX_SORT_ORDER + VALID_GOAL_SORT_ORDER_A;
+    public static final String GOAL_SORT_ORDER_DESC_B = " " + PREFIX_SORT_ORDER + VALID_GOAL_SORT_ORDER_B;
+    public static final String GOAL_SORT_FIELD_DESC_A = " " + PREFIX_SORT_FIELD + VALID_GOAL_SORT_FIELD_A;
+    public static final String GOAL_SORT_FIELD_DESC_B = " " + PREFIX_SORT_FIELD + VALID_GOAL_SORT_FIELD_B;
     public static final String INVALID_IMPORTANCE_DESC = " " + PREFIX_IMPORTANCE + "-1";
     // negative numbers not allowed in importance
 
@@ -716,17 +731,103 @@ public class GoalCommandTestUtil {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/AddressBookParserTest.java
+###### \java\seedu\address\logic\commands\SortGoalCommandTest.java
+``` java
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for Sort Goal Command.
+ */
+public class SortGoalCommandTest {
+
+    private static final String VALID_GOAL_FIELD = "importance";
+    private static final String VALID_GOAL_ORDER = "descending";
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    private Model model;
+    private Model expectedModel;
+    private SortGoalCommand sortGoalCommand;
+
+    @Before
+    public void setUp() {
+        model = new ModelManager(getTypicalGoalAddressBook(), new UserPrefs());
+        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        sortGoalCommand = new SortGoalCommand(VALID_GOAL_FIELD, VALID_GOAL_ORDER);
+        sortGoalCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+    }
+
+
+    @Test
+    public void execute_goalListIsNotFiltered_showsSortedList() {
+        assertCommandSuccess(sortGoalCommand, model, String.format(MESSAGE_SUCCESS, VALID_GOAL_FIELD,
+                VALID_GOAL_ORDER), expectedModel);
+    }
+
+    @Test
+    public void execute_emptyGoalList_throwsCommandException() throws Exception {
+        AddCommandTest.ModelStub modelStub = new ModelStubThrowingEmptyGoalListException();
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(Messages.MESSAGE_INVALID_SORT_COMMAND_USAGE);
+
+        getSortGoalCommandForGoal(VALID_GOAL_FIELD, VALID_GOAL_ORDER, modelStub).execute();
+    }
+
+    /**
+     * Generates a new SortGoalCommand with the details of the given goal.
+     */
+    private SortGoalCommand getSortGoalCommandForGoal(String goalField, String goalOrder, Model model) {
+        SortGoalCommand command = new SortGoalCommand(goalField, goalOrder);
+        command.setData(model, new CommandHistory(), new UndoRedoStack());
+        return command;
+    }
+    /**
+     * A Model stub that always throw a EmptyGoalListException when trying to sort goal list.
+     */
+    private class ModelStubThrowingEmptyGoalListException extends AddCommandTest.ModelStub {
+        @Override
+        public void sortGoal(String goalField, String goalOrder) throws EmptyGoalListException {
+            throw new EmptyGoalListException();
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
+        }
+    }
+}
+```
+###### \java\seedu\address\logic\commands\ThemeCommandTest.java
+``` java
+public class ThemeCommandTest {
+
+    private static final String VALID_THEME = "dark";
+
+    @Rule
+    public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
+
+    @Test
+    public void execute_themeSwitch_success() {
+        CommandResult result = new ThemeCommand(VALID_THEME).execute();
+        assertEquals(MESSAGE_SUCCESS, result.feedbackToUser);
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ThemeSwitchRequestEvent);
+        assertTrue(eventsCollectorRule.eventsCollector.getSize() == 1);
+    }
+
+}
+```
+###### \java\seedu\address\logic\parser\AddressBookParserTest.java
 ``` java
     @Test
-    public void parseCommand_addGoal() throws Exception {
+    public void parseCommand_addGoal_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         AddGoalCommand command = (AddGoalCommand) parser.parseCommand(GoalUtil.getAddGoalCommand(goal));
         assertEquals(new AddGoalCommand(goal), command);
     }
 
     @Test
-    public void parseCommand_addGoalAliasOne() throws Exception {
+    public void parseCommand_addGoalAliasOne_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         AddGoalCommand command = (AddGoalCommand) parser.parseCommand(
                 AddGoalCommand.COMMAND_ALIAS_1 + " " + GoalUtil.getGoalDetails(goal));
@@ -734,7 +835,7 @@ public class GoalCommandTestUtil {
     }
 
     @Test
-    public void parseCommand_addGoalAliasTwo() throws Exception {
+    public void parseCommand_addGoalAliasTwo_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         AddGoalCommand command = (AddGoalCommand) parser.parseCommand(
                 AddGoalCommand.COMMAND_ALIAS_2 + " " + GoalUtil.getGoalDetails(goal));
@@ -742,7 +843,7 @@ public class GoalCommandTestUtil {
     }
 
     @Test
-    public void parseCommand_editGoal() throws Exception {
+    public void parseCommand_editGoal_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         EditGoalDescriptor descriptor = new EditGoalDescriptorBuilder(goal).build();
         EditGoalCommand command = (EditGoalCommand) parser.parseCommand(EditGoalCommand.COMMAND_WORD + " "
@@ -751,7 +852,7 @@ public class GoalCommandTestUtil {
     }
 
     @Test
-    public void parseCommand_editGoalAliasOne() throws Exception {
+    public void parseCommand_editGoalAliasOne_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         EditGoalDescriptor descriptor = new EditGoalDescriptorBuilder(goal).build();
         EditGoalCommand command = (EditGoalCommand) parser.parseCommand(EditGoalCommand.COMMAND_ALIAS_1 + " "
@@ -760,7 +861,7 @@ public class GoalCommandTestUtil {
     }
 
     @Test
-    public void parseCommand_editGoalAliasTwo() throws Exception {
+    public void parseCommand_editGoalAliasTwo_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         EditGoalDescriptor descriptor = new EditGoalDescriptorBuilder(goal).build();
         EditGoalCommand command = (EditGoalCommand) parser.parseCommand(EditGoalCommand.COMMAND_ALIAS_2 + " "
@@ -769,28 +870,28 @@ public class GoalCommandTestUtil {
     }
 
     @Test
-    public void parseCommand_deleteGoal() throws Exception {
+    public void parseCommand_deleteGoal_returnsTrue() throws Exception {
         DeleteGoalCommand command = (DeleteGoalCommand) parser.parseCommand(
                 DeleteGoalCommand.COMMAND_WORD + " " + INDEX_FIRST_GOAL.getOneBased());
         assertEquals(new DeleteGoalCommand(INDEX_FIRST_GOAL), command);
     }
 
     @Test
-    public void parseCommand_deleteGoalAliasOne() throws Exception {
+    public void parseCommand_deleteGoalAliasOne_returnsTrue() throws Exception {
         DeleteGoalCommand command = (DeleteGoalCommand) parser.parseCommand(
                 DeleteGoalCommand.COMMAND_ALIAS_1 + " " + INDEX_FIRST_GOAL.getOneBased());
         assertEquals(new DeleteGoalCommand(INDEX_FIRST_GOAL), command);
     }
 
     @Test
-    public void parseCommand_deleteGoalAliasTwo() throws Exception {
+    public void parseCommand_deleteGoalAliasTwo_returnsTrue() throws Exception {
         DeleteGoalCommand command = (DeleteGoalCommand) parser.parseCommand(
                 DeleteGoalCommand.COMMAND_ALIAS_2 + " " + INDEX_FIRST_GOAL.getOneBased());
         assertEquals(new DeleteGoalCommand(INDEX_FIRST_GOAL), command);
     }
 
     @Test
-    public void parseCommand_completeGoal() throws Exception {
+    public void parseCommand_completeGoal_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         CompleteGoalDescriptor descriptor = new CompleteGoalDescriptorBuilder(goal).build();
         CompleteGoalCommand command = (CompleteGoalCommand) parser.parseCommand(
@@ -799,7 +900,7 @@ public class GoalCommandTestUtil {
     }
 
     @Test
-    public void parseCommand_completeGoalAliasOne() throws Exception {
+    public void parseCommand_completeGoalAliasOne_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         CompleteGoalDescriptor descriptor = new CompleteGoalDescriptorBuilder(goal).build();
         CompleteGoalCommand command = (CompleteGoalCommand) parser.parseCommand(
@@ -808,16 +909,48 @@ public class GoalCommandTestUtil {
     }
 
     @Test
-    public void parseCommand_completeGoalAliasTwo() throws Exception {
+    public void parseCommand_completeGoalAliasTwo_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         CompleteGoalDescriptor descriptor = new CompleteGoalDescriptorBuilder(goal).build();
         CompleteGoalCommand command = (CompleteGoalCommand) parser.parseCommand(
                 CompleteGoalCommand.COMMAND_ALIAS_2 + " " + INDEX_FIRST_GOAL.getOneBased());
         assertEquals(new CompleteGoalCommand(INDEX_FIRST_GOAL, descriptor), command);
     }
+
+    @Test
+    public void parseCommand_theme_returnsTrue() throws Exception {
+        ThemeCommand command = (ThemeCommand) parser.parseCommand(ThemeCommand.COMMAND_WORD + " " + "dark");
+        assertEquals(new ThemeCommand("dark"), command);
+    }
+
+    @Test
+    public void parseCommand_themeAlias_returnsTrue() throws Exception {
+        ThemeCommand command = (ThemeCommand) parser.parseCommand(ThemeCommand.COMMAND_ALIAS + " " + "light");
+        assertEquals(new ThemeCommand("light"), command);
+    }
+
+    @Test
+    public void parseCommand_sortGoal_returnsTrue() throws Exception {
+        SortGoalCommand command = (SortGoalCommand) parser.parseCommand(
+                SortGoalCommand.COMMAND_WORD + " " + "f/importance" + " " + "o/ascending");
+        assertEquals(new SortGoalCommand("importance", "ascending"), command);
+    }
+
+    @Test
+    public void parseCommand_sortGoalAlias_returnsTrue() throws Exception {
+        SortGoalCommand command = (SortGoalCommand) parser.parseCommand(
+                SortGoalCommand.COMMAND_ALIAS + " " + "f/completion" + " " + "o/ascending");
+        assertEquals(new SortGoalCommand("completion", "ascending"), command);
+
+        command = (SortGoalCommand) parser.parseCommand(
+                SortGoalCommand.COMMAND_ALIAS + " " + "f/startdatetime" + " " + "o/ascending");
+        assertEquals(new SortGoalCommand("startdatetime", "ascending"), command);
+    }
+
+
 }
 ```
-###### /java/seedu/address/logic/parser/CompleteGoalCommandParserTest.java
+###### \java\seedu\address\logic\parser\CompleteGoalCommandParserTest.java
 ``` java
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -845,7 +978,7 @@ public class CompleteGoalCommandParserTest {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/DateTimeParserTest.java
+###### \java\seedu\address\logic\parser\DateTimeParserTest.java
 ``` java
 public class DateTimeParserTest {
 
@@ -878,7 +1011,7 @@ public class DateTimeParserTest {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/DeleteGoalCommandParserTest.java
+###### \java\seedu\address\logic\parser\DeleteGoalCommandParserTest.java
 ``` java
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -903,7 +1036,7 @@ public class DeleteGoalCommandParserTest {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/EditGoalCommandParserTest.java
+###### \java\seedu\address\logic\parser\EditGoalCommandParserTest.java
 ``` java
 public class EditGoalCommandParserTest {
 
@@ -1018,7 +1151,299 @@ public class EditGoalCommandParserTest {
     }*/
 }
 ```
-###### /java/seedu/address/model/goal/GoalTextTest.java
+###### \java\seedu\address\logic\parser\ParserUtilTest.java
+``` java
+    @Test
+    public void parseBirthday_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseBirthday((String) null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseBirthday((Optional<String>) null));
+    }
+
+    @Test
+    public void parseBirthday_invalidValue_throwsIllegalValueException() {
+        Assert.assertThrows(IllegalValueException.class, () -> ParserUtil.parseBirthday(INVALID_BIRTHDAY));
+        Assert.assertThrows(IllegalValueException.class, () -> ParserUtil.parseBirthday(Optional.of(INVALID_BIRTHDAY)));
+    }
+
+    @Test
+    public void parseBirthday_optionalEmpty_returnsOptionalEmpty() throws Exception {
+        assertFalse(ParserUtil.parseBirthday(Optional.empty()).isPresent());
+    }
+
+    @Test
+    public void parseBirthday_validValueWithoutWhitespace_returnsBirthday() throws Exception {
+        Birthday expectedBirthday = new Birthday(VALID_BIRTHDAY);
+        assertEquals(expectedBirthday, ParserUtil.parseBirthday(VALID_BIRTHDAY));
+        assertEquals(Optional.of(expectedBirthday), ParserUtil.parseBirthday(Optional.of(VALID_BIRTHDAY)));
+    }
+
+    @Test
+    public void parseBirthday_validValueWithWhitespace_returnsTrimmedBirthday() throws Exception {
+        String birthdayWithWhitespace = WHITESPACE + VALID_BIRTHDAY + WHITESPACE;
+        Birthday expectedBirthday = new Birthday(VALID_BIRTHDAY);
+        assertEquals(expectedBirthday, ParserUtil.parseBirthday(birthdayWithWhitespace));
+        assertEquals(Optional.of(expectedBirthday), ParserUtil.parseBirthday(Optional.of(birthdayWithWhitespace)));
+    }
+
+    @Test
+    public void parseLevelOfFriendship_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseLevelOfFriendship((String) null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil
+                .parseLevelOfFriendship((Optional<String>) null));
+    }
+
+    @Test
+    public void parseLevelOfFriendship_invalidValue_throwsIllegalValueException() {
+        Assert.assertThrows(IllegalValueException.class, () -> ParserUtil
+                .parseLevelOfFriendship(INVALID_LEVEL_OF_FRIENDSHIP));
+        Assert.assertThrows(IllegalValueException.class, () -> ParserUtil
+                .parseLevelOfFriendship(Optional.of(INVALID_LEVEL_OF_FRIENDSHIP)));
+    }
+
+    @Test
+    public void parseLevelOfFriendship_optionalEmpty_returnsOptionalEmpty() throws Exception {
+        assertFalse(ParserUtil.parseLevelOfFriendship(Optional.empty()).isPresent());
+    }
+
+    @Test
+    public void parseLevelOfFriendship_validValueWithoutWhitespace_returnsLevelOfFriendship() throws Exception {
+        LevelOfFriendship expectedLevelOfFriendship = new LevelOfFriendship(VALID_LEVEL_OF_FRIENDSHIP);
+        assertEquals(expectedLevelOfFriendship, ParserUtil.parseLevelOfFriendship(VALID_LEVEL_OF_FRIENDSHIP));
+        assertEquals(Optional.of(expectedLevelOfFriendship), ParserUtil
+                .parseLevelOfFriendship(Optional.of(VALID_LEVEL_OF_FRIENDSHIP)));
+    }
+
+    @Test
+    public void parseLevelOfFriendship_validValueWithWhitespace_returnsTrimmedLevelOfFriendship() throws Exception {
+        String levelOfFriendshipWithWhitespace = WHITESPACE + VALID_LEVEL_OF_FRIENDSHIP + WHITESPACE;
+        LevelOfFriendship expectedLevelOfFriendship = new LevelOfFriendship(VALID_LEVEL_OF_FRIENDSHIP);
+        assertEquals(expectedLevelOfFriendship, ParserUtil.parseLevelOfFriendship(levelOfFriendshipWithWhitespace));
+        assertEquals(Optional.of(expectedLevelOfFriendship), ParserUtil
+                .parseLevelOfFriendship(Optional.of(levelOfFriendshipWithWhitespace)));
+    }
+
+    @Test
+    public void parseUnitNumber_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseUnitNumber((String) null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseUnitNumber((Optional<String>) null));
+    }
+
+    @Test
+    public void parseUnitNumber_invalidValue_throwsIllegalValueException() {
+        Assert.assertThrows(IllegalValueException.class, () -> ParserUtil.parseUnitNumber(INVALID_UNIT_NUMBER));
+        Assert.assertThrows(IllegalValueException.class, () -> ParserUtil
+                .parseUnitNumber(Optional.of(INVALID_UNIT_NUMBER)));
+    }
+
+    @Test
+    public void parseUnitNumber_optionalEmpty_returnsOptionalEmpty() throws Exception {
+        assertFalse(ParserUtil.parseUnitNumber(Optional.empty()).isPresent());
+    }
+
+    @Test
+    public void parseUnitNumber_validValueWithoutWhitespace_returnsUnitNumber() throws Exception {
+        UnitNumber expectedUnitNumber = new UnitNumber(VALID_UNIT_NUMBER);
+        assertEquals(expectedUnitNumber, ParserUtil.parseUnitNumber(VALID_UNIT_NUMBER));
+        assertEquals(Optional.of(expectedUnitNumber), ParserUtil.parseUnitNumber(Optional.of(VALID_UNIT_NUMBER)));
+    }
+
+    @Test
+    public void parseUnitNumber_validValueWithWhitespace_returnsTrimmedUnitNumber() throws Exception {
+        String unitNumberWithWhitespace = WHITESPACE + VALID_UNIT_NUMBER + WHITESPACE;
+        UnitNumber expectedUnitNumber = new UnitNumber(VALID_UNIT_NUMBER);
+        assertEquals(expectedUnitNumber, ParserUtil.parseUnitNumber(unitNumberWithWhitespace));
+        assertEquals(Optional.of(expectedUnitNumber), ParserUtil.parseUnitNumber(Optional
+                .of(unitNumberWithWhitespace)));
+    }
+
+    @Test
+    public void parseCca_null_throwsNullPointerException() throws Exception {
+        thrown.expect(NullPointerException.class);
+        ParserUtil.parseCca(null);
+    }
+
+    @Test
+    public void parseCca_invalidValue_throwsIllegalValueException() throws Exception {
+        thrown.expect(IllegalValueException.class);
+        ParserUtil.parseCca(INVALID_CCA);
+    }
+
+    @Test
+    public void parseCca_validValueWithoutWhitespace_returnsCca() throws Exception {
+        Cca expectedCca = new Cca(VALID_CCA_1);
+        assertEquals(expectedCca, ParserUtil.parseCca(VALID_CCA_1));
+    }
+
+    @Test
+    public void parseCca_validValueWithWhitespace_returnsTrimmedCca() throws Exception {
+        String ccaWithWhitespace = WHITESPACE + VALID_CCA_1 + WHITESPACE;
+        Cca expectedCca = new Cca(VALID_CCA_1);
+        assertEquals(expectedCca, ParserUtil.parseCca(ccaWithWhitespace));
+    }
+
+    @Test
+    public void parseCcas_null_throwsNullPointerException() throws Exception {
+        thrown.expect(NullPointerException.class);
+        ParserUtil.parseCcas(null);
+    }
+
+    @Test
+    public void parseCcas_collectionWithInvalidCcas_throwsIllegalValueException() throws Exception {
+        thrown.expect(IllegalValueException.class);
+        ParserUtil.parseCcas(Arrays.asList(VALID_CCA_1, INVALID_CCA));
+    }
+
+    @Test
+    public void parseCcas_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseCcas(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parseCcas_collectionWithValidCcas_returnsCcaSet() throws Exception {
+        Set<Cca> actualCcaSet = ParserUtil.parseCcas(Arrays.asList(VALID_CCA_1, VALID_CCA_2));
+        Set<Cca> expectedCcaSet = new HashSet<Cca>(Arrays.asList(new Cca(VALID_CCA_1), new Cca(VALID_CCA_2)));
+
+        assertEquals(expectedCcaSet, actualCcaSet);
+    }
+
+    @Test
+    public void parseSortGoalField_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseSortGoalField((String) null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseSortGoalField((Optional<String>) null));
+    }
+
+    @Test
+    public void parseSortGoalField_invalidValue_throwsIllegalValueException() {
+        Assert.assertThrows(IllegalValueException.class, () -> ParserUtil.parseSortGoalField(INVALID_SORT_GOAL_FIELD));
+        Assert.assertThrows(IllegalValueException.class, () -> ParserUtil.parseSortGoalField(Optional
+                .of(INVALID_SORT_GOAL_FIELD)));
+    }
+
+    @Test
+    public void parseSortGoalField_optionalEmpty_returnsOptionalEmpty() throws Exception {
+        assertFalse(ParserUtil.parseSortGoalField(Optional.empty()).isPresent());
+    }
+
+    @Test
+    public void parseSortGoalField_validValueWithoutWhitespace_returnsGoalFieldString() throws Exception {
+        assertEquals(VALID_SORT_GOAL_FIELD, ParserUtil.parseSortGoalField(VALID_SORT_GOAL_FIELD));
+        assertEquals(Optional.of(VALID_SORT_GOAL_FIELD), ParserUtil.parseSortGoalField(Optional
+                .of(VALID_SORT_GOAL_FIELD)));
+    }
+
+    @Test
+    public void parseSortGoalField_validValueWithWhitespace_returnsTrimmedGoalFieldString() throws Exception {
+        String goalFieldWithWhitespace = WHITESPACE + VALID_SORT_GOAL_FIELD + WHITESPACE;
+        assertEquals(VALID_SORT_GOAL_FIELD, ParserUtil.parseSortGoalField(goalFieldWithWhitespace));
+        assertEquals(Optional.of(VALID_SORT_GOAL_FIELD), ParserUtil.parseSortGoalField(Optional
+                .of(goalFieldWithWhitespace)));
+    }
+
+    @Test
+    public void parseSortGoalOrder_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseSortGoalOrder((String) null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseSortGoalOrder((Optional<String>) null));
+    }
+
+    @Test
+    public void parseSortGoalOrder_invalidValue_throwsIllegalValueException() {
+        Assert.assertThrows(IllegalValueException.class, () -> ParserUtil.parseSortGoalOrder(INVALID_SORT_GOAL_ORDER));
+        Assert.assertThrows(IllegalValueException.class, () -> ParserUtil.parseSortGoalOrder(Optional
+                .of(INVALID_SORT_GOAL_ORDER)));
+    }
+
+    @Test
+    public void parseSortGoalOrder_optionalEmpty_returnsOptionalEmpty() throws Exception {
+        assertFalse(ParserUtil.parseSortGoalOrder(Optional.empty()).isPresent());
+    }
+
+    @Test
+    public void parseSortGoalOrder_validValueWithoutWhitespace_returnsGoalOrderString() throws Exception {
+        assertEquals(VALID_SORT_GOAL_ORDER, ParserUtil.parseSortGoalOrder(VALID_SORT_GOAL_ORDER));
+        assertEquals(Optional.of(VALID_SORT_GOAL_ORDER), ParserUtil.parseSortGoalOrder(Optional
+                .of(VALID_SORT_GOAL_ORDER)));
+    }
+
+    @Test
+    public void parseSortGoalOrder_validValueWithWhitespace_returnsTrimmedGoalOrderString() throws Exception {
+        String goalOrderWithWhitespace = WHITESPACE + VALID_SORT_GOAL_ORDER + WHITESPACE;
+        assertEquals(VALID_SORT_GOAL_ORDER, ParserUtil.parseSortGoalOrder(goalOrderWithWhitespace));
+        assertEquals(Optional.of(VALID_SORT_GOAL_ORDER), ParserUtil.parseSortGoalOrder(Optional
+                .of(goalOrderWithWhitespace)));
+    }
+```
+###### \java\seedu\address\logic\parser\SortGoalCommandParserTest.java
+``` java
+public class SortGoalCommandParserTest {
+    private SortGoalCommandParser parser = new SortGoalCommandParser();
+
+    @Test
+    public void parse_allFieldsPresent_success() {
+
+        // whitespace only preamble
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + GOAL_SORT_FIELD_DESC_B + GOAL_SORT_ORDER_DESC_B,
+                new SortGoalCommand(VALID_GOAL_SORT_FIELD_B, VALID_GOAL_SORT_ORDER_B));
+
+        // multiple goal sort fields - last sort goal field accepted
+        assertParseSuccess(parser, GOAL_SORT_FIELD_DESC_A + GOAL_SORT_FIELD_DESC_B + GOAL_SORT_ORDER_DESC_B,
+                new SortGoalCommand(VALID_GOAL_SORT_FIELD_B, VALID_GOAL_SORT_ORDER_B));
+
+        // multiple goal sort order - last sort goal order accepted
+        assertParseSuccess(parser, GOAL_SORT_FIELD_DESC_B + GOAL_SORT_ORDER_DESC_A + GOAL_SORT_ORDER_DESC_B,
+                new SortGoalCommand(VALID_GOAL_SORT_FIELD_B, VALID_GOAL_SORT_ORDER_B));
+    }
+
+    @Test
+    public void parse_compulsoryFieldMissing_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortGoalCommand.MESSAGE_USAGE);
+
+        // missing sort goal field prefix
+        assertParseFailure(parser, GOAL_SORT_ORDER_DESC_B, expectedMessage);
+
+        // missing sort goal order prefix
+        assertParseFailure(parser, GOAL_SORT_FIELD_DESC_B, expectedMessage);
+    }
+
+    @Test
+    public void parse_invalidValue_failure() {
+
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortGoalCommand.MESSAGE_USAGE);
+        // invalid sort goal field
+        assertParseFailure(parser, INVALID_GOAL_SORT_FIELD + GOAL_SORT_ORDER_DESC_B,
+                expectedMessage);
+
+        // invalid sort goal order
+        assertParseFailure(parser, INVALID_GOAL_SORT_ORDER + GOAL_SORT_FIELD_DESC_B,
+                expectedMessage);
+
+        // non-empty preamble
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + GOAL_SORT_ORDER_DESC_B + GOAL_SORT_FIELD_DESC_B,
+                expectedMessage);
+    }
+}
+```
+###### \java\seedu\address\logic\parser\ThemeCommandParserTest.java
+``` java
+
+public class ThemeCommandParserTest {
+    private ThemeCommandParser parser = new ThemeCommandParser();
+
+    @Test
+    public void parse_validArgs_returnsThemeCommand() {
+        assertParseSuccess(parser, "light", new ThemeCommand("light"));
+    }
+
+    @Test
+    public void parser_invalidArgs_throwsParseException() {
+        assertParseFailure(parser, "invalid", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ThemeCommand.MESSAGE_INVALID_THEME_COLOUR));
+
+        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ThemeCommand.MESSAGE_USAGE));
+    }
+}
+```
+###### \java\seedu\address\model\goal\GoalTextTest.java
 ``` java
 public class GoalTextTest {
 
@@ -1052,10 +1477,32 @@ public class GoalTextTest {
     }
 }
 ```
-###### /java/seedu/address/model/goal/ImportanceTest.java
+###### \java\seedu\address\model\goal\ImportanceTest.java
 ``` java
 public class ImportanceTest {
 
+    private final Importance importanceObjectOne = new Importance("10");
+    private final Importance importanceObjectTwo = new Importance("1");
+    private final Importance importanceObjectThree = new Importance("10");
+
+
+    @Test
+    public void importanceCompareTo_testEquals_success() {
+        int result = importanceObjectOne.compareTo(importanceObjectThree);
+        assertTrue(result == 0);
+    }
+
+    @Test
+    public void importanceCompareTo_testGreaterThan_success() {
+        int result = importanceObjectOne.compareTo(importanceObjectTwo);
+        assertTrue(result == 1);
+    }
+
+    @Test
+    public void importanceCompareTo_testLessThan_success() {
+        int result = importanceObjectTwo.compareTo(importanceObjectThree);
+        assertTrue(result == -1);
+    }
     @Test
     public void constructor_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> new Importance(null));
@@ -1097,7 +1544,29 @@ public class ImportanceTest {
     }
 }
 ```
-###### /java/seedu/address/model/person/BirthdayTest.java
+###### \java\seedu\address\model\goal\StartDateTimeTest.java
+``` java
+public class StartDateTimeTest {
+
+    private final StartDateTime startDateTimeObjectOne = new StartDateTime("Date: 18 April 2018, Time: 20:20");
+    private final StartDateTime startDateTimeObjectTwo = new StartDateTime("Date: 17 April 2018, Time: 20:20");
+    private final StartDateTime startDateTimeObjectThree = new StartDateTime("Date: 17 April 2018, Time: 20:20");
+
+
+    @Test
+    public void startDateTimeCompareTo_testGreaterThan_success() {
+        int result = startDateTimeObjectOne.compareTo(startDateTimeObjectTwo);
+        assertTrue(result == 1);
+    }
+
+    @Test
+    public void startDateTimeCompareTo_testLessThan_success() {
+        int result = startDateTimeObjectThree.compareTo(startDateTimeObjectOne);
+        assertTrue(result == -1);
+    }
+}
+```
+###### \java\seedu\address\model\person\BirthdayTest.java
 ``` java
 public class BirthdayTest {
 
@@ -1152,7 +1621,7 @@ public class BirthdayTest {
     }
 }
 ```
-###### /java/seedu/address/model/person/CcaTest.java
+###### \java\seedu\address\model\person\CcaTest.java
 ``` java
 public class CcaTest {
 
@@ -1186,7 +1655,7 @@ public class CcaTest {
     }
 }
 ```
-###### /java/seedu/address/model/person/LevelOfFriendshipTest.java
+###### \java\seedu\address\model\person\LevelOfFriendshipTest.java
 ``` java
 public class LevelOfFriendshipTest {
 
@@ -1231,7 +1700,7 @@ public class LevelOfFriendshipTest {
     }
 }
 ```
-###### /java/seedu/address/model/person/UniqueCcaListTest.java
+###### \java\seedu\address\model\person\UniqueCcaListTest.java
 ``` java
 public class UniqueCcaListTest {
     @Rule
@@ -1246,7 +1715,7 @@ public class UniqueCcaListTest {
 }
 
 ```
-###### /java/seedu/address/model/person/UnitNumberTest.java
+###### \java\seedu\address\model\person\UnitNumberTest.java
 ``` java
 public class UnitNumberTest {
 
@@ -1280,7 +1749,7 @@ public class UnitNumberTest {
     }
 }
 ```
-###### /java/seedu/address/model/UniqueGoalListTest.java
+###### \java\seedu\address\model\UniqueGoalListTest.java
 ``` java
 public class UniqueGoalListTest {
     @Rule
@@ -1294,7 +1763,7 @@ public class UniqueGoalListTest {
     }
 }
 ```
-###### /java/seedu/address/storage/XmlAdaptedGoalTest.java
+###### \java\seedu\address\storage\XmlAdaptedGoalTest.java
 ``` java
 public class XmlAdaptedGoalTest {
     private static final String INVALID_IMPORTANCE = "11";
@@ -1372,7 +1841,7 @@ public class XmlAdaptedGoalTest {
     }
 }
 ```
-###### /java/seedu/address/storage/XmlSerializableAddressBookTest.java
+###### \java\seedu\address\storage\XmlSerializableAddressBookTest.java
 ``` java
     @Test
     public void toModelType_invalidGoalFile_throwsIllegalValueException() throws Exception {
@@ -1392,7 +1861,7 @@ public class XmlAdaptedGoalTest {
     }
 }
 ```
-###### /java/seedu/address/testutil/CompleteGoalDescriptorBuilder.java
+###### \java\seedu\address\testutil\CompleteGoalDescriptorBuilder.java
 ``` java
 /**
  * A utility class to help with building CompleteGoalDescriptor objects.
@@ -1415,7 +1884,7 @@ public class CompleteGoalDescriptorBuilder {
     public CompleteGoalDescriptorBuilder(Goal goal) {
         descriptor = new CompleteGoalDescriptor();
         descriptor.setCompletion(new Completion(true));
-        descriptor.setEndDateTime(new EndDateTime("today"));
+        descriptor.setEndDateTime(new EndDateTime(properDateTimeFormat(LocalDateTime.now())));
         //TODO
         //descriptor.setCompletion(goal.getCompletion());
         //descriptor.setEndDateTime(goal.getEndDateTime());
@@ -1442,7 +1911,7 @@ public class CompleteGoalDescriptorBuilder {
     }
 }
 ```
-###### /java/seedu/address/testutil/EditGoalDescriptorBuilder.java
+###### \java\seedu\address\testutil\EditGoalDescriptorBuilder.java
 ``` java
 /**
  * A utility class to help with building EditGoalDescriptor objects.
@@ -1490,7 +1959,7 @@ public class EditGoalDescriptorBuilder {
 }
 
 ```
-###### /java/seedu/address/testutil/GoalBuilder.java
+###### \java\seedu\address\testutil\GoalBuilder.java
 ``` java
 /**
  * A utility class to help with building Person objects.
@@ -1575,7 +2044,7 @@ public class GoalBuilder {
 }
 
 ```
-###### /java/seedu/address/testutil/GoalUtil.java
+###### \java\seedu\address\testutil\GoalUtil.java
 ``` java
 /**
  * A utility class for Goal.
@@ -1627,7 +2096,7 @@ public class GoalUtil {
     }
 }
 ```
-###### /java/seedu/address/testutil/TypicalGoals.java
+###### \java\seedu\address\testutil\TypicalGoals.java
 ``` java
 /**
  * A utility class containing a list of {@code Goal} objects to be used in tests.
@@ -1696,7 +2165,7 @@ public class TypicalGoals {
     }
 }
 ```
-###### /java/seedu/address/ui/testutil/GuiTestAssert.java
+###### \java\seedu\address\ui\testutil\GuiTestAssert.java
 ``` java
     /**
      * Returns the color style for {@code tagName}'s label. The tag's color is determined by looking up the color
@@ -1712,18 +2181,31 @@ public class TypicalGoals {
 
         case "colleagues":
         case "neighbours":
+        case "bff":
             return "yellow";
 
         case "family":
         case "friend":
+        case "closefriend":
             return "orange";
 
         case "friends":
+        case "classmate":
             return "brown";
 
         case "husband":
-            return "grey";
+        case "cousin":
+            return "purple";
 
+        case "boyfriend":
+            return "green";
+
+        case "schoolmate":
+            return "blue";
+
+        case "exgirlfriend":
+        case "malafriend":
+            return "red";
         default:
             fail(tagName + " does not have a color assigned.");
             return "";
@@ -1760,7 +2242,7 @@ public class TypicalGoals {
     }
 
 ```
-###### /java/seedu/address/ui/testutil/GuiTestAssert.java
+###### \java\seedu\address\ui\testutil\GuiTestAssert.java
 ``` java
     /**
      * Changing @param ccaInArrayList into a CCA string in desired format
