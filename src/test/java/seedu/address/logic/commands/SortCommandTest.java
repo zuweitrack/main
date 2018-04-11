@@ -21,7 +21,10 @@ import seedu.address.model.UserPrefs;
 
 
 
-
+//@@author sham-sheer
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for SortCommand.
+ */
 public class SortCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());

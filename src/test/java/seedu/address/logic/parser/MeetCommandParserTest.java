@@ -14,7 +14,7 @@ import seedu.address.logic.commands.MeetCommand;
 import seedu.address.model.person.Meet;
 
 
-//@@author A0158738X
+//@@author sham-sheer
 public class MeetCommandParserTest {
     private MeetCommandParser parser = new MeetCommandParser();
     private final String nonEmptyDate = "15/03/2018";

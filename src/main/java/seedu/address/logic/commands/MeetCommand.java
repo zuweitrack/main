@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
-//@@author A0158738X
+//@@author sham-sheer
 /**
  * Adds a meeting to the address book.
  */

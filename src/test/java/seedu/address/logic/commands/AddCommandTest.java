@@ -126,11 +126,17 @@ public class AddCommandTest {
             return null;
         }
 
+        //@@author sham-sheer
         @Override
         public void sortPersons(Index index) throws IndexOutOfBoundsException {
             fail("This method should not be called.");
         }
 
+        public void deleteMeetDate(Person person) throws PersonNotFoundException {
+            fail("This method should not be called.");
+        }
+
+        //@@author
         @Override
         public void deletePerson(Person target) throws PersonNotFoundException {
             fail("This method should not be called.");
@@ -214,9 +220,6 @@ public class AddCommandTest {
             fail("This method should not be called.");
         }
 
-        public void deleteMeetDate(Person person) throws PersonNotFoundException {
-            fail("This method should not be called.");
-        }
     }
 
     /**

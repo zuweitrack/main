@@ -97,7 +97,7 @@ public class CalendarPanel extends UiPart<Region> {
                 calendarRDue.addEntry(new Entry(reminder.getReminderText().toString(), new Interval(ldtstart, ldtend)));
             }
         }
-        //@@author A0158738X
+        //@@author sham-sheer
         for (Person person : personList) {
             String meetDate = person.getMeetDate().toString();
             if (!meetDate.isEmpty()) {

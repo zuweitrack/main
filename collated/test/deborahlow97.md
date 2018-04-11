@@ -731,7 +731,11 @@ public class GoalCommandTestUtil {
     }
 }
 ```
+<<<<<<< HEAD
+###### /java/seedu/address/logic/commands/SortGoalCommandTest.java
+=======
 ###### \java\seedu\address\logic\commands\SortGoalCommandTest.java
+>>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc
 ``` java
 /**
  * Contains integration tests (interaction with the Model) and unit tests for Sort Goal Command.
@@ -798,7 +802,11 @@ public class SortGoalCommandTest {
     }
 }
 ```
+<<<<<<< HEAD
+###### /java/seedu/address/logic/commands/ThemeCommandTest.java
+=======
 ###### \java\seedu\address\logic\commands\ThemeCommandTest.java
+>>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc
 ``` java
 public class ThemeCommandTest {
 
@@ -817,7 +825,11 @@ public class ThemeCommandTest {
 
 }
 ```
+<<<<<<< HEAD
+###### /java/seedu/address/logic/parser/AddressBookParserTest.java
+=======
 ###### \java\seedu\address\logic\parser\AddressBookParserTest.java
+>>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc
 ``` java
     @Test
     public void parseCommand_addGoal_returnsTrue() throws Exception {
@@ -1151,7 +1163,11 @@ public class EditGoalCommandParserTest {
     }*/
 }
 ```
+<<<<<<< HEAD
+###### /java/seedu/address/logic/parser/ParserUtilTest.java
+=======
 ###### \java\seedu\address\logic\parser\ParserUtilTest.java
+>>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc
 ``` java
     @Test
     public void parseBirthday_null_throwsNullPointerException() {
@@ -1372,7 +1388,11 @@ public class EditGoalCommandParserTest {
                 .of(goalOrderWithWhitespace)));
     }
 ```
+<<<<<<< HEAD
+###### /java/seedu/address/logic/parser/SortGoalCommandParserTest.java
+=======
 ###### \java\seedu\address\logic\parser\SortGoalCommandParserTest.java
+>>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc
 ``` java
 public class SortGoalCommandParserTest {
     private SortGoalCommandParser parser = new SortGoalCommandParser();
@@ -1422,7 +1442,11 @@ public class SortGoalCommandParserTest {
     }
 }
 ```
+<<<<<<< HEAD
+###### /java/seedu/address/logic/parser/ThemeCommandParserTest.java
+=======
 ###### \java\seedu\address\logic\parser\ThemeCommandParserTest.java
+>>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc
 ``` java
 
 public class ThemeCommandParserTest {
@@ -1443,7 +1467,11 @@ public class ThemeCommandParserTest {
     }
 }
 ```
+<<<<<<< HEAD
+###### /java/seedu/address/model/goal/GoalTextTest.java
+=======
 ###### \java\seedu\address\model\goal\GoalTextTest.java
+>>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc
 ``` java
 public class GoalTextTest {
 
@@ -1544,7 +1572,11 @@ public class ImportanceTest {
     }
 }
 ```
+<<<<<<< HEAD
+###### /java/seedu/address/model/goal/StartDateTimeTest.java
+=======
 ###### \java\seedu\address\model\goal\StartDateTimeTest.java
+>>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc
 ``` java
 public class StartDateTimeTest {
 
@@ -1566,7 +1598,11 @@ public class StartDateTimeTest {
     }
 }
 ```
+<<<<<<< HEAD
+###### /java/seedu/address/model/person/BirthdayTest.java
+=======
 ###### \java\seedu\address\model\person\BirthdayTest.java
+>>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc
 ``` java
 public class BirthdayTest {
 
