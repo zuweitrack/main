@@ -256,6 +256,7 @@ Examples:
 * `meet 1 d/14/03/2018` +
 Sets up a meeting with the 1st person on the 14th of March, 2018 in your Calendar.
 
+// tag::reminder[]
 === Reminder features
 
 ==== Adding a reminder: `+reminder OR +r OR addreminder` [Since v1.4]
@@ -334,6 +335,7 @@ Examples:
 
 * `-r text/Eat vitamins d/tmr 8pm`
 * `-reminder text/Dental appointment d/tmr`
+// end::reminder[]
 
 === Goal features
 

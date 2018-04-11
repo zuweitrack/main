@@ -485,30 +485,29 @@ image::RCPersonClass.JPG[width="450"]
 * Level of Friendship is displayed as a string of heart symbols. It is represented this way as it more intuitive for users to understand what the symbols mean.
 // end::addandedit[]
 
-=== Reminders in Calendar [Since v1.4]
-As RC4 residents have events, classes and meetings to go to at a certain date and time, we decided on implementing a reminder feature to allow users to add reminders in CollegeZone. +
+// tag::reminder[]
+=== Reminders [Since v1.4]
+
+Reminders are created as RC4 residents have events, classes and meetings to go to at a certain date and time, we decided on implementing a reminder feature to allow users to add reminders in CollegeZone. +
 Reminder commands are undoable and redoable for the benefit users to redo and undo a command they did or did not intend to change.
 
 *Reminder features:* +
 
 * Adding a reminder to the Calendar
-* Editing a reminder on the Calendar
 * Deleting a reminder on the Calendar
-* Acknowledging a reminder on the Calendar
 
-*Reminder objects will consist of 2 attributes :* +
-1. the date, time and recurrence of reminder +
-2. the reminder text content
+*Reminder objects will consist of 3 attributes :* +
+
+1. the reminder text content +
+2. the start date and time +
+3. the end date and time
 
 The reminders will be stored in an ArrayList of all the reminder objects. Each reminder will have specific positive integer index number. +
-A reminder will be *green* until it is due. +
-A reminder will turn and remain orange for 24 hours if it's due. +
-This is when user can start acknowledging a reminder on the Calendar.  +
-After acknowledging it, it is removed from calendar. +
-If it's overdue and not acknowledged, it will turn Grey. +
+A reminder will be *blue* until it is due. +
+A reminder will turn and remain *red* if it's due. +
+Users can delete reminders on the Calendar if its already due or when they accidentally made a mistake  +
 
-Bottom Panel: Number of orange reminders +
-//end::addandedit[]
+// end::reminder[]
 
 // tag::myGoalsPage[]
 === My Goals Page [Since v1.4]
