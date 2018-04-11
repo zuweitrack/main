@@ -18,7 +18,6 @@ import seedu.address.model.goal.GoalText;
 import seedu.address.model.goal.Importance;
 import seedu.address.model.goal.StartDateTime;
 import seedu.address.model.goal.exceptions.GoalNotFoundException;
-import seedu.address.model.goal.exceptions.OngoingGoalException;
 
 //@@author deborahlow97
 /**
