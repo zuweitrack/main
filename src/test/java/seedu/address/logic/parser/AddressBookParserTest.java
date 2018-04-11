@@ -37,6 +37,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MeetCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.SortGoalCommand;
 import seedu.address.logic.commands.ThemeCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -238,14 +239,14 @@ public class AddressBookParserTest {
 
     //@@author deborahlow97
     @Test
-    public void parseCommand_addGoal() throws Exception {
+    public void parseCommand_addGoal_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         AddGoalCommand command = (AddGoalCommand) parser.parseCommand(GoalUtil.getAddGoalCommand(goal));
         assertEquals(new AddGoalCommand(goal), command);
     }
 
     @Test
-    public void parseCommand_addGoalAliasOne() throws Exception {
+    public void parseCommand_addGoalAliasOne_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         AddGoalCommand command = (AddGoalCommand) parser.parseCommand(
                 AddGoalCommand.COMMAND_ALIAS_1 + " " + GoalUtil.getGoalDetails(goal));
@@ -253,7 +254,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_addGoalAliasTwo() throws Exception {
+    public void parseCommand_addGoalAliasTwo_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         AddGoalCommand command = (AddGoalCommand) parser.parseCommand(
                 AddGoalCommand.COMMAND_ALIAS_2 + " " + GoalUtil.getGoalDetails(goal));
@@ -261,7 +262,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_editGoal() throws Exception {
+    public void parseCommand_editGoal_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         EditGoalDescriptor descriptor = new EditGoalDescriptorBuilder(goal).build();
         EditGoalCommand command = (EditGoalCommand) parser.parseCommand(EditGoalCommand.COMMAND_WORD + " "
@@ -270,7 +271,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_editGoalAliasOne() throws Exception {
+    public void parseCommand_editGoalAliasOne_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         EditGoalDescriptor descriptor = new EditGoalDescriptorBuilder(goal).build();
         EditGoalCommand command = (EditGoalCommand) parser.parseCommand(EditGoalCommand.COMMAND_ALIAS_1 + " "
@@ -279,7 +280,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_editGoalAliasTwo() throws Exception {
+    public void parseCommand_editGoalAliasTwo_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         EditGoalDescriptor descriptor = new EditGoalDescriptorBuilder(goal).build();
         EditGoalCommand command = (EditGoalCommand) parser.parseCommand(EditGoalCommand.COMMAND_ALIAS_2 + " "
@@ -288,28 +289,28 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_deleteGoal() throws Exception {
+    public void parseCommand_deleteGoal_returnsTrue() throws Exception {
         DeleteGoalCommand command = (DeleteGoalCommand) parser.parseCommand(
                 DeleteGoalCommand.COMMAND_WORD + " " + INDEX_FIRST_GOAL.getOneBased());
         assertEquals(new DeleteGoalCommand(INDEX_FIRST_GOAL), command);
     }
 
     @Test
-    public void parseCommand_deleteGoalAliasOne() throws Exception {
+    public void parseCommand_deleteGoalAliasOne_returnsTrue() throws Exception {
         DeleteGoalCommand command = (DeleteGoalCommand) parser.parseCommand(
                 DeleteGoalCommand.COMMAND_ALIAS_1 + " " + INDEX_FIRST_GOAL.getOneBased());
         assertEquals(new DeleteGoalCommand(INDEX_FIRST_GOAL), command);
     }
 
     @Test
-    public void parseCommand_deleteGoalAliasTwo() throws Exception {
+    public void parseCommand_deleteGoalAliasTwo_returnsTrue() throws Exception {
         DeleteGoalCommand command = (DeleteGoalCommand) parser.parseCommand(
                 DeleteGoalCommand.COMMAND_ALIAS_2 + " " + INDEX_FIRST_GOAL.getOneBased());
         assertEquals(new DeleteGoalCommand(INDEX_FIRST_GOAL), command);
     }
 
     @Test
-    public void parseCommand_completeGoal() throws Exception {
+    public void parseCommand_completeGoal_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         CompleteGoalDescriptor descriptor = new CompleteGoalDescriptorBuilder(goal).build();
         CompleteGoalCommand command = (CompleteGoalCommand) parser.parseCommand(
@@ -318,7 +319,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_completeGoalAliasOne() throws Exception {
+    public void parseCommand_completeGoalAliasOne_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         CompleteGoalDescriptor descriptor = new CompleteGoalDescriptorBuilder(goal).build();
         CompleteGoalCommand command = (CompleteGoalCommand) parser.parseCommand(
@@ -327,7 +328,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_completeGoalAliasTwo() throws Exception {
+    public void parseCommand_completeGoalAliasTwo_returnsTrue() throws Exception {
         Goal goal = new GoalBuilder().build();
         CompleteGoalDescriptor descriptor = new CompleteGoalDescriptorBuilder(goal).build();
         CompleteGoalCommand command = (CompleteGoalCommand) parser.parseCommand(
@@ -336,8 +337,34 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_themeCommand_returns() throws Exception {
+    public void parseCommand_theme_returnsTrue() throws Exception {
         ThemeCommand command = (ThemeCommand) parser.parseCommand(ThemeCommand.COMMAND_WORD + " " + "dark");
         assertEquals(new ThemeCommand("dark"), command);
     }
+
+    @Test
+    public void parseCommand_themeAlias_returnsTrue() throws Exception {
+        ThemeCommand command = (ThemeCommand) parser.parseCommand(ThemeCommand.COMMAND_ALIAS + " " + "light");
+        assertEquals(new ThemeCommand("light"), command);
+    }
+
+    @Test
+    public void parseCommand_sortGoal_returnsTrue() throws Exception {
+        SortGoalCommand command = (SortGoalCommand) parser.parseCommand(
+                SortGoalCommand.COMMAND_WORD + " " + "f/importance" + " " + "o/ascending");
+        assertEquals(new SortGoalCommand("importance", "ascending"), command);
+    }
+
+    @Test
+    public void parseCommand_sortGoalAlias_returnsTrue() throws Exception {
+        SortGoalCommand command = (SortGoalCommand) parser.parseCommand(
+                SortGoalCommand.COMMAND_ALIAS + " " + "f/completion" + " " + "o/ascending");
+        assertEquals(new SortGoalCommand("completion", "ascending"), command);
+
+        command = (SortGoalCommand) parser.parseCommand(
+                SortGoalCommand.COMMAND_ALIAS + " " + "f/startdatetime" + " " + "o/ascending");
+        assertEquals(new SortGoalCommand("startdatetime", "ascending"), command);
+    }
+
+
 }
