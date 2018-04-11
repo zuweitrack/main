@@ -3,11 +3,11 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Person;
 
-import java.util.List;
+import seedu.address.commons.core.index.Index;
+
+import seedu.address.logic.commands.exceptions.CommandException;
+
 
 /**
  * Sort the address book based on the users parameters
@@ -18,7 +18,7 @@ public class SortCommand extends UndoableCommand {
 
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid sort Index";
 
-    public static final String MESSAGE_SORTED_SUCCESS_LEVEL_OF_FRIENDSHIP = "List sorted according to level of friendship!";
+    public static final String MESSAGE_SORTED_SUCCESS_LEVEL_OF_FRIENDSHIP = "List sorted according to LOF!";
 
     public static final String MESSAGE_SORTED_SUCCESS_MEET_DATE = "List sorted according to your latest meet date!";
 
