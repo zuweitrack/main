@@ -24,6 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.goal.Goal;
 import seedu.address.model.goal.exceptions.DuplicateGoalException;
+import seedu.address.model.goal.exceptions.EmptyGoalListException;
 import seedu.address.model.goal.exceptions.GoalNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -183,6 +184,11 @@ public class AddCommandTest {
         @Override
         public void updateGoalWithoutParameters(Goal target, Goal editedGoal)
                 throws GoalNotFoundException {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void sortGoal(String goalField, String goalOrder) throws EmptyGoalListException {
             fail("This method should not be called.");
         }
 

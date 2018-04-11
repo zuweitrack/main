@@ -1,7 +1,7 @@
 /* @@author deborahlow97 */
 .background {
     -fx-background-color: derive(#ffffff, 20%);
-    background-color: #f5f5f5; /* Used in the default.html file */
+    background-color: #f5f5f5;
 }
 
 .label {
@@ -105,11 +105,11 @@
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #b0b0b0;
+    -fx-background-color: #fcf9f9;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #a9bad6;
+    -fx-background-color: #dae3f2;
 }
 
 .list-cell:filled:selected #cardPane {
@@ -282,7 +282,7 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#ffffff, 20%);
+    -fx-background-color: derive(grey, 20%);
 }
 
 .scroll-bar .thumb {
@@ -357,37 +357,37 @@
 
 #tags .red {
     -fx-text-fill: black;
-    -fx-background-color: red;
+    -fx-background-color: #ff7675;
 }
 
 #tags .yellow {
-    -fx-background-color: yellow;
+    -fx-background-color: #ffeaa7;
     -fx-text-fill: black;
 }
 
 #tags .blue {
-    -fx-text-fill: white;
-    -fx-background-color: blue;
+    -fx-text-fill: black;
+    -fx-background-color: #48dbfb;
 }
 
 #tags .orange {
     -fx-text-fill: black;
-    -fx-background-color: orange;
+    -fx-background-color: #ffa502;
 }
 
 #tags .brown {
-    -fx-text-fill: white;
-    -fx-background-color: brown;
+    -fx-text-fill: black;
+    -fx-background-color: #D7ACAC;
 }
 
 #tags .green {
     -fx-text-fill: black;
-    -fx-background-color: green;
+    -fx-background-color: #55efc4;
 }
 
 #tags .pink {
     -fx-text-fill: black;
-    -fx-background-color: pink;
+    -fx-background-color: #fd79a8;
 }
 
 #tags .black {
@@ -395,7 +395,7 @@
     -fx-background-color: black;
 }
 
-#tags .grey {
+#tags .purple {
     -fx-text-fill: black;
-    -fx-background-color: grey;
+    -fx-background-color: #a29bfe;
 }

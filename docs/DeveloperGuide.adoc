@@ -485,7 +485,7 @@ image::RCPersonClass.JPG[width="450"]
 * Level of Friendship is displayed as a string of heart symbols. It is represented this way as it more intuitive for users to understand what the symbols mean.
 // end::addandedit[]
 
-=== Suggested: Set Reminders [Since v1.4]
+=== Reminders in Calendar [Since v1.4]
 As RC4 residents have events, classes and meetings to go to at a certain date and time, we decided on implementing a reminder feature to allow users to add reminders in CollegeZone. +
 Reminder commands are undoable and redoable for the benefit users to redo and undo a command they did or did not intend to change.
 
@@ -496,10 +496,9 @@ Reminder commands are undoable and redoable for the benefit users to redo and un
 * Deleting a reminder on the Calendar
 * Acknowledging a reminder on the Calendar
 
-*Reminder objects will consist of 3 attributes :* +
+*Reminder objects will consist of 2 attributes :* +
 1. the date, time and recurrence of reminder +
-2. the level of urgency of reminder +
-3. the reminder text content
+2. the reminder text content
 
 The reminders will be stored in an ArrayList of all the reminder objects. Each reminder will have specific positive integer index number. +
 A reminder will be *green* until it is due. +
@@ -512,17 +511,20 @@ Bottom Panel: Number of orange reminders +
 //end::addandedit[]
 
 // tag::myGoalsPage[]
-=== My Goals Page [Since v1.4]
+=== Goals List [Since v1.4]
 
-The My Goals page is created for RC4 users to add and keep track of their goals every year. We are implementing this goal page as setting goals gives you *long-term vision* and *short-term motivation* for the goals. In addition as a majority of RC4 residents are NUS students, when students set their own goals, they take responsibility and ownership of their learning goals. +
+The My Goals page is created for RC4 users to add and keep track of their goals throughout their stay. We are implementing this goal list as setting goals gives you *long-term vision* and *short-term motivation* for the goals. In addition as a majority of RC4 residents are NUS students, when students set their own goals, they take responsibility and ownership of their learning goals. +
 Goals are meant only for the user, and the user can have many goals stored in CollegeZone. +
 
 *Goals features:* +
 
-* Adding a goal to the My Goals Page
-* Editing a goal to the My Goals Page
-* Deleting a goal to the My Goals Page
-* Completing a goal to the My Goals Page
+* Adding a goal to Goals List
+* Editing a goal from the Goals List
+* Deleting a goal from the Goals List
+* Check a goal from the Goals List
+* Uncheck a goal from the Goals List
+* Sort goals from the Goals List
+
 
 All goal commands are event driven. +
 The following is the Sequence Diagram for interactions within the `Logic` component for the `execute("goal remove 1")` API call. +

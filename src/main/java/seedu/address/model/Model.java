@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.goal.Goal;
 import seedu.address.model.goal.exceptions.DuplicateGoalException;
+import seedu.address.model.goal.exceptions.EmptyGoalListException;
 import seedu.address.model.goal.exceptions.GoalNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -101,6 +102,11 @@ public interface Model {
      * @throws GoalNotFoundException if {@code target} could not be found in the list.
      */
     void updateGoalWithoutParameters(Goal target, Goal editedGoal) throws GoalNotFoundException;
+
+    /**
+     * Sort the goal based on sortType
+     */
+    void sortGoal(String sortType, String sortOrder) throws EmptyGoalListException;
 
     //@@author
     // fuadsahmawi

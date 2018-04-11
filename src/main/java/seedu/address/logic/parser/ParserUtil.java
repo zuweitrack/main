@@ -37,6 +37,8 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INSUFFICIENT_PARTS = "Number of parts must be more than 1.";
+    public static final String MESSAGE_INVALID_SORT_FIELD = "Sort field entered is not a valid field.";
+    public static final String MESSAGE_INVALID_ORDER_FIELD = "Sort order field entered is not a valid field.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -189,7 +191,6 @@ public class ParserUtil {
         }
         return new Meet(trimmedMeetDate);
     }
-    //@@author
     /**
      * Parses a {@code Optional<String> meetDate} into an {@code Optional<meetDate>} if {@code meetDate}
      * is present.
@@ -200,6 +201,7 @@ public class ParserUtil {
         return meetDate.isPresent() ? Optional.of(parseMeetDate(meetDate.get())) : Optional.empty();
     }
 
+    //@@author deborahlow97
     /**
      * Parses a {@code String cca} into a {@code Cca}
      * Leading and trailing whitespaces will be trimmed.
@@ -381,5 +383,61 @@ public class ParserUtil {
     public static Optional<EndDateTime> parseEndDateTime(Optional<String> endDateTime) throws IllegalValueException {
         requireNonNull(endDateTime);
         return endDateTime.isPresent() ? Optional.of(parseEndDateTime(endDateTime.get())) : Optional.empty();
+    }
+
+    //@@author deborahlow97
+    /**
+     * Parses a {@code String sortField} and checks if it is a valid sortField parameter.
+     *
+     * @throws IllegalValueException if specified String is an invalid field.
+     */
+    public static String parseSortGoalField(String sortField) throws IllegalValueException {
+        String trimmedSortField = sortField.trim();
+        switch (trimmedSortField) {
+        case "importance":
+        case "completion":
+        case "startdatetime":
+            return trimmedSortField;
+        default:
+            throw new IllegalValueException(MESSAGE_INVALID_SORT_FIELD);
+        }
+    }
+
+    /**
+     * Parses a {@code Optional<String> sortField} into an {@code Optional<String>} if {@code sortField}
+     * is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<String> parseSortGoalField(Optional<String> sortField) throws IllegalValueException {
+        requireNonNull(sortField);
+        return sortField.isPresent() ? Optional.of(parseSortGoalField(sortField.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String order} and check if it is a valid order parameter.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code order} is invalid.
+     */
+    public static String parseSortGoalOrder(String order) throws IllegalValueException {
+        requireNonNull(order);
+        String trimmedOrder = order.trim();
+        switch (trimmedOrder) {
+        case "ascending":
+        case "descending":
+            return trimmedOrder;
+        default:
+            throw new IllegalValueException(MESSAGE_INVALID_ORDER_FIELD);
+        }
+    }
+
+    /**
+     * Parses a {@code Optional<String> sortOrder} into an {@code Optional<String>} if {@code sortOrder}
+     * is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<String> parseSortGoalOrder(Optional<String> sortOrder) throws IllegalValueException {
+        requireNonNull(sortOrder);
+        return sortOrder.isPresent() ? Optional.of(parseSortGoalOrder(sortOrder.get())) : Optional.empty();
     }
 }

@@ -28,7 +28,7 @@ public class MeetCommand extends UndoableCommand {
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DATE + "[REMARK]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DATE + "01/April/2018";
+            + PREFIX_DATE + "01/04/2018";
 
 
     public static final String MESSAGE_ADD_MEETDATE_SUCCESS = "%1$s added for meet up! Check out your Calendar!";
