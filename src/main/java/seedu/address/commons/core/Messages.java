@@ -15,5 +15,7 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_RA_LISTED_OVERVIEW = "%1$d Searched Persons and "
             + "their Resident Assistant(s) (RA) listed!";
+    public static final String MESSAGE_INVALID_SORT_COMMAND_USAGE = "Sort command cannot be done on an empty "
+            + "goal list!";
 
 }
