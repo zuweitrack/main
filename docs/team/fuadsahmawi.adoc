@@ -1,0 +1,62 @@
+= Fuad B Sahmawi - Project Portfolio
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+image::fuadsahmawi.jpg[width="150", align="left"]
+{empty}[https://github.com/fuadsahmawi[github]]
+
+== PROJECT: CollegeZone
+
+---
+
+== Overview
+
+CollegeZone is a desktop application for NUS Residential College 4 (RC4) students. It has a Graphical User Interface (GUI)
+but most of the user interactions happen using a Command Line Interface (CLI).
+This application is catered for an RC4 resident to manage their contacts with other RC4 residents and to manage their tasks,
+just like a digital organiser.
+
+== Summary of contributions
+
+* *Major enhancement*: Added *the ability to add & delete reminders in a Calendar interface*
+** What it does: allows the RC4 student to add and delete reminders in a calendar, which will be marked with different colours, depending on whether the specific reminder is due or not due.
+** Justification: This feature improves the product significantly because RC4 students, especially freshmen, will be new to University and College life and by being able to note down tasks and reminders will greatly assist them in organising their day-to-day activities.
+** Highlights: This feature involves creating a new class with new attributes that were not in the original addressbook. Interacting with the CalendarFX API to be able to display the reminders also posed challenges in terms of implementation.
+** Credits: CalendarFX API, Natty API
+
+* *Minor enhancement*: Added additional functionality to the find command, which allows RC4 students to find their contacts by tags.
+
+* *Code contributed*: [https://github.com/CS2103JAN2018-T09-B2/main/blob/master/collated/functional/fuadsahmawi.md[Functional code]] [https://github.com/CS2103JAN2018-T09-B2/main/blob/master/collated/test/fuadsahmawi.md[Test code]]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.5rc` (1 release) on GitHub
+** Enhancements to existing features:
+*** Updated the GUI to include a Calendar Panel (Calendar FX API) (Pull requests https://github.com[#33], https://github.com[#34])
+*** Added command aliases for commands that were originally in addressbook
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+** Community:
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+** Tools:
+*** Integrated a third party library and API (CalendarFX) to the project
+
+_{you can add/remove categories in the list above}_
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=reminder]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=reminder]
