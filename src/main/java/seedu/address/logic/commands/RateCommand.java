@@ -15,9 +15,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
-
+//@@author zuweitrack
 /**
- * Groups existing person(s) into a CCA in the address book.
+ * Rates existing person(s) in the address book.
  */
 public class RateCommand extends UndoableCommand {
 
@@ -30,9 +30,9 @@ public class RateCommand extends UndoableCommand {
             + "by the index number used in the latest listing.\n"
             + "Existing level of friendship will be overwritten by the input values.\n"
             + "Parameters: INDEX(s) (must be a positive integer) "
-            + "[" + PREFIX_LEVEL_OF_FRIENDSHIP + "CCA]...\n"
+            + "[" + PREFIX_LEVEL_OF_FRIENDSHIP + "LEVELOFFRIENDSHIP]...\n"
             + "Example: " + COMMAND_WORD + " 1 3 "
-            + PREFIX_LEVEL_OF_FRIENDSHIP + "*/5 ";
+            + PREFIX_LEVEL_OF_FRIENDSHIP + "5 ";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Rated successfully";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
