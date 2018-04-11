@@ -37,7 +37,7 @@ public class TypicalReminders {
             .withDateTime("2017-03-10 09:30")
             .withEndDateTime("2017-03-10 10:30")
             .withReminderText("ff").build();
-    
+
     private TypicalReminders() {} // prevents instantiation
 
     /**

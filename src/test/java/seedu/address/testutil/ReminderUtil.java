@@ -12,7 +12,7 @@ import seedu.address.model.reminder.Reminder;
  * A utility class for Reminder.
  */
 public class ReminderUtil {
-    
+
     /**
      * Returns an addreminder command string for adding the {@code reminder}.
      */
