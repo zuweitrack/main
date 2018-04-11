@@ -4,9 +4,11 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.goal.Goal;
+import seedu.address.model.goal.exceptions.CompleteGoalException;
 import seedu.address.model.goal.exceptions.DuplicateGoalException;
 import seedu.address.model.goal.exceptions.EmptyGoalListException;
 import seedu.address.model.goal.exceptions.GoalNotFoundException;
+import seedu.address.model.goal.exceptions.OngoingGoalException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;

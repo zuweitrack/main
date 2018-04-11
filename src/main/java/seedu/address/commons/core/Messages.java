@@ -14,5 +14,7 @@ public class Messages {
             + "their Resident Assistant(s) (RA) listed!";
     public static final String MESSAGE_INVALID_SORT_COMMAND_USAGE = "Sort command cannot be done on an empty "
             + "goal list!";
+    public static final String MESSAGE_GOAL_ONGOING_ERROR = "Goal is already ongoing.";
+    public static final String MESSAGE_GOAL_COMPLETED_ERROR = "Goal is already completed.";
 
 }
