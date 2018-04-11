@@ -1,0 +1,74 @@
+= Deborah Low - Project Portfolio
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+:collatedDir: ../../collated
+
+== Project: CollegeZone
+CollegeZone is a desktop address book application used by NUS RC4 students. +
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 20 kLoC.
+
+*Code contributed*: +
+link:{collatedDir}/main/deborahlow97.md[Functional code] +
+link:{collatedDir}/test/deborahlow97.md[Test code] +
+
+== Summary of contributions
+
+=== Major enhancement: added Add, Edit and Delete goal command
+** What it does: Allows user to add, edit and delete goals into CollegeZone. It includes tracking of when the goals started, ended, it's importance level to user and it's completion status.
+** External behavior:
+
+include::../UserGuide.adoc[tag=goalfeatures]
+
+** Justification: This feature improves the product significantly because RC4 students will have goals that they want to accomplish in life, especially for new RC4 students, they enter NUS with many goals they want to achieve. Having this feature allows them to record down the goals and track the status of it.
+
+=== Major enhancement: added Complete and RevertComplete goal command
+** What it does: Allows user to update the completion status of the existing goals they have in CollegeZone.
+** External behavior:
+
+include::../UserGuide.adoc[tag=goalcompletion]
+
+** Justification: This feature improves the product significantly because RC4 students will have be able to indicate completion status of goals that they have.
+
+=== Major enhancement: added Sort goal command
+** What it does: Allows user to sort the goals that they have based on the field they want it sorted in.
+
+=== Minor enhancement: added a theme command that allows the user to change the theme colour of CollegeZone.
+** Justification: This feature allows RC4 students to switch to a different theme colour of their liking.
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.3` - `v1.4.1` (3 releases) on GitHub
+** Enhancements to existing features:
+*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
+*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2103JAN2018-T09-B2/main/pull/198/files
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2103JAN2018-W14-B3/main/issues/102, https://github.com/CS2103JAN2018-W14-B3/main/issues/99, https://github.com/CS2103JAN2018-W14-B3/main/issues/103)
+** Tools:
+*** Integrated a third party library (Natty) to the project (https://github.com/CS2103JAN2018-T09-B2/main/issues/64)
+
+_{you can add/remove categories in the list above}_
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=undoredo]
+
+include::../DeveloperGuide.adoc[tag=dataencryption]
+
+
+== PROJECT: PowerPointLabs
+
+---
+
+_{Optionally, you may include other projects in your portfolio.}_

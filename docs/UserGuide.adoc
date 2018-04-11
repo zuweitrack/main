@@ -337,6 +337,7 @@ Examples:
 
 === Goal features
 
+//tag::goalfeatures[]
 ==== Adding a goal: `+goal OR +g OR addgoal` [Since v1.3]
 Adds a goal to CollegeZone and is reflected in the Goals Page. +
 
@@ -423,7 +424,9 @@ Deletes the 4th goal in CollegeZone's goal page. +
 > deletegoal 1
 ```
 Deletes the 1st goal in CollegeZone's goal page.
+// end::goalfeatures[]
 
+//tag::goalcompletion[]
 ==== Completing a goal: `!goal OR !g OR completegoal` [Since v1.4]
 Once you've completed a goal, indicate completion of an existing goal in CollegeZone using the `!goal`, `!g` or `completegoal` command. +
 
@@ -457,7 +460,9 @@ Indicates completion of the 4th goal in CollegeZone's goal page.
 > completegoal 1
 ```
 Indicates completion of the 1st goal in CollegeZone's goal page.
+// end::goalcompletion[]
 
+// tag::sortgoal[]
 ==== Sorting goals: `sortgoal OR sgoal` [Since v1.5]
 
 It is a hassle to locate the goals you're interested in if you have too many goals in CollegeZone. Try sorting the goals that you have using the `sortgoal` or `sgoal` command. +
@@ -488,9 +493,10 @@ Sorts the goal list based on start date time in ascending order.
 > sgoal f/completion o/descending
 ```
 Sorts the goal list based on completion in descending order.
-
+// end::goalcompletion[]
 
 === Interesting features
+// tag::theme[]
 ==== Changing CollegeZone theme : `theme OR th` [Since v1.5]
 CollegeZone's default theme colour is not the only theme colour we have to offer! Try changing CollegeZone's theme colour using the `theme` or `th` command.  +
 
@@ -517,6 +523,7 @@ Changes the theme colour to light theme.
 ```
 Changes the theme colour to dark theme.
 
+// tag::theme[]
 
 ==== Listing entered commands : `history`
 
