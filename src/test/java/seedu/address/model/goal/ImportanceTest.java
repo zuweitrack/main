@@ -10,6 +10,28 @@ import seedu.address.testutil.Assert;
 //@@author deborahlow97
 public class ImportanceTest {
 
+    private final Importance importanceObjectOne = new Importance("10");
+    private final Importance importanceObjectTwo = new Importance("1");
+    private final Importance importanceObjectThree = new Importance("10");
+
+
+    @Test
+    public void importanceCompareTo_testEquals_success() {
+        int result = importanceObjectOne.compareTo(importanceObjectThree);
+        assertTrue(result == 0);
+    }
+
+    @Test
+    public void importanceCompareTo_testGreaterThan_success() {
+        int result = importanceObjectOne.compareTo(importanceObjectTwo);
+        assertTrue(result == 1);
+    }
+
+    @Test
+    public void importanceCompareTo_testLessThan_success() {
+        int result = importanceObjectTwo.compareTo(importanceObjectThree);
+        assertTrue(result == -1);
+    }
     @Test
     public void constructor_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> new Importance(null));

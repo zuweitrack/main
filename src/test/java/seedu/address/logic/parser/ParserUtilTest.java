@@ -35,6 +35,8 @@ public class ParserUtilTest {
     private static final String INVALID_UNIT_NUMBER = " ";
     private static final String INVALID_CCA = "!345hockey";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_SORT_GOAL_FIELD = "field";
+    private static final String INVALID_SORT_GOAL_ORDER = "order";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -45,6 +47,8 @@ public class ParserUtilTest {
     private static final String VALID_CCA_2 = "aerobics";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_SORT_GOAL_FIELD = "completion";
+    private static final String VALID_SORT_GOAL_ORDER = "descending";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -137,6 +141,7 @@ public class ParserUtilTest {
         assertEquals(Optional.of(expectedPhone), ParserUtil.parsePhone(Optional.of(phoneWithWhitespace)));
     }
 
+    //@@author deborahlow97
     @Test
     public void parseBirthday_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseBirthday((String) null));
@@ -290,6 +295,72 @@ public class ParserUtilTest {
         assertEquals(expectedCcaSet, actualCcaSet);
     }
 
+    @Test
+    public void parseSortGoalField_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseSortGoalField((String) null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseSortGoalField((Optional<String>) null));
+    }
+
+    @Test
+    public void parseSortGoalField_invalidValue_throwsIllegalValueException() {
+        Assert.assertThrows(IllegalValueException.class, () -> ParserUtil.parseSortGoalField(INVALID_SORT_GOAL_FIELD));
+        Assert.assertThrows(IllegalValueException.class, () -> ParserUtil.parseSortGoalField(Optional
+                .of(INVALID_SORT_GOAL_FIELD)));
+    }
+
+    @Test
+    public void parseSortGoalField_optionalEmpty_returnsOptionalEmpty() throws Exception {
+        assertFalse(ParserUtil.parseSortGoalField(Optional.empty()).isPresent());
+    }
+
+    @Test
+    public void parseSortGoalField_validValueWithoutWhitespace_returnsGoalFieldString() throws Exception {
+        assertEquals(VALID_SORT_GOAL_FIELD, ParserUtil.parseSortGoalField(VALID_SORT_GOAL_FIELD));
+        assertEquals(Optional.of(VALID_SORT_GOAL_FIELD), ParserUtil.parseSortGoalField(Optional
+                .of(VALID_SORT_GOAL_FIELD)));
+    }
+
+    @Test
+    public void parseSortGoalField_validValueWithWhitespace_returnsTrimmedGoalFieldString() throws Exception {
+        String goalFieldWithWhitespace = WHITESPACE + VALID_SORT_GOAL_FIELD + WHITESPACE;
+        assertEquals(VALID_SORT_GOAL_FIELD, ParserUtil.parseSortGoalField(goalFieldWithWhitespace));
+        assertEquals(Optional.of(VALID_SORT_GOAL_FIELD), ParserUtil.parseSortGoalField(Optional
+                .of(goalFieldWithWhitespace)));
+    }
+
+    @Test
+    public void parseSortGoalOrder_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseSortGoalOrder((String) null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseSortGoalOrder((Optional<String>) null));
+    }
+
+    @Test
+    public void parseSortGoalOrder_invalidValue_throwsIllegalValueException() {
+        Assert.assertThrows(IllegalValueException.class, () -> ParserUtil.parseSortGoalOrder(INVALID_SORT_GOAL_ORDER));
+        Assert.assertThrows(IllegalValueException.class, () -> ParserUtil.parseSortGoalOrder(Optional
+                .of(INVALID_SORT_GOAL_ORDER)));
+    }
+
+    @Test
+    public void parseSortGoalOrder_optionalEmpty_returnsOptionalEmpty() throws Exception {
+        assertFalse(ParserUtil.parseSortGoalOrder(Optional.empty()).isPresent());
+    }
+
+    @Test
+    public void parseSortGoalOrder_validValueWithoutWhitespace_returnsGoalOrderString() throws Exception {
+        assertEquals(VALID_SORT_GOAL_ORDER, ParserUtil.parseSortGoalOrder(VALID_SORT_GOAL_ORDER));
+        assertEquals(Optional.of(VALID_SORT_GOAL_ORDER), ParserUtil.parseSortGoalOrder(Optional
+                .of(VALID_SORT_GOAL_ORDER)));
+    }
+
+    @Test
+    public void parseSortGoalOrder_validValueWithWhitespace_returnsTrimmedGoalOrderString() throws Exception {
+        String goalOrderWithWhitespace = WHITESPACE + VALID_SORT_GOAL_ORDER + WHITESPACE;
+        assertEquals(VALID_SORT_GOAL_ORDER, ParserUtil.parseSortGoalOrder(goalOrderWithWhitespace));
+        assertEquals(Optional.of(VALID_SORT_GOAL_ORDER), ParserUtil.parseSortGoalOrder(Optional
+                .of(goalOrderWithWhitespace)));
+    }
+    //@@author
     @Test
     public void parseTag_null_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);

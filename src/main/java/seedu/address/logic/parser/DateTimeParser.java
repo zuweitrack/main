@@ -20,6 +20,7 @@ public class DateTimeParser {
 
     private static boolean isRecurring;
     private static boolean isTimeInferred;
+    private static final int BEGIN_INDEX = 6;
     /**
      * Parses user input String specified{@code args} into LocalDateTime objects
      *
@@ -88,6 +89,14 @@ public class DateTimeParser {
                 .append(":")
                 .append(String.format("%02d", minute));
         return builder.toString();
+    }
+
+    public static LocalDateTime getLocalDateTimeFromProperDateTime(String properDateTimeString) {
+        String trimmedArgs = properDateTimeString.trim();
+        int size = trimmedArgs.length();
+        String stringFormat = properDateTimeString.substring(BEGIN_INDEX, size);
+        stringFormat = stringFormat.replace(", Time: ", "");
+        return nattyDateAndTimeParser(stringFormat).get();
     }
 
     /**

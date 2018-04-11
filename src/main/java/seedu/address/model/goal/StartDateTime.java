@@ -1,6 +1,7 @@
 package seedu.address.model.goal;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.DateTimeParser.getLocalDateTimeFromProperDateTime;
 import static seedu.address.logic.parser.DateTimeParser.properDateTimeFormat;
 
 import java.time.LocalDateTime;
@@ -9,9 +10,11 @@ import java.time.LocalDateTime;
 /**
  * Represents a Goal's start date in the address book.
  */
-public class StartDateTime {
+public class StartDateTime implements Comparable<StartDateTime> {
 
     public final String value;
+    public final LocalDateTime localDateTimeValue;
+
 
     /**
      * Constructs a {@code StartDateTime}.
@@ -20,12 +23,14 @@ public class StartDateTime {
      */
     public StartDateTime(LocalDateTime startDateTime) {
         requireNonNull(startDateTime);
+        this.localDateTimeValue = startDateTime;
         this.value = properDateTimeFormat(startDateTime);
     }
 
     public StartDateTime(String startDateTimeInString) {
         requireNonNull(startDateTimeInString);
         this.value = startDateTimeInString;
+        this.localDateTimeValue = getLocalDateTimeFromProperDateTime(startDateTimeInString);
     }
 
     @Override
@@ -45,4 +50,13 @@ public class StartDateTime {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(StartDateTime startDateTime) {
+        if ((startDateTime.localDateTimeValue).isBefore(this.localDateTimeValue)) {
+            return 1;
+        } else if ((startDateTime.localDateTimeValue).isAfter(this.localDateTimeValue)) {
+            return -1;
+        }
+        return 0;
+    }
 }

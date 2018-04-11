@@ -11,7 +11,7 @@ import seedu.address.commons.events.ui.ThemeSwitchRequestEvent;
  */
 public class ThemeCommand extends Command {
     public static final String COMMAND_WORD = "theme";
-
+    public static final String COMMAND_ALIAS = "th";
     public static final String MESSAGE_SUCCESS = "Theme successfully changed!";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the theme to the theme word entered.\n"
