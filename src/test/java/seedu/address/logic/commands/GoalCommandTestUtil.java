@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GOAL_TEXT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IMPORTANCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_FIELD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
 import static seedu.address.logic.parser.DateTimeParser.getLocalDateTimeFromString;
 
 import java.time.LocalDateTime;
@@ -42,11 +44,20 @@ public class GoalCommandTestUtil {
     public static final boolean VALID_GOAL_COMPLETION_B = false;
     public static final boolean VALID_GOAL_COMPLETION_C = true;
     public static final boolean VALID_GOAL_COMPLETION_D = true;
+    public static final String VALID_GOAL_SORT_FIELD_A = "importance";
+    public static final String VALID_GOAL_SORT_FIELD_B = "startdatetime";
+    public static final String VALID_GOAL_SORT_ORDER_A = "ascending";
+    public static final String VALID_GOAL_SORT_ORDER_B = "descending";
+    public static final String INVALID_GOAL_SORT_ORDER = " " + PREFIX_SORT_ORDER + "increasing";
+    public static final String INVALID_GOAL_SORT_FIELD = " " + PREFIX_SORT_FIELD + "invalid";
     public static final String GOAL_TEXT_DESC_A = " " + PREFIX_GOAL_TEXT + VALID_GOAL_TEXT_A;
     public static final String GOAL_TEXT_DESC_B = " " + PREFIX_GOAL_TEXT + VALID_GOAL_TEXT_B;
     public static final String GOAL_IMPORTANCE_DESC_A = " " + PREFIX_IMPORTANCE + VALID_GOAL_IMPORTANCE_A;
     public static final String GOAL_IMPORTANCE_DESC_B = " " + PREFIX_IMPORTANCE + VALID_GOAL_IMPORTANCE_B;
-
+    public static final String GOAL_SORT_ORDER_DESC_A = " " + PREFIX_SORT_ORDER + VALID_GOAL_SORT_ORDER_A;
+    public static final String GOAL_SORT_ORDER_DESC_B = " " + PREFIX_SORT_ORDER + VALID_GOAL_SORT_ORDER_B;
+    public static final String GOAL_SORT_FIELD_DESC_A = " " + PREFIX_SORT_FIELD + VALID_GOAL_SORT_FIELD_A;
+    public static final String GOAL_SORT_FIELD_DESC_B = " " + PREFIX_SORT_FIELD + VALID_GOAL_SORT_FIELD_B;
     public static final String INVALID_IMPORTANCE_DESC = " " + PREFIX_IMPORTANCE + "-1";
     // negative numbers not allowed in importance
 

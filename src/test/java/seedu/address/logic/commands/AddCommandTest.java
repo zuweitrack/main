@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -23,6 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.goal.Goal;
 import seedu.address.model.goal.exceptions.DuplicateGoalException;
+import seedu.address.model.goal.exceptions.EmptyGoalListException;
 import seedu.address.model.goal.exceptions.GoalNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -125,6 +127,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void sortPersons(Index index) throws IndexOutOfBoundsException {
+            fail("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) throws PersonNotFoundException {
             fail("This method should not be called.");
         }
@@ -177,6 +184,11 @@ public class AddCommandTest {
         @Override
         public void updateGoalWithoutParameters(Goal target, Goal editedGoal)
                 throws GoalNotFoundException {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void sortGoal(String goalField, String goalOrder) throws EmptyGoalListException {
             fail("This method should not be called.");
         }
 

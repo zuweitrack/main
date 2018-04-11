@@ -7,6 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UNUSED;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.testutil.TypicalGoals.GOAL_A;
+import static seedu.address.testutil.TypicalGoals.GOAL_B;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -18,6 +20,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.model.goal.exceptions.EmptyGoalListException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -33,6 +36,16 @@ public class ModelManagerTest {
         ModelManager modelManager = new ModelManager();
         thrown.expect(UnsupportedOperationException.class);
         modelManager.getFilteredPersonList().remove(0);
+    }
+
+    @Test
+    public void getSortedGoalList_modifyGoalList_modelSorted() throws EmptyGoalListException {
+        AddressBook addressBook = new AddressBookBuilder().withGoal(GOAL_A).withGoal(GOAL_B).build();
+        UserPrefs userPrefs = new UserPrefs();
+
+        ModelManager modelManager = new ModelManager(addressBook, userPrefs);
+        modelManager.sortGoal("importance", "ascending");
+        assertEquals(new ModelManager(addressBook, userPrefs), modelManager);
     }
 
     @Test

@@ -11,9 +11,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.goal.Goal;
 import seedu.address.model.goal.UniqueGoalList;
 import seedu.address.model.goal.exceptions.DuplicateGoalException;
+import seedu.address.model.goal.exceptions.EmptyGoalListException;
 import seedu.address.model.goal.exceptions.GoalNotFoundException;
 import seedu.address.model.person.Cca;
 import seedu.address.model.person.Meet;
@@ -70,6 +72,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public void setPersons(List<Person> persons) throws DuplicatePersonException {
         this.persons.setPersons(persons);
+    }
+
+    public void sortPersons(Index index) throws IndexOutOfBoundsException {
+        this.persons.sortPersons(index);
     }
 
     //@@author deborahlow97
@@ -363,6 +369,18 @@ public class AddressBook implements ReadOnlyAddressBook {
         goals.setGoalWithoutParameters(target, editedGoal);
     }
 
+    /**
+     * Sorts goal based on the sort field and sort order input.
+     */
+    public void sortGoal(String sortField, String sortOrder) throws EmptyGoalListException {
+        requireNonNull(sortField);
+        requireNonNull(sortOrder);
+        if (goals.getSize() > 0) {
+            goals.sortGoal(sortField, sortOrder);
+        } else {
+            throw new EmptyGoalListException();
+        }
+    }
     //// reminder-level operations
 
     //@@author fuadsahmawi
