@@ -35,25 +35,29 @@ include::../UserGuide.adoc[tag=goalcompletion]
 === Minor enhancement: added a theme command that allows the user to change the theme colour of CollegeZone.
 ** Justification: This feature allows RC4 students to switch to a different theme colour of their liking.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+=== Minor enhancement: added birthday, level of friendship, unit number and ccas field
+** Justification: The addition of this field provides user with more comprehensive contact details to add into CollegeZone.
+
+=== Proposed enhancements:
+==== Auto-Complete command
+==== Differentiating goals into Main goals and Sub-goals
+
+* *Code contributed*: [https://github.com/CS2103JAN2018-T09-B2/main/blob/master/collated/main/deborahlow97.md[Functional code]] [https://github.com/CS2103JAN2018-T09-B2/main/tree/master/collated/test[Test code]]
 
 * *Other contributions*:
 
 ** Project management:
 *** Managed releases `v1.3` - `v1.4.1` (3 releases) on GitHub
+***
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Updated the GUI color scheme (Pull requests https://github.com/CS2103JAN2018-T09-B2/main/pull/204/files[#204])
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2103JAN2018-T09-B2/main/pull/198/files
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2103JAN2018-W14-B3/main/issues/102, https://github.com/CS2103JAN2018-W14-B3/main/issues/99, https://github.com/CS2103JAN2018-W14-B3/main/issues/103)
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2103JAN2018-W14-B3/main/issues/102[1], https://github.com/CS2103JAN2018-W14-B3/main/issues/99[2], https://github.com/CS2103JAN2018-W14-B3/main/issues/103[3])
 ** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com/CS2103JAN2018-T09-B2/main/issues/64)
-
-_{you can add/remove categories in the list above}_
+*** Integrated a third party library (Natty) to the project (https://github.com/CS2103JAN2018-T09-B2/main/issues/64[#64])
 
 
 == Contributions to the Developer Guide
@@ -62,13 +66,12 @@ _{you can add/remove categories in the list above}_
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=addandedit]
 
-include::../DeveloperGuide.adoc[tag=dataencryption]
+include::../DeveloperGuide.adoc[tag=myGoalsPage]
 
 
 == PROJECT: PowerPointLabs
 
 ---
 
-_{Optionally, you may include other projects in your portfolio.}_

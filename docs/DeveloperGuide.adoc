@@ -508,7 +508,6 @@ After acknowledging it, it is removed from calendar. +
 If it's overdue and not acknowledged, it will turn Grey. +
 
 Bottom Panel: Number of orange reminders +
-//end::addandedit[]
 
 // tag::myGoalsPage[]
 === Goals List [Since v1.4]
