@@ -29,7 +29,7 @@ public class RateCommandParser {
 
         String preamble;
         String[] indexString;
-        List<Index> indexList = new ArrayList();
+        List<Index> indexList = new ArrayList<>();
 
         try {
             preamble = argumentMultimap.getPreamble();

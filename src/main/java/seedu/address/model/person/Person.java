@@ -97,8 +97,7 @@ public class Person {
         System.out.println(date);
         if (timeDiff < 0) {
             return Long.MAX_VALUE;
-        }
-        else {
+        } else {
             System.out.println("current date: " + calendar.getTimeInMillis());
             return timeDiff;
         }
