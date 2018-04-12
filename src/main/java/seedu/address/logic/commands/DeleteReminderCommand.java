@@ -23,7 +23,7 @@ public class DeleteReminderCommand extends UndoableCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the reminder identified by its title & start time in the calendar.\n"
             + "Parameters: REMINDER_TITLE & START_DATETIME\n"
-            + "Example: " + COMMAND_WORD + "text/Eat pills d/tmr 8pm";
+            + "Example: " + COMMAND_WORD + " text/Eat pills d/tmr 8pm";
 
     public static final String MESSAGE_DELETE_REMINDER_SUCCESS = "Deleted Reminder: %1$s";
 
