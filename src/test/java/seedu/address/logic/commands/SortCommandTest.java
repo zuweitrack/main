@@ -4,19 +4,20 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.*;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SORT_BIRTHDAY;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SORT_LEVEL_OF_FRIENDSHIP;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SORT_MEET_DATE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Rule;
 import org.junit.Test;
 
 import org.junit.rules.ExpectedException;
-import seedu.address.commons.core.Messages;
+
 import seedu.address.commons.core.index.Index;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -30,10 +31,11 @@ import seedu.address.model.UserPrefs;
  */
 public class SortCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+
 
     @Test
     public void execute_validIndexUnfilteredList_success() throws Exception {
