@@ -73,6 +73,9 @@ public class CompleteGoalCommand extends UndoableCommand {
         }
 
         goalToUpdate = lastShownList.get(index.getZeroBased());
+        if (goalToUpdate.getCompletion().hasCompleted) {
+            throw new CommandException(Messages.MESSAGE_GOAL_COMPLETED_ERROR);
+        }
         updatedGoal = createUpdatedGoal(goalToUpdate, completeGoalDescriptor);
     }
 

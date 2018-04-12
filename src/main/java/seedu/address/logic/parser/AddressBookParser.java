@@ -25,11 +25,16 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MeetCommand;
 import seedu.address.logic.commands.RateCommand;
+import seedu.address.logic.commands.OngoingGoalCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SeekRaCommand;
 import seedu.address.logic.commands.SelectCommand;
+
+import seedu.address.logic.commands.SortCommand;
+
 import seedu.address.logic.commands.SortGoalCommand;
 import seedu.address.logic.commands.ThemeCommand;
+
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -169,6 +174,11 @@ public class AddressBookParser {
         case CompleteGoalCommand.COMMAND_ALIAS_2:
             return new CompleteGoalCommandParser().parse(arguments);
 
+        case OngoingGoalCommand.COMMAND_WORD:
+        case OngoingGoalCommand.COMMAND_ALIAS_1:
+        case OngoingGoalCommand.COMMAND_ALIAS_2:
+            return new OngoingGoalCommandParser().parse(arguments);
+
         case AddReminderCommand.COMMAND_WORD:
         case AddReminderCommand.COMMAND_ALIAS:
         case AddReminderCommand.COMMAND_ALIAS_2:
@@ -178,6 +188,10 @@ public class AddressBookParser {
         case DeleteReminderCommand.COMMAND_ALIAS:
         case DeleteReminderCommand.COMMAND_ALIAS_2:
             return new DeleteReminderCommandParser().parse(arguments);
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
+
 
         case ThemeCommand.COMMAND_WORD:
         case ThemeCommand.COMMAND_ALIAS:

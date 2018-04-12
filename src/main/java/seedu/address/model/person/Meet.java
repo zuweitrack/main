@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 
-//@@author A0158738X
+//@@author sham-sheer
 /**
  * Represents a Person's date of meeting in the address book.
  * Guarantees: immutable; is always valid

@@ -21,9 +21,9 @@ public class DeleteReminderCommand extends UndoableCommand {
     public static final String COMMAND_ALIAS_2 = "deletereminder";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the reminder identified by its title in the calendar.\n"
-            + "Parameters: REMINDER_TITLE\n"
-            + "Example: " + COMMAND_WORD + " Eat pills";
+            + ": Deletes the reminder identified by its title & start time in the calendar.\n"
+            + "Parameters: REMINDER_TITLE & START_DATETIME\n"
+            + "Example: " + COMMAND_WORD + "text/Eat pills d/tmr 8pm";
 
     public static final String MESSAGE_DELETE_REMINDER_SUCCESS = "Deleted Reminder: %1$s";
 
@@ -65,7 +65,7 @@ public class DeleteReminderCommand extends UndoableCommand {
             }
         } else {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_GOAL_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_REMINDER_TEXT_DATE);
             }
 
             reminderToDelete = lastShownList.get(targetIndex.getZeroBased());

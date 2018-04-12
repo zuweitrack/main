@@ -32,9 +32,6 @@ public class CompleteGoalDescriptorBuilder {
         descriptor = new CompleteGoalDescriptor();
         descriptor.setCompletion(new Completion(true));
         descriptor.setEndDateTime(new EndDateTime(properDateTimeFormat(LocalDateTime.now())));
-        //TODO
-        //descriptor.setCompletion(goal.getCompletion());
-        //descriptor.setEndDateTime(goal.getEndDateTime());
     }
 
     /**
