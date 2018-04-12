@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="goalCardPane" fx:id="goalCardPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="goalCardPane" fx:id="goalCardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="200" prefWidth="200" />
@@ -30,7 +30,8 @@
         </Label>
         <Label fx:id="goalText" styleClass="cell_big_label" text="\$first" wrapText="true" />
       </HBox>
-         <FlowPane fx:id="importance" prefHeight="0.0" prefWidth="180.0" />
+      <Label text=" " />
+      <FlowPane fx:id="importance" prefHeight="0.0" prefWidth="180.0" />
       <Label fx:id="startDateTime" styleClass="cell_small_label" text="\$startDateTime" wrapText="true" />
       <Label fx:id="endDateTime" styleClass="cell_small_label" text="\$endDateTime" wrapText="true" />
       <Label text=" " />
