@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -125,6 +126,17 @@ public class AddCommandTest {
             return null;
         }
 
+        //@@author sham-sheer
+        @Override
+        public void sortPersons(Index index) throws IndexOutOfBoundsException {
+            fail("This method should not be called.");
+        }
+
+        public void deleteMeetDate(Person person) throws PersonNotFoundException {
+            fail("This method should not be called.");
+        }
+
+        //@@author
         @Override
         public void deletePerson(Person target) throws PersonNotFoundException {
             fail("This method should not be called.");
@@ -208,9 +220,6 @@ public class AddCommandTest {
             fail("This method should not be called.");
         }
 
-        public void deleteMeetDate(Person person) throws PersonNotFoundException {
-            fail("This method should not be called.");
-        }
     }
 
     /**

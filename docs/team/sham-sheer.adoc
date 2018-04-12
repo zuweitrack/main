@@ -1,0 +1,63 @@
+= Shamsheer Ahamed - Project Portfolio
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: CollegeZone
+
+---
+
+== Overview
+
+CollegeZone is a desktop application for NUS Residential College 4 (RC4) students. It has a Graphical User Interface (GUI) but most of the user interactions happen using a Command Line Interface (CLI). This application is catered for an RC4 resident to manage their contacts with other RC4 residents and to manage their tasks, just like a digital organiser.
+== Summary of contributions
+
+* *Major enhancement*: added meet command
+** What it does: allows the RC4 student to set up a meeting with other RC4 Students in the Contacts.
+** Justification: This feature was primarily added to provide a platform for RC4 students to be more social and make it easy for them to keep track of their meeting appointments.
+** Highlights: This feature involves creating a new class with new attributes that were not in the original addressbook. Interacting with the CalendarFX API to be able to display the reminders also posed challenges in terms of implementation.
+** Credits: CalendarFX API
+
+* *Minor enhancement*: added a sort command that sorts RC4 students based on their Birthday, Meet up dates and Level of Friendship attributes.
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.5rc` (1 release) on GitHub
+** Enhancements to existing features:
+**
+**
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
+** Tools:
+**
+
+_{you can add/remove categories in the list above}_
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+
+
+== PROJECT: NUSMeets
+
+---
+
+

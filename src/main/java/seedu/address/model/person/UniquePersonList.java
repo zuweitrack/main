@@ -3,11 +3,13 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -18,7 +20,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  * Supports a minimal set of list operations.
  *
  * @see Person#equals(Object)
- * @see CollectionUtil#elementsAreUnique(Collection)
+ * @see CollectionUtil #elementsAreUnique(Collection)
  */
 public class UniquePersonList implements Iterable<Person> {
 
@@ -81,6 +83,7 @@ public class UniquePersonList implements Iterable<Person> {
         return personFoundAndDeleted;
     }
 
+
     public void setPersons(UniquePersonList replacement) {
         this.internalList.setAll(replacement.internalList);
     }
@@ -94,6 +97,34 @@ public class UniquePersonList implements Iterable<Person> {
         setPersons(replacement);
     }
 
+    //@@author sham-sheer
+    /**
+     * Sorts the person list from the start.
+     *
+     * @throws PersonNotFoundException if no such person could be found in the list.
+     */
+    public void sortPersons(Index index) throws IndexOutOfBoundsException {
+        requireNonNull(index);
+        if (index.getOneBased() > 3) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (index.getOneBased() == 1) {
+            Comparator<Person> comparator = Comparator.comparingInt(Person::getLevelOfFriendshipInt);
+            FXCollections.sort(internalList, comparator);
+            FXCollections.reverse(internalList);
+        }
+        if (index.getOneBased() == 2) {
+            Comparator<Person> comparator = Comparator.comparingLong(Person::getMeetDateInt);
+            FXCollections.sort(internalList, comparator);
+        }
+        if (index.getOneBased() == 3) {
+            Comparator<Person> comparator = Comparator.comparingLong(Person::getBirthdayInt);
+            FXCollections.sort(internalList, comparator);
+            FXCollections.reverse(internalList);
+        }
+
+    }
+    //@@author
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
