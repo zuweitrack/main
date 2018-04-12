@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Gaegu);
+@import url(https://fonts.googleapis.com/css?family=Lato:Light);
 
 .error {
     -fx-text-fill: #d06651 !important; /* The error class should always override the default text-fill style */
