@@ -76,7 +76,7 @@ public class CalendarPanel extends UiPart<Region> {
         setDateAndTime();
         CalendarSource myCalendarSource = new CalendarSource("Reminders and Meetups");
         Calendar calendarRDue = new Calendar("Reminders Already Due");
-        Calendar calendarRNotDue = new Calendar("Reminder Not Due");
+        Calendar calendarRNotDue = new Calendar("Reminders Not Due");
         Calendar calendarM = new Calendar("Meetups");
         calendarRDue.setStyle(Calendar.Style.getStyle(4));
         calendarRDue.setLookAheadDuration(Duration.ofDays(365));
@@ -97,7 +97,7 @@ public class CalendarPanel extends UiPart<Region> {
                 calendarRDue.addEntry(new Entry(reminder.getReminderText().toString(), new Interval(ldtstart, ldtend)));
             }
         }
-        //@@author A0158738X
+        //@@author sham-sheer
         for (Person person : personList) {
             String meetDate = person.getMeetDate().toString();
             if (!meetDate.isEmpty()) {

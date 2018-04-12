@@ -2,7 +2,9 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.GregorianCalendar;
 import java.util.Objects;
 import java.util.Set;
 
@@ -79,7 +81,52 @@ public class Person {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags.toSet());
     }
+    /**
+     * Seperate methods for sorting
+     */
+    public int getLevelOfFriendshipInt() {
+        return Integer.parseInt(levelOfFriendship.value);
+    }
 
+    //@@author sham-sheer
+    public long getMeetDateInt() {
+        Calendar calendar = Calendar.getInstance();
+        long date = converDateToSeconds(meetDate.toString());
+        long currentDate = calendar.getTimeInMillis();
+        long timeDiff = date - currentDate;
+        System.out.println(date);
+        if (timeDiff < 0) {
+            return Long.MAX_VALUE;
+        }
+        else {
+            System.out.println("current date: " + calendar.getTimeInMillis());
+            return timeDiff;
+        }
+
+    }
+    public long getBirthdayInt() {
+        return converDateToSeconds(birthday.toString());
+    }
+    /**
+     * Converts  date to seconds
+     */
+    public long converDateToSeconds(String date) {
+        if (meetDate.value == "") {
+            return 0;
+        }
+        int day = Integer.parseInt(date.toString().substring(0,
+                2));
+        int month = Integer.parseInt(date.toString().substring(3,
+                5));
+        int year = Integer.parseInt(date.toString().substring(6,
+                10));
+        Calendar calendar = new GregorianCalendar();
+        calendar.set(year, month - 1, day);
+        long seconds = calendar.getTimeInMillis();
+        return seconds;
+    }
+
+    //@@author
     @Override
     public boolean equals(Object other) {
         if (other == this) {
