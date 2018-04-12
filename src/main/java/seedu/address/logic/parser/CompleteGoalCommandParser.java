@@ -20,6 +20,8 @@ import seedu.address.model.goal.EndDateTime;
  */
 public class CompleteGoalCommandParser implements Parser<CompleteGoalCommand> {
 
+    public static final boolean COMPLETED_BOOLEAN_VALUE = true;
+
     /**
      * Parses the given {@code String} of arguments in the context of the CompleteGoalCommand
      * and returns an CompleteGoalCommand object for execution.
@@ -38,7 +40,7 @@ public class CompleteGoalCommandParser implements Parser<CompleteGoalCommand> {
         CompleteGoalDescriptor completeGoalDescriptor = new CompleteGoalDescriptor();
 
         Optional<String> empty = Optional.empty();
-        Completion completion = new Completion(true);
+        Completion completion = new Completion(COMPLETED_BOOLEAN_VALUE);
         EndDateTime endDateTime = new EndDateTime(properDateTimeFormat(LocalDateTime.now()));
         completeGoalDescriptor.setCompletion(completion);
         completeGoalDescriptor.setEndDateTime(endDateTime);
