@@ -503,6 +503,7 @@ Reminder commands are undoable and redoable for the benefit users to redo and un
 3. the end date and time
 
 The reminders will be stored in an ArrayList of all the reminder objects. Each reminder will have specific positive integer index number. +
+
 A reminder will be *blue* until it is due. +
 A reminder will turn and remain *red* if it's due. +
 Users can delete reminders on the Calendar if its already due or when they accidentally made a mistake  +

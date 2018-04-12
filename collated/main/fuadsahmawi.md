@@ -12,14 +12,16 @@ public class AddReminderCommand extends UndoableCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a reminder to Calendar. "
             + "Parameters: "
             + PREFIX_REMINDER_TEXT + "TEXT "
-            + PREFIX_DATE + "START_DATETIME"
-            + PREFIX_END_DATE + "END_DATETIME"
+            + PREFIX_DATE + "START_DATETIME "
+            + PREFIX_END_DATE + "END_DATETIME "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_REMINDER_TEXT + " do homework "
             + PREFIX_DATE + " tonight 8pm "
             + PREFIX_END_DATE + " tonight 10pm";
 
-    public static final String MESSAGE_SUCCESS = "New reminder added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New reminder added: %1$s "
+            + "Disclaimer: If date & time parsed wrongly, delete reminder and refer to User Guide for correct format"
+            + " of date and time";
     public static final String MESSAGE_DUPLICATE_REMINDER = "This reminder already exists in the Calendar";
 
     private final Reminder toAdd;
@@ -62,20 +64,23 @@ public class DeleteReminderCommand extends UndoableCommand {
     public static final String COMMAND_ALIAS_2 = "deletereminder";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the reminder identified by its title in the calendar.\n"
-            + "Parameters: REMINDER_TITLE\n"
-            + "Example: " + COMMAND_WORD + " Eat pills";
+            + ": Deletes the reminder identified by its title & start time in the calendar.\n"
+            + "Parameters: REMINDER_TITLE & START_DATETIME\n"
+            + "Example: " + COMMAND_WORD + "text/Eat pills d/tmr 8pm";
 
     public static final String MESSAGE_DELETE_REMINDER_SUCCESS = "Deleted Reminder: %1$s";
 
     private Index targetIndex;
 
+    private String dateTime;
+
     private ReminderTextPredicate predicate;
 
     private Reminder reminderToDelete;
 
-    public DeleteReminderCommand(ReminderTextPredicate predicate) {
+    public DeleteReminderCommand(ReminderTextPredicate predicate, String dateTime) {
         this.predicate = predicate;
+        this.dateTime = dateTime;
     }
 
     @Override
@@ -95,11 +100,19 @@ public class DeleteReminderCommand extends UndoableCommand {
         model.updateFilteredReminderList(predicate);
         List<Reminder> lastShownList = model.getFilteredReminderList();
         targetIndex = Index.fromOneBased(1);
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_GOAL_DISPLAYED_INDEX);
-        }
+        if (lastShownList.size() > 1) {
+            for (Reminder reminder : lastShownList) {
+                if (reminder.getDateTime().toString().equals(dateTime)) {
+                    reminderToDelete = reminder;
+                }
+            }
+        } else {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_REMINDER_TEXT_DATE);
+            }
 
-        reminderToDelete = lastShownList.get(targetIndex.getZeroBased());
+            reminderToDelete = lastShownList.get(targetIndex.getZeroBased());
+        }
     }
 }
 ```
@@ -214,6 +227,15 @@ public class AddReminderCommandParser implements Parser<AddReminderCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddReminderCommand.MESSAGE_USAGE));
         }
 
+        if (nattyDateAndTimeParser(argMultimap.getValue(PREFIX_DATE).get()).get().compareTo(
+                nattyDateAndTimeParser(argMultimap.getValue(PREFIX_END_DATE).get()).get()) > 0
+                || nattyDateAndTimeParser(argMultimap.getValue(PREFIX_END_DATE).get()).get().compareTo(
+                        LocalDateTime.now()) < 0
+                || nattyDateAndTimeParser(argMultimap.getValue(PREFIX_DATE).get()).get().compareTo(
+                        LocalDateTime.now()) < 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_DATE_FORMAT, AddReminderCommand.MESSAGE_USAGE));
+        }
+
         try {
             ReminderText reminderText = ParserUtil.parseReminderText(argMultimap.getValue(PREFIX_REMINDER_TEXT)).get();
             DateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATE)).get();
@@ -248,7 +270,21 @@ public class DeleteReminderCommandParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteReminderCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_REMINDER_TEXT, PREFIX_DATE);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_REMINDER_TEXT, PREFIX_DATE)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteReminderCommand.MESSAGE_USAGE));
+        }
+
+        String reminderText = argMultimap.getValue(PREFIX_REMINDER_TEXT).get();
+        String dateTime = argMultimap.getValue(PREFIX_DATE).get();
+        LocalDateTime localDateTime = nattyDateAndTimeParser(dateTime).get();
+        dateTime = properReminderDateTimeFormat(localDateTime);
+        String trimmedArgs = reminderText.trim();
+
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteReminderCommand.MESSAGE_USAGE));
@@ -256,7 +292,15 @@ public class DeleteReminderCommandParser {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        return new DeleteReminderCommand(new ReminderTextPredicate(Arrays.asList(nameKeywords)));
+        return new DeleteReminderCommand(new ReminderTextPredicate(Arrays.asList(nameKeywords)), dateTime);
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
 ```
@@ -374,7 +418,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         requireNonNull(endDateTime);
         return endDateTime.isPresent() ? Optional.of(parseEndDateTime(endDateTime.get())) : Optional.empty();
     }
-}
+
 ```
 ###### /java/seedu/address/model/AddressBook.java
 ``` java
@@ -946,13 +990,13 @@ public class CalendarPanel extends UiPart<Region> {
 
     private ObservableList<Reminder> reminderList;
 
-    private ObservableList<Person> personObservableList;
+    private ObservableList<Person> personList;
 
-    public CalendarPanel(ObservableList<Reminder> reminderList, ObservableList<Person> personObservableList) {
+    public CalendarPanel(ObservableList<Reminder> reminderList, ObservableList<Person> personList) {
         super(FXML);
 
         this.reminderList = reminderList;
-        this.personObservableList = personObservableList;
+        this.personList = personList;
 
         calendarView = new CalendarView();
         calendarView.setRequestedTime(LocalTime.now());
@@ -964,23 +1008,19 @@ public class CalendarPanel extends UiPart<Region> {
         calendarView.setShowPrintButton(false);
         calendarView.showMonthPage();
         updateCalendar();
-        updateMeetCalendar();
         registerAsAnEventHandler(this);
 
 
     }
 
     @Subscribe
-    private void handleNewReminderEvent(AddressBookChangedEvent event) {
+    private void handleNewCalendarEvent(AddressBookChangedEvent event) {
         reminderList = event.data.getReminderList();
+        personList = event.data.getPersonList();
         Platform.runLater(this::updateCalendar);
     }
 
-    @Subscribe
-    private void handleNewMeetEvent(AddressBookChangedEvent event) {
-        personObservableList = event.data.getPersonList();
-        Platform.runLater(this::updateMeetCalendar);
-    }
+
 
 
     /**
@@ -988,20 +1028,41 @@ public class CalendarPanel extends UiPart<Region> {
      */
     private void updateCalendar() {
         setDateAndTime();
-        CalendarSource myCalendarSource = new CalendarSource("Reminders");
-        Calendar calendar = new Calendar("Reminders");
-        calendar.setStyle(Calendar.Style.getStyle(1));
-        calendar.setLookAheadDuration(Duration.ofDays(365));
-        myCalendarSource.getCalendars().add(calendar);
+        CalendarSource myCalendarSource = new CalendarSource("Reminders and Meetups");
+        Calendar calendarRDue = new Calendar("Reminders Already Due");
+        Calendar calendarRNotDue = new Calendar("Reminders Not Due");
+        Calendar calendarM = new Calendar("Meetups");
+        calendarRDue.setStyle(Calendar.Style.getStyle(4));
+        calendarRDue.setLookAheadDuration(Duration.ofDays(365));
+        calendarRNotDue.setStyle(Calendar.Style.getStyle(1));
+        calendarRNotDue.setLookAheadDuration(Duration.ofDays(365));
+        calendarM.setStyle(Calendar.Style.getStyle(3));
+        myCalendarSource.getCalendars().add(calendarRDue);
+        myCalendarSource.getCalendars().add(calendarRNotDue);
+        myCalendarSource.getCalendars().add(calendarM);
         for (Reminder reminder : reminderList) {
             LocalDateTime ldtstart = nattyDateAndTimeParser(reminder.getDateTime().toString()).get();
             LocalDateTime ldtend = nattyDateAndTimeParser(reminder.getEndDateTime().toString()).get();
-            calendar.addEntry(new Entry(reminder.getReminderText().toString(), new Interval(ldtstart, ldtend)));
+            LocalDateTime now = LocalDateTime.now();
+            if (now.isBefore(ldtend)) {
+                calendarRNotDue.addEntry(new Entry(
+                        reminder.getReminderText().toString(), new Interval(ldtstart, ldtend)));
+            } else {
+                calendarRDue.addEntry(new Entry(reminder.getReminderText().toString(), new Interval(ldtstart, ldtend)));
+            }
         }
-        calendarView.getCalendarSources().add(myCalendarSource);
+```
+###### /java/seedu/address/ui/CalendarPanel.java
+``` java
+    private void setDateAndTime() {
+        calendarView.setToday(LocalDate.now());
+        calendarView.setTime(LocalTime.now());
+        calendarView.getCalendarSources().clear();
     }
 
-    /**
-     * Updates the Calendar with Meet ups that are already added
-     */
+    public CalendarView getRoot() {
+        return this.calendarView;
+    }
+
+}
 ```
