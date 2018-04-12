@@ -6,7 +6,11 @@ import static org.junit.Assert.fail;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.testutil.TypicalIndexes.*;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GOAL;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SORT_BIRTHDAY;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SORT_LEVEL_OF_FRIENDSHIP;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SORT_MEET_DATE;
 
 import java.util.Arrays;
 
@@ -17,10 +21,31 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddGoalCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CompleteGoalCommand;
 import seedu.address.logic.commands.CompleteGoalCommand.CompleteGoalDescriptor;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteGoalCommand;
+import seedu.address.logic.commands.DeleteMeetCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditGoalCommand;
 import seedu.address.logic.commands.EditGoalCommand.EditGoalDescriptor;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HistoryCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MeetCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.SortGoalCommand;
+import seedu.address.logic.commands.ThemeCommand;
+import seedu.address.logic.commands.UndoCommand;
+
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.goal.Goal;
 import seedu.address.model.person.Meet;
@@ -374,6 +399,4 @@ public class AddressBookParserTest {
         );
         assertEquals(new DeleteMeetCommand(INDEX_FIRST_PERSON), command);
     }
-
-
 }
