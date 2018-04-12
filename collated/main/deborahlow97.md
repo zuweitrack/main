@@ -1,9 +1,5 @@
 # deborahlow97
-<<<<<<< HEAD:collated/functional/deborahlow97.md
 ###### /java/seedu/address/commons/events/ui/ThemeSwitchRequestEvent.java
-=======
-###### \java\seedu\address\commons\events\ui\ThemeSwitchRequestEvent.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc:collated/main/deborahlow97.md
 ``` java
 /**
  * Indicates that a theme switch is requested.
@@ -21,11 +17,7 @@ public class ThemeSwitchRequestEvent extends BaseEvent {
     }
 }
 ```
-<<<<<<< HEAD:collated/functional/deborahlow97.md
 ###### /java/seedu/address/logic/commands/AddGoalCommand.java
-=======
-###### \java\seedu\address\logic\commands\AddGoalCommand.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc:collated/main/deborahlow97.md
 ``` java
 /**
  * Adds a goal to the Goals Page.
@@ -75,7 +67,7 @@ public class AddGoalCommand extends UndoableCommand {
     }
 }
 ```
-###### \java\seedu\address\logic\commands\CompleteGoalCommand.java
+###### /java/seedu/address/logic/commands/CompleteGoalCommand.java
 ``` java
 /**
  * Edits the details of an existing goal in the address book.
@@ -240,7 +232,7 @@ public class CompleteGoalCommand extends UndoableCommand {
     }
 }
 ```
-###### \java\seedu\address\logic\commands\DeleteGoalCommand.java
+###### /java/seedu/address/logic/commands/DeleteGoalCommand.java
 ``` java
 /**
  * Deletes a goal identified using it's last displayed index from the address book.
@@ -300,7 +292,7 @@ public class DeleteGoalCommand extends UndoableCommand {
     }
 }
 ```
-###### \java\seedu\address\logic\commands\EditGoalCommand.java
+###### /java/seedu/address/logic/commands/EditGoalCommand.java
 ``` java
 /**
  * Edits the details of an existing goal in the address book.
@@ -465,11 +457,7 @@ public class EditGoalCommand extends UndoableCommand {
 }
 
 ```
-<<<<<<< HEAD:collated/functional/deborahlow97.md
 ###### /java/seedu/address/logic/commands/SortGoalCommand.java
-=======
-###### \java\seedu\address\logic\commands\SortGoalCommand.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc:collated/main/deborahlow97.md
 ``` java
 /**
  * Sorts goal list based on sort field entered by user.
@@ -513,11 +501,7 @@ public class SortGoalCommand extends Command {
     }
 }
 ```
-<<<<<<< HEAD:collated/functional/deborahlow97.md
 ###### /java/seedu/address/logic/commands/ThemeCommand.java
-=======
-###### \java\seedu\address\logic\commands\ThemeCommand.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc:collated/main/deborahlow97.md
 ``` java
 /**
  * Changes the CollegeZone colour theme to either dark or light.
@@ -560,11 +544,7 @@ public class ThemeCommand extends Command {
     }
 }
 ```
-<<<<<<< HEAD:collated/functional/deborahlow97.md
 ###### /java/seedu/address/logic/parser/AddGoalCommandParser.java
-=======
-###### \java\seedu\address\logic\parser\AddGoalCommandParser.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc:collated/main/deborahlow97.md
 ``` java
 /**
  * Parses input arguments and creates a new AddGoalCommand object
@@ -610,7 +590,7 @@ public class AddGoalCommandParser implements Parser<AddGoalCommand> {
 
 }
 ```
-###### \java\seedu\address\logic\parser\CompleteGoalCommandParser.java
+###### /java/seedu/address/logic/parser/CompleteGoalCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new CompleteGoalCommand object
@@ -645,7 +625,7 @@ public class CompleteGoalCommandParser implements Parser<CompleteGoalCommand> {
     }
 }
 ```
-###### \java\seedu\address\logic\parser\DateTimeParser.java
+###### /java/seedu/address/logic/parser/DateTimeParser.java
 ``` java
 /**
  * Contains utility methods used for parsing DateTime in the various *Parser classes.
@@ -776,7 +756,7 @@ public class DateTimeParser {
     }
 }
 ```
-###### \java\seedu\address\logic\parser\DeleteGoalCommandParser.java
+###### /java/seedu/address/logic/parser/DeleteGoalCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new DeleteGoalCommand object
@@ -800,7 +780,7 @@ public class DeleteGoalCommandParser implements Parser<DeleteGoalCommand> {
 
 }
 ```
-###### \java\seedu\address\logic\parser\EditCommandParser.java
+###### /java/seedu/address/logic/parser/EditCommandParser.java
 ``` java
     /**
      * Parses {@code Collection<String> ccas} into a {@code Set<Cca>} if {@code ccas} is non-empty.
@@ -818,7 +798,7 @@ public class DeleteGoalCommandParser implements Parser<DeleteGoalCommand> {
     }
 
 ```
-###### \java\seedu\address\logic\parser\EditGoalCommandParser.java
+###### /java/seedu/address/logic/parser/EditGoalCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new EditGoalCommand object
@@ -860,7 +840,7 @@ public class EditGoalCommandParser implements Parser<EditGoalCommand> {
     }
 }
 ```
-###### \java\seedu\address\logic\parser\ParserUtil.java
+###### /java/seedu/address/logic/parser/ParserUtil.java
 ``` java
     /**
      * Parses a {@code String birthday} into an {@code birthday}.
@@ -937,37 +917,7 @@ public class EditGoalCommandParser implements Parser<EditGoalCommand> {
         return unitNumber.isPresent() ? Optional.of(parseUnitNumber(unitNumber.get())) : Optional.empty();
     }
 ```
-###### \java\seedu\address\logic\parser\ParserUtil.java
-``` java
-    /**
-     * Parses a {@code String cca} into a {@code Cca}
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws IllegalValueException if the given {@code cca} is invalid.
-     */
-    public static Cca parseCca(String cca) throws IllegalValueException {
-        requireNonNull(cca);
-        String trimmedCca = cca.trim();
-        if (!Cca.isValidCcaName(trimmedCca)) {
-            throw new IllegalValueException(Cca.MESSAGE_CCA_CONSTRAINTS);
-        }
-        return new Cca(trimmedCca);
-    }
-
-    /**
-     * Parses {@code Collection<String> ccas} into a {@code Set<Cca>}.
-     */
-    public static Set<Cca> parseCcas(Collection<String> ccas) throws IllegalValueException {
-        requireNonNull(ccas);
-        final Set<Cca> ccaSet = new HashSet<>();
-        for (String ccaName : ccas) {
-            ccaSet.add(parseCca(ccaName));
-        }
-        return ccaSet;
-    }
-
-```
-###### \java\seedu\address\logic\parser\ParserUtil.java
+###### /java/seedu/address/logic/parser/ParserUtil.java
 ``` java
     /**
      * Parses a {@code String cca} into a {@code Cca}
@@ -1050,11 +1000,7 @@ public class EditGoalCommandParser implements Parser<EditGoalCommand> {
     }
 
 ```
-<<<<<<< HEAD:collated/functional/deborahlow97.md
 ###### /java/seedu/address/logic/parser/ParserUtil.java
-=======
-###### \java\seedu\address\logic\parser\ParserUtil.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc:collated/main/deborahlow97.md
 ``` java
     /**
      * Parses a {@code String sortField} and checks if it is a valid sortField parameter.
@@ -1112,11 +1058,7 @@ public class EditGoalCommandParser implements Parser<EditGoalCommand> {
     }
 }
 ```
-<<<<<<< HEAD:collated/functional/deborahlow97.md
 ###### /java/seedu/address/logic/parser/SortGoalCommandParser.java
-=======
-###### \java\seedu\address\logic\parser\SortGoalCommandParser.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc:collated/main/deborahlow97.md
 ``` java
 /**
  * Parses input arguments and creates a new SortGoalCommand object
@@ -1149,11 +1091,7 @@ public class SortGoalCommandParser implements Parser<SortGoalCommand> {
     }
 }
 ```
-<<<<<<< HEAD:collated/functional/deborahlow97.md
 ###### /java/seedu/address/logic/parser/ThemeCommandParser.java
-=======
-###### \java\seedu\address\logic\parser\ThemeCommandParser.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc:collated/main/deborahlow97.md
 ``` java
 /**
  * Parses input arguments and creates a new ThemeCommand object
@@ -1196,17 +1134,13 @@ public class ThemeCommandParser implements Parser<ThemeCommand> {
 }
 
 ```
-<<<<<<< HEAD:collated/functional/deborahlow97.md
 ###### /java/seedu/address/model/AddressBook.java
-=======
-###### \java\seedu\address\model\AddressBook.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc:collated/main/deborahlow97.md
 ``` java
     public void setCcas(Set<Cca> ccas) {
         this.ccas.setCcas(ccas); }
 
 ```
-###### \java\seedu\address\model\AddressBook.java
+###### /java/seedu/address/model/AddressBook.java
 ``` java
     public void setGoals(List<Goal> goals) throws DuplicateGoalException {
         this.goals.setGoals(goals);
@@ -1218,7 +1152,7 @@ public class ThemeCommandParser implements Parser<ThemeCommand> {
     }
 
 ```
-###### \java\seedu\address\model\AddressBook.java
+###### /java/seedu/address/model/AddressBook.java
 ``` java
     /**
      * Removes all {@code Ccas}s that are not used by any {@code Person} in this {@code AddressBook}.
@@ -1232,7 +1166,7 @@ public class ThemeCommandParser implements Parser<ThemeCommand> {
     }
 
 ```
-###### \java\seedu\address\model\AddressBook.java
+###### /java/seedu/address/model/AddressBook.java
 ``` java
     /**
      *  Updates the master cca list to include ccas in {@code person} that are not in the list.
@@ -1258,7 +1192,7 @@ public class ThemeCommandParser implements Parser<ThemeCommand> {
     }
 
 ```
-###### \java\seedu\address\model\AddressBook.java
+###### /java/seedu/address/model/AddressBook.java
 ``` java
     public void addCca(Cca cca) throws UniqueCcaList.DuplicateCcaException {
         ccas.add(cca);
@@ -1267,7 +1201,7 @@ public class ThemeCommandParser implements Parser<ThemeCommand> {
     //// tag-level operations
 
 ```
-###### \java\seedu\address\model\AddressBook.java
+###### /java/seedu/address/model/AddressBook.java
 ``` java
     /**
      * Adds a goal to CollegeZone.
@@ -1326,7 +1260,7 @@ public class ThemeCommandParser implements Parser<ThemeCommand> {
     //// reminder-level operations
 
 ```
-###### \java\seedu\address\model\goal\Completion.java
+###### /java/seedu/address/model/goal/Completion.java
 ``` java
 /**
  * Represents a Goal's completion status in the Goals Page.
@@ -1369,7 +1303,7 @@ public class Completion {
     }
 }
 ```
-###### \java\seedu\address\model\goal\EndDateTime.java
+###### /java/seedu/address/model/goal/EndDateTime.java
 ``` java
 /**
  * Represents a Goal's end date and time in the Goals Page.
@@ -1414,7 +1348,7 @@ public class EndDateTime {
 
 }
 ```
-###### \java\seedu\address\model\goal\exceptions\DuplicateGoalException.java
+###### /java/seedu/address/model/goal/exceptions/DuplicateGoalException.java
 ``` java
 /**
  * Signals that the operation will result in duplicate Goal objects.
@@ -1425,11 +1359,7 @@ public class DuplicateGoalException extends DuplicateDataException {
     }
 }
 ```
-<<<<<<< HEAD:collated/functional/deborahlow97.md
 ###### /java/seedu/address/model/goal/exceptions/EmptyGoalListException.java
-=======
-###### \java\seedu\address\model\goal\exceptions\EmptyGoalListException.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc:collated/main/deborahlow97.md
 ``` java
 /**
  * Signals that the current goal list is empty.
@@ -1437,18 +1367,14 @@ public class DuplicateGoalException extends DuplicateDataException {
 public class EmptyGoalListException extends Exception {
 }
 ```
-<<<<<<< HEAD:collated/functional/deborahlow97.md
 ###### /java/seedu/address/model/goal/exceptions/GoalNotFoundException.java
-=======
-###### \java\seedu\address\model\goal\exceptions\GoalNotFoundException.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc:collated/main/deborahlow97.md
 ``` java
 /**
  * Signals that the operation is unable to find the specified goal.
  */
 public class GoalNotFoundException extends Exception {}
 ```
-###### \java\seedu\address\model\goal\Goal.java
+###### /java/seedu/address/model/goal/Goal.java
 ``` java
 /**
  * Represents a Goal in the Goals Page.
@@ -1532,7 +1458,7 @@ public class Goal {
 
 }
 ```
-###### \java\seedu\address\model\goal\GoalText.java
+###### /java/seedu/address/model/goal/GoalText.java
 ``` java
 /**
  * Represents a Goal's text in the Goals Page.
@@ -1583,7 +1509,7 @@ public class GoalText {
 
 }
 ```
-###### \java\seedu\address\model\goal\Importance.java
+###### /java/seedu/address/model/goal/Importance.java
 ``` java
 /**
  * Represents a Goal's importance in CollegeZone.
@@ -1660,7 +1586,7 @@ public class Importance implements Comparable<Importance> {
     }
 }
 ```
-###### \java\seedu\address\model\goal\StartDateTime.java
+###### /java/seedu/address/model/goal/StartDateTime.java
 ``` java
 /**
  * Represents a Goal's start date in the address book.
@@ -1716,7 +1642,7 @@ public class StartDateTime implements Comparable<StartDateTime> {
     }
 }
 ```
-###### \java\seedu\address\model\goal\UniqueGoalList.java
+###### /java/seedu/address/model/goal/UniqueGoalList.java
 ``` java
 /**
  * A list of goals that enforces uniqueness between its elements and does not allow nulls.
@@ -1885,7 +1811,7 @@ public class UniqueGoalList implements Iterable<Goal> {
     }
 }
 ```
-###### \java\seedu\address\model\Model.java
+###### /java/seedu/address/model/Model.java
 ``` java
     /** Adds the given goal */
     void addGoal(Goal goal) throws DuplicateGoalException;
@@ -1925,7 +1851,7 @@ public class UniqueGoalList implements Iterable<Goal> {
     void sortGoal(String sortType, String sortOrder) throws EmptyGoalListException;
 
 ```
-###### \java\seedu\address\model\ModelManager.java
+###### /java/seedu/address/model/ModelManager.java
 ``` java
     @Override
     public void addGoal(Goal goal) throws DuplicateGoalException {
@@ -1977,7 +1903,7 @@ public class UniqueGoalList implements Iterable<Goal> {
     }
 
 ```
-###### \java\seedu\address\model\person\Birthday.java
+###### /java/seedu/address/model/person/Birthday.java
 ``` java
 /**
  * Represents a Person's birthday in CollegeZone.
@@ -2032,7 +1958,7 @@ public class Birthday {
 
 }
 ```
-###### \java\seedu\address\model\person\Cca.java
+###### /java/seedu/address/model/person/Cca.java
 ``` java
 /**
  * Represents a Person's CCAs in CollegeZone.
@@ -2083,7 +2009,7 @@ public class Cca {
 
 }
 ```
-###### \java\seedu\address\model\person\LevelOfFriendship.java
+###### /java/seedu/address/model/person/LevelOfFriendship.java
 ``` java
 /**
  * Represents a Person's Level of Friendship in the address book.
@@ -2150,7 +2076,7 @@ public class LevelOfFriendship {
     }
 }
 ```
-###### \java\seedu\address\model\person\UniqueCcaList.java
+###### /java/seedu/address/model/person/UniqueCcaList.java
 ``` java
 /**
  * A list of ccas that enforces no nulls and uniqueness between its elements.
@@ -2281,7 +2207,7 @@ public class UniqueCcaList implements Iterable<Cca> {
 
 }
 ```
-###### \java\seedu\address\model\person\UnitNumber.java
+###### /java/seedu/address/model/person/UnitNumber.java
 ``` java
     /**
      * * Constructs an {@code UnitNumber}.
@@ -2308,7 +2234,7 @@ public class UniqueCcaList implements Iterable<Cca> {
     }
 
 ```
-###### \java\seedu\address\model\person\UnitNumber.java
+###### /java/seedu/address/model/person/UnitNumber.java
 ``` java
     @Override
     public boolean equals(Object other) {
@@ -2323,7 +2249,7 @@ public class UniqueCcaList implements Iterable<Cca> {
     }
 }
 ```
-###### \java\seedu\address\model\ReadOnlyAddressBook.java
+###### /java/seedu/address/model/ReadOnlyAddressBook.java
 ``` java
     /**
      * Returns an unmodifiable view of the ccas list.
@@ -2332,7 +2258,7 @@ public class UniqueCcaList implements Iterable<Cca> {
     ObservableList<Cca> getCcaList();
 
 ```
-###### \java\seedu\address\model\ReadOnlyAddressBook.java
+###### /java/seedu/address/model/ReadOnlyAddressBook.java
 ``` java
     /**
      * Returns an unmodifiable view of the goals list.
@@ -2340,11 +2266,7 @@ public class UniqueCcaList implements Iterable<Cca> {
      */
     ObservableList<Goal> getGoalList();
 ```
-<<<<<<< HEAD:collated/functional/deborahlow97.md
 ###### /java/seedu/address/model/ThemeColourUtil.java
-=======
-###### \java\seedu\address\model\ThemeColourUtil.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc:collated/main/deborahlow97.md
 ``` java
 /**
  * Contains utility methods for ThemeColour.
@@ -2364,11 +2286,7 @@ public class ThemeColourUtil {
     }
 }
 ```
-<<<<<<< HEAD:collated/functional/deborahlow97.md
 ###### /java/seedu/address/model/util/SampleCollegeZone.java
-=======
-###### \java\seedu\address\model\util\SampleCollegeZone.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc:collated/main/deborahlow97.md
 ``` java
 /**
  * Contains method to get a sample CollegeZone data
@@ -2395,11 +2313,7 @@ public class SampleCollegeZone {
     }
 }
 ```
-<<<<<<< HEAD:collated/functional/deborahlow97.md
 ###### /java/seedu/address/model/util/SampleGoalDataUtil.java
-=======
-###### \java\seedu\address\model\util\SampleGoalDataUtil.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc:collated/main/deborahlow97.md
 ``` java
 /**
  * Contains utility methods for populating {@code CollegeZone} with sample data.
@@ -2487,7 +2401,7 @@ public class SampleGoalDataUtil {
     }
 }
 ```
-###### \java\seedu\address\storage\XmlAdaptedCca.java
+###### /java/seedu/address/storage/XmlAdaptedCca.java
 ``` java
 /**
  * JAXB-friendly adapted version of the Cca.
@@ -2545,7 +2459,7 @@ public class XmlAdaptedCca {
     }
 }
 ```
-###### \java\seedu\address\storage\XmlAdaptedGoal.java
+###### /java/seedu/address/storage/XmlAdaptedGoal.java
 ``` java
 /**
  * JAXB-friendly version of the Goal.
@@ -2664,7 +2578,7 @@ public class XmlAdaptedGoal {
 }
 
 ```
-###### \java\seedu\address\ui\GoalCard.java
+###### /java/seedu/address/ui/GoalCard.java
 ``` java
 /**
  * An UI component that displays information of a {@code Goal}.
@@ -2767,11 +2681,7 @@ public class GoalCard extends UiPart<Region> {
     }
 }
 ```
-<<<<<<< HEAD:collated/functional/deborahlow97.md
 ###### /java/seedu/address/ui/MainWindow.java
-=======
-###### \java\seedu\address\ui\MainWindow.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc:collated/main/deborahlow97.md
 ``` java
     /**
      * Calculation of percentage of goal completed
@@ -2827,11 +2737,7 @@ public class GoalCard extends UiPart<Region> {
     }
 }
 ```
-<<<<<<< HEAD:collated/functional/deborahlow97.md
 ###### /java/seedu/address/ui/PersonCard.java
-=======
-###### \java\seedu\address\ui\PersonCard.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc:collated/main/deborahlow97.md
 ``` java
     /**
      * Returns the color style for {@code tagName}'s label.
@@ -2876,7 +2782,7 @@ public class GoalCard extends UiPart<Region> {
     }
 
 ```
-###### \java\seedu\address\ui\PersonListPanel.java
+###### /java/seedu/address/ui/PersonListPanel.java
 ``` java
     @Subscribe
     private void handleJumpToGoalListRequestEvent(JumpToListRequestEvent event) {
@@ -2913,7 +2819,7 @@ public class GoalCard extends UiPart<Region> {
     }
 }
 ```
-###### \java\seedu\address\ui\StatusBarFooter.java
+###### /java/seedu/address/ui/StatusBarFooter.java
 ``` java
     private void setGoalCompletion(int goalCompletion) {
         //        Platform.runLater(() -> this.goalCompletionStatus.setText(String.format(PERCENTAGE_GOAL_COMPLETED,
@@ -2948,7 +2854,7 @@ public class GoalCard extends UiPart<Region> {
         return valueToAdd;
     }
 ```
-###### \resources\view\GoalListCard.fxml
+###### /resources/view/GoalListCard.fxml
 ``` fxml
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -2989,7 +2895,7 @@ public class GoalCard extends UiPart<Region> {
   </GridPane>
 </HBox>
 ```
-###### \resources\view\LightTheme.css
+###### /resources/view/LightTheme.css
 ``` css
 .background {
     -fx-background-color: derive(#ffffff, 20%);
