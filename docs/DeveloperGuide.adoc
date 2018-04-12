@@ -474,14 +474,14 @@ This is done by removing unwanted attributes of a person and adding new attribut
 image::RCPersonClass.JPG[width="450"]
     Figure 3.8.1: Person Class diagram with added attributes
 
-===== Aspect: Nature of new Attributes
+==== Aspect: Nature of new Attributes
 * Birthday: Must be a valid date.
 * Level Of Friendship: Level of friendship is an integer from 1 to 10. The level is indicated by the number of hearts via the UI.
 * Unit Number: Must be a valid unit number in RC4.
 * Meet Date: Must be a valid date.
 * A RC4 resident is able to have multiple CCAs.
 
-===== Aspect: displaying Level Of Friendship
+==== Aspect: displaying Level Of Friendship
 * Level of Friendship is displayed as a string of heart symbols. It is represented this way as it more intuitive for users to understand what the symbols mean.
 // end::addandedit[]
 
