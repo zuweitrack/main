@@ -124,10 +124,16 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
+<p>Words in <kbd>()</kbd> (round brackets) indicates the <strong>Command keyword</strong> to use  e.g. in <code>(add)</code>, <code>add</code> is the command key word to use.</p>
+</li>
+<li>
+<p><strong>Command keywords</strong> separated by <kbd>|</kbd> executes the same command e.g. in <code>(add | a)</code>, <code>add</code> or <code>a</code> are equivalent command key words to use.</p>
+</li>
+<li>
 <p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>add n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>add n/John Doe</code>.</p>
 </li>
 <li>
-<p>Items in square brackets are optional e.g <code>n/NAME [t/TAG]</code> can be used as <code>n/John Doe t/friend</code> or as <code>n/John Doe</code>.</p>
+<p>Items in square brackets are optional e.g. <code>n/NAME [t/TAG]</code> can be used as <code>n/John Doe t/friend</code> or as <code>n/John Doe</code>.</p>
 </li>
 <li>
 <p>Items with <code>…</code>​ after them can be used multiple times including zero times e.g. <code>[t/TAG]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>t/friend</code>, <code>t/friend t/family</code> etc.</p>
@@ -136,11 +142,31 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p>Parameters can be in any order e.g. if the command specifies <code>n/NAME p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER n/NAME</code> is also acceptable.</p>
 </li>
 <li>
-<p>There are no limit to the number of tags or ccas a person can have.</p>
-</li>
-<li>
-<p>[TIP]
-Sentences displayed in this manner indicates a TIP for you</p>
+<p>There are no limit to the number of tags or ccas a student can have.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Sentences displayed in this manner indicates a TIP for you
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Sentences displayed in this manner indicates a NOTE to look out for
+</td>
+</tr>
+</table>
+</div>
 </li>
 </ul>
 </div>
@@ -158,12 +184,12 @@ Sentences displayed in this manner indicates a TIP for you</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">help</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">(help)</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="strong-adding-a-person-code-add-or-a-code-strong"><a class="link" href="#strong-adding-a-person-code-add-or-a-code-strong">3.1.2. <strong>Adding a person: <code>add OR a</code></strong></a></h4>
+<h4 id="strong-adding-a-student-code-add-code-or-code-a-code-strong"><a class="link" href="#strong-adding-a-student-code-add-code-or-code-a-code-strong">3.1.2. <strong>Adding a student: <code>add</code> or <code>a</code></strong></a></h4>
 <div class="paragraph">
 <p>Currently, CollegeZone is empty. Try to add a fellow RC4 friend into CollegeZone using the <code>add</code> or <code>a</code> command.</p>
 </div>
@@ -172,12 +198,7 @@ Sentences displayed in this manner indicates a TIP for you</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">add n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">a n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">(add | a) n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -215,8 +236,8 @@ Sentences displayed in this manner indicates a TIP for you</p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-A person can have any number of tags (including 0)<br>
-A person can have any number of CCAs (including 0)
+A student can have any number of tags (including 0)<br>
+A student can have any number of CCAs (including 0)
 </td>
 </tr>
 </table>
@@ -231,45 +252,35 @@ A person can have any number of CCAs (including 0)
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">&gt; a n/Betsy Crowe t/friend b/<span class="integer">21</span>/<span class="integer">12</span>/<span class="integer">1994</span> u/<span class="octal">01</span>-<span class="integer">10</span> p/<span class="integer">1234567</span> */<span class="integer">1</span> t/OwesMoney</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">&gt; a n/Betsy Crowe t/friend b/<span class="integer">21</span>/<span class="integer">12</span>/<span class="integer">1994</span> u/<span class="error">#</span><span class="octal">01</span>-<span class="integer">10</span> p/<span class="integer">1234567</span> */<span class="integer">1</span> t/OwesMoney</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="listing-all-persons-code-list-or-l-code"><a class="link" href="#listing-all-persons-code-list-or-l-code">3.1.3. Listing all persons : <code>list OR l</code></a></h4>
+<h4 id="listing-all-students-code-list-code-or-code-l-code"><a class="link" href="#listing-all-students-code-list-code-or-code-l-code">3.1.3. Listing all students : <code>list</code> or <code>l</code></a></h4>
 <div class="paragraph">
-<p>Shows a list of all persons in CollegeZone.<br></p>
+<p>Shows a list of all students in CollegeZone.<br></p>
 </div>
 <div class="paragraph">
 <p><strong><em>Formats:</em></strong></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">list</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">l</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">(list | l)</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="editing-a-person-code-edit-or-e-code-since-v1-2"><a class="link" href="#editing-a-person-code-edit-or-e-code-since-v1-2">3.1.4. Editing a person : <code>edit OR e</code> [Since v1.2]</a></h4>
+<h4 id="editing-a-student-code-edit-code-or-code-e-code-since-v1-2"><a class="link" href="#editing-a-student-code-edit-code-or-code-e-code-since-v1-2">3.1.4. Editing a student : <code>edit</code> or <code>e</code> [Since v1.2]</a></h4>
 <div class="paragraph">
-<p>Edits an existing person in CollegeZone.<br></p>
+<p>Edits an existing student in CollegeZone.<br></p>
 </div>
 <div class="paragraph">
 <p><strong><em>Formats:</em></strong></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">edit INDEX [n/NAME] [p/PHONE] [u/UNIT_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [cca/CCA]... [t/TAG]...</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">e INDEX [n/NAME] [p/PHONE] [u/UNIT_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [cca/CCA]... [t/TAG]...</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">(edit | e) INDEX [n/NAME] [p/PHONE] [u/UNIT_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [cca/CCA]... [t/TAG]...</code></pre>
 </div>
 </div>
 <div class="sidebarblock">
@@ -277,7 +288,7 @@ A person can have any number of CCAs (including 0)
 <div class="ulist">
 <ul>
 <li>
-<p>Edits the person at the specified <code>INDEX</code>. The index refers to the index number shown in the last person listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p>Edits the student at the specified <code>INDEX</code>. The index refers to the index number shown in the last student listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
 <p>At least one of the optional fields must be provided.</p>
@@ -286,10 +297,10 @@ A person can have any number of CCAs (including 0)
 <p>Existing values will be updated to the input values.</p>
 </li>
 <li>
-<p>When editing tags or CCAs, the existing tags or CCAs of the person will be removed i.e adding of tags or CCAs is not cumulative.</p>
+<p>When editing tags or CCAs, the existing tags or CCAs of the student will be removed i.e adding of tags or CCAs is not cumulative.</p>
 </li>
 <li>
-<p>You can remove all the person&#8217;s tags by typing <code>t/</code> without specifying any tags after it.</p>
+<p>You can remove all the student&#8217;s tags by typing <code>t/</code> without specifying any tags after it.</p>
 </li>
 </ul>
 </div>
@@ -304,7 +315,7 @@ A person can have any number of CCAs (including 0)
 </div>
 </div>
 <div class="paragraph">
-<p>Edits the phone number and level of friendship of the 1st person to be <code>91234567</code> and <code>10</code> respectively.</p>
+<p>Edits the phone number and level of friendship of the 1st student to be <code>91234567</code> and <code>10</code> respectively.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -312,20 +323,25 @@ A person can have any number of CCAs (including 0)
 </div>
 </div>
 <div class="paragraph">
-<p>Edits the name of the 2nd person to be <code>Betsy Crower</code> and clears all existing tags.</p>
+<p>Edits the name of the 2nd student to be <code>Betsy Crower</code> and clears all existing tags.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="locating-persons-by-name-or-tag-code-find-or-f-code-since-v1-1"><a class="link" href="#locating-persons-by-name-or-tag-code-find-or-f-code-since-v1-1">3.1.5. Locating persons by name or tag: <code>find OR f</code> [Since v1.1]</a></h4>
+<h4 id="locating-students-by-name-or-tag-code-find-code-or-code-f-code-since-v1-1"><a class="link" href="#locating-students-by-name-or-tag-code-find-code-or-code-f-code-since-v1-1">3.1.5. Locating students by name or tag: <code>find</code> or <code>f</code> [Since v1.1]</a></h4>
 <div class="paragraph">
-<p>Finds persons whose names contain any of the given keywords.<br></p>
+<p>Finds students whose names contain any of the given keywords.<br></p>
 </div>
 <div class="paragraph">
 <p><strong><em>Formats:</em></strong></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"> find [n/KEYWORDS] or find [t/KEYWORDS]</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java"> (find | f) [n/KEYWORDS]</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"> (find | f) [t/KEYWORDS]</code></pre>
 </div>
 </div>
 <div class="sidebarblock">
@@ -371,7 +387,7 @@ A person can have any number of CCAs (including 0)
 </div>
 </div>
 <div class="paragraph">
-<p>Returns any person having names <code>Betsy</code>, <code>Tim</code>, or <code>John</code></p>
+<p>Returns any student having names <code>Betsy</code>, <code>Tim</code>, or <code>John</code></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -379,14 +395,19 @@ A person can have any number of CCAs (including 0)
 </div>
 </div>
 <div class="paragraph">
-<p>Returns any person having tags <code>friends</code></p>
+<p>Returns any student having tags <code>friends</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="seeking-the-resident-assistant-of-a-person-code-seek-code-since-v1-3"><a class="link" href="#seeking-the-resident-assistant-of-a-person-code-seek-code-since-v1-3">3.1.6. Seeking the Resident Assistant of a person : <code>seek</code> [Since v1.3]</a></h4>
+<h4 id="seeking-the-resident-assistant-of-a-student-code-seek-code-since-v1-3"><a class="link" href="#seeking-the-resident-assistant-of-a-student-code-seek-code-since-v1-3">3.1.6. Seeking the Resident Assistant of a student : <code>seek</code> [Since v1.3]</a></h4>
 <div class="paragraph">
-<p>Seek the Resident Assistant (RA) of the person whose name contains any of the given keywords.<br>
-Format: <code>seek NAME</code></p>
+<p>Seek the Resident Assistant (RA) of the student whose name contains any of the given keywords.<br>
+<strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">seek NAME<span class="error">`</span></code></pre>
+</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -405,39 +426,43 @@ Format: <code>seek NAME</code></p>
 <p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
 </li>
 <li>
-<p>Resident Assistant (RA) of the person&#8217;s name matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber&#8217;s RA</code>, <code>Bo Yang&#8217;s RA</code></p>
+<p>Resident Assistant (RA) of the student&#8217;s name matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber&#8217;s RA</code>, <code>Bo Yang&#8217;s RA</code></p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong><em>Examples</em>:</strong></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>find John</code><br>
-Returns <code>John&#8217;s RA</code></p>
-</li>
-<li>
-<p><code>find Betsy</code><br>
-Returns <code>Betsy&#8217;s RA</code></p>
-</li>
-</ul>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; find John</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Returns <code>John&#8217;s RA</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; find Betsy</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Returns <code>Betsy&#8217;s RA</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="deleting-a-person-code-delete-or-d-code"><a class="link" href="#deleting-a-person-code-delete-or-d-code">3.1.7. Deleting a person : <code>delete OR d</code></a></h4>
+<h4 id="deleting-a-student-code-delete-code-or-code-d-code"><a class="link" href="#deleting-a-student-code-delete-code-or-code-d-code">3.1.7. Deleting a student : <code>delete</code> or <code>d</code></a></h4>
 <div class="paragraph">
-<p>Deletes the specified person from CollegeZone.<br></p>
+<p>Deletes the specified student from CollegeZone.<br></p>
 </div>
 <div class="paragraph">
 <p><strong><em>Formats:</em></strong></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">delete INDEX</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">(delete | d) INDEX</code></pre>
 </div>
 </div>
 <div class="sidebarblock">
@@ -445,7 +470,7 @@ Returns <code>Betsy&#8217;s RA</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Deletes the person at the specified <code>INDEX</code>.</p>
+<p>Deletes the student at the specified <code>INDEX</code>.</p>
 </li>
 <li>
 <p>The index refers to the index number shown in the most recent listing.</p>
@@ -467,7 +492,7 @@ Returns <code>Betsy&#8217;s RA</code></p>
 </div>
 </div>
 <div class="paragraph">
-<p>Deletes the 2nd person in CollegeZone.</p>
+<p>Deletes the 2nd student in CollegeZone.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -476,21 +501,28 @@ Returns <code>Betsy&#8217;s RA</code></p>
 </div>
 </div>
 <div class="paragraph">
-<p>Deletes the 1st person in the results of the <code>find</code> command.</p>
+<p>Deletes the 1st student in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="selecting-a-person-code-select-or-s-code"><a class="link" href="#selecting-a-person-code-select-or-s-code">3.1.8. Selecting a person : <code>select OR s</code></a></h4>
+<h4 id="selecting-a-student-and-goal-code-select-code-or-code-s-code"><a class="link" href="#selecting-a-student-and-goal-code-select-code-or-code-s-code">3.1.8. Selecting a student and goal: <code>select</code> or <code>s</code></a></h4>
 <div class="paragraph">
-<p>Selects the person identified by the index number used in the last person listing.<br>
-Format: <code>select INDEX</code></p>
+<p>Selects the student and/or goal identified by the index number used in the last student/goal listing.<br></p>
+</div>
+<div class="paragraph">
+<p><strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">(select | s) INDEX</code></pre>
+</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Selects the person and loads the Google search page the person at the specified <code>INDEX</code>.</p>
+<p>Selects the student or goal at the specified <code>INDEX</code>.</p>
 </li>
 <li>
 <p>The index refers to the index number shown in the most recent listing.</p>
@@ -503,35 +535,44 @@ Format: <code>select INDEX</code></p>
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong><em>Examples</em>:</strong></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>list</code><br>
-<code>select 2</code><br>
-Selects the 2nd person in CollegeZone.</p>
-</li>
-<li>
-<p><code>find Betsy</code><br>
-<code>s 1</code><br>
-Selects the 1st person in the results of the <code>find</code> command.</p>
-</li>
-</ul>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; list
+&gt; select <span class="integer">2</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Selects the 2nd student and 2nd goal in CollegeZone.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; find Betsy
+&gt; s <span class="integer">1</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Selects the 1st student in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="meeting-a-person-code-meet-or-m-code-since-v1-3"><a class="link" href="#meeting-a-person-code-meet-or-m-code-since-v1-3">3.1.9. Meeting a person : <code>meet OR m</code> [Since v1.3]</a></h4>
+<h4 id="meeting-a-student-code-meet-code-or-code-m-code-since-v1-3"><a class="link" href="#meeting-a-student-code-meet-code-or-code-m-code-since-v1-3">3.1.9. Meeting a student : <code>meet</code> or <code>m</code> [Since v1.3]</a></h4>
 <div class="paragraph">
-<p>Selects the person identified by the index number used in the last person listing.<br>
-Format: <code>meet INDEX d/MEETDATE</code></p>
+<p>Selects the student identified by the index number used in the last student listing.<br>
+<strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">(meet| m) INDEX d/MEETDATE</code></pre>
+</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Sets up a meeting with the person at the specified <code>INDEX</code> on the specified meet date.</p>
+<p>Sets up a meeting with the student at the specified <code>INDEX</code> on the specified meet date.</p>
 </li>
 <li>
 <p>The index refers to the index number shown in the most recent listing.</p>
@@ -547,22 +588,22 @@ Format: <code>meet INDEX d/MEETDATE</code></p>
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong><em>Examples</em>:</strong></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>meet 1 d/14/03/2018</code><br>
-Sets up a meeting with the 1st person on the 14th of March, 2018 in your Calendar.</p>
-</li>
-</ul>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; meet <span class="integer">1</span> d/<span class="integer">14</span>/<span class="octal">03</span>/<span class="integer">2018</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sets up a meeting with the 1st student on the 14th of March, 2018 in your Calendar.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="reminder-features"><a class="link" href="#reminder-features">3.2. Reminder features</a></h3>
 <div class="sect3">
-<h4 id="adding-a-reminder-code-reminder-or-r-or-addreminder-code-since-v1-4"><a class="link" href="#adding-a-reminder-code-reminder-or-r-or-addreminder-code-since-v1-4">3.2.1. Adding a reminder: <code>+reminder OR +r OR addreminder</code> [Since v1.4]</a></h4>
+<h4 id="adding-a-reminder-code-reminder-code-or-code-r-code-or-code-addreminder-code-since-v1-4"><a class="link" href="#adding-a-reminder-code-reminder-code-or-code-r-code-or-code-addreminder-code-since-v1-4">3.2.1. Adding a reminder: <code>+reminder</code> or <code>+r</code> or <code>addreminder</code> [Since v1.4]</a></h4>
 <div class="paragraph">
 <p>You can set a reminder into the calendar in CollegeZone<br>
 Format: <code>+r text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME</code></p>
@@ -629,17 +670,17 @@ use this date format for the START_DATETIME or END_DATETIME
 </table>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong><em>Examples</em>:</strong></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>+r text/Eat vitamins d/tmr 8am e/tmr 8.10am</code></p>
-</li>
-<li>
-<p><code>+reminder text/Dental appointment d/next thurs 3pm e/next thurs 4pm</code></p>
-</li>
-</ul>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">+r text/Eat vitamins d/tmr <span class="integer">8</span>am e/tmr <span class="float">8.10</span>am</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">+reminder text/Dental appointment d/next thurs <span class="integer">3</span>pm e/next thurs <span class="integer">4</span>pm</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -676,13 +717,13 @@ Edits the reminder text of the 4th reminder to be <code>CS2103 exam coming in 1 
 </li>
 <li>
 <p><code>~r 2 text/water plants d/tmr 7am</code><br>
-Edits the reminder text and datetime of the 2nd person to be <code>water plants</code> and <code>tmr 7am</code> respectively.</p>
+Edits the reminder text and datetime of the 2nd student to be <code>water plants</code> and <code>tmr 7am</code> respectively.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect3">
-<h4 id="deleting-a-reminder-code-reminder-or-r-or-deletereminder-code-since-v1-4"><a class="link" href="#deleting-a-reminder-code-reminder-or-r-or-deletereminder-code-since-v1-4">3.2.3. Deleting a reminder: <code>-reminder OR -r OR deletereminder</code> [Since v1.4]</a></h4>
+<h4 id="deleting-a-reminder-code-reminder-code-or-code-r-code-or-code-deletereminder-code-since-v1-4"><a class="link" href="#deleting-a-reminder-code-reminder-code-or-code-r-code-or-code-deletereminder-code-since-v1-4">3.2.3. Deleting a reminder: <code>-reminder</code> or <code>-r</code> or <code>deletereminder</code> [Since v1.4]</a></h4>
 <div class="paragraph">
 <p>You can delete a reminder that you have set into the calendar in CollegeZone<br>
 Format: <code>-r text/REMINDER_TEXT d/START_DATETIME</code></p>
@@ -769,16 +810,17 @@ use this date format for START_DATETIME
 <div class="sect2">
 <h3 id="goal-features"><a class="link" href="#goal-features">3.3. Goal features</a></h3>
 <div class="sect3">
-<h4 id="adding-a-goal-code-goal-or-g-or-addgoal-code-since-v1-3"><a class="link" href="#adding-a-goal-code-goal-or-g-or-addgoal-code-since-v1-3">3.3.1. Adding a goal: <code>+goal OR +g OR addgoal</code> [Since v1.3]</a></h4>
+<h4 id="adding-a-goal-code-goal-code-or-code-g-code-or-code-addgoal-code-since-v1-3"><a class="link" href="#adding-a-goal-code-goal-code-or-code-g-code-or-code-addgoal-code-since-v1-3">3.3.1. Adding a goal: <code>+goal</code> or <code>+g</code> or <code>addgoal</code> [Since v1.3]</a></h4>
 <div class="paragraph">
-<p>Adds a goal to CollegeZone and is reflected in the Goals Page.<br></p>
+<p>Currently, your goal page is empty! Try adding a goal entry that you have into CollegeZone using the <code>+goal</code>, <code>+g</code> or <code>addgoal</code> command. The new goal added will be reflected in CollegeZone.<br></p>
 </div>
 <div class="paragraph">
-<p>Format: <code>+goal impt/IMPORTANCE_LEVEL text/GOAL_TEXT</code><br>
-        <code>OR</code><br>
-        <code>+g impt/IMPORTANCE_LEVEL text/GOAL_TEXT</code><br>
-        <code>OR</code><br>
-        <code>addgoal impt/IMPORTANCE_LEVEL text/GOAL_TEXT</code></p>
+<p><strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">(+goal | +g | addgoal) impt/IMPORTANCE_LEVEL text/GOAL_TEXT</code></pre>
+</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -795,226 +837,26 @@ use this date format for START_DATETIME
 </table>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>+goal impt/3 text/lose weight!</code></p>
-</li>
-<li>
-<p><code>+g impt/2 text/meetup with close friends more often =)</code></p>
-</li>
-<li>
-<p><code>addgoal impt/1 text/learn how to bake cheesecake</code></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="editing-a-goal-code-goal-or-g-or-editgoal-code-since-v1-4"><a class="link" href="#editing-a-goal-code-goal-or-g-or-editgoal-code-since-v1-4">3.3.2. Editing a goal: <code>~goal OR ~g OR editgoal</code> [Since v1.4]</a></h4>
-<div class="paragraph">
-<p>If you&#8217;ve adding a goal entry incorrectly, try using the <code>~goal</code>, <code>~g</code> or <code>editgoal</code> command to the goals you have.<br></p>
-</div>
-<div class="paragraph">
-<p><strong><em>Formats:</em></strong></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">~goal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"> ~g INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">editgoal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]</code></pre>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Edits the goal at the specified <code>INDEX</code>. The index refers to the index number shown in the goal page&#8217;s listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-<li>
-<p>At least one of the optional fields must be provided.</p>
-</li>
-<li>
-<p>Existing values will be updated to the input values.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
 <p><strong><em>Examples</em>:</strong></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">&gt; ~goal <span class="integer">2</span> impt/<span class="integer">1</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">&gt; +goal impt/<span class="integer">3</span> text/lose weight!</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>Edits the goal importance level of the 2nd reminder to be <code>1</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">~g <span class="integer">1</span> impt/<span class="integer">3</span> text/learn yoga</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">&gt; +g impt/<span class="integer">2</span> text/meetup with close friends more often =)</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>Edits the goal text and importance level of the 1st person to be <code>learn yoga</code> and <code>1</code> respectively.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">editgoal <span class="integer">5</span> text/swim at least twice a month</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">&gt; addgoal impt/<span class="integer">1</span> text/learn how to bake cheesecake</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>Edits the goal text of the 5th person to be <code>swim at least twice a month</code>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="deleting-a-goal-code-goal-or-g-or-deletegoal-code-since-v1-4"><a class="link" href="#deleting-a-goal-code-goal-or-g-or-deletegoal-code-since-v1-4">3.3.3. Deleting a goal: <code>-goal OR -g OR deletegoal</code> [Since v1.4]</a></h4>
-<div class="paragraph">
-<p>If you&#8217;ve added a specific goal that you&#8217;re unlikely to complete and want to remove it from CollegeZone, try using the <code>-goal</code>, <code>-g</code> or <code>deletegoal</code> command.<br>
-<strong><em>Formats:</em></strong></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">-goal INDEX</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">-g INDEX</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">deletegoal INDEX</code></pre>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Deletes the goal at the specified <code>INDEX</code>.</p>
-</li>
-<li>
-<p>The index refers to the index number shown in the most recent goal listing.</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p><strong><em>Examples</em>:</strong></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">&gt; -goal <span class="integer">2</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Deletes the 2nd goal in CollegeZone&#8217;s goal page.<br></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">&gt; -g <span class="integer">4</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Deletes the 4th goal in CollegeZone&#8217;s goal page.<br></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">&gt; deletegoal <span class="integer">1</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Deletes the 1st goal in CollegeZone&#8217;s goal page.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="completing-a-goal-code-goal-or-g-or-completegoal-code-since-v1-4"><a class="link" href="#completing-a-goal-code-goal-or-g-or-completegoal-code-since-v1-4">3.3.4. Completing a goal: <code>!goal OR !g OR completegoal</code> [Since v1.4]</a></h4>
-<div class="paragraph">
-<p>Once you&#8217;ve completed a goal, indicate completion of an existing goal in CollegeZone using the <code>!goal</code>, <code>!g</code> or <code>completegoal</code> command.<br></p>
-</div>
-<div class="paragraph">
-<p><strong><em>Formats:</em></strong></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">!goal INDEX</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">!g INDEX</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">completegoal INDEX</code></pre>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Indicates completion of the goal at the specified <code>INDEX</code>.</p>
-</li>
-<li>
-<p>The index refers to the index number shown in the most recent goal listing.</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p><strong><em>Examples</em>:</strong></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">&gt; !goal <span class="integer">2</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Indicates completion of the 2nd goal in CollegeZone&#8217;s goal page.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">&gt; !g <span class="integer">4</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Indicates completion of the 4th goal in CollegeZone&#8217;s goal page.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">&gt; completegoal <span class="integer">1</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Indicates completion of the 1st goal in CollegeZone&#8217;s goal page.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="sorting-goals-code-sortgoal-or-sgoal-code-since-v1-5"><a class="link" href="#sorting-goals-code-sortgoal-or-sgoal-code-since-v1-5">3.3.5. Sorting goals: <code>sortgoal OR sgoal</code> [Since v1.5]</a></h4>
+<h4 id="sorting-goals-code-sortgoal-code-or-code-sgoal-code-since-v1-5"><a class="link" href="#sorting-goals-code-sortgoal-code-or-code-sgoal-code-since-v1-5">3.3.2. Sorting goals: <code>sortgoal</code> or <code>sgoal</code> [Since v1.5]</a></h4>
 <div class="paragraph">
 <p>It is a hassle to locate the goals you&#8217;re interested in if you have too many goals in CollegeZone. Try sorting the goals that you have using the <code>sortgoal</code> or <code>sgoal</code> command.<br></p>
 </div>
@@ -1023,12 +865,7 @@ use this date format for START_DATETIME
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">sortgoal f/GOAL_FIELD o/ORDER</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">sgoal f/GOAL_FIELD o/ORDER</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">(sortgoal | sgoal) f/GOAL_FIELD o/ORDER</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -1079,11 +916,245 @@ use this date format for START_DATETIME
 <p>Sorts the goal list based on completion in descending order.</p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="editing-a-goal-code-goal-code-or-code-g-code-or-code-editgoal-code-since-v1-4"><a class="link" href="#editing-a-goal-code-goal-code-or-code-g-code-or-code-editgoal-code-since-v1-4">3.3.3. Editing a goal: <code>~goal</code> or <code>~g</code> or <code>editgoal</code> [Since v1.4]</a></h4>
+<div class="paragraph">
+<p>If you&#8217;ve added a goal entry incorrectly, try using the <code>~goal</code>, <code>~g</code> or <code>editgoal</code> command to edit the goals you have.<br></p>
+</div>
+<div class="paragraph">
+<p><strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">(~goal | ~g | editgoal) INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]</code></pre>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Edits the goal at the specified <code>INDEX</code>. The index refers to the index number shown in the goal listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong><em>Examples</em>:</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; ~goal <span class="integer">2</span> impt/<span class="integer">1</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Edits the goal importance level of the 2nd reminder to be <code>1</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; sgoal f/importance o/descending
+&gt; ~g <span class="integer">1</span> impt/<span class="integer">3</span> text/learn yoga</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Edits the goal text and importance level of the 1st student in the sorted goal list to be <code>learn yoga</code> and <code>1</code> respectively.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">editgoal <span class="integer">5</span> text/swim at least twice a month</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Edits the goal text of the 5th student to be <code>swim at least twice a month</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="deleting-a-goal-code-goal-code-or-code-g-code-or-code-deletegoal-code-since-v1-4"><a class="link" href="#deleting-a-goal-code-goal-code-or-code-g-code-or-code-deletegoal-code-since-v1-4">3.3.4. Deleting a goal: <code>-goal</code> or <code>-g</code> or <code>deletegoal</code> [Since v1.4]</a></h4>
+<div class="paragraph">
+<p>If you&#8217;ve added a specific goal that you&#8217;re unlikely to complete and want to remove it from CollegeZone, try using the <code>-goal</code>, <code>-g</code> or <code>deletegoal</code> command to delete a goal entry that you have.<br>
+<strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">(-goal | -g | deletegoal) INDEX</code></pre>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the goal at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent goal listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong><em>Examples</em>:</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; -goal <span class="integer">2</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Deletes the 2nd goal in CollegeZone&#8217;s goal listing.<br></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; sortgoal f/completion o/ascending
+&gt; -g <span class="integer">4</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Deletes the 4th goal in CollegeZone&#8217;s sorted goal listing.<br></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; deletegoal <span class="integer">1</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Deletes the 1st goal in CollegeZone&#8217;s goal listing.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="completing-a-goal-code-goal-code-or-code-g-code-or-code-completegoal-code-since-v1-4"><a class="link" href="#completing-a-goal-code-goal-code-or-code-g-code-or-code-completegoal-code-since-v1-4">3.3.5. Completing a goal: <code>!goal</code> or <code>!g</code> or <code>completegoal</code> [Since v1.4]</a></h4>
+<div class="paragraph">
+<p>Once you&#8217;ve completed a goal, indicate completion of an existing goal in CollegeZone using the <code>!goal</code>, <code>!g</code> or <code>completegoal</code> command.<br></p>
+</div>
+<div class="paragraph">
+<p><strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">(!goal | !g | completegoal) INDEX</code></pre>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Indicates completion of the goal at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent goal listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong><em>Examples</em>:</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; !goal <span class="integer">2</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Indicates completion of the 2nd goal in CollegeZone&#8217;s goal listing.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; sgoal f/importance o/descending
+&gt; !g <span class="integer">4</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Indicates completion of the 4th goal in CollegeZone&#8217;s sorted goal listing.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; completegoal <span class="integer">1</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Indicates completion of the 1st goal in CollegeZone&#8217;s goal listing.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="revert-completing-a-goal-code-goal-code-or-code-g-code-or-code-ongoinggoal-code-since-v1-4"><a class="link" href="#revert-completing-a-goal-code-goal-code-or-code-g-code-or-code-ongoinggoal-code-since-v1-4">3.3.6. Revert completing a goal: <code>-!goal</code> or <code>-!g</code> or <code>ongoinggoal</code> [Since v1.4]</a></h4>
+<div class="paragraph">
+<p>If you have an ongoing goal that is wrongly indicated that it&#8217;s completed, do not fret, simply indicate that an existing goal you have is still ongoing in CollegeZone using the <code>-!goal</code>, <code>-!g</code> or <code>ongoinggoal</code> command.<br></p>
+</div>
+<div class="paragraph">
+<p><strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">(-!goal | -!g | ongoinggoal) INDEX</code></pre>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Indicates completion of the goal at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent goal listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong><em>Examples</em>:</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; -!goal <span class="integer">2</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Indicates ongoing of the 2nd goal in CollegeZone&#8217;s goal listing.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; sortgoal f/startdatetime o/ascending
+&gt; -!g <span class="integer">4</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Indicates ongoing of the 4th goal in CollegeZone&#8217;s sorted goal listing.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; ongoing <span class="integer">1</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Indicates ongoing of the 1st goal in CollegeZone&#8217;s goal listing.</p>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="interesting-features"><a class="link" href="#interesting-features">3.4. Interesting features</a></h3>
 <div class="sect3">
-<h4 id="changing-collegezone-theme-code-theme-or-th-code-since-v1-5"><a class="link" href="#changing-collegezone-theme-code-theme-or-th-code-since-v1-5">3.4.1. Changing CollegeZone theme : <code>theme OR th</code> [Since v1.5]</a></h4>
+<h4 id="changing-collegezone-theme-code-theme-code-or-code-th-code-since-v1-5"><a class="link" href="#changing-collegezone-theme-code-theme-code-or-code-th-code-since-v1-5">3.4.1. Changing CollegeZone theme : <code>theme</code> or <code>th</code> [Since v1.5]</a></h4>
 <div class="paragraph">
 <p>CollegeZone&#8217;s default theme colour is not the only theme colour we have to offer! Try changing CollegeZone&#8217;s theme colour using the <code>theme</code> or <code>th</code> command. <br></p>
 </div>
@@ -1092,12 +1163,7 @@ use this date format for START_DATETIME
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">theme THEME_COLOUR</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">th THEME_COLOUR</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">(theme | th) THEME_COLOUR</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -1135,10 +1201,15 @@ use this date format for START_DATETIME
 </div>
 </div>
 <div class="sect3">
-<h4 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.4.2. Listing entered commands : <code>history</code></a></h4>
+<h4 id="listing-entered-commands-code-history-code-or-code-h-code"><a class="link" href="#listing-entered-commands-code-history-code-or-code-h-code">3.4.2. Listing entered commands : <code>history</code> or <code>h</code></a></h4>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
-Format: <code>history</code></p>
+<strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">(history | h)</code></pre>
+</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1156,10 +1227,15 @@ Format: <code>history</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.4.3. Undoing previous command : <code>undo</code></a></h4>
+<h4 id="undoing-previous-command-code-undo-code-or-code-u-code"><a class="link" href="#undoing-previous-command-code-undo-code-or-code-u-code">3.4.3. Undoing previous command : <code>undo</code> or <code>u</code></a></h4>
 <div class="paragraph">
 <p>Restores CollegeZone to the state before the previous <em>undoable</em> command was executed.<br>
-Format: <code>undo</code></p>
+<strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">(undo | u)</code></pre>
+</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1169,74 +1245,108 @@ Format: <code>undo</code></p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Undoable commands: those commands that modify CollegeZone&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code>, <code>clear</code>, <code>+goal</code>, <code>-goal</code>, <code>~goal</code>).</p>
+<p>Undoable commands: those commands that modify CollegeZone&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code>, <code>clear</code>, <code>+goal</code>, <code>-goal</code>, <code>~goal</code>, <code>!goal</code>, <code>-!goal</code>).</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong><em>Examples</em>:</strong></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>delete 1</code><br>
-<code>list</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
-</li>
-<li>
-<p><code>select 1</code><br>
-<code>list</code><br>
-<code>undo</code><br>
-The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
-</li>
-</ul>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; delete <span class="integer">1</span>
+&gt; list
+&gt; undo</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Reverses the <code>delete 1</code> command</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; select <span class="integer">1</span>
+&gt; list
+&gt; undo</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; delete <span class="integer">1</span>
+&gt; clear
+&gt; undo
+&gt; undo</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Reverses both the <code>clear</code> command and the <code>delete 1</code> command</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.4.4. Redoing the previously undone command : <code>redo</code></a></h4>
+<h4 id="redoing-the-previously-undone-command-code-redo-code-or-code-r-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code-or-code-r-code">3.4.4. Redoing the previously undone command : <code>redo</code> or <code>r</code></a></h4>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
-Format: <code>redo</code></p>
+<strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">(redo | r)</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong><em>Examples</em>:</strong></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>delete 1</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br></p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>redo</code><br>
-The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; delete <span class="integer">1</span>
+&gt; undo
+&gt; redo</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>undo</code> (reverses the <code>delete 1</code> command)<br>
+<code>redo</code> (reapplies the <code>delete 1</code> command)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; delete <span class="integer">1</span>
+&gt; redo</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; delete <span class="integer">1</span>
+&gt; clear
+&gt; undo
+&gt; undo
+&gt; redo
+&gt; redo</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>undo</code> (reverses the <code>clear</code> command)<br>
 <code>undo</code> (reverses the <code>delete 1</code> command)<br>
 <code>redo</code> (reapplies the <code>delete 1</code> command)<br>
 <code>redo</code> (reapplies the <code>clear</code> command)<br></p>
-</li>
-</ul>
 </div>
 </div>
 <div class="sect3">
-<h4 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.4.5. Clearing all entries : <code>clear</code></a></h4>
+<h4 id="clearing-all-entries-code-clear-code-or-code-c-code"><a class="link" href="#clearing-all-entries-code-clear-code-or-code-c-code">3.4.5. Clearing all entries : <code>clear</code> or <code>c</code></a></h4>
 <div class="paragraph">
 <p>Clears all entries from CollegeZone.<br>
-Format: <code>clear</code></p>
+<strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">(clear | c)</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -1298,7 +1408,7 @@ There is no need to save manually.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Add</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a person entry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a student entry</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>add n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]&#8230;&#8203; [t/TAG]&#8230;&#8203;</code><br>
 OR<br>
 <code>a n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]&#8230;&#8203; [t/TAG]&#8230;&#8203;</code></p></td>
@@ -1306,13 +1416,13 @@ OR<br>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Clear</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Clears all person and goal entries</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clears all student and goal entries</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>clear</code> OR <code>c</code></p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delete</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes a person entry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes a student entry</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>delete INDEX</code> OR <code>d INDEX</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>delete 3</code></p></td>
 </tr>
@@ -1326,7 +1436,7 @@ OR<br>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Find</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Finds a person by keyword</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Finds a student by keyword</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>find n/KEYWORD [MORE_KEYWORDS]</code><br>
 OR<br>
 <code>f n/KEYWORD [MORE_KEYWORDS]</code><br>
@@ -1338,7 +1448,7 @@ OR<br>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>List</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Lists all persons</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lists all students</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>list</code><br>
 OR<br>
 <code>l</code></p></td>
@@ -1354,7 +1464,7 @@ OR<br>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Select</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Selects the person and goal entry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Selects the student and goal entry</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>select INDEX</code><br>
 OR<br>
 <code>s INDEX</code></p></td>
@@ -1382,7 +1492,7 @@ OR<br>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Meet</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Adds meet up date with a person</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds meet up date with a student</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>meet INDEX d/DD-MM-YYYY</code><br>
 OR<br>
 <code>m INDEX d/DD-MM-YYYY</code></p></td>
@@ -1471,7 +1581,7 @@ OR<br>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-13 01:07:11 UTC
+Last updated 2018-04-13 12:52:08 UTC
 </div>
 </div>
 </body>

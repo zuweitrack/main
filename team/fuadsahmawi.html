@@ -157,7 +157,7 @@ just like a digital organiser.</p>
 <div class="sect2">
 <h3 id="reminder-features"><a class="link" href="#reminder-features">Reminder features</a></h3>
 <div class="sect3">
-<h4 id="adding-a-reminder-code-reminder-or-r-or-addreminder-code-since-v1-4"><a class="link" href="#adding-a-reminder-code-reminder-or-r-or-addreminder-code-since-v1-4">Adding a reminder: <code>+reminder OR +r OR addreminder</code> [Since v1.4]</a></h4>
+<h4 id="adding-a-reminder-code-reminder-code-or-code-r-code-or-code-addreminder-code-since-v1-4"><a class="link" href="#adding-a-reminder-code-reminder-code-or-code-r-code-or-code-addreminder-code-since-v1-4">Adding a reminder: <code>+reminder</code> or <code>+r</code> or <code>addreminder</code> [Since v1.4]</a></h4>
 <div class="paragraph">
 <p>You can set a reminder into the calendar in CollegeZone<br>
 Format: <code>+r text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME</code></p>
@@ -224,17 +224,17 @@ use this date format for the START_DATETIME or END_DATETIME
 </table>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong><em>Examples</em>:</strong></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>+r text/Eat vitamins d/tmr 8am e/tmr 8.10am</code></p>
-</li>
-<li>
-<p><code>+reminder text/Dental appointment d/next thurs 3pm e/next thurs 4pm</code></p>
-</li>
-</ul>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">+r text/Eat vitamins d/tmr <span class="integer">8</span>am e/tmr <span class="float">8.10</span>am</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">+reminder text/Dental appointment d/next thurs <span class="integer">3</span>pm e/next thurs <span class="integer">4</span>pm</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -271,13 +271,13 @@ Edits the reminder text of the 4th reminder to be <code>CS2103 exam coming in 1 
 </li>
 <li>
 <p><code>~r 2 text/water plants d/tmr 7am</code><br>
-Edits the reminder text and datetime of the 2nd person to be <code>water plants</code> and <code>tmr 7am</code> respectively.</p>
+Edits the reminder text and datetime of the 2nd student to be <code>water plants</code> and <code>tmr 7am</code> respectively.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect3">
-<h4 id="deleting-a-reminder-code-reminder-or-r-or-deletereminder-code-since-v1-4"><a class="link" href="#deleting-a-reminder-code-reminder-or-r-or-deletereminder-code-since-v1-4">Deleting a reminder: <code>-reminder OR -r OR deletereminder</code> [Since v1.4]</a></h4>
+<h4 id="deleting-a-reminder-code-reminder-code-or-code-r-code-or-code-deletereminder-code-since-v1-4"><a class="link" href="#deleting-a-reminder-code-reminder-code-or-code-r-code-or-code-deletereminder-code-since-v1-4">Deleting a reminder: <code>-reminder</code> or <code>-r</code> or <code>deletereminder</code> [Since v1.4]</a></h4>
 <div class="paragraph">
 <p>You can delete a reminder that you have set into the calendar in CollegeZone<br>
 Format: <code>-r text/REMINDER_TEXT d/START_DATETIME</code></p>
@@ -425,7 +425,7 @@ Users can delete reminders on the Calendar if its already due or when they accid
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-13 01:07:11 UTC
+Last updated 2018-04-13 12:52:08 UTC
 </div>
 </div>
 </body>
