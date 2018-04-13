@@ -29,7 +29,7 @@ public class RateCommand extends UndoableCommand {
             + "by the index number used in the latest listing.\n"
             + "Existing level of friendship will be overwritten by the input values.\n"
             + "Parameters: INDEX(s) (must be a positive integer) "
-            + "[" + PREFIX_LEVEL_OF_FRIENDSHIP + "LEVELOFFRIENDSHIP]...\n"
+            + "[" + PREFIX_LEVEL_OF_FRIENDSHIP + "LEVELOFFRIENDSHIP] (between 1 and 10)\n"
             + "Example: " + COMMAND_WORD + " 1 3 "
             + PREFIX_LEVEL_OF_FRIENDSHIP + "5 ";
 
