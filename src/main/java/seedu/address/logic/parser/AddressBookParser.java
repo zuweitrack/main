@@ -30,6 +30,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SeekRaCommand;
 import seedu.address.logic.commands.SelectCommand;
 
+import seedu.address.logic.commands.ShowLofCommand;
 import seedu.address.logic.commands.SortCommand;
 
 import seedu.address.logic.commands.SortGoalCommand;
