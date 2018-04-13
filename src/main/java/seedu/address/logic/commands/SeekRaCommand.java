@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.person.UnitNumberContainsKeywordsPredicate;
+        import seedu.address.model.person.UnitNumberContainsKeywordsPredicate;
 
 //@@author zuweitrack
 /**
@@ -15,7 +15,8 @@ public class SeekRaCommand extends Command {
     public static final String COMMAND_ALIAS = "sk";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Seeks the Resident Assistant (RA) of an individual RC student whose name contain any of "
+            + ": Seeks and lists all Resident Assistants (RA) of RC4 with the"
+            + " individual RC student whose name contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
