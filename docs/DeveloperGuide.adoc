@@ -1064,7 +1064,7 @@ Use case ends.
 * 2b. The specified goal is already completed.
 +
 [none]
-** 2a1. CollegeZone shows an error message.
+** 2b1. CollegeZone shows an error message.
 
 === Use case: Ongoing goal
 
@@ -1092,7 +1092,40 @@ Use case ends.
 * 2b. The specified goal is already ongoing.
 +
 [none]
+** 2b1. CollegeZone shows an error message.
+
+=== Use case: Sort goal
+
+*MSS*
+
+1.  CollegeZone shows a list of goals
+2.  User requests sort goal based on field and order to sort
+3.  CollegeZone sort the goal list based on field and order specified
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The list is empty.
++
+[none]
+** 1a1. CollegeZone shows an error message.
+
+* 2a. The given format is invalid.
++
+[none]
 ** 2a1. CollegeZone shows an error message.
+
+* 2b. The given field is invalid.
++
+[none]
+** 2b1. CollegeZone shows an error message.
+
+* 2c. The given order is invalid.
++
+[none]
+** 2c1. CollegeZone shows an error message.
 
 === Use case: Switch theme colour
 
