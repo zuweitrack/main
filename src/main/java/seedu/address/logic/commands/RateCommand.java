@@ -58,8 +58,8 @@ public class RateCommand extends UndoableCommand {
         for (Index index : indexList) {
 
             if (index.getZeroBased() >= latestList.size()) {
-                throw new CommandException("One or more index inputs are not valid"
-                        + " and only the people of valid indexes are being rated!");
+                throw new CommandException("One or more index inputs may not be valid"
+                        + " and only the person(s) of valid indexes are being rated!");
             }
 
             Person selectedPerson = latestList.get(index.getZeroBased());

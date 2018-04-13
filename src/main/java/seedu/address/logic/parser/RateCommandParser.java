@@ -45,6 +45,11 @@ public class RateCommandParser {
         if (!isPrefixesPresent(argumentMultimap, PREFIX_LEVEL_OF_FRIENDSHIP)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RateCommand.MESSAGE_USAGE));
         }
+        String levelOfFriendship = argumentMultimap.getValue(PREFIX_LEVEL_OF_FRIENDSHIP).get();
+
+        if (!containsValidRange(levelOfFriendship)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RateCommand.MESSAGE_USAGE));
+        }
 
         String preamble;
         String[] indexString;
@@ -60,13 +65,6 @@ public class RateCommandParser {
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     RateCommand.MESSAGE_USAGE));
-        }
-
-
-        String levelOfFriendship = argumentMultimap.getValue(PREFIX_LEVEL_OF_FRIENDSHIP).get();
-
-        if (!containsValidRange(levelOfFriendship)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RateCommand.MESSAGE_USAGE));
         }
 
         return new RateCommand(indexList, new String(levelOfFriendship));
