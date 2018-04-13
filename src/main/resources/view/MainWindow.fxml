@@ -51,7 +51,7 @@
             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
 
-          <StackPane fx:id="calendarPlaceholder" prefWidth="935" >
+          <StackPane fx:id="calendarPlaceholder" prefWidth="1200" >
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
