@@ -45,18 +45,9 @@ public class CalendarPanel extends UiPart<Region> {
         this.personList = personList;
 
         calendarView = new CalendarView();
-        calendarView.setRequestedTime(LocalTime.now());
-        calendarView.setToday(LocalDate.now());
-        calendarView.setTime(LocalTime.now());
-        calendarView.setShowAddCalendarButton(false);
-        calendarView.setShowSearchField(false);
-        calendarView.setShowSearchResultsTray(false);
-        calendarView.setShowPrintButton(false);
-        calendarView.showMonthPage();
+        setupCalendar();
         updateCalendar();
         registerAsAnEventHandler(this);
-
-
     }
 
     @Subscribe
@@ -65,9 +56,6 @@ public class CalendarPanel extends UiPart<Region> {
         personList = event.data.getPersonList();
         Platform.runLater(this::updateCalendar);
     }
-
-
-
 
     /**
      * Updates the Calendar with Reminders that are already added
@@ -116,16 +104,22 @@ public class CalendarPanel extends UiPart<Region> {
         calendarView.getCalendarSources().add(myCalendarSource);
     }
 
-    /**
-     * Updates the Calendar with Meet ups that are already added
-     */
-
-
     //@@author fuadsahmawi
     private void setDateAndTime() {
         calendarView.setToday(LocalDate.now());
         calendarView.setTime(LocalTime.now());
         calendarView.getCalendarSources().clear();
+    }
+
+    private void setupCalendar() {
+        calendarView.setRequestedTime(LocalTime.now());
+        calendarView.setToday(LocalDate.now());
+        calendarView.setTime(LocalTime.now());
+        calendarView.setShowAddCalendarButton(false);
+        calendarView.setShowSearchField(false);
+        calendarView.setShowSearchResultsTray(false);
+        calendarView.setShowPrintButton(false);
+        calendarView.showMonthPage();
     }
 
     public CalendarView getRoot() {
