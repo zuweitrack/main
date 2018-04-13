@@ -7,7 +7,7 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
 
-    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format!";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
 
     public static final String MESSAGE_INVALID_DATE_FORMAT =
             "Start Date cannot be later than End Date or Start/End Date cannot be earlier than current date! \n%1$s";
@@ -21,5 +21,7 @@ public class Messages {
             + "their Resident Assistant(s) (RA) listed!";
     public static final String MESSAGE_INVALID_SORT_COMMAND_USAGE = "Sort command cannot be done on an empty "
             + "goal list!";
+    public static final String MESSAGE_GOAL_ONGOING_ERROR = "Goal is already ongoing.";
+    public static final String MESSAGE_GOAL_COMPLETED_ERROR = "Goal is already completed.";
 
 }

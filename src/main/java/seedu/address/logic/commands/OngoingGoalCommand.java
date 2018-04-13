@@ -23,21 +23,22 @@ import seedu.address.model.goal.exceptions.GoalNotFoundException;
 /**
  * Edits the details of an existing goal in the address book.
  */
-public class CompleteGoalCommand extends UndoableCommand {
+public class OngoingGoalCommand extends UndoableCommand {
 
-    public static final String COMMAND_WORD = "!goal";
-    public static final String COMMAND_ALIAS_1 = "!g";
-    public static final String COMMAND_ALIAS_2 = "completegoal";
+    public static final String COMMAND_WORD = "-!goal";
+    public static final String COMMAND_ALIAS_1 = "-!g";
+    public static final String COMMAND_ALIAS_2 = "ongoinggoal";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Indicate completion of the goal identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Indicate identified goal is not completed "
+            + "and still ongoing. Goal is identified "
             + "by the index number used in the last goal listing. "
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 ";
 
-    public static final String MESSAGE_COMPLETE_GOAL_SUCCESS = "Completed Goal! : %1$s";
+    public static final String MESSAGE_ONGOING_GOAL_SUCCESS = "Ongoing Goal! : %1$s";
 
     private final Index index;
-    private final CompleteGoalDescriptor completeGoalDescriptor;
+    private final OngoingGoalDescriptor ongoingGoalDescriptor;
 
     private Goal goalToUpdate;
     private Goal updatedGoal;
@@ -45,12 +46,12 @@ public class CompleteGoalCommand extends UndoableCommand {
     /**
      * @param index of the goal in the filtered goal list to update
      */
-    public CompleteGoalCommand(Index index, CompleteGoalDescriptor completeGoalDescriptor) {
+    public OngoingGoalCommand(Index index, OngoingGoalDescriptor ongoingGoalDescriptor) {
         requireNonNull(index);
-        requireNonNull(completeGoalDescriptor);
+        requireNonNull(ongoingGoalDescriptor);
 
         this.index = index;
-        this.completeGoalDescriptor = new CompleteGoalDescriptor(completeGoalDescriptor);
+        this.ongoingGoalDescriptor = new OngoingGoalDescriptor(ongoingGoalDescriptor);
     }
 
     @Override
@@ -61,7 +62,7 @@ public class CompleteGoalCommand extends UndoableCommand {
             throw new AssertionError("The target goal cannot be missing");
         }
         model.updateFilteredGoalList(PREDICATE_SHOW_ALL_GOALS);
-        return new CommandResult(String.format(MESSAGE_COMPLETE_GOAL_SUCCESS, updatedGoal));
+        return new CommandResult(String.format(MESSAGE_ONGOING_GOAL_SUCCESS, updatedGoal));
     }
 
     @Override
@@ -73,25 +74,25 @@ public class CompleteGoalCommand extends UndoableCommand {
         }
 
         goalToUpdate = lastShownList.get(index.getZeroBased());
-        if (goalToUpdate.getCompletion().hasCompleted) {
-            throw new CommandException(Messages.MESSAGE_GOAL_COMPLETED_ERROR);
+        if (!goalToUpdate.getCompletion().hasCompleted) {
+            throw new CommandException(Messages.MESSAGE_GOAL_ONGOING_ERROR);
         }
-        updatedGoal = createUpdatedGoal(goalToUpdate, completeGoalDescriptor);
+        updatedGoal = createUpdatedGoal(goalToUpdate, ongoingGoalDescriptor);
     }
 
     /**
      * Creates and returns a {@code Goal} with the details of {@code goalToUpdate}
-     * edited with {@code completeGoalDescriptor}.
+     * edited with {@code ongoingGoalDescriptor}.
      */
-    private static Goal createUpdatedGoal(Goal goalToUpdate, CompleteGoalDescriptor completeGoalDescriptor) {
+    private static Goal createUpdatedGoal(Goal goalToUpdate, OngoingGoalDescriptor ongoingGoalDescriptor) {
         assert goalToUpdate != null;
 
-        GoalText goalText = completeGoalDescriptor.getGoalText().orElse(goalToUpdate.getGoalText());
-        Importance importance = completeGoalDescriptor.getImportance().orElse(goalToUpdate.getImportance());
-        StartDateTime startDateTime = completeGoalDescriptor.getStartDateTime().orElse(goalToUpdate.getStartDateTime());
-        EndDateTime updatedEndDateTime = completeGoalDescriptor.getEndDateTime()
+        GoalText goalText = ongoingGoalDescriptor.getGoalText().orElse(goalToUpdate.getGoalText());
+        Importance importance = ongoingGoalDescriptor.getImportance().orElse(goalToUpdate.getImportance());
+        StartDateTime startDateTime = ongoingGoalDescriptor.getStartDateTime().orElse(goalToUpdate.getStartDateTime());
+        EndDateTime updatedEndDateTime = ongoingGoalDescriptor.getEndDateTime()
                 .orElse(goalToUpdate.getEndDateTime());
-        Completion updatedCompletion = completeGoalDescriptor.getCompletion().orElse(goalToUpdate.getCompletion());
+        Completion updatedCompletion = ongoingGoalDescriptor.getCompletion().orElse(goalToUpdate.getCompletion());
 
         return new Goal(importance, goalText, startDateTime, updatedEndDateTime, updatedCompletion);
     }
@@ -104,34 +105,34 @@ public class CompleteGoalCommand extends UndoableCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof CompleteGoalCommand)) {
+        if (!(other instanceof OngoingGoalCommand)) {
             return false;
         }
 
         // state check
-        CompleteGoalCommand e = (CompleteGoalCommand) other;
+        OngoingGoalCommand e = (OngoingGoalCommand) other;
         return index.equals(e.index)
-                && completeGoalDescriptor.equals(e.completeGoalDescriptor)
+                && ongoingGoalDescriptor.equals(e.ongoingGoalDescriptor)
                 && Objects.equals(goalToUpdate, e.goalToUpdate);
     }
 
     /**
      * Stores the details to update the goal with.
      */
-    public static class CompleteGoalDescriptor {
+    public static class OngoingGoalDescriptor {
         private GoalText goalText;
         private Importance importance;
         private StartDateTime startDateTime;
         private EndDateTime endDateTime;
         private Completion completion;
 
-        public CompleteGoalDescriptor() {}
+        public OngoingGoalDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code toCopy} is used internally.
          */
-        public CompleteGoalDescriptor(CompleteGoalDescriptor toCopy) {
+        public OngoingGoalDescriptor(OngoingGoalDescriptor toCopy) {
             setEndDateTime(toCopy.endDateTime);
             setCompletion(toCopy.completion);
         }
@@ -170,12 +171,12 @@ public class CompleteGoalCommand extends UndoableCommand {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof CompleteGoalDescriptor)) {
+            if (!(other instanceof OngoingGoalDescriptor)) {
                 return false;
             }
 
             // state check
-            CompleteGoalDescriptor e = (CompleteGoalDescriptor) other;
+            OngoingGoalDescriptor e = (OngoingGoalDescriptor) other;
 
             return getGoalText().equals(e.getGoalText())
                     && getImportance().equals(e.getImportance())

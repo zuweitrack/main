@@ -88,17 +88,16 @@ public class Person {
         return Integer.parseInt(levelOfFriendship.value);
     }
 
+    //@@author sham-sheer
     public long getMeetDateInt() {
         Calendar calendar = Calendar.getInstance();
         long date = converDateToSeconds(meetDate.toString());
         long currentDate = calendar.getTimeInMillis();
         long timeDiff = date - currentDate;
-        System.out.println(date);
         if (timeDiff < 0) {
             return Long.MAX_VALUE;
         }
         else {
-            System.out.println("current date: " + calendar.getTimeInMillis());
             return timeDiff;
         }
 
@@ -125,6 +124,7 @@ public class Person {
         return seconds;
     }
 
+    //@@author
     @Override
     public boolean equals(Object other) {
         if (other == this) {

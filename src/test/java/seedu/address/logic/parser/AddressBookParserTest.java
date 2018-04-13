@@ -8,6 +8,9 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GOAL;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SORT_BIRTHDAY;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SORT_LEVEL_OF_FRIENDSHIP;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SORT_MEET_DATE;
 
 import java.util.Arrays;
 
@@ -25,6 +28,7 @@ import seedu.address.logic.commands.CompleteGoalCommand;
 import seedu.address.logic.commands.CompleteGoalCommand.CompleteGoalDescriptor;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteGoalCommand;
+import seedu.address.logic.commands.DeleteMeetCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.EditGoalCommand;
@@ -35,8 +39,11 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MeetCommand;
+import seedu.address.logic.commands.OngoingGoalCommand;
+import seedu.address.logic.commands.OngoingGoalCommand.OngoingGoalDescriptor;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.SortGoalCommand;
 import seedu.address.logic.commands.ThemeCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -50,6 +57,7 @@ import seedu.address.testutil.EditGoalDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.GoalBuilder;
 import seedu.address.testutil.GoalUtil;
+import seedu.address.testutil.OngoingGoalDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -366,5 +374,58 @@ public class AddressBookParserTest {
         assertEquals(new SortGoalCommand("startdatetime", "ascending"), command);
     }
 
+    @Test
+    public void parseCommand_sortCommand_returnsTrue() throws Exception {
+        SortCommand command = (SortCommand) parser.parseCommand(
+                SortCommand.COMMAND_WORD + " " + 1);
+        assertEquals(new SortCommand(INDEX_SORT_LEVEL_OF_FRIENDSHIP), command);
 
+        command = (SortCommand) parser.parseCommand(
+                SortCommand.COMMAND_WORD + " " + 2);
+        assertEquals(new SortCommand(INDEX_SORT_MEET_DATE), command);
+
+        command = (SortCommand) parser.parseCommand(
+                SortCommand.COMMAND_WORD + " " + 3);
+        assertEquals(new SortCommand(INDEX_SORT_BIRTHDAY), command);
+    }
+
+    @Test
+    public void parseCommand_deleteMeetCommand_returnsTrue() throws Exception {
+        DeleteMeetCommand command = (DeleteMeetCommand) parser.parseCommand(
+                DeleteMeetCommand.COMMAND_WORD + " " + 1
+        );
+        assertEquals(new DeleteMeetCommand(INDEX_FIRST_PERSON), command);
+
+        command = (DeleteMeetCommand) parser.parseCommand(
+                DeleteMeetCommand.COMMAND_ALIAS + " " + 1
+        );
+        assertEquals(new DeleteMeetCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_ongoingGoal_returnsTrue() throws Exception {
+        Goal goal = new GoalBuilder().build();
+        OngoingGoalDescriptor descriptor = new OngoingGoalDescriptorBuilder(goal).build();
+        OngoingGoalCommand command = (OngoingGoalCommand) parser.parseCommand(
+                OngoingGoalCommand.COMMAND_WORD + " " + INDEX_FIRST_GOAL.getOneBased());
+        assertEquals(new OngoingGoalCommand(INDEX_FIRST_GOAL, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_ongoingGoalAliasOne_returnsTrue() throws Exception {
+        Goal goal = new GoalBuilder().build();
+        OngoingGoalDescriptor descriptor = new OngoingGoalDescriptorBuilder(goal).build();
+        OngoingGoalCommand command = (OngoingGoalCommand) parser.parseCommand(
+                OngoingGoalCommand.COMMAND_ALIAS_1 + " " + INDEX_FIRST_GOAL.getOneBased());
+        assertEquals(new OngoingGoalCommand(INDEX_FIRST_GOAL, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_ongoingGoalAliasTwo_returnsTrue() throws Exception {
+        Goal goal = new GoalBuilder().build();
+        OngoingGoalDescriptor descriptor = new OngoingGoalDescriptorBuilder(goal).build();
+        OngoingGoalCommand command = (OngoingGoalCommand) parser.parseCommand(
+                OngoingGoalCommand.COMMAND_ALIAS_2 + " " + INDEX_FIRST_GOAL.getOneBased());
+        assertEquals(new OngoingGoalCommand(INDEX_FIRST_GOAL, descriptor), command);
+    }
 }
