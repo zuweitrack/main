@@ -13,6 +13,7 @@ public class ThemeColourUtil {
     static {
         themes = new HashMap<>();
         themes.put("light", "view/LightTheme.css");
+        themes.put("steel", "view/SteelTheme.css");
         themes.put("dark", "view/DarkTheme.css");
     }
 
