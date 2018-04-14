@@ -54,6 +54,7 @@
 <li><a href="#targeted-add-and-edit-command-since-v1-2">3.8. Targeted add and edit command [Since v1.2]</a></li>
 <li><a href="#reminders-since-v1-4">3.9. Reminders [Since v1.4]</a></li>
 <li><a href="#goals-list-since-v1-4">3.10. Goals List [Since v1.4]</a></li>
+<li><a href="#rate-friends-since-v1-4">3.11. Rate friends [Since v1.4]</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -89,20 +90,22 @@
 <li><a href="#use-case-edit-student">C.3. Use case: Edit student</a></li>
 <li><a href="#use-case-find-student">C.4. Use case: Find student</a></li>
 <li><a href="#use-case-select-student-or-goal">C.5. Use case: Select student or goal</a></li>
-<li><a href="#use-case-reminder-add-reminder">C.6. Use case: Reminder add&lt;reminder&gt;</a></li>
-<li><a href="#use-case-reminder-delete-reminder">C.7. Use case: Reminder delete&lt;reminder&gt;</a></li>
-<li><a href="#use-case-task-add-task-notes">C.8. Use case: Task add&lt;task, notes&gt;</a></li>
-<li><a href="#use-case-meet-student">C.9. Use case: Meet student</a></li>
-<li><a href="#use-case-add-goal">C.10. Use case: Add goal</a></li>
-<li><a href="#use-case-edit-goal">C.11. Use case: Edit goal</a></li>
-<li><a href="#use-case-delete-goal">C.12. Use case: Delete goal</a></li>
-<li><a href="#use-case-complete-goal">C.13. Use case: Complete goal</a></li>
-<li><a href="#use-case-ongoing-goal">C.14. Use case: Ongoing goal</a></li>
-<li><a href="#use-case-sort-goal">C.15. Use case: Sort goal</a></li>
-<li><a href="#use-case-switch-theme-colour">C.16. Use case: Switch theme colour</a></li>
-<li><a href="#use-case-history">C.17. Use case: History</a></li>
-<li><a href="#use-case-clear">C.18. Use case: Clear</a></li>
-<li><a href="#use-case-exit-collegezone">C.19. Use case: Exit CollegeZone</a></li>
+<li><a href="#use-case-add-reminder">C.6. Use case: Add reminder</a></li>
+<li><a href="#use-case-delete-reminder">C.7. Use case: Delete reminder</a></li>
+<li><a href="#use-case-meet-student">C.8. Use case: Meet student</a></li>
+<li><a href="#use-case-add-goal">C.9. Use case: Add goal</a></li>
+<li><a href="#use-case-edit-goal">C.10. Use case: Edit goal</a></li>
+<li><a href="#use-case-delete-goal">C.11. Use case: Delete goal</a></li>
+<li><a href="#use-case-complete-goal">C.12. Use case: Complete goal</a></li>
+<li><a href="#use-case-ongoing-goal">C.13. Use case: Ongoing goal</a></li>
+<li><a href="#use-case-sort-goal">C.14. Use case: Sort goal</a></li>
+<li><a href="#use-case-seek-resident-assistant-ra">C.15. Use case: Seek Resident Assistant (RA)</a></li>
+<li><a href="#use-case-rate-friends">C.16. Use case: Rate friends</a></li>
+<li><a href="#use-case-show-student">C.17. Use case: Show student</a></li>
+<li><a href="#use-case-switch-theme-colour">C.18. Use case: Switch theme colour</a></li>
+<li><a href="#use-case-history">C.19. Use case: History</a></li>
+<li><a href="#use-case-clear">C.20. Use case: Clear</a></li>
+<li><a href="#use-case-exit-collegezone">C.21. Use case: Exit CollegeZone</a></li>
 </ul>
 </li>
 <li><a href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></li>
@@ -1034,14 +1037,29 @@ command feature to be able to find persons by tags.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">l</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rt</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Redo</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">redo</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">r</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Seek</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">seek</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sk</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Select</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">select</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">s</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Show</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">show</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sh</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Undo</p></td>
@@ -1115,46 +1133,226 @@ This is done by removing unwanted attributes of a person and adding new attribut
 </div>
 <div class="sect2">
 <h3 id="reminders-since-v1-4"><a class="link" href="#reminders-since-v1-4">3.9. Reminders [Since v1.4]</a></h3>
+<div class="sect3">
+<h4 id="introduction-br"><a class="link" href="#introduction-br">3.9.1. Introduction<br></a></h4>
 <div class="paragraph">
-<p>Reminders are created as RC4 residents have events, classes and meetings to go to at a certain date and time, we decided on implementing a reminder feature to allow users to add reminders in CollegeZone.<br>
-Reminder commands are undoable and redoable for the benefit users to redo and undo a command they did or did not intend to change.</p>
+<p>RC4 students will have a very busy schedule that consists of tasks, events &amp; activities.<br>
+Hence, we decided on implementing a reminder feature to allow them to add &amp; delete reminders in CollegeZone to assist them in organising their schedule.<br></p>
 </div>
 <div class="paragraph">
-<p><strong>Reminder features:</strong><br></p>
+<p>The <code>AddReminderCommand</code> allows you to add a <code>Reminder</code> into CollegeZone and is stored in an ArrayList, <code>UniqueReminderList</code>, in <code>AddressBook</code>.
+The <code>DeleteReminderCommand</code> allows you to delete a <code>Reminder</code> from CollegeZone.</p>
+</div>
+<div class="paragraph">
+<p>Reminder commands are undoable and redoable for the benefit users to redo and undo a command they did or did not intend to change.<br>
+Hence, both <code>AddReminderCommand</code> and <code>DeleteReminderCommand</code> are implemented as <code>UndoableCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Reminder Features:</strong><br></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Adding a reminder to the Calendar</p>
+<p>Adding a reminder to the Calendar: The <code>AddReminderCommand</code> allows you to add a <code>Reminder</code> into CollegeZone and is stored in an ArrayList, <code>UniqueReminderList</code>, in <code>AddressBook</code>.</p>
 </li>
 <li>
-<p>Deleting a reminder on the Calendar</p>
+<p>Deleting a reminder on the Calendar: The <code>DeleteReminderCommand</code> allows you to delete a <code>Reminder</code> from <code>UniqueReminderList</code>, in <code>AddressBook</code>.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Reminder objects will consist of 3 attributes :</strong><br></p>
+<p>Reminder commands are undoable and redoable for the benefit users to redo and undo a command they did or did not intend to change.
+Hence, both <code>AddReminderCommand</code> and <code>DeleteReminderCommand</code> are implemented as <code>UndoableCommand</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-br"><a class="link" href="#implementation-br">3.9.2. Implementation<br></a></h4>
+<div class="paragraph">
+<p><strong>Reminder Object</strong><br></p>
+</div>
+<div class="paragraph">
+<p>Every time a <code>Reminder</code> is created, three other objects are also created:<br></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>the reminder text content<br></p>
+<p><code>ReminderText</code>: This object contains a single string variable, <code>reminderText</code>, that is verified to contain characters and spaces and cannot be blank. <br></p>
 </li>
 <li>
-<p>the start date and time<br></p>
+<p><code>DateTime</code>: This object contains a single string variable, <code>dateTime</code>. After obtaining the start date time from user input, it will parse through <code>nattyDateAndTimeParser</code> to convert it to a <code>LocalDateTime</code>
+variable. Subsequently, this <code>LocalDateTime</code> variable will then be converted back to a string variable using <code>properReminderDateTimeFormat</code> and it stored as <code>dateTime</code> in <code>DateTime</code> object.<br></p>
 </li>
 <li>
-<p>the end date and time</p>
+<p><code>EndDateTime</code>: This object contains a single string variable, <code>dateTime</code>. After obtaining the end date time from user input, it will parse through <code>nattyDateAndTimeParser</code> to convert it to a <code>LocalDateTime</code>
+variable. Subsequently, this <code>LocalDateTime</code> variable will then be converted back to a string variable using <code>properReminderDateTimeFormat</code> and it stored as <code>dateTime</code> in <code>DateTime</code> object.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>The reminders will be stored in an ArrayList of all the reminder objects. Each reminder will have specific positive integer index number.<br></p>
+<p>A <code>Reminder</code> will be marked with a <strong>blue</strong> circle if it&#8217;s not due and be marked with a <strong>red</strong> circle if it&#8217;s due.<br></p>
 </div>
 <div class="paragraph">
-<p>A reminder will be <strong>blue</strong> until it is due.<br>
-A reminder will turn and remain <strong>red</strong> if it&#8217;s due.<br>
-Users can delete reminders on the Calendar if its already due or when they accidentally made a mistake <br></p>
+<p>Users can delete reminders on the Calendar if its already due or when they accidentally made a mistake.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>UniqueReminderList</strong><br></p>
+</div>
+<div class="paragraph">
+<p><code>UniqueReminderList</code> functions as a List of <code>Reminders</code> where every element is unique and is defined by its <code>ReminderText</code>,
+<code>DateTime</code> and <code>EndDateTime</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Adding a Reminder</strong><br></p>
+</div>
+<div class="paragraph">
+<p>When <code>AddReminderCommand</code> is executed, it first checks whether there are any duplicate reminders in <code>UniqueReminderList</code>. If there is no duplicate reminder,
+<code>Reminder</code> is added into <code>UniqueReminderList</code> in <code>AddressBook</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/addReminderSeqDiagram.png" alt="addReminderSeqDiagram" width="800">
+</div>
+<div class="title">Figure 11. Interactions Inside the Logic Component for the <code>+r text/eat pills d/tmr 8pm e/tmr 10pm</code> Command</div>
+</div>
+<div class="paragraph">
+<p><strong>Deleting a Reminder</strong><br></p>
+</div>
+<div class="paragraph">
+<p>When <code>DeleteReminderCommand</code> is executed, it will find the <code>Reminder</code> specified by the user using parameters <code>ReminderText</code> and <code>DateTime</code>. If <code>Reminder</code> specified by user
+is not found in <code>UniqueReminderList</code>, <code>CommandException</code> will be thrown. If <code>Reminder</code> is found, it will then be removed from <code>UniqueReminderList</code>. The code snippet to find and remove the <code>Reminder</code>
+specified by user is shown below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/delReminderSeqDiagram.png" alt="delReminderSeqDiagram" width="800">
+</div>
+<div class="title">Figure 12. Interactions Inside the Logic Component for the <code>-r text/eat pills d/tmr 8pm</code> Command</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Override</span>
+    <span class="directive">protected</span> <span class="type">void</span> preprocessUndoableCommand() <span class="directive">throws</span> CommandException {
+        model.updateFilteredReminderList(predicate);
+        <span class="predefined-type">List</span>&lt;Reminder&gt; lastShownList = model.getFilteredReminderList();
+        targetIndex = Index.fromOneBased(<span class="integer">1</span>);
+        <span class="keyword">if</span> (lastShownList.size() &gt; <span class="integer">1</span>) {
+            <span class="keyword">for</span> (Reminder reminder : lastShownList) {
+                <span class="keyword">if</span> (reminder.getDateTime().toString().equals(dateTime)) {
+                    reminderToDelete = reminder;
+                }
+            }
+        } <span class="keyword">else</span> {
+            <span class="keyword">if</span> (targetIndex.getZeroBased() &gt;= lastShownList.size()) {
+                <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(Messages.MESSAGE_INVALID_REMINDER_TEXT_DATE);
+            }
+
+            reminderToDelete = lastShownList.get(targetIndex.getZeroBased());
+        }
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Syncing Reminder to Calendar</strong><br></p>
+</div>
+<div class="paragraph">
+<p>To display the reminder in the calendar, we have a <code>CalendarPanel</code> that takes in the <code>UniqueReminderList</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> CalendarPanel(ObservableList&lt;Reminder&gt; reminderList, ObservableList&lt;Person&gt; personList) {
+        <span class="local-variable">super</span>(FXML);
+
+        <span class="local-variable">this</span>.reminderList = reminderList;
+        <span class="local-variable">this</span>.personList = personList;
+
+        calendarView = <span class="keyword">new</span> CalendarView();
+        setupCalendar();
+        updateCalendar();
+        registerAsAnEventHandler(<span class="local-variable">this</span>);
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>UniqueReminderList</code> will then be iterated and each reminder in the list is individually added into the calendar through <code>updateCalendar()</code>. Every time a new reminder is added into <code>CollegeZone</code>, an event handler, <code>handleNewCalendarEvent</code>, will
+cause <code>calendarUpdate()</code> to run again and <code>CalendarPanel</code> will be updated to display the new reminder added onto <code>CollegeZone</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="annotation">@Subscribe</span>
+    <span class="directive">private</span> <span class="type">void</span> handleNewCalendarEvent(AddressBookChangedEvent event) {
+        reminderList = event.data.getReminderList();
+        personList = event.data.getPersonList();
+        Platform.runLater(<span class="local-variable">this</span>::updateCalendar);
+    }
+
+    <span class="comment">/**
+     * Updates the Calendar with Reminders that are already added
+     */</span>
+    <span class="directive">private</span> <span class="type">void</span> updateCalendar() {
+        setDateAndTime();
+        CalendarSource myCalendarSource = <span class="keyword">new</span> CalendarSource(<span class="string"><span class="delimiter">&quot;</span><span class="content">Reminders and Meetups</span><span class="delimiter">&quot;</span></span>);
+        <span class="predefined-type">Calendar</span> calendarRDue = <span class="keyword">new</span> <span class="predefined-type">Calendar</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">Reminders Already Due</span><span class="delimiter">&quot;</span></span>);
+        <span class="predefined-type">Calendar</span> calendarRNotDue = <span class="keyword">new</span> <span class="predefined-type">Calendar</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">Reminders Not Due</span><span class="delimiter">&quot;</span></span>);
+        <span class="predefined-type">Calendar</span> calendarM = <span class="keyword">new</span> <span class="predefined-type">Calendar</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">Meetups</span><span class="delimiter">&quot;</span></span>);
+        calendarRDue.setStyle(<span class="predefined-type">Calendar</span>.Style.getStyle(<span class="integer">4</span>));
+        calendarRDue.setLookAheadDuration(<span class="predefined-type">Duration</span>.ofDays(<span class="integer">365</span>));
+        calendarRNotDue.setStyle(<span class="predefined-type">Calendar</span>.Style.getStyle(<span class="integer">1</span>));
+        calendarRNotDue.setLookAheadDuration(<span class="predefined-type">Duration</span>.ofDays(<span class="integer">365</span>));
+        calendarM.setStyle(<span class="predefined-type">Calendar</span>.Style.getStyle(<span class="integer">3</span>));
+        myCalendarSource.getCalendars().add(calendarRDue);
+        myCalendarSource.getCalendars().add(calendarRNotDue);
+        myCalendarSource.getCalendars().add(calendarM);
+        <span class="keyword">for</span> (Reminder reminder : reminderList) {
+            LocalDateTime ldtstart = nattyDateAndTimeParser(reminder.getDateTime().toString()).get();
+            LocalDateTime ldtend = nattyDateAndTimeParser(reminder.getEndDateTime().toString()).get();
+            LocalDateTime now = LocalDateTime.now();
+            <span class="keyword">if</span> (now.isBefore(ldtend)) {
+                calendarRNotDue.addEntry(<span class="keyword">new</span> Entry(
+                        reminder.getReminderText().toString(), <span class="keyword">new</span> Interval(ldtstart, ldtend)));
+            } <span class="keyword">else</span> {
+                calendarRDue.addEntry(<span class="keyword">new</span> Entry(reminder.getReminderText().toString(), <span class="keyword">new</span> Interval(ldtstart, ldtend)));
+            }
+        }
+        <span class="comment">//@@author sham-sheer</span>
+        <span class="keyword">for</span> (Person person : personList) {
+            <span class="predefined-type">String</span> meetDate = person.getMeetDate().toString();
+            <span class="keyword">if</span> (!meetDate.isEmpty()) {
+                <span class="type">int</span> day = <span class="predefined-type">Integer</span>.parseInt(meetDate.substring(<span class="integer">0</span>,
+                        <span class="integer">2</span>));
+                <span class="type">int</span> month = <span class="predefined-type">Integer</span>.parseInt(meetDate.substring(<span class="integer">3</span>,
+                        <span class="integer">5</span>));
+                <span class="type">int</span> year = <span class="predefined-type">Integer</span>.parseInt(meetDate.substring(<span class="integer">6</span>,
+                        <span class="integer">10</span>));
+                calendarM.addEntry(<span class="keyword">new</span> Entry(<span class="string"><span class="delimiter">&quot;</span><span class="content">Meeting </span><span class="delimiter">&quot;</span></span> + person.getName().toString(),
+                        <span class="keyword">new</span> Interval(LocalDate.of(year, month, day), LocalTime.of(<span class="integer">12</span>, <span class="integer">0</span>),
+                                LocalDate.of(year, month, day), LocalTime.of(<span class="integer">13</span>, <span class="integer">0</span>))));
+            }
+        }
+        calendarView.getCalendarSources().add(myCalendarSource);
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When a reminder is deleted, it will go through the same process as adding reminder and the changes will then be updated in the calendar.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.9.3. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect</strong>: Deleting a <code>Reminder</code> from <code>CollegeZone</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1</strong>: Delete <code>Reminder</code> using an index which is the index of the particular <code>Reminder</code> in <code>UniqueReminderList</code><br>
+<strong>Pros</strong>: Implementing <code>DeleteReminderCommand</code> by parsing an index will be simple as <code>DeleteCommand</code> to delete a person from <code>AddressBook</code> is using a similar implementation.<br>
+<strong>Cons</strong>: We will have to first implement a list function to list all reminders with their respective indexes, which may be undesirable as there may be
+a large number of reminders to be listed out. This will in turn require the need of a find function to find a specific reminder that the users want to delete.</p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2(current choice)</strong>: Delete <code>Reminder</code> identified by <code>ReminderText</code> and <code>DateTime</code>.<br>
+<strong>Pros</strong>: Reduces the need of a listing and finding function to delete a <code>Reminder</code> from <code>CollegeZone</code>.<br>
+<strong>Cons</strong>: Implementation of <code>DeleteReminderCommand</code> will be more difficult as we will have to integrate a find function to pick out
+the specific <code>Reminder</code> that the user wants to remove.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1310,7 +1508,7 @@ Coming up with new algorithms is very time consuming. Implementation of My Goals
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.10.1. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.10.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Representation of Goals level of importance in UI<br>
 <strong>Alternative 1 (current choice):</strong> Each level of importance have a number of stars related to it.<br>
@@ -1329,6 +1527,106 @@ Coming up with new algorithms is very time consuming. Implementation of My Goals
 <strong>Pros:</strong> Ability for user to switch to person list and goal list in the UI, which makes it look more user friendly.<br>
 <strong>Cons:</strong> As CollegeZone is a desktop application that has most interactions happen using a Command Line Interface (CLI), a new command to switch tabs between goal list and person list needs to be implemented.<br>
 ---</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rate-friends-since-v1-4"><a class="link" href="#rate-friends-since-v1-4">3.11. Rate friends [Since v1.4]</a></h3>
+<div class="paragraph">
+<p>The Rate friends feature allows RC4 residents to rate their friends and change their levels of friendship.
+This feature is implemented by the <code>RateCommand</code> and <code>RateCommandParser</code> in the Logic component of the CollegeZone code.
+The RC4 student is able to rate one or more friends by keying in the new desired level of friendship through the Command Line Interface (CLI).
+The <code>RateCommand</code> inherits from <code>UndoableCommands</code> as well, as shown in the diagram below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/RateCommandClassDiagram.jpg" alt="RateCommandClassDiagram" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>To rate other RC4 residents and friends, the <code>LevelOfFriendship</code> class is being used and is part of the <code>Person</code> class.
+A <code>Person</code> is composed of a <code>LevelOfFriendship</code> component, and each person in CollegeZone application has a particular level of friendship between <code>1</code> to <code>10</code>.
+The next diagram illustrates the relationship between a
+<code>Person</code> and its <code>LevelOfFriendship</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/RCPersonClass.jpg" alt="RCPersonClass" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>The following shows a part of the code of <code>RateCommand</code> and reveals
+the parameters that <code>RateCommand</code> makes use of.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> RateCommand(<span class="predefined-type">List</span>&lt;Index&gt; indexList, <span class="predefined-type">String</span> levelOfFriendship) {
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As observed, <code>RateCommand</code> involves two parameters, namely <code>indexList</code> and <code>leveloffriendship</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>indexList</code> has a <code>List</code> of indexes type, and <code>leveloffriendship</code> is of <code>String</code> type.</p>
+</div>
+<div class="paragraph">
+<p>The parameter <code>indexList</code> refers to the list of students whose are intended to be rated, and thus
+<code>RateCommand</code> is able to help RC4 residents rate multiple people at a time. The <code>leveloffriendship</code>
+parameter refers to the new level of friendship that the resident would like to rate their friends to.</p>
+</div>
+<div class="paragraph">
+<p>The following code sample shows the execution of <code>RateCommnad</code>,</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> CommandResult executeUndoableCommand() <span class="directive">throws</span> CommandException {
+        <span class="predefined-type">List</span>&lt;Person&gt; latestList = model.getFilteredPersonList();
+        <span class="keyword">for</span> (Index index : indexList) {
+            Person selectedPerson = latestList.get(index.getZeroBased());
+            <span class="keyword">try</span> {
+                Person editedPerson = <span class="keyword">new</span> Person(selectedPerson.getName(), selectedPerson.getPhone(),
+                        selectedPerson.getBirthday(), <span class="keyword">new</span> LevelOfFriendship(levelOfFriendship),
+                        selectedPerson.getUnitNumber(),
+                        selectedPerson.getCcas(), selectedPerson.getMeetDate(), selectedPerson.getTags());
+                model.updatePerson(selectedPerson, editedPerson);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As seen, the index of the student whose level of friendship is to be rated and changed, a new <code>editedPerson</code> object is created
+and all the details of the person, the name and phone number and other details were copied from the <code>selectedPerson</code> and is assigned the new level of friendship from the rate command.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If an invalid index value is entered, i.e the person with an <code>index</code> of which does not exist in CollegeZone contact list is entered with valid <code>index</code> entries,
+only the valid entries will have their <code>Level of friendships</code> rated and updated.
+As seen in the code below, there will be a error message informing the user that they have keyed in an invalid <code>index</code> value.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">            <span class="keyword">if</span> (index.getZeroBased() &gt;= latestList.size()) {
+                <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(MESSAGE_ONE_OR_MORE_INVALID_INDEX);
+            }</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.11.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>RateCommand</code>.<br>
+<strong>Alternative 1 (current choice):</strong> Creates a new <code>Person</code> object which copies all its respective personal details and adds a new <code>LevelOfFriendship</code> value.<br>
+<strong>Pros:</strong> It uses a pre-existing method, and additional methods to implement <code>RateCommand</code> need not be created and added. <br>
+<strong>Cons:</strong> Copying all respective personal data in order to change only the <code>LevelOfFriendship</code> attribute can be excessive as cause additional processing time if a <code>person</code> have many attributes.<br>
+<strong>Alternative 2:</strong> Add a <code>changeLevelOfFriendship</code> setter method in <code>Person</code> class<br>
+<strong>Pros:</strong> Relatively simple to implement.<br>
+<strong>Cons:</strong> Additional methods have to be added to ensure that the <code>input values</code> and <code>indexes</code> are valid.</p>
 </div>
 </div>
 </div>
@@ -1393,7 +1691,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 11. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 13. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 </div>
@@ -1646,8 +1944,8 @@ b. Require developers to download those libraries manually (this creates extra w
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Fuad B Sahmawi</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Scheduler (Reminder) : This app allows user to set/edit/delete reminders reflected on a Calendar<br>
- Scheduler (Notes) : This feature will allow user to add notes for a certain task/event</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calendar: Integrate CalendarFX onto CollegeZone UI<br>
+ Reminder: Allows user to set/delete reminders reflected on the Calendar. Due reminders are marked red while undue reminders marked blue.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Find : Change find command to be able to find persons in contact list according to tags<br>
  Logic : Added command aliases to allow users to be able to perform commands by typing shortcuts</p></td>
 </tr>
@@ -1658,8 +1956,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Goh Zu Wei</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Form Groups : This feature allows user to organize students to form study groups or recreational sport groups<br>
- Set event: Add events and dates for the group meeting and gathering.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rate Friends : This feature allows categorize and rate one or more friends by changing their levels of friendships.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Seek: Add seek command to be able to seek the Resident Assistant (RA) of any particular the student living in RC4</p></td>
 </tr>
 </tbody>
@@ -1735,6 +2032,12 @@ b. Require developers to download those libraries manually (this creates extra w
 <td class="tableblock halign-left valign-top"><p class="tableblock">RC student</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">set a level of friendship with a specific person</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">maintain my friendships depending on a priority system set by myself</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RC student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rate my friends</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">keep track and update of who my close friends are</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
@@ -2090,17 +2393,14 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect2">
-<h3 id="use-case-reminder-add-reminder"><a class="link" href="#use-case-reminder-add-reminder">C.6. Use case: Reminder add&lt;reminder&gt;</a></h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
+<h3 id="use-case-add-reminder"><a class="link" href="#use-case-add-reminder">C.6. Use case: Add reminder</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
 <p>User requests to add a reminder on a certain date</p>
 </li>
 <li>
-<p>CollegeZone adds the reminder in the calendar and changes is reflected on the calendar</p>
+<p>CollegeZone adds the reminder in the calendar and changes are reflected on the calendar</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2129,10 +2429,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect2">
-<h3 id="use-case-reminder-delete-reminder"><a class="link" href="#use-case-reminder-delete-reminder">C.7. Use case: Reminder delete&lt;reminder&gt;</a></h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
+<h3 id="use-case-delete-reminder"><a class="link" href="#use-case-delete-reminder">C.7. Use case: Delete reminder</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2181,23 +2478,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect2">
-<h3 id="use-case-task-add-task-notes"><a class="link" href="#use-case-task-add-task-notes">C.8. Use case: Task add&lt;task, notes&gt;</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to add a task on a certain date with a note attached</p>
-</li>
-<li>
-<p>CollegeZone adds the task in the calendar and changes is reflected in the calendar</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="use-case-meet-student"><a class="link" href="#use-case-meet-student">C.9. Use case: Meet student</a></h3>
+<h3 id="use-case-meet-student"><a class="link" href="#use-case-meet-student">C.8. Use case: Meet student</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2246,7 +2527,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect2">
-<h3 id="use-case-add-goal"><a class="link" href="#use-case-add-goal">C.10. Use case: Add goal</a></h3>
+<h3 id="use-case-add-goal"><a class="link" href="#use-case-add-goal">C.9. Use case: Add goal</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2282,7 +2563,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect2">
-<h3 id="use-case-edit-goal"><a class="link" href="#use-case-edit-goal">C.11. Use case: Edit goal</a></h3>
+<h3 id="use-case-edit-goal"><a class="link" href="#use-case-edit-goal">C.10. Use case: Edit goal</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2353,7 +2634,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect2">
-<h3 id="use-case-delete-goal"><a class="link" href="#use-case-delete-goal">C.12. Use case: Delete goal</a></h3>
+<h3 id="use-case-delete-goal"><a class="link" href="#use-case-delete-goal">C.11. Use case: Delete goal</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2401,7 +2682,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect2">
-<h3 id="use-case-complete-goal"><a class="link" href="#use-case-complete-goal">C.13. Use case: Complete goal</a></h3>
+<h3 id="use-case-complete-goal"><a class="link" href="#use-case-complete-goal">C.12. Use case: Complete goal</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2466,7 +2747,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect2">
-<h3 id="use-case-ongoing-goal"><a class="link" href="#use-case-ongoing-goal">C.14. Use case: Ongoing goal</a></h3>
+<h3 id="use-case-ongoing-goal"><a class="link" href="#use-case-ongoing-goal">C.13. Use case: Ongoing goal</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2534,7 +2815,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect2">
-<h3 id="use-case-sort-goal"><a class="link" href="#use-case-sort-goal">C.15. Use case: Sort goal</a></h3>
+<h3 id="use-case-sort-goal"><a class="link" href="#use-case-sort-goal">C.14. Use case: Sort goal</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2615,7 +2896,180 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect2">
-<h3 id="use-case-switch-theme-colour"><a class="link" href="#use-case-switch-theme-colour">C.16. Use case: Switch theme colour</a></h3>
+<h3 id="use-case-seek-resident-assistant-ra"><a class="link" href="#use-case-seek-resident-assistant-ra">C.15. Use case: Seek Resident Assistant (RA)</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to find students' RA by name using keywords.</p>
+</li>
+<li>
+<p>CollegeZone shows a list of students and Resident assistants (RA).</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The given detail format is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. CollegeZone shows an error message.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list has all students and RA(s) with name that matches keywords.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2b. The list is empty</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-rate-friends"><a class="link" href="#use-case-rate-friends">C.16. Use case: Rate friends</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to list or show students of a particular level of friendship.</p>
+</li>
+<li>
+<p>CollegeZone shows a list of students.</p>
+</li>
+<li>
+<p>User requests to rate one or more student in the list.</p>
+</li>
+<li>
+<p>CollegeZone rates and changes the level of friendship of the student(s).</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>3a. The given index is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. CollegeZone shows an error message.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3b. The given detail format is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3b1. CollegeZone shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-show-student"><a class="link" href="#use-case-show-student">C.17. Use case: Show student</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to show student by level of friendship using valid value.</p>
+</li>
+<li>
+<p>CollegeZone shows a list of students of a particular level of friendship.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The given detail format is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. CollegeZone shows an error message.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list has all students with level of friendship that matches input value.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2b. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-switch-theme-colour"><a class="link" href="#use-case-switch-theme-colour">C.18. Use case: Switch theme colour</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2663,7 +3117,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect2">
-<h3 id="use-case-history"><a class="link" href="#use-case-history">C.17. Use case: History</a></h3>
+<h3 id="use-case-history"><a class="link" href="#use-case-history">C.19. Use case: History</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2702,7 +3156,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect2">
-<h3 id="use-case-clear"><a class="link" href="#use-case-clear">C.18. Use case: Clear</a></h3>
+<h3 id="use-case-clear"><a class="link" href="#use-case-clear">C.20. Use case: Clear</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2741,7 +3195,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect2">
-<h3 id="use-case-exit-collegezone"><a class="link" href="#use-case-exit-collegezone">C.19. Use case: Exit CollegeZone</a></h3>
+<h3 id="use-case-exit-collegezone"><a class="link" href="#use-case-exit-collegezone">C.21. Use case: Exit CollegeZone</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2990,7 +3444,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-14 12:22:40 UTC
+Last updated 2018-04-14 16:21:32 UTC
 </div>
 </div>
 </body>

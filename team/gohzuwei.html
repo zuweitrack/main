@@ -37,10 +37,9 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>CollegeZone is a desktop application for NUS Residential College 4 (RC4) students. It has a Graphical User Interface (GUI)
-but most of the user interactions happen using a Command Line Interface (CLI).
-This application is catered for an RC4 resident to manage their contacts with other RC4 residents and to manage their tasks,
-just like a digital organiser.</p>
+<p>CollegeZone is a Address Book desktop application intended for students living on campus, specifically this application are for students living in an NUS Residential College, RC4.
+RC4 students can use CollegeZone application through a Command Line Interface (CLI).
+The purpose of CollegeZone is for RC4 students monitor and maintain friendships with their fellow residents and it serves as a personal planner as well, keeping track of their tasks.</p>
 </div>
 </div>
 </div>
@@ -60,7 +59,7 @@ just like a digital organiser.</p>
 <p>Justification: An RC4 student may interact with several groups of people during the week, being able to rate multiple people at a go makes the process more convenient. This allows RC4 students to keep track of who their close friends are and helps them identify people who they may want to get closer with.</p>
 </li>
 <li>
-<p>Highlights:  The features show command followed by the rate command allows RC4 students to show friends of a particular level of friendship and change the level of friendships from that list of friends. It helps RC4 students the ease of rating people of a particular level of friendship</p>
+<p>Highlights:  The features show command followed by the rate command allows RC4 students to show friends of a particular level of friendship and change the level of friendships from that list of friends. It gives RC4 students the ease of rating people of a particular level of friendship</p>
 </li>
 </ul>
 </div>
@@ -153,7 +152,7 @@ just like a digital organiser.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">show LEVELOFFRIENDSHIP</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">(show|sh) LEVELOFFRIENDSHIP</code></pre>
 </div>
 </div>
 <div class="sidebarblock">
@@ -182,7 +181,7 @@ just like a digital organiser.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Returns <code>Students with Level of Friendship value 1</code></p>
+<p>Returns Students with Level of Friendship value <code>1</code></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -190,7 +189,7 @@ just like a digital organiser.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Returns <code>Students with Level of Friendship value 1</code> and <code>Students with Level of Friendship value 5</code></p>
+<p>Returns Students with Level of Friendship value <code>1</code> and Students with Level of Friendship value <code>5</code></p>
 </div>
 </div>
 </div>
@@ -266,12 +265,112 @@ just like a digital organiser.</p>
 </tr>
 </tbody>
 </table>
+<div class="sect2">
+<h3 id="rate-friends-since-v1-4"><a class="link" href="#rate-friends-since-v1-4">Rate friends [Since v1.4]</a></h3>
+<div class="paragraph">
+<p>The Rate friends feature allows RC4 residents to rate their friends and change their levels of friendship.
+This feature is implemented by the <code>RateCommand</code> and <code>RateCommandParser</code> in the Logic component of the CollegeZone code.
+The RC4 student is able to rate one or more friends by keying in the new desired level of friendship through the Command Line Interface (CLI).
+The <code>RateCommand</code> inherits from <code>UndoableCommands</code> as well, as shown in the diagram below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/RateCommandClassDiagram.jpg" alt="RateCommandClassDiagram" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>To rate other RC4 residents and friends, the <code>LevelOfFriendship</code> class is being used and is part of the <code>Person</code> class.
+A <code>Person</code> is composed of a <code>LevelOfFriendship</code> component, and each person in CollegeZone application has a particular level of friendship between <code>1</code> to <code>10</code>.
+The next diagram illustrates the relationship between a
+<code>Person</code> and its <code>LevelOfFriendship</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/RCPersonClass.jpg" alt="RCPersonClass" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>The following shows a part of the code of <code>RateCommand</code> and reveals
+the parameters that <code>RateCommand</code> makes use of.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> RateCommand(<span class="predefined-type">List</span>&lt;Index&gt; indexList, <span class="predefined-type">String</span> levelOfFriendship) {
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As observed, <code>RateCommand</code> involves two parameters, namely <code>indexList</code> and <code>leveloffriendship</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>indexList</code> has a <code>List</code> of indexes type, and <code>leveloffriendship</code> is of <code>String</code> type.</p>
+</div>
+<div class="paragraph">
+<p>The parameter <code>indexList</code> refers to the list of students whose are intended to be rated, and thus
+<code>RateCommand</code> is able to help RC4 residents rate multiple people at a time. The <code>leveloffriendship</code>
+parameter refers to the new level of friendship that the resident would like to rate their friends to.</p>
+</div>
+<div class="paragraph">
+<p>The following code sample shows the execution of <code>RateCommnad</code>,</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> CommandResult executeUndoableCommand() <span class="directive">throws</span> CommandException {
+        <span class="predefined-type">List</span>&lt;Person&gt; latestList = model.getFilteredPersonList();
+        <span class="keyword">for</span> (Index index : indexList) {
+            Person selectedPerson = latestList.get(index.getZeroBased());
+            <span class="keyword">try</span> {
+                Person editedPerson = <span class="keyword">new</span> Person(selectedPerson.getName(), selectedPerson.getPhone(),
+                        selectedPerson.getBirthday(), <span class="keyword">new</span> LevelOfFriendship(levelOfFriendship),
+                        selectedPerson.getUnitNumber(),
+                        selectedPerson.getCcas(), selectedPerson.getMeetDate(), selectedPerson.getTags());
+                model.updatePerson(selectedPerson, editedPerson);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As seen, the index of the student whose level of friendship is to be rated and changed, a new <code>editedPerson</code> object is created
+and all the details of the person, the name and phone number and other details were copied from the <code>selectedPerson</code> and is assigned the new level of friendship from the rate command.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If an invalid index value is entered, i.e the person with an <code>index</code> of which does not exist in CollegeZone contact list is entered with valid <code>index</code> entries,
+only the valid entries will have their <code>Level of friendships</code> rated and updated.
+As seen in the code below, there will be a error message informing the user that they have keyed in an invalid <code>index</code> value.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">            <span class="keyword">if</span> (index.getZeroBased() &gt;= latestList.size()) {
+                <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(MESSAGE_ONE_OR_MORE_INVALID_INDEX);
+            }</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>RateCommand</code>.<br>
+<strong>Alternative 1 (current choice):</strong> Creates a new <code>Person</code> object which copies all its respective personal details and adds a new <code>LevelOfFriendship</code> value.<br>
+<strong>Pros:</strong> It uses a pre-existing method, and additional methods to implement <code>RateCommand</code> need not be created and added. <br>
+<strong>Cons:</strong> Copying all respective personal data in order to change only the <code>LevelOfFriendship</code> attribute can be excessive as cause additional processing time if a <code>person</code> have many attributes.<br>
+<strong>Alternative 2:</strong> Add a <code>changeLevelOfFriendship</code> setter method in <code>Person</code> class<br>
+<strong>Pros:</strong> Relatively simple to implement.<br>
+<strong>Cons:</strong> Additional methods have to be added to ensure that the <code>input values</code> and <code>indexes</code> are valid.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-14 12:22:41 UTC
+Last updated 2018-04-14 16:21:32 UTC
 </div>
 </div>
 </body>
