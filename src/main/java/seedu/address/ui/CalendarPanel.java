@@ -107,7 +107,6 @@ public class CalendarPanel extends UiPart<Region> {
                         5));
                 int year = Integer.parseInt(meetDate.substring(6,
                         10));
-                System.out.println(year + " " + month + " " + day);
                 calendarM.addEntry(new Entry("Meeting " + person.getName().toString(),
                         new Interval(LocalDate.of(year, month, day), LocalTime.of(12, 0),
                                 LocalDate.of(year, month, day), LocalTime.of(13, 0))));
