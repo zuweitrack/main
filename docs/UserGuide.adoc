@@ -323,7 +323,7 @@ Shows the level of friendship of the student(s) whose level of friendship contai
 
 *_Formats:_*
 ```java
-show LEVELOFFRIENDSHIP
+(show|sh) LEVELOFFRIENDSHIP
 ```
 
 ****
@@ -336,11 +336,11 @@ show LEVELOFFRIENDSHIP
 ```java
 > show 1
 ```
-Returns `Students with Level of Friendship value 1`
+Returns Students with Level of Friendship value `1`
 ```java
 > sh 1 5
 ```
-Returns `Students with Level of Friendship value 1` and `Students with Level of Friendship value 5`
+Returns Students with Level of Friendship value `1` and Students with Level of Friendship value `5`
 // end::rate[]
 
 // tag::reminder[]
@@ -778,7 +778,7 @@ There is no need to save manually.
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
-
+// tag::editreminder[]
 ==== Editing a reminder [Coming in v2.0]
 Edits an existing reminder in CollegeZone. +
 Format: `~r INDEX [text/REMINDER_TEXT] [d/DATETIME]`
@@ -794,10 +794,11 @@ Examples:
 * `~r 4 text/CS2103 exam coming in 1 week` +
 Edits the reminder text of the 4th reminder to be `CS2103 exam coming in 1 week`.
 * `~r 2 text/water plants d/tmr 7am` +
-Edits the reminder text and datetime of the 2nd student to be `water plants` and `tmr 7am` respectively.
-=======
+Edits the reminder text and datetime of the 2nd student to be `water plants` and `tmr 7am` respectively. +
+// end::editreminder[]
+
 // tag::debv2.0[]
-==== Adding subgoals [Coming in v2.0]
+==== Adding subgoals [Coming in v2.0] +
 By using this command, you are able to add subgoals to the goals you currently have.
 
 ==== Auto-completing of commands [Coming in v2.0]
