@@ -176,7 +176,7 @@ Returns any student having tags `friends`
 
 // tag::seek[]
 ==== Seeking the Resident Assistant(s) of a student : `seek` [Since v1.3]
-Seek the Resident Assistant(s) (RA) of the student whose name contains any of the given keywords. +
+Seek the Resident Assistant(s) (RA) of the student(s) whose name contains any of the given keywords. +
 *_Formats:_*
 ```java
 seek NAME
@@ -546,7 +546,7 @@ Indicates ongoing of the 1st goal in CollegeZone's goal listing.
 // end::goalongoing[]
 
 === Rate features
-
+// tag::rate[]
 ==== Rating feature : `rate` or `rt` [Since v1.4]
 
 Rates an existing student in CollegeZone. +
@@ -576,7 +576,30 @@ Rates the level of friendship of the 1st and 3rd student to be `5`.
 
 ==== Show level of friendship feature : `show` or `sh` [Since v1.5]
 
+Shows the level of friendship of the student(s) whose level of friendship contains any of the given input values. +
 
+*_Formats:_*
+```java
+show LEVELOFFRIENDSHIP
+```
+
+****
+* The order of the values does not matter. e.g. `1 2` will match `1` and `2`
+* Only the name is searched at a single time
+* Only valid level of friendship values will be matched e.g. `11` will not match `1`
+* Level of frienship of the student matching at least one value will be returned (i.e. `OR` search). e.g. `1 2` will return `Students with Level of Friendship value 1` and `Students with Level of Friendship value 2`.
+****
+
+*_Examples_:*
+```java
+> show 1
+```
+Returns `Students with Level of Friendship value 1`
+```java
+> sh 1 5
+```
+Returns `Students with Level of Friendship value 1` and `Students with Level of Friendship value 5`
+// end::rate[]
 
 === Interesting features
 // tag::theme[]

@@ -34,6 +34,11 @@ just like a digital organiser.
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
+=== Major enhancement: added rate and show level of friendship command
+include::../UserGuide.adoc[tag=rate]
+
+
+=== Minor enhancement: added a seek RA command
 include::../UserGuide.adoc[tag=seek]
 
 == Contributions to the Developer Guide
