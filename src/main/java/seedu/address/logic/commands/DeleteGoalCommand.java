@@ -13,7 +13,7 @@ import seedu.address.model.goal.exceptions.GoalNotFoundException;
 
 //@@author deborahlow97
 /**
- * Deletes a goal identified using it's last displayed index from the address book.
+ * Deletes a goal identified using it's last displayed index from CollegeZone.
  */
 public class DeleteGoalCommand extends UndoableCommand {
 
