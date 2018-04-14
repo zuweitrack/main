@@ -743,8 +743,7 @@ b. Require developers to download those libraries manually (this creates extra w
 |Profile Photo : Added a male female profile pictures to GUI for an interactive experience.
 
 |Goh Zu Wei
-|Form Groups : This feature allows user to organize students to form study groups or recreational sport groups +
- Set event: Add events and dates for the group meeting and gathering.
+|Rate Friends : This feature allows categorize and rate one or more friends by changing their levels of friendships.
 |Seek: Add seek command to be able to seek the Resident Assistant (RA) of any particular the student living in RC4
 
 |=======================================================================
@@ -784,6 +783,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |RC student |note down tasks, events or training sessions in a calendar |make my schedule more organised
 
 |`* * *` |RC student |Set down a date for group events |do necessary group preparation prior to a group event
+
+|`* * *` |RC student |Rate my friends |keep track and update of who my close friends are
 
 |`* *` |careless RC student |undo a command I entered |undo a wrong command that I entered
 
@@ -1149,6 +1150,94 @@ Use case ends.
 +
 Use case ends.
 
+=== Use case: Seek Resident Assistant (RA)
+
+*MSS*
+
+1. User requests to find students' RA by name using keywords.
+2. CollegeZone shows a list of students and Resident assistants (RA).
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The given detail format is invalid.
++
+[none]
+** 1a1. CollegeZone shows an error message.
+
+[none]
+* 2a. The list has all students and RA(s) with name that matches keywords.
++
+Use case ends.
+
+[none]
+* 2b. The list is empty
++
+Use case ends.
+
+
+
+=== Use case: Rate student
+*MSS*
++
+1.  User requests to list or show students of a particular level of friendship.
+2.  CollegeZone shows a list of students.
+3.  User requests to rate one or more student in the list.
+4. CollegeZone rates and changes the level of friendship of the student(s).
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. CollegeZone shows an error message.
++
+
+* 3b. The given detail format is invalid.
++
+[none]
+** 3b1. CollegeZone shows an error message.
++
+Use case ends.
+
+[discrete]
+
+=== Use case: Show students of a particular level of friendship
+*MSS*
++
+1. User requests to show student by level of friendship using numerical values.
+2. CollegeZone shows a list of students of a particular level of friendship.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The given detail format is invalid.
++
+[none]
+** 1a1. CollegeZone shows an error message
+
+[none]
+* 2a. The list has all students with level of friendship that matches input values
++
+Use case ends.
+
+[none]
+* 2b. The list is empty
++
+Use case ends.
+
+[discrete]
 
 [appendix]
 == Non Functional Requirements
