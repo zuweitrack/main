@@ -50,29 +50,26 @@ just like a digital organiser.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: Added <strong>the ability to add &amp; delete reminders in a Calendar interface</strong></p>
+<p><strong>Major enhancement</strong>: Added the <strong>ability rate multiple people</strong> by changing the level of friendship and <strong>show people based on their level of friendships.</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the RC4 student to add and delete reminders in a calendar, which will be marked with different colours, depending on whether the specific reminder is due or not due.</p>
+<p>What it does: allows the RC4 student to rate multiple friends in CollegeZone and the level of friendship of these friends will be changed.</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because RC4 students, especially freshmen, will be new to University and College life and by being able to note down tasks and reminders will greatly assist them in organising their day-to-day activities.</p>
+<p>Justification: An RC4 student may interact with several groups of people during the week, being able to rate multiple people at a go makes the process more convenient. This allows RC4 students to keep track of who their close friends are and helps them identify people who they may want to get closer with.</p>
 </li>
 <li>
-<p>Highlights: This feature involves creating a new class with new attributes that were not in the original addressbook. Interacting with the CalendarFX API to be able to display the reminders also posed challenges in terms of implementation.</p>
-</li>
-<li>
-<p>Credits: CalendarFX API, Natty API</p>
+<p>Highlights:  The features show command followed by the rate command allows RC4 students to show friends of a particular level of friendship and change the level of friendships from that list of friends. It helps RC4 students the ease of rating people of a particular level of friendship</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: Added additional functionality to the find command, which allows RC4 students to find their contacts by tags.</p>
+<p><strong>Minor enhancement</strong>: Added a seek RA command, which allows RC4 students to find the details of RC4 students and Resident Assistants (RA).</p>
 </li>
 <li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103JAN2018-T09-B2/main/blob/master/collated/main/fuadsahmawi.md">Functional code</a>] [<a href="https://github.com/CS2103JAN2018-T09-B2/main/blob/master/collated/test/fuadsahmawi.md">Test code</a>]</p>
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103JAN2018-T09-B2/main/blob/master/collated/main/zuweitrack.md">Functional code</a>] [<a href="https://github.com/CS2103JAN2018-T09-B2/main/blob/master/collated/test/zuweitrack.md">Test code</a>]</p>
 </li>
 </ul>
 </div>
@@ -92,209 +89,165 @@ just like a digital organiser.</p>
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="reminder-features"><a class="link" href="#reminder-features">Reminder features</a></h3>
+<h3 id="major-enhancement-added-rate-and-show-level-of-friendship-command"><a class="link" href="#major-enhancement-added-rate-and-show-level-of-friendship-command">Major enhancement: added rate and show level of friendship command</a></h3>
 <div class="sect3">
-<h4 id="adding-a-reminder-code-reminder-code-or-code-r-code-or-code-addreminder-code-since-v1-4"><a class="link" href="#adding-a-reminder-code-reminder-code-or-code-r-code-or-code-addreminder-code-since-v1-4">Adding a reminder: <code>+reminder</code> or <code>+r</code> or <code>addreminder</code> [Since v1.4]</a></h4>
+<h4 id="rating-feature-code-rate-code-or-code-rt-code-since-v1-4"><a class="link" href="#rating-feature-code-rate-code-or-code-rt-code-since-v1-4">Rating feature : <code>rate</code> or <code>rt</code> [Since v1.4]</a></h4>
 <div class="paragraph">
-<p>You can set a reminder into the calendar in CollegeZone<br>
-Format: <code>+r text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME</code></p>
+<p>Rates an existing student in CollegeZone.<br></p>
+</div>
+<div class="paragraph">
+<p><strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">(rate | rt) INDEX(s) [*/LEVEL_OF_FRIENDSHIP]</code></pre>
+</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>A reminder will be added to CollegeZone and it will reflected in the Calendar.</p>
+<p>Rates the student at the specified <code>INDEX(s)</code>. The index(s) refers to the index number shown in the last student listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
-<p><code>START_DATETIME</code> &amp; <code>END_DATETIME</code>: a datetime is a string that contains either a date, a time or a combination of both (in any order). If a date is not specified, then it will refer to today. If a time is not specified, then it will refer to the current time.</p>
+<p>At least one valid index and a valid level of friendship rating must be provided.</p>
 </li>
 <li>
-<p>Examples of valid START_DATETIME &amp; END_DATETIME:<br></p>
-<div class="ulist">
-<ul>
-<li>
-<p>[date] [time]<br></p>
+<p>Existing values will be updated to the input values.</p>
 </li>
 <li>
-<p>3pm<br></p>
-</li>
-<li>
-<p>today<br></p>
-</li>
-<li>
-<p>tmr<br></p>
-</li>
-<li>
-<p>10 Feb<br></p>
-</li>
-<li>
-<p>thursday 8am<br></p>
-</li>
-<li>
-<p>tomorrow 3pm<br></p>
-</li>
-<li>
-<p>14 Feb 2014 5.30am<br></p>
-</li>
-<li>
-<p>2/29/14 23:59<br></p>
-</li>
-</ul>
-</div>
+<p>When rating students, the current existing level of friendship value of the student will be changed.</p>
 </li>
 </ul>
 </div>
 </div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-You should use a date format of MM/DD/YYYY instead of DD/MM/YYYY if you choose to
-use this date format for the START_DATETIME or END_DATETIME
-</td>
-</tr>
-</table>
 </div>
 <div class="paragraph">
 <p><strong><em>Examples</em>:</strong></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">+r text/Eat vitamins d/tmr <span class="integer">8</span>am e/tmr <span class="float">8.10</span>am</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">&gt; rate <span class="integer">1</span> */<span class="integer">5</span></code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Rates the level of friendship of the 1st student to be <code>5</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">+reminder text/Dental appointment d/next thurs <span class="integer">3</span>pm e/next thurs <span class="integer">4</span>pm</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">&gt; rt <span class="integer">1</span> <span class="integer">3</span> */<span class="integer">7</span></code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Rates the level of friendship of the 1st and 3rd student to be <code>5</code>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="editing-a-reminder-code-r-code-coming-v1-5"><a class="link" href="#editing-a-reminder-code-r-code-coming-v1-5">Editing a reminder: <code>~r</code> [Coming v1.5]</a></h4>
+<h4 id="show-level-of-friendship-feature-code-show-code-or-code-sh-code-since-v1-5"><a class="link" href="#show-level-of-friendship-feature-code-show-code-or-code-sh-code-since-v1-5">Show level of friendship feature : <code>show</code> or <code>sh</code> [Since v1.5]</a></h4>
 <div class="paragraph">
-<p>Edits an existing reminder in CollegeZone.<br>
-Format: <code>~r INDEX [text/REMINDER_TEXT] [d/DATETIME]</code></p>
+<p>Shows the level of friendship of the student(s) whose level of friendship contains any of the given input values.<br></p>
+</div>
+<div class="paragraph">
+<p><strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">show LEVELOFFRIENDSHIP</code></pre>
+</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Edits the reminder at the specified <code>INDEX</code>. The index refers to the index number shown in the reminder listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p>The order of the input level of friendship values does not matter. e.g. <code>1 2</code> will match <code>1</code> and <code>2</code></p>
 </li>
 <li>
-<p>At least one of the optional fields must be provided.</p>
+<p>Only valid level of friendship values will be matched e.g. <code>11</code> will not match <code>1</code></p>
 </li>
 <li>
-<p>Existing values will be updated to the input values.</p>
+<p>Level of frienship of the student matching at least one value will be returned (i.e. <code>OR</code> search). e.g. <code>1 2</code> will return <code>Students with Level of Friendship value 1</code> and <code>Students with Level of Friendship value 2</code>.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong><em>Examples</em>:</strong></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>~r 4 text/CS2103 exam coming in 1 week</code><br>
-Edits the reminder text of the 4th reminder to be <code>CS2103 exam coming in 1 week</code>.</p>
-</li>
-<li>
-<p><code>~r 2 text/water plants d/tmr 7am</code><br>
-Edits the reminder text and datetime of the 2nd student to be <code>water plants</code> and <code>tmr 7am</code> respectively.</p>
-</li>
-</ul>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; show <span class="integer">1</span></code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Returns <code>Students with Level of Friendship value 1</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; sh <span class="integer">1</span> <span class="integer">5</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Returns <code>Students with Level of Friendship value 1</code> and <code>Students with Level of Friendship value 5</code></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="minor-enhancement-added-a-seek-ra-command"><a class="link" href="#minor-enhancement-added-a-seek-ra-command">Minor enhancement: added a seek RA command</a></h3>
 <div class="sect3">
-<h4 id="deleting-a-reminder-code-reminder-code-or-code-r-code-or-code-deletereminder-code-since-v1-4"><a class="link" href="#deleting-a-reminder-code-reminder-code-or-code-r-code-or-code-deletereminder-code-since-v1-4">Deleting a reminder: <code>-reminder</code> or <code>-r</code> or <code>deletereminder</code> [Since v1.4]</a></h4>
+<h4 id="seeking-the-resident-assistant-s-of-a-student-code-seek-code-since-v1-3"><a class="link" href="#seeking-the-resident-assistant-s-of-a-student-code-seek-code-since-v1-3">Seeking the Resident Assistant(s) of a student : <code>seek</code> [Since v1.3]</a></h4>
 <div class="paragraph">
-<p>You can delete a reminder that you have set into the calendar in CollegeZone<br>
-Format: <code>-r text/REMINDER_TEXT d/START_DATETIME</code></p>
+<p>Seek the Resident Assistant(s) (RA) of the student(s) whose name contains any of the given keywords.<br>
+<strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">seek NAME</code></pre>
+</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Deletes a reminder from CollegeZone and the reminder will not be reflected in the Calendar anymore.</p>
+<p>The search is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
 </li>
 <li>
-<p><code>REMINDER_TEXT</code>: a string that contains the reminder&#8217;s title</p>
+<p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
 </li>
 <li>
-<p><code>START_DATETIME</code>: a datetime is a string that contains either a date, a time or a combination of both (in any order). If a date is not specified, then it will refer to today. If a time is not specified, then it will refer to the current time.</p>
+<p>Only the name is searched at a single time</p>
 </li>
 <li>
-<p>Examples of valid START_DATETIM:<br></p>
-<div class="ulist">
-<ul>
-<li>
-<p>[date] [time]<br></p>
+<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
 </li>
 <li>
-<p>3pm<br></p>
-</li>
-<li>
-<p>today<br></p>
-</li>
-<li>
-<p>tmr<br></p>
-</li>
-<li>
-<p>10 Feb<br></p>
-</li>
-<li>
-<p>thursday 8am<br></p>
-</li>
-<li>
-<p>tomorrow 3pm<br></p>
-</li>
-<li>
-<p>14 Feb 2014 5.30am<br></p>
-</li>
-<li>
-<p>2/29/14 23:59<br></p>
-</li>
-</ul>
-</div>
+<p>Resident Assistant(s) (RA) of the student&#8217;s name matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code>, <code>RA(s) of RC4</code>.</p>
 </li>
 </ul>
 </div>
 </div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-You should use a date format of MM/DD/YYYY instead of DD/MM/YYYY if you choose to
-use this date format for START_DATETIME
-</td>
-</tr>
-</table>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong><em>Examples</em>:</strong></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>-r text/Eat vitamins d/tmr 8pm</code></p>
-</li>
-<li>
-<p><code>-reminder text/Dental appointment d/tmr</code></p>
-</li>
-</ul>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; seek John</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Returns <code>John</code> and <code>RA(s) of RC4</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; seek Betsy</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Returns <code>Betsy</code> and <code>RA(s) of RC4</code></p>
 </div>
 </div>
 </div>
@@ -313,56 +266,12 @@ use this date format for START_DATETIME
 </tr>
 </tbody>
 </table>
-<div class="sect2">
-<h3 id="reminders-since-v1-4"><a class="link" href="#reminders-since-v1-4">Reminders [Since v1.4]</a></h3>
-<div class="paragraph">
-<p>Reminders are created as RC4 residents have events, classes and meetings to go to at a certain date and time, we decided on implementing a reminder feature to allow users to add reminders in CollegeZone.<br>
-Reminder commands are undoable and redoable for the benefit users to redo and undo a command they did or did not intend to change.</p>
-</div>
-<div class="paragraph">
-<p><strong>Reminder features:</strong><br></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Adding a reminder to the Calendar</p>
-</li>
-<li>
-<p>Deleting a reminder on the Calendar</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><strong>Reminder objects will consist of 3 attributes :</strong><br></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>the reminder text content<br></p>
-</li>
-<li>
-<p>the start date and time<br></p>
-</li>
-<li>
-<p>the end date and time</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The reminders will be stored in an ArrayList of all the reminder objects. Each reminder will have specific positive integer index number.<br></p>
-</div>
-<div class="paragraph">
-<p>A reminder will be <strong>blue</strong> until it is due.<br>
-A reminder will turn and remain <strong>red</strong> if it&#8217;s due.<br>
-Users can delete reminders on the Calendar if its already due or when they accidentally made a mistake <br></p>
-</div>
-</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-13 23:52:14 UTC
+Last updated 2018-04-14 04:24:41 UTC
 </div>
 </div>
 </body>
