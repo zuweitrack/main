@@ -36,6 +36,18 @@ public class CommandBoxHandle extends NodeHandle<TextField> {
 
         return !getStyleClass().contains(CommandBox.ERROR_STYLE_CLASS);
     }
+    //@@author sham-sheer
+    /**
+     * Enters the given command in the Command Box but doesnt press enter.
+     * @return true if the command succeeded, false otherwise.
+     */
+    public boolean runWithoutEnter(String command) {
+        click();
+        guiRobot.interact(() -> getRootNode().setText(command));
+        guiRobot.pauseForHuman();
+
+        return !getStyleClass().contains(CommandBox.ERROR_STYLE_CLASS);
+    }
 
     /**
      * Returns the list of style classes present in the command box.

@@ -335,7 +335,35 @@ Returns `Students with Level of Friendship value 1`
 Returns `Students with Level of Friendship value 1` and `Students with Level of Friendship value 5`
 // end::rate[]
 
+// tag::sort[]
+
+==== Sort RC4 Students List: `sort [INDEX_TYPE]' [Since v1.5]
+
+Sorts the RC4 Students List according to the input index. Three different sorting types available.
+
+
+*_Formats:_*
+```java
+sort INDEX_TYPE
+```
+
+****
+* Sort Type 1: Sorts the RC4 Students according to their Level of Friendship attribute.
+* Sort Type 2: Sorts the RC4 Students according to their meeting date attribute.
+* Sort Type 3: Sorts the RC4 Students according to their Birthday attribute.
+* When sorting according to meet date, those sstudents whose meet date has passed or those students whom you are not meeting as of yet, will be moved to the bottom.
+****
+
+*_Examples_:*
+```java
+> sort 1
+```
+Returns `A sorted list of RC4 students according to their level of friendship`
+// end::sort[]
+
 // tag::reminder[]
+
+
 === Reminder features
 
 You might be wondering what else you can do with the calendar. The Reminder features listed below will allow you to set reminders for events, important dates or simply to-do tasks that will be reflected in the calendar for easy reference!
@@ -852,6 +880,8 @@ OR +
 OR +
 `m INDEX d/DD-MM-YYYY`
 |
+
+|*Sort* |Sorts the RC4 Students list in 3 different ways|`sort [SORT TYPE]`| sort 1
 
 |*Add Goal* |Adds a goal entry |`+goal impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
 OR +

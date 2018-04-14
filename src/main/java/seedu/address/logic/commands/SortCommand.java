@@ -2,8 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Person;
+
 
 //@@author sham-sheer
 /**
@@ -14,6 +18,8 @@ public class SortCommand extends UndoableCommand {
     public static final  String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid sort type: %1$s";
+
+    public static final String MESSAGE_EMPTY_LIST = "CollegeZone student list is empty, There is nothing to sort!";
 
     public static final String MESSAGE_SORTED_SUCCESS_LEVEL_OF_FRIENDSHIP = "List sorted according to LOF!";
 
@@ -52,8 +58,13 @@ public class SortCommand extends UndoableCommand {
 
     @Override
     protected void preprocessUndoableCommand() throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+
         if (index.getOneBased() > 3) {
             throw new CommandException(String.format(SortCommand.MESSAGE_INVALID_COMMAND_FORMAT, index.getOneBased()));
+        }
+        if (lastShownList.size() == 0) {
+            throw new CommandException(String.format(SortCommand.MESSAGE_EMPTY_LIST));
         }
     }
 
