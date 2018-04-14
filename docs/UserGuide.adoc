@@ -338,14 +338,22 @@ Returns `Students with Level of Friendship value 1` and `Students with Level of 
 // tag::reminder[]
 === Reminder features
 
-==== Adding a reminder: `+reminder` or `+r` or `addreminder` [Since v1.4]
-You can set a reminder into the calendar in _CollegeZone_ +
-Format: `+r text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME`
+You might be wondering what else you can do with the calendar. The Reminder features listed below will allow you to set reminders for events, important dates or simply to-do tasks that will be reflected in the calendar for easy reference!
 
+==== Adding a reminder: `+reminder` or `+r` or `addreminder` [Since v1.4]
+
+You can try setting a reminder into the calendar in CollegeZone by referring to the instructions below. +
+
+*_Formats:_*
+```java
+(+reminder | +r | addreminder) text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME
+```
+
+*_Details:_*
 ****
 * A reminder will be added to _CollegeZone_ and it will reflected in the Calendar.
 * `START_DATETIME` & `END_DATETIME`: a datetime is a string that contains either a date, a time or a combination of both (in any order). If a date is not specified, then it will refer to today. If a time is not specified, then it will refer to the current time.
-* Examples of valid START_DATETIME & END_DATETIME: +
+* Examples of valid `START_DATETIME` & `END_DATETIME`: +
  -	[date] [time] +
  -	3pm +
  -	today +
@@ -355,48 +363,42 @@ Format: `+r text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME`
  -	tomorrow 3pm +
  -	14 Feb 2014 5.30am +
  -	2/29/14 23:59 +
-
-****
 
 [TIP]
 You should use a date format of MM/DD/YYYY instead of DD/MM/YYYY if you choose to
 use this date format for the START_DATETIME or END_DATETIME
-
+****
 
 *_Examples_:*
 ```java
-+r text/Eat vitamins d/tmr 8am e/tmr 8.10am
++r text/Eat vitamins d/4/25/2018 8am e/4/25/2018 8.10am
 ```
+Returns `Eat vitamins` in the calendar on `25th April 2018` from `8am` to `8.10am`
+
 ```java
 +reminder text/Dental appointment d/next thurs 3pm e/next thurs 4pm
 ```
+Returns `Dental appointment` in the calendar according to `START_DATETIME` & `END_DATETIME`
 
-==== Editing a reminder: `~r` [Coming v1.5]
-Edits an existing reminder in _CollegeZone_. +
-Format: `~r INDEX [text/REMINDER_TEXT] [d/DATETIME]`
+Figure below portrays what should be seen after the command is executed correctly:
 
-****
-* Edits the reminder at the specified `INDEX`. The index refers to the index number shown in the reminder listing. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-****
-
-Examples:
-
-* `~r 4 text/CS2103 exam coming in 1 week` +
-Edits the reminder text of the 4th reminder to be `CS2103 exam coming in 1 week`.
-* `~r 2 text/water plants d/tmr 7am` +
-Edits the reminder text and datetime of the 2nd student to be `water plants` and `tmr 7am` respectively.
+image::addReminder.PNG[width="1500"]
 
 ==== Deleting a reminder: `-reminder` or `-r` or `deletereminder` [Since v1.4]
-You can delete a reminder that you have set into the calendar in _CollegeZone_ +
-Format: `-r text/REMINDER_TEXT d/START_DATETIME`
 
+If you made a mistake or have reminders that are already due, you can also delete it away from the calendar by referring to the instructions below.
+
+*_Formats:_*
+```java
+(-reminder | -r | deletereminder) text/REMINDER_TEXT d/START_DATETIME
+```
+
+*_Details:_*
 ****
 * Deletes a reminder from _CollegeZone_ and the reminder will not be reflected in the Calendar anymore.
 * `REMINDER_TEXT`: a string that contains the reminder's title
 * `START_DATETIME`: a datetime is a string that contains either a date, a time or a combination of both (in any order). If a date is not specified, then it will refer to today. If a time is not specified, then it will refer to the current time.
-* Examples of valid START_DATETIM: +
+* Examples of valid `START_DATETIME`: +
  -	[date] [time] +
  -	3pm +
  -	today +
@@ -407,16 +409,28 @@ Format: `-r text/REMINDER_TEXT d/START_DATETIME`
  -	14 Feb 2014 5.30am +
  -	2/29/14 23:59 +
 
-****
-
 [TIP]
 You should use a date format of MM/DD/YYYY instead of DD/MM/YYYY if you choose to
 use this date format for START_DATETIME
+****
 
-Examples:
+*_Examples:_*
 
-* `-r text/Eat vitamins d/tmr 8pm`
-* `-reminder text/Dental appointment d/tmr`
+```java
+-r text/Eat vitamins d/4/25/2018 8am
+```
+Deletes reminder `Eat vitamins` set on `25th April 2018` at `8am`
+
+```java
+-reminder text/Dental appointment d/tmr
+```
+
+Deletes reminder `Eat vitamins` according to `START_DATETIME`
+
+Figure below portrays what should be seen after the command is executed correctly:
+
+image::delReminder.PNG[width="1500"]
+
 // end::reminder[]
 
 === Goal features
@@ -747,6 +761,24 @@ There is no need to save manually.
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
+
+==== Editing a reminder [Coming in v2.0]
+Edits an existing reminder in CollegeZone. +
+Format: `~r INDEX [text/REMINDER_TEXT] [d/DATETIME]`
+
+****
+* Edits the reminder at the specified `INDEX`. The index refers to the index number shown in the reminder listing. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+****
+
+Examples:
+
+* `~r 4 text/CS2103 exam coming in 1 week` +
+Edits the reminder text of the 4th reminder to be `CS2103 exam coming in 1 week`.
+* `~r 2 text/water plants d/tmr 7am` +
+Edits the reminder text and datetime of the 2nd student to be `water plants` and `tmr 7am` respectively.
+=======
 // tag::debv2.0[]
 ==== Adding subgoals [Coming in v2.0]
 By using this command, you are able to add subgoals to the goals you currently have.
@@ -864,14 +896,14 @@ OR +
 `+r text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME` +
 OR +
 `addreminder text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME` +
-|`+reminder text/Eat pills d/tonight 10pm e/tonight 10.15pm`
+|`+reminder text/Eat pills d/4/25/2018 8am e/4/25/2018 8.10am`
 
-|*Delete Reminder* |Deletes a reminder entry |`-reminder [REMINDER_TEXT]` +
+|*Delete Reminder* |Deletes a reminder entry |`-reminder text/REMINDER_TEXT d/START_DATETIME` +
 OR +
-`-r [REMINDER_TEXT]` +
+`-r text/REMINDER_TEXT d/START_DATETIME` +
 OR +
-`deletereminder [REMINDER_TEXT]` +
-|`-reminder Eat pills`
+`deletereminder text/REMINDER_TEXT d/START_DATETIME` +
+|`-reminder text/Eat pills d/4/25/2018 8am`
 
 |*Rate* |Rates one or more people|`rate INDEX(s) [LEVELOFFRIENDSHIP]` OR +
 `rt INDEX(s) [LEVELOFFRIENDSHIP]`| rate 1 3 */5
