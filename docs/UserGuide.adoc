@@ -315,8 +315,7 @@ show LEVELOFFRIENDSHIP
 ```
 
 ****
-* The order of the values does not matter. e.g. `1 2` will match `1` and `2`
-* Only the name is searched at a single time
+* The order of the input level of friendship values does not matter. e.g. `1 2` will match `1` and `2`
 * Only valid level of friendship values will be matched e.g. `11` will not match `1`
 * Level of frienship of the student matching at least one value will be returned (i.e. `OR` search). e.g. `1 2` will return `Students with Level of Friendship value 1` and `Students with Level of Friendship value 2`.
 ****
