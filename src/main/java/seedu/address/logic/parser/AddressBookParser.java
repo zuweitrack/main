@@ -30,6 +30,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SeekRaCommand;
 import seedu.address.logic.commands.SelectCommand;
 
+import seedu.address.logic.commands.ShowLofCommand;
 import seedu.address.logic.commands.SortCommand;
 
 import seedu.address.logic.commands.SortGoalCommand;
@@ -113,6 +114,12 @@ public class AddressBookParser {
 
         case SeekRaCommand.COMMAND_ALIAS:
             return new SeekRaCommandParser().parse(arguments);
+
+        case ShowLofCommand.COMMAND_WORD:
+            return new ShowLofCommandParser().parse(arguments);
+
+        case ShowLofCommand.COMMAND_ALIAS:
+            return new ShowLofCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
