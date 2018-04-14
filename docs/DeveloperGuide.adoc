@@ -697,19 +697,15 @@ The main reason behind this implementation is because setting goals gives you *l
 This implementation allows RC4 students to set goals in _CollegeZone_ – big or small ones - so
  that they will be reminded of the goals that they have set for themselves.
 
-  In addition as a majority of RC4 residents are NUS students, when students set their own goals, they
-   take responsibility and ownership of their learning goals. +
- Goals are meant only for the user, and the user can have many goals stored in CollegeZone.
-
 *Goal features:*
-
- -add goal
- -edit goal
- -delete goal
- -complete goal
- -ongoing goal
- -sort goal
-
+```
+ 1. add goal
+ 2. edit goal
+ 3. delete goal
+ 4. complete goal
+ 5. ongoing goal
+ 6. sort goal
+```
 ==== Implementation of Goal Object
 
 *Goal objects consists of 5 attributes :* +
@@ -721,7 +717,7 @@ This implementation allows RC4 students to set goals in _CollegeZone_ – big or
 5. Goal completion status.
 
 ._Class diagram of Goal_
-image::CollegeZoneGoalModelClassDiagram.JPG[width="800"]
+image::CollegeZoneGoalModelClassDiagram.JPG[width="750"]
 
 The code snippet shown below shows the overloading of StartDateTime constructor class.
 It keeps both a String value and a LocalDateTime value.
@@ -954,8 +950,10 @@ are very similar to how CollegeZone implements its contacts. This is implemented
 
 
 === Theme Enhancement
+CollegeZone has multiple themes for the user to choose from. Currently, there are 3 themes implemented.
+Namely, `dark` theme, `bubblegum` theme and `light` theme. This command is not undoable.
 
-
+ThemeCommand is
 
 // tag::meetCommand[]
 === Meet Command [Since v1.2]

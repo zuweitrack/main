@@ -23,9 +23,11 @@ _CollegeZone_ is a personal assistant to your everyday life in NUS. It helps you
 More importantly, _CollegeZone_ is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, _CollegeZone_ can get your contact management and tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 
-== Quick Start
-Follow these few simple steps to get started with _CollegeZone_:
+== Getting Started
 
+Follow these few simple steps to get started with _CollegeZone_!
+
+=== *Download*
 .  Ensure you have Java version `1.8.0_60` or later installed in your Computer.
 +
 [NOTE]
@@ -33,16 +35,35 @@ Having any Java 8 version is not enough. +
 This app will not work with earlier versions of Java 8.
 +
 .  Download the latest `collegezone.jar` link:{repoURL}/releases[here].
++
+image::DownloadJar.JPG[width="500"]
++
+
 .  Copy the file to the folder you want to use as the home folder for _CollegeZone_. For example, you can place it in a folder created on your desktop.
-.  Double-click the file to start the app. You will see the application Graphic User Interface (GUI) as shown below. The GUI should appear in a few seconds.
+
+=== *Launch*
+. To launch _CollegeZone_, double-click on `collegezone.jar` to launch _CollegeZone_.
+. You will be greeted with _CollegeZone's_ Graphic User Interface (GUI) as shown below. The GUI should appear in a few seconds.
 +
 image::UI.JPG[width="800"]
 +
-.  The image below describes what each part of _CollegeZone's_ GUI represent.
-+
-image::UserGuideLabelledUI.PNG[width="800"]
-+
 
+
+=== *Visual Introduction*
+
+The image below describes what each part of _CollegeZone's_ GUI represent.
+
+image::UserGuideLabelledUI.PNG[width="800"]
+
+
+. The *Command Box* is located at the top of CollegeZne. Enter your keyboard commands into the box!
+. The *Result Display Panel* shows you the results of the commands you entered.
+. The *Student List* keeps the list of student contacts that you have.
+. The *Goal List* keeps the list of goals that you have.
+. The *Goal Percentage Bar* is a percentage counter of the goals you have completed.
+. The *Calendar* keeps the schedules that you have.
+
+=== Start using CollegeZone
 Now that you have _CollegeZone's_ application on, try out some of the commands that we offer!
 
 * Type the command in the command box and press kbd:[Enter] to execute it. +
