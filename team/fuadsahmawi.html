@@ -156,24 +156,37 @@ just like a digital organiser.</p>
 </table>
 <div class="sect2">
 <h3 id="reminder-features"><a class="link" href="#reminder-features">Reminder features</a></h3>
+<div class="paragraph">
+<p>You might be wondering what else you can do with the calendar. The Reminder features listed below will allow you to set reminders for events, important dates or simply to-do tasks that will be reflected in the calendar for easy reference!</p>
+</div>
 <div class="sect3">
 <h4 id="adding-a-reminder-code-reminder-code-or-code-r-code-or-code-addreminder-code-since-v1-4"><a class="link" href="#adding-a-reminder-code-reminder-code-or-code-r-code-or-code-addreminder-code-since-v1-4">Adding a reminder: <code>+reminder</code> or <code>+r</code> or <code>addreminder</code> [Since v1.4]</a></h4>
 <div class="paragraph">
-<p>You can set a reminder into the calendar in CollegeZone<br>
-Format: <code>+r text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME</code></p>
+<p>You can try setting a reminder into the calendar in CollegeZone by referring to the instructions below.<br></p>
+</div>
+<div class="paragraph">
+<p><strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">(+reminder | +r | addreminder) text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong><em>Details:</em></strong></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>A reminder will be added to CollegeZone and it will reflected in the Calendar.</p>
+<p>A reminder will be added to <em>CollegeZone</em> and it will reflected in the Calendar.</p>
 </li>
 <li>
 <p><code>START_DATETIME</code> &amp; <code>END_DATETIME</code>: a datetime is a string that contains either a date, a time or a combination of both (in any order). If a date is not specified, then it will refer to today. If a time is not specified, then it will refer to the current time.</p>
 </li>
 <li>
-<p>Examples of valid START_DATETIME &amp; END_DATETIME:<br></p>
+<p>Examples of valid <code>START_DATETIME</code> &amp; <code>END_DATETIME</code>:<br></p>
 <div class="ulist">
 <ul>
 <li>
@@ -207,8 +220,6 @@ Format: <code>+r text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME</code></p>
 </div>
 </li>
 </ul>
-</div>
-</div>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -223,71 +234,58 @@ use this date format for the START_DATETIME or END_DATETIME
 </tr>
 </table>
 </div>
+</div>
+</div>
 <div class="paragraph">
 <p><strong><em>Examples</em>:</strong></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">+r text/Eat vitamins d/tmr <span class="integer">8</span>am e/tmr <span class="float">8.10</span>am</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">+r text/Eat vitamins d/<span class="integer">4</span>/<span class="integer">25</span>/<span class="integer">2018</span> <span class="integer">8</span>am e/<span class="integer">4</span>/<span class="integer">25</span>/<span class="integer">2018</span> <span class="float">8.10</span>am</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Returns <code>Eat vitamins</code> in the calendar on <code>25th April 2018</code> from <code>8am</code> to <code>8.10am</code></p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">+reminder text/Dental appointment d/next thurs <span class="integer">3</span>pm e/next thurs <span class="integer">4</span>pm</code></pre>
 </div>
 </div>
-</div>
-<div class="sect3">
-<h4 id="editing-a-reminder-code-r-code-coming-v1-5"><a class="link" href="#editing-a-reminder-code-r-code-coming-v1-5">Editing a reminder: <code>~r</code> [Coming v1.5]</a></h4>
 <div class="paragraph">
-<p>Edits an existing reminder in CollegeZone.<br>
-Format: <code>~r INDEX [text/REMINDER_TEXT] [d/DATETIME]</code></p>
+<p>Returns <code>Dental appointment</code> in the calendar according to <code>START_DATETIME</code> &amp; <code>END_DATETIME</code></p>
 </div>
-<div class="sidebarblock">
+<div class="paragraph">
+<p>Figure below portrays what should be seen after the command is executed correctly:</p>
+</div>
+<div class="imageblock">
 <div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Edits the reminder at the specified <code>INDEX</code>. The index refers to the index number shown in the reminder listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-<li>
-<p>At least one of the optional fields must be provided.</p>
-</li>
-<li>
-<p>Existing values will be updated to the input values.</p>
-</li>
-</ul>
+<img src="../images/addReminder.PNG" alt="addReminder" width="1500">
 </div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>~r 4 text/CS2103 exam coming in 1 week</code><br>
-Edits the reminder text of the 4th reminder to be <code>CS2103 exam coming in 1 week</code>.</p>
-</li>
-<li>
-<p><code>~r 2 text/water plants d/tmr 7am</code><br>
-Edits the reminder text and datetime of the 2nd student to be <code>water plants</code> and <code>tmr 7am</code> respectively.</p>
-</li>
-</ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="deleting-a-reminder-code-reminder-code-or-code-r-code-or-code-deletereminder-code-since-v1-4"><a class="link" href="#deleting-a-reminder-code-reminder-code-or-code-r-code-or-code-deletereminder-code-since-v1-4">Deleting a reminder: <code>-reminder</code> or <code>-r</code> or <code>deletereminder</code> [Since v1.4]</a></h4>
 <div class="paragraph">
-<p>You can delete a reminder that you have set into the calendar in CollegeZone<br>
-Format: <code>-r text/REMINDER_TEXT d/START_DATETIME</code></p>
+<p>If you made a mistake or have reminders that are already due, you can also delete it away from the calendar by referring to the instructions below.</p>
+</div>
+<div class="paragraph">
+<p><strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">(-reminder | -r | deletereminder) text/REMINDER_TEXT d/START_DATETIME</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong><em>Details:</em></strong></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Deletes a reminder from CollegeZone and the reminder will not be reflected in the Calendar anymore.</p>
+<p>Deletes a reminder from <em>CollegeZone</em> and the reminder will not be reflected in the Calendar anymore.</p>
 </li>
 <li>
 <p><code>REMINDER_TEXT</code>: a string that contains the reminder&#8217;s title</p>
@@ -296,7 +294,7 @@ Format: <code>-r text/REMINDER_TEXT d/START_DATETIME</code></p>
 <p><code>START_DATETIME</code>: a datetime is a string that contains either a date, a time or a combination of both (in any order). If a date is not specified, then it will refer to today. If a time is not specified, then it will refer to the current time.</p>
 </li>
 <li>
-<p>Examples of valid START_DATETIM:<br></p>
+<p>Examples of valid <code>START_DATETIME</code>:<br></p>
 <div class="ulist">
 <ul>
 <li>
@@ -331,8 +329,6 @@ Format: <code>-r text/REMINDER_TEXT d/START_DATETIME</code></p>
 </li>
 </ul>
 </div>
-</div>
-</div>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -346,18 +342,34 @@ use this date format for START_DATETIME
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Examples:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>-r text/Eat vitamins d/tmr 8pm</code></p>
-</li>
-<li>
-<p><code>-reminder text/Dental appointment d/tmr</code></p>
-</li>
-</ul>
+</div>
+<div class="paragraph">
+<p><strong><em>Examples:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">-r text/Eat vitamins d/<span class="integer">4</span>/<span class="integer">25</span>/<span class="integer">2018</span> <span class="integer">8</span>am</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Deletes reminder <code>Eat vitamins</code> set on <code>25th April 2018</code> at <code>8am</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">-reminder text/Dental appointment d/tmr</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Deletes reminder <code>Dental appointment</code> according to <code>START_DATETIME</code></p>
+</div>
+<div class="paragraph">
+<p>Figure below portrays what should be seen after the command is executed correctly:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/delReminder.PNG" alt="delReminder" width="1500">
+</div>
 </div>
 </div>
 </div>
@@ -425,7 +437,7 @@ Users can delete reminders on the Calendar if its already due or when they accid
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-14 04:24:41 UTC
+Last updated 2018-04-14 12:22:41 UTC
 </div>
 </div>
 </body>

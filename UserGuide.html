@@ -35,8 +35,6 @@
 <li><a href="#upcoming-features">3.5. Upcoming features</a></li>
 </ul>
 </li>
-<li><a href="#faq">4. FAQ</a></li>
-<li><a href="#command-summary">5. Command Summary</a></li>
 </ul>
 </div>
 </div>
@@ -44,13 +42,20 @@
 <h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>CollegeZone is for NUS students living in Residential College 4 (RC4) who <strong>prefers to use a desktop app for managing their RC4 friends contacts and their tasks</strong>. More importantly, CollegeZone is <strong>optimized for those who prefer to work with a Command Line Interface</strong> (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CollegeZone can get your contact management and tasks done faster than traditional GUI apps. Interested? Jump to the <a href="#quick-start">Section 2, &#8220;Quick Start&#8221;</a> to get started. Enjoy!</p>
+<p>Welcome to <strong><em>CollegeZone</em></strong>!<br>
+<br>
+<em>CollegeZone</em> is a revolutionary desktop application created for National University of Singapore (NUS) students living in Residential College 4 (RC4). We aim to help you to manage your hectic University life!<br>
+<em>CollegeZone</em> is a personal assistant to your everyday life in NUS. It helps you to maintain and expand your social circle, tells you the goals you have, and schedules reminders and appointments you have.
+More importantly, <em>CollegeZone</em> is <strong>optimized for those who prefer to work with a Command Line Interface</strong> (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, <em>CollegeZone</em> can get your contact management and tasks done faster than traditional GUI apps. Interested? Jump to the <a href="#quick-start">Section 2, &#8220;Quick Start&#8221;</a> to get started. Enjoy!</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="quick-start"><a class="link" href="#quick-start">2. Quick Start</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Follow these few simple steps to get started with <em>CollegeZone</em>:</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -73,16 +78,28 @@ This app will not work with earlier versions of Java 8.
 <p>Download the latest <code>collegezone.jar</code> <a href="https://github.com/CS2103JAN2018-T09-B2/main/releases">here</a>.</p>
 </li>
 <li>
-<p>Copy the file to the folder you want to use as the home folder for CollegeZone.</p>
+<p>Copy the file to the folder you want to use as the home folder for <em>CollegeZone</em>. For example, you can place it in a folder created on your desktop.</p>
 </li>
 <li>
-<p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
+<p>Double-click the file to start the app. You will see the application Graphic User Interface (GUI) as shown below. The GUI should appear in a few seconds.</p>
 <div class="imageblock">
 <div class="content">
-<img src="images/Ui.JPG" alt="Ui" width="790">
+<img src="images/UI.JPG" alt="UI" width="800">
 </div>
 </div>
 </li>
+<li>
+<p>The image below describes what each part of <em>CollegeZone&#8217;s</em> GUI represent.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/UserGuideLabelledUI.PNG" alt="UserGuideLabelledUI" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Now that you have <em>CollegeZone&#8217;s</em> application on, try out some of the commands that we offer!</p>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>Type the command in the command box and press <kbd>Enter</kbd> to execute it.<br>
 e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> will open the help window.</p>
@@ -92,16 +109,19 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p><strong><code>list</code></strong> : lists all contacts</p>
+<p><strong><code>list</code></strong> : lists all RC4 student contacts</p>
 </li>
 <li>
-<p><strong><code>add</code></strong><code>n/John Doe p/98765432 */9 b/21 May 1997 u/#10-12 cca/Badminton cca/Volleyball t/workout buddy</code> : adds a contact named <code>John Doe</code> to CollegeZone.</p>
+<p><strong><code>add</code></strong><code>n/John Doe p/98765432 */9 b/21 May 1997 u/#10-12 cca/Badminton cca/Volleyball t/workout buddy</code> : adds a student contact named <code>John Doe</code> to <em>CollegeZone</em>.</p>
 </li>
 <li>
-<p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd contact shown in the current list</p>
+<p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd student description shown in the student list</p>
 </li>
 <li>
-<p><strong><code>exit</code></strong> : exits the app</p>
+<p><strong><code>exit</code></strong> : exits <em>CollegeZone</em></p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -175,9 +195,9 @@ Sentences displayed in this manner indicates a NOTE to look out for
 <div class="sect2">
 <h3 id="general-features"><a class="link" href="#general-features">3.1. General features</a></h3>
 <div class="sect3">
-<h4 id="strong-viewing-help-code-help-code-strong"><a class="link" href="#strong-viewing-help-code-help-code-strong">3.1.1. <strong>Viewing help : <code>help</code></strong></a></h4>
+<h4 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.1.1. Viewing help : <code>help</code></a></h4>
 <div class="paragraph">
-<p>First, let&#8217;s get familiar with the command features that CollegeZone offers! Type <code>help</code> in the Command Box and press <kbd>Enter</kbd> to display all the possible command usage.</p>
+<p>First, let&#8217;s get familiar with the command features that <em>CollegeZone</em> offers! Type <code>help</code> in the Command Box and press <kbd>Enter</kbd> to display all the possible command usage.</p>
 </div>
 <div class="paragraph">
 <p><strong><em>Format:</em></strong></p>
@@ -191,7 +211,7 @@ Sentences displayed in this manner indicates a NOTE to look out for
 <div class="sect3">
 <h4 id="strong-adding-a-student-code-add-code-or-code-a-code-strong"><a class="link" href="#strong-adding-a-student-code-add-code-or-code-a-code-strong">3.1.2. <strong>Adding a student: <code>add</code> or <code>a</code></strong></a></h4>
 <div class="paragraph">
-<p>Currently, CollegeZone is empty. Try to add a fellow RC4 friend into CollegeZone using the <code>add</code> or <code>a</code> command.</p>
+<p>Currently, <em>CollegeZone</em> is empty. Try to add a fellow RC4 friend into <em>CollegeZone</em> using the <code>add</code> or <code>a</code> command.</p>
 </div>
 <div class="paragraph">
 <p><strong><em>Formats:</em></strong></p>
@@ -259,7 +279,7 @@ A student can have any number of CCAs (including 0)
 <div class="sect3">
 <h4 id="listing-all-students-code-list-code-or-code-l-code"><a class="link" href="#listing-all-students-code-list-code-or-code-l-code">3.1.3. Listing all students : <code>list</code> or <code>l</code></a></h4>
 <div class="paragraph">
-<p>Shows a list of all students in CollegeZone.<br></p>
+<p>Shows a list of all students in <em>CollegeZone</em>.<br></p>
 </div>
 <div class="paragraph">
 <p><strong><em>Formats:</em></strong></p>
@@ -273,7 +293,7 @@ A student can have any number of CCAs (including 0)
 <div class="sect3">
 <h4 id="editing-a-student-code-edit-code-or-code-e-code-since-v1-2"><a class="link" href="#editing-a-student-code-edit-code-or-code-e-code-since-v1-2">3.1.4. Editing a student : <code>edit</code> or <code>e</code> [Since v1.2]</a></h4>
 <div class="paragraph">
-<p>Edits an existing student in CollegeZone.<br></p>
+<p>Edits an existing student in <em>CollegeZone</em>.<br></p>
 </div>
 <div class="paragraph">
 <p><strong><em>Formats:</em></strong></p>
@@ -455,7 +475,7 @@ A student can have any number of CCAs (including 0)
 <div class="sect3">
 <h4 id="deleting-a-student-code-delete-code-or-code-d-code"><a class="link" href="#deleting-a-student-code-delete-code-or-code-d-code">3.1.7. Deleting a student : <code>delete</code> or <code>d</code></a></h4>
 <div class="paragraph">
-<p>Deletes the specified student from CollegeZone.<br></p>
+<p>Deletes the specified student from <em>CollegeZone</em>.<br></p>
 </div>
 <div class="paragraph">
 <p><strong><em>Formats:</em></strong></p>
@@ -492,7 +512,7 @@ A student can have any number of CCAs (including 0)
 </div>
 </div>
 <div class="paragraph">
-<p>Deletes the 2nd student in CollegeZone.</p>
+<p>Deletes the 2nd student in <em>CollegeZone</em>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -544,7 +564,7 @@ A student can have any number of CCAs (including 0)
 </div>
 </div>
 <div class="paragraph">
-<p>Selects the 2nd student and 2nd goal in CollegeZone.</p>
+<p>Selects the 2nd student and 2nd goal in <em>CollegeZone</em>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -705,24 +725,37 @@ A student can have any number of CCAs (including 0)
 </div>
 <div class="sect2">
 <h3 id="reminder-features"><a class="link" href="#reminder-features">3.2. Reminder features</a></h3>
+<div class="paragraph">
+<p>You might be wondering what else you can do with the calendar. The Reminder features listed below will allow you to set reminders for events, important dates or simply to-do tasks that will be reflected in the calendar for easy reference!</p>
+</div>
 <div class="sect3">
 <h4 id="adding-a-reminder-code-reminder-code-or-code-r-code-or-code-addreminder-code-since-v1-4"><a class="link" href="#adding-a-reminder-code-reminder-code-or-code-r-code-or-code-addreminder-code-since-v1-4">3.2.1. Adding a reminder: <code>+reminder</code> or <code>+r</code> or <code>addreminder</code> [Since v1.4]</a></h4>
 <div class="paragraph">
-<p>You can set a reminder into the calendar in CollegeZone<br>
-Format: <code>+r text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME</code></p>
+<p>You can try setting a reminder into the calendar in CollegeZone by referring to the instructions below.<br></p>
+</div>
+<div class="paragraph">
+<p><strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">(+reminder | +r | addreminder) text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong><em>Details:</em></strong></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>A reminder will be added to CollegeZone and it will reflected in the Calendar.</p>
+<p>A reminder will be added to <em>CollegeZone</em> and it will reflected in the Calendar.</p>
 </li>
 <li>
 <p><code>START_DATETIME</code> &amp; <code>END_DATETIME</code>: a datetime is a string that contains either a date, a time or a combination of both (in any order). If a date is not specified, then it will refer to today. If a time is not specified, then it will refer to the current time.</p>
 </li>
 <li>
-<p>Examples of valid START_DATETIME &amp; END_DATETIME:<br></p>
+<p>Examples of valid <code>START_DATETIME</code> &amp; <code>END_DATETIME</code>:<br></p>
 <div class="ulist">
 <ul>
 <li>
@@ -756,8 +789,6 @@ Format: <code>+r text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME</code></p>
 </div>
 </li>
 </ul>
-</div>
-</div>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -772,71 +803,58 @@ use this date format for the START_DATETIME or END_DATETIME
 </tr>
 </table>
 </div>
+</div>
+</div>
 <div class="paragraph">
 <p><strong><em>Examples</em>:</strong></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">+r text/Eat vitamins d/tmr <span class="integer">8</span>am e/tmr <span class="float">8.10</span>am</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">+r text/Eat vitamins d/<span class="integer">4</span>/<span class="integer">25</span>/<span class="integer">2018</span> <span class="integer">8</span>am e/<span class="integer">4</span>/<span class="integer">25</span>/<span class="integer">2018</span> <span class="float">8.10</span>am</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Returns <code>Eat vitamins</code> in the calendar on <code>25th April 2018</code> from <code>8am</code> to <code>8.10am</code></p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">+reminder text/Dental appointment d/next thurs <span class="integer">3</span>pm e/next thurs <span class="integer">4</span>pm</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Returns <code>Dental appointment</code> in the calendar according to <code>START_DATETIME</code> &amp; <code>END_DATETIME</code></p>
+</div>
+<div class="paragraph">
+<p>Figure below portrays what should be seen after the command is executed correctly:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/addReminder.PNG" alt="addReminder" width="1500">
+</div>
+</div>
 </div>
 <div class="sect3">
-<h4 id="editing-a-reminder-code-r-code-coming-v1-5"><a class="link" href="#editing-a-reminder-code-r-code-coming-v1-5">3.2.2. Editing a reminder: <code>~r</code> [Coming v1.5]</a></h4>
+<h4 id="deleting-a-reminder-code-reminder-code-or-code-r-code-or-code-deletereminder-code-since-v1-4"><a class="link" href="#deleting-a-reminder-code-reminder-code-or-code-r-code-or-code-deletereminder-code-since-v1-4">3.2.2. Deleting a reminder: <code>-reminder</code> or <code>-r</code> or <code>deletereminder</code> [Since v1.4]</a></h4>
 <div class="paragraph">
-<p>Edits an existing reminder in CollegeZone.<br>
-Format: <code>~r INDEX [text/REMINDER_TEXT] [d/DATETIME]</code></p>
+<p>If you made a mistake or have reminders that are already due, you can also delete it away from the calendar by referring to the instructions below.</p>
+</div>
+<div class="paragraph">
+<p><strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">(-reminder | -r | deletereminder) text/REMINDER_TEXT d/START_DATETIME</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong><em>Details:</em></strong></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Edits the reminder at the specified <code>INDEX</code>. The index refers to the index number shown in the reminder listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-<li>
-<p>At least one of the optional fields must be provided.</p>
-</li>
-<li>
-<p>Existing values will be updated to the input values.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>~r 4 text/CS2103 exam coming in 1 week</code><br>
-Edits the reminder text of the 4th reminder to be <code>CS2103 exam coming in 1 week</code>.</p>
-</li>
-<li>
-<p><code>~r 2 text/water plants d/tmr 7am</code><br>
-Edits the reminder text and datetime of the 2nd student to be <code>water plants</code> and <code>tmr 7am</code> respectively.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="deleting-a-reminder-code-reminder-code-or-code-r-code-or-code-deletereminder-code-since-v1-4"><a class="link" href="#deleting-a-reminder-code-reminder-code-or-code-r-code-or-code-deletereminder-code-since-v1-4">3.2.3. Deleting a reminder: <code>-reminder</code> or <code>-r</code> or <code>deletereminder</code> [Since v1.4]</a></h4>
-<div class="paragraph">
-<p>You can delete a reminder that you have set into the calendar in CollegeZone<br>
-Format: <code>-r text/REMINDER_TEXT d/START_DATETIME</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Deletes a reminder from CollegeZone and the reminder will not be reflected in the Calendar anymore.</p>
+<p>Deletes a reminder from <em>CollegeZone</em> and the reminder will not be reflected in the Calendar anymore.</p>
 </li>
 <li>
 <p><code>REMINDER_TEXT</code>: a string that contains the reminder&#8217;s title</p>
@@ -845,7 +863,7 @@ Format: <code>-r text/REMINDER_TEXT d/START_DATETIME</code></p>
 <p><code>START_DATETIME</code>: a datetime is a string that contains either a date, a time or a combination of both (in any order). If a date is not specified, then it will refer to today. If a time is not specified, then it will refer to the current time.</p>
 </li>
 <li>
-<p>Examples of valid START_DATETIM:<br></p>
+<p>Examples of valid <code>START_DATETIME</code>:<br></p>
 <div class="ulist">
 <ul>
 <li>
@@ -880,8 +898,6 @@ Format: <code>-r text/REMINDER_TEXT d/START_DATETIME</code></p>
 </li>
 </ul>
 </div>
-</div>
-</div>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -895,18 +911,34 @@ use this date format for START_DATETIME
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Examples:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>-r text/Eat vitamins d/tmr 8pm</code></p>
-</li>
-<li>
-<p><code>-reminder text/Dental appointment d/tmr</code></p>
-</li>
-</ul>
+</div>
+<div class="paragraph">
+<p><strong><em>Examples:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">-r text/Eat vitamins d/<span class="integer">4</span>/<span class="integer">25</span>/<span class="integer">2018</span> <span class="integer">8</span>am</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Deletes reminder <code>Eat vitamins</code> set on <code>25th April 2018</code> at <code>8am</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">-reminder text/Dental appointment d/tmr</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Deletes reminder <code>Dental appointment</code> according to <code>START_DATETIME</code></p>
+</div>
+<div class="paragraph">
+<p>Figure below portrays what should be seen after the command is executed correctly:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/delReminder.PNG" alt="delReminder" width="1500">
+</div>
 </div>
 </div>
 </div>
@@ -915,7 +947,7 @@ use this date format for START_DATETIME
 <div class="sect3">
 <h4 id="adding-a-goal-code-goal-code-or-code-g-code-or-code-addgoal-code-since-v1-3"><a class="link" href="#adding-a-goal-code-goal-code-or-code-g-code-or-code-addgoal-code-since-v1-3">3.3.1. Adding a goal: <code>+goal</code> or <code>+g</code> or <code>addgoal</code> [Since v1.3]</a></h4>
 <div class="paragraph">
-<p>Currently, your goal page is empty! Try adding a goal entry that you have into CollegeZone using the <code>+goal</code>, <code>+g</code> or <code>addgoal</code> command. The new goal added will be reflected in CollegeZone.<br></p>
+<p>Currently, your goal page is empty! Try adding a goal entry that you have into <em>CollegeZone</em> using the <code>+goal</code>, <code>+g</code> or <code>addgoal</code> command. The new goal added will be reflected in <em>CollegeZone</em>.<br></p>
 </div>
 <div class="paragraph">
 <p><strong><em>Formats:</em></strong></p>
@@ -961,7 +993,7 @@ use this date format for START_DATETIME
 <div class="sect3">
 <h4 id="sorting-goals-code-sortgoal-code-or-code-sgoal-code-since-v1-5"><a class="link" href="#sorting-goals-code-sortgoal-code-or-code-sgoal-code-since-v1-5">3.3.2. Sorting goals: <code>sortgoal</code> or <code>sgoal</code> [Since v1.5]</a></h4>
 <div class="paragraph">
-<p>It is a hassle to locate the goals you&#8217;re interested in if you have too many goals in CollegeZone. Try sorting the goals that you have using the <code>sortgoal</code> or <code>sgoal</code> command.<br></p>
+<p>It is a hassle to locate the goals you&#8217;re interested in if you have too many goals in <em>CollegeZone</em>. Try sorting the goals that you have using the <code>sortgoal</code> or <code>sgoal</code> command.<br></p>
 </div>
 <div class="paragraph">
 <p><strong><em>Formats:</em></strong></p>
@@ -1079,9 +1111,9 @@ use this date format for START_DATETIME
 </div>
 </div>
 <div class="sect3">
-<h4 id="deleting-a-goal-code-goal-code-or-code-g-code-or-code-deletegoal-code-since-v1-4"><a class="link" href="#deleting-a-goal-code-goal-code-or-code-g-code-or-code-deletegoal-code-since-v1-4">3.3.4. Deleting a goal: <code>-goal</code> or <code>-g</code> or <code>deletegoal</code> [Since v1.4]</a></h4>
+<h4 id="deleting-a-goal-code-goal-code-or-code-g-code-or-code-deletegoal-code"><a class="link" href="#deleting-a-goal-code-goal-code-or-code-g-code-or-code-deletegoal-code">3.3.4. Deleting a goal: <code>-goal</code> or <code>-g</code> or <code>deletegoal</code></a></h4>
 <div class="paragraph">
-<p>If you&#8217;ve added a specific goal that you&#8217;re unlikely to complete and want to remove it from CollegeZone, try using the <code>-goal</code>, <code>-g</code> or <code>deletegoal</code> command to delete a goal entry that you have.<br>
+<p>If you&#8217;ve added a specific goal that you&#8217;re unlikely to complete and want to remove it from <em>CollegeZone</em>, try using the <code>-goal</code>, <code>-g</code> or <code>deletegoal</code> command to delete a goal entry that you have.<br>
 <strong><em>Formats:</em></strong></p>
 </div>
 <div class="listingblock">
@@ -1115,7 +1147,7 @@ use this date format for START_DATETIME
 </div>
 </div>
 <div class="paragraph">
-<p>Deletes the 2nd goal in CollegeZone&#8217;s goal listing.<br></p>
+<p>Deletes the 2nd goal in <em>CollegeZone</em>'s goal listing.<br></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1124,7 +1156,7 @@ use this date format for START_DATETIME
 </div>
 </div>
 <div class="paragraph">
-<p>Deletes the 4th goal in CollegeZone&#8217;s sorted goal listing.<br></p>
+<p>Deletes the 4th goal in <em>CollegeZone</em>'s sorted goal listing.<br></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1132,13 +1164,13 @@ use this date format for START_DATETIME
 </div>
 </div>
 <div class="paragraph">
-<p>Deletes the 1st goal in CollegeZone&#8217;s goal listing.</p>
+<p>Deletes the 1st goal in <em>CollegeZone</em>'s goal listing.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="completing-a-goal-code-goal-code-or-code-g-code-or-code-completegoal-code-since-v1-4"><a class="link" href="#completing-a-goal-code-goal-code-or-code-g-code-or-code-completegoal-code-since-v1-4">3.3.5. Completing a goal: <code>!goal</code> or <code>!g</code> or <code>completegoal</code> [Since v1.4]</a></h4>
+<h4 id="completing-a-goal-code-goal-code-or-code-g-code-or-code-completegoal-code"><a class="link" href="#completing-a-goal-code-goal-code-or-code-g-code-or-code-completegoal-code">3.3.5. Completing a goal: <code>!goal</code> or <code>!g</code> or <code>completegoal</code></a></h4>
 <div class="paragraph">
-<p>Once you&#8217;ve completed a goal, indicate completion of an existing goal in CollegeZone using the <code>!goal</code>, <code>!g</code> or <code>completegoal</code> command.<br></p>
+<p>Once you&#8217;ve completed a goal, indicate completion of an existing goal in <em>CollegeZone</em> using the <code>!goal</code>, <code>!g</code> or <code>completegoal</code> command.<br></p>
 </div>
 <div class="paragraph">
 <p><strong><em>Formats:</em></strong></p>
@@ -1174,7 +1206,7 @@ use this date format for START_DATETIME
 </div>
 </div>
 <div class="paragraph">
-<p>Indicates completion of the 2nd goal in CollegeZone&#8217;s goal listing.</p>
+<p>Indicates completion of the 2nd goal in <em>CollegeZone</em>'s goal listing.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1183,7 +1215,7 @@ use this date format for START_DATETIME
 </div>
 </div>
 <div class="paragraph">
-<p>Indicates completion of the 4th goal in CollegeZone&#8217;s sorted goal listing.</p>
+<p>Indicates completion of the 4th goal in <em>CollegeZone</em>'s sorted goal listing.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1191,13 +1223,13 @@ use this date format for START_DATETIME
 </div>
 </div>
 <div class="paragraph">
-<p>Indicates completion of the 1st goal in CollegeZone&#8217;s goal listing.</p>
+<p>Indicates completion of the 1st goal in <em>CollegeZone</em>'s goal listing.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="revert-completing-a-goal-code-goal-code-or-code-g-code-or-code-ongoinggoal-code-since-v1-4"><a class="link" href="#revert-completing-a-goal-code-goal-code-or-code-g-code-or-code-ongoinggoal-code-since-v1-4">3.3.6. Revert completing a goal: <code>-!goal</code> or <code>-!g</code> or <code>ongoinggoal</code> [Since v1.4]</a></h4>
+<h4 id="revert-completing-a-goal-code-goal-code-or-code-g-code-or-code-ongoinggoal-code"><a class="link" href="#revert-completing-a-goal-code-goal-code-or-code-g-code-or-code-ongoinggoal-code">3.3.6. Revert completing a goal: <code>-!goal</code> or <code>-!g</code> or <code>ongoinggoal</code></a></h4>
 <div class="paragraph">
-<p>If you have an ongoing goal that is wrongly indicated that it&#8217;s completed, do not fret, simply indicate that an existing goal you have is still ongoing in CollegeZone using the <code>-!goal</code>, <code>-!g</code> or <code>ongoinggoal</code> command.<br></p>
+<p>If you have an ongoing goal that is wrongly indicated that it&#8217;s completed, do not fret, simply indicate that an existing goal you have is still ongoing in <em>CollegeZone</em> using the <code>-!goal</code>, <code>-!g</code> or <code>ongoinggoal</code> command.<br></p>
 </div>
 <div class="paragraph">
 <p><strong><em>Formats:</em></strong></p>
@@ -1233,7 +1265,7 @@ use this date format for START_DATETIME
 </div>
 </div>
 <div class="paragraph">
-<p>Indicates ongoing of the 2nd goal in CollegeZone&#8217;s goal listing.</p>
+<p>Indicates ongoing of the 2nd goal in <em>CollegeZone</em>'s goal listing.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1242,7 +1274,7 @@ use this date format for START_DATETIME
 </div>
 </div>
 <div class="paragraph">
-<p>Indicates ongoing of the 4th goal in CollegeZone&#8217;s sorted goal listing.</p>
+<p>Indicates ongoing of the 4th goal in <em>CollegeZone</em>'s sorted goal listing.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1250,16 +1282,40 @@ use this date format for START_DATETIME
 </div>
 </div>
 <div class="paragraph">
-<p>Indicates ongoing of the 1st goal in CollegeZone&#8217;s goal listing.</p>
+<p>Indicates ongoing of the 1st goal in <em>CollegeZone</em>'s goal listing.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="interesting-features"><a class="link" href="#interesting-features">3.4. Interesting features</a></h3>
 <div class="sect3">
-<h4 id="changing-collegezone-theme-code-theme-code-or-code-th-code-since-v1-5"><a class="link" href="#changing-collegezone-theme-code-theme-code-or-code-th-code-since-v1-5">3.4.1. Changing CollegeZone theme : <code>theme</code> or <code>th</code> [Since v1.5]</a></h4>
+<h4 id="changing-collegezone-theme-code-theme-code-or-code-th-code"><a class="link" href="#changing-collegezone-theme-code-theme-code-or-code-th-code">3.4.1. Changing CollegeZone theme : <code>theme</code> or <code>th</code></a></h4>
 <div class="paragraph">
-<p>CollegeZone&#8217;s default theme colour is not the only theme colour we have to offer! Try changing CollegeZone&#8217;s theme colour using the <code>theme</code> or <code>th</code> command. <br></p>
+<p><em>CollegeZone</em>'s default theme colour is not the only theme colour we have to offer! Try changing <em>CollegeZone</em>'s theme colour to your preferred one using the <code>theme</code> or <code>th</code> command. <br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/CollegeZoneDarkTheme.JPG" alt="CollegeZoneDarkTheme" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure AAA : Dark Theme</em></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/CollegeZoneBubblegumTheme.JPG" alt="CollegeZoneBubblegumTheme" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure AAA : Bubblegum Theme</em></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/CollegeZoneLightTheme.JPG" alt="CollegeZoneLightTheme" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.13.1 : Light Theme</em></p>
 </div>
 <div class="paragraph">
 <p><strong><em>Formats:</em></strong></p>
@@ -1277,7 +1333,7 @@ use this date format for START_DATETIME
 </td>
 <td class="content">
 <div class="paragraph">
-<p><code>THEME_COLOUR</code> can only be 'dark' or 'light'.</p>
+<p><code>THEME_COLOUR</code> can only be 'dark', 'bubblegum' and 'light'.</p>
 </div>
 </td>
 </tr>
@@ -1301,6 +1357,14 @@ use this date format for START_DATETIME
 </div>
 <div class="paragraph">
 <p>Changes the theme colour to dark theme.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; th bubblegum</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Changes the theme colour to bubblegum theme.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1332,7 +1396,7 @@ use this date format for START_DATETIME
 <div class="sect3">
 <h4 id="undoing-previous-command-code-undo-code-or-code-u-code"><a class="link" href="#undoing-previous-command-code-undo-code-or-code-u-code">3.4.3. Undoing previous command : <code>undo</code> or <code>u</code></a></h4>
 <div class="paragraph">
-<p>Restores CollegeZone to the state before the previous <em>undoable</em> command was executed.<br>
+<p>Restores <em>CollegeZone</em> to the state before the previous <em>undoable</em> command was executed.<br>
 <strong><em>Formats:</em></strong></p>
 </div>
 <div class="listingblock">
@@ -1348,7 +1412,7 @@ use this date format for START_DATETIME
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Undoable commands: those commands that modify CollegeZone&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code>, <code>clear</code>, <code>+goal</code>, <code>-goal</code>, <code>~goal</code>, <code>!goal</code>, <code>-!goal</code>).</p>
+<p>Undoable commands: those commands that modify <em>CollegeZone</em>'s content (<code>add</code>, <code>delete</code>, <code>edit</code>, <code>clear</code>, <code>+goal</code>, <code>-goal</code>, <code>~goal</code>, <code>!goal</code>, <code>-!goal</code>).</p>
 </div>
 </td>
 </tr>
@@ -1443,7 +1507,7 @@ use this date format for START_DATETIME
 <div class="sect3">
 <h4 id="clearing-all-entries-code-clear-code-or-code-c-code"><a class="link" href="#clearing-all-entries-code-clear-code-or-code-c-code">3.4.5. Clearing all entries : <code>clear</code> or <code>c</code></a></h4>
 <div class="paragraph">
-<p>Clears all entries from CollegeZone.<br>
+<p>Clears all entries from <em>CollegeZone</em>.<br>
 <strong><em>Formats:</em></strong></p>
 </div>
 <div class="listingblock">
@@ -1462,7 +1526,7 @@ Format: <code>exit</code></p>
 <div class="sect3">
 <h4 id="saving-the-data"><a class="link" href="#saving-the-data">3.4.7. Saving the data</a></h4>
 <div class="paragraph">
-<p>CollegeZone data are saved in the hard disk automatically after any command that changes the data.<br>
+<p><em>CollegeZone</em> data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
@@ -1475,23 +1539,68 @@ There is no need to save manually.</p>
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="editing-a-reminder-coming-in-v2-0"><a class="link" href="#editing-a-reminder-coming-in-v2-0">3.5.2. Editing a reminder [Coming in v2.0]</a></h4>
+<div class="paragraph">
+<p>Edits an existing reminder in CollegeZone.<br>
+Format: <code>~r INDEX [text/REMINDER_TEXT] [d/DATETIME]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Edits the reminder at the specified <code>INDEX</code>. The index refers to the index number shown in the reminder listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="faq"><a class="link" href="#faq">4. FAQ</a></h2>
-<div class="sectionbody">
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>~r 4 text/CS2103 exam coming in 1 week</code><br>
+Edits the reminder text of the 4th reminder to be <code>CS2103 exam coming in 1 week</code>.</p>
+</li>
+<li>
+<p><code>~r 2 text/water plants d/tmr 7am</code><br>
+Edits the reminder text and datetime of the 2nd student to be <code>water plants</code> and <code>tmr 7am</code> respectively.</p>
+</li>
+</ul>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>==== Adding subgoals [Coming in v2.0]
+By using this command, you are able to add subgoals to the goals you currently have.</p>
+</div>
+<div class="paragraph">
+<p>==== Auto-completing of commands [Coming in v2.0]
+Auto-complete command by suggesting to the you the command format to use based on what you have already typed in the command box.</p>
+</div>
+<div class="paragraph">
+<p>==== Adding of timetable into CollegeZone [Coming in v2.0]
+Allows you to add your NUS timetable schedule for the semester into <em>CollegeZone</em>.</p>
+</div>
+<div class="paragraph">
+<p>== FAQ</p>
+</div>
 <div class="paragraph">
 <p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
-<strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CollegeZone folder.</p>
+<strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous <em>CollegeZone</em> folder.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="command-summary"><a class="link" href="#command-summary">5. Command Summary</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>The table below provides a quick summary of all the commands available in CollegeZone.</p>
+<p>== Command Summary
+The table below provides a quick summary of all the commands available in <em>CollegeZone</em>.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -1651,7 +1760,7 @@ OR<br>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Theme</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Switch theme colour of CollegeZone</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Switch theme colour of <em>CollegeZone</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>theme THEME_COLOUR</code><br>
 OR<br>
 <code>th THEME_COLOUR</code><br></p></td>
@@ -1665,17 +1774,17 @@ OR<br>
 <code>+r text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME</code><br>
 OR<br>
 <code>addreminder text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME</code><br></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>+reminder text/Eat pills d/tonight 10pm e/tonight 10.15pm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>+reminder text/Eat pills d/4/25/2018 8am e/4/25/2018 8.10am</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delete Reminder</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Deletes a reminder entry</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-reminder [REMINDER_TEXT]</code><br>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-reminder text/REMINDER_TEXT d/START_DATETIME</code><br>
 OR<br>
-<code>-r [REMINDER_TEXT]</code><br>
+<code>-r text/REMINDER_TEXT d/START_DATETIME</code><br>
 OR<br>
-<code>deletereminder [REMINDER_TEXT]</code><br></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-reminder Eat pills</code></p></td>
+<code>deletereminder text/REMINDER_TEXT d/START_DATETIME</code><br></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-reminder text/Eat pills d/4/25/2018 8am</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Rate</strong></p></td>
@@ -1703,9 +1812,13 @@ OR<br>
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
+</div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-14 04:24:41 UTC
+Last updated 2018-04-14 12:22:40 UTC
 </div>
 </div>
 </body>

@@ -84,11 +84,25 @@
 <li><a href="#user-stories">Appendix B: User Stories</a></li>
 <li><a href="#use-cases">Appendix C: Use Cases</a>
 <ul class="sectlevel2">
-<li><a href="#use-case-delete-goal">C.1. Use case: Delete goal</a></li>
-<li><a href="#use-case-complete-goal">C.2. Use case: Complete goal</a></li>
-<li><a href="#use-case-ongoing-goal">C.3. Use case: Ongoing goal</a></li>
-<li><a href="#use-case-sort-goal">C.4. Use case: Sort goal</a></li>
-<li><a href="#use-case-switch-theme-colour">C.5. Use case: Switch theme colour</a></li>
+<li><a href="#use-case-add-student">C.1. Use case: Add student</a></li>
+<li><a href="#use-case-delete-student">C.2. Use case: Delete student</a></li>
+<li><a href="#use-case-edit-student">C.3. Use case: Edit student</a></li>
+<li><a href="#use-case-find-student">C.4. Use case: Find student</a></li>
+<li><a href="#use-case-select-student-or-goal">C.5. Use case: Select student or goal</a></li>
+<li><a href="#use-case-reminder-add-reminder">C.6. Use case: Reminder add&lt;reminder&gt;</a></li>
+<li><a href="#use-case-reminder-delete-reminder">C.7. Use case: Reminder delete&lt;reminder&gt;</a></li>
+<li><a href="#use-case-task-add-task-notes">C.8. Use case: Task add&lt;task, notes&gt;</a></li>
+<li><a href="#use-case-meet-student">C.9. Use case: Meet student</a></li>
+<li><a href="#use-case-add-goal">C.10. Use case: Add goal</a></li>
+<li><a href="#use-case-edit-goal">C.11. Use case: Edit goal</a></li>
+<li><a href="#use-case-delete-goal">C.12. Use case: Delete goal</a></li>
+<li><a href="#use-case-complete-goal">C.13. Use case: Complete goal</a></li>
+<li><a href="#use-case-ongoing-goal">C.14. Use case: Ongoing goal</a></li>
+<li><a href="#use-case-sort-goal">C.15. Use case: Sort goal</a></li>
+<li><a href="#use-case-switch-theme-colour">C.16. Use case: Switch theme colour</a></li>
+<li><a href="#use-case-history">C.17. Use case: History</a></li>
+<li><a href="#use-case-clear">C.18. Use case: Clear</a></li>
+<li><a href="#use-case-exit-collegezone">C.19. Use case: Exit CollegeZone</a></li>
 </ul>
 </li>
 <li><a href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></li>
@@ -518,7 +532,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <h3 id="Design-Model"><a class="link" href="#Design-Model">2.4. Model component</a></h3>
 <div class="imageblock">
 <div class="content">
-<img src="images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
+<img src="images/ModelComponentCollegeZone.PNG" alt="ModelComponentCollegeZone" width="1100">
 </div>
 <div class="title">Figure 9. Structure of the Model Component</div>
 </div>
@@ -549,7 +563,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <h3 id="Design-Storage"><a class="link" href="#Design-Storage">2.5. Storage component</a></h3>
 <div class="imageblock">
 <div class="content">
-<img src="images/StorageClassDiagram.png" alt="StorageClassDiagram" width="800">
+<img src="images/StorageComponentCollegeZone.PNG" alt="StorageComponentCollegeZone" width="900">
 </div>
 <div class="title">Figure 10. Structure of the Storage Component</div>
 </div>
@@ -1822,7 +1836,47 @@ b. Require developers to download those libraries manually (this creates extra w
 <div class="sect1">
 <h2 id="use-cases"><a class="link" href="#use-cases">Appendix C: Use Cases</a></h2>
 <div class="sectionbody">
-<h3 id="use-case-delete-student" class="discrete">Use case: Delete student</h3>
+<div class="sect2">
+<h3 id="use-case-add-student"><a class="link" href="#use-case-add-student">C.1. Use case: Add student</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to add a student to the list</p>
+</li>
+<li>
+<p>CollegeZone adds the student</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The given detail format is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. CollegeZone shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-delete-student"><a class="link" href="#use-case-delete-student">C.2. Use case: Delete student</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1871,7 +1925,9 @@ b. Require developers to download those libraries manually (this creates extra w
 </li>
 </ul>
 </div>
-<h3 id="use-case-edit-student" class="discrete">Use case: Edit student</h3>
+</div>
+<div class="sect2">
+<h3 id="use-case-edit-student"><a class="link" href="#use-case-edit-student">C.3. Use case: Edit student</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1927,7 +1983,9 @@ b. Require developers to download those libraries manually (this creates extra w
 </li>
 </ul>
 </div>
-<h3 id="use-case-find-student" class="discrete">Use case: Find student</h3>
+</div>
+<div class="sect2">
+<h3 id="use-case-find-student"><a class="link" href="#use-case-find-student">C.4. Use case: Find student</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1978,7 +2036,61 @@ b. Require developers to download those libraries manually (this creates extra w
 </li>
 </ul>
 </div>
-<h3 id="use-case-reminder-add-reminder" class="discrete">Use case: Reminder add&lt;reminder&gt;</h3>
+</div>
+<div class="sect2">
+<h3 id="use-case-select-student-or-goal"><a class="link" href="#use-case-select-student-or-goal">C.5. Use case: Select student or goal</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to list students</p>
+</li>
+<li>
+<p>CollegeZone shows a list of students</p>
+</li>
+<li>
+<p>User requests to select a student or goal</p>
+</li>
+<li>
+<p>CollegeZone shows the detail of the student or goal</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a. The given INDEX for either student or goal is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. CollegeZone shows an error message</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-reminder-add-reminder"><a class="link" href="#use-case-reminder-add-reminder">C.6. Use case: Reminder add&lt;reminder&gt;</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2015,7 +2127,9 @@ b. Require developers to download those libraries manually (this creates extra w
 </li>
 </ul>
 </div>
-<h3 id="use-case-reminder-delete-reminder" class="discrete">Use case: Reminder delete&lt;reminder&gt;</h3>
+</div>
+<div class="sect2">
+<h3 id="use-case-reminder-delete-reminder"><a class="link" href="#use-case-reminder-delete-reminder">C.7. Use case: Reminder delete&lt;reminder&gt;</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2065,7 +2179,9 @@ b. Require developers to download those libraries manually (this creates extra w
 </li>
 </ul>
 </div>
-<h3 id="use-case-task-add-task-notes" class="discrete">Use case: Task add&lt;task, notes&gt;</h3>
+</div>
+<div class="sect2">
+<h3 id="use-case-task-add-task-notes"><a class="link" href="#use-case-task-add-task-notes">C.8. Use case: Task add&lt;task, notes&gt;</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2079,11 +2195,13 @@ b. Require developers to download those libraries manually (this creates extra w
 </li>
 </ol>
 </div>
-<h3 id="use-case-meet-student" class="discrete">Use case: Meet student</h3>
+</div>
+<div class="sect2">
+<h3 id="use-case-meet-student"><a class="link" href="#use-case-meet-student">C.9. Use case: Meet student</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to add a meet up date on a certain date with a student using his index</p>
+<p>User request to add a meet up date on a certain date with a student using his index</p>
 </li>
 <li>
 <p>CollegeZone adds the meet up in the calendar and changes are reflected in the calendar</p>
@@ -2126,7 +2244,9 @@ b. Require developers to download those libraries manually (this creates extra w
 </li>
 </ul>
 </div>
-<h3 id="use-case-add-goal" class="discrete">Use case: Add goal</h3>
+</div>
+<div class="sect2">
+<h3 id="use-case-add-goal"><a class="link" href="#use-case-add-goal">C.10. Use case: Add goal</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2151,13 +2271,18 @@ b. Require developers to download those libraries manually (this creates extra w
 <ul class="none">
 <li>
 <p>1a1. CollegeZone shows an error message.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Use case ends.</p>
 </div>
 </li>
 </ul>
 </div>
-<h3 id="use-case-edit-goal" class="discrete">Use case: Edit goal</h3>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-edit-goal"><a class="link" href="#use-case-edit-goal">C.11. Use case: Edit goal</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2191,6 +2316,9 @@ b. Require developers to download those libraries manually (this creates extra w
 <ul class="none">
 <li>
 <p>2a1. CollegeZone shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
 </li>
 </ul>
 </div>
@@ -2201,6 +2329,9 @@ b. Require developers to download those libraries manually (this creates extra w
 <ul class="none">
 <li>
 <p>2b1. CollegeZone shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
 </li>
 </ul>
 </div>
@@ -2211,14 +2342,18 @@ b. Require developers to download those libraries manually (this creates extra w
 <ul class="none">
 <li>
 <p>2c1. CollegeZone shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
 </li>
 </ul>
 </div>
 </li>
 </ul>
+</div>
 </div>
 <div class="sect2">
-<h3 id="use-case-delete-goal"><a class="link" href="#use-case-delete-goal">C.1. Use case: Delete goal</a></h3>
+<h3 id="use-case-delete-goal"><a class="link" href="#use-case-delete-goal">C.12. Use case: Delete goal</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2255,6 +2390,9 @@ b. Require developers to download those libraries manually (this creates extra w
 <ul class="none">
 <li>
 <p>2a1. CollegeZone shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
 </li>
 </ul>
 </div>
@@ -2263,7 +2401,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect2">
-<h3 id="use-case-complete-goal"><a class="link" href="#use-case-complete-goal">C.2. Use case: Complete goal</a></h3>
+<h3 id="use-case-complete-goal"><a class="link" href="#use-case-complete-goal">C.13. Use case: Complete goal</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2304,6 +2442,9 @@ b. Require developers to download those libraries manually (this creates extra w
 <ul class="none">
 <li>
 <p>2a1. CollegeZone shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
 </li>
 </ul>
 </div>
@@ -2314,6 +2455,9 @@ b. Require developers to download those libraries manually (this creates extra w
 <ul class="none">
 <li>
 <p>2b1. CollegeZone shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
 </li>
 </ul>
 </div>
@@ -2322,7 +2466,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect2">
-<h3 id="use-case-ongoing-goal"><a class="link" href="#use-case-ongoing-goal">C.3. Use case: Ongoing goal</a></h3>
+<h3 id="use-case-ongoing-goal"><a class="link" href="#use-case-ongoing-goal">C.14. Use case: Ongoing goal</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2353,6 +2497,9 @@ b. Require developers to download those libraries manually (this creates extra w
 <ul class="none">
 <li>
 <p>1a1. CollegeZone shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
 </li>
 </ul>
 </div>
@@ -2363,6 +2510,9 @@ b. Require developers to download those libraries manually (this creates extra w
 <ul class="none">
 <li>
 <p>2a1. CollegeZone shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
 </li>
 </ul>
 </div>
@@ -2373,6 +2523,9 @@ b. Require developers to download those libraries manually (this creates extra w
 <ul class="none">
 <li>
 <p>2b1. CollegeZone shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
 </li>
 </ul>
 </div>
@@ -2381,7 +2534,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect2">
-<h3 id="use-case-sort-goal"><a class="link" href="#use-case-sort-goal">C.4. Use case: Sort goal</a></h3>
+<h3 id="use-case-sort-goal"><a class="link" href="#use-case-sort-goal">C.15. Use case: Sort goal</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2412,6 +2565,9 @@ b. Require developers to download those libraries manually (this creates extra w
 <ul class="none">
 <li>
 <p>1a1. CollegeZone shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
 </li>
 </ul>
 </div>
@@ -2422,6 +2578,9 @@ b. Require developers to download those libraries manually (this creates extra w
 <ul class="none">
 <li>
 <p>2a1. CollegeZone shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
 </li>
 </ul>
 </div>
@@ -2432,6 +2591,9 @@ b. Require developers to download those libraries manually (this creates extra w
 <ul class="none">
 <li>
 <p>2b1. CollegeZone shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
 </li>
 </ul>
 </div>
@@ -2442,6 +2604,9 @@ b. Require developers to download those libraries manually (this creates extra w
 <ul class="none">
 <li>
 <p>2c1. CollegeZone shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
 </li>
 </ul>
 </div>
@@ -2450,7 +2615,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect2">
-<h3 id="use-case-switch-theme-colour"><a class="link" href="#use-case-switch-theme-colour">C.5. Use case: Switch theme colour</a></h3>
+<h3 id="use-case-switch-theme-colour"><a class="link" href="#use-case-switch-theme-colour">C.16. Use case: Switch theme colour</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2481,6 +2646,9 @@ b. Require developers to download those libraries manually (this creates extra w
 <ul class="none">
 <li>
 <p>2a1. CollegeZone shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
 </li>
 </ul>
 </div>
@@ -2489,6 +2657,123 @@ b. Require developers to download those libraries manually (this creates extra w
 <p>2b. The given theme colour is currently in use.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-history"><a class="link" href="#use-case-history">C.17. Use case: History</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to toggle command history</p>
+</li>
+<li>
+<p>CollegeZone displays command history</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The given format is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. CollegeZone shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-clear"><a class="link" href="#use-case-clear">C.18. Use case: Clear</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to clear CollegeZone</p>
+</li>
+<li>
+<p>CollegeZone deletes all data</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The given format is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. CollegeZone shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-exit-collegezone"><a class="link" href="#use-case-exit-collegezone">C.19. Use case: Exit CollegeZone</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to exit CollegeZone</p>
+</li>
+<li>
+<p>CollegeZone displays command history</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The given format is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. CollegeZone shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
 </div>
 </li>
 </ul>
@@ -2705,7 +2990,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-14 04:24:41 UTC
+Last updated 2018-04-14 12:22:40 UTC
 </div>
 </div>
 </body>
