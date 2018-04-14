@@ -34,7 +34,7 @@ public class GoalCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label importance;
+    private FlowPane importance;
     @FXML
     private Label startDateTime;
     @FXML
@@ -48,7 +48,7 @@ public class GoalCard extends UiPart<Region> {
         this.goal = goal;
         id.setText(displayedIndex + ". ");
         goalText.setText(goal.getGoalText().value);
-        importance.setText("Impt: " + changeImportanceToStar(goal.getImportance().value));
+        initImportance(goal);
         startDateTime.setText("Start " + goal.getStartDateTime().value);
         if (goal.getEndDateTime().value.equals("")) {
             endDateTime.setText(goal.getEndDateTime().value);
@@ -78,6 +78,16 @@ public class GoalCard extends UiPart<Region> {
             Label completionLabel = new Label("Ongoing", ongoingImageView);
             completion.getChildren().add(completionLabel);
         }
+    }
+
+    /**
+     * Creates the importance label for {@code goal}.
+     */
+    private void initImportance(Goal goal) {
+        String starValue = changeImportanceToStar(goal.getImportance().value);
+        Label importanceLabel = new Label(starValue);
+        importanceLabel.getStyleClass().add("yellow");
+        importance.getChildren().add(importanceLabel);
     }
 
     /**

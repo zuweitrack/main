@@ -1,5 +1,5 @@
 # fuadsahmawi
-###### \java\seedu\address\logic\commands\AddCommandTest.java
+###### /java/seedu/address/logic/commands/AddCommandTest.java
 ``` java
         @Override
         public void addReminder(Reminder reminder) throws DuplicateReminderException {
@@ -22,12 +22,6 @@
             fail("This method should not be called.");
         }
 
-<<<<<<< HEAD
-=======
-        public void deleteMeetDate(Person person) throws PersonNotFoundException {
-            fail("This method should not be called.");
-        }
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc
     }
 
     /**
@@ -65,7 +59,7 @@
 
 }
 ```
-###### \java\seedu\address\logic\commands\AddReminderCommandIntegrationTest.java
+###### /java/seedu/address/logic/commands/AddReminderCommandIntegrationTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) for {@code AddReminderCommand}.
@@ -107,7 +101,7 @@ public class AddReminderCommandIntegrationTest {
     }
 }
 ```
-###### \java\seedu\address\logic\commands\AddReminderCommandTest.java
+###### /java/seedu/address/logic/commands/AddReminderCommandTest.java
 ``` java
 public class AddReminderCommandTest {
 
@@ -206,7 +200,7 @@ public class AddReminderCommandTest {
     }
 }
 ```
-###### \java\seedu\address\logic\commands\ReminderCommandTestUtil.java
+###### /java/seedu/address/logic/commands/ReminderCommandTestUtil.java
 ``` java
 /**
  * Contains helper methods for testing reminder commands.
@@ -295,7 +289,7 @@ public class ReminderCommandTestUtil {
     }
 }
 ```
-###### \java\seedu\address\logic\parser\AddReminderCommandParserTest.java
+###### /java/seedu/address/logic/parser/AddReminderCommandParserTest.java
 ``` java
 public class AddReminderCommandParserTest {
     private AddReminderCommandParser parser = new AddReminderCommandParser();
@@ -330,7 +324,112 @@ public class AddReminderCommandParserTest {
     }
 }
 ```
-###### \java\seedu\address\testutil\ReminderBuilder.java
+###### /java/seedu/address/model/reminder/DateTimeTest.java
+``` java
+public class DateTimeTest {
+
+    @Test
+    public void constructor_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> new DateTime(null));
+    }
+
+    @Test
+    public void isValidGoalText() {
+        // null reminder text
+        Assert.assertThrows(NullPointerException.class, () -> ReminderText.isValidReminderText(null));
+
+        // blank reminder text
+        assertFalse(DateTime.isValidDateTime("")); // empty string
+        assertFalse(DateTime.isValidDateTime(" ")); // spaces only
+        assertFalse(DateTime.isValidDateTime("aaa0")); // alphanumerical
+        assertFalse(DateTime.isValidDateTime("!@$#()_+")); // symbols only
+
+        // valid reminder text
+        assertTrue(DateTime.isValidDateTime("1"));
+        assertTrue(DateTime.isValidDateTime("-1.122ewk:!@|!+@!*~")); // all kinds of symbols and alphanumerical
+        assertTrue(DateTime.isValidDateTime("! 1 wq ")); // with spaces
+        assertTrue(DateTime.isValidDateTime("            7")); // spaces with a value
+    }
+}
+```
+###### /java/seedu/address/model/reminder/ReminderTextTest.java
+``` java
+public class ReminderTextTest {
+
+    @Test
+    public void constructor_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> new ReminderText(null));
+    }
+
+    @Test
+    public void constructor_invalidReminderText_throwsIllegalArgumentException() {
+        String invalidReminderText = "";
+        Assert.assertThrows(IllegalArgumentException.class, () -> new ReminderText(invalidReminderText));
+    }
+
+    @Test
+    public void isValidGoalText() {
+        // null reminder text
+        Assert.assertThrows(NullPointerException.class, () -> ReminderText.isValidReminderText(null));
+
+        // blank reminder text
+        assertFalse(ReminderText.isValidReminderText("")); // empty string
+        assertFalse(ReminderText.isValidReminderText(" ")); // spaces only
+
+        // valid reminder text
+        assertTrue(ReminderText.isValidReminderText("1"));
+        assertTrue(ReminderText.isValidReminderText("aaa0")); // alphanumerical
+        assertTrue(ReminderText.isValidReminderText("!@$#()_+")); // symbols only
+        assertTrue(ReminderText.isValidReminderText("-1.122ewk:!@|!+@!*~")); // all kinds of symbols and alphanumerical
+        assertTrue(ReminderText.isValidReminderText("! 1 wq ")); // with spaces
+        assertTrue(ReminderText.isValidReminderText("            7")); // spaces with a value
+    }
+}
+```
+###### /java/seedu/address/storage/XmlAdaptedReminderTest.java
+``` java
+public class XmlAdaptedReminderTest {
+
+    private static final String INVALID_REMINDER_TEXT = " ";
+
+    private static final String VALID_REMINDER_TEXT = REMINDER_B.getReminderText().toString();
+    private static final String VALID_START_DATE_TIME = REMINDER_B.getDateTime().toString();
+    private static final String VALID_END_DATE_TIME = REMINDER_B.getEndDateTime().toString();
+
+    @Test
+    public void toModelType_invalidReminderText_throwsIllegalValueException() {
+        XmlAdaptedReminder reminder =
+                new XmlAdaptedReminder(INVALID_REMINDER_TEXT, VALID_START_DATE_TIME, VALID_END_DATE_TIME);
+        String expectedMessage = ReminderText.MESSAGE_REMINDER_TEXT_CONSTRAINTS;
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, reminder::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullReminderText_throwsIllegalValueException() {
+        XmlAdaptedReminder reminder = new XmlAdaptedReminder(null, VALID_START_DATE_TIME,
+                VALID_END_DATE_TIME);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, ReminderText.class.getSimpleName());
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, reminder::toModelType);
+    }
+
+
+    @Test
+    public void toModelType_nullStartDateTime_throwsIllegalValueException() {
+        XmlAdaptedReminder reminder = new XmlAdaptedReminder(VALID_REMINDER_TEXT, null, VALID_END_DATE_TIME);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTime.class.getSimpleName());
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, reminder::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullEndDateTime_throwsIllegalValueException() {
+        XmlAdaptedReminder reminder = new XmlAdaptedReminder(VALID_REMINDER_TEXT, VALID_START_DATE_TIME,
+                null);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, EndDateTime.class.getSimpleName());
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, reminder::toModelType);
+    }
+}
+```
+###### /java/seedu/address/testutil/ReminderBuilder.java
 ``` java
 /**
  * A utility class to help with building Reminder objects.
@@ -389,7 +488,7 @@ public class ReminderBuilder {
     }
 }
 ```
-###### \java\seedu\address\testutil\ReminderUtil.java
+###### /java/seedu/address/testutil/ReminderUtil.java
 ``` java
 /**
  * A utility class for Reminder.
@@ -415,7 +514,7 @@ public class ReminderUtil {
     }
 }
 ```
-###### \java\seedu\address\testutil\TypicalReminders.java
+###### /java/seedu/address/testutil/TypicalReminders.java
 ``` java
 /**
  * A utility class containing a list of {@code Reminder} objects to be used in tests.

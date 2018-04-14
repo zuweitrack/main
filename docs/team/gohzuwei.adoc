@@ -1,0 +1,51 @@
+= Goh Zu Wei - Project Portfolio
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+image::zuweitrack.jpg[width="150", align="left"]
+{empty}[https://github.com/zuweitrack[github]]
+
+== PROJECT: CollegeZone
+
+---
+
+== Overview
+
+CollegeZone is a desktop application for NUS Residential College 4 (RC4) students. It has a Graphical User Interface (GUI)
+but most of the user interactions happen using a Command Line Interface (CLI).
+This application is catered for an RC4 resident to manage their contacts with other RC4 residents and to manage their tasks,
+just like a digital organiser.
+
+== Summary of contributions
+
+* *Major enhancement*: Added the *ability rate multiple people* by changing the level of friendship and *show people based on their level of friendships.*
+** What it does: allows the RC4 student to rate multiple friends in CollegeZone and the level of friendship of these friends will be changed.
+** Justification: An RC4 student may interact with several groups of people during the week, being able to rate multiple people at a go makes the process more convenient. This allows RC4 students to keep track of who their close friends are and helps them identify people who they may want to get closer with.
+
+** Highlights:  The features show command followed by the rate command allows RC4 students to show friends of a particular level of friendship and change the level of friendships from that list of friends. It helps RC4 students the ease of rating people of a particular level of friendship
+
+* *Minor enhancement*: Added a seek RA command, which allows RC4 students to find the details of RC4 students and Resident Assistants (RA).
+
+* *Code contributed*: [https://github.com/CS2103JAN2018-T09-B2/main/blob/master/collated/main/zuweitrack.md[Functional code]] [https://github.com/CS2103JAN2018-T09-B2/main/blob/master/collated/test/zuweitrack.md[Test code]]
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+=== Major enhancement: added rate and show level of friendship command
+include::../UserGuide.adoc[tag=rate]
+
+
+=== Minor enhancement: added a seek RA command
+include::../UserGuide.adoc[tag=seek]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=rate]
