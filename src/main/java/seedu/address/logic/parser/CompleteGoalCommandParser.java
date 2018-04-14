@@ -39,7 +39,6 @@ public class CompleteGoalCommandParser implements Parser<CompleteGoalCommand> {
 
         CompleteGoalDescriptor completeGoalDescriptor = new CompleteGoalDescriptor();
 
-        Optional<String> empty = Optional.empty();
         Completion completion = new Completion(COMPLETED_BOOLEAN_VALUE);
         EndDateTime endDateTime = new EndDateTime(properDateTimeFormat(LocalDateTime.now()));
         completeGoalDescriptor.setCompletion(completion);
