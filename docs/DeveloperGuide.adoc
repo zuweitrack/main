@@ -504,9 +504,9 @@ Hence, both `AddReminderCommand` and `DeleteReminderCommand` are implemented as 
 * Adding a reminder to the Calendar: The `AddReminderCommand` allows you to add a `Reminder` into CollegeZone and is stored in an ArrayList, `UniqueReminderList`, in `AddressBook`.
 * Deleting a reminder on the Calendar: The `DeleteReminderCommand` allows you to delete a `Reminder` from `UniqueReminderList`, in `AddressBook`.
 
-Reminder commands are undoable and redoable for the benefit users to redo and undo a command they did or did not intend to change. 
+Reminder commands are undoable and redoable for the benefit users to redo and undo a command they did or did not intend to change.
 Hence, both `AddReminderCommand` and `DeleteReminderCommand` are implemented as `UndoableCommand`.
-  
+
 ==== Implementation +
 
 *Reminder Object* +
@@ -514,10 +514,10 @@ Hence, both `AddReminderCommand` and `DeleteReminderCommand` are implemented as 
 Every time a `Reminder` is created, three other objects are also created: +
 
 1. `ReminderText`: This object contains a single string variable, `reminderText`, that is verified to contain characters and spaces and cannot be blank.  +
-2. `DateTime`: This object contains a single string variable, `dateTime`. After obtaining the start date time from user input, it will parse through `nattyDateAndTimeParser` to convert it to a `LocalDateTime` 
+2. `DateTime`: This object contains a single string variable, `dateTime`. After obtaining the start date time from user input, it will parse through `nattyDateAndTimeParser` to convert it to a `LocalDateTime`
 variable. Subsequently, this `LocalDateTime` variable will then be converted back to a string variable using `properReminderDateTimeFormat` and it stored as `dateTime` in `DateTime` object. +
-3. `EndDateTime`: This object contains a single string variable, `dateTime`. After obtaining the end date time from user input, it will parse through `nattyDateAndTimeParser` to convert it to a `LocalDateTime` 
-                  variable. Subsequently, this `LocalDateTime` variable will then be converted back to a string variable using `properReminderDateTimeFormat` and it stored as `dateTime` in `DateTime` object. 
+3. `EndDateTime`: This object contains a single string variable, `dateTime`. After obtaining the end date time from user input, it will parse through `nattyDateAndTimeParser` to convert it to a `LocalDateTime`
+                  variable. Subsequently, this `LocalDateTime` variable will then be converted back to a string variable using `properReminderDateTimeFormat` and it stored as `dateTime` in `DateTime` object.
 
 A `Reminder` will be marked with a *blue* circle if it's not due and be marked with a *red* circle if it's due. +
 
