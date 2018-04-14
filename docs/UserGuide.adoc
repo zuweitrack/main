@@ -433,7 +433,7 @@ Deletes reminder `Eat vitamins` set on `25th April 2018` at `8am`
 -reminder text/Dental appointment d/tmr
 ```
 
-Deletes reminder `Eat vitamins` according to `START_DATETIME`
+Deletes reminder `Dental appointment` according to `START_DATETIME`
 
 Figure below portrays what should be seen after the command is executed correctly:
 
