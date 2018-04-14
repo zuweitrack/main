@@ -854,3 +854,12 @@ OR +
 OR +
 `deletereminder [REMINDER_TEXT]` +
 |`-reminder Eat pills`
+
+|*Rate* |Rates one or more people|`rate INDEX(s) [LEVELOFFRIENDSHIP]` OR +
+`rt INDEX(s) [LEVELOFFRIENDSHIP]`| rate 1 3 */5
+
+|*Show* |Show students by level of friendship|`show [LEVELOFFRIENDSHIP]` OR +
+`sh [LEVELOFFRIENDSHIP]`| show 5
+
+|*Seek* |Seek RA(s) of students by keyword|`seek [keyword]` OR +
+`sh [keyword]`| seek james
