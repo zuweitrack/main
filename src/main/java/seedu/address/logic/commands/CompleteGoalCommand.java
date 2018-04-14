@@ -21,7 +21,7 @@ import seedu.address.model.goal.exceptions.GoalNotFoundException;
 
 //@@author deborahlow97
 /**
- * Edits the details of an existing goal in the address book.
+ * Edits the details of an existing goal in CollegeZone.
  */
 public class CompleteGoalCommand extends UndoableCommand {
 
@@ -30,7 +30,7 @@ public class CompleteGoalCommand extends UndoableCommand {
     public static final String COMMAND_ALIAS_2 = "completegoal";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Indicate completion of the goal identified "
-            + "by the index number used in the last goal listing. "
+            + "by the index number used in the last goal listing.\n "
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 ";
 

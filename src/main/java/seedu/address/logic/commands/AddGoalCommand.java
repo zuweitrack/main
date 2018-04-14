@@ -10,7 +10,7 @@ import seedu.address.model.goal.exceptions.DuplicateGoalException;
 
 //@@author deborahlow97
 /**
- * Adds a goal to the Goals Page.
+ * Adds a goal to CollegeZone.
  */
 public class AddGoalCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "+goal";

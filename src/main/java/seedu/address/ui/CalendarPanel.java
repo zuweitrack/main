@@ -45,18 +45,9 @@ public class CalendarPanel extends UiPart<Region> {
         this.personList = personList;
 
         calendarView = new CalendarView();
-        calendarView.setRequestedTime(LocalTime.now());
-        calendarView.setToday(LocalDate.now());
-        calendarView.setTime(LocalTime.now());
-        calendarView.setShowAddCalendarButton(false);
-        calendarView.setShowSearchField(false);
-        calendarView.setShowSearchResultsTray(false);
-        calendarView.setShowPrintButton(false);
-        calendarView.showMonthPage();
+        setupCalendar();
         updateCalendar();
         registerAsAnEventHandler(this);
-
-
     }
 
     @Subscribe
@@ -65,9 +56,6 @@ public class CalendarPanel extends UiPart<Region> {
         personList = event.data.getPersonList();
         Platform.runLater(this::updateCalendar);
     }
-
-
-
 
     /**
      * Updates the Calendar with Reminders that are already added
@@ -107,7 +95,6 @@ public class CalendarPanel extends UiPart<Region> {
                         5));
                 int year = Integer.parseInt(meetDate.substring(6,
                         10));
-                System.out.println(year + " " + month + " " + day);
                 calendarM.addEntry(new Entry("Meeting " + person.getName().toString(),
                         new Interval(LocalDate.of(year, month, day), LocalTime.of(12, 0),
                                 LocalDate.of(year, month, day), LocalTime.of(13, 0))));
@@ -116,16 +103,22 @@ public class CalendarPanel extends UiPart<Region> {
         calendarView.getCalendarSources().add(myCalendarSource);
     }
 
-    /**
-     * Updates the Calendar with Meet ups that are already added
-     */
-
-
     //@@author fuadsahmawi
     private void setDateAndTime() {
         calendarView.setToday(LocalDate.now());
         calendarView.setTime(LocalTime.now());
         calendarView.getCalendarSources().clear();
+    }
+
+    private void setupCalendar() {
+        calendarView.setRequestedTime(LocalTime.now());
+        calendarView.setToday(LocalDate.now());
+        calendarView.setTime(LocalTime.now());
+        calendarView.setShowAddCalendarButton(false);
+        calendarView.setShowSearchField(false);
+        calendarView.setShowSearchResultsTray(false);
+        calendarView.setShowPrintButton(false);
+        calendarView.showMonthPage();
     }
 
     public CalendarView getRoot() {

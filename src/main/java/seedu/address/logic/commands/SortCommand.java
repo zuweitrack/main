@@ -7,7 +7,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 
 //@@author sham-sheer
 /**
- * Sort the address book based on the users parameters
+ * Sort the persons in CollegeZone based on the users parameters
  */
 public class SortCommand extends UndoableCommand {
 
