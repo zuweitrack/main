@@ -55,13 +55,13 @@ public class CommandBox extends UiPart<Region> {
 
             navigateToPreviousInput();
             break;
+        case TAB:
+            keyEvent.consume();
+            autocompleteCommand(commandTextField.getText());
         case DOWN:
             keyEvent.consume();
             navigateToNextInput();
             break;
-        case TAB:
-            keyEvent.consume();
-            autocompleteCommand(commandTextField.getText());
         default:
             // let JavaFx handle the keypress
         }
@@ -154,7 +154,7 @@ public class CommandBox extends UiPart<Region> {
 
         styleClass.add(ERROR_STYLE_CLASS);
     }
-
+    //@@author sham-sheer
     /**
      * Sets the commandbox to completed command format if the entered substring of the command is valid
      * @param text is the command which is to be autocompleted
