@@ -11,7 +11,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Deborah Low Shi Lei
 image::deborahlow97.jpg[width="150", align="left"]
-{empty}[https://github.com/deborahlow97[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/deborahlow97[github]] [<<deborahlow97#, portfolio>>]
 
 Role: Team Lead +
 Responsibilities: UI
@@ -20,7 +20,7 @@ Responsibilities: UI
 
 === Goh Zu Wei
 image::zuweitrack.jpg[width="150", align="left"]
-{empty}[https://github.com/zuweitrack[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/zuweitrack[github]] [<<zuweitrack#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Data
@@ -29,7 +29,7 @@ Responsibilities: Data
 
 === Fuad B Sahmawi
 image::fuadsahmawi.jpg[width="150", align="left"]
-{empty}[https://github.com/fuadsahmawi[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/fuadsahmawi[github]] [<<fuadsahmawi#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Dev Ops + Threading
@@ -37,8 +37,8 @@ Responsibilities: Dev Ops + Threading
 '''
 
 === Shamsheer Ahamed
-image::a0158738x.jpg[width="150", align="left"]
-{empty}[https://github.com/A0158738X[github]] [<<johndoe#, portfolio>>]
+image::sham-sheer.jpg[width="150", align="left"]
+{empty}[https://github.com/sham-sheer[github]] [<<sham-sheer#, portfolio>>]
 
 Role: Developer +
 Responsibilities: UI
