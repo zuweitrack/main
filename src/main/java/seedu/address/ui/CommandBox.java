@@ -58,6 +58,7 @@ public class CommandBox extends UiPart<Region> {
         case TAB:
             keyEvent.consume();
             autocompleteCommand(commandTextField.getText());
+            break;
         case DOWN:
             keyEvent.consume();
             navigateToNextInput();

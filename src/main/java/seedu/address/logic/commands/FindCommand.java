@@ -1,10 +1,19 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CCA;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_FRIENDSHIP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIT_NUMBER;
+
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 
-import static seedu.address.logic.parser.CliSyntax.*;
+
+
 
 //@@author fuadsahmawi
 /**
