@@ -4,7 +4,7 @@ import seedu.address.commons.exceptions.DuplicateDataException;
 
 //@@author fuadsahmawi
 /**
- * Signals that the operation will result in duplicate Goal objects.
+ * Signals that the operation will result in duplicate Reminder objects.
  */
 public class DuplicateReminderException extends DuplicateDataException {
     public DuplicateReminderException() {
