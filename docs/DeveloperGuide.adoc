@@ -438,13 +438,25 @@ CollegeZone users may now use shortcuts to perform desired tasks. These shortcut
 |list
 |l
 
+|Rate
+|rate
+|rt
+
 |Redo
 |redo
 |r
 
+|Seek
+|seek
+|sk
+
 |Select
 |select
 |s
+
+|Show
+|show
+|sh
 
 |Undo
 |undo
