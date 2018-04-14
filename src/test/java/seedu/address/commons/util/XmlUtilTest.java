@@ -38,7 +38,7 @@ public class XmlUtilTest {
 
     private static final String VALID_NAME = "Hans Muster";
     private static final String VALID_PHONE = "9482424";
-    private static final String VALID_BIRTHDAY = "24-05-1997";
+    private static final String VALID_BIRTHDAY = "24/05/1997";
     private static final String VALID_LEVEL_OF_FRIENDSHIP = "10";
     private static final String VALID_UNIT_NUMBER = "#10-10";
     private static final String VALID_MEETDATE = "";

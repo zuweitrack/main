@@ -4,7 +4,7 @@
     <persons>
         <name>Ha!ns Mu@ster</name>
         <phone isPrivate="false">9482424</phone>
-        <birthday isPrivate="false">10-10-1993</birthday>
+        <birthday isPrivate="false">10/10/1993</birthday>
         <levelOfFriendship isPrivate="false">4</levelOfFriendship>
         <unitNumber isPrivate="false">#04-33</unitNumber>
     </persons>

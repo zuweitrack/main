@@ -77,8 +77,6 @@ public class StatusBarFooter extends UiPart<Region> {
 
     //@@author deborahlow97
     private void setGoalCompletion(int goalCompletion) {
-        //        Platform.runLater(() -> this.goalCompletionStatus.setText(String.format(PERCENTAGE_GOAL_COMPLETED,
-        //                goalCompletion)));
         Platform.runLater(() -> this.goalCompletionStatus.setText("Goal " + goalCompletion + "% completed."));
     }
 
@@ -97,7 +95,7 @@ public class StatusBarFooter extends UiPart<Region> {
     /**
      * @param completionStatus gives a String that should be either "true" or "false", indicating if the goal is
      *                         completed.
-     * @return true or false
+     * @return 1 or 0
      */
     private int isCompletedGoal(String completionStatus) {
         int valueToAdd;

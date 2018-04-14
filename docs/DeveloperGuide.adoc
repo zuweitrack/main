@@ -197,7 +197,7 @@ image::DeletePersonSdForLogic.png[width="800"]
 === Model component
 
 .Structure of the Model Component
-image::ModelClassDiagram.png[width="800"]
+image::ModelComponentCollegeZone.PNG[width="1100"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
 
@@ -212,7 +212,7 @@ The `Model`,
 === Storage component
 
 .Structure of the Storage Component
-image::StorageClassDiagram.png[width="800"]
+image::StorageComponentCollegeZone.PNG[width="900"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
 
@@ -810,7 +810,26 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-[discrete]
+=== Use case: Add student
+
+*MSS*
+
+1.  User requests to add a student to the list
+2.  CollegeZone adds the student
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The given detail format is invalid.
++
+[none]
+** 1a1. CollegeZone shows an error message.
++
+Use case ends.
+
+
 === Use case: Delete student
 
 *MSS*
@@ -836,7 +855,6 @@ Use case ends.
 +
 Use case resumes at step 2.
 
-[discrete]
 === Use case: Edit student
 1.  User requests to list students
 2.  CollegeZone shows a list of students
@@ -865,7 +883,6 @@ Use case ends.
 +
 Use case resumes at step 2.
 
-[discrete]
 === Use case: Find student
 1. User requests to find student by tag or name using keywords
 2. CollegeZone shows a list of students
@@ -890,7 +907,29 @@ Use case ends.
 +
 Use case ends.
 
-[discrete]
+=== Use case: Select student or goal
+1. User requests to list students
+2. CollegeZone shows a list of students
+3. User requests to select a student or goal
+4. CollegeZone shows the detail of the student or goal
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+[none]
+* 3a. The given INDEX for either student or goal is invalid.
++
+[none]
+** 3a1. CollegeZone shows an error message
++
+Use case ends.
+
 === Use case: Reminder add<reminder>
 
 *MSS*
@@ -910,7 +949,7 @@ Use case ends.
 +
 Use case ends.
 
-[discrete]
+
 === Use case: Reminder delete<reminder>
 *MSS*
 
@@ -936,7 +975,7 @@ Use case ends.
 +
 Use case ends.
 
-[discrete]
+
 === Use case: Task add<task, notes>
 
 1. User requests to add a task on a certain date with a note attached
@@ -944,10 +983,10 @@ Use case ends.
 +
 Use case ends.
 
-[discrete]
+
 === Use case: Meet student
 
-1. User requests to add a meet up date on a certain date with a student using his index
+1. User request to add a meet up date on a certain date with a student using his index
 2. CollegeZone adds the meet up in the calendar and changes are reflected in the calendar
 +
 Use case ends.
@@ -970,7 +1009,7 @@ Use case ends.
 Use case ends.
 
 
-[discrete]
+
 === Use case: Add goal
 1. User requests to add a goal in the list
 2. CollegeZone adds the goal
@@ -983,8 +1022,10 @@ Use case ends.
 +
 [none]
 ** 1a1. CollegeZone shows an error message.
++
+Use case ends.
 
-[discrete]
+
 === Use case: Edit goal
 1.  CollegeZone shows a list of goals
 2.  User requests to edit a detail or multiple details of a goal in the list
@@ -1004,17 +1045,21 @@ Use case ends.
 [none]
 ** 2a1. CollegeZone shows an error message.
 +
+Use case ends.
 
 * 2b. The given goal detail format is invalid.
 +
 [none]
 ** 2b1. CollegeZone shows an error message.
 +
+Use case ends.
 
 * 2c. The given goal details is invalid.
 +
 [none]
 ** 2c1. CollegeZone shows an error message.
++
+Use case ends.
 
 === Use case: Delete goal
 
@@ -1037,6 +1082,8 @@ Use case ends.
 +
 [none]
 ** 2a1. CollegeZone shows an error message.
++
+Use case ends.
 
 === Use case: Complete goal
 
@@ -1060,11 +1107,15 @@ Use case ends.
 +
 [none]
 ** 2a1. CollegeZone shows an error message.
++
+Use case ends.
 
 * 2b. The specified goal is already completed.
 +
 [none]
 ** 2b1. CollegeZone shows an error message.
++
+Use case ends.
 
 === Use case: Ongoing goal
 
@@ -1083,16 +1134,22 @@ Use case ends.
 +
 [none]
 ** 1a1. CollegeZone shows an error message.
++
+Use case ends.
 
 * 2a. The given index is invalid.
 +
 [none]
 ** 2a1. CollegeZone shows an error message.
++
+Use case ends.
 
 * 2b. The specified goal is already ongoing.
 +
 [none]
 ** 2b1. CollegeZone shows an error message.
++
+Use case ends.
 
 === Use case: Sort goal
 
@@ -1111,21 +1168,29 @@ Use case ends.
 +
 [none]
 ** 1a1. CollegeZone shows an error message.
++
+Use case ends.
 
 * 2a. The given format is invalid.
 +
 [none]
 ** 2a1. CollegeZone shows an error message.
++
+Use case ends.
 
 * 2b. The given field is invalid.
 +
 [none]
 ** 2b1. CollegeZone shows an error message.
++
+Use case ends.
 
 * 2c. The given order is invalid.
 +
 [none]
 ** 2c1. CollegeZone shows an error message.
++
+Use case ends.
 
 === Use case: Switch theme colour
 
@@ -1144,11 +1209,69 @@ Use case ends.
 +
 [none]
 ** 2a1. CollegeZone shows an error message.
++
+Use case ends.
 
 * 2b. The given theme colour is currently in use.
 +
 Use case ends.
 
+=== Use case: History
+
+*MSS*
+
+1.  User requests to toggle command history
+2.  CollegeZone displays command history
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The given format is invalid.
++
+[none]
+** 2a1. CollegeZone shows an error message.
++
+Use case ends.
+
+=== Use case: Clear
+
+*MSS*
+
+1.  User requests to clear CollegeZone
+2.  CollegeZone deletes all data
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The given format is invalid.
++
+[none]
+** 2a1. CollegeZone shows an error message.
++
+Use case ends.
+
+=== Use case: Exit CollegeZone
+
+*MSS*
+
+1.  User requests to exit CollegeZone
+2.  CollegeZone displays command history
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The given format is invalid.
++
+[none]
+** 2a1. CollegeZone shows an error message.
++
+Use case ends.
 
 [appendix]
 == Non Functional Requirements
