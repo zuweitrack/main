@@ -9,11 +9,11 @@ public class AddReminderCommand extends UndoableCommand {
     public static final String COMMAND_ALIAS = "+r";
     public static final String COMMAND_ALIAS_2 = "addreminder";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a reminder to Calendar. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a reminder to Calendar.\n"
             + "Parameters: "
             + PREFIX_REMINDER_TEXT + "TEXT "
             + PREFIX_DATE + "START_DATETIME "
-            + PREFIX_END_DATE + "END_DATETIME "
+            + PREFIX_END_DATE + "END_DATETIME\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_REMINDER_TEXT + " do homework "
             + PREFIX_DATE + " tonight 8pm "
@@ -66,7 +66,7 @@ public class DeleteReminderCommand extends UndoableCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the reminder identified by its title & start time in the calendar.\n"
             + "Parameters: REMINDER_TITLE & START_DATETIME\n"
-            + "Example: " + COMMAND_WORD + "text/Eat pills d/tmr 8pm";
+            + "Example: " + COMMAND_WORD + " text/Eat pills d/tmr 8pm";
 
     public static final String MESSAGE_DELETE_REMINDER_SUCCESS = "Deleted Reminder: %1$s";
 
