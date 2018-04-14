@@ -86,9 +86,9 @@ public class CompleteGoalCommand extends UndoableCommand {
     private static Goal createUpdatedGoal(Goal goalToUpdate, CompleteGoalDescriptor completeGoalDescriptor) {
         assert goalToUpdate != null;
 
-        GoalText goalText = completeGoalDescriptor.getGoalText().orElse(goalToUpdate.getGoalText());
-        Importance importance = completeGoalDescriptor.getImportance().orElse(goalToUpdate.getImportance());
-        StartDateTime startDateTime = completeGoalDescriptor.getStartDateTime().orElse(goalToUpdate.getStartDateTime());
+        GoalText goalText = goalToUpdate.getGoalText();
+        Importance importance = goalToUpdate.getImportance();
+        StartDateTime startDateTime = goalToUpdate.getStartDateTime();
         EndDateTime updatedEndDateTime = completeGoalDescriptor.getEndDateTime()
                 .orElse(goalToUpdate.getEndDateTime());
         Completion updatedCompletion = completeGoalDescriptor.getCompletion().orElse(goalToUpdate.getCompletion());
@@ -119,9 +119,7 @@ public class CompleteGoalCommand extends UndoableCommand {
      * Stores the details to update the goal with.
      */
     public static class CompleteGoalDescriptor {
-        private GoalText goalText;
-        private Importance importance;
-        private StartDateTime startDateTime;
+
         private EndDateTime endDateTime;
         private Completion completion;
 
@@ -152,16 +150,6 @@ public class CompleteGoalCommand extends UndoableCommand {
             return Optional.ofNullable(completion);
         }
 
-        public Optional<StartDateTime> getStartDateTime() {
-            return Optional.ofNullable(startDateTime);
-        }
-
-        public Optional<Importance> getImportance() {
-            return Optional.ofNullable(importance);
-        }
-        public Optional<GoalText> getGoalText() {
-            return Optional.ofNullable(goalText);
-        }
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -177,10 +165,7 @@ public class CompleteGoalCommand extends UndoableCommand {
             // state check
             CompleteGoalDescriptor e = (CompleteGoalDescriptor) other;
 
-            return getGoalText().equals(e.getGoalText())
-                    && getImportance().equals(e.getImportance())
-                    && getStartDateTime().equals(e.getStartDateTime())
-                    && getEndDateTime().equals(e.getEndDateTime())
+            return getEndDateTime().equals(e.getEndDateTime())
                     && getCompletion().equals(e.getCompletion());
         }
     }
