@@ -36,6 +36,9 @@ public class RateCommand extends UndoableCommand {
     private static final String MESSAGE_EDIT_PERSON_SUCCESS = "Rated person(s) successfully";
     private static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     private static final String MESSAGE_PERSON_NOT_FOUND = "The selected person cannot be missing";
+    private static final String MESSAGE_ONE_OR_MORE_INVALID_INDEX =
+            "One or more index inputs may not be valid"
+                    + " and only the person(s) of valid indexes are being rated!";
 
     private final List<Index> indexList;
     private final String levelOfFriendship;
@@ -58,8 +61,7 @@ public class RateCommand extends UndoableCommand {
         for (Index index : indexList) {
 
             if (index.getZeroBased() >= latestList.size()) {
-                throw new CommandException("One or more index inputs may not be valid"
-                        + " and only the person(s) of valid indexes are being rated!");
+                throw new CommandException(MESSAGE_ONE_OR_MORE_INVALID_INDEX);
             }
 
             Person selectedPerson = latestList.get(index.getZeroBased());
