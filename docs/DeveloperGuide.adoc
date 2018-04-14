@@ -602,6 +602,76 @@ image::GoalModelComponentClassDiagram.JPG[width="800"]
 ---
 // end::myGoalsPage[]
 
+// tag::rate[]
+=== Rate friends [Since v1.4]
+The Rate friends feature allows RC4 residents to rate their friends and change their levels of friendship.
+This feature is implemented by the `RateCommand` and `RateCommandParser` in the Logic component of the CollegeZone code.
+The RC4 student is able to rate one or more friends by keying in the new desired level of friendship through the Command Line Interface (CLI).
+The `RateCommand` inherits from `UndoableCommands` as well, as shown in the diagram below.
+
+image::RateCommandClassDiagram.jpg[width="400"]
+
+To rate other RC4 residents and friends, the `LevelOfFriendship` class is being used and is part of the `Person` class.
+A `Person` is composed of a `LevelOfFriendship` component, and each person in CollegeZone application has a particular level of friendship between `1` to `10`.
+The next diagram illustrates the relationship between a
+`Person` and its `LevelOfFriendship`.
+
+image::RCPersonClass.jpg[width="400"]
+
+The following shows a part of the code of `RateCommand` and reveals
+the parameters that `RateCommand` makes use of.
+
+[source,java]
+    public RateCommand(List<Index> indexList, String levelOfFriendship) {
+    }
+
+As observed, `RateCommand` involves two parameters, namely `indexList` and `leveloffriendship`.
+
+`indexList` has a `List` of indexes type, and `leveloffriendship` is of `String` type.
+
+The parameter `indexList` refers to the list of students whose are intended to be rated, and thus
+`RateCommand` is able to help RC4 residents rate multiple people at a time. The `leveloffriendship`
+parameter refers to the new level of friendship that the resident would like to rate their friends to.
+
+The following code sample shows the execution of `RateCommnad`,
+[source,java]
+public CommandResult executeUndoableCommand() throws CommandException {
+        List<Person> latestList = model.getFilteredPersonList();
+        for (Index index : indexList) {
+            Person selectedPerson = latestList.get(index.getZeroBased());
+            try {
+                Person editedPerson = new Person(selectedPerson.getName(), selectedPerson.getPhone(),
+                        selectedPerson.getBirthday(), new LevelOfFriendship(levelOfFriendship),
+                        selectedPerson.getUnitNumber(),
+                        selectedPerson.getCcas(), selectedPerson.getMeetDate(), selectedPerson.getTags());
+                model.updatePerson(selectedPerson, editedPerson);
+
+As seen, the index of the student whose level of friendship is to be rated and changed, a new `editedPerson` object is created
+and all the details of the person, the name and phone number and other details were copied from the `selectedPerson` and is assigned the new level of friendship from the rate command.
+
+
+[NOTE]
+If an invalid index value is entered, i.e the person with an `index` of which does not exist in CollegeZone contact list is entered with valid `index` entries,
+only the valid entries will have their `Level of friendships` rated and updated.
+As seen in the code below, there will be a error message informing the user that they have keyed in an invalid `index` value.
+
+[source,java]
+            if (index.getZeroBased() >= latestList.size()) {
+                throw new CommandException(MESSAGE_ONE_OR_MORE_INVALID_INDEX);
+            }
+
+
+==== Design Considerations
+
+**Aspect:** Implementation of `RateCommand`. +
+**Alternative 1 (current choice):** Creates a new `Person` object which copies all its respective personal details and adds a new `LevelOfFriendship` value. +
+**Pros:** It uses a pre-existing method, and additional methods to implement `RateCommand` need not be created and added.  +
+**Cons:** Copying all respective personal data in order to change only the `LevelOfFriendship` attribute can be excessive as cause additional processing time if a `person` have many attributes. +
+**Alternative 2:** Add a `changeLevelOfFriendship` setter method in `Person` class +
+**Pros:** Relatively simple to implement. +
+**Cons:** Additional methods have to be added to ensure that the `input values` and `indexes` are valid.
+
+// end::rate[]
 
 == Documentation
 
@@ -1231,7 +1301,7 @@ Use case ends.
 +
 Use case ends.
 
-=== Use case: Rate student
+=== Use case: Rate friends
 *MSS*
 
 1.  User requests to list or show students of a particular level of friendship.
@@ -1242,36 +1312,36 @@ Use case ends.
 Use case ends.
 
 *Extensions*
+
 [none]
+* 2a. The list is empty.
++
+Use case ends.
 
-** 1a. The list is empty.
-
-** Use case ends.
-
-** 2a. The given index is invalid.
-
+* 3a. The given index is invalid.
++
 [none]
 ** 3a1. CollegeZone shows an error message.
 +
 
-3b. The given detail format is invalid.
+* 3b. The given detail format is invalid.
 +
 [none]
-3b1. CollegeZone shows an error message.
+** 3b1. CollegeZone shows an error message.
 +
 Use case ends.
 
-
-
 === Use case: Show student
+*MSS*
+
 1. User requests to show student by level of friendship using valid value.
 2. CollegeZone shows a list of students of a particular level of friendship.
 +
 Use case ends.
 
 *Extensions*
-
 [none]
+
 * 1a. The given detail format is invalid.
 +
 [none]
@@ -1286,7 +1356,6 @@ Use case ends.
 * 2b. The list is empty.
 +
 Use case ends.
-
 
 === Use case: Switch theme colour
 
