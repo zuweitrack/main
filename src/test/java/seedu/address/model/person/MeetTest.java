@@ -32,6 +32,7 @@ public class MeetTest {
         assertFalse(meet.equals(differentMeet));
     }
 
+
     @Test
     public void isValidDate() {
         // null meet date
