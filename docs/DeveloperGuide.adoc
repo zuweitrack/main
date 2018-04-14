@@ -238,6 +238,7 @@ The undo/redo mechanism is facilitated by an `UndoRedoStack`, which resides insi
 
 `UndoRedoStack` only deals with `UndoableCommands`. Commands that cannot be undone will inherit from `Command` instead. The following diagram shows the inheritance diagram for commands:
 
+.Structure of Logic Command
 image::LogicCommandClassDiagram.png[width="800"]
 
 As you can see from the diagram, `UndoableCommand` adds an extra layer between the abstract `Command` class and concrete commands that can be undone, such as the `DeleteCommand`. Note that extra tasks need to be done when executing a command in an _undoable_ way, such as saving the state of the address book before execution. `UndoableCommand` contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level steps of the algorithm in child classes is also known as the https://www.tutorialspoint.com/design_pattern/template_pattern.htm[template pattern].
@@ -277,10 +278,12 @@ Suppose that the user has just launched the application. The `UndoRedoStack` wil
 
 The user executes a new `UndoableCommand`, `delete 5`, to delete the 5th person in the address book. The current state of the address book is saved before the `delete 5` command executes. The `delete 5` command will then be pushed onto the `undoStack` (the current state is saved together with the command).
 
+.Initial UndoRedoStack
 image::UndoRedoStartingStackDiagram.png[width="800"]
 
 As the user continues to use the program, more commands are added into the `undoStack`. For example, the user may execute `add n/David ...` to add a new person.
 
+.UndoRedoStack given new command input
 image::UndoRedoNewCommand1StackDiagram.png[width="800"]
 
 [NOTE]
@@ -290,6 +293,7 @@ The user now decides that adding the person was a mistake, and decides to undo t
 
 We will pop the most recent command out of the `undoStack` and push it back to the `redoStack`. We will restore the address book to the state before the `add` command executed.
 
+.Undo command on UndoRedoStack
 image::UndoRedoExecuteUndoStackDiagram.png[width="800"]
 
 [NOTE]
@@ -297,6 +301,7 @@ If the `undoStack` is empty, then there are no other commands left to be undone,
 
 The following sequence diagram shows how the undo operation works:
 
+.Sequence diagram for `undo`
 image::UndoRedoSequenceDiagram.png[width="800"]
 
 The redo does the exact opposite (pops from `redoStack`, push to `undoStack`, and restores the address book to the state after the command is executed).
@@ -306,14 +311,17 @@ If the `redoStack` is empty, then there are no other commands left to be redone,
 
 The user now decides to execute a new command, `clear`. As before, `clear` will be pushed into the `undoStack`. This time the `redoStack` is no longer empty. It will be purged as it no longer make sense to redo the `add n/David` command (this is the behavior that most modern desktop applications follow).
 
+.UndoRedoStack given command `clear`
 image::UndoRedoNewCommand2StackDiagram.png[width="800"]
 
 Commands that are not undoable are not added into the `undoStack`. For example, `list`, which inherits from `Command` rather than `UndoableCommand`, will not be added after execution:
 
+.UndoRedoStack given command `list`
 image::UndoRedoNewCommand3StackDiagram.png[width="800"]
 
 The following activity diagram summarize what happens inside the `UndoRedoStack` when a user executes a new command:
 
+.Activity diagram of UndoRedoStack
 image::UndoRedoActivityDiagram.png[width="650"]
 
 ==== Design Considerations
@@ -438,13 +446,25 @@ CollegeZone users may now use shortcuts to perform desired tasks. These shortcut
 |list
 |l
 
+|Rate
+|rate
+|rt
+
 |Redo
 |redo
 |r
 
+|Seek
+|seek
+|sk
+
 |Select
 |select
 |s
+
+|Show
+|show
+|sh
 
 |Undo
 |undo
@@ -460,19 +480,22 @@ CollegeZone users may now use shortcuts to perform desired tasks. These shortcut
 
 // tag::tagcolours[]
 === Enhanced tag colours [Since v1.1]
-Tags are now colour-coded which allows improved differentiation between many different tags.
+Tags are now colour-coded which allows improved differentiation between many different tags. Different coloured tags
+also makes it more eye catching for users.
 // end::tagcolours[]
 
 // tag::addandedit[]
 === Targeted add and edit command [Since v1.2]
+As CollegeZone is designed for NUS RC4 students to use, being able to record other students Level of Friendship,
+ Birthday, RC4 Unit Number and RC4 CCAs, will be a useful feature for them.
 
-The old add and edit feature holds a broad information about a Person.
 As CollegeZone is catered toward NUS RC4 Residents, we have changed the attributes of a Person to hold: +
 *Name, Mobile Number, Birthday, Level of Friendship, RC4 Unit Number, Meet up dates with RC4 students, RC4 CCAs and Tags*. +
 This is done by removing unwanted attributes of a person and adding new attributes of a person.
 
+.Class diagram for Student
 image::RCPersonClass.JPG[width="450"]
-    Figure 3.8.1: Person Class diagram with added attributes
+
 
 ==== Aspect: Nature of new Attributes
 * Birthday: Must be a valid date.
@@ -488,42 +511,399 @@ image::RCPersonClass.JPG[width="450"]
 // tag::reminder[]
 === Reminders [Since v1.4]
 
-Reminders are created as RC4 residents have events, classes and meetings to go to at a certain date and time, we decided on implementing a reminder feature to allow users to add reminders in CollegeZone. +
+==== Introduction +
+
+RC4 students will have a very busy schedule that consists of tasks, events & activities. +
+Hence, we decided on implementing a reminder feature to allow them to add & delete reminders in CollegeZone to assist them in organising their schedule. +
+
+The `AddReminderCommand` allows you to add a `Reminder` into CollegeZone and is stored in an ArrayList, `UniqueReminderList`, in `AddressBook`.
+The `DeleteReminderCommand` allows you to delete a `Reminder` from CollegeZone.
+
+Reminder commands are undoable and redoable for the benefit users to redo and undo a command they did or did not intend to change. +
+Hence, both `AddReminderCommand` and `DeleteReminderCommand` are implemented as `UndoableCommand`.
+
+*Reminder Features:* +
+
+* Adding a reminder to the Calendar: The `AddReminderCommand` allows you to add a `Reminder` into CollegeZone and is stored in an ArrayList, `UniqueReminderList`, in `AddressBook`.
+* Deleting a reminder on the Calendar: The `DeleteReminderCommand` allows you to delete a `Reminder` from `UniqueReminderList`, in `AddressBook`.
+
 Reminder commands are undoable and redoable for the benefit users to redo and undo a command they did or did not intend to change.
+Hence, both `AddReminderCommand` and `DeleteReminderCommand` are implemented as `UndoableCommand`.
 
-*Reminder features:* +
+==== Implementation +
 
-* Adding a reminder to the Calendar
-* Deleting a reminder on the Calendar
+*Reminder Object* +
 
-*Reminder objects will consist of 3 attributes :* +
+Every time a `Reminder` is created, three other objects are also created: +
 
-1. the reminder text content +
-2. the start date and time +
-3. the end date and time
+1. `ReminderText`: This object contains a single string variable, `reminderText`, that is verified to contain characters and spaces and cannot be blank.  +
+2. `DateTime`: This object contains a single string variable, `dateTime`. After obtaining the start date time from user input, it will parse through `nattyDateAndTimeParser` to convert it to a `LocalDateTime`
+variable. Subsequently, this `LocalDateTime` variable will then be converted back to a string variable using `properReminderDateTimeFormat` and it stored as `dateTime` in `DateTime` object. +
+3. `EndDateTime`: This object contains a single string variable, `dateTime`. After obtaining the end date time from user input, it will parse through `nattyDateAndTimeParser` to convert it to a `LocalDateTime`
+                  variable. Subsequently, this `LocalDateTime` variable will then be converted back to a string variable using `properReminderDateTimeFormat` and it stored as `dateTime` in `DateTime` object.
 
-The reminders will be stored in an ArrayList of all the reminder objects. Each reminder will have specific positive integer index number. +
+A `Reminder` will be marked with a *blue* circle if it's not due and be marked with a *red* circle if it's due. +
 
-A reminder will be *blue* until it is due. +
-A reminder will turn and remain *red* if it's due. +
-Users can delete reminders on the Calendar if its already due or when they accidentally made a mistake  +
+Users can delete reminders on the Calendar if its already due or when they accidentally made a mistake. +
+
+*UniqueReminderList* +
+
+`UniqueReminderList` functions as a List of `Reminders` where every element is unique and is defined by its `ReminderText`,
+`DateTime` and `EndDateTime`.
+
+*Adding a Reminder* +
+
+When `AddReminderCommand` is executed, it first checks whether there are any duplicate reminders in `UniqueReminderList`. If there is no duplicate reminder,
+`Reminder` is added into `UniqueReminderList` in `AddressBook`.
+
+.Interactions Inside the Logic Component for the `+r text/eat pills d/tmr 8pm e/tmr 10pm` Command
+image::addReminderSeqDiagram.png[width="800"]
+
+*Deleting a Reminder* +
+
+When `DeleteReminderCommand` is executed, it will find the `Reminder` specified by the user using parameters `ReminderText` and `DateTime`. If `Reminder` specified by user
+is not found in `UniqueReminderList`, `CommandException` will be thrown. If `Reminder` is found, it will then be removed from `UniqueReminderList`. The code snippet to find and remove the `Reminder`
+specified by user is shown below.
+
+.Interactions Inside the Logic Component for the `-r text/eat pills d/tmr 8pm` Command
+image::delReminderSeqDiagram.png[width="800"]
+
+[source,java]
+----
+@Override
+    protected void preprocessUndoableCommand() throws CommandException {
+        model.updateFilteredReminderList(predicate);
+        List<Reminder> lastShownList = model.getFilteredReminderList();
+        targetIndex = Index.fromOneBased(1);
+        if (lastShownList.size() > 1) {
+            for (Reminder reminder : lastShownList) {
+                if (reminder.getDateTime().toString().equals(dateTime)) {
+                    reminderToDelete = reminder;
+                }
+            }
+        } else {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_REMINDER_TEXT_DATE);
+            }
+
+            reminderToDelete = lastShownList.get(targetIndex.getZeroBased());
+        }
+    }
+----
+
+*Syncing Reminder to Calendar* +
+
+To display the reminder in the calendar, we have a `CalendarPanel` that takes in the `UniqueReminderList`.
+
+[source,java]
+----
+    public CalendarPanel(ObservableList<Reminder> reminderList, ObservableList<Person> personList) {
+        super(FXML);
+
+        this.reminderList = reminderList;
+        this.personList = personList;
+
+        calendarView = new CalendarView();
+        setupCalendar();
+        updateCalendar();
+        registerAsAnEventHandler(this);
+    }
+----
+`UniqueReminderList` will then be iterated and each reminder in the list is individually added into the calendar through `updateCalendar()`. Every time a new reminder is added into `CollegeZone`, an event handler, `handleNewCalendarEvent`, will
+cause `calendarUpdate()` to run again and `CalendarPanel` will be updated to display the new reminder added onto `CollegeZone`.
+
+[source,java]
+----
+    @Subscribe
+    private void handleNewCalendarEvent(AddressBookChangedEvent event) {
+        reminderList = event.data.getReminderList();
+        personList = event.data.getPersonList();
+        Platform.runLater(this::updateCalendar);
+    }
+
+    /**
+     * Updates the Calendar with Reminders that are already added
+     */
+    private void updateCalendar() {
+        setDateAndTime();
+        CalendarSource myCalendarSource = new CalendarSource("Reminders and Meetups");
+        Calendar calendarRDue = new Calendar("Reminders Already Due");
+        Calendar calendarRNotDue = new Calendar("Reminders Not Due");
+        Calendar calendarM = new Calendar("Meetups");
+        calendarRDue.setStyle(Calendar.Style.getStyle(4));
+        calendarRDue.setLookAheadDuration(Duration.ofDays(365));
+        calendarRNotDue.setStyle(Calendar.Style.getStyle(1));
+        calendarRNotDue.setLookAheadDuration(Duration.ofDays(365));
+        calendarM.setStyle(Calendar.Style.getStyle(3));
+        myCalendarSource.getCalendars().add(calendarRDue);
+        myCalendarSource.getCalendars().add(calendarRNotDue);
+        myCalendarSource.getCalendars().add(calendarM);
+        for (Reminder reminder : reminderList) {
+            LocalDateTime ldtstart = nattyDateAndTimeParser(reminder.getDateTime().toString()).get();
+            LocalDateTime ldtend = nattyDateAndTimeParser(reminder.getEndDateTime().toString()).get();
+            LocalDateTime now = LocalDateTime.now();
+            if (now.isBefore(ldtend)) {
+                calendarRNotDue.addEntry(new Entry(
+                        reminder.getReminderText().toString(), new Interval(ldtstart, ldtend)));
+            } else {
+                calendarRDue.addEntry(new Entry(reminder.getReminderText().toString(), new Interval(ldtstart, ldtend)));
+            }
+        }
+        //@@author sham-sheer
+        for (Person person : personList) {
+            String meetDate = person.getMeetDate().toString();
+            if (!meetDate.isEmpty()) {
+                int day = Integer.parseInt(meetDate.substring(0,
+                        2));
+                int month = Integer.parseInt(meetDate.substring(3,
+                        5));
+                int year = Integer.parseInt(meetDate.substring(6,
+                        10));
+                calendarM.addEntry(new Entry("Meeting " + person.getName().toString(),
+                        new Interval(LocalDate.of(year, month, day), LocalTime.of(12, 0),
+                                LocalDate.of(year, month, day), LocalTime.of(13, 0))));
+            }
+        }
+        calendarView.getCalendarSources().add(myCalendarSource);
+    }
+----
+
+When a reminder is deleted, it will go through the same process as adding reminder and the changes will then be updated in the calendar.
+
+==== Design Considerations
+
+*Aspect*: Deleting a `Reminder` from `CollegeZone`.
+
+*Alternative 1*: Delete `Reminder` using an index which is the index of the particular `Reminder` in `UniqueReminderList` +
+*Pros*: Implementing `DeleteReminderCommand` by parsing an index will be simple as `DeleteCommand` to delete a person from `AddressBook` is using a similar implementation. +
+*Cons*: We will have to first implement a list function to list all reminders with their respective indexes, which may be undesirable as there may be
+a large number of reminders to be listed out. This will in turn require the need of a find function to find a specific reminder that the users want to delete.
+
+*Alternative 2(current choice)*: Delete `Reminder` identified by `ReminderText` and `DateTime`. +
+*Pros*: Reduces the need of a listing and finding function to delete a `Reminder` from `CollegeZone`. +
+*Cons*: Implementation of `DeleteReminderCommand` will be more difficult as we will have to integrate a find function to pick out
+the specific `Reminder` that the user wants to remove.
+
 
 // end::reminder[]
 
 // tag::myGoalsPage[]
-=== Goals List [Since v1.4]
 
-The My Goals page is created for RC4 users to add and keep track of their goals throughout their stay. We are implementing this goal list as setting goals gives you *long-term vision* and *short-term motivation* for the goals. In addition as a majority of RC4 residents are NUS students, when students set their own goals, they take responsibility and ownership of their learning goals. +
-Goals are meant only for the user, and the user can have many goals stored in CollegeZone. +
+=== Goals
+==== Introduction
+CollegeZone is designed for RC4 students to use. RC4 students often have goals that they want to achieve in life
+– Career goals, health goals, social goals, relationship goals etc. This additional goal feature is created for RC4 users to add and keep track of their goals throughout their stay.
+The main reason behind this implementation is because setting goals gives you *long-term vision* and *short-term motivation* for the goals.
+This implementation allows RC4 students to set goals in _CollegeZone_ – big or small ones - so
+ that they will be reminded of the goals that they have set for themselves.
 
-*Goals features:* +
+  In addition as a majority of RC4 residents are NUS students, when students set their own goals, they
+   take responsibility and ownership of their learning goals. +
+ Goals are meant only for the user, and the user can have many goals stored in CollegeZone.
 
-* Adding a goal to Goals List
-* Editing a goal from the Goals List
-* Deleting a goal from the Goals List
-* Check a goal from the Goals List
-* Uncheck a goal from the Goals List
-* Sort goals from the Goals List
+*Goal features:*
+
+ -add goal
+ -edit goal
+ -delete goal
+ -complete goal
+ -ongoing goal
+ -sort goal
+
+==== Implementation of Goal Object
+
+*Goal objects consists of 5 attributes :* +
+
+1. Date and time of when goal is completed. +
+2. Level of importance of goal. +
+3. Text content of Goal. +
+4. Date and time of Goal of when goal has started. +
+5. Goal completion status.
+
+._Class diagram of Goal_
+image::CollegeZoneGoalModelClassDiagram.JPG[width="800"]
+
+The code snippet shown below shows the overloading of StartDateTime constructor class.
+It keeps both a String value and a LocalDateTime value.
+The _Code-snippet 2 and 3_ shows the conversion of the String value to LocalDateTime value and vice versa.
+
+.Code-snippet 1
+[source,java]
+----
+public class StartDateTime implements Comparable<StartDateTime> {
+
+    public final String value;
+    public final LocalDateTime localDateTimeValue;
+
+    public StartDateTime(LocalDateTime startDateTime) {
+        requireNonNull(startDateTime);
+        this.localDateTimeValue = startDateTime;
+        this.value = properDateTimeFormat(startDateTime);
+    }
+
+    public StartDateTime(String startDateTimeInString) {
+        requireNonNull(startDateTimeInString);
+        this.value = startDateTimeInString;
+        this.localDateTimeValue = getLocalDateTimeFromProperDateTime(startDateTimeInString);
+    }
+}
+----
+
+.Code-snippet 2
+[source,java]
+----
+    public static String properDateTimeFormat(LocalDateTime dateTime) {
+        StringBuilder builder = new StringBuilder();
+        int day = dateTime.getDayOfMonth();
+        String month = dateTime.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+        int year = dateTime.getYear();
+        int hour = dateTime.getHour();
+        int minute = dateTime.getMinute();
+        builder.append("Date: ")
+                .append(day)
+                .append(" ")
+                .append(month)
+                .append(" ")
+                .append(year)
+                .append(",  Time: ")
+                .append(String.format("%02d", hour))
+                .append(":")
+                .append(String.format("%02d", minute));
+        return builder.toString();
+    }
+----
+
+.Code-snippet 3
+[source,java]
+----
+    public static LocalDateTime getLocalDateTimeFromProperDateTime(String properDateTimeString) {
+        String trimmedArgs = properDateTimeString.trim();
+        int size = trimmedArgs.length();
+        String stringFormat = properDateTimeString.substring(BEGIN_INDEX, size);
+        stringFormat = stringFormat.replace(", Time: ", "");
+        return nattyDateAndTimeParser(stringFormat).get();
+    }
+----
+
+==== Implementation of add goal
+
+Adding a goal into _CollegeZone_ is facilitated by `AddGoalCommand`, which extends `UndoableCommand`, it
+supports undoing and redoing of commands that modifies the state of the _CollegeZone_.
+
+[source,java]
+----
+public class AddGoalCommand extends UndoableCommand {
+@Override
+    public CommandResult executeUndoableCommand() throws CommandException {
+        // ... AddGoalCommand logic ...
+    }
+}
+----
+
+The following sequence diagram shows the flow of operation from the point _CollegeZone_ receives an input to the output of the result.
+
+._Interactions Inside the Logic Component for the `+g` Command_
+image::AddGoalSeqDiagram.png[width="800"]
+
+
+AddGoalCommand is implemented in this way:
+
+1. Logic
+* AddressBookParser:
+** Detects if add goal keyword contains correct parsing keywords after +
+*** e.g. +g text/eat healthily impt/9
+* AddGoalCommandParser: (More about this method will be mentioned later)
+** Parses the input by extracting the input text and importance +
+*** Parsed text : eat healthily +
+*** Parsed importance : 9
+** Creates a AddGoalCommand class and passes the text and importance and string as arguments
+* AddGoalCommand:
+** Adds the new goal to the list locally
+** Runs the execution which calls the model
+
+2. Model
+
+* Calls the model and gets the goals list
+* Adds the new goal into the goals list
+
+3. Ui
+* Displays the new goal added in the goal list panel
+
+4. Storage
+* Stores the new goal added in the address book storage
+
+Note:
+
+- All goals will have a string of stars (indicating importance) in a yellow border directly below the goal text in the goal list panel.
+- Goal that are just added will be placed at the bottom of the goal list. +
+
+The `AddGoalCommandParser` returns `AddGoalCommand` after execution, which will be further processed by `logic` component.
+
+AddGoalCommandParser is implemented in this way:
+[source,java]
+----
+public class AddGoalCommandParser implements Parser<AddGoalCommand> {
+
+    public static final String EMPTY_END_DATE_TIME = "";
+    public static final boolean INITIAL_COMPLETION_STATUS = false;
+
+    public AddGoalCommand parse(String args) throws ParseException {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_IMPORTANCE, PREFIX_GOAL_TEXT);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_IMPORTANCE, PREFIX_GOAL_TEXT)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGoalCommand.MESSAGE_USAGE));
+        }
+        try {
+            Importance importance = ParserUtil.parseImportance(argMultimap.getValue(PREFIX_IMPORTANCE)).get();
+            GoalText goalText = ParserUtil.parseGoalText(argMultimap.getValue(PREFIX_GOAL_TEXT)).get();
+            StartDateTime startDateTime = new StartDateTime(LocalDateTime.now());
+            EndDateTime endDateTime = new EndDateTime(EMPTY_END_DATE_TIME);
+            Completion completion = new Completion(INITIAL_COMPLETION_STATUS);
+            Goal goal = new Goal(importance, goalText, startDateTime, endDateTime, completion);
+            return new AddGoalCommand(goal);
+        } catch (IllegalValueException ive) {
+            throw new ParseException(ive.getMessage(), ive);
+        }
+    }
+----
+
+Notice that everytime a goal is added, the start date time of the goal will be recorded down in real time and it's completion
+status will be "ongoing" by default.
+
+==== Design Considerations
+
+**Aspect:** Implementation of adding start date time and completion status of goal +
+**Alternative 1 (current choice):** Having the current date time as the start date time and having a default completion status of a goal added. +
+**Pros:** User have lesser words to input in the command box. +
+**Cons:** User might have a preferred start date time and completion status of the goal that they just added. +
+**Alternative 2:** Giving user a choice of start date time input and completion status of goal added. +
+**Pros:** Allows user to choose their own start date time and completion status. +
+**Cons:** Tedious for user to input a longer add goal command and slightly more difficult to properly parse the start date time
+ that user enters.
+
+---
+
+**Aspect:** Representation of Goals level of importance in UI +
+**Alternative 1 (current choice):** Each level of importance have a number of stars related to it. +
+**Pros:** Ability for the user to differentiate the Goals with higher level of importance compared to those with lower level of importance. +
+**Cons:** The goal list in the UI might look messy to the user without having a sort Goals option as the list of goals is displayed based on when it was added. +
+**Alternative 2:** Having an additional sort goal command +
+**Pros:** It is simple and easy to understand. +
+**Cons:** It requires extra methods to implement the sort function. +
+
+---
+
+**Aspect:** Representation of Goals in UI +
+**Alternative 1 (current choice):** Having a goal list panel beside our current person list panel. +
+**Pros:** Ability for the user to differentiate the Goals with higher level of importance compared to those with lower level of importance. +
+**Cons:** The initial space in UI reserved for person list is not being used to display 2 lists, the person list and the goal list. This causes the UI to look clunky and overwhelming. +
+**Alternative 2:** Having a tab button in CollegeZone that allows user to switch between the person list panel and goal list panel. +
+**Pros:** Ability for user to switch to person list and goal list in the UI, which makes it look more user friendly. +
+**Cons:** As CollegeZone is a desktop application that has most interactions happen using a Command Line Interface (CLI), a new command to switch tabs between goal list and person list needs to be implemented. +
+
+==== Implementation of delete goal
 
 
 All goal commands are event driven. +
@@ -534,12 +914,12 @@ image::GoalHighLevelSequenceDiagram.jpg[width="800"]
 
 1. Logic
 * AddressBookParser: Detects if goal delete keyword contains correct parsing keyword after +
-e.g. goal delete 1
-* GoalDeleteCommandParser:
+e.g. deletegoal 1
+* DeleteGoalCommandParser:
 ** Parses the input by extracting the input index +
-Parsed index : 1 +
-** Creates a RemarkCommand class and passes the index and string as arguments
-* GoalDeleteCommand:
+*** Parsed index : 1 +
+** Creates a DeleteGoalCommand class and passes the index as argument
+* DeleteGoalCommand:
 ** Deletes the goal corresponding to the index locally
 ** Runs the execution which calls the model
 
@@ -550,45 +930,155 @@ Parsed index : 1 +
 * 3. Updates the filtered goals list
 * 4. Gets the updated filtered goals list
 
+3. Ui
+* Displays the deletion of goal in the goal list panel
+
+4. Storage
+* Deletes the details of the deleted goal in the address book storage
+
 *Reason for how it is implemented* +
 
 * Makes use of existing implementations +
-Coming up with new algorithms is very time consuming. Implementation of My Goals Page uses new implementations are very similar to how CollegeZone implements its contacts. This is implemented in this way so as to reduce errors and complexity in the code. +
-
-*Goals objects will consist of 3 attributes :* +
-
-1. Date and time of when goal completed. +
-2. Level of importance of goal. +
-3. Text content of Goal. +
-4. Date and time of Goal of when goal started. +
-5. Goal completion status.
-
-The following is the model component class diagram for Goal
-
-image::GoalModelComponentClassDiagram.JPG[width="800"]
-    Figure 3.10.0.2: Goal model Class Diagram
+Coming up with new algorithms is very time consuming. Implementation of My Goals Page uses new implementations
+are very similar to how CollegeZone implements its contacts. This is implemented in this way so as to reduce errors and complexity in the code. +
 
 
 ==== Design Considerations
 
 
-**Aspect:** Representation of Goals level of importance in UI +
-**Alternative 1 (current choice):** Each level of importance have a number of stars related to it. +
-**Pros:** Ability for the user to differentiate the Goals with higher level of importance compared to those with lower level of importance. +
-**Cons:** The goal list in the UI might look messy to the user without having a sort Goals option as the list of goals is displayed based on when it was added. +
-**Alternative 2:** Having an additional sort goal command +
-**Pros:** It is simple and easy to understand. +
-**Cons:** It requires extra methods to implement the sort function. +
-
-**Aspect:** Representation of Goals in UI +
-**Alternative 1 (current choice):** Having a goal list panel beside our current person list panel. +
-**Pros:** Ability for the user to differentiate the Goals with higher level of importance compared to those with lower level of importance. +
-**Cons:** The initial space in UI reserved for person list is not being used to display 2 lists, the person list and the goal list. This causes the UI to look clunky and overwhelming. +
-**Alternative 2:** Having a tab button in CollegeZone that allows user to switch between the person list panel and goal list panel. +
-**Pros:** Ability for user to switch to person list and goal list in the UI, which makes it look more user friendly. +
-**Cons:** As CollegeZone is a desktop application that has most interactions happen using a Command Line Interface (CLI), a new command to switch tabs between goal list and person list needs to be implemented. +
 ---
 // end::myGoalsPage[]
+
+
+==== Implementation of sort goal
+
+
+=== Theme Enhancement
+
+
+
+// tag::meetCommand[]
+=== Meet Command [Since v1.2]
+
+The new meet up command was implemented specifically to provide a platform in CollegeZone for RC4 students to set up
+meeting with other students with ease.
+// end::meetCommand[]
+
+//tag::sortmech[]
+=== Sorting mechanism
+
+The sorting mechanism is facilitated by `SortCommandParser` and `SortCommand`, with both classes residing in the `Logic` component of the address book. Since the address book state will be modified during the sorting process, the `sort` has to be undoable.
+
+`SortCommandParser` takes in an argument in the form of `INDEX_TYPE` that defines how `UniquePersonList` should be sorted. You may customise the sort operation, with `PREFIX` specifying the sort type. It first checks for validity against a regular expression. Once verified, the argument will be tokenized to identify your specified sort type. A `SortCommand` object is then created with the identified sort type.
+
+The `INDEX_TYPE` can be any three of the following: `1` for sorting RC4 Students based on their level of friendship, `2` for sorting persons by meet date, `3` for sorting persons by Birthday. The `ORDER` can be either `asc` for sorting in ascending order or `dsc` for sorting in descending order. The sorted list is always default to descending order of importance.
+
+Upon execution of `SortCommand`, a `Comparator<Person>` will be initialised based on the sort type it receives. A `sortPersons` function call will be made to `Model`, which propagates down to `UniquePersonList`, where the sorting of the `internalList` occurs. Since sorting of `internalList` results in the change of state to address book, `SortCommand` is to be implemented as an `UndoableCommand`.
+
+
+[NOTE]
+Implementation of Sorting Mechanism requires both the manipulation of `Logic` and `Model` component of address book.
+
+The following sequence diagram shows the flow of operation from the point the address book receives an input to the output of the result.
+
+image::SortPersonSdForLogic.png[width="800"]
+_Figure 4.5.2 : Interactions Inside the Logic Component for the `sort 1` Command_
+
+[NOTE]
+If the list is found to be empty, an `CommandException` will be thrown from `SortCommand`. The command should be terminated without any state change, keeping the redoStack clean of changes.
+
+==== Design Considerations
+
+**Aspect:** Initialising of `Comparator<Person>` +
+**Alternative 1:** Initialise in `SortCommand` +
+**Pros:** Clear separation of concerns, `SortCommandParser` to handle identifying of attribute to sort by only. +
+**Cons:** Hard for new developers to follow as other commands like `AddCommand` handles object creation in its parser. +
+**Alternative 2 (current choice): ** Initialise in `UniquePersonList` +
+**Pros:** Straightforward as initialises the `Comparator` where it is used. +
+**Cons:** `UniquePersonList` is at a lower level and should only handle a minimal set of `Person` related operations, and not logical operations like string matching. +
+
+---
+
+**Aspect:** Sorting by multiple attribute +
+**Alternative 1 (current choice):** Only allows sorting by single attribute +
+**Pros:** Fast and arguments to input is straightforward. +
+**Cons:** Unable to have fine grain control of how list should appear. +
+**Alternative 2:** Allow sorting by multiple attribute +
+**Pros:** Enables fine grain control of how list should appear. +
+**Cons:** Not necessary as effect is only obvious when contact list is long and has multiple common names. As target audience for iConnect are students, contact list will not be more than few thousand contacts long. +
+// end::sortmech[]
+
+
+// tag::rate[]
+=== Rate friends [Since v1.4]
+The Rate friends feature allows RC4 residents to rate their friends and change their levels of friendship.
+This feature is implemented by the `RateCommand` and `RateCommandParser` in the Logic component of the CollegeZone code.
+The RC4 student is able to rate one or more friends by keying in the new desired level of friendship through the Command Line Interface (CLI).
+The `RateCommand` inherits from `UndoableCommands` as well, as shown in the diagram below.
+
+image::RateCommandClassDiagram.jpg[width="400"]
+
+To rate other RC4 residents and friends, the `LevelOfFriendship` class is being used and is part of the `Person` class.
+A `Person` is composed of a `LevelOfFriendship` component, and each person in CollegeZone application has a particular level of friendship between `1` to `10`.
+The next diagram illustrates the relationship between a
+`Person` and its `LevelOfFriendship`.
+
+image::RCPersonClass.jpg[width="400"]
+
+The following shows a part of the code of `RateCommand` and reveals
+the parameters that `RateCommand` makes use of.
+
+[source,java]
+    public RateCommand(List<Index> indexList, String levelOfFriendship) {
+    }
+
+As observed, `RateCommand` involves two parameters, namely `indexList` and `leveloffriendship`.
+
+`indexList` has a `List` of indexes type, and `leveloffriendship` is of `String` type.
+
+The parameter `indexList` refers to the list of students whose are intended to be rated, and thus
+`RateCommand` is able to help RC4 residents rate multiple people at a time. The `leveloffriendship`
+parameter refers to the new level of friendship that the resident would like to rate their friends to.
+
+The following code sample shows the execution of `RateCommnad`,
+[source,java]
+public CommandResult executeUndoableCommand() throws CommandException {
+        List<Person> latestList = model.getFilteredPersonList();
+        for (Index index : indexList) {
+            Person selectedPerson = latestList.get(index.getZeroBased());
+            try {
+                Person editedPerson = new Person(selectedPerson.getName(), selectedPerson.getPhone(),
+                        selectedPerson.getBirthday(), new LevelOfFriendship(levelOfFriendship),
+                        selectedPerson.getUnitNumber(),
+                        selectedPerson.getCcas(), selectedPerson.getMeetDate(), selectedPerson.getTags());
+                model.updatePerson(selectedPerson, editedPerson);
+
+As seen, the index of the student whose level of friendship is to be rated and changed, a new `editedPerson` object is created
+and all the details of the person, the name and phone number and other details were copied from the `selectedPerson` and is assigned the new level of friendship from the rate command.
+
+
+[NOTE]
+If an invalid index value is entered, i.e the person with an `index` of which does not exist in CollegeZone contact list is entered with valid `index` entries,
+only the valid entries will have their `Level of friendships` rated and updated.
+As seen in the code below, there will be a error message informing the user that they have keyed in an invalid `index` value.
+
+[source,java]
+            if (index.getZeroBased() >= latestList.size()) {
+                throw new CommandException(MESSAGE_ONE_OR_MORE_INVALID_INDEX);
+            }
+
+
+==== Design Considerations
+
+**Aspect:** Implementation of `RateCommand`. +
+**Alternative 1 (current choice):** Creates a new `Person` object which copies all its respective personal details and adds a new `LevelOfFriendship` value. +
+**Pros:** It uses a pre-existing method, and additional methods to implement `RateCommand` need not be created and added.  +
+**Cons:** Copying all respective personal data in order to change only the `LevelOfFriendship` attribute can be excessive as cause additional processing time if a `person` have many attributes. +
+**Alternative 2:** Add a `changeLevelOfFriendship` setter method in `Person` class +
+**Pros:** Relatively simple to implement. +
+**Cons:** Additional methods have to be added to ensure that the `input values` and `indexes` are valid.
+
+// end::rate[]
 
 
 == Documentation
@@ -733,18 +1223,18 @@ b. Require developers to download those libraries manually (this creates extra w
  GUI : Change the look and feel of the GUI to make it more user friendly. Allows user to switch themes.
 
 |Fuad B Sahmawi
-|Scheduler (Reminder) : This app allows user to set/edit/delete reminders reflected on a Calendar +
- Scheduler (Notes) : This feature will allow user to add notes for a certain task/event
+|Calendar: Integrate CalendarFX onto CollegeZone UI +
+ Reminder: Allows user to set/delete reminders reflected on the Calendar. Due reminders are marked red while undue reminders marked blue.
 |Find : Change find command to be able to find persons in contact list according to tags +
  Logic : Added command aliases to allow users to be able to perform commands by typing shortcuts
 
 |Shamsheer Ahamed
-|Meetup (Tasks) : This feature allows user to set up a meet up date that will be reflected on a Calendar +
-|Profile Photo : Added a male female profile pictures to GUI for an interactive experience.
+|Social (Meet-Up) : This feature allows user to set up meet ups with RC4 students that will be reflected on a Calendar +
+ Social (Sorting) : On top of the meet up dates appearing on the calendar, a sorting tool is also added to keep the user up to date with his meet up dates, birthdays and friendship levels.
+|Command Box Enhancement : Added a autocomplete command that auto fills the required preambles for the individual commands in the command box
 
 |Goh Zu Wei
-|Form Groups : This feature allows user to organize students to form study groups or recreational sport groups +
- Set event: Add events and dates for the group meeting and gathering.
+|Rate Friends : This feature allows categorize and rate one or more friends by changing their levels of friendships.
 |Seek: Add seek command to be able to seek the Resident Assistant (RA) of any particular the student living in RC4
 
 |=======================================================================
@@ -773,6 +1263,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |RC student |set a level of friendship with a specific person |maintain my friendships depending on a priority system set by myself
 
+|`* * *` |RC student |Rate my friends |keep track and update of who my close friends are
+
 |`* * *` |RC student |edit details of my contacts |stay updated with the current information about my contacts
 
 |`* * *` |forgetful RC student |add persistent reminders |periodically remind myself to do something.
@@ -784,6 +1276,10 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |RC student |note down tasks, events or training sessions in a calendar |make my schedule more organised
 
 |`* * *` |RC student |Set down a date for group events |do necessary group preparation prior to a group event
+
+|`* * *` |RC student |Set up meetings and keep track of them |I can effectively network and meet new people in my RC
+
+|`* * *` |RC student |easily find out important dates like meeting dates and birth dates |be up to task with those dates
 
 |`* *` |careless RC student |undo a command I entered |undo a wrong command that I entered
 
@@ -930,12 +1426,10 @@ Use case ends.
 +
 Use case ends.
 
-=== Use case: Reminder add<reminder>
-
-*MSS*
+=== Use case: Add reminder
 
 1.  User requests to add a reminder on a certain date
-2.  CollegeZone adds the reminder in the calendar and changes is reflected on the calendar
+2.  CollegeZone adds the reminder in the calendar and changes are reflected on the calendar
 +
 Use case ends.
 
@@ -950,8 +1444,8 @@ Use case ends.
 Use case ends.
 
 
-=== Use case: Reminder delete<reminder>
-*MSS*
+=== Use case: Delete reminder
+
 
 1.  User requests to delete a certain reminder on a certain date
 2.  CollegeZone delete the reminder from the calendar and changes is reflected on the calendar
@@ -975,13 +1469,6 @@ Use case ends.
 +
 Use case ends.
 
-
-=== Use case: Task add<task, notes>
-
-1. User requests to add a task on a certain date with a note attached
-2. CollegeZone adds the task in the calendar and changes is reflected in the calendar
-+
-Use case ends.
 
 
 === Use case: Meet student
@@ -1008,7 +1495,29 @@ Use case ends.
 +
 Use case ends.
 
+=== Use case: Sort students
 
+1. Users requests to sort the RC4 Students list according to meet up dates.
+2. CollegeZone sorts the list and shows the upcoming the meet dates first.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The list is empty
++
+[none]
+** 1a1. CollegeZone shows an error message.
++
+Use case ends.
+
+* 1b. The given sorting index type is invalid.
++
+[none]
+** 1b1. CollegeZone shows an error message.
++
+Use case ends.
 
 === Use case: Add goal
 1. User requests to add a goal in the list
@@ -1189,6 +1698,88 @@ Use case ends.
 +
 [none]
 ** 2c1. CollegeZone shows an error message.
++
+Use case ends.
+
+=== Use case: Seek Resident Assistant (RA)
+
+*MSS*
+
+1. User requests to find students' RA by name using keywords.
+2. CollegeZone shows a list of students and Resident assistants (RA).
++
+Use case ends.
+
+*Extensions*
+[none]
+* 1a. The given detail format is invalid.
++
+[none]
+** 1a1. CollegeZone shows an error message.
+
+[none]
+* 2a. The list has all students and RA(s) with name that matches keywords.
++
+Use case ends.
+
+[none]
+* 2b. The list is empty
++
+Use case ends.
+
+=== Use case: Rate friends
+*MSS*
+
+1.  User requests to list or show students of a particular level of friendship.
+2.  CollegeZone shows a list of students.
+3.  User requests to rate one or more student in the list.
+4. CollegeZone rates and changes the level of friendship of the student(s).
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. CollegeZone shows an error message.
++
+
+* 3b. The given detail format is invalid.
++
+[none]
+** 3b1. CollegeZone shows an error message.
++
+Use case ends.
+
+=== Use case: Show student
+*MSS*
+
+1. User requests to show student by level of friendship using valid value.
+2. CollegeZone shows a list of students of a particular level of friendship.
++
+Use case ends.
+
+*Extensions*
+[none]
+
+* 1a. The given detail format is invalid.
++
+[none]
+** 1a1. CollegeZone shows an error message.
+
+[none]
+* 2a. The list has all students with level of friendship that matches input value.
++
+Use case ends.
+
+[none]
+* 2b. The list is empty.
 +
 Use case ends.
 

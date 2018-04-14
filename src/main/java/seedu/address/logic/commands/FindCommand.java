@@ -1,8 +1,19 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CCA;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_FRIENDSHIP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIT_NUMBER;
+
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
+
+
+
 
 //@@author fuadsahmawi
 /**
@@ -14,6 +25,15 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String COMMAND_ALIAS = "f";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " 1"
+            + PREFIX_NAME + "   "
+            + PREFIX_PHONE + "   "
+            + PREFIX_BIRTHDAY + "   "
+            + PREFIX_LEVEL_OF_FRIENDSHIP + "   "
+            + PREFIX_UNIT_NUMBER + "   "
+            + PREFIX_CCA + "   "
+            + PREFIX_TAG + "   ";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names or tags contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
