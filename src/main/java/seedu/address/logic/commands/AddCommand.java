@@ -40,6 +40,14 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_CCA + "tennis "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " "
+            + PREFIX_NAME + "   "
+            + PREFIX_PHONE + "   "
+            + PREFIX_BIRTHDAY + "   "
+            + PREFIX_LEVEL_OF_FRIENDSHIP + "   "
+            + PREFIX_UNIT_NUMBER + "   "
+            + PREFIX_CCA + "   "
+            + PREFIX_TAG + "   ";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";

@@ -855,7 +855,6 @@ public class AddGoalCommandParser implements Parser<AddGoalCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGoalCommand.MESSAGE_USAGE));
         }
-
         try {
             Importance importance = ParserUtil.parseImportance(argMultimap.getValue(PREFIX_IMPORTANCE)).get();
             GoalText goalText = ParserUtil.parseGoalText(argMultimap.getValue(PREFIX_GOAL_TEXT)).get();
@@ -955,6 +954,59 @@ are very similar to how CollegeZone implements its contacts. This is implemented
 
 
 === Theme Enhancement
+
+
+
+// tag::meetCommand[]
+=== Meet Command [Since v1.2]
+
+The new meet up command was implemented specifically to provide a platform in CollegeZone for RC4 students to set up
+meeting with other students with ease.
+// end::meetCommand[]
+
+//tag::sortmech[]
+=== Sorting mechanism
+
+The sorting mechanism is facilitated by `SortCommandParser` and `SortCommand`, with both classes residing in the `Logic` component of the address book. Since the address book state will be modified during the sorting process, the `sort` has to be undoable.
+
+`SortCommandParser` takes in an argument in the form of `INDEX_TYPE` that defines how `UniquePersonList` should be sorted. You may customise the sort operation, with `PREFIX` specifying the sort type. It first checks for validity against a regular expression. Once verified, the argument will be tokenized to identify your specified sort type. A `SortCommand` object is then created with the identified sort type.
+
+The `INDEX_TYPE` can be any three of the following: `1` for sorting RC4 Students based on their level of friendship, `2` for sorting persons by meet date, `3` for sorting persons by Birthday. The `ORDER` can be either `asc` for sorting in ascending order or `dsc` for sorting in descending order. The sorted list is always default to descending order of importance.
+
+Upon execution of `SortCommand`, a `Comparator<Person>` will be initialised based on the sort type it receives. A `sortPersons` function call will be made to `Model`, which propagates down to `UniquePersonList`, where the sorting of the `internalList` occurs. Since sorting of `internalList` results in the change of state to address book, `SortCommand` is to be implemented as an `UndoableCommand`.
+
+
+[NOTE]
+Implementation of Sorting Mechanism requires both the manipulation of `Logic` and `Model` component of address book.
+
+The following sequence diagram shows the flow of operation from the point the address book receives an input to the output of the result.
+
+image::SortPersonSdForLogic.png[width="800"]
+_Figure 4.5.2 : Interactions Inside the Logic Component for the `sort 1` Command_
+
+[NOTE]
+If the list is found to be empty, an `CommandException` will be thrown from `SortCommand`. The command should be terminated without any state change, keeping the redoStack clean of changes.
+
+==== Design Considerations
+
+**Aspect:** Initialising of `Comparator<Person>` +
+**Alternative 1:** Initialise in `SortCommand` +
+**Pros:** Clear separation of concerns, `SortCommandParser` to handle identifying of attribute to sort by only. +
+**Cons:** Hard for new developers to follow as other commands like `AddCommand` handles object creation in its parser. +
+**Alternative 2 (current choice): ** Initialise in `UniquePersonList` +
+**Pros:** Straightforward as initialises the `Comparator` where it is used. +
+**Cons:** `UniquePersonList` is at a lower level and should only handle a minimal set of `Person` related operations, and not logical operations like string matching. +
+
+---
+
+**Aspect:** Sorting by multiple attribute +
+**Alternative 1 (current choice):** Only allows sorting by single attribute +
+**Pros:** Fast and arguments to input is straightforward. +
+**Cons:** Unable to have fine grain control of how list should appear. +
+**Alternative 2:** Allow sorting by multiple attribute +
+**Pros:** Enables fine grain control of how list should appear. +
+**Cons:** Not necessary as effect is only obvious when contact list is long and has multiple common names. As target audience for iConnect are students, contact list will not be more than few thousand contacts long. +
+// end::sortmech[]
 
 
 // tag::rate[]
@@ -1177,8 +1229,9 @@ b. Require developers to download those libraries manually (this creates extra w
  Logic : Added command aliases to allow users to be able to perform commands by typing shortcuts
 
 |Shamsheer Ahamed
-|Meetup (Tasks) : This feature allows user to set up a meet up date that will be reflected on a Calendar +
-|Profile Photo : Added a male female profile pictures to GUI for an interactive experience.
+|Social (Meet-Up) : This feature allows user to set up meet ups with RC4 students that will be reflected on a Calendar +
+ Social (Sorting) : On top of the meet up dates appearing on the calendar, a sorting tool is also added to keep the user up to date with his meet up dates, birthdays and friendship levels.
+|Command Box Enhancement : Added a autocomplete command that auto fills the required preambles for the individual commands in the command box
 
 |Goh Zu Wei
 |Rate Friends : This feature allows categorize and rate one or more friends by changing their levels of friendships.
@@ -1223,6 +1276,10 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |RC student |note down tasks, events or training sessions in a calendar |make my schedule more organised
 
 |`* * *` |RC student |Set down a date for group events |do necessary group preparation prior to a group event
+
+|`* * *` |RC student |Set up meetings and keep track of them |I can effectively network and meet new people in my RC
+
+|`* * *` |RC student |easily find out important dates like meeting dates and birth dates |be up to task with those dates
 
 |`* *` |careless RC student |undo a command I entered |undo a wrong command that I entered
 
@@ -1438,7 +1495,29 @@ Use case ends.
 +
 Use case ends.
 
+=== Use case: Sort students
 
+1. Users requests to sort the RC4 Students list according to meet up dates.
+2. CollegeZone sorts the list and shows the upcoming the meet dates first.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The list is empty
++
+[none]
+** 1a1. CollegeZone shows an error message.
++
+Use case ends.
+
+* 1b. The given sorting index type is invalid.
++
+[none]
+** 1b1. CollegeZone shows an error message.
++
+Use case ends.
 
 === Use case: Add goal
 1. User requests to add a goal in the list
