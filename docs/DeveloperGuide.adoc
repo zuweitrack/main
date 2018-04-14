@@ -784,6 +784,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |RC student |set a level of friendship with a specific person |maintain my friendships depending on a priority system set by myself
 
+|`* * *` |RC student |Rate my friends |keep track and update of who my close friends are
+
 |`* * *` |RC student |edit details of my contacts |stay updated with the current information about my contacts
 
 |`* * *` |forgetful RC student |add persistent reminders |periodically remind myself to do something.
@@ -795,8 +797,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |RC student |note down tasks, events or training sessions in a calendar |make my schedule more organised
 
 |`* * *` |RC student |Set down a date for group events |do necessary group preparation prior to a group event
-
-|`* * *` |RC student |Rate my friends |keep track and update of who my close friends are
 
 |`* *` |careless RC student |undo a command I entered |undo a wrong command that I entered
 
@@ -1205,6 +1205,89 @@ Use case ends.
 +
 Use case ends.
 
+=== Use case: Seek Resident Assistant (RA)
+
+*MSS*
+
+1. User requests to find students' RA by name using keywords.
+2. CollegeZone shows a list of students and Resident assistants (RA).
++
+Use case ends.
+
+*Extensions*
+[none]
+* 1a. The given detail format is invalid.
++
+[none]
+** 1a1. CollegeZone shows an error message.
+
+[none]
+* 2a. The list has all students and RA(s) with name that matches keywords.
++
+Use case ends.
+
+[none]
+* 2b. The list is empty
++
+Use case ends.
+
+=== Use case: Rate student
+*MSS*
+
+1.  User requests to list or show students of a particular level of friendship.
+2.  CollegeZone shows a list of students.
+3.  User requests to rate one or more student in the list.
+4. CollegeZone rates and changes the level of friendship of the student(s).
++
+Use case ends.
+
+*Extensions*
+[none]
+
+** 1a. The list is empty.
+
+** Use case ends.
+
+** 2a. The given index is invalid.
+
+[none]
+** 3a1. CollegeZone shows an error message.
++
+
+3b. The given detail format is invalid.
++
+[none]
+3b1. CollegeZone shows an error message.
++
+Use case ends.
+
+
+
+=== Use case: Show student
+1. User requests to show student by level of friendship using valid value.
+2. CollegeZone shows a list of students of a particular level of friendship.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The given detail format is invalid.
++
+[none]
+** 1a1. CollegeZone shows an error message.
+
+[none]
+* 2a. The list has all students with level of friendship that matches input value.
++
+Use case ends.
+
+[none]
+* 2b. The list is empty.
++
+Use case ends.
+
+
 === Use case: Switch theme colour
 
 *MSS*
@@ -1229,53 +1312,18 @@ Use case ends.
 +
 Use case ends.
 
-<<<<<<< HEAD
-=== Use case: Seek Resident Assistant (RA)
-
-*MSS*
-
-1. User requests to find students' RA by name using keywords.
-2. CollegeZone shows a list of students and Resident assistants (RA).
-=======
 === Use case: History
 
 *MSS*
 
 1.  User requests to toggle command history
 2.  CollegeZone displays command history
->>>>>>> 52a0abf284840ac63a5a1095d27238d6969a4e03
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-<<<<<<< HEAD
-* 1a. The given detail format is invalid.
-+
-[none]
-** 1a1. CollegeZone shows an error message.
-
-[none]
-* 2a. The list has all students and RA(s) with name that matches keywords.
-+
-Use case ends.
-
-[none]
-* 2b. The list is empty
-+
-Use case ends.
-
-
-
-=== Use case: Rate student
-*MSS*
-+
-1.  User requests to list or show students of a particular level of friendship.
-2.  CollegeZone shows a list of students.
-3.  User requests to rate one or more student in the list.
-4. CollegeZone rates and changes the level of friendship of the student(s).
-=======
 * 2a. The given format is invalid.
 +
 [none]
@@ -1289,39 +1337,12 @@ Use case ends.
 
 1.  User requests to clear CollegeZone
 2.  CollegeZone deletes all data
->>>>>>> 52a0abf284840ac63a5a1095d27238d6969a4e03
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-<<<<<<< HEAD
-* 2a. The list is empty.
-+
-Use case ends.
-
-* 3a. The given index is invalid.
-+
-[none]
-** 3a1. CollegeZone shows an error message.
-+
-
-* 3b. The given detail format is invalid.
-+
-[none]
-** 3b1. CollegeZone shows an error message.
-+
-Use case ends.
-
-[discrete]
-
-=== Use case: Show students of a particular level of friendship
-*MSS*
-+
-1. User requests to show student by level of friendship using numerical values.
-2. CollegeZone shows a list of students of a particular level of friendship.
-=======
 * 2a. The given format is invalid.
 +
 [none]
@@ -1335,38 +1356,18 @@ Use case ends.
 
 1.  User requests to exit CollegeZone
 2.  CollegeZone displays command history
->>>>>>> 52a0abf284840ac63a5a1095d27238d6969a4e03
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-<<<<<<< HEAD
-* 1a. The given detail format is invalid.
-+
-[none]
-** 1a1. CollegeZone shows an error message
-
-[none]
-* 2a. The list has all students with level of friendship that matches input values
-+
-Use case ends.
-
-[none]
-* 2b. The list is empty
-+
-Use case ends.
-
-[discrete]
-=======
 * 2a. The given format is invalid.
 +
 [none]
 ** 2a1. CollegeZone shows an error message.
 +
 Use case ends.
->>>>>>> 52a0abf284840ac63a5a1095d27238d6969a4e03
 
 [appendix]
 == Non Functional Requirements
