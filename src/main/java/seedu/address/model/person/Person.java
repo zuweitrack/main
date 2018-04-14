@@ -94,11 +94,9 @@ public class Person {
         long date = converDateToSeconds(meetDate.toString());
         long currentDate = calendar.getTimeInMillis();
         long timeDiff = date - currentDate;
-        System.out.println(date);
         if (timeDiff < 0) {
             return Long.MAX_VALUE;
         } else {
-            System.out.println("current date: " + calendar.getTimeInMillis());
             return timeDiff;
         }
 

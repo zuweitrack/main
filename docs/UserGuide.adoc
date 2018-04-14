@@ -31,7 +31,7 @@ This app will not work with earlier versions of Java 8.
 .  Copy the file to the folder you want to use as the home folder for CollegeZone.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-image::Ui.png[width="790"]
+image::Ui.JPG[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -50,13 +50,19 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
+* Words in kbd:[()] (round brackets) indicates the *Command keyword* to use  e.g. in `(add)`, `add` is the command key word to use.
+* *Command keywords* separated by kbd:[|] executes the same command e.g. in `(add | a)`, `add` or `a` are equivalent command key words to use.
+
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Items in square brackets are optional e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-* There are no limit to the number of tags or ccas a person can have.
-* [TIP]
+* There are no limit to the number of tags or ccas a student can have.
+[TIP]
 Sentences displayed in this manner indicates a TIP for you
+[NOTE]
+Sentences displayed in this manner indicates a NOTE to look out for
+
 ====
 
 === General features
@@ -65,17 +71,14 @@ First, let's get familiar with the command features that CollegeZone offers! Typ
 
 *_Format:_*
 ```java
-help
+(help)
 ```
-==== *Adding a person: `add OR a`*
+==== *Adding a student: `add` or `a`*
 Currently, CollegeZone is empty. Try to add a fellow RC4 friend into CollegeZone using the `add` or `a` command.
 
 *_Formats:_*
 ```java
-add n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...
-```
-```java
-a n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...
+(add | a) n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...
 ```
 
 [NOTE]
@@ -88,66 +91,64 @@ a n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]
 ====
 
 [TIP]
-A person can have any number of tags (including 0) +
-A person can have any number of CCAs (including 0)
+A student can have any number of tags (including 0) +
+A student can have any number of CCAs (including 0)
 
 *_Examples_:*
 ```java
 > add n/John Doe p/98765432 */9 b/21-May-1997 u/#10-12 cca/Badminton cca/Volleyball t/workout buddy
 ```
 ```java
-> a n/Betsy Crowe t/friend b/21/12/1994 u/01-10 p/1234567 */1 t/OwesMoney
+> a n/Betsy Crowe t/friend b/21/12/1994 u/#01-10 p/1234567 */1 t/OwesMoney
 ```
 
-==== Listing all persons : `list OR l`
+==== Listing all students : `list` or `l`
 
-Shows a list of all persons in CollegeZone. +
+Shows a list of all students in CollegeZone. +
 
 *_Formats:_*
 ```java
-list
-```
-```java
-l
+(list | l)
 ```
 
-==== Editing a person : `edit OR e` [Since v1.2]
+==== Editing a student : `edit` or `e` [Since v1.2]
 
-Edits an existing person in CollegeZone. +
+Edits an existing student in CollegeZone. +
 
 *_Formats:_*
 ```java
-edit INDEX [n/NAME] [p/PHONE] [u/UNIT_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [cca/CCA]... [t/TAG]...
+(edit | e) INDEX [n/NAME] [p/PHONE] [u/UNIT_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [cca/CCA]... [t/TAG]...
 ```
-```java
-e INDEX [n/NAME] [p/PHONE] [u/UNIT_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [cca/CCA]... [t/TAG]...
-```
+
 ****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the last person listing. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the last student listing. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags or CCAs, the existing tags or CCAs of the person will be removed i.e adding of tags or CCAs is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+* When editing tags or CCAs, the existing tags or CCAs of the student will be removed i.e adding of tags or CCAs is not cumulative.
+* You can remove all the student's tags by typing `t/` without specifying any tags after it.
 ****
 
 *_Examples_:*
 ```java
 > edit 1 p/91234567 */10
 ```
-Edits the phone number and level of friendship of the 1st person to be `91234567` and `10` respectively.
+Edits the phone number and level of friendship of the 1st student to be `91234567` and `10` respectively.
 
 ```java
 > e 2 n/Betsy Crower t/
 ```
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
-==== Locating persons by name or tag: `find OR f` [Since v1.1]
+==== Locating students by name or tag: `find` or `f` [Since v1.1]
 
-Finds persons whose names contain any of the given keywords. +
+Finds students whose names contain any of the given keywords. +
 
 *_Formats:_*
 ```java
- find [n/KEYWORDS] or find [t/KEYWORDS]
+ (find | f) [n/KEYWORDS]
+```
+```java
+ (find | f) [t/KEYWORDS]
 ```
 
 ****
@@ -167,42 +168,48 @@ Returns `john` and `John Doe`
 ```java
 > f n/Betsy Tim John
 ```
-Returns any person having names `Betsy`, `Tim`, or `John`
+Returns any student having names `Betsy`, `Tim`, or `John`
 ```java
 > find t/friends
 ```
-Returns any person having tags `friends`
+Returns any student having tags `friends`
 
-==== Seeking the Resident Assistant of a person : `seek` [Since v1.3]
-Seek the Resident Assistant (RA) of the person whose name contains any of the given keywords. +
-Format: `seek NAME`
+==== Seeking the Resident Assistant of a student : `seek` [Since v1.3]
+Seek the Resident Assistant (RA) of the student whose name contains any of the given keywords. +
+*_Formats:_*
+```java
+seek NAME`
+```
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched at a single time
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Resident Assistant (RA) of the person's name matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber's RA`, `Bo Yang's RA`
+* Resident Assistant (RA) of the student's name matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber's RA`, `Bo Yang's RA`
 ****
 
-Examples:
-
-* `find John` +
+*_Examples_:*
+```java
+> find John
+```
 Returns `John's RA`
-* `find Betsy` +
+```java
+> find Betsy
+```
 Returns `Betsy's RA`
 
-==== Deleting a person : `delete OR d`
+==== Deleting a student : `delete` or `d`
 
-Deletes the specified person from CollegeZone. +
+Deletes the specified student from CollegeZone. +
 
 *_Formats:_*
 ```java
-delete INDEX
+(delete | d) INDEX
 ```
 
 ****
-* Deletes the person at the specified `INDEX`.
+* Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the most recent listing.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
@@ -212,54 +219,66 @@ delete INDEX
 > list
 > delete 2
 ```
-Deletes the 2nd person in CollegeZone.
+Deletes the 2nd student in CollegeZone.
 ```java
 > find Betsy
 > d 1
 ```
-Deletes the 1st person in the results of the `find` command.
+Deletes the 1st student in the results of the `find` command.
 
-==== Selecting a person : `select OR s`
+==== Selecting a student and goal: `select` or `s`
 
-Selects the person identified by the index number used in the last person listing. +
-Format: `select INDEX`
+Selects the student and/or goal identified by the index number used in the last student/goal listing. +
+
+*_Formats:_*
+```java
+(select | s) INDEX
+```
 
 ****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
+* Selects the student or goal at the specified `INDEX`.
 * The index refers to the index number shown in the most recent listing.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
 
-Examples:
+*_Examples_:*
+```java
+> list
+> select 2
+```
+Selects the 2nd student and 2nd goal in CollegeZone.
+```java
+> find Betsy
+> s 1
+```
+Selects the 1st student in the results of the `find` command.
 
-* `list` +
-`select 2` +
-Selects the 2nd person in CollegeZone.
-* `find Betsy` +
-`s 1` +
-Selects the 1st person in the results of the `find` command.
+==== Meeting a student : `meet` or `m` [Since v1.3]
 
-==== Meeting a person : `meet OR m` [Since v1.3]
 
-Selects the person identified by the index number used in the last person listing. +
-Format: `meet INDEX d/MEETDATE`
+Selects the student identified by the index number used in the last student listing. +
+*_Formats:_*
+```java
+(meet| m) INDEX d/MEETDATE
+```
 
 ****
-* Sets up a meeting with the person at the specified `INDEX` on the specified meet date.
+* Sets up a meeting with the student at the specified `INDEX` on the specified meet date.
 * The index refers to the index number shown in the most recent listing.
 * The index *must be a positive integer* `1, 2, 3, ...`
 * The date must be of the format d/ + DD/MM/YYYY.
 ****
 
-Examples:
-
-* `meet 1 d/14/03/2018` +
-Sets up a meeting with the 1st person on the 14th of March, 2018 in your Calendar.
+*_Examples_:*
+```java
+> meet 1 d/14/03/2018
+```
+Sets up a meeting with the 1st student on the 14th of March, 2018 in your Calendar.
 
 // tag::reminder[]
 === Reminder features
 
-==== Adding a reminder: `+reminder OR +r OR addreminder` [Since v1.4]
+==== Adding a reminder: `+reminder` or `+r` or `addreminder` [Since v1.4]
 You can set a reminder into the calendar in CollegeZone +
 Format: `+r text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME`
 
@@ -284,10 +303,13 @@ You should use a date format of MM/DD/YYYY instead of DD/MM/YYYY if you choose t
 use this date format for the START_DATETIME or END_DATETIME
 
 
-Examples:
-
-* `+r text/Eat vitamins d/tmr 8am e/tmr 8.10am`
-* `+reminder text/Dental appointment d/next thurs 3pm e/next thurs 4pm`
+*_Examples_:*
+```java
++r text/Eat vitamins d/tmr 8am e/tmr 8.10am
+```
+```java
++reminder text/Dental appointment d/next thurs 3pm e/next thurs 4pm
+```
 
 ==== Editing a reminder: `~r` [Coming v1.5]
 Edits an existing reminder in CollegeZone. +
@@ -304,9 +326,9 @@ Examples:
 * `~r 4 text/CS2103 exam coming in 1 week` +
 Edits the reminder text of the 4th reminder to be `CS2103 exam coming in 1 week`.
 * `~r 2 text/water plants d/tmr 7am` +
-Edits the reminder text and datetime of the 2nd person to be `water plants` and `tmr 7am` respectively.
+Edits the reminder text and datetime of the 2nd student to be `water plants` and `tmr 7am` respectively.
 
-==== Deleting a reminder: `-reminder OR -r OR deletereminder` [Since v1.4]
+==== Deleting a reminder: `-reminder` or `-r` or `deletereminder` [Since v1.4]
 You can delete a reminder that you have set into the calendar in CollegeZone +
 Format: `-r text/REMINDER_TEXT d/START_DATETIME`
 
@@ -340,142 +362,40 @@ Examples:
 === Goal features
 
 //tag::goalfeatures[]
-==== Adding a goal: `+goal OR +g OR addgoal` [Since v1.3]
-Adds a goal to CollegeZone and is reflected in the Goals Page. +
+==== Adding a goal: `+goal` or `+g` or `addgoal` [Since v1.3]
+Currently, your goal page is empty! Try adding a goal entry that you have into CollegeZone using the `+goal`, `+g` or `addgoal` command. The new goal added will be reflected in CollegeZone. +
 
-Format: `+goal impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
-        `OR` +
-        `+g impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
-        `OR` +
-        `addgoal impt/IMPORTANCE_LEVEL text/GOAL_TEXT`
+*_Formats:_*
+```java
+(+goal | +g | addgoal) impt/IMPORTANCE_LEVEL text/GOAL_TEXT
+```
 
 [NOTE]
 ====
 `IMPORTANCE_LEVEL` must be a positive integer ranging from 1 to 10.
 ====
 
-Examples:
-
-* `+goal impt/3 text/lose weight!`
-* `+g impt/2 text/meetup with close friends more often =)`
-* `addgoal impt/1 text/learn how to bake cheesecake`
-
-==== Editing a goal: `~goal OR ~g OR editgoal` [Since v1.4]
-If you've adding a goal entry incorrectly, try using the `~goal`, `~g` or `editgoal` command to the goals you have. +
-
-*_Formats:_*
-```java
-~goal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]
-```
-```java
- ~g INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]
-```
-```java
-editgoal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]
-```
-
-****
-* Edits the goal at the specified `INDEX`. The index refers to the index number shown in the goal page's listing. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-****
-
 *_Examples_:*
 ```java
-> ~goal 2 impt/1
-```
-Edits the goal importance level of the 2nd reminder to be `1`.
-```java
-~g 1 impt/3 text/learn yoga
-```
-Edits the goal text and importance level of the 1st person to be `learn yoga` and `1` respectively.
-```java
-editgoal 5 text/swim at least twice a month
-```
-Edits the goal text of the 5th person to be `swim at least twice a month`.
-
-==== Deleting a goal: `-goal OR -g OR deletegoal` [Since v1.4]
-If you've added a specific goal that you're unlikely to complete and want to remove it from CollegeZone, try using the `-goal`, `-g` or `deletegoal` command. +
-*_Formats:_*
-```java
--goal INDEX
+> +goal impt/3 text/lose weight!
 ```
 ```java
--g INDEX
+> +g impt/2 text/meetup with close friends more often =)
 ```
 ```java
-deletegoal INDEX
+> addgoal impt/1 text/learn how to bake cheesecake
 ```
-
-****
-* Deletes the goal at the specified `INDEX`.
-* The index refers to the index number shown in the most recent goal listing.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
-
-*_Examples_:*
-```java
-> -goal 2
-```
-Deletes the 2nd goal in CollegeZone's goal page. +
-```java
-> -g 4
-```
-Deletes the 4th goal in CollegeZone's goal page. +
-```java
-> deletegoal 1
-```
-Deletes the 1st goal in CollegeZone's goal page.
-// end::goalfeatures[]
-
-//tag::goalcompletion[]
-==== Completing a goal: `!goal OR !g OR completegoal` [Since v1.4]
-Once you've completed a goal, indicate completion of an existing goal in CollegeZone using the `!goal`, `!g` or `completegoal` command. +
-
-*_Formats:_*
-```java
-!goal INDEX
-```
-```java
-!g INDEX
-```
-```java
-completegoal INDEX
-```
-
-****
-* Indicates completion of the goal at the specified `INDEX`.
-* The index refers to the index number shown in the most recent goal listing.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
-
-*_Examples_:*
-```java
-> !goal 2
-```
-Indicates completion of the 2nd goal in CollegeZone's goal page.
-```java
-> !g 4
-```
-Indicates completion of the 4th goal in CollegeZone's goal page.
-```java
-> completegoal 1
-```
-Indicates completion of the 1st goal in CollegeZone's goal page.
-// end::goalcompletion[]
 
 // tag::sortgoal[]
-==== Sorting goals: `sortgoal OR sgoal` [Since v1.5]
+==== Sorting goals: `sortgoal` or `sgoal` [Since v1.5]
 
 It is a hassle to locate the goals you're interested in if you have too many goals in CollegeZone. Try sorting the goals that you have using the `sortgoal` or `sgoal` command. +
 
 *_Formats:_*
 ```java
-sortgoal f/GOAL_FIELD o/ORDER
+(sortgoal | sgoal) f/GOAL_FIELD o/ORDER
 ```
-```java
-sgoal f/GOAL_FIELD o/ORDER
-```
+
 [NOTE]
 ====
 `GOAL_FIELD` can only be 'startdatetime', 'completion' or 'importance'.
@@ -495,20 +415,144 @@ Sorts the goal list based on start date time in ascending order.
 > sgoal f/completion o/descending
 ```
 Sorts the goal list based on completion in descending order.
+// end::sortgoal[]
+
+==== Editing a goal: `~goal` or `~g` or `editgoal` [Since v1.4]
+If you've added a goal entry incorrectly, try using the `~goal`, `~g` or `editgoal` command to edit the goals you have. +
+
+*_Formats:_*
+```java
+(~goal | ~g | editgoal) INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]
+```
+
+****
+* Edits the goal at the specified `INDEX`. The index refers to the index number shown in the goal listing. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+****
+
+*_Examples_:*
+```java
+> ~goal 2 impt/1
+```
+Edits the goal importance level of the 2nd reminder to be `1`.
+
+```java
+> sgoal f/importance o/descending
+> ~g 1 impt/3 text/learn yoga
+```
+Edits the goal text and importance level of the 1st student in the sorted goal list to be `learn yoga` and `1` respectively.
+
+```java
+editgoal 5 text/swim at least twice a month
+```
+Edits the goal text of the 5th student to be `swim at least twice a month`.
+
+==== Deleting a goal: `-goal` or `-g` or `deletegoal` [Since v1.4]
+If you've added a specific goal that you're unlikely to complete and want to remove it from CollegeZone, try using the `-goal`, `-g` or `deletegoal` command to delete a goal entry that you have. +
+*_Formats:_*
+```java
+(-goal | -g | deletegoal) INDEX
+```
+
+****
+* Deletes the goal at the specified `INDEX`.
+* The index refers to the index number shown in the most recent goal listing.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+*_Examples_:*
+```java
+> -goal 2
+```
+Deletes the 2nd goal in CollegeZone's goal listing. +
+
+```java
+> sortgoal f/completion o/ascending
+> -g 4
+```
+Deletes the 4th goal in CollegeZone's sorted goal listing. +
+
+```java
+> deletegoal 1
+```
+Deletes the 1st goal in CollegeZone's goal listing.
+// end::goalfeatures[]
+
+//tag::goalcompletion[]
+==== Completing a goal: `!goal` or `!g` or `completegoal` [Since v1.4]
+Once you've completed a goal, indicate completion of an existing goal in CollegeZone using the `!goal`, `!g` or `completegoal` command. +
+
+*_Formats:_*
+```java
+(!goal | !g | completegoal) INDEX
+```
+
+****
+* Indicates completion of the goal at the specified `INDEX`.
+* The index refers to the index number shown in the most recent goal listing.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+*_Examples_:*
+```java
+> !goal 2
+```
+Indicates completion of the 2nd goal in CollegeZone's goal listing.
+
+```java
+> sgoal f/importance o/descending
+> !g 4
+```
+Indicates completion of the 4th goal in CollegeZone's sorted goal listing.
+
+```java
+> completegoal 1
+```
+Indicates completion of the 1st goal in CollegeZone's goal listing.
 // end::goalcompletion[]
+
+//tag::goalongoing[]
+==== Revert completing a goal: `-!goal` or `-!g` or `ongoinggoal` [Since v1.4]
+If you have an ongoing goal that is wrongly indicated that it's completed, do not fret, simply indicate that an existing goal you have is still ongoing in CollegeZone using the `-!goal`, `-!g` or `ongoinggoal` command. +
+
+*_Formats:_*
+```java
+(-!goal | -!g | ongoinggoal) INDEX
+```
+
+****
+* Indicates completion of the goal at the specified `INDEX`.
+* The index refers to the index number shown in the most recent goal listing.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+*_Examples_:*
+```java
+> -!goal 2
+```
+Indicates ongoing of the 2nd goal in CollegeZone's goal listing.
+```java
+> sortgoal f/startdatetime o/ascending
+> -!g 4
+```
+Indicates ongoing of the 4th goal in CollegeZone's sorted goal listing.
+```java
+> ongoing 1
+```
+Indicates ongoing of the 1st goal in CollegeZone's goal listing.
+// end::goalongoing[]
 
 === Interesting features
 // tag::theme[]
-==== Changing CollegeZone theme : `theme OR th` [Since v1.5]
+==== Changing CollegeZone theme : `theme` or `th` [Since v1.5]
 CollegeZone's default theme colour is not the only theme colour we have to offer! Try changing CollegeZone's theme colour using the `theme` or `th` command.  +
 
 *_Formats:_*
 ```java
-theme THEME_COLOUR
+(theme | th) THEME_COLOUR
 ```
-```java
-th THEME_COLOUR
-```
+
 [NOTE]
 ====
 `THEME_COLOUR` can only be 'dark' or 'light'.
@@ -527,10 +571,13 @@ Changes the theme colour to dark theme.
 
 // tag::theme[]
 
-==== Listing entered commands : `history`
+==== Listing entered commands : `history` or `h`
 
 Lists all the commands that you have entered in reverse chronological order. +
-Format: `history`
+*_Formats:_*
+```java
+(history | h)
+```
 
 [NOTE]
 ====
@@ -538,59 +585,86 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
-==== Undoing previous command : `undo`
+==== Undoing previous command : `undo` or `u`
 
 Restores CollegeZone to the state before the previous _undoable_ command was executed. +
-Format: `undo`
+*_Formats:_*
+```java
+(undo | u)
+```
 
 [NOTE]
 ====
-Undoable commands: those commands that modify CollegeZone's content (`add`, `delete`, `edit`, `clear`, `+goal`, `-goal`, `~goal`).
+Undoable commands: those commands that modify CollegeZone's content (`add`, `delete`, `edit`, `clear`, `+goal`, `-goal`, `~goal`, `!goal`, `-!goal`).
 ====
 
-Examples:
+*_Examples_:*
+```java
+> delete 1
+> list
+> undo
+```
+Reverses the `delete 1` command
 
-* `delete 1` +
-`list` +
-`undo` (reverses the `delete 1` command) +
-
-* `select 1` +
-`list` +
-`undo` +
+```java
+> select 1
+> list
+> undo
+```
 The `undo` command fails as there are no undoable commands executed previously.
 
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
+```java
+> delete 1
+> clear
+> undo
+> undo
+```
+Reverses both the `clear` command and the `delete 1` command
 
-==== Redoing the previously undone command : `redo`
+==== Redoing the previously undone command : `redo` or `r`
 
 Reverses the most recent `undo` command. +
-Format: `redo`
+*_Formats:_*
+```java
+(redo | r)
+```
 
-Examples:
-
-* `delete 1` +
+*_Examples_:*
+```java
+> delete 1
+> undo
+> redo
+```
 `undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
+`redo` (reapplies the `delete 1` command)
 
-* `delete 1` +
-`redo` +
+```java
+> delete 1
+> redo
+```
 The `redo` command fails as there are no `undo` commands executed previously.
 
-* `delete 1` +
-`clear` +
+```java
+> delete 1
+> clear
+> undo
+> undo
+> redo
+> redo
+```
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
 `redo` (reapplies the `delete 1` command) +
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-==== Clearing all entries : `clear`
+==== Clearing all entries : `clear` or `c`
 
 Clears all entries from CollegeZone. +
-Format: `clear`
+*_Formats:_*
+```java
+(clear | c)
+```
 
 ==== Exiting the program : `exit`
 
@@ -621,14 +695,14 @@ The table below provides a quick summary of all the commands available in Colleg
 |=======================================================================
 |Command |Function |Format |Example
 
-|*Add* |Adds a person entry|`add n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...` +
+|*Add* |Adds a student entry|`add n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...` +
 OR +
 `a n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...`
 |`add n/James Ho p/22224444 */3 b/14-3-1995 u/01-111 cca/Choir t/friend t/colleague`
 
-|*Clear* |Clears all person and goal entries |`clear` OR `c`|
+|*Clear* |Clears all student and goal entries |`clear` OR `c`|
 
-|*Delete* |Deletes a person entry |`delete INDEX` OR `d INDEX`
+|*Delete* |Deletes a student entry |`delete INDEX` OR `d INDEX`
 |`delete 3`
 
 |*Edit* |Edits a peron details |`edit INDEX [n/NAME] [p/PHONE_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [u/UNIT_NUMBER] [cca/CCA]... [t/TAG]...` +
@@ -636,7 +710,7 @@ OR +
 `e INDEX [n/NAME] [p/PHONE_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [u/UNIT_NUMBER] [cca/CCA]... [t/TAG]...` +
 |`edit 2 n/James Lee cca/waterpolo`
 
-|*Find* |Finds a person by keyword |`find n/KEYWORD [MORE_KEYWORDS]` +
+|*Find* |Finds a student by keyword |`find n/KEYWORD [MORE_KEYWORDS]` +
 OR +
 `f n/KEYWORD [MORE_KEYWORDS]` +
 OR +
@@ -645,7 +719,7 @@ OR +
 `f t/KEYWORD [MORE_KEYWORDS]` +
 |`find n/James Jake`
 
-|*List* |Lists all persons |`list` +
+|*List* |Lists all students |`list` +
 OR +
 `l` |
 
@@ -653,7 +727,7 @@ OR +
 OR +
 `h` |
 
-|*Select* |Selects the person and goal entry |`select INDEX` +
+|*Select* |Selects the student and goal entry |`select INDEX` +
 OR +
 `s INDEX`
 |`select 2`
@@ -667,7 +741,7 @@ OR +
 
 |*Redo* |Redo previous command |`redo` |
 
-|*Meet* |Adds meet up date with a person |`meet INDEX d/DD-MM-YYYY` +
+|*Meet* |Adds meet up date with a student |`meet INDEX d/DD-MM-YYYY` +
 OR +
 `m INDEX d/DD-MM-YYYY`
 |
