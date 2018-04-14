@@ -122,6 +122,9 @@ public class CompleteGoalCommand extends UndoableCommand {
         }
 
         goalToUpdate = lastShownList.get(index.getZeroBased());
+        if (goalToUpdate.getCompletion().hasCompleted) {
+            throw new CommandException(Messages.MESSAGE_GOAL_COMPLETED_ERROR);
+        }
         updatedGoal = createUpdatedGoal(goalToUpdate, completeGoalDescriptor);
     }
 
@@ -457,6 +460,176 @@ public class EditGoalCommand extends UndoableCommand {
 }
 
 ```
+###### /java/seedu/address/logic/commands/OngoingGoalCommand.java
+``` java
+/**
+ * Edits the details of an existing goal in the address book.
+ */
+public class OngoingGoalCommand extends UndoableCommand {
+
+    public static final String COMMAND_WORD = "-!goal";
+    public static final String COMMAND_ALIAS_1 = "-!g";
+    public static final String COMMAND_ALIAS_2 = "ongoinggoal";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Indicate identified goal is not completed "
+            + "and still ongoing.\n"
+            + "Goal is identified "
+            + "by the index number used in the last goal listing.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1 ";
+
+    public static final String MESSAGE_ONGOING_GOAL_SUCCESS = "Ongoing Goal! : %1$s";
+
+    private final Index index;
+    private final OngoingGoalDescriptor ongoingGoalDescriptor;
+
+    private Goal goalToUpdate;
+    private Goal updatedGoal;
+
+    /**
+     * @param index of the goal in the filtered goal list to update
+     */
+    public OngoingGoalCommand(Index index, OngoingGoalDescriptor ongoingGoalDescriptor) {
+        requireNonNull(index);
+        requireNonNull(ongoingGoalDescriptor);
+
+        this.index = index;
+        this.ongoingGoalDescriptor = new OngoingGoalDescriptor(ongoingGoalDescriptor);
+    }
+
+    @Override
+    public CommandResult executeUndoableCommand() throws CommandException {
+        try {
+            model.updateGoalWithoutParameters(goalToUpdate, updatedGoal);
+        } catch (GoalNotFoundException pnfe) {
+            throw new AssertionError("The target goal cannot be missing");
+        }
+        model.updateFilteredGoalList(PREDICATE_SHOW_ALL_GOALS);
+        return new CommandResult(String.format(MESSAGE_ONGOING_GOAL_SUCCESS, updatedGoal));
+    }
+
+    @Override
+    protected void preprocessUndoableCommand() throws CommandException {
+        List<Goal> lastShownList = model.getFilteredGoalList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_GOAL_DISPLAYED_INDEX);
+        }
+
+        goalToUpdate = lastShownList.get(index.getZeroBased());
+        if (!goalToUpdate.getCompletion().hasCompleted) {
+            throw new CommandException(Messages.MESSAGE_GOAL_ONGOING_ERROR);
+        }
+        updatedGoal = createUpdatedGoal(goalToUpdate, ongoingGoalDescriptor);
+    }
+
+    /**
+     * Creates and returns a {@code Goal} with the details of {@code goalToUpdate}
+     * edited with {@code ongoingGoalDescriptor}.
+     */
+    private static Goal createUpdatedGoal(Goal goalToUpdate, OngoingGoalDescriptor ongoingGoalDescriptor) {
+        assert goalToUpdate != null;
+
+        GoalText goalText = ongoingGoalDescriptor.getGoalText().orElse(goalToUpdate.getGoalText());
+        Importance importance = ongoingGoalDescriptor.getImportance().orElse(goalToUpdate.getImportance());
+        StartDateTime startDateTime = ongoingGoalDescriptor.getStartDateTime().orElse(goalToUpdate.getStartDateTime());
+        EndDateTime updatedEndDateTime = ongoingGoalDescriptor.getEndDateTime()
+                .orElse(goalToUpdate.getEndDateTime());
+        Completion updatedCompletion = ongoingGoalDescriptor.getCompletion().orElse(goalToUpdate.getCompletion());
+
+        return new Goal(importance, goalText, startDateTime, updatedEndDateTime, updatedCompletion);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof OngoingGoalCommand)) {
+            return false;
+        }
+
+        // state check
+        OngoingGoalCommand e = (OngoingGoalCommand) other;
+        return index.equals(e.index)
+                && ongoingGoalDescriptor.equals(e.ongoingGoalDescriptor)
+                && Objects.equals(goalToUpdate, e.goalToUpdate);
+    }
+
+    /**
+     * Stores the details to update the goal with.
+     */
+    public static class OngoingGoalDescriptor {
+        private GoalText goalText;
+        private Importance importance;
+        private StartDateTime startDateTime;
+        private EndDateTime endDateTime;
+        private Completion completion;
+
+        public OngoingGoalDescriptor() {}
+
+        /**
+         * Copy constructor.
+         * A defensive copy of {@code toCopy} is used internally.
+         */
+        public OngoingGoalDescriptor(OngoingGoalDescriptor toCopy) {
+            setEndDateTime(toCopy.endDateTime);
+            setCompletion(toCopy.completion);
+        }
+
+        public void setEndDateTime(EndDateTime endDateTime) {
+            this.endDateTime = endDateTime;
+        }
+
+        public Optional<EndDateTime> getEndDateTime() {
+            return Optional.ofNullable(endDateTime);
+        }
+
+        public void setCompletion(Completion completion) {
+            this.completion = completion;
+        }
+
+        public Optional<Completion> getCompletion() {
+            return Optional.ofNullable(completion);
+        }
+
+        public Optional<StartDateTime> getStartDateTime() {
+            return Optional.ofNullable(startDateTime);
+        }
+
+        public Optional<Importance> getImportance() {
+            return Optional.ofNullable(importance);
+        }
+        public Optional<GoalText> getGoalText() {
+            return Optional.ofNullable(goalText);
+        }
+        @Override
+        public boolean equals(Object other) {
+            // short circuit if same object
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof OngoingGoalDescriptor)) {
+                return false;
+            }
+
+            // state check
+            OngoingGoalDescriptor e = (OngoingGoalDescriptor) other;
+
+            return getGoalText().equals(e.getGoalText())
+                    && getImportance().equals(e.getImportance())
+                    && getStartDateTime().equals(e.getStartDateTime())
+                    && getEndDateTime().equals(e.getEndDateTime())
+                    && getCompletion().equals(e.getCompletion());
+        }
+    }
+}
+```
 ###### /java/seedu/address/logic/commands/SortGoalCommand.java
 ``` java
 /**
@@ -597,6 +770,8 @@ public class AddGoalCommandParser implements Parser<AddGoalCommand> {
  */
 public class CompleteGoalCommandParser implements Parser<CompleteGoalCommand> {
 
+    public static final boolean COMPLETED_BOOLEAN_VALUE = true;
+
     /**
      * Parses the given {@code String} of arguments in the context of the CompleteGoalCommand
      * and returns an CompleteGoalCommand object for execution.
@@ -615,7 +790,7 @@ public class CompleteGoalCommandParser implements Parser<CompleteGoalCommand> {
         CompleteGoalDescriptor completeGoalDescriptor = new CompleteGoalDescriptor();
 
         Optional<String> empty = Optional.empty();
-        Completion completion = new Completion(true);
+        Completion completion = new Completion(COMPLETED_BOOLEAN_VALUE);
         EndDateTime endDateTime = new EndDateTime(properDateTimeFormat(LocalDateTime.now()));
         completeGoalDescriptor.setCompletion(completion);
         completeGoalDescriptor.setEndDateTime(endDateTime);
@@ -837,6 +1012,42 @@ public class EditGoalCommandParser implements Parser<EditGoalCommand> {
         }
 
         return new EditGoalCommand(index, editGoalDescriptor);
+    }
+}
+```
+###### /java/seedu/address/logic/parser/OngoingGoalCommandParser.java
+``` java
+/**
+ * Parses input arguments and creates a new OngoingGoalCommand object
+ */
+public class OngoingGoalCommandParser implements Parser<OngoingGoalCommand> {
+
+    public static final boolean ONGOING_BOOLEAN_VALUE = false;
+    /**
+     * Parses the given {@code String} of arguments in the context of the OngoingGoalCommand
+     * and returns an OngoingGoalCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public OngoingGoalCommand parse(String args) throws ParseException {
+
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(args);
+        } catch (IllegalValueException ive) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, OngoingGoalCommand.MESSAGE_USAGE));
+        }
+
+        OngoingGoalDescriptor ongoingGoalDescriptor = new OngoingGoalDescriptor();
+
+        Optional<String> empty = Optional.empty();
+        Completion completion = new Completion(ONGOING_BOOLEAN_VALUE);
+        EndDateTime endDateTime = new EndDateTime("");
+        ongoingGoalDescriptor.setCompletion(completion);
+        ongoingGoalDescriptor.setEndDateTime(endDateTime);
+
+
+        return new OngoingGoalCommand(index, ongoingGoalDescriptor);
     }
 }
 ```
@@ -2355,7 +2566,7 @@ public class SampleGoalDataUtil {
             new Goal(new Importance("7"), new GoalText("water plants"),
                     new StartDateTime(getLocalDateTimeFromString("2017-04-08 12:30")),
                     new EndDateTime("03/06/2018 12:30"), new Completion(true)),
-            new Goal(new Importance("2"), new GoalText("buy dog food"),
+            new Goal(new Importance("5"), new GoalText("buy dog food"),
                     new StartDateTime(getLocalDateTimeFromString("2017-04-08 12:30")),
                     new EndDateTime("03/06/2018 12:30"), new Completion(true)),
             new Goal(new Importance("4"), new GoalText("Take the stairs more often!"),
@@ -2364,10 +2575,10 @@ public class SampleGoalDataUtil {
             new Goal(new Importance("10"), new GoalText("Eat PGP MALA once every week"),
                     new StartDateTime(getLocalDateTimeFromString("2017-04-08 12:30")),
                     new EndDateTime("07/06/2018 12:30"), new Completion(true)),
-            new Goal(new Importance("1"), new GoalText("Make more friends in uni"),
+            new Goal(new Importance("7"), new GoalText("Make more friends in uni"),
                     new StartDateTime(getLocalDateTimeFromString("2017-04-08 12:45")),
                     new EndDateTime("03/06/2018 12:30"), new Completion(true)),
-            new Goal(new Importance("2"), new GoalText("Go CCA regularly"),
+            new Goal(new Importance("9"), new GoalText("Go CCA regularly"),
                     new StartDateTime(getLocalDateTimeFromString("2017-04-08 13:30")),
                     EMPTY_END_DATE_TIME, new Completion(false)),
             new Goal(new Importance("9"), new GoalText("Drink 8 cups of water everyday"),
@@ -2382,7 +2593,7 @@ public class SampleGoalDataUtil {
             new Goal(new Importance("10"), new GoalText("Aim to increase CAP by 0.2 by the end of this semester"),
                     new StartDateTime(getLocalDateTimeFromString("2017-02-18 12:30")),
                     EMPTY_END_DATE_TIME, new Completion(false)),
-            new Goal(new Importance("10"), new GoalText("Do 50 squats EVERYDAY"),
+            new Goal(new Importance("4"), new GoalText("Do 50 squats EVERYDAY"),
                     new StartDateTime(getLocalDateTimeFromString("2017-04-08 12:30")),
                     new EndDateTime("03/06/2018 12:30"), new Completion(true)),
         };
@@ -2603,7 +2814,7 @@ public class GoalCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label importance;
+    private FlowPane importance;
     @FXML
     private Label startDateTime;
     @FXML
@@ -2617,7 +2828,7 @@ public class GoalCard extends UiPart<Region> {
         this.goal = goal;
         id.setText(displayedIndex + ". ");
         goalText.setText(goal.getGoalText().value);
-        importance.setText("Impt: " + changeImportanceToStar(goal.getImportance().value));
+        initImportance(goal);
         startDateTime.setText("Start " + goal.getStartDateTime().value);
         if (goal.getEndDateTime().value.equals("")) {
             endDateTime.setText(goal.getEndDateTime().value);
@@ -2647,6 +2858,16 @@ public class GoalCard extends UiPart<Region> {
             Label completionLabel = new Label("Ongoing", ongoingImageView);
             completion.getChildren().add(completionLabel);
         }
+    }
+
+    /**
+     * Creates the importance label for {@code goal}.
+     */
+    private void initImportance(Goal goal) {
+        String starValue = changeImportanceToStar(goal.getImportance().value);
+        Label importanceLabel = new Label(starValue);
+        importanceLabel.getStyleClass().add("yellow");
+        importance.getChildren().add(importanceLabel);
     }
 
     /**
@@ -2856,6 +3077,7 @@ public class GoalCard extends UiPart<Region> {
 ```
 ###### /resources/view/GoalListCard.fxml
 ``` fxml
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -2869,7 +3091,7 @@ public class GoalCard extends UiPart<Region> {
 <HBox id="goalCardPane" fx:id="goalCardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="200" prefWidth="200" />
     </columnConstraints>
     <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
       <padding>
@@ -2884,10 +3106,12 @@ public class GoalCard extends UiPart<Region> {
         </Label>
         <Label fx:id="goalText" styleClass="cell_big_label" text="\$first" wrapText="true" />
       </HBox>
+      <Label text=" " />
+      <FlowPane fx:id="importance" prefHeight="0.0" prefWidth="180.0" />
+      <Label fx:id="startDateTime" styleClass="cell_small_label" text="\$startDateTime" wrapText="true" />
+      <Label fx:id="endDateTime" styleClass="cell_small_label" text="\$endDateTime" wrapText="true" />
+      <Label text=" " />
       <FlowPane fx:id="completion" alignment="BOTTOM_RIGHT" columnHalignment="RIGHT" prefWidth="130.0" rowValignment="BOTTOM" />
-      <Label fx:id="importance" styleClass="cell_small_label" text="\$importance" />
-      <Label fx:id="startDateTime" styleClass="cell_small_label" text="\$startDateTime" wrapText="true"/>
-      <Label fx:id="endDateTime" styleClass="cell_small_label" text="\$endDateTime" wrapText="true"/>
     </VBox>
       <rowConstraints>
          <RowConstraints />
@@ -2904,28 +3128,28 @@ public class GoalCard extends UiPart<Region> {
 
 .label {
     -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Lato";
     -fx-text-fill: #cecece;
     -fx-opacity: 0.9;
 }
 
 .label-bright {
     -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Lato";
     -fx-text-fill: black;
     -fx-opacity: 1;
 }
 
 .label-header {
     -fx-font-size: 32pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Lato Light";
     -fx-text-fill: black;
     -fx-opacity: 1;
 }
 
 .text-field {
     -fx-font-size: 12pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Lato";
 }
 
 .tab-pane {
@@ -2965,7 +3189,7 @@ public class GoalCard extends UiPart<Region> {
 
 .table-view .column-header .label {
     -fx-font-size: 20pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Lato";
     -fx-text-fill: black;
     -fx-alignment: center-left;
     -fx-opacity: 1;
@@ -3020,13 +3244,13 @@ public class GoalCard extends UiPart<Region> {
 }
 
 .cell_big_label {
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-font-size: 16px;
+    -fx-font-family: "Lato";
+    -fx-font-size: 18px;
     -fx-text-fill: #010504;
 }
 
 .cell_small_label {
-    -fx-font-family: "Segoe UI";
+    -fx-font-family: "Lato";
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
 }
@@ -3048,7 +3272,7 @@ public class GoalCard extends UiPart<Region> {
 
 .result-display {
     -fx-background-color: transparent;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Lato Light";
     -fx-font-size: 13pt;
     -fx-text-fill: black;
 }
@@ -3058,7 +3282,7 @@ public class GoalCard extends UiPart<Region> {
 }
 
 .status-bar .label {
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Lato";
     -fx-text-fill: black;
 }
 
@@ -3096,7 +3320,7 @@ public class GoalCard extends UiPart<Region> {
 
 .menu-bar .label {
     -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Lato Light";
     -fx-text-fill: black;
     -fx-opacity: 0.9;
 }
@@ -3116,7 +3340,7 @@ public class GoalCard extends UiPart<Region> {
     -fx-border-width: 2;
     -fx-background-radius: 0;
     -fx-background-color: #ffffff;
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-family: "Lato";
     -fx-font-size: 11pt;
     -fx-text-fill: #d8d8d8;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
@@ -3221,7 +3445,7 @@ public class GoalCard extends UiPart<Region> {
     -fx-border-color: #f5f5f5 #f5f5f5 #ffffff #f5f5f5;
     -fx-border-insets: 0;
     -fx-border-width: 1;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Lato Light";
     -fx-font-size: 13pt;
     -fx-text-fill: black;
 }
@@ -3296,5 +3520,19 @@ public class GoalCard extends UiPart<Region> {
 #tags .purple {
     -fx-text-fill: black;
     -fx-background-color: #a29bfe;
+}
+
+#importance {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#importance .label {
+    -fx-background-color: #FFE761;
+    -fx-text-fill: black;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 3;
+    -fx-background-radius: 2;
+    -fx-font-size: 13;
 }
 ```
