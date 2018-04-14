@@ -20,7 +20,7 @@ public class ThemeSwitchRequestEvent extends BaseEvent {
 ###### /java/seedu/address/logic/commands/AddGoalCommand.java
 ``` java
 /**
- * Adds a goal to the Goals Page.
+ * Adds a goal to CollegeZone.
  */
 public class AddGoalCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "+goal";
@@ -70,7 +70,7 @@ public class AddGoalCommand extends UndoableCommand {
 ###### /java/seedu/address/logic/commands/CompleteGoalCommand.java
 ``` java
 /**
- * Edits the details of an existing goal in the address book.
+ * Edits the details of an existing goal in CollegeZone.
  */
 public class CompleteGoalCommand extends UndoableCommand {
 
@@ -79,7 +79,7 @@ public class CompleteGoalCommand extends UndoableCommand {
     public static final String COMMAND_ALIAS_2 = "completegoal";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Indicate completion of the goal identified "
-            + "by the index number used in the last goal listing. "
+            + "by the index number used in the last goal listing.\n "
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 ";
 
@@ -238,7 +238,7 @@ public class CompleteGoalCommand extends UndoableCommand {
 ###### /java/seedu/address/logic/commands/DeleteGoalCommand.java
 ``` java
 /**
- * Deletes a goal identified using it's last displayed index from the address book.
+ * Deletes a goal identified using it's last displayed index from CollegeZone.
  */
 public class DeleteGoalCommand extends UndoableCommand {
 
@@ -298,7 +298,7 @@ public class DeleteGoalCommand extends UndoableCommand {
 ###### /java/seedu/address/logic/commands/EditGoalCommand.java
 ``` java
 /**
- * Edits the details of an existing goal in the address book.
+ * Edits the details of an existing goal in CollegeZone.
  */
 public class EditGoalCommand extends UndoableCommand {
 
@@ -463,7 +463,7 @@ public class EditGoalCommand extends UndoableCommand {
 ###### /java/seedu/address/logic/commands/OngoingGoalCommand.java
 ``` java
 /**
- * Edits the details of an existing goal in the address book.
+ * Edits the details of an existing goal in CollegeZone.
  */
 public class OngoingGoalCommand extends UndoableCommand {
 
@@ -633,7 +633,7 @@ public class OngoingGoalCommand extends UndoableCommand {
 ###### /java/seedu/address/logic/commands/SortGoalCommand.java
 ``` java
 /**
- * Sorts goal list based on sort field entered by user.
+ * Sorts goal list in CollegeZone based on sort field entered by user.
  */
 public class SortGoalCommand extends Command {
 
@@ -677,7 +677,7 @@ public class SortGoalCommand extends Command {
 ###### /java/seedu/address/logic/commands/ThemeCommand.java
 ``` java
 /**
- * Changes the CollegeZone colour theme to either dark or light.
+ * Changes the CollegeZone colour theme to either dark, bubblegum or light.
  */
 public class ThemeCommand extends Command {
     public static final String COMMAND_WORD = "theme";
@@ -686,12 +686,11 @@ public class ThemeCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the theme to the theme word entered.\n"
             + "Parameters: COLOUR THEME\n"
-            + "(Colour theme words: dark, light)\n"
+            + "(Colour theme words: dark, bubblegum, light)\n"
             + "Example: " + COMMAND_WORD + " dark\n";
     public static final String MESSAGE_INVALID_THEME_COLOUR = "Theme colour entered is invalid.\n"
             + "Possible theme colours:\n"
-            + "(Colour theme words: dark, light)\n";
-    public static final String MESSAGE_ALREADY_IN_CURRENT_THEME = "CollegeZone is already in the theme colour.";
+            + "(Colour theme words: dark, bubblegum, light)\n";
     private final String themeColour;
 
     /**
@@ -716,6 +715,43 @@ public class ThemeCommand extends Command {
                 && themeColour.equals(((ThemeCommand) other).themeColour));
     }
 }
+```
+###### /java/seedu/address/logic/parser/AddCommandParser.java
+``` java
+    /**
+     * Parses the given {@code String} of arguments in the context of the AddCommand
+     * and returns an AddCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public AddCommand parse(String args) throws ParseException {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_BIRTHDAY,
+                        PREFIX_LEVEL_OF_FRIENDSHIP, PREFIX_UNIT_NUMBER, PREFIX_CCA, PREFIX_TAG);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_BIRTHDAY, PREFIX_PHONE, PREFIX_UNIT_NUMBER,
+                PREFIX_LEVEL_OF_FRIENDSHIP, PREFIX_UNIT_NUMBER)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+
+        try {
+            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME)).get();
+            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE)).get();
+            Birthday birthday = ParserUtil.parseBirthday(argMultimap.getValue(PREFIX_BIRTHDAY)).get();
+            UnitNumber unitNumber = ParserUtil.parseUnitNumber(argMultimap.getValue(PREFIX_UNIT_NUMBER)).get();
+            LevelOfFriendship levelOfFriendship = ParserUtil.parseLevelOfFriendship(argMultimap
+                    .getValue(PREFIX_LEVEL_OF_FRIENDSHIP)).get();
+            Set<Cca> ccaList = ParserUtil.parseCcas(argMultimap.getAllValues(PREFIX_CCA));
+            Meet meetDate = new Meet("");
+            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+            Person person = new Person(name, phone, birthday, levelOfFriendship, unitNumber, ccaList, meetDate,
+                    tagList);
+            return new AddCommand(person);
+        } catch (IllegalValueException ive) {
+            throw new ParseException(ive.getMessage(), ive);
+        }
+    }
+
 ```
 ###### /java/seedu/address/logic/parser/AddGoalCommandParser.java
 ``` java
@@ -807,14 +843,12 @@ public class CompleteGoalCommandParser implements Parser<CompleteGoalCommand> {
  */
 public class DateTimeParser {
 
-    private static boolean isRecurring;
-    private static boolean isTimeInferred;
     private static final int BEGIN_INDEX = 6;
     /**
      * Parses user input String specified{@code args} into LocalDateTime objects
      *
      * @return Empty Optional if args could not be parsed
-     * @Disclaimer : The parser used is a dependency called 'natty' developed by 'Joe Stelmach'
+     * @Disclaimer : The parser used is a NLP API called 'natty' developed by 'Joe Stelmach'
      */
     public static Optional<LocalDateTime> nattyDateAndTimeParser(String args) {
         if (args == null || args.isEmpty()) {
@@ -835,8 +869,6 @@ public class DateTimeParser {
         }
 
         Date date = dateGroup.getDates().get(0);
-        isRecurring = dateGroup.isRecurring();
-        isTimeInferred = dateGroup.isTimeInferred();
 
         LocalDateTime localDateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
         return Optional.ofNullable(localDateTime);
@@ -914,14 +946,6 @@ public class DateTimeParser {
 
     public static boolean containsDateAndTime(String args) {
         return nattyDateAndTimeParser(args).isPresent();
-    }
-
-    public static boolean isRecurringDate() {
-        return isRecurring;
-    }
-
-    public static boolean isTimeInferredInArgs() {
-        return isTimeInferred;
     }
 
     public static LocalDateTime getLocalDateTimeFromString(String dateString) {
@@ -2124,11 +2148,10 @@ public class Birthday {
 
     public static final String MESSAGE_BIRTHDAY_CONSTRAINTS = "Person birthday should be a valid date.";
     public static final String BIRTHDAY_VALIDATION_REGEX =
-            "^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug|Oct|Dec)))\\1|(?:(?:29|30)(\\/|-|\\.)"
-            + "(?:0?[1,3-9]|1[0-2]|(?:Jan|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))\\2))(?:(?:1[6-9]|[2-9]\\d)"
-            + "?\\d{2})$|^(?:29(\\/|-|\\.)(?:0?2|(?:Feb))\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])"
-            + "|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9]|"
-            + "(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep))|(?:1[0-2]|(?:Oct|Nov|Dec)))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$";
+            "^(((0[1-9]|[12]\\d|3[01])\\/(0[13578]|1[02])\\/((19|[2-9]\\d)\\d{2}))|((0[1-9]|[12]\\d|30)"
+                    + "\\/(0[13456789]|1[012])\\/((19|[2-9]\\d)\\d{2}))|((0[1-9]|1\\d|2[0-8])\\/02\\/((19|[2-9]\\d)"
+                    + "\\d{2}))|(29\\/02\\/((1[6-9]|[2-9]\\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|"
+                    + "[3579][26])00))))$";
 
     public final String value;
 
@@ -2489,6 +2512,7 @@ public class ThemeColourUtil {
     static {
         themes = new HashMap<>();
         themes.put("light", "view/LightTheme.css");
+        themes.put("bubblegum", "view/BubblegumTheme.css");
         themes.put("dark", "view/DarkTheme.css");
     }
 
@@ -2520,8 +2544,127 @@ public class SampleCollegeZone {
         } catch (DuplicateGoalException e) {
             throw new AssertionError("sample data cannot contain duplicate goals", e);
         }
+        try {
+            for (Reminder sampleReminder : getSampleReminders()) {
+                sampleCz.addReminder(sampleReminder);
+            }
+        } catch (DuplicateReminderException e) {
+            throw new AssertionError("sample data cannot contain duplicate reminders", e);
+        }
         return sampleCz;
     }
+}
+```
+###### /java/seedu/address/model/util/SampleDataUtil.java
+``` java
+/**
+ * Contains utility methods for populating {@code CollegeZone} with sample data.
+ */
+public class SampleDataUtil {
+
+    public static final Meet EMPTY_MEET_DATE = new Meet("15/04/2018");
+
+    public static Person[] getSamplePersons() {
+        return new Person[] {
+            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Birthday("01/01/1997"),
+                new LevelOfFriendship("5"), new UnitNumber("#06-40"), getCcaSet("Basketball"),
+                EMPTY_MEET_DATE, getTagSet("friends")),
+            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Birthday("21/02/1990"),
+                new LevelOfFriendship("9"), new UnitNumber("#07-18"), getCcaSet(),
+                EMPTY_MEET_DATE, getTagSet("colleagues", "friends")),
+            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Birthday("05/09/1980"),
+                new LevelOfFriendship("1"), new UnitNumber("#11-04"), getCcaSet("Swimming"),
+                EMPTY_MEET_DATE, getTagSet("neighbours")),
+            new Person(new Name("David Li"), new Phone("91031282"), new Birthday("20/02/1995"),
+                new LevelOfFriendship("6"), new UnitNumber("#16-43"), getCcaSet(),
+                EMPTY_MEET_DATE, getTagSet("family")),
+            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Birthday("01/01/1999"),
+                new LevelOfFriendship("7"), new UnitNumber("#16-41"), getCcaSet(),
+                EMPTY_MEET_DATE, getTagSet("classmates")),
+            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Birthday("02/04/1995"),
+                new LevelOfFriendship("10"), new UnitNumber("#6-43"), getCcaSet("Computing club", "Anime Club"),
+                EMPTY_MEET_DATE, getTagSet("colleagues")),
+            new Person(new Name("Deborah Low"), new Phone("91162930"), new Birthday("24/05/1997"),
+                    new LevelOfFriendship("9"), new UnitNumber("#10-24"), getCcaSet("Aerobics Cub"),
+                    EMPTY_MEET_DATE, getTagSet("colleagues")),
+            new Person(new Name("Royce Lew"), new Phone("93265932"), new Birthday("10/04/1996"),
+                    new LevelOfFriendship("5"), new UnitNumber("#02-021"), getCcaSet(),
+                    EMPTY_MEET_DATE, getTagSet("boyfriend")),
+            new Person(new Name("Kaden Yeo"), new Phone("82350332"), new Birthday("28/03/2001"),
+                    new LevelOfFriendship("6"), new UnitNumber("#6-20"), getCcaSet("shooting"),
+                    EMPTY_MEET_DATE, getTagSet("friends")),
+            new Person(new Name("Matthew Chiang"), new Phone("92624417"), new Birthday("02/04/1995"),
+                    new LevelOfFriendship("4"), new UnitNumber("#20-43"), getCcaSet("Anime Club"),
+                    EMPTY_MEET_DATE, getTagSet("classmate")),
+            new Person(new Name("Loh Sin Yuen"), new Phone("92624417"), new Birthday("02/05/1995"),
+                    new LevelOfFriendship("10"), new UnitNumber("#03-63"), getCcaSet("dance"),
+                    EMPTY_MEET_DATE, getTagSet("schoolmate")),
+            new Person(new Name("Florence Chiang"), new Phone("92624417"), new Birthday("02/06/1995"),
+                    new LevelOfFriendship("10"), new UnitNumber("#6-97"), getCcaSet("volleyball"),
+                    EMPTY_MEET_DATE, getTagSet("bff")),
+            new Person(new Name("Daniel Low"), new Phone("92624417"), new Birthday("12/04/1995"),
+                    new LevelOfFriendship("1"), new UnitNumber("#7-473"), getCcaSet("Muay Thai"),
+                    EMPTY_MEET_DATE, getTagSet("cousin")),
+            new Person(new Name("Rachel Lee Yan Ling"), new Phone("92624417"), new Birthday("23/04/1995"),
+                    new LevelOfFriendship("3"), new UnitNumber("#6-69"), getCcaSet("Computing club", "Anime Club"),
+                    EMPTY_MEET_DATE, getTagSet("cousin")),
+            new Person(new Name("Sarah tan"), new Phone("92624417"), new Birthday("27/04/1999"),
+                    new LevelOfFriendship("2"), new UnitNumber("#8-43"), getCcaSet("Computing club", "Anime Club"),
+                    EMPTY_MEET_DATE, getTagSet()),
+            new Person(new Name("Amanda Soh"), new Phone("92624417"), new Birthday("02/12/1995"),
+                    new LevelOfFriendship("1"), new UnitNumber("#24-579"), getCcaSet("Computing club", "Anime Club"),
+                    EMPTY_MEET_DATE, getTagSet("exgirlfriend")),
+            new Person(new Name("Marlene Koh"), new Phone("92624417"), new Birthday("02/07/1997"),
+                    new LevelOfFriendship("10"), new UnitNumber("#02-222"), getCcaSet("Pool"),
+                    EMPTY_MEET_DATE, getTagSet("closefriend")),
+            new Person(new Name("Johnny Depp"), new Phone("92624417"), new Birthday("02/12/1994"),
+                    new LevelOfFriendship("2"), new UnitNumber("#01-346"), getCcaSet("Pool"),
+                    EMPTY_MEET_DATE, getTagSet("malafriend")),
+            new Person(new Name("Aditya"), new Phone("92624417"), new Birthday("02/04/1998"),
+                    new LevelOfFriendship("3"), new UnitNumber("#6-43"), getCcaSet(),
+                    EMPTY_MEET_DATE, getTagSet("malafriend")),
+            new Person(new Name("Fuad"), new Phone("92624417"), new Birthday("20/04/1995"),
+                    new LevelOfFriendship("9"), new UnitNumber("#6-43"), getCcaSet("Floorball"),
+                    EMPTY_MEET_DATE, getTagSet("colleagues"))
+        };
+    }
+
+    public static ReadOnlyAddressBook getSampleAddressBook() {
+        try {
+            AddressBook sampleAb = new AddressBook();
+            for (Person samplePerson : getSamplePersons()) {
+                sampleAb.addPerson(samplePerson);
+            }
+            return sampleAb;
+        } catch (DuplicatePersonException e) {
+            throw new AssertionError("sample data cannot contain duplicate persons", e);
+        }
+    }
+
+    /**
+     * Returns a cca set containing the list of strings given.
+     */
+    public static Set<Cca> getCcaSet(String... strings) {
+        HashSet<Cca> ccas = new HashSet<>();
+        for (String s : strings) {
+            ccas.add(new Cca(s));
+        }
+
+        return ccas;
+    }
+
+    /**
+     * Returns a tag set containing the list of strings given.
+     */
+    public static Set<Tag> getTagSet(String... strings) {
+        HashSet<Tag> tags = new HashSet<>();
+        for (String s : strings) {
+            tags.add(new Tag(s));
+        }
+
+        return tags;
+    }
+
 }
 ```
 ###### /java/seedu/address/model/util/SampleGoalDataUtil.java
@@ -2789,6 +2932,47 @@ public class XmlAdaptedGoal {
 }
 
 ```
+###### /java/seedu/address/storage/XmlAdaptedPerson.java
+``` java
+        final List<Cca> personCcas = new ArrayList<>();
+        for (XmlAdaptedCca cca : ccas) {
+            personCcas.add(cca.toModelType());
+        }
+```
+###### /java/seedu/address/storage/XmlAdaptedPerson.java
+``` java
+        if (this.birthday == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Birthday.class.getSimpleName()));
+        }
+        if (!Birthday.isValidBirthday(this.birthday)) {
+            throw new IllegalValueException(Birthday.MESSAGE_BIRTHDAY_CONSTRAINTS);
+        }
+        final Birthday birthday = new Birthday(this.birthday);
+
+        if (this.levelOfFriendship == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, LevelOfFriendship
+                    .class.getSimpleName()));
+        }
+        if (!LevelOfFriendship.isValidLevelOfFriendship(this.levelOfFriendship)) {
+            throw new IllegalValueException(LevelOfFriendship.MESSAGE_LEVEL_OF_FRIENDSHIP_CONSTRAINTS);
+        }
+        final LevelOfFriendship levelOfFriendship = new LevelOfFriendship(this.levelOfFriendship);
+
+```
+###### /java/seedu/address/storage/XmlAdaptedPerson.java
+``` java
+        if (this.unitNumber == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    UnitNumber.class.getSimpleName()));
+        }
+        if (!UnitNumber.isValidUnitNumber(this.unitNumber)) {
+            throw new IllegalValueException(UnitNumber.MESSAGE_UNIT_NUMBER_CONSTRAINTS);
+        }
+        final UnitNumber unitNumber = new UnitNumber(this.unitNumber);
+        final Set<Cca> ccas = new HashSet<>(personCcas);
+
+```
 ###### /java/seedu/address/ui/GoalCard.java
 ``` java
 /**
@@ -3043,8 +3227,6 @@ public class GoalCard extends UiPart<Region> {
 ###### /java/seedu/address/ui/StatusBarFooter.java
 ``` java
     private void setGoalCompletion(int goalCompletion) {
-        //        Platform.runLater(() -> this.goalCompletionStatus.setText(String.format(PERCENTAGE_GOAL_COMPLETED,
-        //                goalCompletion)));
         Platform.runLater(() -> this.goalCompletionStatus.setText("Goal " + goalCompletion + "% completed."));
     }
 
@@ -3063,7 +3245,7 @@ public class GoalCard extends UiPart<Region> {
     /**
      * @param completionStatus gives a String that should be either "true" or "false", indicating if the goal is
      *                         completed.
-     * @return true or false
+     * @return 1 or 0
      */
     private int isCompletedGoal(String completionStatus) {
         int valueToAdd;
@@ -3074,6 +3256,423 @@ public class GoalCard extends UiPart<Region> {
         }
         return valueToAdd;
     }
+```
+###### /resources/view/BubblegumTheme.css
+``` css
+.background {
+    -fx-background-color: derive(#ffdae0, 20%);
+    background-color: #ffb6c1;
+}
+
+.label {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Lato";
+    -fx-text-fill: #FFFF99;
+    -fx-opacity: 0.9;
+}
+
+.label-bright {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Lato";
+    -fx-text-fill: black;
+    -fx-opacity: 1;
+}
+
+.label-header {
+    -fx-font-size: 32pt;
+    -fx-font-family: "Lato Light";
+    -fx-text-fill: black;
+    -fx-opacity: 1;
+}
+
+.text-field {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Lato";
+}
+
+.tab-pane {
+    -fx-padding: 0 0 0 1;
+}
+
+.tab-pane .tab-header-area {
+    -fx-padding: 0 0 0 0;
+    -fx-min-height: 0;
+    -fx-max-height: 0;
+}
+
+.table-view {
+    -fx-base: #ffdae0;
+    -fx-control-inner-background: #ffdae0;
+    -fx-background-color: #ffdae0;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-size: 35;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: transparent;
+    -fx-border-color:
+        transparent
+        transparent
+        derive(-fx-base, 80%)
+        transparent;
+    -fx-border-insets: 0 10 1 0;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 20pt;
+    -fx-font-family: "Lato";
+    -fx-text-fill: black;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: -fx-focus-color;
+}
+
+.split-pane:horizontal .split-pane-divider {
+    -fx-background-color: derive(#ffdae0, 20%);
+    -fx-border-color: transparent transparent transparent #4d4d4d;
+}
+
+.split-pane {
+    -fx-border-radius: 1;
+    -fx-border-width: 1;
+    -fx-background-color: derive(#ffdae0, 20%);
+}
+
+.list-view {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-background-color: derive(#ffdae0, 20%);
+}
+
+.list-cell {
+    -fx-label-padding: 0 0 0 0;
+    -fx-graphic-text-gap : 0;
+    -fx-padding: 0 0 0 0;
+}
+
+.list-cell:filled:even {
+    -fx-background-color: #BFEFFF;
+}
+
+.list-cell:filled:odd {
+    -fx-background-color: #63D1F4;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: #	00BFFF;
+}
+
+.list-cell:filled:selected #cardPane {
+    -fx-border-color: #3e7b91;
+    -fx-border-width: 1;
+}
+
+.list-cell .label {
+    -fx-text-fill: black;
+}
+
+.cell_big_label {
+    -fx-font-family: "Lato";
+    -fx-font-size: 18px;
+    -fx-text-fill: #010504;
+}
+
+.cell_small_label {
+    -fx-font-family: "Lato";
+    -fx-font-size: 13px;
+    -fx-text-fill: #010504;
+}
+
+.anchor-pane {
+     -fx-background-color: derive(#ffdae0, 20%);
+}
+
+.pane-with-border {
+     -fx-background-color: derive(#ffdae0, 20%);
+     -fx-border-color: derive(#ffdae0, 10%);
+     -fx-border-top-width: 1px;
+}
+
+.status-bar {
+    -fx-background-color: derive(#ffdae0, 20%);
+    -fx-text-fill: black;
+}
+
+.result-display {
+    -fx-background-color: transparent;
+    -fx-font-family: "Lato Light";
+    -fx-font-size: 13pt;
+    -fx-text-fill: black;
+}
+
+.result-display .label {
+    -fx-text-fill: black !important;
+}
+
+.status-bar .label {
+    -fx-font-family: "Lato";
+    -fx-text-fill: black;
+}
+
+.status-bar-with-border {
+    -fx-background-color: derive(#ffdae0, 30%);
+    -fx-border-color: derive(#ffdae0, 25%);
+    -fx-border-width: 1px;
+}
+
+.status-bar-with-border .label {
+    -fx-text-fill: black;
+}
+
+.grid-pane {
+    -fx-background-color: derive(#ffdae0, 30%);
+    -fx-border-color: derive(#ffdae0, 30%);
+    -fx-border-width: 1px;
+}
+
+.grid-pane .anchor-pane {
+    -fx-background-color: derive(#ffdae0, 30%);
+}
+
+.context-menu {
+    -fx-background-color: derive(#ffdae0, 50%);
+}
+
+.context-menu .label {
+    -fx-text-fill: black;
+}
+
+.menu-bar {
+    -fx-background-color: derive(#ffdae0, 20%);
+}
+
+.menu-bar .label {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Lato Light";
+    -fx-text-fill: black;
+    -fx-opacity: 0.9;
+}
+/*a*/
+.menu .left-container {
+    -fx-background-color: black;
+}
+
+/*
+ * Metro style Push Button
+ * Author: Pedro Duque Vieira
+ * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
+ */
+.button {
+    -fx-padding: 5 22 5 22;
+    -fx-border-color: #313131;
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+    -fx-background-color: #ffdae0;
+    -fx-font-family: "Lato";
+    -fx-font-size: 11pt;
+    -fx-text-fill: #d8d8d8;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.button:hover {
+    -fx-background-color: #ebebeb;
+}
+
+.button:pressed, .button:default:hover:pressed {
+  -fx-background-color: black;
+  -fx-text-fill: #ffdae0;
+}
+
+.button:focused {
+    -fx-border-color: black, black;
+    -fx-border-width: 1, 1;
+    -fx-border-style: solid, segments(1, 1);
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+.button:disabled, .button:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: #ffdae0;
+    -fx-text-fill: black;
+}
+
+.button:default {
+    -fx-background-color: -fx-focus-color;
+    -fx-text-fill: #ffdae0;
+}
+
+.button:default:hover {
+    -fx-background-color: derive(-fx-focus-color, 30%);
+}
+
+.dialog-pane {
+    -fx-background-color: #ffdae0;
+}
+
+.dialog-pane > *.button-bar > *.container {
+    -fx-background-color: #ffdae0;
+}
+
+.dialog-pane > *.label.content {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+}
+
+.dialog-pane:header *.header-panel {
+    -fx-background-color: derive(#ffdae0, 25%);
+}
+
+.dialog-pane:header *.header-panel *.label {
+    -fx-font-size: 18px;
+    -fx-font-style: italic;
+    -fx-fill: black;
+    -fx-text-fill: black;
+}
+
+.scroll-bar {
+    -fx-background-color: derive(#BA55D3, 20%);
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: derive(#EE82EE, 50%);
+    -fx-background-insets: 3;
+}
+
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 0;
+}
+
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+}
+
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-padding: 1 8 1 8;
+}
+
+.scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
+    -fx-padding: 8 1 8 1;
+}
+
+#cardPane {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}
+
+#commandTypeLabel {
+    -fx-font-size: 11px;
+    -fx-text-fill: #F70D1A;
+}
+
+#commandTextField {
+    -fx-background-color: transparent #ffb6c1 transparent #ffb6c1;
+    -fx-background-insets: 0;
+    -fx-border-color: #ffb6c1 #ffb6c1 #FF7F50 #ffb6c1;
+    -fx-border-insets: 0;
+    -fx-border-width: 1;
+    -fx-font-family: "Lato Light";
+    -fx-font-size: 13pt;
+    -fx-text-fill: black;
+}
+
+#filterField, #personListPanel, #personWebpage {
+    -fx-effect: innershadow(gaussian, white, 10, 0, 0, 0);
+}
+
+#resultDisplay .content {
+    -fx-background-color: transparent, #ffb6c1, transparent, #ffb6c1;
+    -fx-background-radius: 0;
+}
+
+#tags {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#tags .label {
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+
+#tags .teal {
+    -fx-text-fill: white;
+    -fx-background-color: #3e7b91;
+}
+
+#tags .red {
+    -fx-text-fill: black;
+    -fx-background-color: #ff7675;
+}
+
+#tags .yellow {
+    -fx-background-color: #ffeaa7;
+    -fx-text-fill: black;
+}
+
+#tags .blue {
+    -fx-text-fill: black;
+    -fx-background-color: #48dbfb;
+}
+
+#tags .orange {
+    -fx-text-fill: black;
+    -fx-background-color: #ffa502;
+}
+
+#tags .brown {
+    -fx-text-fill: black;
+    -fx-background-color: #D7ACAC;
+}
+
+#tags .green {
+    -fx-text-fill: black;
+    -fx-background-color: #55efc4;
+}
+
+#tags .pink {
+    -fx-text-fill: black;
+    -fx-background-color: #fd79a8;
+}
+
+#tags .black {
+    -fx-text-fill: white;
+    -fx-background-color: black;
+}
+
+#tags .purple {
+    -fx-text-fill: black;
+    -fx-background-color: #a29bfe;
+}
+
+#importance {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#importance .label {
+    -fx-background-color: #FFE761;
+    -fx-text-fill: black;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 3;
+    -fx-background-radius: 2;
+    -fx-font-size: 13;
+}
 ```
 ###### /resources/view/GoalListCard.fxml
 ``` fxml
@@ -3442,7 +4041,7 @@ public class GoalCard extends UiPart<Region> {
 #commandTextField {
     -fx-background-color: transparent #f5f5f5 transparent #f5f5f5;
     -fx-background-insets: 0;
-    -fx-border-color: #f5f5f5 #f5f5f5 #ffffff #f5f5f5;
+    -fx-border-color: #ffffff #ffffff #383838 #ffffff;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Lato Light";

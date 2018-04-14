@@ -2,7 +2,7 @@
 ###### /java/seedu/address/logic/commands/MeetCommand.java
 ``` java
 /**
- * Adds a meeting to the address book.
+ * Adds a meeting to CollegeZone.
  */
 public class MeetCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "meet";
@@ -106,7 +106,7 @@ public class MeetCommand extends UndoableCommand {
 ###### /java/seedu/address/logic/commands/SortCommand.java
 ``` java
 /**
- * Sort the address book based on the users parameters
+ * Sort the persons in CollegeZone based on the users parameters
  */
 public class SortCommand extends UndoableCommand {
 
@@ -211,7 +211,7 @@ public class MeetCommandParser implements Parser {
     public static Meet parseMeetDate(String meetDate) throws IllegalValueException {
         requireNonNull(meetDate);
         String trimmedMeetDate = meetDate.trim();
-        if (!Meet.isValidDate(trimmedMeetDate)) {
+        if (!Meet.isValidDate(meetDate)) {
             throw new IllegalValueException(Meet.MESSAGE_DATE_CONSTRAINTS);
         }
         return new Meet(trimmedMeetDate);
@@ -289,13 +289,12 @@ public class SortCommandParser implements Parser<SortCommand> {
  */
 public class Meet {
     public static final String MESSAGE_DATE_CONSTRAINTS =
-            "Make sure date is in this format: DD-MM-YYYY";
+            "Make sure date is in this format: DD/MM/YYYY";
     public static final String DATE_VALIDATION_REGEX =
-            "^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug|Oct|Dec)))\\1|(?:(?:29|30)(\\/|-|\\.)"
-            + "(?:0?[1,3-9]|1[0-2]|(?:Jan|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))\\2))(?:(?:1[6-9]|[2-9]\\d)"
-            + "?\\d{2})$|^(?:29(\\/|-|\\.)(?:0?2|(?:Feb))\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])"
-            + "|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9]|"
-            + "(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep))|(?:1[0-2]|(?:Oct|Nov|Dec)))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$";
+            "^(((0[1-9]|[12]\\d|3[01])\\/(0[13578]|1[02])\\/((19|[2-9]\\d)\\d{2}))|((0[1-9]|[12]\\d|30)\\/"
+                    + "(0[13456789]|1[012])\\/((19|[2-9]\\d)\\d{2}))|((0[1-9]|1\\d|2[0-8])\\/02\\/((19|[2-9]\\d)\\"
+                    + "d{2}))|(29\\/02\\/((1[6-9]|[2-9]\\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579]"
+                    + "[26])00))))$";
 
     public final String value;
 
@@ -402,6 +401,7 @@ public class Meet {
 ###### /java/seedu/address/storage/XmlAdaptedPerson.java
 ``` java
         final Meet meetDate = new Meet(this.meetDate);
+
 ```
 ###### /java/seedu/address/ui/CalendarPanel.java
 ``` java
@@ -414,7 +414,6 @@ public class Meet {
                         5));
                 int year = Integer.parseInt(meetDate.substring(6,
                         10));
-                System.out.println(year + " " + month + " " + day);
                 calendarM.addEntry(new Entry("Meeting " + person.getName().toString(),
                         new Interval(LocalDate.of(year, month, day), LocalTime.of(12, 0),
                                 LocalDate.of(year, month, day), LocalTime.of(13, 0))));
@@ -422,10 +421,5 @@ public class Meet {
         }
         calendarView.getCalendarSources().add(myCalendarSource);
     }
-
-    /**
-     * Updates the Calendar with Meet ups that are already added
-     */
-
 
 ```
