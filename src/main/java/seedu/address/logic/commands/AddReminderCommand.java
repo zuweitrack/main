@@ -28,8 +28,8 @@ public class AddReminderCommand extends UndoableCommand {
             + PREFIX_DATE + " tonight 8pm "
             + PREFIX_END_DATE + " tonight 10pm";
 
-    public static final String MESSAGE_SUCCESS = "New reminder added: %1$s "
-            + "Disclaimer: If date & time parsed wrongly, delete reminder and refer to User Guide for correct format"
+    public static final String MESSAGE_SUCCESS = "New reminder added: %1$s\n"
+            + "Disclaimer: If date & time parsed wrongly, delete the reminder and refer to User Guide for correct format"
             + " of date and time";
     public static final String MESSAGE_DUPLICATE_REMINDER = "This reminder already exists in the Calendar";
 
