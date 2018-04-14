@@ -16,10 +16,15 @@ endif::[]
 By: `Team T09-B2`      Since: `March 2018`      Licence: `MIT`
 
 == Introduction
+Welcome to *_CollegeZone_*! +
+ +
+_CollegeZone_ is a revolutionary desktop application created for National University of Singapore (NUS) students living in Residential College 4 (RC4). We aim to help you to manage your hectic University life! +
+_CollegeZone_ is a personal assistant to your everyday life in NUS. It helps you to maintain and expand your social circle, tells you the goals you have, and schedules reminders and appointments you have.
+More importantly, _CollegeZone_ is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, _CollegeZone_ can get your contact management and tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
-CollegeZone is for NUS students living in Residential College 4 (RC4) who *prefers to use a desktop app for managing their RC4 friends contacts and their tasks*. More importantly, CollegeZone is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CollegeZone can get your contact management and tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
+Follow these few simple steps to get started with _CollegeZone_:
 
 .  Ensure you have Java version `1.8.0_60` or later installed in your Computer.
 +
@@ -28,19 +33,26 @@ Having any Java 8 version is not enough. +
 This app will not work with earlier versions of Java 8.
 +
 .  Download the latest `collegezone.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for CollegeZone.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+.  Copy the file to the folder you want to use as the home folder for _CollegeZone_. For example, you can place it in a folder created on your desktop.
+.  Double-click the file to start the app. You will see the application Graphic User Interface (GUI) as shown below. The GUI should appear in a few seconds.
 +
-image::Ui.JPG[width="790"]
+image::UI.JPG[width="800"]
 +
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
-e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
+.  The image below describes what each part of _CollegeZone's_ GUI represent.
++
+image::UserGuideLabelledUI.PNG[width="800"]
++
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 */9 b/21 May 1997 u/#10-12 cca/Badminton cca/Volleyball t/workout buddy` : adds a contact named `John Doe` to CollegeZone.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
-* *`exit`* : exits the app
+Now that you have _CollegeZone's_ application on, try out some of the commands that we offer!
+
+* Type the command in the command box and press kbd:[Enter] to execute it. +
+e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
+* Some example commands you can try:
+
+** *`list`* : lists all RC4 student contacts
+** **`add`**`n/John Doe p/98765432 */9 b/21 May 1997 u/#10-12 cca/Badminton cca/Volleyball t/workout buddy` : adds a student contact named `John Doe` to _CollegeZone_.
+** **`delete`**`3` : deletes the 3rd student description shown in the student list
+** *`exit`* : exits _CollegeZone_
 
 .  Refer to <<Features>> for details of each command.
 
@@ -66,15 +78,15 @@ Sentences displayed in this manner indicates a NOTE to look out for
 ====
 
 === General features
-==== *Viewing help : `help`*
-First, let's get familiar with the command features that CollegeZone offers! Type `help` in the Command Box and press kbd:[Enter] to display all the possible command usage.
+==== Viewing help : `help`
+First, let's get familiar with the command features that _CollegeZone_ offers! Type `help` in the Command Box and press kbd:[Enter] to display all the possible command usage.
 
 *_Format:_*
 ```java
 (help)
 ```
 ==== *Adding a student: `add` or `a`*
-Currently, CollegeZone is empty. Try to add a fellow RC4 friend into CollegeZone using the `add` or `a` command.
+Currently, _CollegeZone_ is empty. Try to add a fellow RC4 friend into _CollegeZone_ using the `add` or `a` command.
 
 *_Formats:_*
 ```java
@@ -104,7 +116,7 @@ A student can have any number of CCAs (including 0)
 
 ==== Listing all students : `list` or `l`
 
-Shows a list of all students in CollegeZone. +
+Shows a list of all students in _CollegeZone_. +
 
 *_Formats:_*
 ```java
@@ -113,7 +125,7 @@ Shows a list of all students in CollegeZone. +
 
 ==== Editing a student : `edit` or `e` [Since v1.2]
 
-Edits an existing student in CollegeZone. +
+Edits an existing student in _CollegeZone_. +
 
 *_Formats:_*
 ```java
@@ -203,7 +215,7 @@ Returns `Betsy` and `RA(s) of RC4`
 
 ==== Deleting a student : `delete` or `d`
 
-Deletes the specified student from CollegeZone. +
+Deletes the specified student from _CollegeZone_. +
 
 *_Formats:_*
 ```java
@@ -221,7 +233,7 @@ Deletes the specified student from CollegeZone. +
 > list
 > delete 2
 ```
-Deletes the 2nd student in CollegeZone.
+Deletes the 2nd student in _CollegeZone_.
 ```java
 > find Betsy
 > d 1
@@ -248,7 +260,7 @@ Selects the student and/or goal identified by the index number used in the last 
 > list
 > select 2
 ```
-Selects the 2nd student and 2nd goal in CollegeZone.
+Selects the 2nd student and 2nd goal in _CollegeZone_.
 ```java
 > find Betsy
 > s 1
@@ -334,14 +346,22 @@ Returns Students with Level of Friendship value `1` and Students with Level of F
 // tag::reminder[]
 === Reminder features
 
-==== Adding a reminder: `+reminder` or `+r` or `addreminder` [Since v1.4]
-You can set a reminder into the calendar in CollegeZone +
-Format: `+r text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME`
+You might be wondering what else you can do with the calendar. The Reminder features listed below will allow you to set reminders for events, important dates or simply to-do tasks that will be reflected in the calendar for easy reference!
 
+==== Adding a reminder: `+reminder` or `+r` or `addreminder` [Since v1.4]
+
+You can try setting a reminder into the calendar in CollegeZone by referring to the instructions below. +
+
+*_Formats:_*
+```java
+(+reminder | +r | addreminder) text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME
+```
+
+*_Details:_*
 ****
-* A reminder will be added to CollegeZone and it will reflected in the Calendar.
+* A reminder will be added to _CollegeZone_ and it will reflected in the Calendar.
 * `START_DATETIME` & `END_DATETIME`: a datetime is a string that contains either a date, a time or a combination of both (in any order). If a date is not specified, then it will refer to today. If a time is not specified, then it will refer to the current time.
-* Examples of valid START_DATETIME & END_DATETIME: +
+* Examples of valid `START_DATETIME` & `END_DATETIME`: +
  -	[date] [time] +
  -	3pm +
  -	today +
@@ -351,48 +371,42 @@ Format: `+r text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME`
  -	tomorrow 3pm +
  -	14 Feb 2014 5.30am +
  -	2/29/14 23:59 +
-
-****
 
 [TIP]
 You should use a date format of MM/DD/YYYY instead of DD/MM/YYYY if you choose to
 use this date format for the START_DATETIME or END_DATETIME
-
+****
 
 *_Examples_:*
 ```java
-+r text/Eat vitamins d/tmr 8am e/tmr 8.10am
++r text/Eat vitamins d/4/25/2018 8am e/4/25/2018 8.10am
 ```
+Returns `Eat vitamins` in the calendar on `25th April 2018` from `8am` to `8.10am`
+
 ```java
 +reminder text/Dental appointment d/next thurs 3pm e/next thurs 4pm
 ```
+Returns `Dental appointment` in the calendar according to `START_DATETIME` & `END_DATETIME`
 
-==== Editing a reminder: `~r` [Coming v1.5]
-Edits an existing reminder in CollegeZone. +
-Format: `~r INDEX [text/REMINDER_TEXT] [d/DATETIME]`
+Figure below portrays what should be seen after the command is executed correctly:
 
-****
-* Edits the reminder at the specified `INDEX`. The index refers to the index number shown in the reminder listing. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-****
-
-Examples:
-
-* `~r 4 text/CS2103 exam coming in 1 week` +
-Edits the reminder text of the 4th reminder to be `CS2103 exam coming in 1 week`.
-* `~r 2 text/water plants d/tmr 7am` +
-Edits the reminder text and datetime of the 2nd student to be `water plants` and `tmr 7am` respectively.
+image::addReminder.PNG[width="1500"]
 
 ==== Deleting a reminder: `-reminder` or `-r` or `deletereminder` [Since v1.4]
-You can delete a reminder that you have set into the calendar in CollegeZone +
-Format: `-r text/REMINDER_TEXT d/START_DATETIME`
 
+If you made a mistake or have reminders that are already due, you can also delete it away from the calendar by referring to the instructions below.
+
+*_Formats:_*
+```java
+(-reminder | -r | deletereminder) text/REMINDER_TEXT d/START_DATETIME
+```
+
+*_Details:_*
 ****
-* Deletes a reminder from CollegeZone and the reminder will not be reflected in the Calendar anymore.
+* Deletes a reminder from _CollegeZone_ and the reminder will not be reflected in the Calendar anymore.
 * `REMINDER_TEXT`: a string that contains the reminder's title
 * `START_DATETIME`: a datetime is a string that contains either a date, a time or a combination of both (in any order). If a date is not specified, then it will refer to today. If a time is not specified, then it will refer to the current time.
-* Examples of valid START_DATETIM: +
+* Examples of valid `START_DATETIME`: +
  -	[date] [time] +
  -	3pm +
  -	today +
@@ -403,23 +417,35 @@ Format: `-r text/REMINDER_TEXT d/START_DATETIME`
  -	14 Feb 2014 5.30am +
  -	2/29/14 23:59 +
 
-****
-
 [TIP]
 You should use a date format of MM/DD/YYYY instead of DD/MM/YYYY if you choose to
 use this date format for START_DATETIME
+****
 
-Examples:
+*_Examples:_*
 
-* `-r text/Eat vitamins d/tmr 8pm`
-* `-reminder text/Dental appointment d/tmr`
+```java
+-r text/Eat vitamins d/4/25/2018 8am
+```
+Deletes reminder `Eat vitamins` set on `25th April 2018` at `8am`
+
+```java
+-reminder text/Dental appointment d/tmr
+```
+
+Deletes reminder `Dental appointment` according to `START_DATETIME`
+
+Figure below portrays what should be seen after the command is executed correctly:
+
+image::delReminder.PNG[width="1500"]
+
 // end::reminder[]
 
 === Goal features
 
 //tag::goalfeatures[]
 ==== Adding a goal: `+goal` or `+g` or `addgoal` [Since v1.3]
-Currently, your goal page is empty! Try adding a goal entry that you have into CollegeZone using the `+goal`, `+g` or `addgoal` command. The new goal added will be reflected in CollegeZone. +
+Currently, your goal page is empty! Try adding a goal entry that you have into _CollegeZone_ using the `+goal`, `+g` or `addgoal` command. The new goal added will be reflected in _CollegeZone_. +
 
 *_Formats:_*
 ```java
@@ -445,7 +471,7 @@ Currently, your goal page is empty! Try adding a goal entry that you have into C
 // tag::sortgoal[]
 ==== Sorting goals: `sortgoal` or `sgoal` [Since v1.5]
 
-It is a hassle to locate the goals you're interested in if you have too many goals in CollegeZone. Try sorting the goals that you have using the `sortgoal` or `sgoal` command. +
+It is a hassle to locate the goals you're interested in if you have too many goals in _CollegeZone_. Try sorting the goals that you have using the `sortgoal` or `sgoal` command. +
 
 *_Formats:_*
 ```java
@@ -504,8 +530,8 @@ editgoal 5 text/swim at least twice a month
 ```
 Edits the goal text of the 5th student to be `swim at least twice a month`.
 
-==== Deleting a goal: `-goal` or `-g` or `deletegoal` [Since v1.4]
-If you've added a specific goal that you're unlikely to complete and want to remove it from CollegeZone, try using the `-goal`, `-g` or `deletegoal` command to delete a goal entry that you have. +
+==== Deleting a goal: `-goal` or `-g` or `deletegoal`
+If you've added a specific goal that you're unlikely to complete and want to remove it from _CollegeZone_, try using the `-goal`, `-g` or `deletegoal` command to delete a goal entry that you have. +
 *_Formats:_*
 ```java
 (-goal | -g | deletegoal) INDEX
@@ -521,23 +547,23 @@ If you've added a specific goal that you're unlikely to complete and want to rem
 ```java
 > -goal 2
 ```
-Deletes the 2nd goal in CollegeZone's goal listing. +
+Deletes the 2nd goal in _CollegeZone_'s goal listing. +
 
 ```java
 > sortgoal f/completion o/ascending
 > -g 4
 ```
-Deletes the 4th goal in CollegeZone's sorted goal listing. +
+Deletes the 4th goal in _CollegeZone_'s sorted goal listing. +
 
 ```java
 > deletegoal 1
 ```
-Deletes the 1st goal in CollegeZone's goal listing.
+Deletes the 1st goal in _CollegeZone_'s goal listing.
 // end::goalfeatures[]
 
 //tag::goalcompletion[]
-==== Completing a goal: `!goal` or `!g` or `completegoal` [Since v1.4]
-Once you've completed a goal, indicate completion of an existing goal in CollegeZone using the `!goal`, `!g` or `completegoal` command. +
+==== Completing a goal: `!goal` or `!g` or `completegoal`
+Once you've completed a goal, indicate completion of an existing goal in _CollegeZone_ using the `!goal`, `!g` or `completegoal` command. +
 
 *_Formats:_*
 ```java
@@ -554,23 +580,23 @@ Once you've completed a goal, indicate completion of an existing goal in College
 ```java
 > !goal 2
 ```
-Indicates completion of the 2nd goal in CollegeZone's goal listing.
+Indicates completion of the 2nd goal in _CollegeZone_'s goal listing.
 
 ```java
 > sgoal f/importance o/descending
 > !g 4
 ```
-Indicates completion of the 4th goal in CollegeZone's sorted goal listing.
+Indicates completion of the 4th goal in _CollegeZone_'s sorted goal listing.
 
 ```java
 > completegoal 1
 ```
-Indicates completion of the 1st goal in CollegeZone's goal listing.
+Indicates completion of the 1st goal in _CollegeZone_'s goal listing.
 // end::goalcompletion[]
 
 //tag::goalongoing[]
-==== Revert completing a goal: `-!goal` or `-!g` or `ongoinggoal` [Since v1.4]
-If you have an ongoing goal that is wrongly indicated that it's completed, do not fret, simply indicate that an existing goal you have is still ongoing in CollegeZone using the `-!goal`, `-!g` or `ongoinggoal` command. +
+==== Revert completing a goal: `-!goal` or `-!g` or `ongoinggoal`
+If you have an ongoing goal that is wrongly indicated that it's completed, do not fret, simply indicate that an existing goal you have is still ongoing in _CollegeZone_ using the `-!goal`, `-!g` or `ongoinggoal` command. +
 
 *_Formats:_*
 ```java
@@ -587,22 +613,31 @@ If you have an ongoing goal that is wrongly indicated that it's completed, do no
 ```java
 > -!goal 2
 ```
-Indicates ongoing of the 2nd goal in CollegeZone's goal listing.
+Indicates ongoing of the 2nd goal in _CollegeZone_'s goal listing.
 ```java
 > sortgoal f/startdatetime o/ascending
 > -!g 4
 ```
-Indicates ongoing of the 4th goal in CollegeZone's sorted goal listing.
+Indicates ongoing of the 4th goal in _CollegeZone_'s sorted goal listing.
 ```java
 > ongoing 1
 ```
-Indicates ongoing of the 1st goal in CollegeZone's goal listing.
+Indicates ongoing of the 1st goal in _CollegeZone_'s goal listing.
 // end::goalongoing[]
 
 === Interesting features
 // tag::theme[]
-==== Changing CollegeZone theme : `theme` or `th` [Since v1.5]
-CollegeZone's default theme colour is not the only theme colour we have to offer! Try changing CollegeZone's theme colour using the `theme` or `th` command.  +
+==== Changing CollegeZone theme : `theme` or `th`
+_CollegeZone_'s default theme colour is not the only theme colour we have to offer! Try changing _CollegeZone_'s theme colour to your preferred one using the `theme` or `th` command.  +
+
+image::CollegeZoneDarkTheme.JPG[width="800"]
+_Figure AAA : Dark Theme_
+
+image::CollegeZoneBubblegumTheme.JPG[width="800"]
+_Figure AAA : Bubblegum Theme_
+
+image::CollegeZoneLightTheme.JPG[width="800"]
+_Figure 3.13.1 : Light Theme_
 
 *_Formats:_*
 ```java
@@ -611,7 +646,7 @@ CollegeZone's default theme colour is not the only theme colour we have to offer
 
 [NOTE]
 ====
-`THEME_COLOUR` can only be 'dark' or 'light'.
+`THEME_COLOUR` can only be 'dark', 'bubblegum' and 'light'.
 ====
 
 *_Examples_:*
@@ -625,6 +660,10 @@ Changes the theme colour to light theme.
 ```
 Changes the theme colour to dark theme.
 
+```java
+> th bubblegum
+```
+Changes the theme colour to bubblegum theme.
 // tag::theme[]
 
 ==== Listing entered commands : `history` or `h`
@@ -643,7 +682,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 // tag::undoredo[]
 ==== Undoing previous command : `undo` or `u`
 
-Restores CollegeZone to the state before the previous _undoable_ command was executed. +
+Restores _CollegeZone_ to the state before the previous _undoable_ command was executed. +
 *_Formats:_*
 ```java
 (undo | u)
@@ -651,7 +690,7 @@ Restores CollegeZone to the state before the previous _undoable_ command was exe
 
 [NOTE]
 ====
-Undoable commands: those commands that modify CollegeZone's content (`add`, `delete`, `edit`, `clear`, `+goal`, `-goal`, `~goal`, `!goal`, `-!goal`).
+Undoable commands: those commands that modify _CollegeZone_'s content (`add`, `delete`, `edit`, `clear`, `+goal`, `-goal`, `~goal`, `!goal`, `-!goal`).
 ====
 
 *_Examples_:*
@@ -716,7 +755,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 ==== Clearing all entries : `clear` or `c`
 
-Clears all entries from CollegeZone. +
+Clears all entries from _CollegeZone_. +
 *_Formats:_*
 ```java
 (clear | c)
@@ -729,7 +768,7 @@ Format: `exit`
 
 ==== Saving the data
 
-CollegeZone data are saved in the hard disk automatically after any command that changes the data. +
+_CollegeZone_ data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 === Upcoming features
@@ -739,13 +778,42 @@ There is no need to save manually.
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
+
+==== Editing a reminder [Coming in v2.0]
+Edits an existing reminder in CollegeZone. +
+Format: `~r INDEX [text/REMINDER_TEXT] [d/DATETIME]`
+
+****
+* Edits the reminder at the specified `INDEX`. The index refers to the index number shown in the reminder listing. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+****
+
+Examples:
+
+* `~r 4 text/CS2103 exam coming in 1 week` +
+Edits the reminder text of the 4th reminder to be `CS2103 exam coming in 1 week`.
+* `~r 2 text/water plants d/tmr 7am` +
+Edits the reminder text and datetime of the 2nd student to be `water plants` and `tmr 7am` respectively.
+=======
+// tag::debv2.0[]
+==== Adding subgoals [Coming in v2.0]
+By using this command, you are able to add subgoals to the goals you currently have.
+
+==== Auto-completing of commands [Coming in v2.0]
+Auto-complete command by suggesting to the you the command format to use based on what you have already typed in the command box.
+
+==== Adding of timetable into CollegeZone [Coming in v2.0]
+Allows you to add your NUS timetable schedule for the semester into _CollegeZone_.
+// end::debv2.0[]
+
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CollegeZone folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous _CollegeZone_ folder.
 
 == Command Summary
-The table below provides a quick summary of all the commands available in CollegeZone.
+The table below provides a quick summary of all the commands available in _CollegeZone_.
 
 [width="90%",cols="20%,<22%,<23%,<25%",options="header",]
 |=======================================================================
@@ -835,7 +903,7 @@ OR +
 `sgoal f/GOAL_FIELD o/ORDER` +
 |`sortgoal f/startdatetime o/ascending`
 
-|*Theme* |Switch theme colour of CollegeZone |`theme THEME_COLOUR` +
+|*Theme* |Switch theme colour of _CollegeZone_ |`theme THEME_COLOUR` +
 OR +
 `th THEME_COLOUR` +
 |`theme light`
@@ -845,14 +913,14 @@ OR +
 `+r text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME` +
 OR +
 `addreminder text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME` +
-|`+reminder text/Eat pills d/tonight 10pm e/tonight 10.15pm`
+|`+reminder text/Eat pills d/4/25/2018 8am e/4/25/2018 8.10am`
 
-|*Delete Reminder* |Deletes a reminder entry |`-reminder [REMINDER_TEXT]` +
+|*Delete Reminder* |Deletes a reminder entry |`-reminder text/REMINDER_TEXT d/START_DATETIME` +
 OR +
-`-r [REMINDER_TEXT]` +
+`-r text/REMINDER_TEXT d/START_DATETIME` +
 OR +
-`deletereminder [REMINDER_TEXT]` +
-|`-reminder Eat pills`
+`deletereminder text/REMINDER_TEXT d/START_DATETIME` +
+|`-reminder text/Eat pills d/4/25/2018 8am`
 
 |*Rate* |Rates one or more people|`rate INDEX(s) [LEVELOFFRIENDSHIP]` OR +
 `rt INDEX(s) [LEVELOFFRIENDSHIP]`| rate 1 3 */5

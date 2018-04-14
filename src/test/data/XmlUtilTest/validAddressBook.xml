@@ -11,7 +11,7 @@
     <persons>
         <name>Ruth Mueller</name>
         <phone isPrivate="false">87249245</phone>
-        <birthday isPrivate="false">09-02-2009</birthday>
+        <birthday isPrivate="false">09/02/2009</birthday>
         <levelOfFriendship isPrivate="false">2</levelOfFriendship>
         <unitNumber isPrivate="false">#01-10</unitNumber>
         <meetDate isPrivate="false"></meetDate>
@@ -19,7 +19,7 @@
     <persons>
         <name>Heinz Kurz</name>
         <phone isPrivate="false">95352563</phone>
-        <birthday isPrivate="false">25-12-1992</birthday>
+        <birthday isPrivate="false">25/12/1992</birthday>
         <levelOfFriendship isPrivate="false">3</levelOfFriendship>
         <unitNumber isPrivate="false">#2-40</unitNumber>
         <meetDate isPrivate="false"></meetDate>
@@ -27,7 +27,7 @@
     <persons>
         <name>Cornelia Meier</name>
         <phone isPrivate="false">87652533</phone>
-        <birthday isPrivate="false">24-10-2000</birthday>
+        <birthday isPrivate="false">24/10/2000</birthday>
         <levelOfFriendship isPrivate="false">4</levelOfFriendship>
         <unitNumber isPrivate="false">#12-204</unitNumber>
         <meetDate isPrivate="false">15/04/2018</meetDate>
@@ -51,7 +51,7 @@
     <persons>
         <name>Anna Best</name>
         <phone isPrivate="false">9482442</phone>
-        <birthday isPrivate="false">10-11-1995</birthday>
+        <birthday isPrivate="false">10/11/1995</birthday>
         <levelOfFriendship isPrivate="false">7</levelOfFriendship>
         <unitNumber isPrivate="false">#03-86</unitNumber>
         <meetDate isPrivate="false"></meetDate>
@@ -59,7 +59,7 @@
     <persons>
         <name>Stefan Meier</name>
         <phone isPrivate="false">8482424</phone>
-        <birthday isPrivate="false">05-05-1995</birthday>
+        <birthday isPrivate="false">05/05/1995</birthday>
         <levelOfFriendship isPrivate="false">8</levelOfFriendship>
         <unitNumber isPrivate="false">#12-88</unitNumber>
         <meetDate isPrivate="false"></meetDate>

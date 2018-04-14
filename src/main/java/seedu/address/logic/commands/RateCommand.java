@@ -16,7 +16,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 //@@author zuweitrack
 /**
- * Rates existing person(s) in the address book.
+ * Rates existing person(s) in CollegeZone.
  */
 public class RateCommand extends UndoableCommand {
 

@@ -12,7 +12,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
- * Removes the meet up set with a person using the person's displayed index from the address book.
+ * Removes the meet up set with a person using the person's displayed index from CollegeZone.
  */
 public class DeleteMeetCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "-meet";
