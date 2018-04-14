@@ -11,10 +11,9 @@ image::zuweitrack.jpg[width="150", align="left"]
 
 == Overview
 
-CollegeZone is a desktop application for NUS Residential College 4 (RC4) students. It has a Graphical User Interface (GUI)
-but most of the user interactions happen using a Command Line Interface (CLI).
-This application is catered for an RC4 resident to manage their contacts with other RC4 residents and to manage their tasks,
-just like a digital organiser.
+CollegeZone is a Address Book desktop application intended for students living on campus, specifically this application are for students living in an NUS Residential College, RC4.
+RC4 students can use CollegeZone application through a Command Line Interface (CLI).
+The purpose of CollegeZone is for RC4 students monitor and maintain friendships with their fellow residents and it serves as a personal planner as well, keeping track of their tasks.
 
 == Summary of contributions
 
@@ -22,7 +21,7 @@ just like a digital organiser.
 ** What it does: allows the RC4 student to rate multiple friends in CollegeZone and the level of friendship of these friends will be changed.
 ** Justification: An RC4 student may interact with several groups of people during the week, being able to rate multiple people at a go makes the process more convenient. This allows RC4 students to keep track of who their close friends are and helps them identify people who they may want to get closer with.
 
-** Highlights:  The features show command followed by the rate command allows RC4 students to show friends of a particular level of friendship and change the level of friendships from that list of friends. It helps RC4 students the ease of rating people of a particular level of friendship
+** Highlights:  The features show command followed by the rate command allows RC4 students to show friends of a particular level of friendship and change the level of friendships from that list of friends. It gives RC4 students the ease of rating people of a particular level of friendship
 
 * *Minor enhancement*: Added a seek RA command, which allows RC4 students to find the details of RC4 students and Resident Assistants (RA).
 

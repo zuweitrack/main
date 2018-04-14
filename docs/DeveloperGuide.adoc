@@ -438,13 +438,25 @@ CollegeZone users may now use shortcuts to perform desired tasks. These shortcut
 |list
 |l
 
+|Rate
+|rate
+|rt
+
 |Redo
 |redo
 |r
 
+|Seek
+|seek
+|sk
+
 |Select
 |select
 |s
+
+|Show
+|show
+|sh
 
 |Undo
 |undo
@@ -488,25 +500,179 @@ image::RCPersonClass.JPG[width="450"]
 // tag::reminder[]
 === Reminders [Since v1.4]
 
-Reminders are created as RC4 residents have events, classes and meetings to go to at a certain date and time, we decided on implementing a reminder feature to allow users to add reminders in CollegeZone. +
+==== Introduction +
+
+RC4 students will have a very busy schedule that consists of tasks, events & activities. +
+Hence, we decided on implementing a reminder feature to allow them to add & delete reminders in CollegeZone to assist them in organising their schedule. +
+
+The `AddReminderCommand` allows you to add a `Reminder` into CollegeZone and is stored in an ArrayList, `UniqueReminderList`, in `AddressBook`.
+The `DeleteReminderCommand` allows you to delete a `Reminder` from CollegeZone.
+
+Reminder commands are undoable and redoable for the benefit users to redo and undo a command they did or did not intend to change. +
+Hence, both `AddReminderCommand` and `DeleteReminderCommand` are implemented as `UndoableCommand`.
+
+*Reminder Features:* +
+
+* Adding a reminder to the Calendar: The `AddReminderCommand` allows you to add a `Reminder` into CollegeZone and is stored in an ArrayList, `UniqueReminderList`, in `AddressBook`.
+* Deleting a reminder on the Calendar: The `DeleteReminderCommand` allows you to delete a `Reminder` from `UniqueReminderList`, in `AddressBook`.
+
 Reminder commands are undoable and redoable for the benefit users to redo and undo a command they did or did not intend to change.
+Hence, both `AddReminderCommand` and `DeleteReminderCommand` are implemented as `UndoableCommand`.
 
-*Reminder features:* +
+==== Implementation +
 
-* Adding a reminder to the Calendar
-* Deleting a reminder on the Calendar
+*Reminder Object* +
 
-*Reminder objects will consist of 3 attributes :* +
+Every time a `Reminder` is created, three other objects are also created: +
 
-1. the reminder text content +
-2. the start date and time +
-3. the end date and time
+1. `ReminderText`: This object contains a single string variable, `reminderText`, that is verified to contain characters and spaces and cannot be blank.  +
+2. `DateTime`: This object contains a single string variable, `dateTime`. After obtaining the start date time from user input, it will parse through `nattyDateAndTimeParser` to convert it to a `LocalDateTime`
+variable. Subsequently, this `LocalDateTime` variable will then be converted back to a string variable using `properReminderDateTimeFormat` and it stored as `dateTime` in `DateTime` object. +
+3. `EndDateTime`: This object contains a single string variable, `dateTime`. After obtaining the end date time from user input, it will parse through `nattyDateAndTimeParser` to convert it to a `LocalDateTime`
+                  variable. Subsequently, this `LocalDateTime` variable will then be converted back to a string variable using `properReminderDateTimeFormat` and it stored as `dateTime` in `DateTime` object.
 
-The reminders will be stored in an ArrayList of all the reminder objects. Each reminder will have specific positive integer index number. +
+A `Reminder` will be marked with a *blue* circle if it's not due and be marked with a *red* circle if it's due. +
 
-A reminder will be *blue* until it is due. +
-A reminder will turn and remain *red* if it's due. +
-Users can delete reminders on the Calendar if its already due or when they accidentally made a mistake  +
+Users can delete reminders on the Calendar if its already due or when they accidentally made a mistake. +
+
+*UniqueReminderList* +
+
+`UniqueReminderList` functions as a List of `Reminders` where every element is unique and is defined by its `ReminderText`,
+`DateTime` and `EndDateTime`.
+
+*Adding a Reminder* +
+
+When `AddReminderCommand` is executed, it first checks whether there are any duplicate reminders in `UniqueReminderList`. If there is no duplicate reminder,
+`Reminder` is added into `UniqueReminderList` in `AddressBook`.
+
+.Interactions Inside the Logic Component for the `+r text/eat pills d/tmr 8pm e/tmr 10pm` Command
+image::addReminderSeqDiagram.png[width="800"]
+
+*Deleting a Reminder* +
+
+When `DeleteReminderCommand` is executed, it will find the `Reminder` specified by the user using parameters `ReminderText` and `DateTime`. If `Reminder` specified by user
+is not found in `UniqueReminderList`, `CommandException` will be thrown. If `Reminder` is found, it will then be removed from `UniqueReminderList`. The code snippet to find and remove the `Reminder`
+specified by user is shown below.
+
+.Interactions Inside the Logic Component for the `-r text/eat pills d/tmr 8pm` Command
+image::delReminderSeqDiagram.png[width="800"]
+
+[source,java]
+----
+@Override
+    protected void preprocessUndoableCommand() throws CommandException {
+        model.updateFilteredReminderList(predicate);
+        List<Reminder> lastShownList = model.getFilteredReminderList();
+        targetIndex = Index.fromOneBased(1);
+        if (lastShownList.size() > 1) {
+            for (Reminder reminder : lastShownList) {
+                if (reminder.getDateTime().toString().equals(dateTime)) {
+                    reminderToDelete = reminder;
+                }
+            }
+        } else {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_REMINDER_TEXT_DATE);
+            }
+
+            reminderToDelete = lastShownList.get(targetIndex.getZeroBased());
+        }
+    }
+----
+
+*Syncing Reminder to Calendar* +
+
+To display the reminder in the calendar, we have a `CalendarPanel` that takes in the `UniqueReminderList`.
+
+[source,java]
+----
+    public CalendarPanel(ObservableList<Reminder> reminderList, ObservableList<Person> personList) {
+        super(FXML);
+
+        this.reminderList = reminderList;
+        this.personList = personList;
+
+        calendarView = new CalendarView();
+        setupCalendar();
+        updateCalendar();
+        registerAsAnEventHandler(this);
+    }
+----
+`UniqueReminderList` will then be iterated and each reminder in the list is individually added into the calendar through `updateCalendar()`. Every time a new reminder is added into `CollegeZone`, an event handler, `handleNewCalendarEvent`, will
+cause `calendarUpdate()` to run again and `CalendarPanel` will be updated to display the new reminder added onto `CollegeZone`.
+
+[source,java]
+----
+    @Subscribe
+    private void handleNewCalendarEvent(AddressBookChangedEvent event) {
+        reminderList = event.data.getReminderList();
+        personList = event.data.getPersonList();
+        Platform.runLater(this::updateCalendar);
+    }
+
+    /**
+     * Updates the Calendar with Reminders that are already added
+     */
+    private void updateCalendar() {
+        setDateAndTime();
+        CalendarSource myCalendarSource = new CalendarSource("Reminders and Meetups");
+        Calendar calendarRDue = new Calendar("Reminders Already Due");
+        Calendar calendarRNotDue = new Calendar("Reminders Not Due");
+        Calendar calendarM = new Calendar("Meetups");
+        calendarRDue.setStyle(Calendar.Style.getStyle(4));
+        calendarRDue.setLookAheadDuration(Duration.ofDays(365));
+        calendarRNotDue.setStyle(Calendar.Style.getStyle(1));
+        calendarRNotDue.setLookAheadDuration(Duration.ofDays(365));
+        calendarM.setStyle(Calendar.Style.getStyle(3));
+        myCalendarSource.getCalendars().add(calendarRDue);
+        myCalendarSource.getCalendars().add(calendarRNotDue);
+        myCalendarSource.getCalendars().add(calendarM);
+        for (Reminder reminder : reminderList) {
+            LocalDateTime ldtstart = nattyDateAndTimeParser(reminder.getDateTime().toString()).get();
+            LocalDateTime ldtend = nattyDateAndTimeParser(reminder.getEndDateTime().toString()).get();
+            LocalDateTime now = LocalDateTime.now();
+            if (now.isBefore(ldtend)) {
+                calendarRNotDue.addEntry(new Entry(
+                        reminder.getReminderText().toString(), new Interval(ldtstart, ldtend)));
+            } else {
+                calendarRDue.addEntry(new Entry(reminder.getReminderText().toString(), new Interval(ldtstart, ldtend)));
+            }
+        }
+        //@@author sham-sheer
+        for (Person person : personList) {
+            String meetDate = person.getMeetDate().toString();
+            if (!meetDate.isEmpty()) {
+                int day = Integer.parseInt(meetDate.substring(0,
+                        2));
+                int month = Integer.parseInt(meetDate.substring(3,
+                        5));
+                int year = Integer.parseInt(meetDate.substring(6,
+                        10));
+                calendarM.addEntry(new Entry("Meeting " + person.getName().toString(),
+                        new Interval(LocalDate.of(year, month, day), LocalTime.of(12, 0),
+                                LocalDate.of(year, month, day), LocalTime.of(13, 0))));
+            }
+        }
+        calendarView.getCalendarSources().add(myCalendarSource);
+    }
+----
+
+When a reminder is deleted, it will go through the same process as adding reminder and the changes will then be updated in the calendar.
+
+==== Design Considerations
+
+*Aspect*: Deleting a `Reminder` from `CollegeZone`.
+
+*Alternative 1*: Delete `Reminder` using an index which is the index of the particular `Reminder` in `UniqueReminderList` +
+*Pros*: Implementing `DeleteReminderCommand` by parsing an index will be simple as `DeleteCommand` to delete a person from `AddressBook` is using a similar implementation. +
+*Cons*: We will have to first implement a list function to list all reminders with their respective indexes, which may be undesirable as there may be
+a large number of reminders to be listed out. This will in turn require the need of a find function to find a specific reminder that the users want to delete.
+
+*Alternative 2(current choice)*: Delete `Reminder` identified by `ReminderText` and `DateTime`. +
+*Pros*: Reduces the need of a listing and finding function to delete a `Reminder` from `CollegeZone`. +
+*Cons*: Implementation of `DeleteReminderCommand` will be more difficult as we will have to integrate a find function to pick out
+the specific `Reminder` that the user wants to remove.
+
 
 // end::reminder[]
 
@@ -590,6 +756,76 @@ image::GoalModelComponentClassDiagram.JPG[width="800"]
 ---
 // end::myGoalsPage[]
 
+// tag::rate[]
+=== Rate friends [Since v1.4]
+The Rate friends feature allows RC4 residents to rate their friends and change their levels of friendship.
+This feature is implemented by the `RateCommand` and `RateCommandParser` in the Logic component of the CollegeZone code.
+The RC4 student is able to rate one or more friends by keying in the new desired level of friendship through the Command Line Interface (CLI).
+The `RateCommand` inherits from `UndoableCommands` as well, as shown in the diagram below.
+
+image::RateCommandClassDiagram.jpg[width="400"]
+
+To rate other RC4 residents and friends, the `LevelOfFriendship` class is being used and is part of the `Person` class.
+A `Person` is composed of a `LevelOfFriendship` component, and each person in CollegeZone application has a particular level of friendship between `1` to `10`.
+The next diagram illustrates the relationship between a
+`Person` and its `LevelOfFriendship`.
+
+image::RCPersonClass.jpg[width="400"]
+
+The following shows a part of the code of `RateCommand` and reveals
+the parameters that `RateCommand` makes use of.
+
+[source,java]
+    public RateCommand(List<Index> indexList, String levelOfFriendship) {
+    }
+
+As observed, `RateCommand` involves two parameters, namely `indexList` and `leveloffriendship`.
+
+`indexList` has a `List` of indexes type, and `leveloffriendship` is of `String` type.
+
+The parameter `indexList` refers to the list of students whose are intended to be rated, and thus
+`RateCommand` is able to help RC4 residents rate multiple people at a time. The `leveloffriendship`
+parameter refers to the new level of friendship that the resident would like to rate their friends to.
+
+The following code sample shows the execution of `RateCommnad`,
+[source,java]
+public CommandResult executeUndoableCommand() throws CommandException {
+        List<Person> latestList = model.getFilteredPersonList();
+        for (Index index : indexList) {
+            Person selectedPerson = latestList.get(index.getZeroBased());
+            try {
+                Person editedPerson = new Person(selectedPerson.getName(), selectedPerson.getPhone(),
+                        selectedPerson.getBirthday(), new LevelOfFriendship(levelOfFriendship),
+                        selectedPerson.getUnitNumber(),
+                        selectedPerson.getCcas(), selectedPerson.getMeetDate(), selectedPerson.getTags());
+                model.updatePerson(selectedPerson, editedPerson);
+
+As seen, the index of the student whose level of friendship is to be rated and changed, a new `editedPerson` object is created
+and all the details of the person, the name and phone number and other details were copied from the `selectedPerson` and is assigned the new level of friendship from the rate command.
+
+
+[NOTE]
+If an invalid index value is entered, i.e the person with an `index` of which does not exist in CollegeZone contact list is entered with valid `index` entries,
+only the valid entries will have their `Level of friendships` rated and updated.
+As seen in the code below, there will be a error message informing the user that they have keyed in an invalid `index` value.
+
+[source,java]
+            if (index.getZeroBased() >= latestList.size()) {
+                throw new CommandException(MESSAGE_ONE_OR_MORE_INVALID_INDEX);
+            }
+
+
+==== Design Considerations
+
+**Aspect:** Implementation of `RateCommand`. +
+**Alternative 1 (current choice):** Creates a new `Person` object which copies all its respective personal details and adds a new `LevelOfFriendship` value. +
+**Pros:** It uses a pre-existing method, and additional methods to implement `RateCommand` need not be created and added.  +
+**Cons:** Copying all respective personal data in order to change only the `LevelOfFriendship` attribute can be excessive as cause additional processing time if a `person` have many attributes. +
+**Alternative 2:** Add a `changeLevelOfFriendship` setter method in `Person` class +
+**Pros:** Relatively simple to implement. +
+**Cons:** Additional methods have to be added to ensure that the `input values` and `indexes` are valid.
+
+// end::rate[]
 
 == Documentation
 
@@ -733,8 +969,8 @@ b. Require developers to download those libraries manually (this creates extra w
  GUI : Change the look and feel of the GUI to make it more user friendly. Allows user to switch themes.
 
 |Fuad B Sahmawi
-|Scheduler (Reminder) : This app allows user to set/edit/delete reminders reflected on a Calendar +
- Scheduler (Notes) : This feature will allow user to add notes for a certain task/event
+|Calendar: Integrate CalendarFX onto CollegeZone UI +
+ Reminder: Allows user to set/delete reminders reflected on the Calendar. Due reminders are marked red while undue reminders marked blue.
 |Find : Change find command to be able to find persons in contact list according to tags +
  Logic : Added command aliases to allow users to be able to perform commands by typing shortcuts
 
@@ -743,8 +979,7 @@ b. Require developers to download those libraries manually (this creates extra w
 |Profile Photo : Added a male female profile pictures to GUI for an interactive experience.
 
 |Goh Zu Wei
-|Form Groups : This feature allows user to organize students to form study groups or recreational sport groups +
- Set event: Add events and dates for the group meeting and gathering.
+|Rate Friends : This feature allows categorize and rate one or more friends by changing their levels of friendships.
 |Seek: Add seek command to be able to seek the Resident Assistant (RA) of any particular the student living in RC4
 
 |=======================================================================
@@ -772,6 +1007,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |RC student |add my goals for the year |keep track of the goals I have and have not completed
 
 |`* * *` |RC student |set a level of friendship with a specific person |maintain my friendships depending on a priority system set by myself
+
+|`* * *` |RC student |Rate my friends |keep track and update of who my close friends are
 
 |`* * *` |RC student |edit details of my contacts |stay updated with the current information about my contacts
 
@@ -930,12 +1167,10 @@ Use case ends.
 +
 Use case ends.
 
-=== Use case: Reminder add<reminder>
-
-*MSS*
+=== Use case: Add reminder
 
 1.  User requests to add a reminder on a certain date
-2.  CollegeZone adds the reminder in the calendar and changes is reflected on the calendar
+2.  CollegeZone adds the reminder in the calendar and changes are reflected on the calendar
 +
 Use case ends.
 
@@ -950,8 +1185,8 @@ Use case ends.
 Use case ends.
 
 
-=== Use case: Reminder delete<reminder>
-*MSS*
+=== Use case: Delete reminder
+
 
 1.  User requests to delete a certain reminder on a certain date
 2.  CollegeZone delete the reminder from the calendar and changes is reflected on the calendar
@@ -975,13 +1210,6 @@ Use case ends.
 +
 Use case ends.
 
-
-=== Use case: Task add<task, notes>
-
-1. User requests to add a task on a certain date with a note attached
-2. CollegeZone adds the task in the calendar and changes is reflected in the calendar
-+
-Use case ends.
 
 
 === Use case: Meet student
@@ -1189,6 +1417,88 @@ Use case ends.
 +
 [none]
 ** 2c1. CollegeZone shows an error message.
++
+Use case ends.
+
+=== Use case: Seek Resident Assistant (RA)
+
+*MSS*
+
+1. User requests to find students' RA by name using keywords.
+2. CollegeZone shows a list of students and Resident assistants (RA).
++
+Use case ends.
+
+*Extensions*
+[none]
+* 1a. The given detail format is invalid.
++
+[none]
+** 1a1. CollegeZone shows an error message.
+
+[none]
+* 2a. The list has all students and RA(s) with name that matches keywords.
++
+Use case ends.
+
+[none]
+* 2b. The list is empty
++
+Use case ends.
+
+=== Use case: Rate friends
+*MSS*
+
+1.  User requests to list or show students of a particular level of friendship.
+2.  CollegeZone shows a list of students.
+3.  User requests to rate one or more student in the list.
+4. CollegeZone rates and changes the level of friendship of the student(s).
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. CollegeZone shows an error message.
++
+
+* 3b. The given detail format is invalid.
++
+[none]
+** 3b1. CollegeZone shows an error message.
++
+Use case ends.
+
+=== Use case: Show student
+*MSS*
+
+1. User requests to show student by level of friendship using valid value.
+2. CollegeZone shows a list of students of a particular level of friendship.
++
+Use case ends.
+
+*Extensions*
+[none]
+
+* 1a. The given detail format is invalid.
++
+[none]
+** 1a1. CollegeZone shows an error message.
+
+[none]
+* 2a. The list has all students with level of friendship that matches input value.
++
+Use case ends.
+
+[none]
+* 2b. The list is empty.
 +
 Use case ends.
 
