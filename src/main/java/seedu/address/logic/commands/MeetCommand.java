@@ -17,7 +17,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 //@@author sham-sheer
 /**
- * Adds a meeting to the address book.
+ * Adds a meeting to CollegeZone.
  */
 public class MeetCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "meet";
