@@ -40,7 +40,7 @@ public class ParserUtilTest {
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
-    private static final String VALID_BIRTHDAY = "12-3-1992";
+    private static final String VALID_BIRTHDAY = "12/03/1992";
     private static final String VALID_LEVEL_OF_FRIENDSHIP = "1";
     private static final String VALID_UNIT_NUMBER = "#04-33";
     private static final String VALID_CCA_1 = "scouts";
