@@ -709,9 +709,10 @@ b. Require developers to download those libraries manually (this creates extra w
 
 *Target user profile*:
 
-* Current NUS Student living in Residential College 4 (RC4)
+* Current NUS Students living in Residential College 4 (RC4)
 * has a need to manage a significant number of contacts (friends) and tasks to do
-* needs to be reminded of things to do
+* has a need to be reminded of things to do
+* has a need to keep track of goals that they have
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
@@ -725,9 +726,11 @@ b. Require developers to download those libraries manually (this creates extra w
 |Assignee |Major |Minor
 
 |Deborah Low
-|Goals Page : This feature allows user to set/edit/delete goals they have for the year and to keep track of their goals progress.
-|Add and Edit : Change add and edit command to suit our target audience ( RC4 Residents ) +
- GUI : Change the look and feel of the GUI to make it more user friendly.
+|Goals Panel : Allows user to set/edit/delete goals they have for the year and to keep track of their goals progress. +
+ Allows user to indicate goal is still ongoing or has already been completed.
+ Allows user to sort goals.
+|Add and Edit : Change add and edit command to suit our target audience ( RC4 Students ) - adding birthday, cca, level of friendship and unit number field for student. +
+ GUI : Change the look and feel of the GUI to make it more user friendly. Allows user to switch themes.
 
 |Fuad B Sahmawi
 |Scheduler (Reminder) : This app allows user to set/edit/delete reminders reflected on a Calendar +
@@ -807,17 +810,15 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `CollegeZone` and the *Actor* is the `user`, unless specified otherwise)
-
 [discrete]
-=== Use case: Delete person
+=== Use case: Delete student
 
 *MSS*
 
-1.  User requests to list persons
-2.  CollegeZone shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  CollegeZone deletes the person
+1.  User requests to list students
+2.  CollegeZone shows a list of students
+3.  User requests to delete a specific student in the list
+4.  CollegeZone deletes the student
 +
 Use case ends.
 
@@ -836,11 +837,11 @@ Use case ends.
 Use case resumes at step 2.
 
 [discrete]
-=== Use case: Edit person
-1.  User requests to list persons
-2.  CollegeZone shows a list of persons
-3.  User requests to edit a detail or multiple details of a person in the list
-4. CollegeZone edits the detail or details of the person
+=== Use case: Edit student
+1.  User requests to list students
+2.  CollegeZone shows a list of students
+3.  User requests to edit a detail or multiple details of a student in the list
+4. CollegeZone edits the detail or details of the student
 +
 Use case ends.
 
@@ -865,9 +866,9 @@ Use case ends.
 Use case resumes at step 2.
 
 [discrete]
-=== Use case: Find person
-1. User requests to find person by tag or name using keywords
-2. CollegeZone shows a list of persons
+=== Use case: Find student
+1. User requests to find student by tag or name using keywords
+2. CollegeZone shows a list of students
 +
 Use case ends.
 
@@ -880,7 +881,7 @@ Use case ends.
 ** 1a1. CollegeZone shows an error message
 
 [none]
-* 2a. The list has all persons with name or tag that matches keywords
+* 2a. The list has all students with name or tag that matches keywords
 +
 Use case ends.
 
@@ -944,9 +945,9 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: Meet person
+=== Use case: Meet student
 
-1. User requests to add a meet up date on a certain date with a person using his index
+1. User requests to add a meet up date on a certain date with a student using his index
 2. CollegeZone adds the meet up in the calendar and changes are reflected in the calendar
 +
 Use case ends.
@@ -961,14 +962,193 @@ Use case ends.
 +
 Use case ends.
 
-* 1b. The given person's index is invalid.
+* 1b. The given student's index is invalid.
 +
 [none]
 ** 1b1. CollegeZone shows an error message.
 +
 Use case ends.
 
-_{More to be added}_
+
+[discrete]
+=== Use case: Add goal
+1. User requests to add a goal in the list
+2. CollegeZone adds the goal
++
+Use case ends.
+
+*Extensions*
+
+* 1a. The given goal details is invalid.
++
+[none]
+** 1a1. CollegeZone shows an error message.
+
+[discrete]
+=== Use case: Edit goal
+1.  CollegeZone shows a list of goals
+2.  User requests to edit a detail or multiple details of a goal in the list
+3. CollegeZone edits the detail or details of the selected goal
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The list is empty.
++
+Use case ends.
+
+* 2a. The given index is invalid.
++
+[none]
+** 2a1. CollegeZone shows an error message.
++
+
+* 2b. The given goal detail format is invalid.
++
+[none]
+** 2b1. CollegeZone shows an error message.
++
+
+* 2c. The given goal details is invalid.
++
+[none]
+** 2c1. CollegeZone shows an error message.
+
+=== Use case: Delete goal
+
+*MSS*
+
+1.  CollegeZone shows a list of goals
+2.  User requests to delete a specific goal in the list
+3.  CollegeZone deletes the goal
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The list is empty.
++
+Use case ends.
+
+* 2a. The given index is invalid.
++
+[none]
+** 2a1. CollegeZone shows an error message.
+
+=== Use case: Complete goal
+
+*MSS*
+
+1.  CollegeZone shows a list of goals
+2.  User requests to complete a specific goal in the list
+3.  CollegeZone indicates the specified goal is completed
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The list is empty.
++
+[none]
+** 1a1. CollegeZone shows an error message.
+
+* 2a. The given index is invalid.
++
+[none]
+** 2a1. CollegeZone shows an error message.
+
+* 2b. The specified goal is already completed.
++
+[none]
+** 2b1. CollegeZone shows an error message.
+
+=== Use case: Ongoing goal
+
+*MSS*
+
+1.  CollegeZone shows a list of goals
+2.  User requests to indicate goal is ongoing to a specific goal in the list
+3.  CollegeZone indicates the specified goal is ongoing
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The list is empty.
++
+[none]
+** 1a1. CollegeZone shows an error message.
+
+* 2a. The given index is invalid.
++
+[none]
+** 2a1. CollegeZone shows an error message.
+
+* 2b. The specified goal is already ongoing.
++
+[none]
+** 2b1. CollegeZone shows an error message.
+
+=== Use case: Sort goal
+
+*MSS*
+
+1.  CollegeZone shows a list of goals
+2.  User requests sort goal based on field and order to sort
+3.  CollegeZone sort the goal list based on field and order specified
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The list is empty.
++
+[none]
+** 1a1. CollegeZone shows an error message.
+
+* 2a. The given format is invalid.
++
+[none]
+** 2a1. CollegeZone shows an error message.
+
+* 2b. The given field is invalid.
++
+[none]
+** 2b1. CollegeZone shows an error message.
+
+* 2c. The given order is invalid.
++
+[none]
+** 2c1. CollegeZone shows an error message.
+
+=== Use case: Switch theme colour
+
+*MSS*
+
+1.  CollegeZone has a theme colour
+2.  User requests to switch theme colour
+3.  CollegeZone switches theme colour
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The given theme colour is invalid.
++
+[none]
+** 2a1. CollegeZone shows an error message.
+
+* 2b. The given theme colour is currently in use.
++
+Use case ends.
+
 
 [appendix]
 == Non Functional Requirements
@@ -976,11 +1156,11 @@ _{More to be added}_
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `1.8.0_60` or higher installed.
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-.  Should be able to deal with invalid command inputs.
 .  Should be intuitive to use for users who are not tech-savvy.
+.  Should be able to be accessed offline.
 .  The system should respond within 2 seconds.
 .  Should work on 32-bit and 64-bit environment.
-
+.  Should store data locally and should be in a .xml file.
 _{More to be added}_
 
 [appendix]
@@ -1039,15 +1219,15 @@ These instructions only provide a starting point for testers to work on; testers
 
 _{ more test cases ... }_
 
-=== Deleting a person
+=== Deleting a student
 
-. Deleting a person while all persons are listed
+. Deleting a student while all students are listed
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Prerequisites: List all students using the `list` command. Multiple students in the list.
 .. Test case: `delete 1` +
    Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 

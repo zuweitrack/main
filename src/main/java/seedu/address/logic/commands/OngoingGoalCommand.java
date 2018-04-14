@@ -30,8 +30,9 @@ public class OngoingGoalCommand extends UndoableCommand {
     public static final String COMMAND_ALIAS_2 = "ongoinggoal";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Indicate identified goal is not completed "
-            + "and still ongoing. Goal is identified "
-            + "by the index number used in the last goal listing. "
+            + "and still ongoing.\n"
+            + "Goal is identified "
+            + "by the index number used in the last goal listing.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 ";
 

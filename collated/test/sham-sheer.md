@@ -382,7 +382,11 @@ public class MeetCommandTest {
  */
 public class SortCommandTest {
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+
 
     @Test
     public void execute_validIndexUnfilteredList_success() throws Exception {
@@ -428,7 +432,33 @@ public class SortCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(4);
         SortCommand sortCommand = prepareCommand(outOfBoundIndex);
 
-        assertCommandFailure(sortCommand, model, Messages.MESSAGE_INVALID_COMMAND_FORMAT);
+        assertCommandFailure(sortCommand, model, String.format(SortCommand.MESSAGE_INVALID_COMMAND_FORMAT, 4));
+    }
+
+    @Test
+    public void equals() throws Exception {
+        SortCommand sortFirstCommand = prepareCommand(Index.fromOneBased(1));
+        SortCommand sortSecondCommand = prepareCommand(Index.fromOneBased(3));
+
+        // same object -> returns true
+        assertTrue(sortFirstCommand.equals(sortFirstCommand));
+
+        // same values -> returns true
+        SortCommand sortFirstCommandCopy = prepareCommand(Index.fromOneBased(1));
+        assertTrue(sortFirstCommand.equals(sortFirstCommandCopy));
+
+        // one command preprocessed when previously equal -> returns false
+        sortFirstCommandCopy.preprocessUndoableCommand();
+        assertTrue(sortFirstCommand.equals(sortFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(sortFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(sortFirstCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(sortFirstCommand.equals(sortSecondCommand));
     }
 
     private SortCommand prepareCommand(Index index) {
@@ -495,12 +525,6 @@ public class MeetCommandParserTest {
 ``` java
 public class SortCommandParserTest {
     private SortCommandParser parser = new SortCommandParser();
-
-    @Test
-    public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new SortCommand(INDEX_SORT_LEVEL_OF_FRIENDSHIP));
-    }
-
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));

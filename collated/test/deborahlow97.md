@@ -1,5 +1,5 @@
 # deborahlow97
-###### \java\guitests\guihandles\StatusBarFooterHandle.java
+###### /java/guitests/guihandles/StatusBarFooterHandle.java
 ``` java
     /**
      * Returns the text of the 'save location' portion of the status bar.
@@ -9,7 +9,7 @@
     }
 
 ```
-###### \java\guitests\guihandles\StatusBarFooterHandle.java
+###### /java/guitests/guihandles/StatusBarFooterHandle.java
 ``` java
     /**
      * Remembers the content of the 'goal completion status' portion of the status bar.
@@ -28,7 +28,7 @@
     }
 }
 ```
-###### \java\seedu\address\logic\commands\AddCommandTest.java
+###### /java/seedu/address/logic/commands/AddCommandTest.java
 ``` java
         @Override
         public void addGoal(Goal goal) throws DuplicateGoalException {
@@ -69,7 +69,7 @@
         }
 
 ```
-###### \java\seedu\address\logic\commands\AddGoalCommandIntegrationTest.java
+###### /java/seedu/address/logic/commands/AddGoalCommandIntegrationTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) for {@code AddGoalCommand}.
@@ -111,7 +111,7 @@ public class AddGoalCommandIntegrationTest {
 }
 
 ```
-###### \java\seedu\address\logic\commands\AddGoalCommandTest.java
+###### /java/seedu/address/logic/commands/AddGoalCommandTest.java
 ``` java
 public class AddGoalCommandTest {
 
@@ -210,7 +210,7 @@ public class AddGoalCommandTest {
     }
 }
 ```
-###### \java\seedu\address\logic\commands\CompleteGoalCommandTest.java
+###### /java/seedu/address/logic/commands/CompleteGoalCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -332,7 +332,7 @@ public class CompleteGoalCommandTest {
 }
 
 ```
-###### \java\seedu\address\logic\commands\DeleteGoalCommandTest.java
+###### /java/seedu/address/logic/commands/DeleteGoalCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -445,7 +445,7 @@ public class DeleteGoalCommandTest {
     }
 }
 ```
-###### \java\seedu\address\logic\commands\EditGoalCommandTest.java
+###### /java/seedu/address/logic/commands/EditGoalCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -598,7 +598,7 @@ public class EditGoalCommandTest {
     }
 }
 ```
-###### \java\seedu\address\logic\commands\GoalCommandTestUtil.java
+###### /java/seedu/address/logic/commands/GoalCommandTestUtil.java
 ``` java
 /**
  * Contains helper methods for testing commands.
@@ -731,11 +731,7 @@ public class GoalCommandTestUtil {
     }
 }
 ```
-<<<<<<< HEAD
 ###### /java/seedu/address/logic/commands/SortGoalCommandTest.java
-=======
-###### \java\seedu\address\logic\commands\SortGoalCommandTest.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc
 ``` java
 /**
  * Contains integration tests (interaction with the Model) and unit tests for Sort Goal Command.
@@ -802,11 +798,7 @@ public class SortGoalCommandTest {
     }
 }
 ```
-<<<<<<< HEAD
 ###### /java/seedu/address/logic/commands/ThemeCommandTest.java
-=======
-###### \java\seedu\address\logic\commands\ThemeCommandTest.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc
 ``` java
 public class ThemeCommandTest {
 
@@ -825,11 +817,7 @@ public class ThemeCommandTest {
 
 }
 ```
-<<<<<<< HEAD
 ###### /java/seedu/address/logic/parser/AddressBookParserTest.java
-=======
-###### \java\seedu\address\logic\parser\AddressBookParserTest.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc
 ``` java
     @Test
     public void parseCommand_addGoal_returnsTrue() throws Exception {
@@ -959,10 +947,63 @@ public class ThemeCommandTest {
         assertEquals(new SortGoalCommand("startdatetime", "ascending"), command);
     }
 
+    @Test
+    public void parseCommand_sortCommand_returnsTrue() throws Exception {
+        SortCommand command = (SortCommand) parser.parseCommand(
+                SortCommand.COMMAND_WORD + " " + 1);
+        assertEquals(new SortCommand(INDEX_SORT_LEVEL_OF_FRIENDSHIP), command);
 
+        command = (SortCommand) parser.parseCommand(
+                SortCommand.COMMAND_WORD + " " + 2);
+        assertEquals(new SortCommand(INDEX_SORT_MEET_DATE), command);
+
+        command = (SortCommand) parser.parseCommand(
+                SortCommand.COMMAND_WORD + " " + 3);
+        assertEquals(new SortCommand(INDEX_SORT_BIRTHDAY), command);
+    }
+
+    @Test
+    public void parseCommand_deleteMeetCommand_returnsTrue() throws Exception {
+        DeleteMeetCommand command = (DeleteMeetCommand) parser.parseCommand(
+                DeleteMeetCommand.COMMAND_WORD + " " + 1
+        );
+        assertEquals(new DeleteMeetCommand(INDEX_FIRST_PERSON), command);
+
+        command = (DeleteMeetCommand) parser.parseCommand(
+                DeleteMeetCommand.COMMAND_ALIAS + " " + 1
+        );
+        assertEquals(new DeleteMeetCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_ongoingGoal_returnsTrue() throws Exception {
+        Goal goal = new GoalBuilder().build();
+        OngoingGoalDescriptor descriptor = new OngoingGoalDescriptorBuilder(goal).build();
+        OngoingGoalCommand command = (OngoingGoalCommand) parser.parseCommand(
+                OngoingGoalCommand.COMMAND_WORD + " " + INDEX_FIRST_GOAL.getOneBased());
+        assertEquals(new OngoingGoalCommand(INDEX_FIRST_GOAL, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_ongoingGoalAliasOne_returnsTrue() throws Exception {
+        Goal goal = new GoalBuilder().build();
+        OngoingGoalDescriptor descriptor = new OngoingGoalDescriptorBuilder(goal).build();
+        OngoingGoalCommand command = (OngoingGoalCommand) parser.parseCommand(
+                OngoingGoalCommand.COMMAND_ALIAS_1 + " " + INDEX_FIRST_GOAL.getOneBased());
+        assertEquals(new OngoingGoalCommand(INDEX_FIRST_GOAL, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_ongoingGoalAliasTwo_returnsTrue() throws Exception {
+        Goal goal = new GoalBuilder().build();
+        OngoingGoalDescriptor descriptor = new OngoingGoalDescriptorBuilder(goal).build();
+        OngoingGoalCommand command = (OngoingGoalCommand) parser.parseCommand(
+                OngoingGoalCommand.COMMAND_ALIAS_2 + " " + INDEX_FIRST_GOAL.getOneBased());
+        assertEquals(new OngoingGoalCommand(INDEX_FIRST_GOAL, descriptor), command);
+    }
 }
 ```
-###### \java\seedu\address\logic\parser\CompleteGoalCommandParserTest.java
+###### /java/seedu/address/logic/parser/CompleteGoalCommandParserTest.java
 ``` java
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -990,7 +1031,7 @@ public class CompleteGoalCommandParserTest {
     }
 }
 ```
-###### \java\seedu\address\logic\parser\DateTimeParserTest.java
+###### /java/seedu/address/logic/parser/DateTimeParserTest.java
 ``` java
 public class DateTimeParserTest {
 
@@ -1023,7 +1064,7 @@ public class DateTimeParserTest {
     }
 }
 ```
-###### \java\seedu\address\logic\parser\DeleteGoalCommandParserTest.java
+###### /java/seedu/address/logic/parser/DeleteGoalCommandParserTest.java
 ``` java
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -1048,7 +1089,7 @@ public class DeleteGoalCommandParserTest {
     }
 }
 ```
-###### \java\seedu\address\logic\parser\EditGoalCommandParserTest.java
+###### /java/seedu/address/logic/parser/EditGoalCommandParserTest.java
 ``` java
 public class EditGoalCommandParserTest {
 
@@ -1163,11 +1204,7 @@ public class EditGoalCommandParserTest {
     }*/
 }
 ```
-<<<<<<< HEAD
 ###### /java/seedu/address/logic/parser/ParserUtilTest.java
-=======
-###### \java\seedu\address\logic\parser\ParserUtilTest.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc
 ``` java
     @Test
     public void parseBirthday_null_throwsNullPointerException() {
@@ -1388,11 +1425,7 @@ public class EditGoalCommandParserTest {
                 .of(goalOrderWithWhitespace)));
     }
 ```
-<<<<<<< HEAD
 ###### /java/seedu/address/logic/parser/SortGoalCommandParserTest.java
-=======
-###### \java\seedu\address\logic\parser\SortGoalCommandParserTest.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc
 ``` java
 public class SortGoalCommandParserTest {
     private SortGoalCommandParser parser = new SortGoalCommandParser();
@@ -1442,11 +1475,7 @@ public class SortGoalCommandParserTest {
     }
 }
 ```
-<<<<<<< HEAD
 ###### /java/seedu/address/logic/parser/ThemeCommandParserTest.java
-=======
-###### \java\seedu\address\logic\parser\ThemeCommandParserTest.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc
 ``` java
 
 public class ThemeCommandParserTest {
@@ -1467,11 +1496,7 @@ public class ThemeCommandParserTest {
     }
 }
 ```
-<<<<<<< HEAD
 ###### /java/seedu/address/model/goal/GoalTextTest.java
-=======
-###### \java\seedu\address\model\goal\GoalTextTest.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc
 ``` java
 public class GoalTextTest {
 
@@ -1505,7 +1530,7 @@ public class GoalTextTest {
     }
 }
 ```
-###### \java\seedu\address\model\goal\ImportanceTest.java
+###### /java/seedu/address/model/goal/ImportanceTest.java
 ``` java
 public class ImportanceTest {
 
@@ -1572,11 +1597,7 @@ public class ImportanceTest {
     }
 }
 ```
-<<<<<<< HEAD
 ###### /java/seedu/address/model/goal/StartDateTimeTest.java
-=======
-###### \java\seedu\address\model\goal\StartDateTimeTest.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc
 ``` java
 public class StartDateTimeTest {
 
@@ -1598,11 +1619,7 @@ public class StartDateTimeTest {
     }
 }
 ```
-<<<<<<< HEAD
 ###### /java/seedu/address/model/person/BirthdayTest.java
-=======
-###### \java\seedu\address\model\person\BirthdayTest.java
->>>>>>> d5334ffb867978561af90038a7eb79997bafa6fc
 ``` java
 public class BirthdayTest {
 
@@ -1657,7 +1674,7 @@ public class BirthdayTest {
     }
 }
 ```
-###### \java\seedu\address\model\person\CcaTest.java
+###### /java/seedu/address/model/person/CcaTest.java
 ``` java
 public class CcaTest {
 
@@ -1691,7 +1708,7 @@ public class CcaTest {
     }
 }
 ```
-###### \java\seedu\address\model\person\LevelOfFriendshipTest.java
+###### /java/seedu/address/model/person/LevelOfFriendshipTest.java
 ``` java
 public class LevelOfFriendshipTest {
 
@@ -1736,7 +1753,7 @@ public class LevelOfFriendshipTest {
     }
 }
 ```
-###### \java\seedu\address\model\person\UniqueCcaListTest.java
+###### /java/seedu/address/model/person/UniqueCcaListTest.java
 ``` java
 public class UniqueCcaListTest {
     @Rule
@@ -1751,7 +1768,7 @@ public class UniqueCcaListTest {
 }
 
 ```
-###### \java\seedu\address\model\person\UnitNumberTest.java
+###### /java/seedu/address/model/person/UnitNumberTest.java
 ``` java
 public class UnitNumberTest {
 
@@ -1785,7 +1802,7 @@ public class UnitNumberTest {
     }
 }
 ```
-###### \java\seedu\address\model\UniqueGoalListTest.java
+###### /java/seedu/address/model/UniqueGoalListTest.java
 ``` java
 public class UniqueGoalListTest {
     @Rule
@@ -1799,7 +1816,7 @@ public class UniqueGoalListTest {
     }
 }
 ```
-###### \java\seedu\address\storage\XmlAdaptedGoalTest.java
+###### /java/seedu/address/storage/XmlAdaptedGoalTest.java
 ``` java
 public class XmlAdaptedGoalTest {
     private static final String INVALID_IMPORTANCE = "11";
@@ -1877,7 +1894,7 @@ public class XmlAdaptedGoalTest {
     }
 }
 ```
-###### \java\seedu\address\storage\XmlSerializableAddressBookTest.java
+###### /java/seedu/address/storage/XmlSerializableAddressBookTest.java
 ``` java
     @Test
     public void toModelType_invalidGoalFile_throwsIllegalValueException() throws Exception {
@@ -1897,7 +1914,7 @@ public class XmlAdaptedGoalTest {
     }
 }
 ```
-###### \java\seedu\address\testutil\CompleteGoalDescriptorBuilder.java
+###### /java/seedu/address/testutil/CompleteGoalDescriptorBuilder.java
 ``` java
 /**
  * A utility class to help with building CompleteGoalDescriptor objects.
@@ -1921,9 +1938,6 @@ public class CompleteGoalDescriptorBuilder {
         descriptor = new CompleteGoalDescriptor();
         descriptor.setCompletion(new Completion(true));
         descriptor.setEndDateTime(new EndDateTime(properDateTimeFormat(LocalDateTime.now())));
-        //TODO
-        //descriptor.setCompletion(goal.getCompletion());
-        //descriptor.setEndDateTime(goal.getEndDateTime());
     }
 
     /**
@@ -1947,7 +1961,7 @@ public class CompleteGoalDescriptorBuilder {
     }
 }
 ```
-###### \java\seedu\address\testutil\EditGoalDescriptorBuilder.java
+###### /java/seedu/address/testutil/EditGoalDescriptorBuilder.java
 ``` java
 /**
  * A utility class to help with building EditGoalDescriptor objects.
@@ -1995,7 +2009,7 @@ public class EditGoalDescriptorBuilder {
 }
 
 ```
-###### \java\seedu\address\testutil\GoalBuilder.java
+###### /java/seedu/address/testutil/GoalBuilder.java
 ``` java
 /**
  * A utility class to help with building Person objects.
@@ -2080,7 +2094,7 @@ public class GoalBuilder {
 }
 
 ```
-###### \java\seedu\address\testutil\GoalUtil.java
+###### /java/seedu/address/testutil/GoalUtil.java
 ``` java
 /**
  * A utility class for Goal.
@@ -2132,7 +2146,54 @@ public class GoalUtil {
     }
 }
 ```
-###### \java\seedu\address\testutil\TypicalGoals.java
+###### /java/seedu/address/testutil/OngoingGoalDescriptorBuilder.java
+``` java
+/**
+ * A utility class to help with building OngoingGoalDescriptor objects.
+ */
+public class OngoingGoalDescriptorBuilder {
+
+    private OngoingGoalDescriptor descriptor;
+
+    public OngoingGoalDescriptorBuilder() {
+        descriptor = new OngoingGoalDescriptor();
+    }
+
+    public OngoingGoalDescriptorBuilder(OngoingGoalDescriptor descriptor) {
+        this.descriptor = new OngoingGoalDescriptor(descriptor);
+    }
+
+    /**
+     * Returns an {@code OngoingGoalDescriptor} with fields containing {@code goal}'s details
+     */
+    public OngoingGoalDescriptorBuilder(Goal goal) {
+        descriptor = new OngoingGoalDescriptor();
+        descriptor.setCompletion(new Completion(false));
+        descriptor.setEndDateTime(new EndDateTime(""));
+    }
+
+    /**
+     * Sets the {@code Completion} of the {@code OngoingGoalDescriptor} that we are building.
+     */
+    public OngoingGoalDescriptorBuilder withCompletion(boolean isOngoing) {
+        descriptor.setCompletion(new Completion(isOngoing));
+        return this;
+    }
+
+    /**
+     * Sets the {@code EndDateTime} of the {@code OngoingGoalDescriptor} that we are building.
+     */
+    public OngoingGoalDescriptorBuilder withEndDateTime(String endDateTime) {
+        descriptor.setEndDateTime(new EndDateTime(endDateTime));
+        return this;
+    }
+
+    public OngoingGoalDescriptor build() {
+        return descriptor;
+    }
+}
+```
+###### /java/seedu/address/testutil/TypicalGoals.java
 ``` java
 /**
  * A utility class containing a list of {@code Goal} objects to be used in tests.
@@ -2201,7 +2262,7 @@ public class TypicalGoals {
     }
 }
 ```
-###### \java\seedu\address\ui\testutil\GuiTestAssert.java
+###### /java/seedu/address/ui/testutil/GuiTestAssert.java
 ``` java
     /**
      * Returns the color style for {@code tagName}'s label. The tag's color is determined by looking up the color
@@ -2278,7 +2339,7 @@ public class TypicalGoals {
     }
 
 ```
-###### \java\seedu\address\ui\testutil\GuiTestAssert.java
+###### /java/seedu/address/ui/testutil/GuiTestAssert.java
 ``` java
     /**
      * Changing @param ccaInArrayList into a CCA string in desired format

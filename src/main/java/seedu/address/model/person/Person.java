@@ -96,8 +96,7 @@ public class Person {
         long timeDiff = date - currentDate;
         if (timeDiff < 0) {
             return Long.MAX_VALUE;
-        }
-        else {
+        } else {
             return timeDiff;
         }
 
