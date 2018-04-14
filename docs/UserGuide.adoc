@@ -277,6 +277,61 @@ Selects the student identified by the index number used in the last student list
 ```
 Sets up a meeting with the 1st student on the 14th of March, 2018 in your Calendar.
 
+// tag::rate[]
+==== Rating feature : `rate` or `rt` [Since v1.4]
+
+Rates an existing student in CollegeZone. +
+
+*_Formats:_*
+```java
+(rate | rt) INDEX(s) [*/LEVEL_OF_FRIENDSHIP]
+```
+
+****
+* Rates the student at the specified `INDEX(s)`. The index(s) refers to the index number shown in the last student listing. The index *must be a positive integer* 1, 2, 3, ...
+* At least one valid index and a valid level of friendship rating must be provided.
+* Existing values will be updated to the input values.
+* When rating students, the current existing level of friendship value of the student will be changed.
+****
+
+*_Examples_:*
+```java
+> rate 1 */5
+```
+Rates the level of friendship of the 1st student to be `5`.
+
+```java
+> rt 1 3 */7
+```
+Rates the level of friendship of the 1st and 3rd student to be `5`.
+
+==== Show level of friendship feature : `show` or `sh` [Since v1.5]
+
+Shows the level of friendship of the student(s) whose level of friendship contains any of the given input values. +
+
+*_Formats:_*
+```java
+show LEVELOFFRIENDSHIP
+```
+
+****
+* The order of the values does not matter. e.g. `1 2` will match `1` and `2`
+* Only the name is searched at a single time
+* Only valid level of friendship values will be matched e.g. `11` will not match `1`
+* Level of frienship of the student matching at least one value will be returned (i.e. `OR` search). e.g. `1 2` will return `Students with Level of Friendship value 1` and `Students with Level of Friendship value 2`.
+****
+
+*_Examples_:*
+```java
+> show 1
+```
+Returns `Students with Level of Friendship value 1`
+```java
+> sh 1 5
+```
+Returns `Students with Level of Friendship value 1` and `Students with Level of Friendship value 5`
+// end::rate[]
+
 // tag::reminder[]
 === Reminder features
 
@@ -544,62 +599,6 @@ Indicates ongoing of the 4th goal in CollegeZone's sorted goal listing.
 ```
 Indicates ongoing of the 1st goal in CollegeZone's goal listing.
 // end::goalongoing[]
-
-=== Rate features
-// tag::rate[]
-==== Rating feature : `rate` or `rt` [Since v1.4]
-
-Rates an existing student in CollegeZone. +
-
-*_Formats:_*
-```java
-(rate | rt) INDEX(s) [*/LEVEL_OF_FRIENDSHIP]
-```
-
-****
-* Rates the student at the specified `INDEX(s)`. The index(s) refers to the index number shown in the last student listing. The index *must be a positive integer* 1, 2, 3, ...
-* At least one valid index and a valid level of friendship rating must be provided.
-* Existing values will be updated to the input values.
-* When rating students, the current existing level of friendship value of the student will be changed.
-****
-
-*_Examples_:*
-```java
-> rate 1 */5
-```
-Rates the level of friendship of the 1st student to be `5`.
-
-```java
-> rt 1 3 */7
-```
-Rates the level of friendship of the 1st and 3rd student to be `5`.
-
-==== Show level of friendship feature : `show` or `sh` [Since v1.5]
-
-Shows the level of friendship of the student(s) whose level of friendship contains any of the given input values. +
-
-*_Formats:_*
-```java
-show LEVELOFFRIENDSHIP
-```
-
-****
-* The order of the values does not matter. e.g. `1 2` will match `1` and `2`
-* Only the name is searched at a single time
-* Only valid level of friendship values will be matched e.g. `11` will not match `1`
-* Level of frienship of the student matching at least one value will be returned (i.e. `OR` search). e.g. `1 2` will return `Students with Level of Friendship value 1` and `Students with Level of Friendship value 2`.
-****
-
-*_Examples_:*
-```java
-> show 1
-```
-Returns `Students with Level of Friendship value 1`
-```java
-> sh 1 5
-```
-Returns `Students with Level of Friendship value 1` and `Students with Level of Friendship value 5`
-// end::rate[]
 
 === Interesting features
 // tag::theme[]
