@@ -24,6 +24,7 @@ More importantly, _CollegeZone_ is *optimized for those who prefer to work with 
 
 
 == Quick Start
+Follow these few simple steps to get started with _CollegeZone_:
 
 .  Ensure you have Java version `1.8.0_60` or later installed in your Computer.
 +
@@ -32,19 +33,26 @@ Having any Java 8 version is not enough. +
 This app will not work with earlier versions of Java 8.
 +
 .  Download the latest `collegezone.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for _CollegeZone_.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+.  Copy the file to the folder you want to use as the home folder for _CollegeZone_. For example, you can place it in a folder created on your desktop.
+.  Double-click the file to start the app. You will see the application Graphic User Interface (GUI) as shown below. The GUI should appear in a few seconds.
 +
-image::Ui.JPG[width="790"]
+image::UI.JPG[width="800"]
 +
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
-e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
+.  The image below describes what each part of _CollegeZone's_ GUI represent.
++
+image::UserGuideLabelledUI.PNG[width="800"]
++
 
-* *`list`* : lists all RC4 student contacts
-* **`add`**`n/John Doe p/98765432 */9 b/21 May 1997 u/#10-12 cca/Badminton cca/Volleyball t/workout buddy` : adds a contact named `John Doe` to _CollegeZone_.
-* **`delete`**`3` : deletes the 3rd student shown in the student list
-* *`exit`* : exits the app
+Now that you have _CollegeZone's_ application on, try out some of the commands that we offer!
+
+* Type the command in the command box and press kbd:[Enter] to execute it. +
+e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
+* Some example commands you can try:
+
+** *`list`* : lists all RC4 student contacts
+** **`add`**`n/John Doe p/98765432 */9 b/21 May 1997 u/#10-12 cca/Badminton cca/Volleyball t/workout buddy` : adds a student contact named `John Doe` to _CollegeZone_.
+** **`delete`**`3` : deletes the 3rd student description shown in the student list
+** *`exit`* : exits _CollegeZone_
 
 .  Refer to <<Features>> for details of each command.
 
@@ -620,7 +628,16 @@ Indicates ongoing of the 1st goal in _CollegeZone_'s goal listing.
 === Interesting features
 // tag::theme[]
 ==== Changing CollegeZone theme : `theme` or `th`
-_CollegeZone_'s default theme colour is not the only theme colour we have to offer! Try changing _CollegeZone_'s theme colour using the `theme` or `th` command.  +
+_CollegeZone_'s default theme colour is not the only theme colour we have to offer! Try changing _CollegeZone_'s theme colour to your preferred one using the `theme` or `th` command.  +
+
+image::CollegeZoneDarkTheme.JPG[width="800"]
+_Figure AAA : Dark Theme_
+
+image::CollegeZoneBubblegumTheme.JPG[width="800"]
+_Figure AAA : Bubblegum Theme_
+
+image::CollegeZoneLightTheme.JPG[width="800"]
+_Figure 3.13.1 : Light Theme_
 
 *_Formats:_*
 ```java
