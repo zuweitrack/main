@@ -7,7 +7,7 @@ import seedu.address.commons.events.ui.ThemeSwitchRequestEvent;
 
 //@@author deborahlow97
 /**
- * Changes the CollegeZone colour theme to either dark, steel or light.
+ * Changes the CollegeZone colour theme to either dark, bubblegum or light.
  */
 public class ThemeCommand extends Command {
     public static final String COMMAND_WORD = "theme";
@@ -16,11 +16,11 @@ public class ThemeCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the theme to the theme word entered.\n"
             + "Parameters: COLOUR THEME\n"
-            + "(Colour theme words: dark, steel, light)\n"
+            + "(Colour theme words: dark, bubblegum, light)\n"
             + "Example: " + COMMAND_WORD + " dark\n";
     public static final String MESSAGE_INVALID_THEME_COLOUR = "Theme colour entered is invalid.\n"
             + "Possible theme colours:\n"
-            + "(Colour theme words: dark, steel, light)\n";
+            + "(Colour theme words: dark, bubblegum, light)\n";
     private final String themeColour;
 
     /**
