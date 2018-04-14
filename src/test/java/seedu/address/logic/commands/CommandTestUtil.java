@@ -37,7 +37,7 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_MEETDATE_AMY = "14/04/2018";
     public static final String VALID_MEETDATE_BOB = "15/04/2018";
-    public static final String VALID_BIRTHDAY_AMY = "10-10-2000";
+    public static final String VALID_BIRTHDAY_AMY = "10/10/2000";
     public static final String VALID_BIRTHDAY_BOB = "03/04/1997";
     public static final String VALID_LEVEL_OF_FRIENDSHIP_AMY = "1";
     public static final String VALID_LEVEL_OF_FRIENDSHIP_BOB = "10";

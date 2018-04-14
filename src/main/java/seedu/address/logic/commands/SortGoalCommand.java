@@ -10,7 +10,7 @@ import seedu.address.model.goal.exceptions.EmptyGoalListException;
 
 //@@author deborahlow97
 /**
- * Sorts goal list based on sort field entered by user.
+ * Sorts goal list in CollegeZone based on sort field entered by user.
  */
 public class SortGoalCommand extends Command {
 

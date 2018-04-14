@@ -98,10 +98,12 @@ public class XmlAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
     public Person toModelType() throws IllegalValueException {
+        //@@author deborahlow97
         final List<Cca> personCcas = new ArrayList<>();
         for (XmlAdaptedCca cca : ccas) {
             personCcas.add(cca.toModelType());
         }
+        //@@author
         final List<Tag> personTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
@@ -123,6 +125,7 @@ public class XmlAdaptedPerson {
         }
         final Phone phone = new Phone(this.phone);
 
+        //@@author deborahlow97
         if (this.birthday == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Birthday.class.getSimpleName()));
@@ -143,8 +146,8 @@ public class XmlAdaptedPerson {
 
         //@@author sham-sheer
         final Meet meetDate = new Meet(this.meetDate);
-        //@@author
 
+        //@@author deborahlow97
         if (this.unitNumber == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     UnitNumber.class.getSimpleName()));
@@ -154,6 +157,8 @@ public class XmlAdaptedPerson {
         }
         final UnitNumber unitNumber = new UnitNumber(this.unitNumber);
         final Set<Cca> ccas = new HashSet<>(personCcas);
+
+        //@@author
         final Set<Tag> tags = new HashSet<>(personTags);
         return new Person(name, phone, birthday, levelOfFriendship, unitNumber, ccas, meetDate, tags);
     }
