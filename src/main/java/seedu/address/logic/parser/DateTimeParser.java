@@ -18,14 +18,12 @@ import com.joestelmach.natty.Parser;
  */
 public class DateTimeParser {
 
-    private static boolean isRecurring;
-    private static boolean isTimeInferred;
     private static final int BEGIN_INDEX = 6;
     /**
      * Parses user input String specified{@code args} into LocalDateTime objects
      *
      * @return Empty Optional if args could not be parsed
-     * @Disclaimer : The parser used is a dependency called 'natty' developed by 'Joe Stelmach'
+     * @Disclaimer : The parser used is a NLP API called 'natty' developed by 'Joe Stelmach'
      */
     public static Optional<LocalDateTime> nattyDateAndTimeParser(String args) {
         if (args == null || args.isEmpty()) {
@@ -46,8 +44,6 @@ public class DateTimeParser {
         }
 
         Date date = dateGroup.getDates().get(0);
-        isRecurring = dateGroup.isRecurring();
-        isTimeInferred = dateGroup.isTimeInferred();
 
         LocalDateTime localDateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
         return Optional.ofNullable(localDateTime);
@@ -125,14 +121,6 @@ public class DateTimeParser {
 
     public static boolean containsDateAndTime(String args) {
         return nattyDateAndTimeParser(args).isPresent();
-    }
-
-    public static boolean isRecurringDate() {
-        return isRecurring;
-    }
-
-    public static boolean isTimeInferredInArgs() {
-        return isTimeInferred;
     }
 
     public static LocalDateTime getLocalDateTimeFromString(String dateString) {

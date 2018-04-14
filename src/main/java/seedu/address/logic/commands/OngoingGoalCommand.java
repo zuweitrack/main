@@ -21,7 +21,7 @@ import seedu.address.model.goal.exceptions.GoalNotFoundException;
 
 //@@author deborahlow97
 /**
- * Edits the details of an existing goal in the address book.
+ * Edits the details of an existing goal in CollegeZone.
  */
 public class OngoingGoalCommand extends UndoableCommand {
 
