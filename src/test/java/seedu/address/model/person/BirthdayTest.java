@@ -51,12 +51,12 @@ public class BirthdayTest {
         assertFalse(Birthday.isValidBirthday("20--2-1997")); // invalid birthday format
         assertFalse(Birthday.isValidBirthday("20*2*1997")); // invalid symbols
         assertFalse(Birthday.isValidBirthday("12 / 12 / 2012")); // contains spaces
+        assertFalse(Birthday.isValidBirthday("01/Jan/2000"));  // using /
+        assertFalse(Birthday.isValidBirthday("31.Jan.2000"));   // using .
+        assertFalse(Birthday.isValidBirthday("01-12-2000")); // using -
+        assertFalse(Birthday.isValidBirthday("28-Feb-2001"));
 
         // valid birthday
         assertTrue(Birthday.isValidBirthday("01/01/2000"));
-        assertTrue(Birthday.isValidBirthday("01/Jan/2000"));  // using /
-        assertTrue(Birthday.isValidBirthday("31.Jan.2000"));   // using .
-        assertTrue(Birthday.isValidBirthday("01-12-2000")); // using -
-        assertTrue(Birthday.isValidBirthday("28-Feb-2001"));  // valid date
     }
 }

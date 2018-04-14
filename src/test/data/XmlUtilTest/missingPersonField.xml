@@ -2,7 +2,7 @@
 <!-- Person with missing name field -->
 <person>
     <phone>9482424</phone>
-    <birthday>24-05-1997</birthday>
+    <birthday>24/05/1997</birthday>
     <levelOfFriendship>10</levelOfFriendship>
     <unitNumber>#10-10</unitNumber>
     <ccas>dance</ccas>
