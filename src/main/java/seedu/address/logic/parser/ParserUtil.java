@@ -186,7 +186,7 @@ public class ParserUtil {
     public static Meet parseMeetDate(String meetDate) throws IllegalValueException {
         requireNonNull(meetDate);
         String trimmedMeetDate = meetDate.trim();
-        if (!Meet.isValidDate(trimmedMeetDate)) {
+        if (!Meet.isValidDate(meetDate)) {
             throw new IllegalValueException(Meet.MESSAGE_DATE_CONSTRAINTS);
         }
         return new Meet(trimmedMeetDate);

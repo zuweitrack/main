@@ -4,7 +4,7 @@
     <persons>
         <name>Hans Muster</name>
         <phone isPrivate="false">9482424</phone>
-        <birthday isPrivate="false">24-02-1998</birthday>
+        <birthday isPrivate="false">24/02/1998</birthday>
         <levelOfFriendship isPrivate="false">10</levelOfFriendship>
         <unitNumber isPrivate="false">#1-20</unitNumber>
         <cca isPrivate="false">basketball</cca>
@@ -14,7 +14,7 @@
     <persons>
         <name>Hans Muster</name>
         <phone isPrivate="false">948asdf2424</phone>
-        <birthday isPrivate="false">13-09-1990</birthday>
+        <birthday isPrivate="false">13/09/1990</birthday>
         <levelOfFriendship isPrivate="false">9</levelOfFriendship>
         <unitNumber isPrivate="false">#2-201</unitNumber>
         <cca isPrivate="false">badminton</cca>
