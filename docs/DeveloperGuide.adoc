@@ -460,13 +460,15 @@ CollegeZone users may now use shortcuts to perform desired tasks. These shortcut
 
 // tag::tagcolours[]
 === Enhanced tag colours [Since v1.1]
-Tags are now colour-coded which allows improved differentiation between many different tags.
+Tags are now colour-coded which allows improved differentiation between many different tags. Different coloured tags
+also makes it more eye catching for users.
 // end::tagcolours[]
 
 // tag::addandedit[]
 === Targeted add and edit command [Since v1.2]
+As CollegeZone is designed for NUS RC4 students to use, being able to record other students Level of Friendship,
+ Birthday, RC4 Unit Number and RC4 CCAs, will be a useful feature for them.
 
-The old add and edit feature holds a broad information about a Person.
 As CollegeZone is catered toward NUS RC4 Residents, we have changed the attributes of a Person to hold: +
 *Name, Mobile Number, Birthday, Level of Friendship, RC4 Unit Number, Meet up dates with RC4 students, RC4 CCAs and Tags*. +
 This is done by removing unwanted attributes of a person and adding new attributes of a person.
@@ -511,6 +513,142 @@ Users can delete reminders on the Calendar if its already due or when they accid
 // end::reminder[]
 
 // tag::myGoalsPage[]
+
+=== Goals
+==== Introduction
+CollegeZone is designed for RC4 students to use. RC4 students often have goals that they want to achieve in life
+– Career goals, health goals, social goals, relationship goals etc. This additional goal feature is created for RC4 users to add and keep track of their goals throughout their stay.
+The main reason behind this implementation is because setting goals gives you *long-term vision* and *short-term motivation* for the goals.
+This implementation allows RC4 students to set goals in _CollegeZone_ – big or small ones - so
+ that they will be reminded of the goals that they have set for themselves.
+
+  In addition as a majority of RC4 residents are NUS students, when students set their own goals, they
+   take responsibility and ownership of their learning goals. +
+ Goals are meant only for the user, and the user can have many goals stored in CollegeZone.
+
+*Goal features:*
+
+ -add goal
+ -edit goal
+ -delete goal
+ -complete goal
+ -ongoing goal
+ -sort goal
+
+==== Implementation of add goal
+
+Adding a goal into _CollegeZone_ is facilitated by `AddGoalCommand`, which extends `UndoableCommand`, it
+supports undoing and redoing of commands that modifies the state of the _CollegeZone_.
+
+The following sequence diagram shows the flow of operation from the point the address book receives an input to the output of the result.
+
+image::AddGoalCommandSeqDiagram.png[width="800"]
+._Interactions Inside the Logic Component for the `t-add 1 2 CS2103` Command_
+
+AddGoalCommand is implemented in this way:
+[source,java]
+----
+public class TagAddCommand extends UndoableCommand {
+@Override
+    public CommandResult executeUndoableCommand() throws CommandException {
+        // ... TagAddCommand logic ...
+    }
+}
+----
+
+For example, the user input might be `t-add 1 2 3 college friend`. +
+
+After the command word `t-add` is parsed at the `AddresBookParser`, the remaining user input( indices in the list, tag to add), in the example `1 2 3 college friend`, will be passed to and parsed by `TagAddCommandParser`.
+
+Different from the previous limitation on the choice of word for `tag`, which is `Alnum`, we allow multiple words `tagName` as well, such as `college friend`.
+
+The change of `tagName` format requires a new algorithm for parsing in the `TagAddCommandParser`.
+The key is to differentiate between indices and `tagName`. The parser algorithm would first split the input string into parts by space as delimiter. +
+It would then determine whether each part is a word or a number, the parser keeps track of the last recognized number.
+After processing the entire user input, the parser would treat all parts until the last recognized number as indices and those after it as `tagName`.
+In this case, as `3` is the last part that is numeric, `1 2 3` are treated as indices and `college friend` is treated as `tagName`. +
+
+The command `t-add` is also used to add in `favourite` tag, for example `t-add 1 2 3 favourite`. +
+Person(s) with `favourite` tag will have a small coral circle next to the person's name in the left person list panel. And person(s) with `favourite` tag would always be pinned to top of the person list. +
+We also recognize other words containing `fav` as `favourite`, such as `favo`. +
+
+The `TagAddCommandParser` returns `TagAddCommand` after execution, which will be further processed by `logic` component.
+
+TagAddCommandParser is implemented in this way:
+[source,java]
+----
+public class TagAddCommandParser implements Parser<TagAddCommand> {
+
+    public TagAddCommand parse(String args) throws ParseException {
+        // ... TagAddCommandParser logic ...
+        int defaultLastNumberIndex = -1;
+        int completeNumOfArgs = 2;
+        String newTag = "";
+
+        int lastIndex = defaultLastNumberIndex;
+        String[] argsArray;
+        ArrayList<Index> index = new ArrayList<>();
+        if (args.isEmpty() || (argsArray = args.trim().split(" ")).length < completeNumOfArgs) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagAddCommand.MESSAGE_USAGE));
+        }
+        try {
+            for (int i = 0; i < argsArray.length; i++) {
+                if (argsArray[i].matches("\\d+")) {
+                    index.add(ParserUtil.parseIndex(argsArray[i]));
+                    lastIndex = i;
+                } else {
+                    break;
+                }
+            }
+        } catch (IllegalValueException ive) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagAddCommand.MESSAGE_USAGE));
+        }
+        // ... Other TagAddCommandParser logic ...
+    }
+}
+----
+
+==== Design Considerations
+
+**Aspect:** Implementation of adding a tag to person(s) by indices +
+**Alternative 1 (current choice):** Add a new Command `TagAddCommand` +
+**Pros:** Having a separate command for adding a tag is consistent with a series of tag related operations we designed to have. We can implements `UndoableCommand` Abstract Class, so that we have undo/redo functionality. +
+**Cons:** Have to add in a new Command class and the corresponding parser class. +
+**Alternative 2:** Modify current EditCommand +
+**Pros:** Only need to change a small part of code and the undo/redo functionality can be preserved. +
+**Cons:** The current `EditCommand` only enables the user to edit one person at a time, which makes adding a tag to multiple contacts tedious.
+
+---
+
+**Aspect:** Implementation of parsing a `TagAddCommand` +
+**Alternative 1 (current choice):** Add a new Parser class `TagAddCommandParser` +
+**Pros:** The input format can be customized for `TagAddCommand`. +
+**Cons:** Have to add in a new Parser class. +
+**Alternative 2:** Make use of `EditCommandParser` +
+**Pros:** We only need to change a small part of code. +
+**Cons:** User input is restricted by the EditCommand input format.
+
+---
+
+**Aspect:** Whether to accept user input that has partially invalid indices +
+**Alternative 1 (current choice):** Do not accept +
+**Pros:** Easy to implement. +
+**Cons:** User has to type in the valid indices again. +
+**Alternative 2:** Ignore the invalid indices +
+**Pros:** Efficient for the user. +
+**Cons:** Difficult to implement.
+
+---
+
+**Aspect:** Whether to have another command to set person(s) as `favourite` +
+**Alternative 1 (current choice):** No, setting `favourite` utilizes the current `t-add` command +
+**Pros:** User does not need to remember extra commands and treating `favourite` as `tag` is intuitive. Other tag-related operations such as `t-remove` and `t-find` can also be used to manipulate `favourite` tag. +
+**Cons:** Computationally costly to determine whether person(s) are set as `favourite`, as the entire `tagList` needs to be iterated. +
+**Alternative 2:** Have a separate set of commands for `favourite` +
+**Pros:** Have a clear separation of functions. +
+**Cons:** Not user friendly.
+// end::tagadd[]
+
 === Goals List [Since v1.4]
 
 The My Goals page is created for RC4 users to add and keep track of their goals throughout their stay. We are implementing this goal list as setting goals gives you *long-term vision* and *short-term motivation* for the goals. In addition as a majority of RC4 residents are NUS students, when students set their own goals, they take responsibility and ownership of their learning goals. +
