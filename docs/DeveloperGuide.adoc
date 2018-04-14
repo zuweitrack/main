@@ -896,7 +896,7 @@ Use case ends.
 *MSS*
 
 1.  User requests to add a reminder on a certain date
-2.  CollegeZone adds the reminder in the calendar and changes is reflected on the calendar
+2.  CollegeZone adds the reminder in the calendar and changes are reflected on the calendar
 +
 Use case ends.
 
