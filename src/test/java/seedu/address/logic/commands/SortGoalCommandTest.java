@@ -35,21 +35,30 @@ public class SortGoalCommandTest {
 
     private Model model;
     private Model expectedModel;
-    private SortGoalCommand sortGoalCommand;
-
+    private SortGoalCommand sortGoalCommandA;
+    private SortGoalCommand sortGoalCommandB;
+    private SortGoalCommand sortGoalCommandC;
     @Before
     public void setUp() {
         model = new ModelManager(getTypicalGoalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        sortGoalCommand = new SortGoalCommand(VALID_GOAL_FIELD, VALID_GOAL_ORDER);
-        sortGoalCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        sortGoalCommandA = new SortGoalCommand(VALID_GOAL_FIELD, VALID_GOAL_ORDER);
+        sortGoalCommandA.setData(model, new CommandHistory(), new UndoRedoStack());
+        sortGoalCommandB = new SortGoalCommand("startdatetime", "ascending");
+        sortGoalCommandB.setData(model, new CommandHistory(), new UndoRedoStack());
+        sortGoalCommandC = new SortGoalCommand("completion", VALID_GOAL_ORDER);
+        sortGoalCommandC.setData(model, new CommandHistory(), new UndoRedoStack());
     }
 
 
     @Test
     public void execute_goalListIsNotFiltered_showsSortedList() {
-        assertCommandSuccess(sortGoalCommand, model, String.format(MESSAGE_SUCCESS, VALID_GOAL_FIELD,
+        assertCommandSuccess(sortGoalCommandA, model, String.format(MESSAGE_SUCCESS, VALID_GOAL_FIELD,
+                VALID_GOAL_ORDER), expectedModel);
+        assertCommandSuccess(sortGoalCommandB, model, String.format(MESSAGE_SUCCESS, "startdatetime",
+                "ascending"), expectedModel);
+        assertCommandSuccess(sortGoalCommandC, model, String.format(MESSAGE_SUCCESS, "completion",
                 VALID_GOAL_ORDER), expectedModel);
     }
 

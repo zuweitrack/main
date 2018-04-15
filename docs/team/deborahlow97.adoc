@@ -1,11 +1,17 @@
-= Deborah Low - Project Portfolio
+= Deborah Low Shi Lei - Project Portfolio
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 :collatedDir: ../../collated
 
+(https://github.com/deborahlow97[GitHub])
+
+Welcome to my project portfolio. This document summarises my contributions of every software-related project that I have
+been involved with. The link to my GitHub page can be found above. This is where you can find the repository of every
+project mentioned below.
+
 == Project: CollegeZone
 CollegeZone is a desktop address book application used by National University of Singapore Residential College 4 (RC4) students. We aim to make RC4 student’s school life much easier and more convenient. +
-The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 20 kLoC.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 20 kLoC. +
 *Code contributed*: +
 link:{collatedDir}/main/deborahlow97.md[Functional code] +
 link:{collatedDir}/test/deborahlow97.md[Test code] +
@@ -15,41 +21,31 @@ link:{collatedDir}/test/deborahlow97.md[Test code] +
 === Major enhancement: added Add, Edit, Sort and Delete goal command
 ** What it does: Allows user to add, edit and delete goals into CollegeZone. It also allows user to sort the goals that they have based on the field they want it sorted in.It includes tracking of when the goals started, ended, it's importance level to user and it's completion status.
 ** External behavior: +
-Start of Extract [from: User Guide]
 include::../UserGuide.adoc[tag=goalfeatures]
-End of Extract
 
 ** Justification: This feature improves the product significantly because RC4 students will have goals that they want to accomplish in life, especially for new RC4 students, they enter NUS with many goals they want to achieve. Having this feature allows them to record down the goals and track the status of it.
 
 === Major enhancement: added Complete and RevertComplete goal command
 ** What it does: Allows user to update the completion status of the existing goals they have in CollegeZone.
 ** External behavior: +
-Start of Extract [from: User Guide]
 include::../UserGuide.adoc[tag=goalcompletion]
-End of Extract
 
 ** Justification: This feature improves the product significantly because RC4 students will have be able to indicate completion status of goals that they have.
 
 === Minor enhancement: added a theme command that allows the user to change the theme colour of CollegeZone.
 ** Justification: This feature allows RC4 students to switch to a different theme colour of their liking.
 ** External behavior: +
-Start of Extract [from: User Guide]
 include::../UserGuide.adoc[tag=theme]
-End of Extract
 
 === Minor enhancement: added birthday, level of friendship, unit number and ccas field
 ** Justification: The addition of this field provides user with more comprehensive contact details to add into CollegeZone.
 ** External behavior: +
-Start of Extract [from: User Guide]
 include::../UserGuide.adoc[tag=addandedit]
-End of Extract
 
 === Proposed enhancements:
-Start of Extract [from: User Guide]
 include::../UserGuide.adoc[tag=debv2.0]
-End of Extract
 
-** Differentiating goals into Main goals and Sub-goals
+** Adding Sub-goals
 ** Adding of timetable into CollegeZone
 
 == Contributions to the Developer Guide
@@ -58,14 +54,12 @@ End of Extract
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-Start of Extract [from: Developer Guide]
-include::../DeveloperGuide.adoc[tag=addandedit] +
-include::../DeveloperGuide.adoc[tag=Goals] +
-include::../DeveloperGuide.adoc[tag=addgoal] +
-include::../DeveloperGuide.adoc[tag=deletegoal] +
-include::../DeveloperGuide.adoc[tag=sortgoal] +
+include::../DeveloperGuide.adoc[tag=addandedit]
+include::../DeveloperGuide.adoc[tag=Goals]
+include::../DeveloperGuide.adoc[tag=addgoal]
+include::../DeveloperGuide.adoc[tag=deletegoal]
+include::../DeveloperGuide.adoc[tag=sortgoal]
 include::../DeveloperGuide.adoc[tag=theme]
-End of Extract
 
 === Other Contributions:
 ** Project management:
@@ -74,7 +68,7 @@ End of Extract
 ** Enhancements to existing features:
 *** Updated the GUI color scheme (Pull requests https://github.com/CS2103JAN2018-T09-B2/main/pull/204/files[#204])
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2103JAN2018-T09-B2/main/pull/198/files
+*** Did cosmetic tweaks to existing contents of the User Guide (https://github.com/CS2103JAN2018-T09-B2/main/pull/198/files[#198])
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2103JAN2018-W14-B3/main/issues/102[1], https://github.com/CS2103JAN2018-W14-B3/main/issues/99[2], https://github.com/CS2103JAN2018-W14-B3/main/issues/103[3])

@@ -46,14 +46,13 @@ image::DownloadJar.JPG[width="550"]
 . You will be greeted with _CollegeZone's_ Graphic User Interface (GUI) as shown below. The GUI should appear in a few seconds.
 +
 image::UI.JPG[width="800"]
-+
+
 
 === Visual Introduction
 
 The image below describes what each part of _CollegeZone's_ GUI represent.
 
 image::UserGuideLabelledUI.PNG[width="800"]
-
 
 . The *Command Box* is located at the top of CollegeZne. Enter your keyboard commands into the box!
 . The *Result Display Panel* shows you the results of the commands you entered.
@@ -325,7 +324,7 @@ Sets up a meeting with the 1st student on the 14th of March, 2018 in your Calend
 [discrete]
 === Rating feature : `rate` or `rt` [Since v1.4]
 
-Rates an existing student in CollegeZone. +
+Rates an existing student in _CollegeZone_. +
 
 *_Formats:_*
 ```java
@@ -411,7 +410,7 @@ You might be wondering what else you can do with the calendar. The Reminder feat
 [discrete]
 === Adding a reminder: `+reminder` or `+r` or `addreminder` [Since v1.4]
 
-You can try setting a reminder into the calendar in CollegeZone by referring to the instructions below. +
+You can try setting a reminder into the calendar in _CollegeZone_ by referring to the instructions below. +
 
 *_Formats:_*
 ```java
@@ -451,6 +450,7 @@ Returns `Dental appointment` in the calendar according to `START_DATETIME` & `EN
 
 Figure below portrays what should be seen after the command is executed correctly:
 
+.Execution of +r text/Eat vitamins d/5/5/2018 8am e/5/5/2018 8.10am
 image::addReminder.PNG[width="1500"]
 
 [discrete]
@@ -499,6 +499,7 @@ Deletes reminder `Dental appointment` according to `START_DATETIME`
 
 Figure below portrays what should be seen after the command is executed correctly:
 
+.Execution of -r text/Eat vitamins d/5/5/2018 8am
 image::delReminder.PNG[width="1500"]
 
 // end::reminder[]
@@ -625,18 +626,18 @@ If you've added a specific goal that you're unlikely to complete and want to rem
 ```java
 > -goal 2
 ```
-Deletes the 2nd goal in _CollegeZone_'s goal listing. +
+Deletes the 2nd goal in _CollegeZone's_ goal listing. +
 
 ```java
 > sortgoal f/completion o/ascending
 > -g 4
 ```
-Deletes the 4th goal in _CollegeZone_'s sorted goal listing. +
+Deletes the 4th goal in _CollegeZone's_ sorted goal listing. +
 
 ```java
 > deletegoal 1
 ```
-Deletes the 1st goal in _CollegeZone_'s goal listing.
+Deletes the 1st goal in _CollegeZone's_ goal listing.
 
 The figure below portrays what should be seen after the command is executed correctly:
 
@@ -665,23 +666,24 @@ Once you've completed a goal, indicate completion of an existing goal in _Colleg
 ```java
 > !goal 2
 ```
-Indicates completion of the 2nd goal in _CollegeZone_'s goal listing.
+Indicates completion of the 2nd goal in _CollegeZone's_ goal listing.
 
 ```java
 > sgoal f/importance o/descending
 > !g 4
 ```
-Indicates completion of the 4th goal in _CollegeZone_'s sorted goal listing.
+Indicates completion of the 4th goal in _CollegeZone's_ sorted goal listing.
 
 ```java
 > completegoal 1
 ```
-Indicates completion of the 1st goal in _CollegeZone_'s goal listing.
+Indicates completion of the 1st goal in _CollegeZone's_ goal listing.
 
 The figure below portrays what should be seen after the command is executed correctly:
 
 .Execution of !g 4
 image::CompleteGoal.PNG[width="1000"]
+
 
 [NOTE]
 ====
@@ -707,16 +709,16 @@ If you had an ongoing goal that is wrongly indicated that it's completed, do not
 ```java
 > -!goal 2
 ```
-Indicates ongoing of the 2nd goal in _CollegeZone_'s goal listing.
+Indicates ongoing of the 2nd goal in _CollegeZone's_ goal listing.
 ```java
 > sortgoal f/startdatetime o/ascending
 > -!g 4
 ```
-Indicates ongoing of the 4th goal in _CollegeZone_'s sorted goal listing.
+Indicates ongoing of the 4th goal in _CollegeZone's_ sorted goal listing.
 ```java
 > ongoing 1
 ```
-Indicates ongoing of the 1st goal in _CollegeZone_'s goal listing.
+Indicates ongoing of the 1st goal in _CollegeZone's_ goal listing.
 
 The figure below portrays what should be seen after the command is executed correctly:
 
@@ -735,7 +737,7 @@ The goal percentage bar changes.
 // tag::theme[]
 [discrete]
 === Changing CollegeZone theme : `theme` or `th`
-_CollegeZone_'s default theme colour is not the only theme colour we have to offer! Try changing _CollegeZone_'s theme colour to your preferred one using the `theme` or `th` command.  +
+_CollegeZone's_ default theme colour is not the only theme colour we have to offer! Try changing _CollegeZone's_ theme colour to your preferred one using the `theme` or `th` command.  +
 
 .Dark Theme
 image::CollegeZoneDarkTheme.JPG[width="1000"]
@@ -807,7 +809,7 @@ Restores _CollegeZone_ to the state before the previous _undoable_ command was e
 
 [NOTE]
 ====
-Undoable commands: those commands that modify _CollegeZone_'s content (`add`, `delete`, `edit`, `clear`, `+goal`, `-goal`, `~goal`, `!goal`, `-!goal`).
+Undoable commands: those commands that modify _CollegeZone's_ content (`add`, `delete`, `edit`, `clear`, `+goal`, `-goal`, `~goal`, `!goal`, `-!goal`).
 ====
 
 *_Examples_:*

@@ -478,12 +478,6 @@ CollegeZone users may now use shortcuts to perform desired tasks. These shortcut
 
 //end::find[]
 
-// tag::tagcolours[]
-=== Enhanced tag colours [Since v1.1]
-Tags are now colour-coded which allows improved differentiation between many different tags. Different coloured tags
-also makes it more eye catching for users.
-// end::tagcolours[]
-
 // tag::addandedit[]
 === Targeted add and edit command [Since v1.2]
 As CollegeZone is designed for NUS RC4 students to use, being able to record other students Level of Friendship,
@@ -725,7 +719,6 @@ The code snippet shown below shows the overloading of StartDateTime constructor 
 It keeps both a String value and a LocalDateTime value.
 The _Code-snippet 2 and 3_ shows the conversion of the String value to LocalDateTime value and vice versa.
 
-.Code-snippet 1
 [source,java]
 ----
 public class StartDateTime implements Comparable<StartDateTime> {
@@ -746,8 +739,8 @@ public class StartDateTime implements Comparable<StartDateTime> {
     }
 }
 ----
+.Code Snippet 3.10.1: StartDateTime method
 
-.Code-snippet 2
 [source,java]
 ----
     public static String properDateTimeFormat(LocalDateTime dateTime) {
@@ -770,8 +763,8 @@ public class StartDateTime implements Comparable<StartDateTime> {
         return builder.toString();
     }
 ----
+.Code Snippet 3.10.2: Method conversion
 
-.Code-snippet 3
 [source,java]
 ----
     public static LocalDateTime getLocalDateTimeFromProperDateTime(String properDateTimeString) {
@@ -782,6 +775,7 @@ public class StartDateTime implements Comparable<StartDateTime> {
         return nattyDateAndTimeParser(stringFormat).get();
     }
 ----
+.Code Snippet 3.10.3: Method conversion
 
 - All goals will have a string of stars (indicating importance) in a yellow border directly below the goal text in the goal list panel.
 
@@ -894,7 +888,7 @@ Note:
 
 
 // tag::deletegoal[]
-==== Delete goal mechanism [Since v1.4]
+=== Delete goal mechanism [Since v1.4]
 
 Deleting a goal from _CollegeZone_ is facilitated by `DeleteGoalCommand`, which extends `UndoableCommand`, it
 supports undoing and redoing of commands that modifies the state of the _CollegeZone_.
@@ -915,12 +909,10 @@ In the Logic component, `AddressBookParser` will parse the user's input, for exa
 `DeleteGoalCommandParser` parses the `INDEX`: +
 e.g.Parsed index : 1 +
 
-The following is the Sequence Diagram for interactions within the `Logic` component for the `execute("goal remove 1")` API call. +
-
 ._Interactions Inside the Logic Component for the `-goal` Command_
 image::DeleteGoalSeqDiagram.PNG[width="800"]
 
-`DeleteGoalCommandParser`Creates a `DeleteGoalCommand` class and passes the index as argument.
+`DeleteGoalCommandParser` creates a `DeleteGoalCommand` class and passes the index as argument.
 It deletes the goal corresponding to the index locally and runs the execution which calls the model
 The filtered goals list and deletion of the specified Goal object occurs. The filtered goals list is updated and retrieved.
 The UI component displays the deletion of goal in the goal list panel and the storage component deletes the details of the deleted goal in the address book storage.
@@ -955,7 +947,7 @@ The image below shows the interaction of sort the `Logic` component.
 image::SortGoalSeqDiagram.PNG[width="800"]
 
 Upon execution of `SortGoalCommand`, a `Comparator<Goal>` will be initialised based on the sort type it receives.
-A `sortPersons` function call will be made to `Model`, which propagates down to `UniqueGoalList`, where the sorting of the `internalList` occurs. +
+A `sortGoal` function call will be made to `Model`, which propagates down to `UniqueGoalList`, where the sorting of the `internalList` occurs. +
 The code below shows the switch statement used to define the type of sort the user wants in the `UniqueGoalList`. +
 
 [source,java]
@@ -997,8 +989,8 @@ public class UniqueGoalList implements Iterable<Goal> {
     }
 }
 ----
- Once verified, the argument will be tokenized to identify your specified sort type. A `SortGoalCommand` object is then
-  created with the identified sort type.
+Once verified, the argument will be tokenized to identify your specified sort type. A `SortGoalCommand` object is then
+created with the identified sort type.
 [NOTE]
 If the goal list is found to be empty, a `CommandException` will be thrown from `SortGoalCommand`.
 
@@ -1275,7 +1267,7 @@ The next diagram illustrates the relationship between a
 `Person` and its `LevelOfFriendship`.
 
 
-image::RCPersonClass1.jpg[width="450"]
+image::RC4ModelComponenetClass.JPG[width="800"]
 
 
 The following shows a part of the code of `RateCommand` and reveals

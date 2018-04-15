@@ -26,8 +26,8 @@ You can find many interesting features available in CollegeZone such as: +
 * and many more!
 
 The main reasons NUS freshmen chooses to stay in RC4 is to *forge new friendships* and to *perform well in their studies*. CollegeZone aims to aid in RC4 residents tasks management and maintaining the friendships forged in RC4. +
-With CollegeZone's unique features, we aim to be your personal assistant just for you. +
-Head over to our link:docs/UserGuide.adoc[user guide] to get started with CollegeZone.
+With CollegeZone's unique features, we aim to benefit your everyday life. +
+Head over to our link:docs/UserGuide.adoc[user guide] to get started with CollegeZone!
 
 == Site Map
 
