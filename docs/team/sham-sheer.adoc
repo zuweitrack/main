@@ -53,9 +53,6 @@ include::../UserGuide.adoc[tag=auto]
 include::../DeveloperGuide.adoc[tag=meetCommand]
 include::../DeveloperGuide.adoc[tag=sortmech]
 
-
-== PROJECT: NUSMeets
-
 ---
 
 

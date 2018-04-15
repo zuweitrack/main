@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.person.Birthday.birthDateToInt;
 import static seedu.address.model.person.Meet.dateToInt;
 
 import java.util.Collections;
@@ -89,7 +90,7 @@ public class Person {
 
     public long getMeetDateInt() { return dateToInt(meetDate.toString()); }
 
-    public long getBirthdayInt() { return dateToInt(birthday.toString()); }
+    public long getBirthdayInt() { return birthDateToInt(birthday.toString()); }
 
     @Override
     public boolean equals(Object other) {

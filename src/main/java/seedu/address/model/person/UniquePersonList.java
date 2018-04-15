@@ -148,7 +148,6 @@ public class UniquePersonList implements Iterable<Person> {
         if (index.getOneBased() == 3) {
             Comparator<Person> comparator = Comparator.comparingLong(Person::getBirthdayInt);
             FXCollections.sort(internalList, comparator);
-            FXCollections.reverse(internalList);
         }
     }
 }
