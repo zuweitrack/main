@@ -799,15 +799,13 @@ public class AddGoalCommand extends UndoableCommand {
 The following sequence diagram shows the flow of operation from the point _CollegeZone_ receives an input to the output of the result.
 
 ._Interactions Inside the Logic Component for the `+g` Command_
-image::AddGoalSeqDiagram.png[width="800"]
+image::AddGoalSeqDiagram.PNG[width="800"]
 
 
 AddGoalCommand is implemented in this way:
 
-1. Logic
-* AddressBookParser:
-** Detects if add goal keyword contains correct parsing keywords after +
-*** e.g. +g text/eat healthily impt/9
+In the Logic componenet, `AddressBookParser` will parse the user's input and detects if add goal keyword contains correct parsing keywords after.
+For example, e.g. +g text/eat healthily impt/9
 * AddGoalCommandParser: (More about this method will be mentioned later)
 ** Parses the input by extracting the input text and importance +
 *** Parsed text : eat healthily +
@@ -948,6 +946,18 @@ are very similar to how CollegeZone implements its contacts. This is implemented
 
 ==== Implementation of sort goal
 
+The sorting goal mechanism is facilitated by `SortGoalCommandParser` and `SortGoalCommand`, with both classes residing
+in the `Logic` component of CollegeZone. `SortGoalCommand` in not undoable.
+
+`SortGoalCommandParser` takes in an arguments in the form of `FIELD` and `ORDER` that defines how `UniqueGoalList`
+should be sorted. You may customise the sort goal operation, with `FIELD` specifying the goal field to sort and `ORDER`
+specifying the type of sort order. It checks for validity against a few keywords. For example, `ORDER` only accepts 2 keywords: `ascending` or `descending`.
+On the other hand, `FIELD` only accepts 3 keywords: `importance`, `startdatetime` and `completion`.
+ Once verified, the argument will be tokenized to identify your specified sort type. A `SortGoalCommand` object is then
+  created with the identified sort type.
+
+Upon execution of `SortGoalCommand`, a `Comparator<Goal>` will be initialised based on the sort type it receives.
+A `sortPersons` function call will be made to `Model`, which propagates down to `UniqueGoalList`, where the sorting of the `internalList` occurs.
 
 === Theme Enhancement
 CollegeZone has multiple themes for the user to choose from. Currently, there are 3 themes implemented.
