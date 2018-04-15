@@ -11,6 +11,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
+//@@author sham-sheer
 /**
  * Removes the meet up set with a person using the person's displayed index from CollegeZone.
  */
