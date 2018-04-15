@@ -1,4 +1,4 @@
-= Deborah Low - Project Portfolio
+z= Deborah Low - Project Portfolio
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 :collatedDir: ../../collated

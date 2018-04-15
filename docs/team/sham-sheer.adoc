@@ -11,32 +11,27 @@
 CollegeZone is a desktop application for NUS Residential College 4 (RC4) students. It has a Graphical User Interface (GUI) but most of the user interactions happen using a Command Line Interface (CLI). This application is catered for an RC4 resident to manage their contacts with other RC4 residents and to manage their tasks, just like a digital organiser.
 == Summary of contributions
 
-* *Major enhancement*: added meet command
-** What it does: allows the RC4 student to set up a meeting with other RC4 Students in the Contacts.
-** Justification: This feature was primarily added to provide a platform for RC4 students to be more social and make it easy for them to keep track of their meeting appointments.
-** Highlights: This feature involves creating a new class with new attributes that were not in the original addressbook. Interacting with the CalendarFX API to be able to display the reminders also posed challenges in terms of implementation.
+* *Major enhancement*: Social CollegeZone: Meet Command and Sort Command
+** What it does: allows the RC4 students to be set up meet dates in our CollegeZone Calendar and also easily keep track of upcoming meet up dates, birthdays with a click of a button.
+** Justification: This feature was primarily added to provide a platform for RC4 students to be more social and make it easy for them to keep track of their meeting appointments and their friends birthdays to plan get togethers.
+** Highlights: This feature involves creating a new attributes for the `Person` Class that were not in the original addressbook. Interacting with the CalendarFX API to be able to display the meet dates also posed challenges in terms of implementation.
 ** Credits: CalendarFX API
 
-* *Minor enhancement*: added a sort command that sorts RC4 students based on their Birthday, Meet up dates and Level of Friendship attributes.
+* *Minor enhancement*: added an auto complete command that auto-completes a command with the press of `TAB`.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://github.com/CS2103JAN2018-T09-B2/main/blob/master/collated/main/sham-sheer.md[Functional code]] [https://github.com/CS2103JAN2018-T09-B2/main/blob/master/collated/test/sham-sheer.md[Test code]]
 
 * *Other contributions*:
 
 ** Project management:
 *** Managed releases `v1.5rc` (1 release) on GitHub
-** Enhancements to existing features:
-**
-**
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2103JAN2018-T09-B2/main/pull/82[#82]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
+***
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2103JAN2018-W11-B1/main/issues/151[1], https://github.com/CS2103JAN2018-W11-B1/main/issues/150[2], https://github.com/CS2103JAN2018-W11-B1/main/issues/154[3])
 ** Tools:
-**
+*** Integrated a third party library and API (CalendarFX) to the project
 
 _{you can add/remove categories in the list above}_
 
@@ -46,14 +41,17 @@ _{you can add/remove categories in the list above}_
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
-
+include::../UserGuide.adoc[tag=sort]
+include::../UserGuide.adoc[tag=meet]
+include::../UserGuide.adoc[tag=auto]
 
 == Contributions to the Developer Guide
 
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
-
+include::../DeveloperGuide.adoc[tag=meetCommand]
+include::../DeveloperGuide.adoc[tag=sortmech]
 
 
 == PROJECT: NUSMeets

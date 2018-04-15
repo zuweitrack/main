@@ -535,7 +535,9 @@ Hence, both `AddReminderCommand` and `DeleteReminderCommand` are implemented as 
 
 ==== Implementation +
 
-*Reminder Object* +
+*Model Component* +
+
+* Reminder Class
 
 Every time a `Reminder` is created, three other objects are also created: +
 
@@ -549,27 +551,32 @@ A `Reminder` will be marked with a *blue* circle if it's not due and be marked w
 
 Users can delete reminders on the Calendar if its already due or when they accidentally made a mistake. +
 
-*UniqueReminderList* +
+._Class Diagram of Reminder_
+image::ReminderClassDiagram.PNG[width="800"]
+
+* UniqueReminderList +
 
 `UniqueReminderList` functions as a List of `Reminders` where every element is unique and is defined by its `ReminderText`,
 `DateTime` and `EndDateTime`.
 
-*Adding a Reminder* +
+*Logic Component* +
+
+* Adding a Reminder +
 
 When `AddReminderCommand` is executed, it first checks whether there are any duplicate reminders in `UniqueReminderList`. If there is no duplicate reminder,
 `Reminder` is added into `UniqueReminderList` in `AddressBook`.
 
 .Interactions Inside the Logic Component for the `+r text/eat pills d/tmr 8pm e/tmr 10pm` Command
-image::addReminderSeqDiagram.png[width="800"]
+image::addReminderSeqDiagram.PNG[width="800"]
 
-*Deleting a Reminder* +
+* Deleting a Reminder +
 
 When `DeleteReminderCommand` is executed, it will find the `Reminder` specified by the user using parameters `ReminderText` and `DateTime`. If `Reminder` specified by user
 is not found in `UniqueReminderList`, `CommandException` will be thrown. If `Reminder` is found, it will then be removed from `UniqueReminderList`. The code snippet to find and remove the `Reminder`
-specified by user is shown below.
+specified by user is shown below. Code snippet of this is shown in Code Snippet 3.9.1.
 
 .Interactions Inside the Logic Component for the `-r text/eat pills d/tmr 8pm` Command
-image::delReminderSeqDiagram.png[width="800"]
+image::delReminderSeqDiagram.PNG[width="800"]
 
 [source,java]
 ----
@@ -593,8 +600,9 @@ image::delReminderSeqDiagram.png[width="800"]
         }
     }
 ----
+.Code Snippet 3.9.1: Method to find specific Reminder to delete
 
-*Syncing Reminder to Calendar* +
+*User Interface(Syncing Calendar to Reminders)* +
 
 To display the reminder in the calendar, we have a `CalendarPanel` that takes in the `UniqueReminderList`.
 
@@ -612,6 +620,8 @@ To display the reminder in the calendar, we have a `CalendarPanel` that takes in
         registerAsAnEventHandler(this);
     }
 ----
+.Code Snippet 3.9.2: Inititialisation of Calendar Panel for User Interface
+
 `UniqueReminderList` will then be iterated and each reminder in the list is individually added into the calendar through `updateCalendar()`. Every time a new reminder is added into `CollegeZone`, an event handler, `handleNewCalendarEvent`, will
 cause `calendarUpdate()` to run again and `CalendarPanel` will be updated to display the new reminder added onto `CollegeZone`.
 
@@ -623,6 +633,11 @@ cause `calendarUpdate()` to run again and `CalendarPanel` will be updated to dis
         personList = event.data.getPersonList();
         Platform.runLater(this::updateCalendar);
     }
+----
+.Code Snippet 3.9.3: Event Handler: handleNewCalendarEvent
+
+[source,java]
+----
 
     /**
      * Updates the Calendar with Reminders that are already added
@@ -652,24 +667,10 @@ cause `calendarUpdate()` to run again and `CalendarPanel` will be updated to dis
                 calendarRDue.addEntry(new Entry(reminder.getReminderText().toString(), new Interval(ldtstart, ldtend)));
             }
         }
-        //@@author sham-sheer
-        for (Person person : personList) {
-            String meetDate = person.getMeetDate().toString();
-            if (!meetDate.isEmpty()) {
-                int day = Integer.parseInt(meetDate.substring(0,
-                        2));
-                int month = Integer.parseInt(meetDate.substring(3,
-                        5));
-                int year = Integer.parseInt(meetDate.substring(6,
-                        10));
-                calendarM.addEntry(new Entry("Meeting " + person.getName().toString(),
-                        new Interval(LocalDate.of(year, month, day), LocalTime.of(12, 0),
-                                LocalDate.of(year, month, day), LocalTime.of(13, 0))));
-            }
-        }
         calendarView.getCalendarSources().add(myCalendarSource);
     }
 ----
+.Code Snippet 3.9.4: _updateCalendar() method_
 
 When a reminder is deleted, it will go through the same process as adding reminder and the changes will then be updated in the calendar.
 
@@ -1102,16 +1103,155 @@ private void handleChangeThemeEvent(ThemeSwitchRequestEvent event) {
 // end::theme[]
 
 // tag::meetCommand[]
+
 === Meet Command [Since v1.2]
 
 The new meet up command was implemented specifically to provide a platform in CollegeZone for RC4 students to set up
-meeting with other students with ease.
+meetings with other students with ease.
+
+
+*Meet Command Features:* +
+The `MeetCommand` allows you to add a `MeetDate` into CollegeZone and is stored as a attribute of the `Person` class of `UniquePersonList`, in `AddressBook`.
+The `DeleteMeetCommand` allows you to delete a `MeetDate` from CollegeZone. The `MeetDate` of the `Person` you deleted is set to an empty string.
+
+Meet commands are undoable and redoable for the benefit of RC4 Students to redo and undo a command they did or did not intend to change. +
+Hence, both `MeetCommand` and `DeleteMeetCommand` are implemented as `UndoableCommand`.
+
+==== Implementation +
+
+*Meet Object* +
+
+Every time a User sets up a meet up with someone else: +
+
+1. `Meet`: This object contains a single string variable, `meetDate`, that is verified to be a valid date of the format DD/MM/YYYY. This is format is enforced to ensure user ease of usage.  +
+2. `Person`: The Meet Attribute that is a part of the Person attribute is then updated with the relevant `meetDate` +
+
+Users can delete meet ups on the Calendar if its already due or when they accidentally made a mistake. +
+
+*Adding a Meet up date* +
+
+When `Meet Command` is executed, it first preprocesses the data to check whether the `Person` you are meeting is a valid `Person` and also not a duplicate `Person`. If there is no `DuplicatePersonException` and `PersonNotFoundException`, then `Person`
+class is updated with the `meetDate` in the `UniquePersonList`.
+
+*Deleting a Meet up* +
+
+When `DeleteMeetCommand` is executed, it will first find the `Person` specified by the user using the `Person Index` attribute. If `Person Index` specified by user
+is not found in `UniquePersonList`, `PersonNotFoundException` will be thrown. If `Person` is found, his/her "meetDate" attribute will then be removed from. The code snippet to find and remove the `Meet Date`
+specified by user is shown below.
+
+[source,java]
+----
+ protected void preprocessUndoableCommand() throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        personToDelete = lastShownList.get(targetIndex.getZeroBased());
+    }
+----
+
+*Syncing Meet ups to Calendar* +
+
+To display the meet ups in the calendar, we have a `CalendarPanel` that takes in the `UniquePersonList`.
+
+[source,java]
+----
+    public CalendarPanel(ObservableList<Reminder> reminderList, ObservableList<Person> personList) {
+        super(FXML);
+
+        this.reminderList = reminderList;
+        this.personList = personList;
+
+        calendarView = new CalendarView();
+        setupCalendar();
+        updateCalendar();
+        registerAsAnEventHandler(this);
+    }
+----
+`UniquePersonList` will then be iterated and each person with a valid meet up date in the list is individually added into the calendar through `updateCalendar()`.
+ Every time any `Person` is updated with a new meet up date in `CollegeZone`, an event handler, `handleNewCalendarEvent`, will
+cause `calendarUpdate()` to run again and `CalendarPanel` will be updated to display the `Person` and his `meetDate`.
+
+[source,java]
+----
+    @Subscribe
+    private void handleNewCalendarEvent(AddressBookChangedEvent event) {
+        reminderList = event.data.getReminderList();
+        personList = event.data.getPersonList();
+        Platform.runLater(this::updateCalendar);
+    }
+
+    /**
+     * Updates the Calendar with Reminders that are already added
+     */
+    private void updateCalendar() {
+        setDateAndTime();
+        CalendarSource myCalendarSource = new CalendarSource("Reminders and Meetups");
+        Calendar calendarRDue = new Calendar("Reminders Already Due");
+        Calendar calendarRNotDue = new Calendar("Reminders Not Due");
+        Calendar calendarM = new Calendar("Meetups");
+        calendarRDue.setStyle(Calendar.Style.getStyle(4));
+        calendarRDue.setLookAheadDuration(Duration.ofDays(365));
+        calendarRNotDue.setStyle(Calendar.Style.getStyle(1));
+        calendarRNotDue.setLookAheadDuration(Duration.ofDays(365));
+        calendarM.setStyle(Calendar.Style.getStyle(3));
+        myCalendarSource.getCalendars().add(calendarRDue);
+        myCalendarSource.getCalendars().add(calendarRNotDue);
+        myCalendarSource.getCalendars().add(calendarM);
+        for (Reminder reminder : reminderList) {
+            LocalDateTime ldtstart = nattyDateAndTimeParser(reminder.getDateTime().toString()).get();
+            LocalDateTime ldtend = nattyDateAndTimeParser(reminder.getEndDateTime().toString()).get();
+            LocalDateTime now = LocalDateTime.now();
+            if (now.isBefore(ldtend)) {
+                calendarRNotDue.addEntry(new Entry(
+                        reminder.getReminderText().toString(), new Interval(ldtstart, ldtend)));
+            } else {
+                calendarRDue.addEntry(new Entry(reminder.getReminderText().toString(), new Interval(ldtstart, ldtend)));
+            }
+        }
+        //@@author sham-sheer
+        for (Person person : personList) {
+            String meetDate = person.getMeetDate().toString();
+            if (!meetDate.isEmpty()) {
+                int day = Integer.parseInt(meetDate.substring(0,
+                        2));
+                int month = Integer.parseInt(meetDate.substring(3,
+                        5));
+                int year = Integer.parseInt(meetDate.substring(6,
+                        10));
+                calendarM.addEntry(new Entry("Meeting " + person.getName().toString(),
+                        new Interval(LocalDate.of(year, month, day), LocalTime.of(12, 0),
+                                LocalDate.of(year, month, day), LocalTime.of(13, 0))));
+            }
+        }
+        calendarView.getCalendarSources().add(myCalendarSource);
+    }
+----
+
+When a meet date is deleted, it will go through the same process as adding meet up dates and the changes will then be updated in the calendar.
+
+==== Design Considerations
+
+*Aspect*: Deleting a `meetDate` from `CollegeZone`.
+
+*Alternative 1(current choice)*: Delete `meetDate` using an index which is the index of the particular `Person` in `UniquePersonList` +
+*Pros*: Implementing `DeleteReminderCommand` by parsing an index will be simple and fast. With no need for parsing of data. +
+*Cons*: When your addressbook gets too large, using indexes to delete meet ups will not be a scalable option as people cant remember the individual `Indexes` relates to a `Person`.
+
+*Alternative 2*: Delete `meetDate` identified by `Date` or `Person`. +
+*Pros*: Reduces the need of a listing and finding function to delete a `meetDate` from `CollegeZone`. +
+*Cons*: Implementation of `DeleteReminderCommand` will be more difficult as we will have to integrate a find function to pick out
+the specific `meetDates` or 'Person' that the user wants to remove.
+
 // end::meetCommand[]
 
 //tag::sortmech[]
-=== Sorting mechanism [Since v1.5]
 
-The sorting mechanism is facilitated by `SortCommandParser` and `SortCommand`, with both classes residing in the `Logic` component of the address book. Since the address book state will be modified during the sorting process, the `sort` has to be undoable.
+=== Sort Command [Since v1.4]
+
+The Sort Command is facilitated by `SortCommandParser` and `SortCommand`, with both classes residing in the `Logic` component of the address book. Since the address book state will be modified during the sorting process, the `sort` has to be undoable.
 
 `SortCommandParser` takes in an argument in the form of `INDEX_TYPE` that defines how `UniquePersonList` should be sorted. You may customise the sort operation, with `PREFIX` specifying the sort type. It first checks for validity against a regular expression. Once verified, the argument will be tokenized to identify your specified sort type. A `SortCommand` object is then created with the identified sort type.
 
@@ -1119,9 +1259,11 @@ The `INDEX_TYPE` can be any three of the following: `1` for sorting RC4 Students
 
 Upon execution of `SortCommand`, a `Comparator<Person>` will be initialised based on the sort type it receives. A `sortPersons` function call will be made to `Model`, which propagates down to `UniquePersonList`, where the sorting of the `internalList` occurs. Since sorting of `internalList` results in the change of state to address book, `SortCommand` is to be implemented as an `UndoableCommand`.
 
+image::LogicCommandClassDiagram_Sort.png[width="800"]
+_Figure 4.5.1 : Structure of Sort Command in the Logic Component_
 
 [NOTE]
-Implementation of Sorting Mechanism requires both the manipulation of `Logic` and `Model` component of address book.
+Implementation of the Sort Command requires both the manipulation of `Logic` and `Model` component of address book.
 
 The following sequence diagram shows the flow of operation from the point the address book receives an input to the output of the result.
 
@@ -1150,6 +1292,7 @@ If the list is found to be empty, an `CommandException` will be thrown from `Sor
 **Alternative 2:** Allow sorting by multiple attribute +
 **Pros:** Enables fine grain control of how list should appear. +
 **Cons:** Not necessary as effect is only obvious when contact list is long and has multiple common names. As target audience for iConnect are students, contact list will not be more than few thousand contacts long. +
+
 // end::sortmech[]
 
 

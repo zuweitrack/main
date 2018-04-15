@@ -1,4 +1,114 @@
 # sham-sheer
+###### /java/seedu/address/logic/CommandFormatListUtil.java
+``` java
+/**
+ * Initialises and returns a list which contains different command formats
+ */
+public final class CommandFormatListUtil {
+    private static ArrayList<String> commandFormatList;
+
+    public static ArrayList<String> getCommandFormatList () {
+        commandFormatList = new ArrayList<>();
+        createCommandFormatList();
+        return commandFormatList;
+    }
+
+    /**
+     * Creates commandFormatList for existing commands
+     */
+    private static void createCommandFormatList() {
+        commandFormatList.add(AddCommand.COMMAND_FORMAT);
+        commandFormatList.add(AddGoalCommand.COMMAND_FORMAT);
+        commandFormatList.add(AddReminderCommand.COMMAND_WORD);
+        commandFormatList.add(ClearCommand.COMMAND_WORD);
+        commandFormatList.add(CompleteGoalCommand.COMMAND_WORD);
+        commandFormatList.add(DeleteCommand.COMMAND_WORD);
+        commandFormatList.add(DeleteGoalCommand.COMMAND_WORD);
+        commandFormatList.add(DeleteMeetCommand.COMMAND_WORD);
+        commandFormatList.add(DeleteReminderCommand.COMMAND_ALIAS_2);
+        commandFormatList.add(EditCommand.COMMAND_FORMAT);
+        commandFormatList.add(EditGoalCommand.COMMAND_WORD);
+        commandFormatList.add(ExitCommand.COMMAND_WORD);
+        commandFormatList.add(FindCommand.COMMAND_FORMAT);
+        commandFormatList.add(HelpCommand.COMMAND_WORD);
+        commandFormatList.add(HistoryCommand.COMMAND_WORD);
+        commandFormatList.add(ListCommand.COMMAND_WORD);
+        commandFormatList.add(MeetCommand.COMMAND_WORD);
+        commandFormatList.add(OngoingGoalCommand.COMMAND_WORD);
+        commandFormatList.add(RateCommand.COMMAND_WORD);
+        commandFormatList.add(RedoCommand.COMMAND_WORD);
+        commandFormatList.add(SelectCommand.COMMAND_WORD);
+        commandFormatList.add(SortCommand.COMMAND_WORD);
+        commandFormatList.add(SortGoalCommand.COMMAND_WORD);
+        commandFormatList.add(ShowLofCommand.COMMAND_WORD);
+        commandFormatList.add(ThemeCommand.COMMAND_WORD);
+        commandFormatList.add(UndoCommand.COMMAND_WORD);
+
+        //sorting the commandFormatList
+        Collections.sort(commandFormatList);
+    }
+}
+```
+###### /java/seedu/address/logic/commands/DeleteMeetCommand.java
+``` java
+/**
+ * Removes the meet up set with a person using the person's displayed index from CollegeZone.
+ */
+public class DeleteMeetCommand extends UndoableCommand {
+    public static final String COMMAND_WORD = "-meet";
+
+    public static final String COMMAND_ALIAS = "-m";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Deletes the person's meet date identified by the index number used in the last person listing.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
+
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "You are not meeting %1$s anymore. ";
+
+    private final Index targetIndex;
+
+    private Person personToDelete;
+
+    public DeleteMeetCommand(Index targetIndex) {
+        this.targetIndex = targetIndex;
+    }
+
+
+    @Override
+    public CommandResult executeUndoableCommand() {
+        requireNonNull(personToDelete);
+        try {
+            model.deleteMeetDate(personToDelete);
+        } catch (PersonNotFoundException pnfe) {
+            throw new AssertionError("The target person cannot be missing");
+        }
+
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+    }
+
+    @Override
+    protected void preprocessUndoableCommand() throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        personToDelete = lastShownList.get(targetIndex.getZeroBased());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DeleteMeetCommand // instanceof handles nulls
+                && this.targetIndex.equals(((DeleteMeetCommand) other).targetIndex) // state check
+                && Objects.equals(this.personToDelete, ((DeleteMeetCommand) other).personToDelete));
+    }
+
+
+}
+```
 ###### /java/seedu/address/logic/commands/MeetCommand.java
 ``` java
 /**
@@ -114,7 +224,10 @@ public class SortCommand extends UndoableCommand {
 
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid sort type: %1$s";
 
-    public static final String MESSAGE_SORTED_SUCCESS_LEVEL_OF_FRIENDSHIP = "List sorted according to LOF!";
+    public static final String MESSAGE_EMPTY_LIST = "CollegeZone student list is empty, There is nothing to sort!";
+
+    public static final String MESSAGE_SORTED_SUCCESS_LEVEL_OF_FRIENDSHIP = "List sorted according to Level" +
+            "of Friendship!";
 
     public static final String MESSAGE_SORTED_SUCCESS_MEET_DATE = "List sorted according to your latest meet date!";
 
@@ -126,6 +239,8 @@ public class SortCommand extends UndoableCommand {
             + "Example: " + COMMAND_WORD + " 1";
 
     private final Index index;
+
+    private final ObservableList<Person> internalList = FXCollections.observableArrayList();
 
     public SortCommand(Index index) {
         requireNonNull(index);
@@ -151,8 +266,13 @@ public class SortCommand extends UndoableCommand {
 
     @Override
     protected void preprocessUndoableCommand() throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+
         if (index.getOneBased() > 3) {
             throw new CommandException(String.format(SortCommand.MESSAGE_INVALID_COMMAND_FORMAT, index.getOneBased()));
+        }
+        if (lastShownList.size() == 0) {
+            throw new CommandException(String.format(SortCommand.MESSAGE_EMPTY_LIST));
         }
     }
 
@@ -162,6 +282,8 @@ public class SortCommand extends UndoableCommand {
                 || (other instanceof SortCommand // instanceof handles nulls
                 && this.index.equals(((SortCommand) other).index)); // state check
     }
+
+
 }
 
 ```
@@ -307,6 +429,39 @@ public class Meet {
             this.value = meet;
         }
     }
+    /**
+     * Converts  date to seconds
+     */
+    public static long convertDateToSeconds(String date) {
+        if (date == "") {
+            return 0;
+        }
+        int day = Integer.parseInt(date.toString().substring(0,
+                2));
+        int month = Integer.parseInt(date.toString().substring(3,
+                5));
+        int year = Integer.parseInt(date.toString().substring(6,
+                10));
+        Calendar calendar = new GregorianCalendar();
+        calendar.set(year, month - 1, day);
+        long seconds = calendar.getTimeInMillis();
+        return seconds;
+    }
+
+    /**
+     * Converts meet date to a time that is relative to current date, for sorting purposes
+     */
+    public static long dateToInt(String date) {
+        Calendar calendar = Calendar.getInstance();
+        long longDate = convertDateToSeconds(date.toString());
+        long currentDate = calendar.getTimeInMillis();
+        long timeDiff = longDate - currentDate;
+        if (timeDiff < 0) {
+            return Long.MAX_VALUE;
+        } else {
+            return timeDiff;
+        }
+    }
 
     public static boolean isValidDate(String test) {
         return test.matches(DATE_VALIDATION_REGEX);
@@ -332,51 +487,12 @@ public class Meet {
     }
 }
 ```
-###### /java/seedu/address/model/person/Person.java
-``` java
-    public long getMeetDateInt() {
-        Calendar calendar = Calendar.getInstance();
-        long date = converDateToSeconds(meetDate.toString());
-        long currentDate = calendar.getTimeInMillis();
-        long timeDiff = date - currentDate;
-        if (timeDiff < 0) {
-            return Long.MAX_VALUE;
-        } else {
-            return timeDiff;
-        }
-
-    }
-    public long getBirthdayInt() {
-        return converDateToSeconds(birthday.toString());
-    }
-    /**
-     * Converts  date to seconds
-     */
-    public long converDateToSeconds(String date) {
-        if (meetDate.value == "") {
-            return 0;
-        }
-        int day = Integer.parseInt(date.toString().substring(0,
-                2));
-        int month = Integer.parseInt(date.toString().substring(3,
-                5));
-        int year = Integer.parseInt(date.toString().substring(6,
-                10));
-        Calendar calendar = new GregorianCalendar();
-        calendar.set(year, month - 1, day);
-        long seconds = calendar.getTimeInMillis();
-        return seconds;
-    }
-
-```
 ###### /java/seedu/address/model/person/UniquePersonList.java
 ``` java
     /**
-     * Sorts the person list from the start.
-     *
-     * @throws PersonNotFoundException if no such person could be found in the list.
+     * Sorting method
      */
-    public void sortPersons(Index index) throws IndexOutOfBoundsException {
+    public void sortExecution(Index index, ObservableList<Person> internalList) {
         requireNonNull(index);
         if (index.getOneBased() > 3) {
             throw new IndexOutOfBoundsException();
@@ -395,8 +511,8 @@ public class Meet {
             FXCollections.sort(internalList, comparator);
             FXCollections.reverse(internalList);
         }
-
     }
+}
 ```
 ###### /java/seedu/address/storage/XmlAdaptedPerson.java
 ``` java
@@ -421,5 +537,29 @@ public class Meet {
         }
         calendarView.getCalendarSources().add(myCalendarSource);
     }
+    
+```
+###### /java/seedu/address/ui/CommandBox.java
+``` java
+    /**
+     * Sets the commandbox to completed command format if the entered substring of the command is valid
+     * @param text is the command which is to be autocompleted
+     */
+    private void autocompleteCommand(String text) {
+        ArrayList<String> commandFormatList = CommandFormatListUtil.getCommandFormatList();
+
+        //retrieve the list of words which begin with text
+        List<String> autocompleteCommandList = commandFormatList.stream()
+                .filter(s -> s.startsWith(text))
+                .collect(Collectors.toList());
+
+        //replace input in text field with matched keyword
+        if (!autocompleteCommandList.isEmpty()) {
+            replaceText(autocompleteCommandList.get(0));
+        }
+
+    }
+
+}
 
 ```

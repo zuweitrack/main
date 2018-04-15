@@ -129,6 +129,15 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_ALIAS = "f";
 
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " 1"
+            + PREFIX_NAME + "   "
+            + PREFIX_PHONE + "   "
+            + PREFIX_BIRTHDAY + "   "
+            + PREFIX_LEVEL_OF_FRIENDSHIP + "   "
+            + PREFIX_UNIT_NUMBER + "   "
+            + PREFIX_CCA + "   "
+            + PREFIX_TAG + "   ";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names or tags contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
             + "Parameters: n/KEYWORD [MORE_KEYWORDS]... or t/KEYWORD [MORE_KEYWORDS]...\n"
