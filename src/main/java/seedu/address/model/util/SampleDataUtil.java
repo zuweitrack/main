@@ -28,7 +28,7 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Birthday("01/01/1997"),
                 new LevelOfFriendship("5"), new UnitNumber("#06-40"), getCcaSet("Basketball"),
-                EMPTY_MEET_DATE, getTagSet("friends")),
+                EMPTY_MEET_DATE, getTagSet("friends", "RA")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Birthday("21/02/1990"),
                 new LevelOfFriendship("9"), new UnitNumber("#07-18"), getCcaSet(),
                 EMPTY_MEET_DATE, getTagSet("colleagues", "friends")),
