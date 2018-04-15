@@ -23,8 +23,8 @@ public class SortCommand extends UndoableCommand {
 
     public static final String MESSAGE_EMPTY_LIST = "CollegeZone student list is empty, There is nothing to sort!";
 
-    public static final String MESSAGE_SORTED_SUCCESS_LEVEL_OF_FRIENDSHIP = "List sorted according to Level" +
-            "of Friendship!";
+    public static final String MESSAGE_SORTED_SUCCESS_LEVEL_OF_FRIENDSHIP = "List sorted according to Level"
+            + "of Friendship!";
 
     public static final String MESSAGE_SORTED_SUCCESS_MEET_DATE = "List sorted according to your latest meet date!";
 
