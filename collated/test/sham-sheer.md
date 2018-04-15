@@ -1,4 +1,26 @@
 # sham-sheer
+###### /java/guitests/guihandles/CommandBoxHandle.java
+``` java
+    /**
+     * Enters the given command in the Command Box but doesnt press enter.
+     * @return true if the command succeeded, false otherwise.
+     */
+    public boolean runWithoutEnter(String command) {
+        click();
+        guiRobot.interact(() -> getRootNode().setText(command));
+        guiRobot.pauseForHuman();
+
+        return !getStyleClass().contains(CommandBox.ERROR_STYLE_CLASS);
+    }
+
+    /**
+     * Returns the list of style classes present in the command box.
+     */
+    public ObservableList<String> getStyleClass() {
+        return getRootNode().getStyleClass();
+    }
+}
+```
 ###### /java/seedu/address/logic/commands/AddCommandTest.java
 ``` java
         @Override
@@ -613,4 +635,13 @@ public class MeetTest {
     }
 
 }
+```
+###### /java/seedu/address/ui/CommandBoxTest.java
+``` java
+    @Test
+    public void handleKeyPress_startingWithTab() {
+        commandBoxHandle.runWithoutEnter(COMMAND_INCOMPLETE);
+        assertInputHistory(KeyCode.TAB, COMMAND_COMPLETE);
+    }
+
 ```
