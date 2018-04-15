@@ -639,6 +639,9 @@ The figure below portrays what should be seen after the command is executed corr
 .Execution of -goal 4
 image::DeleteGoal.PNG[width="1000"]
 
+// end::goalfeatures[]
+
+//tag::goalcompletion[]
 [discrete]
 === Completing a goal: `!goal` or `!g` or `completegoal`
 Once you've completed a goal, indicate completion of an existing goal in _CollegeZone_ using the `!goal`, `!g` or `completegoal` command. +
@@ -721,7 +724,8 @@ image::OngoingGoal.PNG[width="1000"]
 ====
 The goal percentage bar changes.
 ====
-// end::goalfeatures[]
+
+// end::goalcompletion[]
 
 === Interesting features
 // tag::theme[]
@@ -909,10 +913,6 @@ Edits the reminder text and datetime of the 2nd student to be `water plants` and
 [discrete]
 === Adding subgoals [Coming in v2.0] +
 By using this command, you are able to add subgoals to the goals you currently have.
-
-[discrete]
-=== Auto-completing of commands [Coming in v2.0]
-Auto-complete command by suggesting to the you the command format to use based on what you have already typed in the command box.
 
 [discrete]
 === Adding of timetable into CollegeZone [Coming in v2.0]
