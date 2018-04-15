@@ -451,6 +451,7 @@ Returns `Dental appointment` in the calendar according to `START_DATETIME` & `EN
 
 Figure below portrays what should be seen after the command is executed correctly:
 
+.Execution of +r text/Eat vitamins d/5/5/2018 8am e/5/5/2018 8.10am
 image::addReminder.PNG[width="1500"]
 
 [discrete]
@@ -499,6 +500,7 @@ Deletes reminder `Dental appointment` according to `START_DATETIME`
 
 Figure below portrays what should be seen after the command is executed correctly:
 
+.Execution of -r text/Eat vitamins d/5/5/2018 8am
 image::delReminder.PNG[width="1500"]
 
 // end::reminder[]
