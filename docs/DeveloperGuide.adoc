@@ -687,8 +687,7 @@ the specific `Reminder` that the user wants to remove.
 
 // end::reminder[]
 
-// tag::myGoalsPage[]
-
+// tag::Goals[]
 === Goals
 ==== Introduction
 CollegeZone is designed for RC4 students to use. RC4 students often have goals that they want to achieve in life
@@ -781,6 +780,20 @@ public class StartDateTime implements Comparable<StartDateTime> {
     }
 ----
 
+- All goals will have a string of stars (indicating importance) in a yellow border directly below the goal text in the goal list panel.
+
+
+==== Design Considerations
+
+**Aspect:** Representation of Goals level of importance in UI +
+**Alternative 1 (current choice):** Each level of importance have a number of stars related to it. +
+**Pros:** Ability for the user to differentiate the Goals with higher level of importance compared to those with lower level of importance. +
+**Cons:** The goal list in the UI might look messy to the user without having a sort Goals option as the list of goals is displayed based on when it was added. +
+**Alternative 2:** Having an additional sort goal command +
+**Pros:** It is simple and easy to understand. +
+**Cons:** It requires extra methods to implement the sort function. +
+
+---
 ==== Implementation of add goal
 
 Adding a goal into _CollegeZone_ is facilitated by `AddGoalCommand`, which extends `UndoableCommand`, it
@@ -806,34 +819,12 @@ AddGoalCommand is implemented in this way:
 
 In the Logic componenet, `AddressBookParser` will parse the user's input and detects if add goal keyword contains correct parsing keywords after.
 For example, e.g. +g text/eat healthily impt/9
-* AddGoalCommandParser: (More about this method will be mentioned later)
-** Parses the input by extracting the input text and importance +
-*** Parsed text : eat healthily +
-*** Parsed importance : 9
-** Creates a AddGoalCommand class and passes the text and importance and string as arguments
-* AddGoalCommand:
-** Adds the new goal to the list locally
-** Runs the execution which calls the model
-
-2. Model
-
-* Calls the model and gets the goals list
-* Adds the new goal into the goals list
-
-3. Ui
-* Displays the new goal added in the goal list panel
-
-4. Storage
-* Stores the new goal added in the address book storage
-
-Note:
-
-- All goals will have a string of stars (indicating importance) in a yellow border directly below the goal text in the goal list panel.
-- Goal that are just added will be placed at the bottom of the goal list. +
-
-The `AddGoalCommandParser` returns `AddGoalCommand` after execution, which will be further processed by `logic` component.
-
-AddGoalCommandParser is implemented in this way:
+`AddGoalCommandParser` parses the input by extracting the input text and importance, +
+e.g.Parsed text : eat healthily +
+    Parsed importance : 9 +
+Everytime a goal is added, the start date time of the goal will be recorded down in real time and it's completion
+status will be "ongoing" by default.
+`AddGoalCommandParser` is implemented in this way:
 [source,java]
 ----
 public class AddGoalCommandParser implements Parser<AddGoalCommand> {
@@ -862,9 +853,15 @@ public class AddGoalCommandParser implements Parser<AddGoalCommand> {
         }
     }
 ----
+The `AddGoalCommandParser` returns `AddGoalCommand` after execution, passes the text and importance and string as arguments which will be further processed by `logic` component.
+`AddGoalCommand` adds the new goal to the list locally and runs the execution which calls the model.
+In the Model component, the `UniqueGoalList` is called and the new goal is added to the list.
+In the Ui component, the new goal added is displayed in the goal list panel.
+In the Storage component, the new goal added is stored in the address book storage
 
-Notice that everytime a goal is added, the start date time of the goal will be recorded down in real time and it's completion
-status will be "ongoing" by default.
+Note:
+- A goal that has just been added will be placed at the bottom of the goal list. +
+
 
 ==== Design Considerations
 
@@ -876,16 +873,6 @@ status will be "ongoing" by default.
 **Pros:** Allows user to choose their own start date time and completion status. +
 **Cons:** Tedious for user to input a longer add goal command and slightly more difficult to properly parse the start date time
  that user enters.
-
----
-
-**Aspect:** Representation of Goals level of importance in UI +
-**Alternative 1 (current choice):** Each level of importance have a number of stars related to it. +
-**Pros:** Ability for the user to differentiate the Goals with higher level of importance compared to those with lower level of importance. +
-**Cons:** The goal list in the UI might look messy to the user without having a sort Goals option as the list of goals is displayed based on when it was added. +
-**Alternative 2:** Having an additional sort goal command +
-**Pros:** It is simple and easy to understand. +
-**Cons:** It requires extra methods to implement the sort function. +
 
 ---
 
@@ -953,12 +940,81 @@ in the `Logic` component of CollegeZone. `SortGoalCommand` in not undoable.
 should be sorted. You may customise the sort goal operation, with `FIELD` specifying the goal field to sort and `ORDER`
 specifying the type of sort order. It checks for validity against a few keywords. For example, `ORDER` only accepts 2 keywords: `ascending` or `descending`.
 On the other hand, `FIELD` only accepts 3 keywords: `importance`, `startdatetime` and `completion`.
- Once verified, the argument will be tokenized to identify your specified sort type. A `SortGoalCommand` object is then
-  created with the identified sort type.
+The image below shows the interaction of sort the `Logic` component.
+
+.Interactions Inside the Logic Component for the `sortgoal importance o/ascending` Command
+image::SortGoalSeqDiagram.PNG[width="800"]
 
 Upon execution of `SortGoalCommand`, a `Comparator<Goal>` will be initialised based on the sort type it receives.
-A `sortPersons` function call will be made to `Model`, which propagates down to `UniqueGoalList`, where the sorting of the `internalList` occurs.
+A `sortPersons` function call will be made to `Model`, which propagates down to `UniqueGoalList`, where the sorting of the `internalList` occurs. +
+The code below shows the switch statement used to define the type of sort the user wants in the `UniqueGoalList`. +
 
+[source,java]
+----
+public class UniqueGoalList implements Iterable<Goal> {
+
+    public void sortGoal(String sortField, String sortOrder) throws EmptyGoalListException {
+        String sortFieldAndOrder = sortField + " " + sortOrder;
+        //Comparator<Goal> comparatorImportance = Comparator.comparingInt(Goal::getImportance);
+        switch (sortFieldAndOrder) {
+        case "importance ascending":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalA.getImportance()
+                    .compareTo(goalB.getImportance()));
+            break;
+        case "importance descending":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalB.getImportance()
+                    .compareTo(goalA.getImportance()));
+            break;
+        case "completion ascending":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) -> new Boolean(goalA.getCompletion().hasCompleted)
+                    .compareTo(goalB.getCompletion().hasCompleted));
+            break;
+        case "completion descending":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) -> new Boolean(goalB.getCompletion().hasCompleted)
+                    .compareTo(goalA.getCompletion().hasCompleted));
+            break;
+        case "startdatetime ascending":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalA.getStartDateTime()
+                    .compareTo(goalB.getStartDateTime()));
+            break;
+        case "startdatetime descending":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalB.getStartDateTime()
+                    .compareTo(goalA.getStartDateTime()));
+            break;
+
+        default:
+            break;
+        }
+    }
+}
+----
+ Once verified, the argument will be tokenized to identify your specified sort type. A `SortGoalCommand` object is then
+  created with the identified sort type.
+[NOTE]
+If the goal list is found to be empty, a `CommandException` will be thrown from `SortGoalCommand`.
+
+==== Design Considerations
+
+**Aspect:** Deciding the fields and orders that the goal list can be sorted +
+**Alternative 1:** Sort only one field and in one order +
+**Pros:** Sort becomes a more intuitive command for user to type +
+**Cons:** Less customization of sort goal command. +
+**Alternative 2 (current choice): ** Sort in multiple fields and two orders +
+**Pros:** More customization for user +
+**Cons:** User have to type in a longer command
+---
+
+**Aspect:** Initialising of `Comparator<Goal>` +
+**Alternative 1:** Initialise in `SortGoalCommand` +
+**Pros:** Clear separation of concerns, `SortGoalCommandParser` to handle identifying of attribute to sort by only. +
+**Cons:** Hard for new developers to follow as other commands like `AddGoalCommand` handles object creation in its parser. +
+**Alternative 2 (current choice): ** Initialise in `UniqueGoalList` +
+**Pros:** Straightforward as initialises the `Comparator` where it is used. +
+**Cons:** `UniquePersonList` is at a lower level and should only handle a minimal set of `Goal` related operations, and not logical operations like string matching. +
+
+// end::Goals[]
+
+// tag::theme[]
 === Theme Enhancement
 CollegeZone has multiple themes for the user to choose from. Currently, there are 3 themes implemented.
 Namely, `dark` theme, `bubblegum` theme and `light` theme. This command is not undoable.
