@@ -22,7 +22,7 @@ import seedu.address.model.goal.Goal;
 import seedu.address.model.goal.exceptions.GoalNotFoundException;
 import seedu.address.testutil.CompleteGoalDescriptorBuilder;
 import seedu.address.testutil.EditGoalDescriptorBuilder;
-
+import seedu.address.testutil.OngoingGoalDescriptorBuilder;
 
 //@@author deborahlow97
 /**
@@ -44,6 +44,8 @@ public class GoalCommandTestUtil {
     public static final boolean VALID_GOAL_COMPLETION_B = false;
     public static final boolean VALID_GOAL_COMPLETION_C = true;
     public static final boolean VALID_GOAL_COMPLETION_D = true;
+    public static final boolean VALID_GOAL_COMPLETION_E = false;
+    public static final String VALID_GOAL_END_DATE_TIME = "";
     public static final String VALID_GOAL_SORT_FIELD_A = "importance";
     public static final String VALID_GOAL_SORT_FIELD_B = "startdatetime";
     public static final String VALID_GOAL_SORT_ORDER_A = "ascending";
@@ -72,7 +74,8 @@ public class GoalCommandTestUtil {
 
     public static final CompleteGoalCommand.CompleteGoalDescriptor DESC_GOAL_COMPLETED_C;
     public static final CompleteGoalCommand.CompleteGoalDescriptor DESC_GOAL_COMPLETED_D;
-
+    public static final OngoingGoalCommand.OngoingGoalDescriptor DESC_GOAL_COMPLETED_E;
+    public static final OngoingGoalCommand.OngoingGoalDescriptor DESC_GOAL_COMPLETED_F;
     static {
         VALID_GOAL_START_DATE_TIME_A = getLocalDateTimeFromString(VALID_GOAL_START_DATE_TIME_STRING_A);
         VALID_GOAL_START_DATE_TIME_B = getLocalDateTimeFromString(VALID_GOAL_START_DATE_TIME_STRING_B);
@@ -85,6 +88,10 @@ public class GoalCommandTestUtil {
                 .withEndDateTime(VALID_GOAL_END_DATE_TIME_STRING_C).build();
         DESC_GOAL_COMPLETED_D = new CompleteGoalDescriptorBuilder().withCompletion(VALID_GOAL_COMPLETION_D)
                 .withEndDateTime(VALID_GOAL_END_DATE_TIME_STRING_D).build();
+        DESC_GOAL_COMPLETED_E = new OngoingGoalDescriptorBuilder().withCompletion(VALID_GOAL_COMPLETION_E)
+                .withEndDateTime(VALID_GOAL_END_DATE_TIME).build();
+        DESC_GOAL_COMPLETED_F = new OngoingGoalDescriptorBuilder().withCompletion(VALID_GOAL_COMPLETION_E)
+                .withEndDateTime(VALID_GOAL_END_DATE_TIME).build();
     }
 
     /**

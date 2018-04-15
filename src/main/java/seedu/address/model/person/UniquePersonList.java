@@ -97,34 +97,12 @@ public class UniquePersonList implements Iterable<Person> {
         setPersons(replacement);
     }
 
-    //@@author sham-sheer
     /**
      * Sorts the person list from the start.
      *
      * @throws PersonNotFoundException if no such person could be found in the list.
      */
-    public void sortPersons(Index index) throws IndexOutOfBoundsException {
-        requireNonNull(index);
-        if (index.getOneBased() > 3) {
-            throw new IndexOutOfBoundsException();
-        }
-        if (index.getOneBased() == 1) {
-            Comparator<Person> comparator = Comparator.comparingInt(Person::getLevelOfFriendshipInt);
-            FXCollections.sort(internalList, comparator);
-            FXCollections.reverse(internalList);
-        }
-        if (index.getOneBased() == 2) {
-            Comparator<Person> comparator = Comparator.comparingLong(Person::getMeetDateInt);
-            FXCollections.sort(internalList, comparator);
-        }
-        if (index.getOneBased() == 3) {
-            Comparator<Person> comparator = Comparator.comparingLong(Person::getBirthdayInt);
-            FXCollections.sort(internalList, comparator);
-            FXCollections.reverse(internalList);
-        }
-
-    }
-    //@@author
+    public void sortPersons(Index index) throws IndexOutOfBoundsException { sortExecution(index, internalList); }
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
@@ -147,5 +125,29 @@ public class UniquePersonList implements Iterable<Person> {
     @Override
     public int hashCode() {
         return internalList.hashCode();
+    }
+
+    //@@author sham-sheer
+    /**
+     * Sorting method
+     */
+    public void sortExecution(Index index, ObservableList<Person> internalList) {
+        requireNonNull(index);
+        if (index.getOneBased() > 3) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (index.getOneBased() == 1) {
+            Comparator<Person> comparator = Comparator.comparingInt(Person::getLevelOfFriendshipInt);
+            FXCollections.sort(internalList, comparator);
+            FXCollections.reverse(internalList);
+        }
+        if (index.getOneBased() == 2) {
+            Comparator<Person> comparator = Comparator.comparingLong(Person::getMeetDateInt);
+            FXCollections.sort(internalList, comparator);
+        }
+        if (index.getOneBased() == 3) {
+            Comparator<Person> comparator = Comparator.comparingLong(Person::getBirthdayInt);
+            FXCollections.sort(internalList, comparator);
+        }
     }
 }

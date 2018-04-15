@@ -1,5 +1,5 @@
 # deborahlow97
-###### /java/seedu/address/commons/events/ui/ThemeSwitchRequestEvent.java
+###### \java\seedu\address\commons\events\ui\ThemeSwitchRequestEvent.java
 ``` java
 /**
  * Indicates that a theme switch is requested.
@@ -17,7 +17,7 @@ public class ThemeSwitchRequestEvent extends BaseEvent {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/AddGoalCommand.java
+###### \java\seedu\address\logic\commands\AddGoalCommand.java
 ``` java
 /**
  * Adds a goal to CollegeZone.
@@ -26,6 +26,10 @@ public class AddGoalCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "+goal";
     public static final String COMMAND_ALIAS_1 = "+g";
     public static final String COMMAND_ALIAS_2 = "addgoal";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " "
+            + PREFIX_IMPORTANCE + "   "
+            + PREFIX_GOAL_TEXT + "   ";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a goal to Goals Page. \n"
             + "Parameters: "
@@ -67,7 +71,7 @@ public class AddGoalCommand extends UndoableCommand {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/CompleteGoalCommand.java
+###### \java\seedu\address\logic\commands\CompleteGoalCommand.java
 ``` java
 /**
  * Edits the details of an existing goal in CollegeZone.
@@ -135,9 +139,9 @@ public class CompleteGoalCommand extends UndoableCommand {
     private static Goal createUpdatedGoal(Goal goalToUpdate, CompleteGoalDescriptor completeGoalDescriptor) {
         assert goalToUpdate != null;
 
-        GoalText goalText = completeGoalDescriptor.getGoalText().orElse(goalToUpdate.getGoalText());
-        Importance importance = completeGoalDescriptor.getImportance().orElse(goalToUpdate.getImportance());
-        StartDateTime startDateTime = completeGoalDescriptor.getStartDateTime().orElse(goalToUpdate.getStartDateTime());
+        GoalText goalText = goalToUpdate.getGoalText();
+        Importance importance = goalToUpdate.getImportance();
+        StartDateTime startDateTime = goalToUpdate.getStartDateTime();
         EndDateTime updatedEndDateTime = completeGoalDescriptor.getEndDateTime()
                 .orElse(goalToUpdate.getEndDateTime());
         Completion updatedCompletion = completeGoalDescriptor.getCompletion().orElse(goalToUpdate.getCompletion());
@@ -168,9 +172,7 @@ public class CompleteGoalCommand extends UndoableCommand {
      * Stores the details to update the goal with.
      */
     public static class CompleteGoalDescriptor {
-        private GoalText goalText;
-        private Importance importance;
-        private StartDateTime startDateTime;
+
         private EndDateTime endDateTime;
         private Completion completion;
 
@@ -201,16 +203,6 @@ public class CompleteGoalCommand extends UndoableCommand {
             return Optional.ofNullable(completion);
         }
 
-        public Optional<StartDateTime> getStartDateTime() {
-            return Optional.ofNullable(startDateTime);
-        }
-
-        public Optional<Importance> getImportance() {
-            return Optional.ofNullable(importance);
-        }
-        public Optional<GoalText> getGoalText() {
-            return Optional.ofNullable(goalText);
-        }
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -226,16 +218,13 @@ public class CompleteGoalCommand extends UndoableCommand {
             // state check
             CompleteGoalDescriptor e = (CompleteGoalDescriptor) other;
 
-            return getGoalText().equals(e.getGoalText())
-                    && getImportance().equals(e.getImportance())
-                    && getStartDateTime().equals(e.getStartDateTime())
-                    && getEndDateTime().equals(e.getEndDateTime())
+            return getEndDateTime().equals(e.getEndDateTime())
                     && getCompletion().equals(e.getCompletion());
         }
     }
 }
 ```
-###### /java/seedu/address/logic/commands/DeleteGoalCommand.java
+###### \java\seedu\address\logic\commands\DeleteGoalCommand.java
 ``` java
 /**
  * Deletes a goal identified using it's last displayed index from CollegeZone.
@@ -295,7 +284,7 @@ public class DeleteGoalCommand extends UndoableCommand {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/EditGoalCommand.java
+###### \java\seedu\address\logic\commands\EditGoalCommand.java
 ``` java
 /**
  * Edits the details of an existing goal in CollegeZone.
@@ -460,7 +449,7 @@ public class EditGoalCommand extends UndoableCommand {
 }
 
 ```
-###### /java/seedu/address/logic/commands/OngoingGoalCommand.java
+###### \java\seedu\address\logic\commands\OngoingGoalCommand.java
 ``` java
 /**
  * Edits the details of an existing goal in CollegeZone.
@@ -630,7 +619,7 @@ public class OngoingGoalCommand extends UndoableCommand {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/SortGoalCommand.java
+###### \java\seedu\address\logic\commands\SortGoalCommand.java
 ``` java
 /**
  * Sorts goal list in CollegeZone based on sort field entered by user.
@@ -674,7 +663,7 @@ public class SortGoalCommand extends Command {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/ThemeCommand.java
+###### \java\seedu\address\logic\commands\ThemeCommand.java
 ``` java
 /**
  * Changes the CollegeZone colour theme to either dark, bubblegum or light.
@@ -716,7 +705,7 @@ public class ThemeCommand extends Command {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/AddCommandParser.java
+###### \java\seedu\address\logic\parser\AddCommandParser.java
 ``` java
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -753,7 +742,7 @@ public class ThemeCommand extends Command {
     }
 
 ```
-###### /java/seedu/address/logic/parser/AddGoalCommandParser.java
+###### \java\seedu\address\logic\parser\AddGoalCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new AddGoalCommand object
@@ -799,7 +788,7 @@ public class AddGoalCommandParser implements Parser<AddGoalCommand> {
 
 }
 ```
-###### /java/seedu/address/logic/parser/CompleteGoalCommandParser.java
+###### \java\seedu\address\logic\parser\CompleteGoalCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new CompleteGoalCommand object
@@ -825,7 +814,6 @@ public class CompleteGoalCommandParser implements Parser<CompleteGoalCommand> {
 
         CompleteGoalDescriptor completeGoalDescriptor = new CompleteGoalDescriptor();
 
-        Optional<String> empty = Optional.empty();
         Completion completion = new Completion(COMPLETED_BOOLEAN_VALUE);
         EndDateTime endDateTime = new EndDateTime(properDateTimeFormat(LocalDateTime.now()));
         completeGoalDescriptor.setCompletion(completion);
@@ -836,7 +824,7 @@ public class CompleteGoalCommandParser implements Parser<CompleteGoalCommand> {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/DateTimeParser.java
+###### \java\seedu\address\logic\parser\DateTimeParser.java
 ``` java
 /**
  * Contains utility methods used for parsing DateTime in the various *Parser classes.
@@ -874,19 +862,6 @@ public class DateTimeParser {
         return Optional.ofNullable(localDateTime);
     }
 
-    /**
-     * Receives two LocalDateTime and ensures that the specified {@code endDateTime} is always later in time than
-     * specified {@code startDateTime}
-     *
-     * @return endDateTime that checks the above confirmation
-     */
-    public static LocalDateTime balanceStartAndEndDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        LocalDateTime newEndDateTime = endDateTime;
-        while (startDateTime.compareTo(newEndDateTime) >= 1) {
-            newEndDateTime = newEndDateTime.plusDays(1);
-        }
-        return newEndDateTime;
-    }
     /**
      * Receives a LocalDateTime and formats the {@code dateTime}
      *
@@ -955,7 +930,7 @@ public class DateTimeParser {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/DeleteGoalCommandParser.java
+###### \java\seedu\address\logic\parser\DeleteGoalCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new DeleteGoalCommand object
@@ -979,7 +954,7 @@ public class DeleteGoalCommandParser implements Parser<DeleteGoalCommand> {
 
 }
 ```
-###### /java/seedu/address/logic/parser/EditCommandParser.java
+###### \java\seedu\address\logic\parser\EditCommandParser.java
 ``` java
     /**
      * Parses {@code Collection<String> ccas} into a {@code Set<Cca>} if {@code ccas} is non-empty.
@@ -997,7 +972,7 @@ public class DeleteGoalCommandParser implements Parser<DeleteGoalCommand> {
     }
 
 ```
-###### /java/seedu/address/logic/parser/EditGoalCommandParser.java
+###### \java\seedu\address\logic\parser\EditGoalCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new EditGoalCommand object
@@ -1039,7 +1014,7 @@ public class EditGoalCommandParser implements Parser<EditGoalCommand> {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/OngoingGoalCommandParser.java
+###### \java\seedu\address\logic\parser\OngoingGoalCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new OngoingGoalCommand object
@@ -1075,7 +1050,7 @@ public class OngoingGoalCommandParser implements Parser<OngoingGoalCommand> {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/ParserUtil.java
+###### \java\seedu\address\logic\parser\ParserUtil.java
 ``` java
     /**
      * Parses a {@code String birthday} into an {@code birthday}.
@@ -1152,7 +1127,7 @@ public class OngoingGoalCommandParser implements Parser<OngoingGoalCommand> {
         return unitNumber.isPresent() ? Optional.of(parseUnitNumber(unitNumber.get())) : Optional.empty();
     }
 ```
-###### /java/seedu/address/logic/parser/ParserUtil.java
+###### \java\seedu\address\logic\parser\ParserUtil.java
 ``` java
     /**
      * Parses a {@code String cca} into a {@code Cca}
@@ -1182,7 +1157,7 @@ public class OngoingGoalCommandParser implements Parser<OngoingGoalCommand> {
     }
 
 ```
-###### /java/seedu/address/logic/parser/ParserUtil.java
+###### \java\seedu\address\logic\parser\ParserUtil.java
 ``` java
     /**
      * Parses a {@code String importance} into an {@code Importance}.
@@ -1235,7 +1210,7 @@ public class OngoingGoalCommandParser implements Parser<OngoingGoalCommand> {
     }
 
 ```
-###### /java/seedu/address/logic/parser/ParserUtil.java
+###### \java\seedu\address\logic\parser\ParserUtil.java
 ``` java
     /**
      * Parses a {@code String sortField} and checks if it is a valid sortField parameter.
@@ -1293,7 +1268,7 @@ public class OngoingGoalCommandParser implements Parser<OngoingGoalCommand> {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/SortGoalCommandParser.java
+###### \java\seedu\address\logic\parser\SortGoalCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new SortGoalCommand object
@@ -1326,7 +1301,7 @@ public class SortGoalCommandParser implements Parser<SortGoalCommand> {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/ThemeCommandParser.java
+###### \java\seedu\address\logic\parser\ThemeCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new ThemeCommand object
@@ -1369,13 +1344,13 @@ public class ThemeCommandParser implements Parser<ThemeCommand> {
 }
 
 ```
-###### /java/seedu/address/model/AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
     public void setCcas(Set<Cca> ccas) {
         this.ccas.setCcas(ccas); }
 
 ```
-###### /java/seedu/address/model/AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
     public void setGoals(List<Goal> goals) throws DuplicateGoalException {
         this.goals.setGoals(goals);
@@ -1387,7 +1362,7 @@ public class ThemeCommandParser implements Parser<ThemeCommand> {
     }
 
 ```
-###### /java/seedu/address/model/AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
     /**
      * Removes all {@code Ccas}s that are not used by any {@code Person} in this {@code AddressBook}.
@@ -1401,7 +1376,7 @@ public class ThemeCommandParser implements Parser<ThemeCommand> {
     }
 
 ```
-###### /java/seedu/address/model/AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
     /**
      *  Updates the master cca list to include ccas in {@code person} that are not in the list.
@@ -1427,7 +1402,7 @@ public class ThemeCommandParser implements Parser<ThemeCommand> {
     }
 
 ```
-###### /java/seedu/address/model/AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
     public void addCca(Cca cca) throws UniqueCcaList.DuplicateCcaException {
         ccas.add(cca);
@@ -1436,7 +1411,7 @@ public class ThemeCommandParser implements Parser<ThemeCommand> {
     //// tag-level operations
 
 ```
-###### /java/seedu/address/model/AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
     /**
      * Adds a goal to CollegeZone.
@@ -1495,7 +1470,7 @@ public class ThemeCommandParser implements Parser<ThemeCommand> {
     //// reminder-level operations
 
 ```
-###### /java/seedu/address/model/goal/Completion.java
+###### \java\seedu\address\model\goal\Completion.java
 ``` java
 /**
  * Represents a Goal's completion status in the Goals Page.
@@ -1538,7 +1513,7 @@ public class Completion {
     }
 }
 ```
-###### /java/seedu/address/model/goal/EndDateTime.java
+###### \java\seedu\address\model\goal\EndDateTime.java
 ``` java
 /**
  * Represents a Goal's end date and time in the Goals Page.
@@ -1583,7 +1558,7 @@ public class EndDateTime {
 
 }
 ```
-###### /java/seedu/address/model/goal/exceptions/DuplicateGoalException.java
+###### \java\seedu\address\model\goal\exceptions\DuplicateGoalException.java
 ``` java
 /**
  * Signals that the operation will result in duplicate Goal objects.
@@ -1594,7 +1569,7 @@ public class DuplicateGoalException extends DuplicateDataException {
     }
 }
 ```
-###### /java/seedu/address/model/goal/exceptions/EmptyGoalListException.java
+###### \java\seedu\address\model\goal\exceptions\EmptyGoalListException.java
 ``` java
 /**
  * Signals that the current goal list is empty.
@@ -1602,14 +1577,14 @@ public class DuplicateGoalException extends DuplicateDataException {
 public class EmptyGoalListException extends Exception {
 }
 ```
-###### /java/seedu/address/model/goal/exceptions/GoalNotFoundException.java
+###### \java\seedu\address\model\goal\exceptions\GoalNotFoundException.java
 ``` java
 /**
  * Signals that the operation is unable to find the specified goal.
  */
 public class GoalNotFoundException extends Exception {}
 ```
-###### /java/seedu/address/model/goal/Goal.java
+###### \java\seedu\address\model\goal\Goal.java
 ``` java
 /**
  * Represents a Goal in the Goals Page.
@@ -1693,7 +1668,7 @@ public class Goal {
 
 }
 ```
-###### /java/seedu/address/model/goal/GoalText.java
+###### \java\seedu\address\model\goal\GoalText.java
 ``` java
 /**
  * Represents a Goal's text in the Goals Page.
@@ -1744,7 +1719,7 @@ public class GoalText {
 
 }
 ```
-###### /java/seedu/address/model/goal/Importance.java
+###### \java\seedu\address\model\goal\Importance.java
 ``` java
 /**
  * Represents a Goal's importance in CollegeZone.
@@ -1821,7 +1796,7 @@ public class Importance implements Comparable<Importance> {
     }
 }
 ```
-###### /java/seedu/address/model/goal/StartDateTime.java
+###### \java\seedu\address\model\goal\StartDateTime.java
 ``` java
 /**
  * Represents a Goal's start date in the address book.
@@ -1877,7 +1852,7 @@ public class StartDateTime implements Comparable<StartDateTime> {
     }
 }
 ```
-###### /java/seedu/address/model/goal/UniqueGoalList.java
+###### \java\seedu\address\model\goal\UniqueGoalList.java
 ``` java
 /**
  * A list of goals that enforces uniqueness between its elements and does not allow nulls.
@@ -1990,7 +1965,6 @@ public class UniqueGoalList implements Iterable<Goal> {
      */
     public void sortGoal(String sortField, String sortOrder) throws EmptyGoalListException {
         String sortFieldAndOrder = sortField + " " + sortOrder;
-        //Comparator<Goal> comparatorImportance = Comparator.comparingInt(Goal::getImportance);
         switch (sortFieldAndOrder) {
         case "importance ascending":
             FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalA.getImportance()
@@ -2046,7 +2020,7 @@ public class UniqueGoalList implements Iterable<Goal> {
     }
 }
 ```
-###### /java/seedu/address/model/Model.java
+###### \java\seedu\address\model\Model.java
 ``` java
     /** Adds the given goal */
     void addGoal(Goal goal) throws DuplicateGoalException;
@@ -2086,7 +2060,7 @@ public class UniqueGoalList implements Iterable<Goal> {
     void sortGoal(String sortType, String sortOrder) throws EmptyGoalListException;
 
 ```
-###### /java/seedu/address/model/ModelManager.java
+###### \java\seedu\address\model\ModelManager.java
 ``` java
     @Override
     public void addGoal(Goal goal) throws DuplicateGoalException {
@@ -2138,7 +2112,7 @@ public class UniqueGoalList implements Iterable<Goal> {
     }
 
 ```
-###### /java/seedu/address/model/person/Birthday.java
+###### \java\seedu\address\model\person\Birthday.java
 ``` java
 /**
  * Represents a Person's birthday in CollegeZone.
@@ -2146,7 +2120,8 @@ public class UniqueGoalList implements Iterable<Goal> {
  */
 public class Birthday {
 
-    public static final String MESSAGE_BIRTHDAY_CONSTRAINTS = "Person birthday should be a valid date.";
+    public static final String MESSAGE_BIRTHDAY_CONSTRAINTS = "Person birthday should be a valid date and cannot "
+            + "be later than today's date.";
     public static final String BIRTHDAY_VALIDATION_REGEX =
             "^(((0[1-9]|[12]\\d|3[01])\\/(0[13578]|1[02])\\/((19|[2-9]\\d)\\d{2}))|((0[1-9]|[12]\\d|30)"
                     + "\\/(0[13456789]|1[012])\\/((19|[2-9]\\d)\\d{2}))|((0[1-9]|1\\d|2[0-8])\\/02\\/((19|[2-9]\\d)"
@@ -2167,12 +2142,54 @@ public class Birthday {
     }
 
     /**
-     * Returns if a given string is a valid person birthday.
+     * Returns if a given string is a valid person birthday (before current date).
      */
     public static boolean isValidBirthday(String test) {
-        return test.matches(BIRTHDAY_VALIDATION_REGEX);
+        LocalDateTime birthdayLocalDateTime = null;
+        LocalDateTime currentLocalDateTime = LocalDateTime.now();
+        if (test.matches(BIRTHDAY_VALIDATION_REGEX)) {
+            String birthdayInDifferentFormat = getDifferentBirthdayFormat(test);
+            birthdayLocalDateTime = nattyDateAndTimeParser(birthdayInDifferentFormat).get();
+        } else {
+            return false;
+        }
+        return isBeforeCurrentDate(birthdayLocalDateTime, currentLocalDateTime);
     }
 
+    /**
+     * Takes in @param birthdayLocalDateTime and @param currentLocalDateTime and checks if 1st parameter is later
+     * than the second parameter
+     * @return boolean
+     */
+    private static boolean isBeforeCurrentDate(LocalDateTime birthdayLocalDateTime,
+                                               LocalDateTime currentLocalDateTime) {
+        if (birthdayLocalDateTime.isBefore(currentLocalDateTime)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    /**
+     *
+     * Takes in @param date in dd/mm/yyyy format
+     * @return birthday string in mm/dd/yyyy format
+     */
+    public static String getDifferentBirthdayFormat(String date) {
+        String day = date.substring(0, 2);
+        String month = date.substring(3, 5);
+        String year = date.substring(6, 10);
+        StringBuilder builder = new StringBuilder();
+        builder.append(month)
+                .append("/")
+                .append(day)
+                .append("/")
+                .append(year);
+        return builder.toString();
+    }
+
+```
+###### \java\seedu\address\model\person\Birthday.java
+``` java
     @Override
     public String toString() {
         return value;
@@ -2192,7 +2209,7 @@ public class Birthday {
 
 }
 ```
-###### /java/seedu/address/model/person/Cca.java
+###### \java\seedu\address\model\person\Cca.java
 ``` java
 /**
  * Represents a Person's CCAs in CollegeZone.
@@ -2243,7 +2260,7 @@ public class Cca {
 
 }
 ```
-###### /java/seedu/address/model/person/LevelOfFriendship.java
+###### \java\seedu\address\model\person\LevelOfFriendship.java
 ``` java
 /**
  * Represents a Person's Level of Friendship in the address book.
@@ -2310,7 +2327,7 @@ public class LevelOfFriendship {
     }
 }
 ```
-###### /java/seedu/address/model/person/UniqueCcaList.java
+###### \java\seedu\address\model\person\UniqueCcaList.java
 ``` java
 /**
  * A list of ccas that enforces no nulls and uniqueness between its elements.
@@ -2441,7 +2458,7 @@ public class UniqueCcaList implements Iterable<Cca> {
 
 }
 ```
-###### /java/seedu/address/model/person/UnitNumber.java
+###### \java\seedu\address\model\person\UnitNumber.java
 ``` java
     /**
      * * Constructs an {@code UnitNumber}.
@@ -2468,7 +2485,7 @@ public class UniqueCcaList implements Iterable<Cca> {
     }
 
 ```
-###### /java/seedu/address/model/person/UnitNumber.java
+###### \java\seedu\address\model\person\UnitNumber.java
 ``` java
     @Override
     public boolean equals(Object other) {
@@ -2483,7 +2500,7 @@ public class UniqueCcaList implements Iterable<Cca> {
     }
 }
 ```
-###### /java/seedu/address/model/ReadOnlyAddressBook.java
+###### \java\seedu\address\model\ReadOnlyAddressBook.java
 ``` java
     /**
      * Returns an unmodifiable view of the ccas list.
@@ -2492,7 +2509,7 @@ public class UniqueCcaList implements Iterable<Cca> {
     ObservableList<Cca> getCcaList();
 
 ```
-###### /java/seedu/address/model/ReadOnlyAddressBook.java
+###### \java\seedu\address\model\ReadOnlyAddressBook.java
 ``` java
     /**
      * Returns an unmodifiable view of the goals list.
@@ -2500,7 +2517,7 @@ public class UniqueCcaList implements Iterable<Cca> {
      */
     ObservableList<Goal> getGoalList();
 ```
-###### /java/seedu/address/model/ThemeColourUtil.java
+###### \java\seedu\address\model\ThemeColourUtil.java
 ``` java
 /**
  * Contains utility methods for ThemeColour.
@@ -2521,7 +2538,7 @@ public class ThemeColourUtil {
     }
 }
 ```
-###### /java/seedu/address/model/util/SampleCollegeZone.java
+###### \java\seedu\address\model\util\SampleCollegeZone.java
 ``` java
 /**
  * Contains method to get a sample CollegeZone data
@@ -2555,77 +2572,83 @@ public class SampleCollegeZone {
     }
 }
 ```
-###### /java/seedu/address/model/util/SampleDataUtil.java
+###### \java\seedu\address\model\util\SampleDataUtil.java
 ``` java
 /**
  * Contains utility methods for populating {@code CollegeZone} with sample data.
  */
 public class SampleDataUtil {
 
-    public static final Meet EMPTY_MEET_DATE = new Meet("15/04/2018");
+    public static final Meet MEET_DATE = new Meet("15/04/2018");
 
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Birthday("01/01/1997"),
                 new LevelOfFriendship("5"), new UnitNumber("#06-40"), getCcaSet("Basketball"),
-                EMPTY_MEET_DATE, getTagSet("friends")),
+                MEET_DATE, getTagSet("friends", "RA")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Birthday("21/02/1990"),
                 new LevelOfFriendship("9"), new UnitNumber("#07-18"), getCcaSet(),
-                EMPTY_MEET_DATE, getTagSet("colleagues", "friends")),
+                new Meet("15/05/2018"), getTagSet("colleagues", "friends")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Birthday("05/09/1980"),
                 new LevelOfFriendship("1"), new UnitNumber("#11-04"), getCcaSet("Swimming"),
-                EMPTY_MEET_DATE, getTagSet("neighbours")),
+                    new Meet("15/05/2018"), getTagSet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"), new Birthday("20/02/1995"),
                 new LevelOfFriendship("6"), new UnitNumber("#16-43"), getCcaSet(),
-                EMPTY_MEET_DATE, getTagSet("family")),
+                    new Meet("16/04/2018"), getTagSet("family")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Birthday("01/01/1999"),
                 new LevelOfFriendship("7"), new UnitNumber("#16-41"), getCcaSet(),
-                EMPTY_MEET_DATE, getTagSet("classmates")),
+                    new Meet("17/04/2018"), getTagSet("classmates")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Birthday("02/04/1995"),
                 new LevelOfFriendship("10"), new UnitNumber("#6-43"), getCcaSet("Computing club", "Anime Club"),
-                EMPTY_MEET_DATE, getTagSet("colleagues")),
+                    new Meet("18/04/2018"), getTagSet("colleagues")),
+            new Person(new Name("James Mee"), new Phone("98887555"), new Birthday("22/08/1992"),
+                new LevelOfFriendship("1"), new UnitNumber("#06-40"), getCcaSet("Tennis"),
+                    new Meet("19/04/2018"), getTagSet("RA")),
+            new Person(new Name("Jane Ray"), new Phone("93336444"), new Birthday("25/09/1991"),
+                new LevelOfFriendship("1"), new UnitNumber("#07-40"), getCcaSet("Chess Club"),
+                    new Meet("20/04/2018"), getTagSet("RA")),
             new Person(new Name("Deborah Low"), new Phone("91162930"), new Birthday("24/05/1997"),
-                    new LevelOfFriendship("9"), new UnitNumber("#10-24"), getCcaSet("Aerobics Cub"),
-                    EMPTY_MEET_DATE, getTagSet("colleagues")),
+                    new LevelOfFriendship("9"), new UnitNumber("#10-24"), getCcaSet("Aerobics Club"),
+                    new Meet("21/04/2018"), getTagSet("colleagues")),
             new Person(new Name("Royce Lew"), new Phone("93265932"), new Birthday("10/04/1996"),
                     new LevelOfFriendship("5"), new UnitNumber("#02-021"), getCcaSet(),
-                    EMPTY_MEET_DATE, getTagSet("boyfriend")),
+                    new Meet("22/04/2018"), getTagSet("boyfriend")),
             new Person(new Name("Kaden Yeo"), new Phone("82350332"), new Birthday("28/03/2001"),
                     new LevelOfFriendship("6"), new UnitNumber("#6-20"), getCcaSet("shooting"),
-                    EMPTY_MEET_DATE, getTagSet("friends")),
+                    new Meet("23/04/2018"), getTagSet("friends")),
             new Person(new Name("Matthew Chiang"), new Phone("92624417"), new Birthday("02/04/1995"),
                     new LevelOfFriendship("4"), new UnitNumber("#20-43"), getCcaSet("Anime Club"),
-                    EMPTY_MEET_DATE, getTagSet("classmate")),
+                    new Meet("24/04/2018"), getTagSet("classmate")),
             new Person(new Name("Loh Sin Yuen"), new Phone("92624417"), new Birthday("02/05/1995"),
                     new LevelOfFriendship("10"), new UnitNumber("#03-63"), getCcaSet("dance"),
-                    EMPTY_MEET_DATE, getTagSet("schoolmate")),
+                    new Meet("25/04/2018"), getTagSet("schoolmate")),
             new Person(new Name("Florence Chiang"), new Phone("92624417"), new Birthday("02/06/1995"),
                     new LevelOfFriendship("10"), new UnitNumber("#6-97"), getCcaSet("volleyball"),
-                    EMPTY_MEET_DATE, getTagSet("bff")),
+                    new Meet("26/04/2018"), getTagSet("bff")),
             new Person(new Name("Daniel Low"), new Phone("92624417"), new Birthday("12/04/1995"),
                     new LevelOfFriendship("1"), new UnitNumber("#7-473"), getCcaSet("Muay Thai"),
-                    EMPTY_MEET_DATE, getTagSet("cousin")),
+                    new Meet("27/04/2018"), getTagSet("cousin")),
             new Person(new Name("Rachel Lee Yan Ling"), new Phone("92624417"), new Birthday("23/04/1995"),
                     new LevelOfFriendship("3"), new UnitNumber("#6-69"), getCcaSet("Computing club", "Anime Club"),
-                    EMPTY_MEET_DATE, getTagSet("cousin")),
+                    new Meet("28/04/2018"), getTagSet("cousin")),
             new Person(new Name("Sarah tan"), new Phone("92624417"), new Birthday("27/04/1999"),
                     new LevelOfFriendship("2"), new UnitNumber("#8-43"), getCcaSet("Computing club", "Anime Club"),
-                    EMPTY_MEET_DATE, getTagSet()),
+                    new Meet("28/04/2018"), getTagSet()),
             new Person(new Name("Amanda Soh"), new Phone("92624417"), new Birthday("02/12/1995"),
                     new LevelOfFriendship("1"), new UnitNumber("#24-579"), getCcaSet("Computing club", "Anime Club"),
-                    EMPTY_MEET_DATE, getTagSet("exgirlfriend")),
+                    new Meet("17/06/2018"), getTagSet("exgirlfriend")),
             new Person(new Name("Marlene Koh"), new Phone("92624417"), new Birthday("02/07/1997"),
                     new LevelOfFriendship("10"), new UnitNumber("#02-222"), getCcaSet("Pool"),
-                    EMPTY_MEET_DATE, getTagSet("closefriend")),
+                    new Meet("17/07/2018"), getTagSet("closefriend")),
             new Person(new Name("Johnny Depp"), new Phone("92624417"), new Birthday("02/12/1994"),
                     new LevelOfFriendship("2"), new UnitNumber("#01-346"), getCcaSet("Pool"),
-                    EMPTY_MEET_DATE, getTagSet("malafriend")),
+                    new Meet("17/08/2018"), getTagSet("malafriend")),
             new Person(new Name("Aditya"), new Phone("92624417"), new Birthday("02/04/1998"),
                     new LevelOfFriendship("3"), new UnitNumber("#6-43"), getCcaSet(),
-                    EMPTY_MEET_DATE, getTagSet("malafriend")),
+                    new Meet("17/09/2018"), getTagSet("malafriend")),
             new Person(new Name("Fuad"), new Phone("92624417"), new Birthday("20/04/1995"),
                     new LevelOfFriendship("9"), new UnitNumber("#6-43"), getCcaSet("Floorball"),
-                    EMPTY_MEET_DATE, getTagSet("colleagues"))
+                    new Meet("17/04/2018"), getTagSet("colleagues"))
         };
     }
 
@@ -2667,7 +2690,7 @@ public class SampleDataUtil {
 
 }
 ```
-###### /java/seedu/address/model/util/SampleGoalDataUtil.java
+###### \java\seedu\address\model\util\SampleGoalDataUtil.java
 ``` java
 /**
  * Contains utility methods for populating {@code CollegeZone} with sample data.
@@ -2755,7 +2778,7 @@ public class SampleGoalDataUtil {
     }
 }
 ```
-###### /java/seedu/address/storage/XmlAdaptedCca.java
+###### \java\seedu\address\storage\XmlAdaptedCca.java
 ``` java
 /**
  * JAXB-friendly adapted version of the Cca.
@@ -2813,7 +2836,7 @@ public class XmlAdaptedCca {
     }
 }
 ```
-###### /java/seedu/address/storage/XmlAdaptedGoal.java
+###### \java\seedu\address\storage\XmlAdaptedGoal.java
 ``` java
 /**
  * JAXB-friendly version of the Goal.
@@ -2932,14 +2955,14 @@ public class XmlAdaptedGoal {
 }
 
 ```
-###### /java/seedu/address/storage/XmlAdaptedPerson.java
+###### \java\seedu\address\storage\XmlAdaptedPerson.java
 ``` java
         final List<Cca> personCcas = new ArrayList<>();
         for (XmlAdaptedCca cca : ccas) {
             personCcas.add(cca.toModelType());
         }
 ```
-###### /java/seedu/address/storage/XmlAdaptedPerson.java
+###### \java\seedu\address\storage\XmlAdaptedPerson.java
 ``` java
         if (this.birthday == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -2960,7 +2983,7 @@ public class XmlAdaptedGoal {
         final LevelOfFriendship levelOfFriendship = new LevelOfFriendship(this.levelOfFriendship);
 
 ```
-###### /java/seedu/address/storage/XmlAdaptedPerson.java
+###### \java\seedu\address\storage\XmlAdaptedPerson.java
 ``` java
         if (this.unitNumber == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -2973,7 +2996,7 @@ public class XmlAdaptedGoal {
         final Set<Cca> ccas = new HashSet<>(personCcas);
 
 ```
-###### /java/seedu/address/ui/GoalCard.java
+###### \java\seedu\address\ui\GoalCard.java
 ``` java
 /**
  * An UI component that displays information of a {@code Goal}.
@@ -3086,7 +3109,7 @@ public class GoalCard extends UiPart<Region> {
     }
 }
 ```
-###### /java/seedu/address/ui/MainWindow.java
+###### \java\seedu\address\ui\MainWindow.java
 ``` java
     /**
      * Calculation of percentage of goal completed
@@ -3142,7 +3165,7 @@ public class GoalCard extends UiPart<Region> {
     }
 }
 ```
-###### /java/seedu/address/ui/PersonCard.java
+###### \java\seedu\address\ui\PersonCard.java
 ``` java
     /**
      * Returns the color style for {@code tagName}'s label.
@@ -3187,7 +3210,7 @@ public class GoalCard extends UiPart<Region> {
     }
 
 ```
-###### /java/seedu/address/ui/PersonListPanel.java
+###### \java\seedu\address\ui\PersonListPanel.java
 ``` java
     @Subscribe
     private void handleJumpToGoalListRequestEvent(JumpToListRequestEvent event) {
@@ -3224,7 +3247,7 @@ public class GoalCard extends UiPart<Region> {
     }
 }
 ```
-###### /java/seedu/address/ui/StatusBarFooter.java
+###### \java\seedu\address\ui\StatusBarFooter.java
 ``` java
     private void setGoalCompletion(int goalCompletion) {
         Platform.runLater(() -> this.goalCompletionStatus.setText("Goal " + goalCompletion + "% completed."));
@@ -3257,7 +3280,7 @@ public class GoalCard extends UiPart<Region> {
         return valueToAdd;
     }
 ```
-###### /resources/view/BubblegumTheme.css
+###### \resources\view\BubblegumTheme.css
 ``` css
 .background {
     -fx-background-color: derive(#ffdae0, 20%);
@@ -3674,7 +3697,7 @@ public class GoalCard extends UiPart<Region> {
     -fx-font-size: 13;
 }
 ```
-###### /resources/view/GoalListCard.fxml
+###### \resources\view\GoalListCard.fxml
 ``` fxml
 
 <?import javafx.geometry.Insets?>
@@ -3718,7 +3741,7 @@ public class GoalCard extends UiPart<Region> {
   </GridPane>
 </HBox>
 ```
-###### /resources/view/LightTheme.css
+###### \resources\view\LightTheme.css
 ``` css
 .background {
     -fx-background-color: derive(#ffffff, 20%);

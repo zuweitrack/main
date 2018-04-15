@@ -55,7 +55,7 @@ public class BirthdayTest {
         assertFalse(Birthday.isValidBirthday("31.Jan.2000"));   // using .
         assertFalse(Birthday.isValidBirthday("01-12-2000")); // using -
         assertFalse(Birthday.isValidBirthday("28-Feb-2001"));
-
+        assertFalse(Birthday.isValidBirthday("28/Feb/9999")); //birthday later than today's date
         // valid birthday
         assertTrue(Birthday.isValidBirthday("01/01/2000"));
     }
