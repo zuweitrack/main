@@ -1,17 +1,6 @@
-package seedu.address.model.reminder;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import org.junit.Test;
-
-import seedu.address.testutil.ReminderBuilder;
-
-//@@author fuadsahmawi
+# fuadsahamwi
+###### /java/seedu/address/model/reminder/ReminderTextPredicateTest.java
+``` java
 public class ReminderTextPredicateTest {
 
     @Test
@@ -75,3 +64,4 @@ public class ReminderTextPredicateTest {
                 .withEndDateTime("tmr 10pm").build()));
     }
 }
+```

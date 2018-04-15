@@ -15,12 +15,19 @@ ifndef::env-github[]
 image::images/UI.JPG[width="650"]
 endif::[]
 
-* CollegeZone is a desktop application for *NUS Residential College 4 (RC4) students*. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
-* It's created for a RC4 resident to manage their contacts with other RC4 residents and to manage their tasks.
+Welcome to CollegeZone! CollegeZone is a custom application made for *National University of Singapore (NUS) Residential College 4 (RC4) students*. +
+CollegeZone is designed for a RC4 student to manage their contacts with other RC4 students, manage their goals and to manage their time.
+You can find many interesting features available in CollegeZone such as: +
 
+* recording meetups +
+* rating friends +
+* creating goals +
+* creating reminders +
+* and many more!
 
-
-* The main reasons NUS freshmen chooses to stay in RC4 is to *forge new friendships* and to *perform well in their studies*. CollegeZone aims to aid in RC4 residents tasks management and maintaining the friendships forged in RC4.
+The main reasons NUS freshmen chooses to stay in RC4 is to *forge new friendships* and to *perform well in their studies*. CollegeZone aims to aid in RC4 residents tasks management and maintaining the friendships forged in RC4. +
+With CollegeZone's unique features, we aim to be your personal assistant just for you. +
+Head over to our link:docs/UserGuide.adoc[user guide] to get started with CollegeZone.
 
 == Site Map
 
@@ -35,5 +42,7 @@ endif::[]
 * Some parts of this sample application were inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by
 _Marco Jakob_.
 * Libraries used: https://github.com/TomasMikula/EasyBind[EasyBind], https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit4[JUnit4]
+* Credits to http://natty.joestelmach.com/[Joestalmach] for the date parsing NLP library
+* Credits to to http://dlsc.com/products/calendarfx/[Dirk Lemmermann] for his calendar software
 
 == Licence : link:LICENSE[MIT]

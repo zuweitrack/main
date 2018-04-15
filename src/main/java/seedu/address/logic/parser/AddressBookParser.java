@@ -152,6 +152,7 @@ public class AddressBookParser {
             return new RedoCommand();
 
         case MeetCommand.COMMAND_WORD:
+        case MeetCommand.COMMAND_ALIAS:
             return new MeetCommandParser().parse(arguments);
 
         case DeleteMeetCommand.COMMAND_WORD:

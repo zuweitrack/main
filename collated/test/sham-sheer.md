@@ -1,4 +1,26 @@
 # sham-sheer
+###### /java/guitests/guihandles/CommandBoxHandle.java
+``` java
+    /**
+     * Enters the given command in the Command Box but doesnt press enter.
+     * @return true if the command succeeded, false otherwise.
+     */
+    public boolean runWithoutEnter(String command) {
+        click();
+        guiRobot.interact(() -> getRootNode().setText(command));
+        guiRobot.pauseForHuman();
+
+        return !getStyleClass().contains(CommandBox.ERROR_STYLE_CLASS);
+    }
+
+    /**
+     * Returns the list of style classes present in the command box.
+     */
+    public ObservableList<String> getStyleClass() {
+        return getRootNode().getStyleClass();
+    }
+}
+```
 ###### /java/seedu/address/logic/commands/AddCommandTest.java
 ``` java
         @Override
@@ -556,6 +578,46 @@ public class MeetTest {
         Meet differentMeet = new Meet("15/01/2018");
         assertFalse(meet.equals(differentMeet));
     }
+
+
+    @Test
+    public void isValidDate() {
+        // null meet date
+        Assert.assertThrows(NullPointerException.class, () -> Meet.isValidDate(null));
+
+        // blank meet date
+        assertFalse(Meet.isValidDate("")); // empty string
+        assertFalse(Meet.isValidDate(" ")); // spaces only
+
+        // missing parts
+        assertFalse(Meet.isValidDate("12--1997")); // missing month part
+        assertFalse(Meet.isValidDate("--12-1998")); // missing date part
+        assertFalse(Meet.isValidDate("//12/1998")); // missing date part
+        assertFalse(Meet.isValidDate("12-12-")); // missing year part
+        assertFalse(Meet.isValidDate("12/12/")); // missing year part
+
+
+        // invalid parts
+        assertFalse(Meet.isValidDate("32-Jan-2000")); // invalid day
+        assertFalse(Meet.isValidDate("33.01.2000")); // invalid day
+        assertFalse(Meet.isValidDate("20/20/2000")); // invalid month
+        assertFalse(Meet.isValidDate("20/13/1997")); // invalid month
+        assertFalse(Meet.isValidDate("29/Feb/2001")); // invalid due to leap year
+        assertFalse(Meet.isValidDate("31/04/2000")); // invalid day for month of April
+        assertFalse(Meet.isValidDate("31/Sep/2000")); // invalid day for month of September
+        assertFalse(Meet.isValidDate("31//01/2000")); // invalid meet date format
+        assertFalse(Meet.isValidDate("31..01..2000")); // invalid meet date format
+        assertFalse(Meet.isValidDate("20--2-1997")); // invalid meet date format
+        assertFalse(Meet.isValidDate("20*2*1997")); // invalid symbols
+        assertFalse(Meet.isValidDate("12 / 12 / 2012")); // contains spaces
+        assertFalse(Meet.isValidDate("01/Jan/2000"));  // using /
+        assertFalse(Meet.isValidDate("31.Jan.2000"));   // using .
+        assertFalse(Meet.isValidDate("01-12-2000")); // using -
+        assertFalse(Meet.isValidDate("28-Feb-2001"));
+
+        // valid meet date
+        assertTrue(Meet.isValidDate("01/01/2000"));
+    }
 }
 ```
 ###### /java/seedu/address/testutil/PersonBuilder.java
@@ -573,4 +635,13 @@ public class MeetTest {
     }
 
 }
+```
+###### /java/seedu/address/ui/CommandBoxTest.java
+``` java
+    @Test
+    public void handleKeyPress_startingWithTab() {
+        commandBoxHandle.runWithoutEnter(COMMAND_INCOMPLETE);
+        assertInputHistory(KeyCode.TAB, COMMAND_COMPLETE);
+    }
+
 ```

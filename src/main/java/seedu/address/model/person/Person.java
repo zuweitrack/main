@@ -1,10 +1,10 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.person.Birthday.birthDateToInt;
+import static seedu.address.model.person.Meet.dateToInt;
 
-import java.util.Calendar;
 import java.util.Collections;
-import java.util.GregorianCalendar;
 import java.util.Objects;
 import java.util.Set;
 
@@ -88,42 +88,10 @@ public class Person {
         return Integer.parseInt(levelOfFriendship.value);
     }
 
-    //@@author sham-sheer
-    public long getMeetDateInt() {
-        Calendar calendar = Calendar.getInstance();
-        long date = converDateToSeconds(meetDate.toString());
-        long currentDate = calendar.getTimeInMillis();
-        long timeDiff = date - currentDate;
-        if (timeDiff < 0) {
-            return Long.MAX_VALUE;
-        } else {
-            return timeDiff;
-        }
+    public long getMeetDateInt() { return dateToInt(meetDate.toString()); }
 
-    }
-    public long getBirthdayInt() {
-        return converDateToSeconds(birthday.toString());
-    }
-    /**
-     * Converts  date to seconds
-     */
-    public long converDateToSeconds(String date) {
-        if (meetDate.value == "") {
-            return 0;
-        }
-        int day = Integer.parseInt(date.toString().substring(0,
-                2));
-        int month = Integer.parseInt(date.toString().substring(3,
-                5));
-        int year = Integer.parseInt(date.toString().substring(6,
-                10));
-        Calendar calendar = new GregorianCalendar();
-        calendar.set(year, month - 1, day);
-        long seconds = calendar.getTimeInMillis();
-        return seconds;
-    }
+    public long getBirthdayInt() { return birthDateToInt(birthday.toString()); }
 
-    //@@author
     @Override
     public boolean equals(Object other) {
         if (other == this) {

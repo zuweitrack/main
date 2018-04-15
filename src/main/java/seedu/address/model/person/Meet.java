@@ -4,6 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+
 
 //@@author sham-sheer
 /**
@@ -30,6 +34,40 @@ public class Meet {
             this.value = meet;
         }
     }
+    /**
+     * Converts  date to seconds
+     */
+    public static long convertDateToSeconds(String date) {
+        if (date == "") {
+            return 0;
+        }
+        int day = Integer.parseInt(date.toString().substring(0,
+                2));
+        int month = Integer.parseInt(date.toString().substring(3,
+                5));
+        int year = Integer.parseInt(date.toString().substring(6,
+                10));
+        Calendar calendar = new GregorianCalendar();
+        calendar.set(year, month - 1, day);
+        long seconds = calendar.getTimeInMillis();
+        return seconds;
+    }
+
+    /**
+     * Converts meet date to a time that is relative to current date, for sorting purposes
+     */
+    public static long dateToInt(String date) {
+        Calendar calendar = Calendar.getInstance();
+        long longDate = convertDateToSeconds(date.toString());
+        long currentDate = calendar.getTimeInMillis();
+        long timeDiff = longDate - currentDate;
+        if (timeDiff < 0) {
+            return Long.MAX_VALUE;
+        } else {
+            return timeDiff;
+        }
+    }
+
 
     public static boolean isValidDate(String test) {
         return test.matches(DATE_VALIDATION_REGEX);

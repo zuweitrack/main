@@ -50,19 +50,6 @@ public class DateTimeParser {
     }
 
     /**
-     * Receives two LocalDateTime and ensures that the specified {@code endDateTime} is always later in time than
-     * specified {@code startDateTime}
-     *
-     * @return endDateTime that checks the above confirmation
-     */
-    public static LocalDateTime balanceStartAndEndDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        LocalDateTime newEndDateTime = endDateTime;
-        while (startDateTime.compareTo(newEndDateTime) >= 1) {
-            newEndDateTime = newEndDateTime.plusDays(1);
-        }
-        return newEndDateTime;
-    }
-    /**
      * Receives a LocalDateTime and formats the {@code dateTime}
      *
      * @return a formatted dateTime in String

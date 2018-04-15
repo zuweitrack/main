@@ -4,48 +4,70 @@
 :collatedDir: ../../collated
 
 == Project: CollegeZone
-CollegeZone is a desktop address book application used by NUS RC4 students. +
+CollegeZone is a desktop address book application used by National University of Singapore Residential College 4 (RC4) students. We aim to make RC4 student’s school life much easier and more convenient. +
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 20 kLoC.
-
 *Code contributed*: +
 link:{collatedDir}/main/deborahlow97.md[Functional code] +
 link:{collatedDir}/test/deborahlow97.md[Test code] +
 
 == Summary of contributions
 
-=== Major enhancement: added Add, Edit and Delete goal command
-** What it does: Allows user to add, edit and delete goals into CollegeZone. It includes tracking of when the goals started, ended, it's importance level to user and it's completion status.
-** External behavior:
-
+=== Major enhancement: added Add, Edit, Sort and Delete goal command
+** What it does: Allows user to add, edit and delete goals into CollegeZone. It also allows user to sort the goals that they have based on the field they want it sorted in.It includes tracking of when the goals started, ended, it's importance level to user and it's completion status.
+** External behavior: +
+Start of Extract [from: User Guide]
 include::../UserGuide.adoc[tag=goalfeatures]
+End of Extract
 
 ** Justification: This feature improves the product significantly because RC4 students will have goals that they want to accomplish in life, especially for new RC4 students, they enter NUS with many goals they want to achieve. Having this feature allows them to record down the goals and track the status of it.
 
 === Major enhancement: added Complete and RevertComplete goal command
 ** What it does: Allows user to update the completion status of the existing goals they have in CollegeZone.
-** External behavior:
-
+** External behavior: +
+Start of Extract [from: User Guide]
 include::../UserGuide.adoc[tag=goalcompletion]
+End of Extract
 
 ** Justification: This feature improves the product significantly because RC4 students will have be able to indicate completion status of goals that they have.
 
-=== Major enhancement: added Sort goal command
-** What it does: Allows user to sort the goals that they have based on the field they want it sorted in.
-
 === Minor enhancement: added a theme command that allows the user to change the theme colour of CollegeZone.
 ** Justification: This feature allows RC4 students to switch to a different theme colour of their liking.
+** External behavior: +
+Start of Extract [from: User Guide]
+include::../UserGuide.adoc[tag=theme]
+End of Extract
 
 === Minor enhancement: added birthday, level of friendship, unit number and ccas field
 ** Justification: The addition of this field provides user with more comprehensive contact details to add into CollegeZone.
+** External behavior: +
+Start of Extract [from: User Guide]
+include::../UserGuide.adoc[tag=addandedit]
+End of Extract
 
 === Proposed enhancements:
-==== Auto-Complete command
-==== Differentiating goals into Main goals and Sub-goals
+Start of Extract [from: User Guide]
+include::../UserGuide.adoc[tag=debv2.0]
+End of Extract
 
-* *Code contributed*: [https://github.com/CS2103JAN2018-T09-B2/main/blob/master/collated/main/deborahlow97.md[Functional code]] [https://github.com/CS2103JAN2018-T09-B2/main/tree/master/collated/test[Test code]]
+** Differentiating goals into Main goals and Sub-goals
+** Adding of timetable into CollegeZone
 
-* *Other contributions*:
+== Contributions to the Developer Guide
 
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+Start of Extract [from: Developer Guide]
+include::../DeveloperGuide.adoc[tag=addandedit] +
+include::../DeveloperGuide.adoc[tag=Goals] +
+include::../DeveloperGuide.adoc[tag=addgoal] +
+include::../DeveloperGuide.adoc[tag=deletegoal] +
+include::../DeveloperGuide.adoc[tag=sortgoal] +
+include::../DeveloperGuide.adoc[tag=theme]
+End of Extract
+
+=== Other Contributions:
 ** Project management:
 *** Managed releases `v1.3` - `v1.4.1` (3 releases) on GitHub
 ***
@@ -58,20 +80,3 @@ include::../UserGuide.adoc[tag=goalcompletion]
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2103JAN2018-W14-B3/main/issues/102[1], https://github.com/CS2103JAN2018-W14-B3/main/issues/99[2], https://github.com/CS2103JAN2018-W14-B3/main/issues/103[3])
 ** Tools:
 *** Integrated a third party library (Natty) to the project (https://github.com/CS2103JAN2018-T09-B2/main/issues/64[#64])
-
-
-== Contributions to the Developer Guide
-
-|===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
-|===
-
-include::../DeveloperGuide.adoc[tag=addandedit]
-
-include::../DeveloperGuide.adoc[tag=myGoalsPage]
-
-
-== PROJECT: PowerPointLabs
-
----
-

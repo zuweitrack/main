@@ -125,6 +125,15 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_meetAlias() throws Exception {
+        final String date = "14/10/2018";
+        MeetCommand command  = (MeetCommand) parser.parseCommand(MeetCommand.COMMAND_ALIAS + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_DATE + date);
+        assertEquals(new MeetCommand(INDEX_FIRST_PERSON, new Meet(date)), command);
+    }
+
+
+    @Test
     public void parseCommand_editAlias() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
