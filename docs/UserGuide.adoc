@@ -1014,6 +1014,13 @@ OR +
 `completegoal INDEX` +
 |`!goal 1`
 
+|*Revert complete Goal* |Revert a complete a goal entry |`-!goal INDEX` +
+OR +
+`-!g INDEX` +
+OR +
+`ongoinggoal INDEX` +
+|`-!goal 1`
+
 |*Sort Goal* |Sorts the goal list |`sortgoal f/GOAL_FIELD o/ORDER` +
 OR +
 `sgoal f/GOAL_FIELD o/ORDER` +
@@ -1046,3 +1053,5 @@ OR +
 
 |*Seek* |Seek RA(s) of students by keyword|`seek [keyword]` OR +
 `sh [keyword]`| seek james
+
+|*Exit* |Exits _CollegeZone_ |`exit` |

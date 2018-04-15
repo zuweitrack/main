@@ -1432,6 +1432,18 @@ Use case ends.
 +
 Use case ends.
 
+=== Use case: List students
+1. User requests to list students
+2. CollegeZone shows a list of students
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
 
 === Use case: Delete student
 
@@ -1914,6 +1926,60 @@ Use case ends.
 +
 Use case ends.
 
+=== Use case: Undo
+
+*MSS*
+
+1.  User requests to undo a command
+2.  CollegeZone undo the command and update _CollegeZone_
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The given format is invalid.
++
+[none]
+** 1a1. CollegeZone shows an error message.
++
+Use case ends.
+
+* 1b. There are no more commands to undo.
++
+[none]
+** 1b1. CollegeZone shows an error message.
++
+Use case ends.
+
+=== Use case: Redo
+
+*MSS*
+
+1.  User requests to redo a command
+2.  CollegeZone redo the command and update _CollegeZone_
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The given format is invalid.
++
+[none]
+** 1a1. CollegeZone shows an error message.
++
+Use case ends.
+
+* 1b. There are no more commands to redo.
++
+[none]
+** 1b1. CollegeZone shows an error message.
++
+Use case ends.
+
+=== Use case: Seek Resident Assistant (RA)
+
 === Use case: History
 
 *MSS*
@@ -1939,6 +2005,25 @@ Use case ends.
 
 1.  User requests to clear CollegeZone
 2.  CollegeZone deletes all data
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The given format is invalid.
++
+[none]
+** 2a1. CollegeZone shows an error message.
++
+Use case ends.
+
+=== Use case: Help
+
+*MSS*
+
+1.  User requests for help page in CollegeZone
+2.  CollegeZone opens help page
 +
 Use case ends.
 
