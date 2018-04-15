@@ -99,14 +99,17 @@ Sentences displayed in this manner indicates a NOTE to look out for
 ====
 
 === General features
-==== Viewing help : `help`
+[discrete]
+=== Viewing help : `help`
 First, let's get familiar with the command features that _CollegeZone_ offers! Type `help` in the Command Box and press kbd:[Enter] to display all the possible command usage.
 
 *_Format:_*
 ```java
 (help)
 ```
-==== *Adding a student: `add` or `a`*
+
+[discrete]
+=== Adding a student: `add` or `a`
 Currently, _CollegeZone_ is empty. Try to add a fellow RC4 friend into _CollegeZone_ using the `add` or `a` command.
 
 *_Formats:_*
@@ -135,7 +138,8 @@ A student can have any number of CCAs (including 0)
 > a n/Betsy Crowe t/friend b/21/12/1994 u/#01-10 p/1234567 */1 t/OwesMoney
 ```
 
-==== Listing all students : `list` or `l`
+[discrete]
+=== Listing all students : `list` or `l`
 
 Shows a list of all students in _CollegeZone_. +
 
@@ -144,7 +148,8 @@ Shows a list of all students in _CollegeZone_. +
 (list | l)
 ```
 
-==== Editing a student : `edit` or `e` [Since v1.2]
+[discrete]
+=== Editing a student : `edit` or `e` [Since v1.2]
 
 Edits an existing student in _CollegeZone_. +
 
@@ -172,7 +177,8 @@ Edits the phone number and level of friendship of the 1st student to be `9123456
 ```
 Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
-==== Locating students by name or tag: `find` or `f` [Since v1.1]
+[discrete]
+=== Locating students by name or tag: `find` or `f` [Since v1.1]
 
 Finds students whose names contain any of the given keywords. +
 
@@ -208,7 +214,8 @@ Returns any student having names `Betsy`, `Tim`, or `John`
 Returns any student having tags `friends`
 
 // tag::seek[]
-==== Seeking the Resident Assistant(s) of a student : `seek` [Since v1.3]
+[discrete]
+=== Seeking the Resident Assistant(s) of a student : `seek` [Since v1.3]
 Seek the Resident Assistant(s) (RA) of the student(s) whose name contains any of the given keywords. +
 *_Formats:_*
 ```java
@@ -234,7 +241,8 @@ Returns `John` and `RA(s) of RC4`
 Returns `Betsy` and `RA(s) of RC4`
 // end::seek[]
 
-==== Deleting a student : `delete` or `d`
+[discrete]
+=== Deleting a student : `delete` or `d`
 
 Deletes the specified student from _CollegeZone_. +
 
@@ -261,7 +269,8 @@ Deletes the 2nd student in _CollegeZone_.
 ```
 Deletes the 1st student in the results of the `find` command.
 
-==== Selecting a student and goal: `select` or `s`
+[discrete]
+=== Selecting a student and goal: `select` or `s`
 
 Selects the student and/or goal identified by the index number used in the last student/goal listing. +
 
@@ -288,8 +297,8 @@ Selects the 2nd student and 2nd goal in _CollegeZone_.
 ```
 Selects the 1st student in the results of the `find` command.
 
-==== Meeting a student : `meet` or `m` [Since v1.3]
-
+[discrete]
+=== Meeting a student : `meet` or `m` [Since v1.3]
 
 Selects the student identified by the index number used in the last student listing. +
 *_Formats:_*
@@ -311,7 +320,8 @@ Selects the student identified by the index number used in the last student list
 Sets up a meeting with the 1st student on the 14th of March, 2018 in your Calendar.
 
 // tag::rate[]
-==== Rating feature : `rate` or `rt` [Since v1.4]
+[discrete]
+=== Rating feature : `rate` or `rt` [Since v1.4]
 
 Rates an existing student in CollegeZone. +
 
@@ -338,7 +348,8 @@ Rates the level of friendship of the 1st student to be `5`.
 ```
 Rates the level of friendship of the 1st and 3rd student to be `5`.
 
-==== Show level of friendship feature : `show` or `sh` [Since v1.5]
+[discrete]
+=== Show level of friendship feature : `show` or `sh` [Since v1.5]
 
 Shows the level of friendship of the student(s) whose level of friendship contains any of the given input values. +
 
@@ -365,8 +376,8 @@ Returns Students with Level of Friendship value `1` and Students with Level of F
 // end::rate[]
 
 // tag::sort[]
-
-==== Sort RC4 Students List: `sort [INDEX_TYPE]' [Since v1.5]
+[discrete]
+=== Sort RC4 Students List: `sort [INDEX_TYPE]' [Since v1.5]
 
 Sorts the RC4 Students List according to the input index. Three different sorting types available.
 
@@ -397,7 +408,8 @@ Returns `A sorted list of RC4 students according to their level of friendship`
 
 You might be wondering what else you can do with the calendar. The Reminder features listed below will allow you to set reminders for events, important dates or simply to-do tasks that will be reflected in the calendar for easy reference!
 
-==== Adding a reminder: `+reminder` or `+r` or `addreminder` [Since v1.4]
+[discrete]
+=== Adding a reminder: `+reminder` or `+r` or `addreminder` [Since v1.4]
 
 You can try setting a reminder into the calendar in CollegeZone by referring to the instructions below. +
 
@@ -441,7 +453,8 @@ Figure below portrays what should be seen after the command is executed correctl
 
 image::addReminder.PNG[width="1500"]
 
-==== Deleting a reminder: `-reminder` or `-r` or `deletereminder` [Since v1.4]
+[discrete]
+=== Deleting a reminder: `-reminder` or `-r` or `deletereminder` [Since v1.4]
 
 If you made a mistake or have reminders that are already due, you can also delete it away from the calendar by referring to the instructions below.
 
@@ -493,7 +506,8 @@ image::delReminder.PNG[width="1500"]
 === Goal features
 
 //tag::goalfeatures[]
-==== Adding a goal: `+goal` or `+g` or `addgoal` [Since v1.3]
+[discrete]
+=== Adding a goal: `+goal` or `+g` or `addgoal` [Since v1.3]
 Currently, your goal page is empty! Try adding a goal entry that you have into _CollegeZone_ using the `+goal`, `+g` or `addgoal` command. The new goal added will be reflected in _CollegeZone_. +
 
 *_Formats:_*
@@ -518,7 +532,8 @@ Currently, your goal page is empty! Try adding a goal entry that you have into _
 ```
 
 // tag::sortgoal[]
-==== Sorting goals: `sortgoal` or `sgoal` [Since v1.5]
+[discrete]
+=== Sorting goals: `sortgoal` or `sgoal` [Since v1.5]
 
 It is a hassle to locate the goals you're interested in if you have too many goals in _CollegeZone_. Try sorting the goals that you have using the `sortgoal` or `sgoal` command. +
 
@@ -548,7 +563,8 @@ Sorts the goal list based on start date time in ascending order.
 Sorts the goal list based on completion in descending order.
 // end::sortgoal[]
 
-==== Editing a goal: `~goal` or `~g` or `editgoal` [Since v1.4]
+[discrete]
+=== Editing a goal: `~goal` or `~g` or `editgoal` [Since v1.4]
 If you've added a goal entry incorrectly, try using the `~goal`, `~g` or `editgoal` command to edit the goals you have. +
 
 *_Formats:_*
@@ -579,7 +595,8 @@ editgoal 5 text/swim at least twice a month
 ```
 Edits the goal text of the 5th student to be `swim at least twice a month`.
 
-==== Deleting a goal: `-goal` or `-g` or `deletegoal`
+[discrete]
+=== Deleting a goal: `-goal` or `-g` or `deletegoal`
 If you've added a specific goal that you're unlikely to complete and want to remove it from _CollegeZone_, try using the `-goal`, `-g` or `deletegoal` command to delete a goal entry that you have. +
 *_Formats:_*
 ```java
@@ -611,7 +628,8 @@ Deletes the 1st goal in _CollegeZone_'s goal listing.
 // end::goalfeatures[]
 
 //tag::goalcompletion[]
-==== Completing a goal: `!goal` or `!g` or `completegoal`
+[discrete]
+=== Completing a goal: `!goal` or `!g` or `completegoal`
 Once you've completed a goal, indicate completion of an existing goal in _CollegeZone_ using the `!goal`, `!g` or `completegoal` command. +
 
 *_Formats:_*
@@ -644,8 +662,9 @@ Indicates completion of the 1st goal in _CollegeZone_'s goal listing.
 // end::goalcompletion[]
 
 //tag::goalongoing[]
-==== Revert completing a goal: `-!goal` or `-!g` or `ongoinggoal`
-If you have an ongoing goal that is wrongly indicated that it's completed, do not fret, simply indicate that an existing goal you have is still ongoing in _CollegeZone_ using the `-!goal`, `-!g` or `ongoinggoal` command. +
+[discrete]
+=== Revert completing a goal: `-!goal` or `-!g` or `ongoinggoal`
+If you had an ongoing goal that is wrongly indicated that it's completed, do not fret, simply indicate that an existing goal you have is still ongoing in _CollegeZone_ using the `-!goal`, `-!g` or `ongoinggoal` command. +
 
 *_Formats:_*
 ```java
@@ -676,7 +695,8 @@ Indicates ongoing of the 1st goal in _CollegeZone_'s goal listing.
 
 === Interesting features
 // tag::theme[]
-==== Changing CollegeZone theme : `theme` or `th`
+[discrete]
+=== Changing CollegeZone theme : `theme` or `th`
 _CollegeZone_'s default theme colour is not the only theme colour we have to offer! Try changing _CollegeZone_'s theme colour to your preferred one using the `theme` or `th` command.  +
 
 image::CollegeZoneDarkTheme.JPG[width="800"]
@@ -715,7 +735,8 @@ Changes the theme colour to dark theme.
 Changes the theme colour to bubblegum theme.
 // tag::theme[]
 
-==== Listing entered commands : `history` or `h`
+[discrete]
+=== Listing entered commands : `history` or `h`
 
 Lists all the commands that you have entered in reverse chronological order. +
 *_Formats:_*
@@ -729,7 +750,8 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
-==== Undoing previous command : `undo` or `u`
+[discrete]
+=== Undoing previous command : `undo` or `u`
 
 Restores _CollegeZone_ to the state before the previous _undoable_ command was executed. +
 *_Formats:_*
@@ -765,7 +787,8 @@ The `undo` command fails as there are no undoable commands executed previously.
 ```
 Reverses both the `clear` command and the `delete 1` command
 
-==== Redoing the previously undone command : `redo` or `r`
+[discrete]
+=== Redoing the previously undone command : `redo` or `r`
 
 Reverses the most recent `undo` command. +
 *_Formats:_*
@@ -802,7 +825,8 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-==== Clearing all entries : `clear` or `c`
+[discrete]
+=== Clearing all entries : `clear` or `c`
 
 Clears all entries from _CollegeZone_. +
 *_Formats:_*
@@ -810,25 +834,30 @@ Clears all entries from _CollegeZone_. +
 (clear | c)
 ```
 
-==== Exiting the program : `exit`
+[discrete]
+=== Exiting the program : `exit`
 
 Exits the program. +
-Format: `exit`
+*_Formats:_*
+`exit`
 
-==== Saving the data
+[discrete]
+=== Saving the data
 
 _CollegeZone_ data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 === Upcoming features
 // tag::dataencryption[]
-==== Encrypting data files [Coming in v2.0]
+[discrete]
+=== Encrypting data files [Coming in v2.0]
 
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
 // tag::editreminder[]
-==== Editing a reminder [Coming in v2.0]
+[discrete]
+=== Editing a reminder [Coming in v2.0]
 Edits an existing reminder in CollegeZone. +
 Format: `~r INDEX [text/REMINDER_TEXT] [d/DATETIME]`
 
@@ -847,13 +876,16 @@ Edits the reminder text and datetime of the 2nd student to be `water plants` and
 // end::editreminder[]
 
 // tag::debv2.0[]
-==== Adding subgoals [Coming in v2.0] +
+[discrete]
+=== Adding subgoals [Coming in v2.0] +
 By using this command, you are able to add subgoals to the goals you currently have.
 
-==== Auto-completing of commands [Coming in v2.0]
+[discrete]
+=== Auto-completing of commands [Coming in v2.0]
 Auto-complete command by suggesting to the you the command format to use based on what you have already typed in the command box.
 
-==== Adding of timetable into CollegeZone [Coming in v2.0]
+[discrete]
+=== Adding of timetable into CollegeZone [Coming in v2.0]
 Allows you to add your NUS timetable schedule for the semester into _CollegeZone_.
 // end::debv2.0[]
 

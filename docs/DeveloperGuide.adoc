@@ -412,9 +412,9 @@ command feature to be able to find persons by tags.
 
 === Logic: Command Aliases [Since v1.1]
 
-CollegeZone users may now use shortcuts to perform desired tasks. These shortcuts are shown in figure 3.6.1.
+CollegeZone users may now use shortcuts to perform desired tasks. These shortcuts are shown in the table below.
 
-*Figure 3.6.1*:
+
 [width="90%",cols="20%,<25%,<25%",options="header",]
 |=======================================================================
 |Command | Original| Alias
@@ -890,8 +890,9 @@ Note:
 All goal commands are event driven. +
 The following is the Sequence Diagram for interactions within the `Logic` component for the `execute("goal remove 1")` API call. +
 
+.Goal delete Sequence Diagram
 image::GoalHighLevelSequenceDiagram.jpg[width="800"]
-    Figure 3.10.0.1: Goal delete Sequence Diagram
+
 
 1. Logic
 * AddressBookParser: Detects if goal delete keyword contains correct parsing keyword after +
@@ -1045,8 +1046,8 @@ Implementation of Sorting Mechanism requires both the manipulation of `Logic` an
 
 The following sequence diagram shows the flow of operation from the point the address book receives an input to the output of the result.
 
+.Interactions Inside the Logic Component for the `sort 1` Command_
 image::SortPersonSdForLogic.png[width="800"]
-_Figure 4.5.2 : Interactions Inside the Logic Component for the `sort 1` Command_
 
 [NOTE]
 If the list is found to be empty, an `CommandException` will be thrown from `SortCommand`. The command should be terminated without any state change, keeping the redoStack clean of changes.
