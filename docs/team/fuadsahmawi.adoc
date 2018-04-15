@@ -31,18 +31,14 @@ just like a digital organiser.
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.5rc` (1 release) on GitHub
+*** Managed releases `v1.5rc` & `v1.5` (2 releases) on GitHub
 ** Enhancements to existing features:
-*** Updated the GUI to include a Calendar Panel (Calendar FX API) (Pull requests https://github.com[#33], https://github.com[#34])
-*** Added command aliases for commands that were originally in addressbook
+*** Updated the GUI to include a Calendar Panel(Pull request https://github.com/CS2103JAN2018-T09-B2/main/pull/116[#116])
+*** Added command aliases for commands that were originally in addressbook (Pull request https://github.com/CS2103JAN2018-T09-B2/main/pull/9[#9])
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
-** Community:
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Did cosmetic tweaks to existing contents of the User Guide & Developer Guide (Pull requests https://github.com/CS2103JAN2018-T09-B2/main/pull/54[#54], https://github.com/CS2103JAN2018-T09-B2/main/pull/85[#85], https://github.com/CS2103JAN2018-T09-B2/main/pull/163[#163], https://github.com/CS2103JAN2018-T09-B2/main/pull/245[#245], https://github.com/CS2103JAN2018-T09-B2/main/pull/248[#248])
 ** Tools:
-*** Integrated a third party library and API (CalendarFX) to the project
-
-_{you can add/remove categories in the list above}_
+*** Integrated a third party library and API (CalendarFX) to the project (Pull request https://github.com/CS2103JAN2018-T09-B2/main/pull/116[#116])
 
 == Contributions to the User Guide
 
