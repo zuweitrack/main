@@ -2,6 +2,10 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.logic.parser.DateTimeParser.containsDateAndTime;
+import static seedu.address.logic.parser.DateTimeParser.nattyDateAndTimeParser;
+
+import java.time.LocalDateTime;
 
 //@@author deborahlow97
 /**
@@ -26,6 +30,7 @@ public class Birthday {
      */
     public Birthday(String birthday) {
         requireNonNull(birthday);
+        checkArgument(isValidBirthdayRegex(birthday), MESSAGE_BIRTHDAY_CONSTRAINTS);
         checkArgument(isValidBirthday(birthday), MESSAGE_BIRTHDAY_CONSTRAINTS);
         this.value = birthday;
     }
@@ -33,8 +38,54 @@ public class Birthday {
     /**
      * Returns if a given string is a valid person birthday.
      */
-    public static boolean isValidBirthday(String test) {
+    public static boolean isValidBirthdayRegex(String test) {
         return test.matches(BIRTHDAY_VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns if a given string is a valid person birthday (before current date).
+     */
+    public static boolean isValidBirthday(String test) {
+        LocalDateTime birthdayLocalDateTime;
+        LocalDateTime currentLocalDateTime = LocalDateTime.now();
+        String birthdayInDifferentFormat = getDifferentBirthdayFormat(test);
+        if (containsDateAndTime(birthdayInDifferentFormat)) {
+            birthdayLocalDateTime = nattyDateAndTimeParser(birthdayInDifferentFormat).get();
+        } else {
+            return false;
+        }
+        return isBeforeCurrentDate(birthdayLocalDateTime, currentLocalDateTime);
+    }
+
+    /**
+     * Takes in @param birthdayLocalDateTime and @param currentLocalDateTime and checks if 1st parameter is later
+     * than the second parameter
+     * @return boolean
+     */
+    private static boolean isBeforeCurrentDate(LocalDateTime birthdayLocalDateTime,
+                                               LocalDateTime currentLocalDateTime) {
+        if (birthdayLocalDateTime.isBefore(currentLocalDateTime)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    /**
+     *
+     * Takes in @param date in dd/mm/yyyy format
+     * @return birthday string in mm/dd/yyyy format
+     */
+    public static String getDifferentBirthdayFormat(String date) {
+        String day = date.substring(0, 2);
+        String month = date.substring(3, 5);
+        String year = date.substring(6, 10);
+        StringBuilder builder = new StringBuilder();
+        builder.append(month)
+                .append("/")
+                .append(day)
+                .append("/")
+                .append(year);
+        return builder.toString();
     }
 
     @Override
