@@ -410,7 +410,7 @@ command feature to be able to find persons by tags.
 * If user is searching by name, user input should be: find n/<name> t/<empty>
 * If user is searching by tags, user input should be: find n/<empty> t/<tag>
 
-=== Logic: Command Aliases [Since v1.1]
+=== Command Aliases [Since v1.1]
 
 CollegeZone users may now use shortcuts to perform desired tasks. These shortcuts are shown in the table below.
 
@@ -491,21 +491,24 @@ As CollegeZone is designed for NUS RC4 students to use, being able to record oth
 
 As CollegeZone is catered toward NUS RC4 Residents, we have changed the attributes of a Person to hold: +
 *Name, Mobile Number, Birthday, Level of Friendship, RC4 Unit Number, Meet up dates with RC4 students, RC4 CCAs and Tags*. +
-This is done by removing unwanted attributes of a person and adding new attributes of a person.
+This is done by removing unwanted attributes of a person and adding new attributes of a person. +
+The figure below shows the new atrributes for student in the class diagram.
 
 .Class diagram for Student
-image::RCPersonClass.JPG[width="450"]
+image::RC4ModelComponenetClass.JPG[width="800"]
 
+==== Design Considerations
+*Aspect*: Displaying level of friendship in `CollegeZone` UI.
 
-==== Aspect: Nature of new Attributes
-* Birthday: Must be a valid date.
-* Level Of Friendship: Level of friendship is an integer from 1 to 10. The level is indicated by the number of hearts via the UI.
-* Unit Number: Must be a valid unit number in RC4.
-* Meet Date: Must be a valid date.
-* A RC4 resident is able to have multiple CCAs.
+*Alternative 1(current choice)*: `Level of Friendship` is displayed as a string of heart symbols. +
+*Pros*: Looks fanciful to user. +
+*Cons*: Might not be intuitive for the user to understand the meaning of heart symbols.
 
-==== Aspect: displaying Level Of Friendship
-* Level of Friendship is displayed as a string of heart symbols. It is represented this way as it more intuitive for users to understand what the symbols mean.
+*Alternative 2*: `Level of Friendship` is displayed as a number. + +
+*Pros*: User easily understands the meaning of it. +
+*Cons*: Less eye catching to the user.
+
+---
 // end::addandedit[]
 
 // tag::reminder[]
@@ -684,12 +687,11 @@ a large number of reminders to be listed out. This will in turn require the need
 *Cons*: Implementation of `DeleteReminderCommand` will be more difficult as we will have to integrate a find function to pick out
 the specific `Reminder` that the user wants to remove.
 
-
+---
 // end::reminder[]
 
 // tag::Goals[]
-=== Goals
-==== Introduction
+=== Goal Object [Since v1.2]
 CollegeZone is designed for RC4 students to use. RC4 students often have goals that they want to achieve in life
 – Career goals, health goals, social goals, relationship goals etc. This additional goal feature is created for RC4 users to add and keep track of their goals throughout their stay.
 The main reason behind this implementation is because setting goals gives you *long-term vision* and *short-term motivation* for the goals.
@@ -797,7 +799,7 @@ public class StartDateTime implements Comparable<StartDateTime> {
 // end::Goals[]
 
 // tag::addgoal[]
-==== Implementation of add goal
+=== Add goal mechanism [Since v1.3]
 
 Adding a goal into _CollegeZone_ is facilitated by `AddGoalCommand`, which extends `UndoableCommand`, it
 supports undoing and redoing of commands that modifies the state of the _CollegeZone_.
@@ -865,7 +867,6 @@ In the Storage component, the new goal added is stored in the address book stora
 Note:
 - A goal that has just been added will be placed at the bottom of the goal list. +
 
-
 ==== Design Considerations
 
 **Aspect:** Implementation of adding start date time and completion status of goal +
@@ -886,19 +887,46 @@ Note:
 **Alternative 2:** Having a tab button in CollegeZone that allows user to switch between the person list panel and goal list panel. +
 **Pros:** Ability for user to switch to person list and goal list in the UI, which makes it look more user friendly. +
 **Cons:** As CollegeZone is a desktop application that has most interactions happen using a Command Line Interface (CLI), a new command to switch tabs between goal list and person list needs to be implemented. +
+
 ---
 // end::addgoal[]
 
 
 // tag::deletegoal[]
-==== Implementation of delete goal
+==== Delete goal mechanism [Since v1.4]
 
+Deleting a goal from _CollegeZone_ is facilitated by `DeleteGoalCommand`, which extends `UndoableCommand`, it
+supports undoing and redoing of commands that modifies the state of the _CollegeZone_.
 
+[source,java]
+----
+public class DeleteGoalCommand extends UndoableCommand {
+@Override
+    public CommandResult executeUndoableCommand() throws CommandException {
+        // ... DeleteGoalCommand logic ...
+    }
+}
+----
+
+The following sequence diagram shows the flow of operation from the point _CollegeZone_ receives an input to the output of the result.
+
+._Interactions Inside the Logic Component for the `+g` Command_
+image::AddGoalSeqDiagram.PNG[width="800"]
+
+AddGoalCommand is implemented in this way:
+
+In the Logic component, `AddressBookParser` will parse the user's input and detects if add goal keyword contains correct parsing keywords after.
+For example, e.g. +g text/eat healthily impt/9
+`AddGoalCommandParser` parses the input by extracting the input text and importance, +
+e.g.Parsed text : eat healthily +
+    Parsed importance : 9 +
+Everytime a goal is added, the start date time of the goal will be recorded down in real time and it's completion
+status will be "ongoing" by default.
 All goal commands are event driven. +
 The following is the Sequence Diagram for interactions within the `Logic` component for the `execute("goal remove 1")` API call. +
 
-.Goal delete Sequence Diagram
-image::GoalHighLevelSequenceDiagram.jpg[width="800"]
+._Interactions Inside the Logic Component for the `-goal` Command_
+image::DeleteGoalSeqDiagram.PNG[width="800"]
 
 
 1. Logic
@@ -931,16 +959,22 @@ e.g. deletegoal 1
 Coming up with new algorithms is very time consuming. Implementation of My Goals Page uses new implementations
 are very similar to how CollegeZone implements its contacts. This is implemented in this way so as to reduce errors and complexity in the code. +
 
-
 ==== Design Considerations
 
+**Aspect:** Deciding the field for user to enter to delete the goal +
+**Alternative 1 (current choice):** Using `INDEX` of goals in goal list panel +
+**Pros:** Easier to implement as it's implementation is similar to deleting a student and easier for the user to type in the command as `INDEX` is an integer +
+**Cons:**  User might get confused as we have 2 list panels with `INDEX` +
+**Alternative 2: ** Using `GOAL_TEXT` of goals in goal list panel +
+**Pros:** Lower chance for user to use delete goal command wrongly +
+**Cons:** User have to type in a longer command
 
 ---
 // end::deletegoal[]
 
 
 // tag::sortgoal[]
-==== Implementation of sort goal
+=== Sort goal mechanism [Since v1.5]
 
 The sorting goal mechanism is facilitated by `SortGoalCommandParser` and `SortGoalCommand`, with both classes residing
 in the `Logic` component of CollegeZone. `SortGoalCommand` in not undoable.
@@ -1012,6 +1046,7 @@ If the goal list is found to be empty, a `CommandException` will be thrown from 
 **Alternative 2 (current choice): ** Sort in multiple fields and two orders +
 **Pros:** More customization for user +
 **Cons:** User have to type in a longer command
+
 ---
 
 **Aspect:** Initialising of `Comparator<Goal>` +
@@ -1021,11 +1056,12 @@ If the goal list is found to be empty, a `CommandException` will be thrown from 
 **Alternative 2 (current choice): ** Initialise in `UniqueGoalList` +
 **Pros:** Straightforward as initialises the `Comparator` where it is used. +
 **Cons:** `UniquePersonList` is at a lower level and should only handle a minimal set of `Goal` related operations, and not logical operations like string matching. +
+
 ---
 // end::sortgoal[]
 
 // tag::theme[]
-=== Switching theme mechanism
+=== Switching theme mechanism [Since v1.5]
 CollegeZone has multiple themes for the user to choose from. Currently, there are 3 themes implemented.
 Namely, `dark` theme, `bubblegum` theme and `light` theme. This command is not undoable.
 
@@ -1061,6 +1097,7 @@ private void handleChangeThemeEvent(ThemeSwitchRequestEvent event) {
 **Alternative 2 (current choice): ** Initialising in `UserPref`  +
 **Pros:** _CollegeZone_ will remember user's preferred theme upon restarting _CollegeZone_  +
 **Cons:** More coding required to store theme colour
+
 ---
 // end::theme[]
 
@@ -1072,7 +1109,7 @@ meeting with other students with ease.
 // end::meetCommand[]
 
 //tag::sortmech[]
-=== Sorting mechanism
+=== Sorting mechanism [Since v1.5]
 
 The sorting mechanism is facilitated by `SortCommandParser` and `SortCommand`, with both classes residing in the `Logic` component of the address book. Since the address book state will be modified during the sorting process, the `sort` has to be undoable.
 
