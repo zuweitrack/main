@@ -909,56 +909,21 @@ public class DeleteGoalCommand extends UndoableCommand {
 }
 ----
 
-The following sequence diagram shows the flow of operation from the point _CollegeZone_ receives an input to the output of the result.
+DeleteGoalCommand is implemented in this way:
 
-._Interactions Inside the Logic Component for the `+g` Command_
-image::AddGoalSeqDiagram.PNG[width="800"]
+In the Logic component, `AddressBookParser` will parse the user's input, for example, `-goal 1` and detects the `INDEX` given by the user .
+`DeleteGoalCommandParser` parses the `INDEX`: +
+e.g.Parsed index : 1 +
 
-AddGoalCommand is implemented in this way:
-
-In the Logic component, `AddressBookParser` will parse the user's input and detects if add goal keyword contains correct parsing keywords after.
-For example, e.g. +g text/eat healthily impt/9
-`AddGoalCommandParser` parses the input by extracting the input text and importance, +
-e.g.Parsed text : eat healthily +
-    Parsed importance : 9 +
-Everytime a goal is added, the start date time of the goal will be recorded down in real time and it's completion
-status will be "ongoing" by default.
-All goal commands are event driven. +
 The following is the Sequence Diagram for interactions within the `Logic` component for the `execute("goal remove 1")` API call. +
 
 ._Interactions Inside the Logic Component for the `-goal` Command_
 image::DeleteGoalSeqDiagram.PNG[width="800"]
 
-
-1. Logic
-* AddressBookParser: Detects if goal delete keyword contains correct parsing keyword after +
-e.g. deletegoal 1
-* DeleteGoalCommandParser:
-** Parses the input by extracting the input index +
-*** Parsed index : 1 +
-** Creates a DeleteGoalCommand class and passes the index as argument
-* DeleteGoalCommand:
-** Deletes the goal corresponding to the index locally
-** Runs the execution which calls the model
-
-2. Model
-
-* 1. Calls the model and gets the filtered goals list
-* 2. Deletes the deleted Goal object
-* 3. Updates the filtered goals list
-* 4. Gets the updated filtered goals list
-
-3. Ui
-* Displays the deletion of goal in the goal list panel
-
-4. Storage
-* Deletes the details of the deleted goal in the address book storage
-
-*Reason for how it is implemented* +
-
-* Makes use of existing implementations +
-Coming up with new algorithms is very time consuming. Implementation of My Goals Page uses new implementations
-are very similar to how CollegeZone implements its contacts. This is implemented in this way so as to reduce errors and complexity in the code. +
+`DeleteGoalCommandParser`Creates a `DeleteGoalCommand` class and passes the index as argument.
+It deletes the goal corresponding to the index locally and runs the execution which calls the model
+The filtered goals list and deletion of the specified Goal object occurs. The filtered goals list is updated and retrieved.
+The UI component displays the deletion of goal in the goal list panel and the storage component deletes the details of the deleted goal in the address book storage.
 
 ==== Design Considerations
 
@@ -972,7 +937,6 @@ are very similar to how CollegeZone implements its contacts. This is implemented
 
 ---
 // end::deletegoal[]
-
 
 // tag::sortgoal[]
 === Sort goal mechanism [Since v1.5]
