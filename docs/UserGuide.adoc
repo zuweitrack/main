@@ -46,14 +46,12 @@ image::DownloadJar.JPG[width="550"]
 . You will be greeted with _CollegeZone's_ Graphic User Interface (GUI) as shown below. The GUI should appear in a few seconds.
 +
 image::UI.JPG[width="800"]
-+
 
 === Visual Introduction
 
 The image below describes what each part of _CollegeZone's_ GUI represent.
 
 image::UserGuideLabelledUI.PNG[width="800"]
-
 
 . The *Command Box* is located at the top of CollegeZne. Enter your keyboard commands into the box!
 . The *Result Display Panel* shows you the results of the commands you entered.
@@ -682,6 +680,7 @@ The figure below portrays what should be seen after the command is executed corr
 
 .Execution of !g 4
 image::CompleteGoal.PNG[width="1000"]
+
 
 [NOTE]
 ====

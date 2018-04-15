@@ -478,12 +478,6 @@ CollegeZone users may now use shortcuts to perform desired tasks. These shortcut
 
 //end::find[]
 
-// tag::tagcolours[]
-=== Enhanced tag colours [Since v1.1]
-Tags are now colour-coded which allows improved differentiation between many different tags. Different coloured tags
-also makes it more eye catching for users.
-// end::tagcolours[]
-
 // tag::addandedit[]
 === Targeted add and edit command [Since v1.2]
 As CollegeZone is designed for NUS RC4 students to use, being able to record other students Level of Friendship,
@@ -894,7 +888,7 @@ Note:
 
 
 // tag::deletegoal[]
-==== Delete goal mechanism [Since v1.4]
+=== Delete goal mechanism [Since v1.4]
 
 Deleting a goal from _CollegeZone_ is facilitated by `DeleteGoalCommand`, which extends `UndoableCommand`, it
 supports undoing and redoing of commands that modifies the state of the _CollegeZone_.
