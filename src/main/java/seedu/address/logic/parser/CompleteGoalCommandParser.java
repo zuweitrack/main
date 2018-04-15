@@ -4,7 +4,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.DateTimeParser.properDateTimeFormat;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -39,7 +38,6 @@ public class CompleteGoalCommandParser implements Parser<CompleteGoalCommand> {
 
         CompleteGoalDescriptor completeGoalDescriptor = new CompleteGoalDescriptor();
 
-        Optional<String> empty = Optional.empty();
         Completion completion = new Completion(COMPLETED_BOOLEAN_VALUE);
         EndDateTime endDateTime = new EndDateTime(properDateTimeFormat(LocalDateTime.now()));
         completeGoalDescriptor.setCompletion(completion);
