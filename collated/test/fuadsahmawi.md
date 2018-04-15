@@ -1,5 +1,5 @@
 # fuadsahmawi
-###### /java/seedu/address/logic/commands/AddCommandTest.java
+###### \java\seedu\address\logic\commands\AddCommandTest.java
 ``` java
         @Override
         public void addReminder(Reminder reminder) throws DuplicateReminderException {
@@ -59,7 +59,7 @@
 
 }
 ```
-###### /java/seedu/address/logic/commands/AddReminderCommandIntegrationTest.java
+###### \java\seedu\address\logic\commands\AddReminderCommandIntegrationTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) for {@code AddReminderCommand}.
@@ -101,7 +101,7 @@ public class AddReminderCommandIntegrationTest {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/AddReminderCommandTest.java
+###### \java\seedu\address\logic\commands\AddReminderCommandTest.java
 ``` java
 public class AddReminderCommandTest {
 
@@ -200,7 +200,7 @@ public class AddReminderCommandTest {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/ReminderCommandTestUtil.java
+###### \java\seedu\address\logic\commands\ReminderCommandTestUtil.java
 ``` java
 /**
  * Contains helper methods for testing reminder commands.
@@ -289,7 +289,7 @@ public class ReminderCommandTestUtil {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/AddReminderCommandParserTest.java
+###### \java\seedu\address\logic\parser\AddReminderCommandParserTest.java
 ``` java
 public class AddReminderCommandParserTest {
     private AddReminderCommandParser parser = new AddReminderCommandParser();
@@ -324,7 +324,7 @@ public class AddReminderCommandParserTest {
     }
 }
 ```
-###### /java/seedu/address/model/reminder/DateTimeTest.java
+###### \java\seedu\address\model\reminder\DateTimeTest.java
 ``` java
 public class DateTimeTest {
 
@@ -352,7 +352,7 @@ public class DateTimeTest {
     }
 }
 ```
-###### /java/seedu/address/model/reminder/ReminderTextPredicateTest.java
+###### \java\seedu\address\model\reminder\ReminderTextPredicateTest.java
 ``` java
 public class ReminderTextPredicateTest {
 
@@ -418,7 +418,7 @@ public class ReminderTextPredicateTest {
     }
 }
 ```
-###### /java/seedu/address/model/reminder/ReminderTextTest.java
+###### \java\seedu\address\model\reminder\ReminderTextTest.java
 ``` java
 public class ReminderTextTest {
 
@@ -452,7 +452,7 @@ public class ReminderTextTest {
     }
 }
 ```
-###### /java/seedu/address/storage/XmlAdaptedReminderTest.java
+###### \java\seedu\address\storage\XmlAdaptedReminderTest.java
 ``` java
 public class XmlAdaptedReminderTest {
 
@@ -495,7 +495,7 @@ public class XmlAdaptedReminderTest {
     }
 }
 ```
-###### /java/seedu/address/testutil/ReminderBuilder.java
+###### \java\seedu\address\testutil\ReminderBuilder.java
 ``` java
 /**
  * A utility class to help with building Reminder objects.
@@ -554,7 +554,7 @@ public class ReminderBuilder {
     }
 }
 ```
-###### /java/seedu/address/testutil/ReminderUtil.java
+###### \java\seedu\address\testutil\ReminderUtil.java
 ``` java
 /**
  * A utility class for Reminder.
@@ -580,7 +580,7 @@ public class ReminderUtil {
     }
 }
 ```
-###### /java/seedu/address/testutil/TypicalReminders.java
+###### \java\seedu\address\testutil\TypicalReminders.java
 ``` java
 /**
  * A utility class containing a list of {@code Reminder} objects to be used in tests.

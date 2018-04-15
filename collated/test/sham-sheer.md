@@ -1,5 +1,5 @@
 # sham-sheer
-###### /java/guitests/guihandles/CommandBoxHandle.java
+###### \java\guitests\guihandles\CommandBoxHandle.java
 ``` java
     /**
      * Enters the given command in the Command Box but doesnt press enter.
@@ -21,7 +21,7 @@
     }
 }
 ```
-###### /java/seedu/address/logic/commands/AddCommandTest.java
+###### \java\seedu\address\logic\commands\AddCommandTest.java
 ``` java
         @Override
         public void sortPersons(Index index) throws IndexOutOfBoundsException {
@@ -33,7 +33,7 @@
         }
 
 ```
-###### /java/seedu/address/logic/commands/DeleteMeetCommandTest.java
+###### \java\seedu\address\logic\commands\DeleteMeetCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -205,7 +205,7 @@ public class DeleteMeetCommandTest {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/MeetCommandTest.java
+###### \java\seedu\address\logic\commands\MeetCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) and unit tests for SortCommand.
@@ -397,7 +397,7 @@ public class MeetCommandTest {
 }
 
 ```
-###### /java/seedu/address/logic/commands/SortCommandTest.java
+###### \java\seedu\address\logic\commands\SortCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) and unit tests for SortCommand.
@@ -490,7 +490,7 @@ public class SortCommandTest {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/DeleteMeetCommandParserTest.java
+###### \java\seedu\address\logic\parser\DeleteMeetCommandParserTest.java
 ``` java
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -515,7 +515,7 @@ public class DeleteMeetCommandParserTest {
 
 }
 ```
-###### /java/seedu/address/logic/parser/MeetCommandParserTest.java
+###### \java\seedu\address\logic\parser\MeetCommandParserTest.java
 ``` java
 public class MeetCommandParserTest {
     private MeetCommandParser parser = new MeetCommandParser();
@@ -543,7 +543,7 @@ public class MeetCommandParserTest {
 
 }
 ```
-###### /java/seedu/address/logic/parser/SortCommandParserTest.java
+###### \java\seedu\address\logic\parser\SortCommandParserTest.java
 ``` java
 public class SortCommandParserTest {
     private SortCommandParser parser = new SortCommandParser();
@@ -553,7 +553,7 @@ public class SortCommandParserTest {
     }
 }
 ```
-###### /java/seedu/address/model/person/MeetTest.java
+###### \java\seedu\address\model\person\MeetTest.java
 ``` java
 public class MeetTest {
 
@@ -620,7 +620,7 @@ public class MeetTest {
     }
 }
 ```
-###### /java/seedu/address/testutil/PersonBuilder.java
+###### \java\seedu\address\testutil\PersonBuilder.java
 ``` java
     /**
      * Sets the {@code Email} of the {@code Person} that we are building.
@@ -636,7 +636,7 @@ public class MeetTest {
 
 }
 ```
-###### /java/seedu/address/ui/CommandBoxTest.java
+###### \java\seedu\address\ui\CommandBoxTest.java
 ``` java
     @Test
     public void handleKeyPress_startingWithTab() {
