@@ -530,6 +530,10 @@ Currently, your goal page is empty! Try adding a goal entry that you have into _
 ```java
 > addgoal impt/1 text/learn how to bake cheesecake
 ```
+The figure below portrays what should be seen after the command is executed correctly:
+
+.Execution of +goal text/get an internship this summer impt/10
+image::AddGoal.PNG[width="1000"]
 
 // tag::sortgoal[]
 [discrete]
@@ -561,6 +565,11 @@ Sorts the goal list based on start date time in ascending order.
 > sgoal f/completion o/descending
 ```
 Sorts the goal list based on completion in descending order.
+
+The figure below portrays what should be seen after the command is executed correctly:
+
+.Execution of sortgoal f/importance o/ascending
+image::SortGoal.PNG[width="1000"]
 // end::sortgoal[]
 
 [discrete]
@@ -625,6 +634,11 @@ Deletes the 4th goal in _CollegeZone_'s sorted goal listing. +
 > deletegoal 1
 ```
 Deletes the 1st goal in _CollegeZone_'s goal listing.
+
+The figure below portrays what should be seen after the command is executed correctly:
+
+.Execution of -goal 4
+image::DeleteGoal.PNG[width="1000"]
 // end::goalfeatures[]
 
 //tag::goalcompletion[]
@@ -699,14 +713,14 @@ Indicates ongoing of the 1st goal in _CollegeZone_'s goal listing.
 === Changing CollegeZone theme : `theme` or `th`
 _CollegeZone_'s default theme colour is not the only theme colour we have to offer! Try changing _CollegeZone_'s theme colour to your preferred one using the `theme` or `th` command.  +
 
-image::CollegeZoneDarkTheme.JPG[width="800"]
-_Figure AAA : Dark Theme_
+.Dark Theme
+image::CollegeZoneDarkTheme.JPG[width="1000"]
 
-image::CollegeZoneBubblegumTheme.JPG[width="800"]
-_Figure AAA : Bubblegum Theme_
+.Bubblegum Theme
+image::CollegeZoneBubblegumTheme.JPG[width="1000"]
 
-image::CollegeZoneLightTheme.JPG[width="800"]
-_Figure 3.13.1 : Light Theme_
+.Light Theme
+image::CollegeZoneLightTheme.JPG[width="1000"]
 
 *_Formats:_*
 ```java
