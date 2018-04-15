@@ -3,7 +3,7 @@
 :stylesDir: ../stylesheets
 
 image::fuadsahmawi.jpg[width="150", align="left"]
-{empty}[https://github.com/fuadsahmawi[github]]
+(https://github.com/fuadsahmawi[my github page])
 
 Welcome to my project portfolio. This document summarises my contributions of every software-related project that I have
 been involved with. The link to my GitHub page can be found above. This is where you can find the repository of every 
