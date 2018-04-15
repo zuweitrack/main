@@ -412,9 +412,9 @@ command feature to be able to find persons by tags.
 
 === Logic: Command Aliases [Since v1.1]
 
-CollegeZone users may now use shortcuts to perform desired tasks. These shortcuts are shown in figure 3.6.1.
+CollegeZone users may now use shortcuts to perform desired tasks. These shortcuts are shown in the table below.
 
-*Figure 3.6.1*:
+
 [width="90%",cols="20%,<25%,<25%",options="header",]
 |=======================================================================
 |Command | Original| Alias
@@ -687,8 +687,7 @@ the specific `Reminder` that the user wants to remove.
 
 // end::reminder[]
 
-// tag::myGoalsPage[]
-
+// tag::Goals[]
 === Goals
 ==== Introduction
 CollegeZone is designed for RC4 students to use. RC4 students often have goals that they want to achieve in life
@@ -697,19 +696,15 @@ The main reason behind this implementation is because setting goals gives you *l
 This implementation allows RC4 students to set goals in _CollegeZone_ – big or small ones - so
  that they will be reminded of the goals that they have set for themselves.
 
-  In addition as a majority of RC4 residents are NUS students, when students set their own goals, they
-   take responsibility and ownership of their learning goals. +
- Goals are meant only for the user, and the user can have many goals stored in CollegeZone.
-
 *Goal features:*
-
- -add goal
- -edit goal
- -delete goal
- -complete goal
- -ongoing goal
- -sort goal
-
+```
+ 1. add goal
+ 2. edit goal
+ 3. delete goal
+ 4. complete goal
+ 5. ongoing goal
+ 6. sort goal
+```
 ==== Implementation of Goal Object
 
 *Goal objects consists of 5 attributes :* +
@@ -721,7 +716,7 @@ This implementation allows RC4 students to set goals in _CollegeZone_ – big or
 5. Goal completion status.
 
 ._Class diagram of Goal_
-image::CollegeZoneGoalModelClassDiagram.JPG[width="800"]
+image::CollegeZoneGoalModelClassDiagram.JPG[width="750"]
 
 The code snippet shown below shows the overloading of StartDateTime constructor class.
 It keeps both a String value and a LocalDateTime value.
@@ -785,6 +780,23 @@ public class StartDateTime implements Comparable<StartDateTime> {
     }
 ----
 
+- All goals will have a string of stars (indicating importance) in a yellow border directly below the goal text in the goal list panel.
+
+
+==== Design Considerations
+
+**Aspect:** Representation of Goals level of importance in UI +
+**Alternative 1 (current choice):** Each level of importance have a number of stars related to it. +
+**Pros:** Ability for the user to differentiate the Goals with higher level of importance compared to those with lower level of importance. +
+**Cons:** The goal list in the UI might look messy to the user without having a sort Goals option as the list of goals is displayed based on when it was added. +
+**Alternative 2:** Having an additional sort goal command +
+**Pros:** It is simple and easy to understand. +
+**Cons:** It requires extra methods to implement the sort function. +
+
+---
+// end::Goals[]
+
+// tag::addgoal[]
 ==== Implementation of add goal
 
 Adding a goal into _CollegeZone_ is facilitated by `AddGoalCommand`, which extends `UndoableCommand`, it
@@ -803,43 +815,18 @@ public class AddGoalCommand extends UndoableCommand {
 The following sequence diagram shows the flow of operation from the point _CollegeZone_ receives an input to the output of the result.
 
 ._Interactions Inside the Logic Component for the `+g` Command_
-image::AddGoalSeqDiagram.png[width="800"]
-
+image::AddGoalSeqDiagram.PNG[width="800"]
 
 AddGoalCommand is implemented in this way:
 
-1. Logic
-* AddressBookParser:
-** Detects if add goal keyword contains correct parsing keywords after +
-*** e.g. +g text/eat healthily impt/9
-* AddGoalCommandParser: (More about this method will be mentioned later)
-** Parses the input by extracting the input text and importance +
-*** Parsed text : eat healthily +
-*** Parsed importance : 9
-** Creates a AddGoalCommand class and passes the text and importance and string as arguments
-* AddGoalCommand:
-** Adds the new goal to the list locally
-** Runs the execution which calls the model
-
-2. Model
-
-* Calls the model and gets the goals list
-* Adds the new goal into the goals list
-
-3. Ui
-* Displays the new goal added in the goal list panel
-
-4. Storage
-* Stores the new goal added in the address book storage
-
-Note:
-
-- All goals will have a string of stars (indicating importance) in a yellow border directly below the goal text in the goal list panel.
-- Goal that are just added will be placed at the bottom of the goal list. +
-
-The `AddGoalCommandParser` returns `AddGoalCommand` after execution, which will be further processed by `logic` component.
-
-AddGoalCommandParser is implemented in this way:
+In the Logic component, `AddressBookParser` will parse the user's input and detects if add goal keyword contains correct parsing keywords after.
+For example, e.g. +g text/eat healthily impt/9
+`AddGoalCommandParser` parses the input by extracting the input text and importance, +
+e.g.Parsed text : eat healthily +
+    Parsed importance : 9 +
+Everytime a goal is added, the start date time of the goal will be recorded down in real time and it's completion
+status will be "ongoing" by default.
+`AddGoalCommandParser` is implemented in this way:
 [source,java]
 ----
 public class AddGoalCommandParser implements Parser<AddGoalCommand> {
@@ -867,10 +854,17 @@ public class AddGoalCommandParser implements Parser<AddGoalCommand> {
             throw new ParseException(ive.getMessage(), ive);
         }
     }
+}
 ----
+The `AddGoalCommandParser` returns `AddGoalCommand` after execution, passes the text and importance and string as arguments which will be further processed by `logic` component.
+`AddGoalCommand` adds the new goal to the list locally and runs the execution which calls the model.
+In the Model component, the `UniqueGoalList` is called and the new goal is added to the list.
+In the Ui component, the new goal added is displayed in the goal list panel.
+In the Storage component, the new goal added is stored in the address book storage
 
-Notice that everytime a goal is added, the start date time of the goal will be recorded down in real time and it's completion
-status will be "ongoing" by default.
+Note:
+- A goal that has just been added will be placed at the bottom of the goal list. +
+
 
 ==== Design Considerations
 
@@ -885,16 +879,6 @@ status will be "ongoing" by default.
 
 ---
 
-**Aspect:** Representation of Goals level of importance in UI +
-**Alternative 1 (current choice):** Each level of importance have a number of stars related to it. +
-**Pros:** Ability for the user to differentiate the Goals with higher level of importance compared to those with lower level of importance. +
-**Cons:** The goal list in the UI might look messy to the user without having a sort Goals option as the list of goals is displayed based on when it was added. +
-**Alternative 2:** Having an additional sort goal command +
-**Pros:** It is simple and easy to understand. +
-**Cons:** It requires extra methods to implement the sort function. +
-
----
-
 **Aspect:** Representation of Goals in UI +
 **Alternative 1 (current choice):** Having a goal list panel beside our current person list panel. +
 **Pros:** Ability for the user to differentiate the Goals with higher level of importance compared to those with lower level of importance. +
@@ -902,15 +886,20 @@ status will be "ongoing" by default.
 **Alternative 2:** Having a tab button in CollegeZone that allows user to switch between the person list panel and goal list panel. +
 **Pros:** Ability for user to switch to person list and goal list in the UI, which makes it look more user friendly. +
 **Cons:** As CollegeZone is a desktop application that has most interactions happen using a Command Line Interface (CLI), a new command to switch tabs between goal list and person list needs to be implemented. +
+---
+// end::addgoal[]
 
+
+// tag::deletegoal[]
 ==== Implementation of delete goal
 
 
 All goal commands are event driven. +
 The following is the Sequence Diagram for interactions within the `Logic` component for the `execute("goal remove 1")` API call. +
 
+.Goal delete Sequence Diagram
 image::GoalHighLevelSequenceDiagram.jpg[width="800"]
-    Figure 3.10.0.1: Goal delete Sequence Diagram
+
 
 1. Logic
 * AddressBookParser: Detects if goal delete keyword contains correct parsing keyword after +
@@ -947,15 +936,133 @@ are very similar to how CollegeZone implements its contacts. This is implemented
 
 
 ---
-// end::myGoalsPage[]
+// end::deletegoal[]
 
 
+// tag::sortgoal[]
 ==== Implementation of sort goal
 
+The sorting goal mechanism is facilitated by `SortGoalCommandParser` and `SortGoalCommand`, with both classes residing
+in the `Logic` component of CollegeZone. `SortGoalCommand` in not undoable.
 
-=== Theme Enhancement
+`SortGoalCommandParser` takes in an arguments in the form of `FIELD` and `ORDER` that defines how `UniqueGoalList`
+should be sorted. You may customise the sort goal operation, with `FIELD` specifying the goal field to sort and `ORDER`
+specifying the type of sort order. It checks for validity against a few keywords. For example, `ORDER` only accepts 2 keywords: `ascending` or `descending`.
+On the other hand, `FIELD` only accepts 3 keywords: `importance`, `startdatetime` and `completion`.
 
+The image below shows the interaction of sort the `Logic` component.
 
+.Interactions Inside the Logic Component for the `sortgoal importance o/ascending` Command
+image::SortGoalSeqDiagram.PNG[width="800"]
+
+Upon execution of `SortGoalCommand`, a `Comparator<Goal>` will be initialised based on the sort type it receives.
+A `sortPersons` function call will be made to `Model`, which propagates down to `UniqueGoalList`, where the sorting of the `internalList` occurs. +
+The code below shows the switch statement used to define the type of sort the user wants in the `UniqueGoalList`. +
+
+[source,java]
+----
+public class UniqueGoalList implements Iterable<Goal> {
+
+    public void sortGoal(String sortField, String sortOrder) throws EmptyGoalListException {
+        String sortFieldAndOrder = sortField + " " + sortOrder;
+        //Comparator<Goal> comparatorImportance = Comparator.comparingInt(Goal::getImportance);
+        switch (sortFieldAndOrder) {
+        case "importance ascending":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalA.getImportance()
+                    .compareTo(goalB.getImportance()));
+            break;
+        case "importance descending":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalB.getImportance()
+                    .compareTo(goalA.getImportance()));
+            break;
+        case "completion ascending":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) -> new Boolean(goalA.getCompletion().hasCompleted)
+                    .compareTo(goalB.getCompletion().hasCompleted));
+            break;
+        case "completion descending":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) -> new Boolean(goalB.getCompletion().hasCompleted)
+                    .compareTo(goalA.getCompletion().hasCompleted));
+            break;
+        case "startdatetime ascending":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalA.getStartDateTime()
+                    .compareTo(goalB.getStartDateTime()));
+            break;
+        case "startdatetime descending":
+            FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalB.getStartDateTime()
+                    .compareTo(goalA.getStartDateTime()));
+            break;
+
+        default:
+            break;
+        }
+    }
+}
+----
+ Once verified, the argument will be tokenized to identify your specified sort type. A `SortGoalCommand` object is then
+  created with the identified sort type.
+[NOTE]
+If the goal list is found to be empty, a `CommandException` will be thrown from `SortGoalCommand`.
+
+==== Design Considerations
+
+**Aspect:** Deciding the fields and orders that the goal list can be sorted +
+**Alternative 1:** Sort only one field and in one order +
+**Pros:** Sort becomes a more intuitive command for user to type +
+**Cons:** Less customization of sort goal command. +
+**Alternative 2 (current choice): ** Sort in multiple fields and two orders +
+**Pros:** More customization for user +
+**Cons:** User have to type in a longer command
+---
+
+**Aspect:** Initialising of `Comparator<Goal>` +
+**Alternative 1:** Initialise in `SortGoalCommand` +
+**Pros:** Clear separation of concerns, `SortGoalCommandParser` to handle identifying of attribute to sort by only. +
+**Cons:** Hard for new developers to follow as other commands like `AddGoalCommand` handles object creation in its parser. +
+**Alternative 2 (current choice): ** Initialise in `UniqueGoalList` +
+**Pros:** Straightforward as initialises the `Comparator` where it is used. +
+**Cons:** `UniquePersonList` is at a lower level and should only handle a minimal set of `Goal` related operations, and not logical operations like string matching. +
+---
+// end::sortgoal[]
+
+// tag::theme[]
+=== Switching theme mechanism
+CollegeZone has multiple themes for the user to choose from. Currently, there are 3 themes implemented.
+Namely, `dark` theme, `bubblegum` theme and `light` theme. This command is not undoable.
+
+The switch theme mechanism is facilitated by `ThemeCommandParser` and `ThemeCommand`, with both classes residing
+in the `Logic` component of CollegeZone. `ThemeCommand` in not undoable.
+
+`ThemeCommandParser` takes in an argument in the form of `THEME_COLOUR` that defines the theme colour of what CollegeZone
+will be. You may customise the theme colour you want out of the 3 that we have. It checks for validity against a few keywords.
+`THEME_COLOUR` only accepts 3 keywords: `light`, `dark` or `bubblegum`.
+
+`ThemeCommandParser` returns a new `ThemeCommand` object. `ThemeCommand` then executes the new
+event change by calling `ThemeSwitchRequestEvent`. The updating of theme colour will be
+done by `handleChangeThemeEvent` method. +
+The following code snippet shows how the theme switch event is handled. +
+
+[source,java]
+----
+@Subscribe
+private void handleChangeThemeEvent(ThemeSwitchRequestEvent event) {
+    themeColour = event.themeToChangeTo;
+    Platform.runLater(
+            this::changeThemeColour
+    );
+}
+----
+
+==== Design Considerations
+
+**Aspect:** Storing user choice of theme +
+**Alternative 1 (current choice):** User prefs will be set to `dark` theme colour by default +
+**Pros:** Lesser coding required as there's no need to store theme colour as a part of the model component +
+**Cons:** _CollegeZone_ does not remember user's preferred theme upon restarting _CollegeZone_ +
+**Alternative 2 (current choice): ** Initialising in `UserPref`  +
+**Pros:** _CollegeZone_ will remember user's preferred theme upon restarting _CollegeZone_  +
+**Cons:** More coding required to store theme colour
+---
+// end::theme[]
 
 // tag::meetCommand[]
 === Meet Command [Since v1.2]
@@ -981,8 +1088,8 @@ Implementation of Sorting Mechanism requires both the manipulation of `Logic` an
 
 The following sequence diagram shows the flow of operation from the point the address book receives an input to the output of the result.
 
+.Interactions Inside the Logic Component for the `sort 1` Command_
 image::SortPersonSdForLogic.png[width="800"]
-_Figure 4.5.2 : Interactions Inside the Logic Component for the `sort 1` Command_
 
 [NOTE]
 If the list is found to be empty, an `CommandException` will be thrown from `SortCommand`. The command should be terminated without any state change, keeping the redoStack clean of changes.
@@ -1327,6 +1434,18 @@ Use case ends.
 +
 Use case ends.
 
+=== Use case: List students
+1. User requests to list students
+2. CollegeZone shows a list of students
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
 
 === Use case: Delete student
 
@@ -1809,6 +1928,60 @@ Use case ends.
 +
 Use case ends.
 
+=== Use case: Undo
+
+*MSS*
+
+1.  User requests to undo a command
+2.  CollegeZone undo the command and update _CollegeZone_
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The given format is invalid.
++
+[none]
+** 1a1. CollegeZone shows an error message.
++
+Use case ends.
+
+* 1b. There are no more commands to undo.
++
+[none]
+** 1b1. CollegeZone shows an error message.
++
+Use case ends.
+
+=== Use case: Redo
+
+*MSS*
+
+1.  User requests to redo a command
+2.  CollegeZone redo the command and update _CollegeZone_
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The given format is invalid.
++
+[none]
+** 1a1. CollegeZone shows an error message.
++
+Use case ends.
+
+* 1b. There are no more commands to redo.
++
+[none]
+** 1b1. CollegeZone shows an error message.
++
+Use case ends.
+
+=== Use case: Seek Resident Assistant (RA)
+
 === Use case: History
 
 *MSS*
@@ -1834,6 +2007,25 @@ Use case ends.
 
 1.  User requests to clear CollegeZone
 2.  CollegeZone deletes all data
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The given format is invalid.
++
+[none]
+** 2a1. CollegeZone shows an error message.
++
+Use case ends.
+
+=== Use case: Help
+
+*MSS*
+
+1.  User requests for help page in CollegeZone
+2.  CollegeZone opens help page
 +
 Use case ends.
 
