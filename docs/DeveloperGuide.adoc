@@ -909,8 +909,6 @@ In the Logic component, `AddressBookParser` will parse the user's input, for exa
 `DeleteGoalCommandParser` parses the `INDEX`: +
 e.g.Parsed index : 1 +
 
-The following is the Sequence Diagram for interactions within the `Logic` component for the `execute("goal remove 1")` API call. +
-
 ._Interactions Inside the Logic Component for the `-goal` Command_
 image::DeleteGoalSeqDiagram.PNG[width="800"]
 
