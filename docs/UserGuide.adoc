@@ -504,9 +504,10 @@ image::delReminder.PNG[width="1500"]
 
 // end::reminder[]
 
-//tag::goalfeatures[]
+
 === Goal features
 
+//tag::goalfeatures[]
 [discrete]
 === Adding a goal: `+goal` or `+g` or `addgoal` [Since v1.3]
 Currently, your goal page is empty! Try adding a goal entry that you have into _CollegeZone_ using the `+goal`, `+g` or `addgoal` command. The new goal added will be reflected in _CollegeZone_. +

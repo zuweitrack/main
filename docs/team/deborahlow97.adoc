@@ -19,7 +19,7 @@ link:{collatedDir}/test/deborahlow97.md[Test code] +
 == Summary of contributions
 
 === Major enhancement: added Add, Edit, Sort and Delete goal command
-** What it does: Allows user to add, edit and delete goals into CollegeZone. It also allows user to sort the goals that they have based on the field they want it sorted in.It includes tracking of when the goals started, ended, it's importance level to user and it's completion status.
+** What it does: Allows user to add, edit and delete goals into CollegeZone. It also allows user to sort the goals that they have based on the field they want it sorted in. It includes keeping track of when the goals started, ended, it's importance level to user and it's completion status.
 ** External behavior: +
 include::../UserGuide.adoc[tag=goalfeatures]
 
