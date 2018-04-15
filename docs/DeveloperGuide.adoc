@@ -478,12 +478,6 @@ CollegeZone users may now use shortcuts to perform desired tasks. These shortcut
 
 //end::find[]
 
-// tag::tagcolours[]
-=== Enhanced tag colours [Since v1.1]
-Tags are now colour-coded which allows improved differentiation between many different tags. Different coloured tags
-also makes it more eye catching for users.
-// end::tagcolours[]
-
 // tag::addandedit[]
 === Targeted add and edit command [Since v1.2]
 As CollegeZone is designed for NUS RC4 students to use, being able to record other students Level of Friendship,
@@ -725,7 +719,6 @@ The code snippet shown below shows the overloading of StartDateTime constructor 
 It keeps both a String value and a LocalDateTime value.
 The _Code-snippet 2 and 3_ shows the conversion of the String value to LocalDateTime value and vice versa.
 
-.Code-snippet 1
 [source,java]
 ----
 public class StartDateTime implements Comparable<StartDateTime> {
@@ -746,8 +739,8 @@ public class StartDateTime implements Comparable<StartDateTime> {
     }
 }
 ----
+.Code Snippet 3.10.1: StartDateTime method
 
-.Code-snippet 2
 [source,java]
 ----
     public static String properDateTimeFormat(LocalDateTime dateTime) {
@@ -770,8 +763,8 @@ public class StartDateTime implements Comparable<StartDateTime> {
         return builder.toString();
     }
 ----
+.Code Snippet 3.10.2: Method conversion
 
-.Code-snippet 3
 [source,java]
 ----
     public static LocalDateTime getLocalDateTimeFromProperDateTime(String properDateTimeString) {
@@ -782,6 +775,7 @@ public class StartDateTime implements Comparable<StartDateTime> {
         return nattyDateAndTimeParser(stringFormat).get();
     }
 ----
+.Code Snippet 3.10.3: Method conversion
 
 - All goals will have a string of stars (indicating importance) in a yellow border directly below the goal text in the goal list panel.
 
@@ -894,7 +888,7 @@ Note:
 
 
 // tag::deletegoal[]
-==== Delete goal mechanism [Since v1.4]
+=== Delete goal mechanism [Since v1.4]
 
 Deleting a goal from _CollegeZone_ is facilitated by `DeleteGoalCommand`, which extends `UndoableCommand`, it
 supports undoing and redoing of commands that modifies the state of the _CollegeZone_.
