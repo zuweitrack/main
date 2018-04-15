@@ -27,7 +27,7 @@ More importantly, _CollegeZone_ is *optimized for those who prefer to work with 
 
 Follow these few simple steps to get started with _CollegeZone_!
 
-=== *Download*
+=== Download
 .  Ensure you have Java version `1.8.0_60` or later installed in your Computer.
 +
 [NOTE]
@@ -36,20 +36,19 @@ This app will not work with earlier versions of Java 8.
 +
 .  Download the latest `collegezone.jar` link:{repoURL}/releases[here].
 +
-image::DownloadJar.JPG[width="500"]
+image::DownloadJar.JPG[width="550"]
 +
 
 .  Copy the file to the folder you want to use as the home folder for _CollegeZone_. For example, you can place it in a folder created on your desktop.
 
-=== *Launch*
+=== Launch
 . To launch _CollegeZone_, double-click on `collegezone.jar` to launch _CollegeZone_.
 . You will be greeted with _CollegeZone's_ Graphic User Interface (GUI) as shown below. The GUI should appear in a few seconds.
 +
 image::UI.JPG[width="800"]
 +
 
-
-=== *Visual Introduction*
+=== Visual Introduction
 
 The image below describes what each part of _CollegeZone's_ GUI represent.
 
@@ -83,9 +82,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in kbd:[()] (round brackets) indicates the *Command keyword* to use  e.g. in `(add)`, `add` is the command key word to use.
+* Words enclosed in round brackets indicates the *Command keyword* to use  e.g. in `(add)`, `add` is the command key word to use.
 * *Command keywords* separated by kbd:[|] executes the same command e.g. in `(add | a)`, `add` or `a` are equivalent command key words to use.
-
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 * Items in square brackets are optional e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -645,6 +643,9 @@ The figure below portrays what should be seen after the command is executed corr
 .Execution of -goal 4
 image::DeleteGoal.PNG[width="1000"]
 
+// end::goalfeatures[]
+
+//tag::goalcompletion[]
 [discrete]
 === Completing a goal: `!goal` or `!g` or `completegoal`
 Once you've completed a goal, indicate completion of an existing goal in _CollegeZone_ using the `!goal`, `!g` or `completegoal` command. +
@@ -727,7 +728,8 @@ image::OngoingGoal.PNG[width="1000"]
 ====
 The goal percentage bar changes.
 ====
-// end::goalfeatures[]
+
+// end::goalcompletion[]
 
 === Interesting features
 // tag::theme[]
@@ -925,10 +927,6 @@ Edits the reminder text and datetime of the 2nd student to be `water plants` and
 By using this command, you are able to add subgoals to the goals you currently have.
 
 [discrete]
-=== Auto-completing of commands [Coming in v2.0]
-Auto-complete command by suggesting to the you the command format to use based on what you have already typed in the command box.
-
-[discrete]
 === Adding of timetable into CollegeZone [Coming in v2.0]
 Allows you to add your NUS timetable schedule for the semester into _CollegeZone_.
 // end::debv2.0[]
@@ -950,15 +948,59 @@ OR +
 `a n/NAME p/PHONE_NUMBER */LEVEL_OF_FRIENDSHIP b/BIRTHDAY u/UNIT_NUMBER [cca/CCA]... [t/TAG]...`
 |`add n/James Ho p/22224444 */3 b/14-3-1995 u/01-111 cca/Choir t/friend t/colleague`
 
+|*Add Goal* |Adds a goal entry |`+goal impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
+OR +
+`+g impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
+OR +
+`addgoal impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
+|`+goal impt/3 text/lose weight!`
+
+|*Add Reminder* |Adds a reminder entry |`+reminder text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME` +
+OR +
+`+r text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME` +
+OR +
+`addreminder text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME` +
+|`+reminder text/Eat pills d/4/25/2018 8am e/4/25/2018 8.10am`
+
 |*Clear* |Clears all student and goal entries |`clear` OR `c`|
+
+|*Complete Goal* |Complete a goal entry |`!goal INDEX` +
+OR +
+`!g INDEX` +
+OR +
+`completegoal INDEX` +
+|`!goal 1`
 
 |*Delete* |Deletes a student entry |`delete INDEX` OR `d INDEX`
 |`delete 3`
 
-|*Edit* |Edits a peron details |`edit INDEX [n/NAME] [p/PHONE_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [u/UNIT_NUMBER] [cca/CCA]... [t/TAG]...` +
+|*Delete Goal* |Deletes a goal entry |`-goal INDEX` +
 OR +
-`e INDEX [n/NAME] [p/PHONE_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [u/UNIT_NUMBER] [cca/CCA]... [t/TAG]...` +
+`-g INDEX` +
+OR +
+`deletegoal INDEX` +
+|`-goal 2`
+
+|*Delete Reminder* |Deletes a reminder entry |`-reminder text/REMINDER_TEXT d/START_DATETIME` +
+OR +
+`-r text/REMINDER_TEXT d/START_DATETIME` +
+OR +
+`deletereminder text/REMINDER_TEXT d/START_DATETIME` +
+|`-reminder text/Eat pills d/4/25/2018 8am`
+
+|*Edit* |Edits a person details |`edit INDEX [n/NAME] [p/PHONE_NUMBER] [*/LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [u/UNIT_NUMBER] [cca/CCA]... [t/TAG]...` +
+OR +
+`e INDEX [n/NAME] [p/PHONE_NUMBER][ */LEVEL_OF_FRIENDSHIP] [b/BIRTHDAY] [u/UNIT_NUMBER] [cca/CCA]... [t/TAG]...` +
 |`edit 2 n/James Lee cca/waterpolo`
+
+|*Edit Goal* |Edits a goal entry |`~goal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
+OR +
+`~g INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
+OR +
+`editgoal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
+|`~goal 2 impt/1`
+
+|*Exit* |Exits _CollegeZone_ |`exit` |
 
 |*Find* |Finds a student by keyword |`find n/KEYWORD [MORE_KEYWORDS]` +
 OR +
@@ -969,62 +1011,26 @@ OR +
 `f t/KEYWORD [MORE_KEYWORDS]` +
 |`find n/James Jake`
 
-|*List* |Lists all students |`list` +
-OR +
-`l` |
-
-|*Help* |Opens the help page |`help` +
-OR +
-`h` |
-
-|*Select* |Selects the student and goal entry |`select INDEX` +
-OR +
-`s INDEX`
-|`select 2`
+|*Help* |Opens the help page |`help`|
 
 |*History* |Lists previously entered commands |`history` +
 OR +
 `h`
 |
 
-|*Undo* |Undo previous command |`undo` |
-
-|*Redo* |Redo previous command |`redo` |
+|*List* |Lists all students |`list` +
+OR +
+`l` |
 
 |*Meet* |Adds meet up date with a student |`meet INDEX d/DD-MM-YYYY` +
 OR +
 `m INDEX d/DD-MM-YYYY`
 |
 
-|*Sort* |Sorts the RC4 Students list in 3 different ways|`sort [SORT TYPE]`| sort 1
+|*Rate* |Rates one or more people|`rate INDEX(s) [LEVELOFFRIENDSHIP]` OR +
+`rt INDEX(s) [LEVELOFFRIENDSHIP]`| rate 1 3 */5
 
-|*Add Goal* |Adds a goal entry |`+goal impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
-OR +
-`+g impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
-OR +
-`addgoal impt/IMPORTANCE_LEVEL text/GOAL_TEXT` +
-|`+goal impt/3 text/lose weight!`
-
-|*Edit Goal* |Edits a goal entry |`~goal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
-OR +
-`~g INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
-OR +
-`editgoal INDEX [impt/IMPORTANCE_LEVEL] [text/GOAL_TEXT]` +
-|`~goal 2 impt/1`
-
-|*Delete Goal* |Deletes a goal entry |`-goal INDEX` +
-OR +
-`-g INDEX` +
-OR +
-`deletegoal INDEX` +
-|`-goal 2`
-
-|*Complete Goal* |Complete a goal entry |`!goal INDEX` +
-OR +
-`!g INDEX` +
-OR +
-`completegoal INDEX` +
-|`!goal 1`
+|*Redo* |Redo previous command |`redo` |
 
 |*Revert complete Goal* |Revert a complete a goal entry |`-!goal INDEX` +
 OR +
@@ -1032,6 +1038,19 @@ OR +
 OR +
 `ongoinggoal INDEX` +
 |`-!goal 1`
+
+|*Seek* |Seek RA(s) of students by keyword|`seek [keyword]` OR +
+`sh [keyword]`| seek james
+
+|*Select* |Selects the student and goal entry |`select INDEX` +
+OR +
+`s INDEX`
+|`select 2`
+
+|*Show* |Show students by level of friendship|`show [LEVELOFFRIENDSHIP]` OR +
+`sh [LEVELOFFRIENDSHIP]`| show 5
+
+|*Sort* |Sorts the RC4 Students list in 3 different ways|`sort [SORT TYPE]`| sort 1
 
 |*Sort Goal* |Sorts the goal list |`sortgoal f/GOAL_FIELD o/ORDER` +
 OR +
@@ -1043,27 +1062,4 @@ OR +
 `th THEME_COLOUR` +
 |`theme light`
 
-|*Add Reminder* |Adds a reminder entry |`+reminder text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME` +
-OR +
-`+r text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME` +
-OR +
-`addreminder text/REMINDER_TEXT d/START_DATETIME e/END_DATETIME` +
-|`+reminder text/Eat pills d/4/25/2018 8am e/4/25/2018 8.10am`
-
-|*Delete Reminder* |Deletes a reminder entry |`-reminder text/REMINDER_TEXT d/START_DATETIME` +
-OR +
-`-r text/REMINDER_TEXT d/START_DATETIME` +
-OR +
-`deletereminder text/REMINDER_TEXT d/START_DATETIME` +
-|`-reminder text/Eat pills d/4/25/2018 8am`
-
-|*Rate* |Rates one or more people|`rate INDEX(s) [LEVELOFFRIENDSHIP]` OR +
-`rt INDEX(s) [LEVELOFFRIENDSHIP]`| rate 1 3 */5
-
-|*Show* |Show students by level of friendship|`show [LEVELOFFRIENDSHIP]` OR +
-`sh [LEVELOFFRIENDSHIP]`| show 5
-
-|*Seek* |Seek RA(s) of students by keyword|`seek [keyword]` OR +
-`sh [keyword]`| seek james
-
-|*Exit* |Exits _CollegeZone_ |`exit` |
+|*Undo* |Undo previous command |`undo` |

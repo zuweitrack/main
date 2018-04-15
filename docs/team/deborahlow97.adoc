@@ -13,8 +13,8 @@ link:{collatedDir}/test/deborahlow97.md[Test code] +
 
 == Summary of contributions
 
-=== Major enhancement: added Add, Edit and Delete goal command
-** What it does: Allows user to add, edit and delete goals into CollegeZone. It includes tracking of when the goals started, ended, it's importance level to user and it's completion status.
+=== Major enhancement: added Add, Edit, Sort and Delete goal command
+** What it does: Allows user to add, edit and delete goals into CollegeZone. It also allows user to sort the goals that they have based on the field they want it sorted in.It includes tracking of when the goals started, ended, it's importance level to user and it's completion status.
 ** External behavior:
 
 include::../UserGuide.adoc[tag=goalfeatures]
@@ -29,20 +29,23 @@ include::../UserGuide.adoc[tag=goalcompletion]
 
 ** Justification: This feature improves the product significantly because RC4 students will have be able to indicate completion status of goals that they have.
 
-=== Major enhancement: added Sort goal command
-** What it does: Allows user to sort the goals that they have based on the field they want it sorted in.
-
 === Minor enhancement: added a theme command that allows the user to change the theme colour of CollegeZone.
 ** Justification: This feature allows RC4 students to switch to a different theme colour of their liking.
+** External behavior:
+
 include::../UserGuide.adoc[tag=theme]
 
 === Minor enhancement: added birthday, level of friendship, unit number and ccas field
 ** Justification: The addition of this field provides user with more comprehensive contact details to add into CollegeZone.
+** External behavior:
 
+include::../UserGuide.adoc[tag=addandedit]
 
 === Proposed enhancements:
-==== Auto-Complete command
+include::../UserGuide.adoc[tag=debv2.0]
+
 ==== Differentiating goals into Main goals and Sub-goals
+==== Adding of timetable into CollegeZone
 
 * *Code contributed*: [https://github.com/CS2103JAN2018-T09-B2/main/blob/master/collated/main/deborahlow97.md[Functional code]] [https://github.com/CS2103JAN2018-T09-B2/main/tree/master/collated/test[Test code]]
 
@@ -69,8 +72,11 @@ include::../UserGuide.adoc[tag=theme]
 |===
 
 include::../DeveloperGuide.adoc[tag=addandedit]
-
-include::../DeveloperGuide.adoc[tag=myGoalsPage]
+include::../DeveloperGuide.adoc[tag=Goals]
+include::../DeveloperGuide.adoc[tag=addgoal]
+include::../DeveloperGuide.adoc[tag=deletegoal]
+include::../DeveloperGuide.adoc[tag=sortgoal]
+include::../DeveloperGuide.adoc[tag=theme]
 
 
 == PROJECT: PowerPointLabs
