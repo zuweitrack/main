@@ -326,7 +326,7 @@ Shows the level of friendship of the student(s) whose level of friendship contai
 
 *_Formats:_*
 ```java
-show LEVELOFFRIENDSHIP
+(show|sh) LEVELOFFRIENDSHIP
 ```
 
 ****
@@ -339,11 +339,11 @@ show LEVELOFFRIENDSHIP
 ```java
 > show 1
 ```
-Returns `Students with Level of Friendship value 1`
+Returns Students with Level of Friendship value `1`
 ```java
 > sh 1 5
 ```
-Returns `Students with Level of Friendship value 1` and `Students with Level of Friendship value 5`
+Returns Students with Level of Friendship value `1` and Students with Level of Friendship value `5`
 // end::rate[]
 
 // tag::sort[]
