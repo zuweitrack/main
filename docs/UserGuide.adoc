@@ -23,7 +23,7 @@ _CollegeZone_ is a personal assistant to your everyday life in NUS. It helps you
 More importantly, _CollegeZone_ is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, _CollegeZone_ can get your contact management and tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 
-== Getting Started
+== Quick Start
 
 Follow these few simple steps to get started with _CollegeZone_!
 
