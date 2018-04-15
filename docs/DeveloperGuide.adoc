@@ -1219,7 +1219,7 @@ The Sort Command is facilitated by `SortCommandParser` and `SortCommand`, with b
 
 `SortCommandParser` takes in an argument in the form of `INDEX_TYPE` that defines how `UniquePersonList` should be sorted. You may customise the sort operation, with `PREFIX` specifying the sort type. It first checks for validity against a regular expression. Once verified, the argument will be tokenized to identify your specified sort type. A `SortCommand` object is then created with the identified sort type.
 
-The `INDEX_TYPE` can be any three of the following: `1` for sorting RC4 Students based on their level of friendship, `2` for sorting persons by meet date, `3` for sorting persons by Birthday. The `ORDER` can be either `asc` for sorting in ascending order or `dsc` for sorting in descending order. The sorted list is always default to descending order of importance.
+The `INDEX_TYPE` can be any three of the following: `1` for sorting RC4 Students based on their level of friendship, `2` for sorting persons by meet date, `3` for sorting persons by Birthday. The sorted list is always default to descending order of importance.
 
 Upon execution of `SortCommand`, a `Comparator<Person>` will be initialised based on the sort type it receives. A `sortPersons` function call will be made to `Model`, which propagates down to `UniquePersonList`, where the sorting of the `internalList` occurs. Since sorting of `internalList` results in the change of state to address book, `SortCommand` is to be implemented as an `UndoableCommand`.
 

@@ -1,10 +1,17 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.parser.DateTimeParser.nattyDateAndTimeParser;
 
 import java.time.LocalDateTime;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+
+
 
 //@@author deborahlow97
 /**
@@ -80,6 +87,41 @@ public class Birthday {
         return builder.toString();
     }
 
+    //@@author sham-sheer
+    /**
+     * Converts Birth date to a time that is relative to current date, for sorting purposes
+     */
+    public static long birthDateToInt(String date) {
+        Calendar calendar = Calendar.getInstance();
+        long longDate = convertbirthDateToSeconds(date.toString());
+        long currentDate = calendar.getTimeInMillis();
+        long timeDiff = longDate - currentDate;
+        if (timeDiff < 0) {
+            return Long.MAX_VALUE;
+        } else {
+            return timeDiff;
+        }
+    }
+
+    /**
+     * Converts Birth date to seconds
+     */
+    public static long convertbirthDateToSeconds(String date) {
+        if (date == "") {
+            return 0;
+        }
+        int day = Integer.parseInt(date.toString().substring(0,
+                2));
+        int month = Integer.parseInt(date.toString().substring(3,
+                5));
+        int year = 2018;
+        Calendar calendar = new GregorianCalendar();
+        calendar.set(year, month - 1, day);
+        long seconds = calendar.getTimeInMillis();
+        return seconds;
+    }
+
+    //@@author deborahlow97
     @Override
     public String toString() {
         return value;
