@@ -16,7 +16,8 @@ import seedu.address.model.goal.StartDateTime;
 public class GoalBuilder {
 
     public static final boolean DEFAULT_COMPLETION = false;
-    public static final String DEFAULT_END_DATE_TIME = "";
+    public static final String DEFAULT_EMPTY_END_DATE_TIME = "";
+    public static final String DEFAULT_END_DATE_TIME = "today";
     public static final String DEFAULT_GOAL_TEXT = "er yea acadamic no la no la";
     public static final String DEFAULT_IMPORTANCE = "1";
     public static final String DEFAULT_START_DATE_TIME = "2017-04-08 12:30";
@@ -29,6 +30,14 @@ public class GoalBuilder {
 
     public GoalBuilder() {
         completion = new Completion(DEFAULT_COMPLETION);
+        endDateTime = new EndDateTime(DEFAULT_EMPTY_END_DATE_TIME);
+        goalText = new GoalText(DEFAULT_GOAL_TEXT);
+        importance = new Importance(DEFAULT_IMPORTANCE);
+        startDateTime = new StartDateTime(getLocalDateTimeFromString(DEFAULT_START_DATE_TIME));
+    }
+
+    public GoalBuilder(boolean isCompleted) {
+        completion = new Completion(isCompleted);
         endDateTime = new EndDateTime(DEFAULT_END_DATE_TIME);
         goalText = new GoalText(DEFAULT_GOAL_TEXT);
         importance = new Importance(DEFAULT_IMPORTANCE);
