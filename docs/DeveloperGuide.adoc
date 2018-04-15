@@ -912,7 +912,7 @@ e.g.Parsed index : 1 +
 ._Interactions Inside the Logic Component for the `-goal` Command_
 image::DeleteGoalSeqDiagram.PNG[width="800"]
 
-`DeleteGoalCommandParser`Creates a `DeleteGoalCommand` class and passes the index as argument.
+`DeleteGoalCommandParser` creates a `DeleteGoalCommand` class and passes the index as argument.
 It deletes the goal corresponding to the index locally and runs the execution which calls the model
 The filtered goals list and deletion of the specified Goal object occurs. The filtered goals list is updated and retrieved.
 The UI component displays the deletion of goal in the goal list panel and the storage component deletes the details of the deleted goal in the address book storage.
@@ -947,7 +947,7 @@ The image below shows the interaction of sort the `Logic` component.
 image::SortGoalSeqDiagram.PNG[width="800"]
 
 Upon execution of `SortGoalCommand`, a `Comparator<Goal>` will be initialised based on the sort type it receives.
-A `sortPersons` function call will be made to `Model`, which propagates down to `UniqueGoalList`, where the sorting of the `internalList` occurs. +
+A `sortGoal` function call will be made to `Model`, which propagates down to `UniqueGoalList`, where the sorting of the `internalList` occurs. +
 The code below shows the switch statement used to define the type of sort the user wants in the `UniqueGoalList`. +
 
 [source,java]
@@ -989,8 +989,8 @@ public class UniqueGoalList implements Iterable<Goal> {
     }
 }
 ----
- Once verified, the argument will be tokenized to identify your specified sort type. A `SortGoalCommand` object is then
-  created with the identified sort type.
+Once verified, the argument will be tokenized to identify your specified sort type. A `SortGoalCommand` object is then
+created with the identified sort type.
 [NOTE]
 If the goal list is found to be empty, a `CommandException` will be thrown from `SortGoalCommand`.
 
