@@ -2,7 +2,7 @@
 ###### /java/seedu/address/logic/commands/RateCommand.java
 ``` java
 /**
- * Rates existing person(s) in the address book.
+ * Rates existing person(s) in CollegeZone.
  */
 public class RateCommand extends UndoableCommand {
 

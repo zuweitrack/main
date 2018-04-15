@@ -179,9 +179,9 @@ public class UnitNumberContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Keywords match phone, birthday, level of friendship, unit number, but does not match name
-        predicate = new UnitNumberContainsKeywordsPredicate(Arrays.asList("92474733", "23-06-1996", "3", "#4-49"));
+        predicate = new UnitNumberContainsKeywordsPredicate(Arrays.asList("92474733", "23/06/1996", "3", "#4-49"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("92474733")
-                .withBirthday("23-06-1996").withLevelOfFriendship("3").withUnitNumber("#4-49").build()));
+                .withBirthday("23/06/1996").withLevelOfFriendship("3").withUnitNumber("#4-49").build()));
     }
 }
 ```

@@ -19,9 +19,10 @@ public class AddReminderCommand extends UndoableCommand {
             + PREFIX_DATE + " tonight 8pm "
             + PREFIX_END_DATE + " tonight 10pm";
 
-    public static final String MESSAGE_SUCCESS = "New reminder added: %1$s "
-            + "Disclaimer: If date & time parsed wrongly, delete reminder and refer to User Guide for correct format"
-            + " of date and time";
+    public static final String MESSAGE_SUCCESS = "New reminder added: %1$s\n"
+            + "Disclaimer: If date & time parsed wrongly, delete the reminder and refer to User Guide for correct"
+            + " format of date and time";
+
     public static final String MESSAGE_DUPLICATE_REMINDER = "This reminder already exists in the Calendar";
 
     private final Reminder toAdd;
@@ -119,7 +120,7 @@ public class DeleteReminderCommand extends UndoableCommand {
 ###### /java/seedu/address/logic/commands/FindCommand.java
 ``` java
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all persons in CollegeZone whose name contains any of the argument keywords.
  * Keyword matching is case sensitive.
  */
 public class FindCommand extends Command {
@@ -127,6 +128,15 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String COMMAND_ALIAS = "f";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " 1"
+            + PREFIX_NAME + "   "
+            + PREFIX_PHONE + "   "
+            + PREFIX_BIRTHDAY + "   "
+            + PREFIX_LEVEL_OF_FRIENDSHIP + "   "
+            + PREFIX_UNIT_NUMBER + "   "
+            + PREFIX_CCA + "   "
+            + PREFIX_TAG + "   ";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names or tags contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
@@ -604,7 +614,7 @@ public class EndDateTime {
 ###### /java/seedu/address/model/reminder/exceptions/DuplicateReminderException.java
 ``` java
 /**
- * Signals that the operation will result in duplicate Goal objects.
+ * Signals that the operation will result in duplicate Reminder objects.
  */
 public class DuplicateReminderException extends DuplicateDataException {
     public DuplicateReminderException() {
@@ -883,6 +893,50 @@ public class UniqueReminderList implements Iterable<Reminder> {
     }
 }
 ```
+###### /java/seedu/address/model/util/SampleReminderDataUtil.java
+``` java
+/**
+ * Contains utility methods for populating {@code CollegeZone} with sample reminder data.
+ */
+public class SampleReminderDataUtil {
+
+    public static Reminder[] getSampleReminders() {
+        return new Reminder[] {
+
+            new Reminder(new ReminderText("CS2103T Submission"),
+                    new DateTime("2018-04-15 23:00"),
+                    new EndDateTime("2018-04-15 23:59")),
+            new Reminder(new ReminderText("Gym Session"),
+                    new DateTime("2018-04-13 14:00"),
+                    new EndDateTime("2018-04-13 16:00")),
+            new Reminder(new ReminderText("Gym Session"),
+                    new DateTime("2018-04-06 14:00"),
+                    new EndDateTime("2018-04-06 16:00")),
+            new Reminder(new ReminderText("Gym Session"),
+                    new DateTime("2018-04-20 14:00"),
+                    new EndDateTime("2018-04-20 16:00")),
+            new Reminder(new ReminderText("Gym Session"),
+                    new DateTime("2018-04-27 14:00"),
+                    new EndDateTime("2018-04-27 16:00")),
+            new Reminder(new ReminderText("Recess Week"),
+                    new DateTime("2018-04-23 00:00"),
+                    new EndDateTime("2018-04-27 23:59")),
+            new Reminder(new ReminderText("CS2103T Software Demo"),
+                    new DateTime("2018-04-19 09:00"),
+                    new EndDateTime("2018-04-19 10:00")),
+            new Reminder(new ReminderText("CS2103T Group Meeting"),
+                    new DateTime("2018-04-14 11:00"),
+                    new EndDateTime("2018-04-14 18:00")),
+            new Reminder(new ReminderText("Chalet"),
+                    new DateTime("2018-04-21 10:00"),
+                    new EndDateTime("2018-04-22 20:00")),
+            new Reminder(new ReminderText("Medical Appointment"),
+                    new DateTime("2018-04-05 15:00"),
+                    new EndDateTime("2018-04-05 17:00")),
+        };
+    }
+}
+```
 ###### /java/seedu/address/storage/XmlAdaptedReminder.java
 ``` java
 /**
@@ -999,18 +1053,9 @@ public class CalendarPanel extends UiPart<Region> {
         this.personList = personList;
 
         calendarView = new CalendarView();
-        calendarView.setRequestedTime(LocalTime.now());
-        calendarView.setToday(LocalDate.now());
-        calendarView.setTime(LocalTime.now());
-        calendarView.setShowAddCalendarButton(false);
-        calendarView.setShowSearchField(false);
-        calendarView.setShowSearchResultsTray(false);
-        calendarView.setShowPrintButton(false);
-        calendarView.showMonthPage();
+        setupCalendar();
         updateCalendar();
         registerAsAnEventHandler(this);
-
-
     }
 
     @Subscribe
@@ -1019,9 +1064,6 @@ public class CalendarPanel extends UiPart<Region> {
         personList = event.data.getPersonList();
         Platform.runLater(this::updateCalendar);
     }
-
-
-
 
     /**
      * Updates the Calendar with Reminders that are already added
@@ -1058,6 +1100,17 @@ public class CalendarPanel extends UiPart<Region> {
         calendarView.setToday(LocalDate.now());
         calendarView.setTime(LocalTime.now());
         calendarView.getCalendarSources().clear();
+    }
+
+    private void setupCalendar() {
+        calendarView.setRequestedTime(LocalTime.now());
+        calendarView.setToday(LocalDate.now());
+        calendarView.setTime(LocalTime.now());
+        calendarView.setShowAddCalendarButton(false);
+        calendarView.setShowSearchField(false);
+        calendarView.setShowSearchResultsTray(false);
+        calendarView.setShowPrintButton(false);
+        calendarView.showMonthPage();
     }
 
     public CalendarView getRoot() {

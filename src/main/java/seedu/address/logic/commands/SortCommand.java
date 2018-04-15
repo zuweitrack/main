@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
@@ -33,6 +35,8 @@ public class SortCommand extends UndoableCommand {
             + "Example: " + COMMAND_WORD + " 1";
 
     private final Index index;
+
+    private final ObservableList<Person> internalList = FXCollections.observableArrayList();
 
     public SortCommand(Index index) {
         requireNonNull(index);
@@ -74,5 +78,7 @@ public class SortCommand extends UndoableCommand {
                 || (other instanceof SortCommand // instanceof handles nulls
                 && this.index.equals(((SortCommand) other).index)); // state check
     }
+
+
 }
 
