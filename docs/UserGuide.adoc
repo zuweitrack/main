@@ -54,7 +54,6 @@ The image below describes what each part of _CollegeZone's_ GUI represent.
 
 image::UserGuideLabelledUI.PNG[width="800"]
 
-
 . The *Command Box* is located at the top of CollegeZne. Enter your keyboard commands into the box!
 . The *Result Display Panel* shows you the results of the commands you entered.
 . The *Student List* keeps the list of student contacts that you have.
@@ -684,6 +683,7 @@ The figure below portrays what should be seen after the command is executed corr
 
 .Execution of !g 4
 image::CompleteGoal.PNG[width="1000"]
+
 
 [NOTE]
 ====
