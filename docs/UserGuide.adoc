@@ -27,7 +27,7 @@ More importantly, _CollegeZone_ is *optimized for those who prefer to work with 
 
 Follow these few simple steps to get started with _CollegeZone_!
 
-=== *Download*
+=== Download
 .  Ensure you have Java version `1.8.0_60` or later installed in your Computer.
 +
 [NOTE]
@@ -36,20 +36,19 @@ This app will not work with earlier versions of Java 8.
 +
 .  Download the latest `collegezone.jar` link:{repoURL}/releases[here].
 +
-image::DownloadJar.JPG[width="500"]
+image::DownloadJar.JPG[width="550"]
 +
 
 .  Copy the file to the folder you want to use as the home folder for _CollegeZone_. For example, you can place it in a folder created on your desktop.
 
-=== *Launch*
+=== Launch
 . To launch _CollegeZone_, double-click on `collegezone.jar` to launch _CollegeZone_.
 . You will be greeted with _CollegeZone's_ Graphic User Interface (GUI) as shown below. The GUI should appear in a few seconds.
 +
 image::UI.JPG[width="800"]
 +
 
-
-=== *Visual Introduction*
+=== Visual Introduction
 
 The image below describes what each part of _CollegeZone's_ GUI represent.
 
@@ -83,9 +82,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in kbd:[()] (round brackets) indicates the *Command keyword* to use  e.g. in `(add)`, `add` is the command key word to use.
+* Words enclosed in round brackets indicates the *Command keyword* to use  e.g. in `(add)`, `add` is the command key word to use.
 * *Command keywords* separated by kbd:[|] executes the same command e.g. in `(add | a)`, `add` or `a` are equivalent command key words to use.
-
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 * Items in square brackets are optional e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
