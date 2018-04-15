@@ -1,5 +1,5 @@
 # sham-sheer
-###### /java/seedu/address/logic/CommandFormatListUtil.java
+###### \java\seedu\address\logic\CommandFormatListUtil.java
 ``` java
 /**
  * Initialises and returns a list which contains different command formats
@@ -49,7 +49,7 @@ public final class CommandFormatListUtil {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/DeleteMeetCommand.java
+###### \java\seedu\address\logic\commands\DeleteMeetCommand.java
 ``` java
 /**
  * Removes the meet up set with a person using the person's displayed index from CollegeZone.
@@ -109,7 +109,7 @@ public class DeleteMeetCommand extends UndoableCommand {
 
 }
 ```
-###### /java/seedu/address/logic/commands/MeetCommand.java
+###### \java\seedu\address\logic\commands\MeetCommand.java
 ``` java
 /**
  * Adds a meeting to CollegeZone.
@@ -213,7 +213,7 @@ public class MeetCommand extends UndoableCommand {
 
 }
 ```
-###### /java/seedu/address/logic/commands/SortCommand.java
+###### \java\seedu\address\logic\commands\SortCommand.java
 ``` java
 /**
  * Sort the persons in CollegeZone based on the users parameters
@@ -226,12 +226,11 @@ public class SortCommand extends UndoableCommand {
 
     public static final String MESSAGE_EMPTY_LIST = "CollegeZone student list is empty, There is nothing to sort!";
 
-    public static final String MESSAGE_SORTED_SUCCESS_LEVEL_OF_FRIENDSHIP = "List sorted according to Level" +
-            "of Friendship!";
+    public static final String MESSAGE_SORTED_SUCCESS_LEVEL_OF_FRIENDSHIP = "List sorted according to Friendship lvl!";
 
     public static final String MESSAGE_SORTED_SUCCESS_MEET_DATE = "List sorted according to your latest meet date!";
 
-    public static final String MESSAGE_SORTED_SUCCESS_BIRTHDAY = "List sorted according to your latest birthday!";
+    public static final String MESSAGE_SORTED_SUCCESS_BIRTHDAY = "List sorted according to show latest birthday!";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the person list identified by the index number used in the last person listing.\n"
@@ -287,7 +286,7 @@ public class SortCommand extends UndoableCommand {
 }
 
 ```
-###### /java/seedu/address/logic/parser/MeetCommandParser.java
+###### \java\seedu\address\logic\parser\MeetCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new {@code RemarkCommand} object
@@ -322,7 +321,7 @@ public class MeetCommandParser implements Parser {
 
 }
 ```
-###### /java/seedu/address/logic/parser/ParserUtil.java
+###### \java\seedu\address\logic\parser\ParserUtil.java
 ``` java
     /**
      * Parses a {@code String unitNumber} into an {@code UnitNumber}.
@@ -349,7 +348,7 @@ public class MeetCommandParser implements Parser {
     }
 
 ```
-###### /java/seedu/address/logic/parser/SortCommandParser.java
+###### \java\seedu\address\logic\parser\SortCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new DeleteCommand object
@@ -373,14 +372,14 @@ public class SortCommandParser implements Parser<SortCommand> {
 
 }
 ```
-###### /java/seedu/address/model/AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
     public void sortPersons(Index index) throws IndexOutOfBoundsException {
         this.persons.sortPersons(index);
     }
 
 ```
-###### /java/seedu/address/model/ModelManager.java
+###### \java\seedu\address\model\ModelManager.java
 ``` java
     @Override
     public void deleteMeetDate (Person person) throws PersonNotFoundException {
@@ -403,7 +402,43 @@ public class SortCommandParser implements Parser<SortCommand> {
      * {@code addressBook}
      */
 ```
-###### /java/seedu/address/model/person/Meet.java
+###### \java\seedu\address\model\person\Birthday.java
+``` java
+    /**
+     * Converts Birth date to a time that is relative to current date, for sorting purposes
+     */
+    public static long birthDateToInt(String date) {
+        Calendar calendar = Calendar.getInstance();
+        long longDate = convertbirthDateToSeconds(date.toString());
+        long currentDate = calendar.getTimeInMillis();
+        long timeDiff = longDate - currentDate;
+        if (timeDiff < 0) {
+            return Long.MAX_VALUE;
+        } else {
+            return timeDiff;
+        }
+    }
+
+    /**
+     * Converts Birth date to seconds
+     */
+    public static long convertbirthDateToSeconds(String date) {
+        if (date == "") {
+            return 0;
+        }
+        int day = Integer.parseInt(date.toString().substring(0,
+                2));
+        int month = Integer.parseInt(date.toString().substring(3,
+                5));
+        int year = 2018;
+        Calendar calendar = new GregorianCalendar();
+        calendar.set(year, month - 1, day);
+        long seconds = calendar.getTimeInMillis();
+        return seconds;
+    }
+
+```
+###### \java\seedu\address\model\person\Meet.java
 ``` java
 /**
  * Represents a Person's date of meeting in the address book.
@@ -463,6 +498,7 @@ public class Meet {
         }
     }
 
+
     public static boolean isValidDate(String test) {
         return test.matches(DATE_VALIDATION_REGEX);
     }
@@ -487,7 +523,7 @@ public class Meet {
     }
 }
 ```
-###### /java/seedu/address/model/person/UniquePersonList.java
+###### \java\seedu\address\model\person\UniquePersonList.java
 ``` java
     /**
      * Sorting method
@@ -509,17 +545,16 @@ public class Meet {
         if (index.getOneBased() == 3) {
             Comparator<Person> comparator = Comparator.comparingLong(Person::getBirthdayInt);
             FXCollections.sort(internalList, comparator);
-            FXCollections.reverse(internalList);
         }
     }
 }
 ```
-###### /java/seedu/address/storage/XmlAdaptedPerson.java
+###### \java\seedu\address\storage\XmlAdaptedPerson.java
 ``` java
         final Meet meetDate = new Meet(this.meetDate);
 
 ```
-###### /java/seedu/address/ui/CalendarPanel.java
+###### \java\seedu\address\ui\CalendarPanel.java
 ``` java
         for (Person person : personList) {
             String meetDate = person.getMeetDate().toString();
@@ -537,9 +572,9 @@ public class Meet {
         }
         calendarView.getCalendarSources().add(myCalendarSource);
     }
-    
+
 ```
-###### /java/seedu/address/ui/CommandBox.java
+###### \java\seedu\address\ui\CommandBox.java
 ``` java
     /**
      * Sets the commandbox to completed command format if the entered substring of the command is valid
@@ -561,5 +596,4 @@ public class Meet {
     }
 
 }
-
 ```

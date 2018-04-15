@@ -1,5 +1,5 @@
 # zuweitrack
-###### /java/seedu/address/logic/commands/RateCommand.java
+###### \java\seedu\address\logic\commands\RateCommand.java
 ``` java
 /**
  * Rates existing person(s) in CollegeZone.
@@ -76,7 +76,7 @@ public class RateCommand extends UndoableCommand {
 
 }
 ```
-###### /java/seedu/address/logic/commands/SeekRaCommand.java
+###### \java\seedu\address\logic\commands\SeekRaCommand.java
 ``` java
 /**
  * Finds and lists the Resident Assistant (RA) of an individual RC Student
@@ -116,7 +116,7 @@ public class SeekRaCommand extends Command {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/ShowLofCommand.java
+###### \java\seedu\address\logic\commands\ShowLofCommand.java
 ``` java
 /**
  * Finds and lists the person(s)
@@ -156,7 +156,7 @@ public class ShowLofCommand extends Command {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/RateCommandParser.java
+###### \java\seedu\address\logic\parser\RateCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new RateCommand object
@@ -216,7 +216,7 @@ public class RateCommandParser {
 
 }
 ```
-###### /java/seedu/address/logic/parser/SeekRaCommandParser.java
+###### \java\seedu\address\logic\parser\SeekRaCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new SeekRaCommand object
@@ -245,7 +245,7 @@ public class SeekRaCommandParser implements Parser<SeekRaCommand> {
 
 }
 ```
-###### /java/seedu/address/logic/parser/ShowLofCommandParser.java
+###### \java\seedu\address\logic\parser\ShowLofCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new ShowLofCommand object
@@ -272,7 +272,7 @@ public class ShowLofCommandParser implements Parser<ShowLofCommand> {
 
 }
 ```
-###### /java/seedu/address/model/person/LofContainsValuePredicate.java
+###### \java\seedu\address\model\person\LofContainsValuePredicate.java
 ``` java
 /**
  * Tests that a {@code Person}'s {@code UnitNumber} matches any of the keywords given.
@@ -301,7 +301,7 @@ public class LofContainsValuePredicate implements Predicate<Person> {
 
 }
 ```
-###### /java/seedu/address/model/person/UnitNumberContainsKeywordsPredicate.java
+###### \java\seedu\address\model\person\UnitNumberContainsKeywordsPredicate.java
 ``` java
 /**
  * Tests that a {@code Person}'s {@code UnitNumber} matches any of the keywords given.

@@ -1,5 +1,5 @@
 # deborahlow97
-###### /java/guitests/guihandles/StatusBarFooterHandle.java
+###### \java\guitests\guihandles\StatusBarFooterHandle.java
 ``` java
     /**
      * Returns the text of the 'save location' portion of the status bar.
@@ -9,7 +9,7 @@
     }
 
 ```
-###### /java/guitests/guihandles/StatusBarFooterHandle.java
+###### \java\guitests\guihandles\StatusBarFooterHandle.java
 ``` java
     /**
      * Remembers the content of the 'goal completion status' portion of the status bar.
@@ -28,7 +28,7 @@
     }
 }
 ```
-###### /java/seedu/address/logic/commands/AddCommandTest.java
+###### \java\seedu\address\logic\commands\AddCommandTest.java
 ``` java
         @Override
         public void addGoal(Goal goal) throws DuplicateGoalException {
@@ -69,7 +69,7 @@
         }
 
 ```
-###### /java/seedu/address/logic/commands/AddGoalCommandIntegrationTest.java
+###### \java\seedu\address\logic\commands\AddGoalCommandIntegrationTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) for {@code AddGoalCommand}.
@@ -111,7 +111,7 @@ public class AddGoalCommandIntegrationTest {
 }
 
 ```
-###### /java/seedu/address/logic/commands/AddGoalCommandTest.java
+###### \java\seedu\address\logic\commands\AddGoalCommandTest.java
 ``` java
 public class AddGoalCommandTest {
 
@@ -123,18 +123,6 @@ public class AddGoalCommandTest {
         thrown.expect(NullPointerException.class);
         new AddGoalCommand(null);
     }
-
-    //TODODEB
-    /*@Test
-    public void execute_goalAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingGoalAdded modelStub = new ModelStubAcceptingGoalAdded();
-        Goal validGoal = new GoalBuilder().build();
-
-        CommandResult commandResult = getAddGoalCommandForGoal(validGoal, modelStub).execute();
-
-        assertEquals(String.format(AddGoalCommand.MESSAGE_SUCCESS, validGoal), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validGoal), modelStub.goalsAdded);
-    }*/
 
     @Test
     public void execute_duplicateGoal_throwsCommandException() throws Exception {
@@ -210,7 +198,7 @@ public class AddGoalCommandTest {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/CompleteGoalCommandTest.java
+###### \java\seedu\address\logic\commands\CompleteGoalCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -332,7 +320,7 @@ public class CompleteGoalCommandTest {
 }
 
 ```
-###### /java/seedu/address/logic/commands/DeleteGoalCommandTest.java
+###### \java\seedu\address\logic\commands\DeleteGoalCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -445,7 +433,7 @@ public class DeleteGoalCommandTest {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/EditGoalCommandTest.java
+###### \java\seedu\address\logic\commands\EditGoalCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -598,7 +586,7 @@ public class EditGoalCommandTest {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/GoalCommandTestUtil.java
+###### \java\seedu\address\logic\commands\GoalCommandTestUtil.java
 ``` java
 /**
  * Contains helper methods for testing commands.
@@ -619,6 +607,8 @@ public class GoalCommandTestUtil {
     public static final boolean VALID_GOAL_COMPLETION_B = false;
     public static final boolean VALID_GOAL_COMPLETION_C = true;
     public static final boolean VALID_GOAL_COMPLETION_D = true;
+    public static final boolean VALID_GOAL_COMPLETION_E = false;
+    public static final String VALID_GOAL_END_DATE_TIME = "";
     public static final String VALID_GOAL_SORT_FIELD_A = "importance";
     public static final String VALID_GOAL_SORT_FIELD_B = "startdatetime";
     public static final String VALID_GOAL_SORT_ORDER_A = "ascending";
@@ -647,7 +637,8 @@ public class GoalCommandTestUtil {
 
     public static final CompleteGoalCommand.CompleteGoalDescriptor DESC_GOAL_COMPLETED_C;
     public static final CompleteGoalCommand.CompleteGoalDescriptor DESC_GOAL_COMPLETED_D;
-
+    public static final OngoingGoalCommand.OngoingGoalDescriptor DESC_GOAL_COMPLETED_E;
+    public static final OngoingGoalCommand.OngoingGoalDescriptor DESC_GOAL_COMPLETED_F;
     static {
         VALID_GOAL_START_DATE_TIME_A = getLocalDateTimeFromString(VALID_GOAL_START_DATE_TIME_STRING_A);
         VALID_GOAL_START_DATE_TIME_B = getLocalDateTimeFromString(VALID_GOAL_START_DATE_TIME_STRING_B);
@@ -660,6 +651,10 @@ public class GoalCommandTestUtil {
                 .withEndDateTime(VALID_GOAL_END_DATE_TIME_STRING_C).build();
         DESC_GOAL_COMPLETED_D = new CompleteGoalDescriptorBuilder().withCompletion(VALID_GOAL_COMPLETION_D)
                 .withEndDateTime(VALID_GOAL_END_DATE_TIME_STRING_D).build();
+        DESC_GOAL_COMPLETED_E = new OngoingGoalDescriptorBuilder().withCompletion(VALID_GOAL_COMPLETION_E)
+                .withEndDateTime(VALID_GOAL_END_DATE_TIME).build();
+        DESC_GOAL_COMPLETED_F = new OngoingGoalDescriptorBuilder().withCompletion(VALID_GOAL_COMPLETION_E)
+                .withEndDateTime(VALID_GOAL_END_DATE_TIME).build();
     }
 
     /**
@@ -731,7 +726,98 @@ public class GoalCommandTestUtil {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/SortGoalCommandTest.java
+###### \java\seedu\address\logic\commands\OngoingGoalCommandTest.java
+``` java
+/**
+ * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
+ * OngoingGoalCommand.
+ */
+public class OngoingGoalCommandTest {
+
+    private Model model = new ModelManager(getTypicalGoalAddressBook(), new UserPrefs());
+
+    @Test
+    public void execute_goalAlreadyOngoingUnfilteredList_throwsCommandException() throws Exception {
+        Index indexLastGoal = Index.fromOneBased(model.getFilteredGoalList().size());
+        Goal lastGoal = model.getFilteredGoalList().get(indexLastGoal.getZeroBased());
+
+        GoalBuilder goalInList = new GoalBuilder(lastGoal);
+        Goal ongoingGoal = goalInList.withCompletion(VALID_GOAL_COMPLETION_E)
+                .withEndDateTime(VALID_GOAL_END_DATE_TIME).build();
+
+        OngoingGoalDescriptor descriptor = new OngoingGoalDescriptorBuilder().withCompletion(VALID_GOAL_COMPLETION_E)
+                .withEndDateTime(VALID_GOAL_END_DATE_TIME).build();
+        OngoingGoalCommand ongoingGoalCommand = prepareCommand(indexLastGoal, descriptor);
+
+        String expectedCommandException = Messages.MESSAGE_GOAL_ONGOING_ERROR;
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.updateGoalWithoutParameters(lastGoal, ongoingGoal);
+
+        assertCommandFailure(ongoingGoalCommand, model, expectedCommandException);
+    }
+
+    @Test
+    public void execute_invalidGoalIndexUnfilteredList_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredGoalList().size() + 1);
+        OngoingGoalDescriptor descriptor = new OngoingGoalDescriptorBuilder().withCompletion(VALID_GOAL_COMPLETION_E)
+                .withEndDateTime(VALID_GOAL_END_DATE_TIME).build();
+        OngoingGoalCommand ongoingGoalCommand = prepareCommand(outOfBoundIndex, descriptor);
+
+        assertCommandFailure(ongoingGoalCommand, model, Messages.MESSAGE_INVALID_GOAL_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
+        UndoRedoStack undoRedoStack = new UndoRedoStack();
+        UndoCommand undoCommand = prepareUndoCommand(model, undoRedoStack);
+        RedoCommand redoCommand = prepareRedoCommand(model, undoRedoStack);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredGoalList().size() + 1);
+        OngoingGoalDescriptor descriptor = new OngoingGoalDescriptorBuilder().withCompletion(VALID_GOAL_COMPLETION_E)
+                .withEndDateTime(VALID_GOAL_END_DATE_TIME).build();
+        OngoingGoalCommand ongoingGoalCommand = prepareCommand(outOfBoundIndex, descriptor);
+
+        // execution failed -> ongoingGoalCommand not pushed into undoRedoStack
+        assertCommandFailure(ongoingGoalCommand, model, Messages.MESSAGE_INVALID_GOAL_DISPLAYED_INDEX);
+
+        // no commands in undoRedoStack -> undoCommand and redoCommand fail
+        assertCommandFailure(undoCommand, model, UndoCommand.MESSAGE_FAILURE);
+        assertCommandFailure(redoCommand, model, RedoCommand.MESSAGE_FAILURE);
+    }
+
+    @Test
+    public void equals() throws Exception {
+        final OngoingGoalCommand standardCommand = prepareCommand(INDEX_FIRST_GOAL, DESC_GOAL_COMPLETED_E);
+
+        // same values -> returns true
+        OngoingGoalDescriptor copyDescriptor = new OngoingGoalDescriptor(DESC_GOAL_COMPLETED_E);
+        OngoingGoalCommand commandWithSameValues = prepareCommand(INDEX_FIRST_GOAL, copyDescriptor);
+        assertTrue(standardCommand.equals(commandWithSameValues));
+
+        // same object -> returns true
+        assertTrue(standardCommand.equals(standardCommand));
+
+        // null -> returns false
+        assertFalse(standardCommand.equals(null));
+
+        // different types -> returns false
+        assertFalse(standardCommand.equals(new ClearCommand()));
+
+        // different index -> returns false
+        assertFalse(standardCommand.equals(new OngoingGoalCommand(INDEX_SECOND_GOAL, DESC_GOAL_COMPLETED_E)));
+    }
+
+    /**
+     * Returns an {@code OngoingGoalCommand} with parameters {@code index} and {@code descriptor}
+     */
+    private OngoingGoalCommand prepareCommand(Index index, OngoingGoalDescriptor descriptor) {
+        OngoingGoalCommand ongoingGoalCommand = new OngoingGoalCommand(index, descriptor);
+        ongoingGoalCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        return ongoingGoalCommand;
+    }
+}
+```
+###### \java\seedu\address\logic\commands\SortGoalCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) and unit tests for Sort Goal Command.
@@ -746,21 +832,30 @@ public class SortGoalCommandTest {
 
     private Model model;
     private Model expectedModel;
-    private SortGoalCommand sortGoalCommand;
-
+    private SortGoalCommand sortGoalCommandA;
+    private SortGoalCommand sortGoalCommandB;
+    private SortGoalCommand sortGoalCommandC;
     @Before
     public void setUp() {
         model = new ModelManager(getTypicalGoalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        sortGoalCommand = new SortGoalCommand(VALID_GOAL_FIELD, VALID_GOAL_ORDER);
-        sortGoalCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        sortGoalCommandA = new SortGoalCommand(VALID_GOAL_FIELD, VALID_GOAL_ORDER);
+        sortGoalCommandA.setData(model, new CommandHistory(), new UndoRedoStack());
+        sortGoalCommandB = new SortGoalCommand("startdatetime", "ascending");
+        sortGoalCommandB.setData(model, new CommandHistory(), new UndoRedoStack());
+        sortGoalCommandC = new SortGoalCommand("completion", VALID_GOAL_ORDER);
+        sortGoalCommandC.setData(model, new CommandHistory(), new UndoRedoStack());
     }
 
 
     @Test
     public void execute_goalListIsNotFiltered_showsSortedList() {
-        assertCommandSuccess(sortGoalCommand, model, String.format(MESSAGE_SUCCESS, VALID_GOAL_FIELD,
+        assertCommandSuccess(sortGoalCommandA, model, String.format(MESSAGE_SUCCESS, VALID_GOAL_FIELD,
+                VALID_GOAL_ORDER), expectedModel);
+        assertCommandSuccess(sortGoalCommandB, model, String.format(MESSAGE_SUCCESS, "startdatetime",
+                "ascending"), expectedModel);
+        assertCommandSuccess(sortGoalCommandC, model, String.format(MESSAGE_SUCCESS, "completion",
                 VALID_GOAL_ORDER), expectedModel);
     }
 
@@ -798,7 +893,7 @@ public class SortGoalCommandTest {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/ThemeCommandTest.java
+###### \java\seedu\address\logic\commands\ThemeCommandTest.java
 ``` java
 public class ThemeCommandTest {
 
@@ -817,7 +912,7 @@ public class ThemeCommandTest {
 
 }
 ```
-###### /java/seedu/address/logic/parser/AddressBookParserTest.java
+###### \java\seedu\address\logic\parser\AddressBookParserTest.java
 ``` java
     @Test
     public void parseCommand_addGoal_returnsTrue() throws Exception {
@@ -1003,7 +1098,7 @@ public class ThemeCommandTest {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/CompleteGoalCommandParserTest.java
+###### \java\seedu\address\logic\parser\CompleteGoalCommandParserTest.java
 ``` java
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -1031,7 +1126,7 @@ public class CompleteGoalCommandParserTest {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/DateTimeParserTest.java
+###### \java\seedu\address\logic\parser\DateTimeParserTest.java
 ``` java
 public class DateTimeParserTest {
 
@@ -1064,7 +1159,7 @@ public class DateTimeParserTest {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/DeleteGoalCommandParserTest.java
+###### \java\seedu\address\logic\parser\DeleteGoalCommandParserTest.java
 ``` java
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -1089,7 +1184,7 @@ public class DeleteGoalCommandParserTest {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/EditGoalCommandParserTest.java
+###### \java\seedu\address\logic\parser\EditGoalCommandParserTest.java
 ``` java
 public class EditGoalCommandParserTest {
 
@@ -1204,7 +1299,7 @@ public class EditGoalCommandParserTest {
     }*/
 }
 ```
-###### /java/seedu/address/logic/parser/ParserUtilTest.java
+###### \java\seedu\address\logic\parser\ParserUtilTest.java
 ``` java
     @Test
     public void parseBirthday_null_throwsNullPointerException() {
@@ -1425,7 +1520,7 @@ public class EditGoalCommandParserTest {
                 .of(goalOrderWithWhitespace)));
     }
 ```
-###### /java/seedu/address/logic/parser/SortGoalCommandParserTest.java
+###### \java\seedu\address\logic\parser\SortGoalCommandParserTest.java
 ``` java
 public class SortGoalCommandParserTest {
     private SortGoalCommandParser parser = new SortGoalCommandParser();
@@ -1475,7 +1570,7 @@ public class SortGoalCommandParserTest {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/ThemeCommandParserTest.java
+###### \java\seedu\address\logic\parser\ThemeCommandParserTest.java
 ``` java
 
 public class ThemeCommandParserTest {
@@ -1496,7 +1591,7 @@ public class ThemeCommandParserTest {
     }
 }
 ```
-###### /java/seedu/address/model/goal/GoalTextTest.java
+###### \java\seedu\address\model\goal\GoalTextTest.java
 ``` java
 public class GoalTextTest {
 
@@ -1530,7 +1625,7 @@ public class GoalTextTest {
     }
 }
 ```
-###### /java/seedu/address/model/goal/ImportanceTest.java
+###### \java\seedu\address\model\goal\ImportanceTest.java
 ``` java
 public class ImportanceTest {
 
@@ -1597,7 +1692,7 @@ public class ImportanceTest {
     }
 }
 ```
-###### /java/seedu/address/model/goal/StartDateTimeTest.java
+###### \java\seedu\address\model\goal\StartDateTimeTest.java
 ``` java
 public class StartDateTimeTest {
 
@@ -1619,7 +1714,7 @@ public class StartDateTimeTest {
     }
 }
 ```
-###### /java/seedu/address/model/person/BirthdayTest.java
+###### \java\seedu\address\model\person\BirthdayTest.java
 ``` java
 public class BirthdayTest {
 
@@ -1668,13 +1763,13 @@ public class BirthdayTest {
         assertFalse(Birthday.isValidBirthday("31.Jan.2000"));   // using .
         assertFalse(Birthday.isValidBirthday("01-12-2000")); // using -
         assertFalse(Birthday.isValidBirthday("28-Feb-2001"));
-
+        assertFalse(Birthday.isValidBirthday("28/Feb/9999")); //birthday later than today's date
         // valid birthday
         assertTrue(Birthday.isValidBirthday("01/01/2000"));
     }
 }
 ```
-###### /java/seedu/address/model/person/CcaTest.java
+###### \java\seedu\address\model\person\CcaTest.java
 ``` java
 public class CcaTest {
 
@@ -1708,7 +1803,7 @@ public class CcaTest {
     }
 }
 ```
-###### /java/seedu/address/model/person/LevelOfFriendshipTest.java
+###### \java\seedu\address\model\person\LevelOfFriendshipTest.java
 ``` java
 public class LevelOfFriendshipTest {
 
@@ -1753,7 +1848,7 @@ public class LevelOfFriendshipTest {
     }
 }
 ```
-###### /java/seedu/address/model/person/UniqueCcaListTest.java
+###### \java\seedu\address\model\person\UniqueCcaListTest.java
 ``` java
 public class UniqueCcaListTest {
     @Rule
@@ -1768,7 +1863,7 @@ public class UniqueCcaListTest {
 }
 
 ```
-###### /java/seedu/address/model/person/UnitNumberTest.java
+###### \java\seedu\address\model\person\UnitNumberTest.java
 ``` java
 public class UnitNumberTest {
 
@@ -1802,7 +1897,7 @@ public class UnitNumberTest {
     }
 }
 ```
-###### /java/seedu/address/model/UniqueGoalListTest.java
+###### \java\seedu\address\model\UniqueGoalListTest.java
 ``` java
 public class UniqueGoalListTest {
     @Rule
@@ -1816,7 +1911,7 @@ public class UniqueGoalListTest {
     }
 }
 ```
-###### /java/seedu/address/storage/XmlAdaptedGoalTest.java
+###### \java\seedu\address\storage\XmlAdaptedGoalTest.java
 ``` java
 public class XmlAdaptedGoalTest {
     private static final String INVALID_IMPORTANCE = "11";
@@ -1894,7 +1989,7 @@ public class XmlAdaptedGoalTest {
     }
 }
 ```
-###### /java/seedu/address/storage/XmlSerializableAddressBookTest.java
+###### \java\seedu\address\storage\XmlSerializableAddressBookTest.java
 ``` java
     @Test
     public void toModelType_invalidGoalFile_throwsIllegalValueException() throws Exception {
@@ -1914,7 +2009,7 @@ public class XmlAdaptedGoalTest {
     }
 }
 ```
-###### /java/seedu/address/testutil/CompleteGoalDescriptorBuilder.java
+###### \java\seedu\address\testutil\CompleteGoalDescriptorBuilder.java
 ``` java
 /**
  * A utility class to help with building CompleteGoalDescriptor objects.
@@ -1961,7 +2056,7 @@ public class CompleteGoalDescriptorBuilder {
     }
 }
 ```
-###### /java/seedu/address/testutil/EditGoalDescriptorBuilder.java
+###### \java\seedu\address\testutil\EditGoalDescriptorBuilder.java
 ``` java
 /**
  * A utility class to help with building EditGoalDescriptor objects.
@@ -2009,7 +2104,7 @@ public class EditGoalDescriptorBuilder {
 }
 
 ```
-###### /java/seedu/address/testutil/GoalBuilder.java
+###### \java\seedu\address\testutil\GoalBuilder.java
 ``` java
 /**
  * A utility class to help with building Person objects.
@@ -2017,7 +2112,8 @@ public class EditGoalDescriptorBuilder {
 public class GoalBuilder {
 
     public static final boolean DEFAULT_COMPLETION = false;
-    public static final String DEFAULT_END_DATE_TIME = "";
+    public static final String DEFAULT_EMPTY_END_DATE_TIME = "";
+    public static final String DEFAULT_END_DATE_TIME = "today";
     public static final String DEFAULT_GOAL_TEXT = "er yea acadamic no la no la";
     public static final String DEFAULT_IMPORTANCE = "1";
     public static final String DEFAULT_START_DATE_TIME = "2017-04-08 12:30";
@@ -2030,6 +2126,14 @@ public class GoalBuilder {
 
     public GoalBuilder() {
         completion = new Completion(DEFAULT_COMPLETION);
+        endDateTime = new EndDateTime(DEFAULT_EMPTY_END_DATE_TIME);
+        goalText = new GoalText(DEFAULT_GOAL_TEXT);
+        importance = new Importance(DEFAULT_IMPORTANCE);
+        startDateTime = new StartDateTime(getLocalDateTimeFromString(DEFAULT_START_DATE_TIME));
+    }
+
+    public GoalBuilder(boolean isCompleted) {
+        completion = new Completion(isCompleted);
         endDateTime = new EndDateTime(DEFAULT_END_DATE_TIME);
         goalText = new GoalText(DEFAULT_GOAL_TEXT);
         importance = new Importance(DEFAULT_IMPORTANCE);
@@ -2094,7 +2198,7 @@ public class GoalBuilder {
 }
 
 ```
-###### /java/seedu/address/testutil/GoalUtil.java
+###### \java\seedu\address\testutil\GoalUtil.java
 ``` java
 /**
  * A utility class for Goal.
@@ -2146,7 +2250,7 @@ public class GoalUtil {
     }
 }
 ```
-###### /java/seedu/address/testutil/OngoingGoalDescriptorBuilder.java
+###### \java\seedu\address\testutil\OngoingGoalDescriptorBuilder.java
 ``` java
 /**
  * A utility class to help with building OngoingGoalDescriptor objects.
@@ -2193,7 +2297,7 @@ public class OngoingGoalDescriptorBuilder {
     }
 }
 ```
-###### /java/seedu/address/testutil/TypicalGoals.java
+###### \java\seedu\address\testutil\TypicalGoals.java
 ``` java
 /**
  * A utility class containing a list of {@code Goal} objects to be used in tests.
@@ -2262,7 +2366,7 @@ public class TypicalGoals {
     }
 }
 ```
-###### /java/seedu/address/ui/testutil/GuiTestAssert.java
+###### \java\seedu\address\ui\testutil\GuiTestAssert.java
 ``` java
     /**
      * Returns the color style for {@code tagName}'s label. The tag's color is determined by looking up the color
@@ -2289,6 +2393,9 @@ public class TypicalGoals {
         case "friends":
         case "classmate":
             return "brown";
+
+        case "RA":
+            return "pink";
 
         case "husband":
         case "cousin":
@@ -2339,7 +2446,7 @@ public class TypicalGoals {
     }
 
 ```
-###### /java/seedu/address/ui/testutil/GuiTestAssert.java
+###### \java\seedu\address\ui\testutil\GuiTestAssert.java
 ``` java
     /**
      * Changing @param ccaInArrayList into a CCA string in desired format

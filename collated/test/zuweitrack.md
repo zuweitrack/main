@@ -1,5 +1,5 @@
 # zuweitrack
-###### /java/seedu/address/logic/commands/SeekRaCommandTest.java
+###### \java\seedu\address\logic\commands\SeekRaCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) for {@code SeekRaCommand}.
@@ -91,7 +91,7 @@ public class SeekRaCommandTest {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/ShowLofCommandTest.java
+###### \java\seedu\address\logic\commands\ShowLofCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) for {@code ShowLofCommand}.
@@ -140,7 +140,7 @@ public class ShowLofCommandTest {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/SeekRaCommandParserTest.java
+###### \java\seedu\address\logic\parser\SeekRaCommandParserTest.java
 ``` java
 public class SeekRaCommandParserTest {
 
@@ -164,7 +164,7 @@ public class SeekRaCommandParserTest {
 
 }
 ```
-###### /java/seedu/address/logic/parser/ShowLofCommandParserTest.java
+###### \java\seedu\address\logic\parser\ShowLofCommandParserTest.java
 ``` java
 public class ShowLofCommandParserTest {
 
@@ -189,7 +189,7 @@ public class ShowLofCommandParserTest {
 
 }
 ```
-###### /java/seedu/address/model/person/LofContainsValuePredicateTest.java
+###### \java\seedu\address\model\person\LofContainsValuePredicateTest.java
 ``` java
 public class LofContainsValuePredicateTest {
 
@@ -257,7 +257,7 @@ public class LofContainsValuePredicateTest {
     }
 }
 ```
-###### /java/seedu/address/model/person/UnitNumberContainsKeywordsPredicateTest.java
+###### \java\seedu\address\model\person\UnitNumberContainsKeywordsPredicateTest.java
 ``` java
 public class UnitNumberContainsKeywordsPredicateTest {
 
