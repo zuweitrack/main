@@ -125,7 +125,6 @@ public class UniqueGoalList implements Iterable<Goal> {
      */
     public void sortGoal(String sortField, String sortOrder) throws EmptyGoalListException {
         String sortFieldAndOrder = sortField + " " + sortOrder;
-        //Comparator<Goal> comparatorImportance = Comparator.comparingInt(Goal::getImportance);
         switch (sortFieldAndOrder) {
         case "importance ascending":
             FXCollections.sort(internalList, (Goal goalA, Goal goalB) ->goalA.getImportance()

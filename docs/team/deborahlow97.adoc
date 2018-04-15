@@ -34,9 +34,11 @@ include::../UserGuide.adoc[tag=goalcompletion]
 
 === Minor enhancement: added a theme command that allows the user to change the theme colour of CollegeZone.
 ** Justification: This feature allows RC4 students to switch to a different theme colour of their liking.
+include::../UserGuide.adoc[tag=theme]
 
 === Minor enhancement: added birthday, level of friendship, unit number and ccas field
 ** Justification: The addition of this field provides user with more comprehensive contact details to add into CollegeZone.
+
 
 === Proposed enhancements:
 ==== Auto-Complete command

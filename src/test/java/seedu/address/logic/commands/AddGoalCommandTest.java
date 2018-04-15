@@ -36,18 +36,6 @@ public class AddGoalCommandTest {
         new AddGoalCommand(null);
     }
 
-    //TODODEB
-    /*@Test
-    public void execute_goalAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingGoalAdded modelStub = new ModelStubAcceptingGoalAdded();
-        Goal validGoal = new GoalBuilder().build();
-
-        CommandResult commandResult = getAddGoalCommandForGoal(validGoal, modelStub).execute();
-
-        assertEquals(String.format(AddGoalCommand.MESSAGE_SUCCESS, validGoal), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validGoal), modelStub.goalsAdded);
-    }*/
-
     @Test
     public void execute_duplicateGoal_throwsCommandException() throws Exception {
         AddCommandTest.ModelStub modelStub = new ModelStubThrowingDuplicateGoalException();

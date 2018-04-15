@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import seedu.address.testutil.ReminderBuilder;
 
-//@@author fuadsahamwi
+//@@author fuadsahmawi
 public class ReminderTextPredicateTest {
 
     @Test
