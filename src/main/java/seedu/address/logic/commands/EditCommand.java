@@ -42,6 +42,15 @@ public class EditCommand extends UndoableCommand {
 
     public static final String COMMAND_ALIAS = "e";
 
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " 1"
+            + PREFIX_NAME + "   "
+            + PREFIX_PHONE + "   "
+            + PREFIX_BIRTHDAY + "   "
+            + PREFIX_LEVEL_OF_FRIENDSHIP + "   "
+            + PREFIX_UNIT_NUMBER + "   "
+            + PREFIX_CCA + "   "
+            + PREFIX_TAG + "   ";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the last person listing. "
             + "Existing values will be overwritten by the input values.\n"
