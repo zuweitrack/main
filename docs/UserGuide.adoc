@@ -418,7 +418,7 @@ You can try setting a reminder into the calendar in CollegeZone by referring to 
 
 *_Details:_*
 ****
-* A reminder will be added to _CollegeZone_ and it will reflected in the Calendar.
+* A reminder will be added to _CollegeZone_ and it will be reflected in the Calendar.
 * `START_DATETIME` & `END_DATETIME`: a datetime is a string that contains either a date, a time or a combination of both (in any order). If a date is not specified, then it will refer to today. If a time is not specified, then it will refer to the current time.
 * Examples of valid `START_DATETIME` & `END_DATETIME`: +
  -	[date] [time] +
