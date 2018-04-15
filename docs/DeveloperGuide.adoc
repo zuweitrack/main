@@ -527,12 +527,14 @@ Hence, both `AddReminderCommand` and `DeleteReminderCommand` are implemented as 
 * Adding a reminder to the Calendar: The `AddReminderCommand` allows you to add a `Reminder` into CollegeZone and is stored in an ArrayList, `UniqueReminderList`, in `AddressBook`.
 * Deleting a reminder on the Calendar: The `DeleteReminderCommand` allows you to delete a `Reminder` from `UniqueReminderList`, in `AddressBook`.
 
-Reminder commands are undoable and redoable for the benefit users to redo and undo a command they did or did not intend to change.
+Reminder commands are undoable and redoable for the benefit users to redo and undo a command they did or did not intend to change. 
 Hence, both `AddReminderCommand` and `DeleteReminderCommand` are implemented as `UndoableCommand`.
 
 ==== Implementation +
 
-*Reminder Object* +
+*Model Component* +
+
+* Reminder Class
 
 Every time a `Reminder` is created, three other objects are also created: +
 
@@ -546,27 +548,32 @@ A `Reminder` will be marked with a *blue* circle if it's not due and be marked w
 
 Users can delete reminders on the Calendar if its already due or when they accidentally made a mistake. +
 
-*UniqueReminderList* +
+._Class Diagram of Reminder_
+image::ReminderClassDiagram.PNG[width="800"]
+
+* UniqueReminderList +
 
 `UniqueReminderList` functions as a List of `Reminders` where every element is unique and is defined by its `ReminderText`,
 `DateTime` and `EndDateTime`.
 
-*Adding a Reminder* +
+*Logic Component* +
+
+* Adding a Reminder +
 
 When `AddReminderCommand` is executed, it first checks whether there are any duplicate reminders in `UniqueReminderList`. If there is no duplicate reminder,
 `Reminder` is added into `UniqueReminderList` in `AddressBook`.
 
 .Interactions Inside the Logic Component for the `+r text/eat pills d/tmr 8pm e/tmr 10pm` Command
-image::addReminderSeqDiagram.png[width="800"]
+image::addReminderSeqDiagram.PNG[width="800"]
 
-*Deleting a Reminder* +
+* Deleting a Reminder +
 
 When `DeleteReminderCommand` is executed, it will find the `Reminder` specified by the user using parameters `ReminderText` and `DateTime`. If `Reminder` specified by user
 is not found in `UniqueReminderList`, `CommandException` will be thrown. If `Reminder` is found, it will then be removed from `UniqueReminderList`. The code snippet to find and remove the `Reminder`
-specified by user is shown below.
+specified by user is shown below. Code snippet of this is shown in Code Snippet 3.9.1.
 
 .Interactions Inside the Logic Component for the `-r text/eat pills d/tmr 8pm` Command
-image::delReminderSeqDiagram.png[width="800"]
+image::delReminderSeqDiagram.PNG[width="800"]
 
 [source,java]
 ----
@@ -590,8 +597,9 @@ image::delReminderSeqDiagram.png[width="800"]
         }
     }
 ----
+.Code Snippet 3.9.1: Method to find specific Reminder to delete
 
-*Syncing Reminder to Calendar* +
+*User Interface(Syncing Calendar to Reminders)* +
 
 To display the reminder in the calendar, we have a `CalendarPanel` that takes in the `UniqueReminderList`.
 
@@ -609,6 +617,8 @@ To display the reminder in the calendar, we have a `CalendarPanel` that takes in
         registerAsAnEventHandler(this);
     }
 ----
+.Code Snippet 3.9.2: Inititialisation of Calendar Panel for User Interface
+
 `UniqueReminderList` will then be iterated and each reminder in the list is individually added into the calendar through `updateCalendar()`. Every time a new reminder is added into `CollegeZone`, an event handler, `handleNewCalendarEvent`, will
 cause `calendarUpdate()` to run again and `CalendarPanel` will be updated to display the new reminder added onto `CollegeZone`.
 
@@ -620,6 +630,11 @@ cause `calendarUpdate()` to run again and `CalendarPanel` will be updated to dis
         personList = event.data.getPersonList();
         Platform.runLater(this::updateCalendar);
     }
+----
+.Code Snippet 3.9.3: Event Handler: handleNewCalendarEvent
+
+[source,java]
+----
 
     /**
      * Updates the Calendar with Reminders that are already added
@@ -649,24 +664,10 @@ cause `calendarUpdate()` to run again and `CalendarPanel` will be updated to dis
                 calendarRDue.addEntry(new Entry(reminder.getReminderText().toString(), new Interval(ldtstart, ldtend)));
             }
         }
-        //@@author sham-sheer
-        for (Person person : personList) {
-            String meetDate = person.getMeetDate().toString();
-            if (!meetDate.isEmpty()) {
-                int day = Integer.parseInt(meetDate.substring(0,
-                        2));
-                int month = Integer.parseInt(meetDate.substring(3,
-                        5));
-                int year = Integer.parseInt(meetDate.substring(6,
-                        10));
-                calendarM.addEntry(new Entry("Meeting " + person.getName().toString(),
-                        new Interval(LocalDate.of(year, month, day), LocalTime.of(12, 0),
-                                LocalDate.of(year, month, day), LocalTime.of(13, 0))));
-            }
-        }
         calendarView.getCalendarSources().add(myCalendarSource);
     }
 ----
+.Code Snippet 3.9.4: _updateCalendar() method_
 
 When a reminder is deleted, it will go through the same process as adding reminder and the changes will then be updated in the calendar.
 
