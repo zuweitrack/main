@@ -238,6 +238,7 @@ The undo/redo mechanism is facilitated by an `UndoRedoStack`, which resides insi
 
 `UndoRedoStack` only deals with `UndoableCommands`. Commands that cannot be undone will inherit from `Command` instead. The following diagram shows the inheritance diagram for commands:
 
+.Structure of Logic Command
 image::LogicCommandClassDiagram.png[width="800"]
 
 As you can see from the diagram, `UndoableCommand` adds an extra layer between the abstract `Command` class and concrete commands that can be undone, such as the `DeleteCommand`. Note that extra tasks need to be done when executing a command in an _undoable_ way, such as saving the state of the address book before execution. `UndoableCommand` contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level steps of the algorithm in child classes is also known as the https://www.tutorialspoint.com/design_pattern/template_pattern.htm[template pattern].
@@ -277,10 +278,12 @@ Suppose that the user has just launched the application. The `UndoRedoStack` wil
 
 The user executes a new `UndoableCommand`, `delete 5`, to delete the 5th person in the address book. The current state of the address book is saved before the `delete 5` command executes. The `delete 5` command will then be pushed onto the `undoStack` (the current state is saved together with the command).
 
+.Initial UndoRedoStack
 image::UndoRedoStartingStackDiagram.png[width="800"]
 
 As the user continues to use the program, more commands are added into the `undoStack`. For example, the user may execute `add n/David ...` to add a new person.
 
+.UndoRedoStack given new command input
 image::UndoRedoNewCommand1StackDiagram.png[width="800"]
 
 [NOTE]
@@ -290,6 +293,7 @@ The user now decides that adding the person was a mistake, and decides to undo t
 
 We will pop the most recent command out of the `undoStack` and push it back to the `redoStack`. We will restore the address book to the state before the `add` command executed.
 
+.Undo command on UndoRedoStack
 image::UndoRedoExecuteUndoStackDiagram.png[width="800"]
 
 [NOTE]
@@ -297,6 +301,7 @@ If the `undoStack` is empty, then there are no other commands left to be undone,
 
 The following sequence diagram shows how the undo operation works:
 
+.Sequence diagram for `undo`
 image::UndoRedoSequenceDiagram.png[width="800"]
 
 The redo does the exact opposite (pops from `redoStack`, push to `undoStack`, and restores the address book to the state after the command is executed).
@@ -306,14 +311,17 @@ If the `redoStack` is empty, then there are no other commands left to be redone,
 
 The user now decides to execute a new command, `clear`. As before, `clear` will be pushed into the `undoStack`. This time the `redoStack` is no longer empty. It will be purged as it no longer make sense to redo the `add n/David` command (this is the behavior that most modern desktop applications follow).
 
+.UndoRedoStack given command `clear`
 image::UndoRedoNewCommand2StackDiagram.png[width="800"]
 
 Commands that are not undoable are not added into the `undoStack`. For example, `list`, which inherits from `Command` rather than `UndoableCommand`, will not be added after execution:
 
+.UndoRedoStack given command `list`
 image::UndoRedoNewCommand3StackDiagram.png[width="800"]
 
 The following activity diagram summarize what happens inside the `UndoRedoStack` when a user executes a new command:
 
+.Activity diagram of UndoRedoStack
 image::UndoRedoActivityDiagram.png[width="650"]
 
 ==== Design Considerations
@@ -472,19 +480,22 @@ CollegeZone users may now use shortcuts to perform desired tasks. These shortcut
 
 // tag::tagcolours[]
 === Enhanced tag colours [Since v1.1]
-Tags are now colour-coded which allows improved differentiation between many different tags.
+Tags are now colour-coded which allows improved differentiation between many different tags. Different coloured tags
+also makes it more eye catching for users.
 // end::tagcolours[]
 
 // tag::addandedit[]
 === Targeted add and edit command [Since v1.2]
+As CollegeZone is designed for NUS RC4 students to use, being able to record other students Level of Friendship,
+ Birthday, RC4 Unit Number and RC4 CCAs, will be a useful feature for them.
 
-The old add and edit feature holds a broad information about a Person.
 As CollegeZone is catered toward NUS RC4 Residents, we have changed the attributes of a Person to hold: +
 *Name, Mobile Number, Birthday, Level of Friendship, RC4 Unit Number, Meet up dates with RC4 students, RC4 CCAs and Tags*. +
 This is done by removing unwanted attributes of a person and adding new attributes of a person.
 
+.Class diagram for Student
 image::RCPersonClass.JPG[width="450"]
-    Figure 3.8.1: Person Class diagram with added attributes
+
 
 ==== Aspect: Nature of new Attributes
 * Birthday: Must be a valid date.
@@ -677,19 +688,222 @@ the specific `Reminder` that the user wants to remove.
 // end::reminder[]
 
 // tag::myGoalsPage[]
-=== Goals List [Since v1.4]
 
-The My Goals page is created for RC4 users to add and keep track of their goals throughout their stay. We are implementing this goal list as setting goals gives you *long-term vision* and *short-term motivation* for the goals. In addition as a majority of RC4 residents are NUS students, when students set their own goals, they take responsibility and ownership of their learning goals. +
-Goals are meant only for the user, and the user can have many goals stored in CollegeZone. +
+=== Goals
+==== Introduction
+CollegeZone is designed for RC4 students to use. RC4 students often have goals that they want to achieve in life
+– Career goals, health goals, social goals, relationship goals etc. This additional goal feature is created for RC4 users to add and keep track of their goals throughout their stay.
+The main reason behind this implementation is because setting goals gives you *long-term vision* and *short-term motivation* for the goals.
+This implementation allows RC4 students to set goals in _CollegeZone_ – big or small ones - so
+ that they will be reminded of the goals that they have set for themselves.
 
-*Goals features:* +
+  In addition as a majority of RC4 residents are NUS students, when students set their own goals, they
+   take responsibility and ownership of their learning goals. +
+ Goals are meant only for the user, and the user can have many goals stored in CollegeZone.
 
-* Adding a goal to Goals List
-* Editing a goal from the Goals List
-* Deleting a goal from the Goals List
-* Check a goal from the Goals List
-* Uncheck a goal from the Goals List
-* Sort goals from the Goals List
+*Goal features:*
+
+ -add goal
+ -edit goal
+ -delete goal
+ -complete goal
+ -ongoing goal
+ -sort goal
+
+==== Implementation of Goal Object
+
+*Goal objects consists of 5 attributes :* +
+
+1. Date and time of when goal is completed. +
+2. Level of importance of goal. +
+3. Text content of Goal. +
+4. Date and time of Goal of when goal has started. +
+5. Goal completion status.
+
+._Class diagram of Goal_
+image::CollegeZoneGoalModelClassDiagram.JPG[width="800"]
+
+The code snippet shown below shows the overloading of StartDateTime constructor class.
+It keeps both a String value and a LocalDateTime value.
+The _Code-snippet 2 and 3_ shows the conversion of the String value to LocalDateTime value and vice versa.
+
+.Code-snippet 1
+[source,java]
+----
+public class StartDateTime implements Comparable<StartDateTime> {
+
+    public final String value;
+    public final LocalDateTime localDateTimeValue;
+
+    public StartDateTime(LocalDateTime startDateTime) {
+        requireNonNull(startDateTime);
+        this.localDateTimeValue = startDateTime;
+        this.value = properDateTimeFormat(startDateTime);
+    }
+
+    public StartDateTime(String startDateTimeInString) {
+        requireNonNull(startDateTimeInString);
+        this.value = startDateTimeInString;
+        this.localDateTimeValue = getLocalDateTimeFromProperDateTime(startDateTimeInString);
+    }
+}
+----
+
+.Code-snippet 2
+[source,java]
+----
+    public static String properDateTimeFormat(LocalDateTime dateTime) {
+        StringBuilder builder = new StringBuilder();
+        int day = dateTime.getDayOfMonth();
+        String month = dateTime.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+        int year = dateTime.getYear();
+        int hour = dateTime.getHour();
+        int minute = dateTime.getMinute();
+        builder.append("Date: ")
+                .append(day)
+                .append(" ")
+                .append(month)
+                .append(" ")
+                .append(year)
+                .append(",  Time: ")
+                .append(String.format("%02d", hour))
+                .append(":")
+                .append(String.format("%02d", minute));
+        return builder.toString();
+    }
+----
+
+.Code-snippet 3
+[source,java]
+----
+    public static LocalDateTime getLocalDateTimeFromProperDateTime(String properDateTimeString) {
+        String trimmedArgs = properDateTimeString.trim();
+        int size = trimmedArgs.length();
+        String stringFormat = properDateTimeString.substring(BEGIN_INDEX, size);
+        stringFormat = stringFormat.replace(", Time: ", "");
+        return nattyDateAndTimeParser(stringFormat).get();
+    }
+----
+
+==== Implementation of add goal
+
+Adding a goal into _CollegeZone_ is facilitated by `AddGoalCommand`, which extends `UndoableCommand`, it
+supports undoing and redoing of commands that modifies the state of the _CollegeZone_.
+
+[source,java]
+----
+public class AddGoalCommand extends UndoableCommand {
+@Override
+    public CommandResult executeUndoableCommand() throws CommandException {
+        // ... AddGoalCommand logic ...
+    }
+}
+----
+
+The following sequence diagram shows the flow of operation from the point _CollegeZone_ receives an input to the output of the result.
+
+._Interactions Inside the Logic Component for the `+g` Command_
+image::AddGoalSeqDiagram.png[width="800"]
+
+
+AddGoalCommand is implemented in this way:
+
+1. Logic
+* AddressBookParser:
+** Detects if add goal keyword contains correct parsing keywords after +
+*** e.g. +g text/eat healthily impt/9
+* AddGoalCommandParser: (More about this method will be mentioned later)
+** Parses the input by extracting the input text and importance +
+*** Parsed text : eat healthily +
+*** Parsed importance : 9
+** Creates a AddGoalCommand class and passes the text and importance and string as arguments
+* AddGoalCommand:
+** Adds the new goal to the list locally
+** Runs the execution which calls the model
+
+2. Model
+
+* Calls the model and gets the goals list
+* Adds the new goal into the goals list
+
+3. Ui
+* Displays the new goal added in the goal list panel
+
+4. Storage
+* Stores the new goal added in the address book storage
+
+Note:
+
+- All goals will have a string of stars (indicating importance) in a yellow border directly below the goal text in the goal list panel.
+- Goal that are just added will be placed at the bottom of the goal list. +
+
+The `AddGoalCommandParser` returns `AddGoalCommand` after execution, which will be further processed by `logic` component.
+
+AddGoalCommandParser is implemented in this way:
+[source,java]
+----
+public class AddGoalCommandParser implements Parser<AddGoalCommand> {
+
+    public static final String EMPTY_END_DATE_TIME = "";
+    public static final boolean INITIAL_COMPLETION_STATUS = false;
+
+    public AddGoalCommand parse(String args) throws ParseException {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_IMPORTANCE, PREFIX_GOAL_TEXT);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_IMPORTANCE, PREFIX_GOAL_TEXT)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGoalCommand.MESSAGE_USAGE));
+        }
+        try {
+            Importance importance = ParserUtil.parseImportance(argMultimap.getValue(PREFIX_IMPORTANCE)).get();
+            GoalText goalText = ParserUtil.parseGoalText(argMultimap.getValue(PREFIX_GOAL_TEXT)).get();
+            StartDateTime startDateTime = new StartDateTime(LocalDateTime.now());
+            EndDateTime endDateTime = new EndDateTime(EMPTY_END_DATE_TIME);
+            Completion completion = new Completion(INITIAL_COMPLETION_STATUS);
+            Goal goal = new Goal(importance, goalText, startDateTime, endDateTime, completion);
+            return new AddGoalCommand(goal);
+        } catch (IllegalValueException ive) {
+            throw new ParseException(ive.getMessage(), ive);
+        }
+    }
+----
+
+Notice that everytime a goal is added, the start date time of the goal will be recorded down in real time and it's completion
+status will be "ongoing" by default.
+
+==== Design Considerations
+
+**Aspect:** Implementation of adding start date time and completion status of goal +
+**Alternative 1 (current choice):** Having the current date time as the start date time and having a default completion status of a goal added. +
+**Pros:** User have lesser words to input in the command box. +
+**Cons:** User might have a preferred start date time and completion status of the goal that they just added. +
+**Alternative 2:** Giving user a choice of start date time input and completion status of goal added. +
+**Pros:** Allows user to choose their own start date time and completion status. +
+**Cons:** Tedious for user to input a longer add goal command and slightly more difficult to properly parse the start date time
+ that user enters.
+
+---
+
+**Aspect:** Representation of Goals level of importance in UI +
+**Alternative 1 (current choice):** Each level of importance have a number of stars related to it. +
+**Pros:** Ability for the user to differentiate the Goals with higher level of importance compared to those with lower level of importance. +
+**Cons:** The goal list in the UI might look messy to the user without having a sort Goals option as the list of goals is displayed based on when it was added. +
+**Alternative 2:** Having an additional sort goal command +
+**Pros:** It is simple and easy to understand. +
+**Cons:** It requires extra methods to implement the sort function. +
+
+---
+
+**Aspect:** Representation of Goals in UI +
+**Alternative 1 (current choice):** Having a goal list panel beside our current person list panel. +
+**Pros:** Ability for the user to differentiate the Goals with higher level of importance compared to those with lower level of importance. +
+**Cons:** The initial space in UI reserved for person list is not being used to display 2 lists, the person list and the goal list. This causes the UI to look clunky and overwhelming. +
+**Alternative 2:** Having a tab button in CollegeZone that allows user to switch between the person list panel and goal list panel. +
+**Pros:** Ability for user to switch to person list and goal list in the UI, which makes it look more user friendly. +
+**Cons:** As CollegeZone is a desktop application that has most interactions happen using a Command Line Interface (CLI), a new command to switch tabs between goal list and person list needs to be implemented. +
+
+==== Implementation of delete goal
 
 
 All goal commands are event driven. +
@@ -700,12 +914,12 @@ image::GoalHighLevelSequenceDiagram.jpg[width="800"]
 
 1. Logic
 * AddressBookParser: Detects if goal delete keyword contains correct parsing keyword after +
-e.g. goal delete 1
-* GoalDeleteCommandParser:
+e.g. deletegoal 1
+* DeleteGoalCommandParser:
 ** Parses the input by extracting the input index +
-Parsed index : 1 +
-** Creates a RemarkCommand class and passes the index and string as arguments
-* GoalDeleteCommand:
+*** Parsed index : 1 +
+** Creates a DeleteGoalCommand class and passes the index as argument
+* DeleteGoalCommand:
 ** Deletes the goal corresponding to the index locally
 ** Runs the execution which calls the model
 
@@ -716,45 +930,84 @@ Parsed index : 1 +
 * 3. Updates the filtered goals list
 * 4. Gets the updated filtered goals list
 
+3. Ui
+* Displays the deletion of goal in the goal list panel
+
+4. Storage
+* Deletes the details of the deleted goal in the address book storage
+
 *Reason for how it is implemented* +
 
 * Makes use of existing implementations +
-Coming up with new algorithms is very time consuming. Implementation of My Goals Page uses new implementations are very similar to how CollegeZone implements its contacts. This is implemented in this way so as to reduce errors and complexity in the code. +
-
-*Goals objects will consist of 3 attributes :* +
-
-1. Date and time of when goal completed. +
-2. Level of importance of goal. +
-3. Text content of Goal. +
-4. Date and time of Goal of when goal started. +
-5. Goal completion status.
-
-The following is the model component class diagram for Goal
-
-image::GoalModelComponentClassDiagram.JPG[width="800"]
-    Figure 3.10.0.2: Goal model Class Diagram
+Coming up with new algorithms is very time consuming. Implementation of My Goals Page uses new implementations
+are very similar to how CollegeZone implements its contacts. This is implemented in this way so as to reduce errors and complexity in the code. +
 
 
 ==== Design Considerations
 
 
-**Aspect:** Representation of Goals level of importance in UI +
-**Alternative 1 (current choice):** Each level of importance have a number of stars related to it. +
-**Pros:** Ability for the user to differentiate the Goals with higher level of importance compared to those with lower level of importance. +
-**Cons:** The goal list in the UI might look messy to the user without having a sort Goals option as the list of goals is displayed based on when it was added. +
-**Alternative 2:** Having an additional sort goal command +
-**Pros:** It is simple and easy to understand. +
-**Cons:** It requires extra methods to implement the sort function. +
-
-**Aspect:** Representation of Goals in UI +
-**Alternative 1 (current choice):** Having a goal list panel beside our current person list panel. +
-**Pros:** Ability for the user to differentiate the Goals with higher level of importance compared to those with lower level of importance. +
-**Cons:** The initial space in UI reserved for person list is not being used to display 2 lists, the person list and the goal list. This causes the UI to look clunky and overwhelming. +
-**Alternative 2:** Having a tab button in CollegeZone that allows user to switch between the person list panel and goal list panel. +
-**Pros:** Ability for user to switch to person list and goal list in the UI, which makes it look more user friendly. +
-**Cons:** As CollegeZone is a desktop application that has most interactions happen using a Command Line Interface (CLI), a new command to switch tabs between goal list and person list needs to be implemented. +
 ---
 // end::myGoalsPage[]
+
+
+==== Implementation of sort goal
+
+
+=== Theme Enhancement
+
+
+
+// tag::meetCommand[]
+=== Meet Command [Since v1.2]
+
+The new meet up command was implemented specifically to provide a platform in CollegeZone for RC4 students to set up
+meeting with other students with ease.
+// end::meetCommand[]
+
+//tag::sortmech[]
+=== Sorting mechanism
+
+The sorting mechanism is facilitated by `SortCommandParser` and `SortCommand`, with both classes residing in the `Logic` component of the address book. Since the address book state will be modified during the sorting process, the `sort` has to be undoable.
+
+`SortCommandParser` takes in an argument in the form of `INDEX_TYPE` that defines how `UniquePersonList` should be sorted. You may customise the sort operation, with `PREFIX` specifying the sort type. It first checks for validity against a regular expression. Once verified, the argument will be tokenized to identify your specified sort type. A `SortCommand` object is then created with the identified sort type.
+
+The `INDEX_TYPE` can be any three of the following: `1` for sorting RC4 Students based on their level of friendship, `2` for sorting persons by meet date, `3` for sorting persons by Birthday. The `ORDER` can be either `asc` for sorting in ascending order or `dsc` for sorting in descending order. The sorted list is always default to descending order of importance.
+
+Upon execution of `SortCommand`, a `Comparator<Person>` will be initialised based on the sort type it receives. A `sortPersons` function call will be made to `Model`, which propagates down to `UniquePersonList`, where the sorting of the `internalList` occurs. Since sorting of `internalList` results in the change of state to address book, `SortCommand` is to be implemented as an `UndoableCommand`.
+
+
+[NOTE]
+Implementation of Sorting Mechanism requires both the manipulation of `Logic` and `Model` component of address book.
+
+The following sequence diagram shows the flow of operation from the point the address book receives an input to the output of the result.
+
+image::SortPersonSdForLogic.png[width="800"]
+_Figure 4.5.2 : Interactions Inside the Logic Component for the `sort 1` Command_
+
+[NOTE]
+If the list is found to be empty, an `CommandException` will be thrown from `SortCommand`. The command should be terminated without any state change, keeping the redoStack clean of changes.
+
+==== Design Considerations
+
+**Aspect:** Initialising of `Comparator<Person>` +
+**Alternative 1:** Initialise in `SortCommand` +
+**Pros:** Clear separation of concerns, `SortCommandParser` to handle identifying of attribute to sort by only. +
+**Cons:** Hard for new developers to follow as other commands like `AddCommand` handles object creation in its parser. +
+**Alternative 2 (current choice): ** Initialise in `UniquePersonList` +
+**Pros:** Straightforward as initialises the `Comparator` where it is used. +
+**Cons:** `UniquePersonList` is at a lower level and should only handle a minimal set of `Person` related operations, and not logical operations like string matching. +
+
+---
+
+**Aspect:** Sorting by multiple attribute +
+**Alternative 1 (current choice):** Only allows sorting by single attribute +
+**Pros:** Fast and arguments to input is straightforward. +
+**Cons:** Unable to have fine grain control of how list should appear. +
+**Alternative 2:** Allow sorting by multiple attribute +
+**Pros:** Enables fine grain control of how list should appear. +
+**Cons:** Not necessary as effect is only obvious when contact list is long and has multiple common names. As target audience for iConnect are students, contact list will not be more than few thousand contacts long. +
+// end::sortmech[]
+
 
 // tag::rate[]
 === Rate friends [Since v1.4]
@@ -826,6 +1079,7 @@ As seen in the code below, there will be a error message informing the user that
 **Cons:** Additional methods have to be added to ensure that the `input values` and `indexes` are valid.
 
 // end::rate[]
+
 
 == Documentation
 
@@ -975,8 +1229,9 @@ b. Require developers to download those libraries manually (this creates extra w
  Logic : Added command aliases to allow users to be able to perform commands by typing shortcuts
 
 |Shamsheer Ahamed
-|Meetup (Tasks) : This feature allows user to set up a meet up date that will be reflected on a Calendar +
-|Profile Photo : Added a male female profile pictures to GUI for an interactive experience.
+|Social (Meet-Up) : This feature allows user to set up meet ups with RC4 students that will be reflected on a Calendar +
+ Social (Sorting) : On top of the meet up dates appearing on the calendar, a sorting tool is also added to keep the user up to date with his meet up dates, birthdays and friendship levels.
+|Command Box Enhancement : Added a autocomplete command that auto fills the required preambles for the individual commands in the command box
 
 |Goh Zu Wei
 |Rate Friends : This feature allows categorize and rate one or more friends by changing their levels of friendships.
@@ -1021,6 +1276,10 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |RC student |note down tasks, events or training sessions in a calendar |make my schedule more organised
 
 |`* * *` |RC student |Set down a date for group events |do necessary group preparation prior to a group event
+
+|`* * *` |RC student |Set up meetings and keep track of them |I can effectively network and meet new people in my RC
+
+|`* * *` |RC student |easily find out important dates like meeting dates and birth dates |be up to task with those dates
 
 |`* *` |careless RC student |undo a command I entered |undo a wrong command that I entered
 
@@ -1236,7 +1495,29 @@ Use case ends.
 +
 Use case ends.
 
+=== Use case: Sort students
 
+1. Users requests to sort the RC4 Students list according to meet up dates.
+2. CollegeZone sorts the list and shows the upcoming the meet dates first.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The list is empty
++
+[none]
+** 1a1. CollegeZone shows an error message.
++
+Use case ends.
+
+* 1b. The given sorting index type is invalid.
++
+[none]
+** 1b1. CollegeZone shows an error message.
++
+Use case ends.
 
 === Use case: Add goal
 1. User requests to add a goal in the list

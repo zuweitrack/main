@@ -11,6 +11,7 @@ import guitests.guihandles.CommandBoxHandle;
 import javafx.scene.input.KeyCode;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -18,6 +19,8 @@ import seedu.address.model.ModelManager;
 public class CommandBoxTest extends GuiUnitTest {
 
     private static final String COMMAND_THAT_SUCCEEDS = ListCommand.COMMAND_WORD;
+    private static final String COMMAND_INCOMPLETE = "ad";
+    private static final String COMMAND_COMPLETE = AddCommand.COMMAND_FORMAT;
     private static final String COMMAND_THAT_FAILS = "invalid command";
 
     private ArrayList<String> defaultStyleOfCommandBox;
@@ -125,6 +128,14 @@ public class CommandBoxTest extends GuiUnitTest {
         assertInputHistory(KeyCode.UP, thirdCommand);
     }
 
+    //@@author sham-sheer
+    @Test
+    public void handleKeyPress_startingWithTab() {
+        commandBoxHandle.runWithoutEnter(COMMAND_INCOMPLETE);
+        assertInputHistory(KeyCode.TAB, COMMAND_COMPLETE);
+    }
+
+    //@@author
     /**
      * Runs a command that fails, then verifies that <br>
      *      - the text remains <br>
