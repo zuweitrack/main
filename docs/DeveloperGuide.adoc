@@ -1167,7 +1167,9 @@ A `Person` is composed of a `LevelOfFriendship` component, and each person in Co
 The next diagram illustrates the relationship between a
 `Person` and its `LevelOfFriendship`.
 
-image::RCPersonClass 1.jpg[width="450"]
+
+image::RCPersonClass1.jpg[width="450"]
+
 
 The following shows a part of the code of `RateCommand` and reveals
 the parameters that `RateCommand` makes use of.
