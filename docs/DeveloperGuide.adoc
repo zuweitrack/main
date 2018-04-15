@@ -744,6 +744,7 @@ image::GoalModelComponentClassDiagram.JPG[width="800"]
 // end::myGoalsPage[]
 
 // tag::meetCommand[]
+
 === Meet Command [Since v1.2]
 
 The new meet up command was implemented specifically to provide a platform in CollegeZone for RC4 students to set up
@@ -759,7 +760,7 @@ Hence, both `MeetCommand` and `DeleteMeetCommand` are implemented as `UndoableCo
 
 ==== Implementation +
 
-*Meer Object* +
+*Meet Object* +
 
 Every time a User sets up a meet up with someone else: +
 
@@ -888,6 +889,7 @@ the specific `meetDates` or 'Person' that the user wants to remove.
 // end::meetCommand[]
 
 //tag::sortmech[]
+
 === Sort Command [Since v1.4]
 
 The Sort Command is facilitated by `SortCommandParser` and `SortCommand`, with both classes residing in the `Logic` component of the address book. Since the address book state will be modified during the sorting process, the `sort` has to be undoable.
@@ -931,6 +933,7 @@ If the list is found to be empty, an `CommandException` will be thrown from `Sor
 **Alternative 2:** Allow sorting by multiple attribute +
 **Pros:** Enables fine grain control of how list should appear. +
 **Cons:** Not necessary as effect is only obvious when contact list is long and has multiple common names. As target audience for iConnect are students, contact list will not be more than few thousand contacts long. +
+
 // end::sortmech[]
 
 
