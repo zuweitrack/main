@@ -527,7 +527,7 @@ Hence, both `AddReminderCommand` and `DeleteReminderCommand` are implemented as 
 * Adding a reminder to the Calendar: The `AddReminderCommand` allows you to add a `Reminder` into CollegeZone and is stored in an ArrayList, `UniqueReminderList`, in `AddressBook`.
 * Deleting a reminder on the Calendar: The `DeleteReminderCommand` allows you to delete a `Reminder` from `UniqueReminderList`, in `AddressBook`.
 
-Reminder commands are undoable and redoable for the benefit users to redo and undo a command they did or did not intend to change. 
+Reminder commands are undoable and redoable for the benefit users to redo and undo a command they did or did not intend to change.
 Hence, both `AddReminderCommand` and `DeleteReminderCommand` are implemented as `UndoableCommand`.
 
 ==== Implementation +
