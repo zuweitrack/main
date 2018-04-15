@@ -480,8 +480,11 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 <div class="sect2">
 <h3 id="targeted-add-and-edit-command-since-v1-2"><a class="link" href="#targeted-add-and-edit-command-since-v1-2">Targeted add and edit command [Since v1.2]</a></h3>
 <div class="paragraph">
-<p>The old add and edit feature holds a broad information about a Person.
-As CollegeZone is catered toward NUS RC4 Residents, we have changed the attributes of a Person to hold:<br>
+<p>As CollegeZone is designed for NUS RC4 students to use, being able to record other students Level of Friendship,
+ Birthday, RC4 Unit Number and RC4 CCAs, will be a useful feature for them.</p>
+</div>
+<div class="paragraph">
+<p>As CollegeZone is catered toward NUS RC4 Residents, we have changed the attributes of a Person to hold:<br>
 <strong>Name, Mobile Number, Birthday, Level of Friendship, RC4 Unit Number, Meet up dates with RC4 students, RC4 CCAs and Tags</strong>.<br>
 This is done by removing unwanted attributes of a person and adding new attributes of a person.</p>
 </div>
@@ -489,11 +492,7 @@ This is done by removing unwanted attributes of a person and adding new attribut
 <div class="content">
 <img src="../images/RCPersonClass.JPG" alt="RCPersonClass" width="450">
 </div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>Figure 3.8.1: Person Class diagram with added attributes</pre>
-</div>
+<div class="title">Figure 1. Class diagram for Student</div>
 </div>
 <div class="sect3">
 <h4 id="aspect-nature-of-new-attributes"><a class="link" href="#aspect-nature-of-new-attributes">Aspect: Nature of new Attributes</a></h4>
@@ -529,36 +528,344 @@ This is done by removing unwanted attributes of a person and adding new attribut
 </div>
 </div>
 <div class="sect2">
-<h3 id="goals-list-since-v1-4"><a class="link" href="#goals-list-since-v1-4">Goals List [Since v1.4]</a></h3>
+<h3 id="goals"><a class="link" href="#goals">Goals</a></h3>
+<div class="sect3">
+<h4 id="introduction"><a class="link" href="#introduction">Introduction</a></h4>
 <div class="paragraph">
-<p>The My Goals page is created for RC4 users to add and keep track of their goals throughout their stay. We are implementing this goal list as setting goals gives you <strong>long-term vision</strong> and <strong>short-term motivation</strong> for the goals. In addition as a majority of RC4 residents are NUS students, when students set their own goals, they take responsibility and ownership of their learning goals.<br>
-Goals are meant only for the user, and the user can have many goals stored in CollegeZone.<br></p>
+<p>CollegeZone is designed for RC4 students to use. RC4 students often have goals that they want to achieve in life
+– Career goals, health goals, social goals, relationship goals etc. This additional goal feature is created for RC4 users to add and keep track of their goals throughout their stay.
+The main reason behind this implementation is because setting goals gives you <strong>long-term vision</strong> and <strong>short-term motivation</strong> for the goals.
+This implementation allows RC4 students to set goals in <em>CollegeZone</em> – big or small ones - so
+ that they will be reminded of the goals that they have set for themselves.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre> In addition as a majority of RC4 residents are NUS students, when students set their own goals, they
+  take responsibility and ownership of their learning goals. +
+Goals are meant only for the user, and the user can have many goals stored in CollegeZone.</pre>
+</div>
 </div>
 <div class="paragraph">
-<p><strong>Goals features:</strong><br></p>
+<p><strong>Goal features:</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>-add goal
+-edit goal
+-delete goal
+-complete goal
+-ongoing goal
+-sort goal</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-of-goal-object"><a class="link" href="#implementation-of-goal-object">Implementation of Goal Object</a></h4>
+<div class="paragraph">
+<p><strong>Goal objects consists of 5 attributes :</strong><br></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Date and time of when goal is completed.<br></p>
+</li>
+<li>
+<p>Level of importance of goal.<br></p>
+</li>
+<li>
+<p>Text content of Goal.<br></p>
+</li>
+<li>
+<p>Date and time of Goal of when goal has started.<br></p>
+</li>
+<li>
+<p>Goal completion status.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/CollegeZoneGoalModelClassDiagram.JPG" alt="CollegeZoneGoalModelClassDiagram" width="800">
+</div>
+<div class="title">Figure 2. <em>Class diagram of Goal</em></div>
+</div>
+<div class="paragraph">
+<p>The code snippet shown below shows the overloading of StartDateTime constructor class.
+It keeps both a String value and a LocalDateTime value.
+The <em>Code-snippet 2 and 3</em> shows the conversion of the String value to LocalDateTime value and vice versa.</p>
+</div>
+<div class="listingblock">
+<div class="title">Code-snippet 1</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">StartDateTime</span> <span class="directive">implements</span> <span class="predefined-type">Comparable</span>&lt;StartDateTime&gt; {
+
+    <span class="directive">public</span> <span class="directive">final</span> <span class="predefined-type">String</span> value;
+    <span class="directive">public</span> <span class="directive">final</span> LocalDateTime localDateTimeValue;
+
+    <span class="directive">public</span> StartDateTime(LocalDateTime startDateTime) {
+        requireNonNull(startDateTime);
+        <span class="local-variable">this</span>.localDateTimeValue = startDateTime;
+        <span class="local-variable">this</span>.value = properDateTimeFormat(startDateTime);
+    }
+
+    <span class="directive">public</span> StartDateTime(<span class="predefined-type">String</span> startDateTimeInString) {
+        requireNonNull(startDateTimeInString);
+        <span class="local-variable">this</span>.value = startDateTimeInString;
+        <span class="local-variable">this</span>.localDateTimeValue = getLocalDateTimeFromProperDateTime(startDateTimeInString);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Code-snippet 2</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> <span class="directive">static</span> <span class="predefined-type">String</span> properDateTimeFormat(LocalDateTime dateTime) {
+        <span class="predefined-type">StringBuilder</span> builder = <span class="keyword">new</span> <span class="predefined-type">StringBuilder</span>();
+        <span class="type">int</span> day = dateTime.getDayOfMonth();
+        <span class="predefined-type">String</span> month = dateTime.getMonth().getDisplayName(TextStyle.FULL, <span class="predefined-type">Locale</span>.ENGLISH);
+        <span class="type">int</span> year = dateTime.getYear();
+        <span class="type">int</span> hour = dateTime.getHour();
+        <span class="type">int</span> minute = dateTime.getMinute();
+        builder.append(<span class="string"><span class="delimiter">&quot;</span><span class="content">Date: </span><span class="delimiter">&quot;</span></span>)
+                .append(day)
+                .append(<span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>)
+                .append(month)
+                .append(<span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>)
+                .append(year)
+                .append(<span class="string"><span class="delimiter">&quot;</span><span class="content">,  Time: </span><span class="delimiter">&quot;</span></span>)
+                .append(<span class="predefined-type">String</span>.format(<span class="string"><span class="delimiter">&quot;</span><span class="content">%02d</span><span class="delimiter">&quot;</span></span>, hour))
+                .append(<span class="string"><span class="delimiter">&quot;</span><span class="content">:</span><span class="delimiter">&quot;</span></span>)
+                .append(<span class="predefined-type">String</span>.format(<span class="string"><span class="delimiter">&quot;</span><span class="content">%02d</span><span class="delimiter">&quot;</span></span>, minute));
+        <span class="keyword">return</span> builder.toString();
+    }</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Code-snippet 3</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> <span class="directive">static</span> LocalDateTime getLocalDateTimeFromProperDateTime(<span class="predefined-type">String</span> properDateTimeString) {
+        <span class="predefined-type">String</span> trimmedArgs = properDateTimeString.trim();
+        <span class="type">int</span> size = trimmedArgs.length();
+        <span class="predefined-type">String</span> stringFormat = properDateTimeString.substring(BEGIN_INDEX, size);
+        stringFormat = stringFormat.replace(<span class="string"><span class="delimiter">&quot;</span><span class="content">, Time: </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>);
+        <span class="keyword">return</span> nattyDateAndTimeParser(stringFormat).get();
+    }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-of-add-goal"><a class="link" href="#implementation-of-add-goal">Implementation of add goal</a></h4>
+<div class="paragraph">
+<p>Adding a goal into <em>CollegeZone</em> is facilitated by <code>AddGoalCommand</code>, which extends <code>UndoableCommand</code>, it
+supports undoing and redoing of commands that modifies the state of the <em>CollegeZone</em>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">AddGoalCommand</span> <span class="directive">extends</span> UndoableCommand {
+<span class="annotation">@Override</span>
+    <span class="directive">public</span> CommandResult executeUndoableCommand() <span class="directive">throws</span> CommandException {
+        <span class="comment">// ... AddGoalCommand logic ...</span>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows the flow of operation from the point <em>CollegeZone</em> receives an input to the output of the result.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AddGoalSeqDiagram.png" alt="AddGoalSeqDiagram" width="800">
+</div>
+<div class="title">Figure 3. <em>Interactions Inside the Logic Component for the <code>+g</code> Command</em></div>
+</div>
+<div class="paragraph">
+<p>AddGoalCommand is implemented in this way:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Logic</p>
+<div class="ulist">
+<ul>
+<li>
+<p>AddressBookParser:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Detects if add goal keyword contains correct parsing keywords after<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>e.g. +g text/eat healthily impt/9</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>AddGoalCommandParser: (More about this method will be mentioned later)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Parses the input by extracting the input text and importance<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Parsed text : eat healthily<br></p>
+</li>
+<li>
+<p>Parsed importance : 9</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Creates a AddGoalCommand class and passes the text and importance and string as arguments</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>AddGoalCommand:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Adds the new goal to the list locally</p>
+</li>
+<li>
+<p>Runs the execution which calls the model</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Model</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Calls the model and gets the goals list</p>
+</li>
+<li>
+<p>Adds the new goal into the goals list</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ui</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Displays the new goal added in the goal list panel</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Storage</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Stores the new goal added in the address book storage</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Note:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Adding a goal to Goals List</p>
+<p>All goals will have a string of stars (indicating importance) in a yellow border directly below the goal text in the goal list panel.</p>
 </li>
 <li>
-<p>Editing a goal from the Goals List</p>
-</li>
-<li>
-<p>Deleting a goal from the Goals List</p>
-</li>
-<li>
-<p>Check a goal from the Goals List</p>
-</li>
-<li>
-<p>Uncheck a goal from the Goals List</p>
-</li>
-<li>
-<p>Sort goals from the Goals List</p>
+<p>Goal that are just added will be placed at the bottom of the goal list.<br></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>The <code>AddGoalCommandParser</code> returns <code>AddGoalCommand</code> after execution, which will be further processed by <code>logic</code> component.</p>
+</div>
+<div class="paragraph">
+<p>AddGoalCommandParser is implemented in this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">AddGoalCommandParser</span> <span class="directive">implements</span> <span class="predefined-type">Parser</span>&lt;AddGoalCommand&gt; {
+
+    <span class="directive">public</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">String</span> EMPTY_END_DATE_TIME = <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>;
+    <span class="directive">public</span> <span class="directive">static</span> <span class="directive">final</span> <span class="type">boolean</span> INITIAL_COMPLETION_STATUS = <span class="predefined-constant">false</span>;
+
+    <span class="directive">public</span> AddGoalCommand parse(<span class="predefined-type">String</span> args) <span class="directive">throws</span> <span class="exception">ParseException</span> {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_IMPORTANCE, PREFIX_GOAL_TEXT);
+
+        <span class="keyword">if</span> (!arePrefixesPresent(argMultimap, PREFIX_IMPORTANCE, PREFIX_GOAL_TEXT)
+                || !argMultimap.getPreamble().isEmpty()) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(<span class="predefined-type">String</span>.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGoalCommand.MESSAGE_USAGE));
+        }
+        <span class="keyword">try</span> {
+            Importance importance = ParserUtil.parseImportance(argMultimap.getValue(PREFIX_IMPORTANCE)).get();
+            GoalText goalText = ParserUtil.parseGoalText(argMultimap.getValue(PREFIX_GOAL_TEXT)).get();
+            StartDateTime startDateTime = <span class="keyword">new</span> StartDateTime(LocalDateTime.now());
+            EndDateTime endDateTime = <span class="keyword">new</span> EndDateTime(EMPTY_END_DATE_TIME);
+            Completion completion = <span class="keyword">new</span> Completion(INITIAL_COMPLETION_STATUS);
+            Goal goal = <span class="keyword">new</span> Goal(importance, goalText, startDateTime, endDateTime, completion);
+            <span class="keyword">return</span> <span class="keyword">new</span> AddGoalCommand(goal);
+        } <span class="keyword">catch</span> (IllegalValueException ive) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(ive.getMessage(), ive);
+        }
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice that everytime a goal is added, the start date time of the goal will be recorded down in real time and it&#8217;s completion
+status will be "ongoing" by default.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of adding start date time and completion status of goal<br>
+<strong>Alternative 1 (current choice):</strong> Having the current date time as the start date time and having a default completion status of a goal added.<br>
+<strong>Pros:</strong> User have lesser words to input in the command box.<br>
+<strong>Cons:</strong> User might have a preferred start date time and completion status of the goal that they just added.<br>
+<strong>Alternative 2:</strong> Giving user a choice of start date time input and completion status of goal added.<br>
+<strong>Pros:</strong> Allows user to choose their own start date time and completion status.<br>
+<strong>Cons:</strong> Tedious for user to input a longer add goal command and slightly more difficult to properly parse the start date time
+ that user enters.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Representation of Goals level of importance in UI<br>
+<strong>Alternative 1 (current choice):</strong> Each level of importance have a number of stars related to it.<br>
+<strong>Pros:</strong> Ability for the user to differentiate the Goals with higher level of importance compared to those with lower level of importance.<br>
+<strong>Cons:</strong> The goal list in the UI might look messy to the user without having a sort Goals option as the list of goals is displayed based on when it was added.<br>
+<strong>Alternative 2:</strong> Having an additional sort goal command<br>
+<strong>Pros:</strong> It is simple and easy to understand.<br>
+<strong>Cons:</strong> It requires extra methods to implement the sort function.<br></p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Representation of Goals in UI<br>
+<strong>Alternative 1 (current choice):</strong> Having a goal list panel beside our current person list panel.<br>
+<strong>Pros:</strong> Ability for the user to differentiate the Goals with higher level of importance compared to those with lower level of importance.<br>
+<strong>Cons:</strong> The initial space in UI reserved for person list is not being used to display 2 lists, the person list and the goal list. This causes the UI to look clunky and overwhelming.<br>
+<strong>Alternative 2:</strong> Having a tab button in CollegeZone that allows user to switch between the person list panel and goal list panel.<br>
+<strong>Pros:</strong> Ability for user to switch to person list and goal list in the UI, which makes it look more user friendly.<br>
+<strong>Cons:</strong> As CollegeZone is a desktop application that has most interactions happen using a Command Line Interface (CLI), a new command to switch tabs between goal list and person list needs to be implemented.<br></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-of-delete-goal"><a class="link" href="#implementation-of-delete-goal">Implementation of delete goal</a></h4>
 <div class="paragraph">
 <p>All goal commands are event driven.<br>
 The following is the Sequence Diagram for interactions within the <code>Logic</code> component for the <code>execute("goal remove 1")</code> API call.<br></p>
@@ -581,24 +888,30 @@ The following is the Sequence Diagram for interactions within the <code>Logic</c
 <ul>
 <li>
 <p>AddressBookParser: Detects if goal delete keyword contains correct parsing keyword after<br>
-e.g. goal delete 1</p>
+e.g. deletegoal 1</p>
 </li>
 <li>
-<p>GoalDeleteCommandParser:</p>
+<p>DeleteGoalCommandParser:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Parses the input by extracting the input index<br>
-Parsed index : 1<br></p>
-</li>
+<p>Parses the input by extracting the input index<br></p>
+<div class="ulist">
+<ul>
 <li>
-<p>Creates a RemarkCommand class and passes the index and string as arguments</p>
+<p>Parsed index : 1<br></p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>GoalDeleteCommand:</p>
+<p>Creates a DeleteGoalCommand class and passes the index as argument</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>DeleteGoalCommand:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -632,6 +945,26 @@ Parsed index : 1<br></p>
 </ul>
 </div>
 </li>
+<li>
+<p>Ui</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Displays the deletion of goal in the goal list panel</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Storage</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the details of the deleted goal in the address book storage</p>
+</li>
+</ul>
+</div>
+</li>
 </ol>
 </div>
 <div class="paragraph">
@@ -641,66 +974,15 @@ Parsed index : 1<br></p>
 <ul>
 <li>
 <p>Makes use of existing implementations<br>
-Coming up with new algorithms is very time consuming. Implementation of My Goals Page uses new implementations are very similar to how CollegeZone implements its contacts. This is implemented in this way so as to reduce errors and complexity in the code.<br></p>
+Coming up with new algorithms is very time consuming. Implementation of My Goals Page uses new implementations
+are very similar to how CollegeZone implements its contacts. This is implemented in this way so as to reduce errors and complexity in the code.<br></p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p><strong>Goals objects will consist of 3 attributes :</strong><br></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Date and time of when goal completed.<br></p>
-</li>
-<li>
-<p>Level of importance of goal.<br></p>
-</li>
-<li>
-<p>Text content of Goal.<br></p>
-</li>
-<li>
-<p>Date and time of Goal of when goal started.<br></p>
-</li>
-<li>
-<p>Goal completion status.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The following is the model component class diagram for Goal</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/GoalModelComponentClassDiagram.JPG" alt="GoalModelComponentClassDiagram" width="800">
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>Figure 3.10.0.2: Goal model Class Diagram</pre>
-</div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
-<div class="paragraph">
-<p><strong>Aspect:</strong> Representation of Goals level of importance in UI<br>
-<strong>Alternative 1 (current choice):</strong> Each level of importance have a number of stars related to it.<br>
-<strong>Pros:</strong> Ability for the user to differentiate the Goals with higher level of importance compared to those with lower level of importance.<br>
-<strong>Cons:</strong> The goal list in the UI might look messy to the user without having a sort Goals option as the list of goals is displayed based on when it was added.<br>
-<strong>Alternative 2:</strong> Having an additional sort goal command<br>
-<strong>Pros:</strong> It is simple and easy to understand.<br>
-<strong>Cons:</strong> It requires extra methods to implement the sort function.<br></p>
-</div>
-<div class="paragraph">
-<p><strong>Aspect:</strong> Representation of Goals in UI<br>
-<strong>Alternative 1 (current choice):</strong> Having a goal list panel beside our current person list panel.<br>
-<strong>Pros:</strong> Ability for the user to differentiate the Goals with higher level of importance compared to those with lower level of importance.<br>
-<strong>Cons:</strong> The initial space in UI reserved for person list is not being used to display 2 lists, the person list and the goal list. This causes the UI to look clunky and overwhelming.<br>
-<strong>Alternative 2:</strong> Having a tab button in CollegeZone that allows user to switch between the person list panel and goal list panel.<br>
-<strong>Pros:</strong> Ability for user to switch to person list and goal list in the UI, which makes it look more user friendly.<br>
-<strong>Cons:</strong> As CollegeZone is a desktop application that has most interactions happen using a Command Line Interface (CLI), a new command to switch tabs between goal list and person list needs to be implemented.<br>
----</p>
-</div>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<hr>
 </div>
 </div>
 </div>
@@ -714,7 +996,7 @@ Coming up with new algorithms is very time consuming. Implementation of My Goals
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-14 16:21:32 UTC
+Last updated 2018-04-15 01:11:41 UTC
 </div>
 </div>
 </body>

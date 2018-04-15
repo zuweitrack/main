@@ -724,6 +724,51 @@ A student can have any number of CCAs (including 0)
 <p>Returns Students with Level of Friendship value <code>1</code> and Students with Level of Friendship value <code>5</code></p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="sort-rc4-students-list-sort-index_type-since-v1-5"><a class="link" href="#sort-rc4-students-list-sort-index_type-since-v1-5">3.1.12. Sort RC4 Students List: `sort [INDEX_TYPE]' [Since v1.5]</a></h4>
+<div class="paragraph">
+<p>Sorts the RC4 Students List according to the input index. Three different sorting types available.</p>
+</div>
+<div class="paragraph">
+<p><strong><em>Formats:</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">sort INDEX_TYPE</code></pre>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Sort Type 1: Sorts the RC4 Students according to their Level of Friendship attribute.</p>
+</li>
+<li>
+<p>Sort Type 2: Sorts the RC4 Students according to their meeting date attribute.</p>
+</li>
+<li>
+<p>Sort Type 3: Sorts the RC4 Students according to their Birthday attribute.</p>
+</li>
+<li>
+<p>When sorting according to meet date, those sstudents whose meet date has passed or those students whom you are not meeting as of yet, will be moved to the bottom.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong><em>Examples</em>:</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">&gt; sort <span class="integer">1</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Returns <code>A sorted list of RC4 students according to their level of friendship</code></p>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="reminder-features"><a class="link" href="#reminder-features">3.2. Reminder features</a></h3>
@@ -1725,6 +1770,12 @@ OR<br>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Sort</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sorts the RC4 Students list in 3 different ways</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sort [SORT TYPE]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort 1</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Add Goal</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Adds a goal entry</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>+goal impt/IMPORTANCE_LEVEL text/GOAL_TEXT</code><br>
@@ -1828,7 +1879,7 @@ OR<br>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-14 16:21:32 UTC
+Last updated 2018-04-15 01:11:40 UTC
 </div>
 </div>
 </body>
