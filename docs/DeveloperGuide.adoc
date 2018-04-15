@@ -1269,7 +1269,7 @@ The next diagram illustrates the relationship between a
 `Person` and its `LevelOfFriendship`.
 
 
-image::RC4ModelComponentClass.jpg[width="800"]
+image::RC4ModelComponenetClass.JPG[width="800"]
 
 
 The following shows a part of the code of `RateCommand` and reveals
