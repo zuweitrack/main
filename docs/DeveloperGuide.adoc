@@ -794,6 +794,9 @@ public class StartDateTime implements Comparable<StartDateTime> {
 **Cons:** It requires extra methods to implement the sort function. +
 
 ---
+// end::Goals[]
+
+// tag::addgoal[]
 ==== Implementation of add goal
 
 Adding a goal into _CollegeZone_ is facilitated by `AddGoalCommand`, which extends `UndoableCommand`, it
@@ -814,10 +817,9 @@ The following sequence diagram shows the flow of operation from the point _Colle
 ._Interactions Inside the Logic Component for the `+g` Command_
 image::AddGoalSeqDiagram.PNG[width="800"]
 
-
 AddGoalCommand is implemented in this way:
 
-In the Logic componenet, `AddressBookParser` will parse the user's input and detects if add goal keyword contains correct parsing keywords after.
+In the Logic component, `AddressBookParser` will parse the user's input and detects if add goal keyword contains correct parsing keywords after.
 For example, e.g. +g text/eat healthily impt/9
 `AddGoalCommandParser` parses the input by extracting the input text and importance, +
 e.g.Parsed text : eat healthily +
@@ -852,6 +854,7 @@ public class AddGoalCommandParser implements Parser<AddGoalCommand> {
             throw new ParseException(ive.getMessage(), ive);
         }
     }
+}
 ----
 The `AddGoalCommandParser` returns `AddGoalCommand` after execution, passes the text and importance and string as arguments which will be further processed by `logic` component.
 `AddGoalCommand` adds the new goal to the list locally and runs the execution which calls the model.
@@ -883,7 +886,11 @@ Note:
 **Alternative 2:** Having a tab button in CollegeZone that allows user to switch between the person list panel and goal list panel. +
 **Pros:** Ability for user to switch to person list and goal list in the UI, which makes it look more user friendly. +
 **Cons:** As CollegeZone is a desktop application that has most interactions happen using a Command Line Interface (CLI), a new command to switch tabs between goal list and person list needs to be implemented. +
+---
+// end::addgoal[]
 
+
+// tag::deletegoal[]
 ==== Implementation of delete goal
 
 
@@ -929,9 +936,10 @@ are very similar to how CollegeZone implements its contacts. This is implemented
 
 
 ---
-// end::myGoalsPage[]
+// end::deletegoal[]
 
 
+// tag::sortgoal[]
 ==== Implementation of sort goal
 
 The sorting goal mechanism is facilitated by `SortGoalCommandParser` and `SortGoalCommand`, with both classes residing
@@ -941,6 +949,7 @@ in the `Logic` component of CollegeZone. `SortGoalCommand` in not undoable.
 should be sorted. You may customise the sort goal operation, with `FIELD` specifying the goal field to sort and `ORDER`
 specifying the type of sort order. It checks for validity against a few keywords. For example, `ORDER` only accepts 2 keywords: `ascending` or `descending`.
 On the other hand, `FIELD` only accepts 3 keywords: `importance`, `startdatetime` and `completion`.
+
 The image below shows the interaction of sort the `Logic` component.
 
 .Interactions Inside the Logic Component for the `sortgoal importance o/ascending` Command
@@ -1012,15 +1021,48 @@ If the goal list is found to be empty, a `CommandException` will be thrown from 
 **Alternative 2 (current choice): ** Initialise in `UniqueGoalList` +
 **Pros:** Straightforward as initialises the `Comparator` where it is used. +
 **Cons:** `UniquePersonList` is at a lower level and should only handle a minimal set of `Goal` related operations, and not logical operations like string matching. +
-
-// end::Goals[]
+---
+// end::sortgoal[]
 
 // tag::theme[]
-=== Theme Enhancement
+=== Switching theme mechanism
 CollegeZone has multiple themes for the user to choose from. Currently, there are 3 themes implemented.
 Namely, `dark` theme, `bubblegum` theme and `light` theme. This command is not undoable.
 
-ThemeCommand is
+The switch theme mechanism is facilitated by `ThemeCommandParser` and `ThemeCommand`, with both classes residing
+in the `Logic` component of CollegeZone. `ThemeCommand` in not undoable.
+
+`ThemeCommandParser` takes in an argument in the form of `THEME_COLOUR` that defines the theme colour of what CollegeZone
+will be. You may customise the theme colour you want out of the 3 that we have. It checks for validity against a few keywords.
+`THEME_COLOUR` only accepts 3 keywords: `light`, `dark` or `bubblegum`.
+
+`ThemeCommandParser` returns a new `ThemeCommand` object. `ThemeCommand` then executes the new
+event change by calling `ThemeSwitchRequestEvent`. The updating of theme colour will be
+done by `handleChangeThemeEvent` method. +
+The following code snippet shows how the theme switch event is handled. +
+
+[source,java]
+----
+@Subscribe
+private void handleChangeThemeEvent(ThemeSwitchRequestEvent event) {
+    themeColour = event.themeToChangeTo;
+    Platform.runLater(
+            this::changeThemeColour
+    );
+}
+----
+
+==== Design Considerations
+
+**Aspect:** Storing user choice of theme +
+**Alternative 1 (current choice):** User prefs will be set to `dark` theme colour by default +
+**Pros:** Lesser coding required as there's no need to store theme colour as a part of the model component +
+**Cons:** _CollegeZone_ does not remember user's preferred theme upon restarting _CollegeZone_ +
+**Alternative 2 (current choice): ** Initialising in `UserPref`  +
+**Pros:** _CollegeZone_ will remember user's preferred theme upon restarting _CollegeZone_  +
+**Cons:** More coding required to store theme colour
+---
+// end::theme[]
 
 // tag::meetCommand[]
 === Meet Command [Since v1.2]
