@@ -27,6 +27,15 @@ The purpose of CollegeZone is for RC4 students monitor and maintain friendships 
 
 * *Code contributed*: [https://github.com/CS2103JAN2018-T09-B2/main/blob/master/collated/main/zuweitrack.md[Functional code]] [https://github.com/CS2103JAN2018-T09-B2/main/blob/master/collated/test/zuweitrack.md[Test code]]
 
+* *Other contributions*:
+
+** Project management:
+*** Collated team members code contributions (Pull request https://github.com/CS2103JAN2018-T09-B2/main/pull/232/files[#232])
+** Enhancements to existing features:
+*** Enhancement to storage component, Added a new method for address book to be stored in a fixed temporary location. (Pull request https://github.com/CS2103JAN2018-T09-B2/main/pull/10/files[#10])
+** Documentation:
+*** Build User and Developer Guides to HTML files using the asciidoctor plugin.
+
 == Contributions to the User Guide
 
 
